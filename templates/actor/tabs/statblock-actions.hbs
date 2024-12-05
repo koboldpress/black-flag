@@ -41,8 +41,12 @@
 					</div>
 				{{/if}}
 			</h2>
-			{{#if description}}
-				<p>{{ description }}</p>
+			{{#if (or description (and @root.editable descriptionKeyPath))}}
+				{{#if (and @root.editable descriptionKeyPath)}}
+					<textarea name="{{ descriptionKeyPath }}">{{ description }}</textarea>
+				{{else}}
+					<p>{{ description }}</p>
+				{{/if}}
 			{{/if}}
 			{{#each items}}
 				<div class="feature" data-item-id="{{ item.id }}"

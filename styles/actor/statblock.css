@@ -10,9 +10,7 @@
 			white-space: nowrap;
 		}
 	}
-	input {
-		background: none;
-	}
+	input, select { background: none; }
 
 	.type {
 		display: flex;
@@ -41,7 +39,7 @@
 			flex: 1 1 50%;
 		}
 
-		input {
+		input, select {
 			width: 6em;
 			height: unset;
 			border: 1px solid var(--bf-color-border-blue);
@@ -53,9 +51,8 @@
 		input[name="system.attributes.hp.value"] {
 			text-align: end;
 		}
-		sl-select {
-			flex-grow: 1;
-			--sl-input-background-color: transparent;
+		select {
+			align-self: stretch;
 		}
 	}
 
@@ -166,6 +163,12 @@
 				}
 				input { border: 1px solid rgb(0 0 0 / 0.2); }
 			}
+		}
+		textarea {
+			min-block-size: 100px;
+			border: 1px solid var(--bf-color-border-blue);
+			margin-block-end: 8px;
+			resize: vertical;
 		}
 
 		.feature {

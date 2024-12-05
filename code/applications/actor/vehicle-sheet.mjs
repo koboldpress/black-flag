@@ -45,6 +45,8 @@ export default class VehicleSheet extends BaseStatblockSheet {
 	/** @override */
 	async prepareActions(context) {
 		await super.prepareActions(context);
+		context.actions.action.description = context.system.description.actions;
+		context.actions.action.descriptionKeyPath = "system.description.actions";
 		context.passive.findSplice(d => d.item.identifier === "vehicle-resilience");
 	}
 

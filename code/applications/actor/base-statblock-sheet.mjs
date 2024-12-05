@@ -135,20 +135,6 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 			if (!value.items.length && (key !== "action" || !context.spellcasting)) delete context.actions[key];
 			else context.actions[key].items.sort((lhs, rhs) => (lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity));
 		}
-
-		// Legendary Actions
-		if (context.actions.legendary) {
-			const leg = context.system.attributes.legendary;
-			context.actions.legendary.count = {
-				prefix: "system.attributes.legendary",
-				value: leg?.value ?? 0,
-				max: context.editable ? leg?.max ?? 0 : context.source.attributes.legendary.max
-			};
-			context.actions.legendary.description = game.i18n.format(
-				`BF.LegendaryAction.Description[${getPluralRules().select(context.system.attributes.legendary.max)}]`,
-				{ type: context.actor.name.toLowerCase(), count: context.system.attributes.legendary.max }
-			);
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

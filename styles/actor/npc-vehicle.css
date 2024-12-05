@@ -13,7 +13,7 @@
 		flex-direction: column;
 	}
 
-	input:is(:hover:not(:disabled), :focus) {
+	:is(input, select, textarea):is(:hover:not(:disabled), :focus) {
 		box-shadow: 0 0 4px 1px var(--bf-color-border-light-blue);
 	}
 

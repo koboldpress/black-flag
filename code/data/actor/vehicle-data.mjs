@@ -40,6 +40,7 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
  * @property {object} attributes.passengers
  * @property {number} attributes.passengers.max - Maximum number of passengers that can be carried.
  * @property {object} description
+ * @property {string} description.actions - Brief description for the actions section.
  * @property {string} description.value - Biography on the vehicle.
  * @property {number} initiative - Initiative score for the vehicle.
  * @property {object} traits
@@ -104,6 +105,7 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 				})
 			}),
 			description: new SchemaField({
+				actions: new StringField(),
 				value: new HTMLField()
 			}),
 			initiative: new NumberField({ initial: 0 }),

@@ -50,6 +50,27 @@ export default class NPCSheet extends BaseStatblockSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	async prepareActions(context) {
+		await super.prepareActions(context);
+
+		// Legendary Actions
+		if (context.actions.legendary) {
+			const leg = context.system.attributes.legendary;
+			context.actions.legendary.count = {
+				prefix: "system.attributes.legendary",
+				value: leg.value ?? 0,
+				max: context.editable ? leg.max ?? 0 : context.source.attributes.legendary.max
+			};
+			context.actions.legendary.description = game.i18n.format(
+				`BF.LegendaryAction.Description[${getPluralRules().select(context.system.attributes.legendary.max)}]`,
+				{ type: context.actor.name.toLowerCase(), count: context.system.attributes.legendary.max }
+			);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	async prepareTraits(context) {
 		super.prepareTraits(context);
