@@ -1,0 +1,41 @@
+<div class="actions">
+	<div class="features passive">
+		{{#each passive}}
+			<div class="feature">
+				<span class="controls">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</span>
+				{{{ description }}}
+			</div>
+		{{/each}}
+	</div>
+	{{#each actions}}
+		<div class="features {{ @key }}">
+			<h5>
+				{{ label }}
+				{{#if count}}
+					<div class="action-count">
+						<span>{{ count.max }}</span>
+					</div>
+				{{/if}}
+			</h5>
+			{{#if description}}
+				<p>{{ description }}</p>
+			{{/if}}
+			{{#each items}}
+				<div class="feature">
+					<span class="controls">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</span>
+					{{{ description }}}
+				</div>
+			{{/each}}
+			{{#if (and (eq @key "action") @root.spellcasting)}}
+			{{#with @root.spellcasting}}
+				<div class="spellcasting feature">
+					<span class="controls">
+						{{ localize "BF.Spellcasting.Label" }}.
+					</span>
+					{{{ description }}}
+				</div>
+			{{/with}}
+			{{/if}}
+		</div>
+	{{/each}}
+</div>

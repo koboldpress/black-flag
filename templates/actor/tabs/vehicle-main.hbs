@@ -109,7 +109,7 @@
 			{{else}}
 				<button type="button" class="link-button modifier-roll" data-action="roll" data-sub-action="initiative">
 					<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
-					{{ blackFlag-number system.initiative sign=true }}
+					{{ blackFlag-number system.initiative }}
 				</button>
 			{{/if}}
 		</label>
@@ -147,7 +147,7 @@
 			{{/if}}
 		</label>
 	</div>
-	
+
 	<div class="abilities">
 		{{#each system.abilities}}
 			<div data-ability="{{ @key }}">

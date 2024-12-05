@@ -1,7 +1,6 @@
-<div class="statblock npc">
+<div class="statblock vehicle">
 	<h4 class="title">
 		<span class="name">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</span>
-		<span class="cr">{{ localize "BF.ChallengeRating.Abbreviation" }} {{ cr }}</span>
 	</h4>
 	<div class="type">
 		<span>{{ labels.sizeAndType }}</span>
@@ -10,10 +9,11 @@
 		<dl>
 			<div>
 				<dt>{{ localize "BF.ArmorClass.Label" }}</dt>
-				<dd>{{ system.attributes.ac.value }}</dd>
-				{{#with system.attributes.ac.label}}
-					<dd>({{ this }})</dd>
-				{{/with}}
+				<dd>
+					{{ localize "BF.VEHICLE.ArmorClassThreshold"
+											ac=(blackFlag-number system.attributes.ac.value)
+											threshold=(blackFlag-number system.attributes.ac.threshold) }}
+				</dd>
 			</div>
 			<div>
 				<dt>{{ localize "BF.HitPoint.Label[other]" }}</dt>
@@ -22,14 +22,6 @@
 			<div>
 				<dt>{{ localize "BF.Speed.Label" }}</dt>
 				<dd>{{ traits.speed }}</dd>
-			</div>
-			<div class="half-width">
-				<dt>{{ localize "BF.Skill.Perception.Label" }}</dt>
-				<dd>{{ blackFlag-number system.attributes.perception }}</dd>
-			</div>
-			<div class="half-width">
-				<dt>{{ localize "BF.Skill.Stealth.Label" }}</dt>
-				<dd>{{ stealthLabel }}</dd>
 			</div>
 			{{#if traits.vulnerabilities}}
 				<div>
@@ -50,12 +42,20 @@
 				</div>
 			{{/if}}
 			<div>
-				<dt>{{ localize "BF.SENSES.Label[other]" }}</dt>
-				<dd>{{ traits.senses }}</dd>
+				<dt>{{ localize "BF.Initiative.Label" }}</dt>
+				<dd>{{ blackFlag-number system.initiative }}</dd>
+			</div>
+			<div class="half-width">
+				<dt>{{ localize "BF.VEHICLE.FIELDS.attributes.crew.label" }}</dt>
+				<dd>{{ blackFlag-number system.attributes.crew.required }}</dd>
+			</div>
+			<div class="half-width">
+				<dt>{{ localize "BF.VEHICLE.FIELDS.attributes.passengers.label" }}</dt>
+				<dd>{{ blackFlag-number system.attributes.passengers.max }}</dd>
 			</div>
 			<div>
-				<dt>{{ localize "BF.Language.Label[other]" }}</dt>
-				<dd>{{ traits.languages }}</dd>
+				<dt>{{ localize "BF.VEHICLE.FIELDS.attributes.cargo.max.label" }}</dt>
+				<dd>{{ system.attributes.cargo.label }}</dd>
 			</div>
 		</dl>
 	</div>
@@ -63,7 +63,7 @@
 		{{#each system.abilities}}
 			<div class="ability">
 				<span class="name">{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
-				<span class="mod">{{ blackFlag-number mod sign=true }}</span>
+				<span class="mod">{{ifThen valid (blackFlag-number mod sign=true) "—" }}</span>
 			</div>
 		{{/each}}
 	</div>

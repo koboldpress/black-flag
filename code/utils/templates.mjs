@@ -184,6 +184,7 @@ export async function registerHandlebarsPartials() {
 		"activity/parts/activity-inventory-row.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",
+		"actor/embeds/statblock-actions-embed.hbs",
 		"actor/parts/actor-active-effects.hbs",
 		"actor/parts/modifier-list-v2.hbs",
 		"actor/tabs/npc-biography.hbs",

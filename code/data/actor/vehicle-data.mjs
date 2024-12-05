@@ -134,6 +134,15 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get embeddedDescriptionKeyPath() {
+		return "description.value";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -272,7 +281,7 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 					generatedLabel = game.i18n.format("BF.VEHICLE.FormattedPace", {
 						speed: generatedLabel,
 						// TODO: Support non-standard units
-						perHour: formatNumber(pace, { unit: `${paceUnits}-per-hour`, unitDisplay: "long" }),
+						perHour: formatNumber(pace, { unit: `${paceUnits}-per-hour` }),
 						perDay: formatNumber(pace * 24, { unit: `${paceUnits}-per-day`, unitDisplay: "long" })
 					});
 				}
@@ -298,6 +307,28 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 			tags: movement.tags,
 			tagDefinitions: CONFIG.BlackFlag.movementTags
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Embeds & Tooltips          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(config, options = {}) {
+		for (const value of config.values) {
+			if (value === "statblock") config.statblock = true;
+		}
+		if (!config.statblock) return super.toEmbed(config, options);
+
+		const context = await this.parent.sheet.getData();
+		context.name = config.label || this.parent.name;
+		if (config.cite === true) {
+			context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
+			config.cite = false;
+		}
+		const section = document.createElement("section");
+		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/vehicle-embed.hbs", context);
+		return section.children;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
