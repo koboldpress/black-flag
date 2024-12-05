@@ -156,7 +156,7 @@
 				</label>
 				{{#if @root.editable}}
 					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
-								 value="{{ _source.mod }}" placeholder="0" step="1">
+								 value="{{ _source.mod }}" placeholder="—" step="1">
 				{{else if valid}}
 					<span id="{{ @root.appID }}-ability-{{ @key }}">
 						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"

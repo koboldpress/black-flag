@@ -1,0 +1,158 @@
+{
+  "type": "gear",
+  "name": "Stone of Controlling Earth Elements",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 14500,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This carved stone weighs 5 pounds. If the stone is touching the ground, you can use an action to speak its command word and summon an <strong>@UUID[Compendium.black-flag.npcs.Actor.AbtSnvjVHTDzZciV]{earth elemental}</strong>, as if you had cast the <em>@UUID[Compendium.black-flag.spells.Item.r3D0SVvYQkzi6lE4]{conjure elemental}</em> spell. The stone can’t be used this way again until the next dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "AgcYNtujLmcLHT2I": {
+        "type": "summon",
+        "_id": "AgcYNtujLmcLHT2I",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "bonuses": {
+            "ac": "",
+            "hp": "",
+            "attackDamage": "",
+            "saveDamage": "",
+            "healing": ""
+          },
+          "creatureSizes": [],
+          "creatureTypes": [],
+          "effects": [],
+          "match": {
+            "attacks": false,
+            "proficiency": false,
+            "saves": false
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.AbtSnvjVHTDzZciV",
+              "_id": "pEleqMZYBVjqx1Kq",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ],
+          "summon": {
+            "prompt": true,
+            "identifier": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": true,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "90",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "S2P7fbMjIrUjNyKI",
+  "img": "icons/commodities/treasure/token-runed-os-grey.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 9400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071365441,
+    "modifiedTime": 1730153937491,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!S2P7fbMjIrUjNyKI"
+}
