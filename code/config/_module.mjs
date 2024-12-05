@@ -79,6 +79,7 @@ import * as weapons from "./weapons.mjs";
  *                              a trait entry in a parenthetical, formatter will wrap the trait list in a string,
  *                              and inline will display in the trait list after the normal entries.
  * @property {string} [association] - Key of a trait that this tag will be associated with for the "association" type.
+ * @property {Set<string>} [validTypes] - Valid actor types with which this tag can be used.
  */
 
 export default {

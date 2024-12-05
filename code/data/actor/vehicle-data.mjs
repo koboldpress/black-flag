@@ -165,6 +165,16 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 		this.prepareDerivedAbilities(rollData);
 		this.prepareDerivedMovement(rollData);
 
+		// Cargo capacity
+		this.attributes.cargo.label = formatNumber(this.attributes.cargo.max ?? 0, {
+			unit: this.attributes.cargo.units,
+			unitDisplay: "long"
+		});
+		// TODO: Fix this once weight units are fully localized
+		if (this.attributes.cargo.units === "ton") {
+			this.attributes.cargo.label += ` ${game.i18n.localize("BF.UNITS.WEIGHT.Ton.Label").toLowerCase()}`;
+		}
+
 		// Hit Points
 		const hp = this.attributes.hp;
 		hp.max ??= 0;

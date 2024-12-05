@@ -250,6 +250,12 @@ localizeConfig(movementTypes, { sort: false });
  * @enum {TraitTagConfiguration}
  */
 export const movementTags = {
+	animalDrawn: {
+		label: "BF.MOVEMENT.Tag.AnimalDrawn.Label",
+		display: "BF.MOVEMENT.Tag.AnimalDrawn.Display",
+		type: "appended",
+		validTypes: new Set(["vehicle"])
+	},
 	hover: {
 		label: "BF.MOVEMENT.Tag.Hover.Label",
 		display: "BF.MOVEMENT.Tag.Hover.Display",

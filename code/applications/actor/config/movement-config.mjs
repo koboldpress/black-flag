@@ -58,7 +58,9 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 			return obj;
 		}, {});
 		context.tagOptions = Object.entries(CONFIG.BlackFlag.movementTags).reduce((obj, [key, config]) => {
-			obj[key] = { label: game.i18n.localize(config.label), chosen: context.movement.data.tags?.includes(key) };
+			if (!config.validTypes || config.validTypes.has(this.document.type)) {
+				obj[key] = { label: game.i18n.localize(config.label), chosen: context.movement.data.tags?.includes(key) };
+			}
 			return obj;
 		}, {});
 

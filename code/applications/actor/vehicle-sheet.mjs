@@ -45,6 +45,6 @@ export default class VehicleSheet extends BaseStatblockSheet {
 	/** @inheritDoc */
 	async prepareTraits(context) {
 		super.prepareTraits(context);
-		context.traits.speed = this.actor.system.traits.movement.label?.toLowerCase() || "—";
+		context.traits.speed = this.actor.system.traits.movement.label || "—";
 	}
 }
