@@ -17,7 +17,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		return options;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Currently selected grouping mode.
@@ -25,14 +25,14 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 	 */
 	grouping = null;
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	get template() {
 		return `systems/black-flag/templates/journal/spell-list-page-${this.isEditable ? "edit" : "view"}.hbs`;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async getData(options) {
@@ -98,7 +98,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Load indices with necessary information for spells.
@@ -135,9 +135,9 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 			.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 	}
 
-	/* -------------------------------------------- */
-	/*  Event Handlers                              */
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	activateListeners(jQuery) {
@@ -153,7 +153,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		});
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle performing an action.
@@ -175,7 +175,16 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Drag & Drop             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_canDragDrop() {
+		return this.isEditable;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _onDrop(event) {

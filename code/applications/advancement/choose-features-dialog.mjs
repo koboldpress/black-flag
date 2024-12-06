@@ -154,6 +154,13 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
+	_canDragDrop() {
+		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	async _onDrop(event) {
 		const data = TextEditor.getDragEventData(event);
 		if (data?.type !== "Item") return false;

@@ -29,12 +29,12 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @type {boolean}
 	 */
 	get shouldDisplayChallenge() {
-		if (game.user.isGM || this.user === game.user) return true;
+		if (game.user.isGM || this.author === game.user) return true;
 		switch (game.settings.get(game.system.id, "challengeVisibility")) {
 			case "all":
 				return true;
 			case "player":
-				return !this.user.isGM;
+				return !this.author.isGM;
 			default:
 				return false;
 		}

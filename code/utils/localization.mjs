@@ -137,8 +137,8 @@ export function getAttributeOption(attribute, { actor }={}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Cached store of Intl.ListFormat instances.
- * @type {{[key: string]: Intl.PluralRules}}
+ * Cached store of Intl.PluralRules instances.
+ * @type {Record<string, Intl.PluralRules>}
  */
 const _pluralRules = {};
 

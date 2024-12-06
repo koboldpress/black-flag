@@ -103,6 +103,13 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	_canDragDrop() {
+		return this.isEditable;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	async _onDrop(event) {
 		const { data } = DragDrop.getDragData(event);
