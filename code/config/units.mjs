@@ -141,6 +141,7 @@ Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
 export const distanceUnits = {
 	foot: {
 		label: "BF.UNITS.DISTANCE.Foot.Label",
+		localization: "BF.Distance.Unit.Foot.Label",
 		abbreviation: "BF.UNITS.DISTANCE.Foot.Abbreviation",
 		conversion: 1,
 		formattingUnit: "foot",
@@ -148,6 +149,7 @@ export const distanceUnits = {
 	},
 	mile: {
 		label: "BF.UNITS.DISTANCE.Mile.Label",
+		localization: "BF.Distance.Unit.Mile.Label",
 		abbreviation: "BF.UNITS.DISTANCE.Mile.Abbreviation",
 		conversion: 1 / 5280,
 		formattingUnit: "mile",
@@ -234,18 +236,21 @@ export const timeUnits = {
 export const weightUnits = {
 	pound: {
 		label: "BF.UNITS.WEIGHT.Pound.Label",
+		localization: "BF.Weight.Unit.Pound.Label",
 		abbreviation: "BF.UNITS.WEIGHT.Pound.Abbreviation",
 		conversion: 1,
 		system: "imperial"
 	},
 	ounce: {
 		label: "BF.UNITS.WEIGHT.Ounce.Label",
+		localization: "BF.Weight.Unit.Ounce.Label",
 		abbreviation: "BF.UNITS.WEIGHT.Ounce.Abbreviation",
 		conversion: 0.0625,
 		system: "imperial"
 	},
 	ton: {
 		label: "BF.UNITS.WEIGHT.Ton.Label",
+		localization: "BF.Weight.Unit.Ton.Label",
 		abbreviation: "BF.UNITS.WEIGHT.Ton.Abbreviation",
 		conversion: 2_000,
 		system: "imperial"
