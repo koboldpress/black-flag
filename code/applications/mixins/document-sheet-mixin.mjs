@@ -32,7 +32,7 @@ export default function DocumentSheetMixin(Base) {
 		/** @inheritDoc */
 		_getHeaderButtons() {
 			let buttons = super._getHeaderButtons();
-			if (game.user.isGM || this.actor.isOwner) {
+			if (game.user.isGM || this.document.isOwner) {
 				// Identity / Source button
 				buttons.unshift({
 					label: game.i18n.localize("BF.Identity.Label"),
