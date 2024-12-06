@@ -1,6 +1,7 @@
 import BFApplication from "./api/application.mjs";
 
-const DATA_FILE = "systems/black-flag/json/official-modules.json";
+const REMOTE_PATH = "https://koboldpress.github.io/black-flag-docs/assets/json/official-modules.json";
+const LOCAL_PATH = "systems/black-flag/json/official-modules.json";
 
 /**
  * Application that displays important links and official module information on first starting a new world.
@@ -17,7 +18,8 @@ export default class WelcomeDialog extends BFApplication {
 			openDocumentation: WelcomeDialog.#openDocumentation
 		},
 		position: {
-			width: 640
+			width: 720,
+			top: 100
 		}
 	};
 
@@ -72,10 +74,12 @@ export default class WelcomeDialog extends BFApplication {
 	 * @type {Promise<OfficialModules>}
 	 */
 	get modules() {
-		if (!WelcomeDialog.#modules)
-			WelcomeDialog.#modules = fetch(DATA_FILE)
-				.then(m => m?.json())
-				.catch(err => undefined);
+		const grab = path =>
+			fetch(path).then(response => {
+				if (!response.ok) throw Error(`HTTP Error: ${response.status}`);
+				return response.json();
+			});
+		if (!WelcomeDialog.#modules) WelcomeDialog.#modules = grab(REMOTE_PATH).catch(err => grab(LOCAL_PATH).catch());
 		return WelcomeDialog.#modules;
 	}
 
