@@ -1,4 +1,4 @@
-import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
+import { formatDistance, formatNumber, getPluralRules } from "../../utils/_module.mjs";
 import FormulaField from "./formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -147,7 +147,7 @@ export default class TargetField extends SchemaField {
 				typeLowercase: game.i18n.localize(`${type.localization}[${pluralRule}]`).toLowerCase()
 			});
 		} else {
-			const number = numberFormat(affects.count ?? 1);
+			const number = formatNumber(affects.count ?? 1);
 			short = `${number} ${game.i18n
 				.localize(`BF.TARGET.Label[${getPluralRules().select(affects.count ?? 1)}]`)
 				.toLowerCase()}`;
@@ -187,13 +187,12 @@ export default class TargetField extends SchemaField {
 		let long;
 
 		const pluralRule = getPluralRules().select(template.count);
-		const unit = CONFIG.BlackFlag.distanceUnits[template.units];
 		const shape = type.localization
 			? game.i18n.localize(`${type.localization}[${pluralRule}]`)
 			: game.i18n.localize(type.label) ?? "";
 
 		if (type.icon) {
-			let size = numberFormat(template.size, { unit, unitDisplay: "narrow" });
+			let size = formatDistance(template.size, template.units, { unitDisplay: "narrow" });
 			const image = `<img class="area-icon" src="${type.icon}" alt="${shape}"></img>`;
 			short = game.i18n.format("BF.AreaOfEffect.Described", {
 				size: style === "combined" ? `<span class="number">${size}</span>` : size,
@@ -201,19 +200,19 @@ export default class TargetField extends SchemaField {
 				shapeLowercase: image
 			});
 			if (template.count > 1) {
-				short = `${numberFormat(template.count)} x ${short}`;
+				short = `${formatNumber(template.count)} x ${short}`;
 			}
 		}
 
 		if (style !== "short" && short) {
 			long = game.i18n.format("BF.AreaOfEffect.Described", {
-				size: numberFormat(template.size, { unit }),
+				size: formatDistance(template.size, template.units),
 				shape,
 				shapeLowercase: shape.toLowerCase()
 			});
 			if (template.count > 1) {
 				long = game.i18n.format("BF.AreaOfEffect.Counted", {
-					count: numberFormat(template.count, { spelledOut: true }).capitalize(),
+					count: formatNumber(template.count, { spelledOut: true }).capitalize(),
 					sizedShape: long
 				});
 			}

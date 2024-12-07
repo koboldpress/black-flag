@@ -41,30 +41,30 @@
 					<legend>{{ localize "BF.Container.Capacity.Label" }}</legend>
 					<label>
 						<span>{{ localize "BF.Container.Capacity.Number.Label" }}</span>
-						<input type="number" name="system.capacity.count" value="{{ system.capacity.count }}" min="0" step="1"
+						<input type="number" name="system.capacity.count" value="{{ source.capacity.count }}" min="0" step="1"
 						       placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
 					</label>
 					<div class="field-group">
 						<span>{{ localize "BF.Container.Capacity.Weight.Label" }}</span>
 						<label>
-							<input type="number" name="system.capacity.weight.value" value="{{ system.capacity.weight.value }}"
+							<input type="number" name="system.capacity.weight.value" value="{{ source.capacity.weight.value }}"
 							       min="0" step="0.1" placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
 						</label>
 						<label>
-							<select disabled>
-								<option>{{ localize "BF.UNITS.WEIGHT.Pound.Label[other]" }}</option>
+							<select name="system.capacity.weight.units">
+								{{ selectOptions CONFIG.weightUnits.localizedOptions selected=source.capacity.weight.units }}
 							</select>
 						</label>
 					</div>
 					<div class="field-group">
 						<span>{{ localize "BF.Container.Capacity.Volume.Label" }}</span>
 						<label>
-							<input type="number" name="system.capacity.volume.value" value="{{ system.capacity.volume.value }}"
+							<input type="number" name="system.capacity.volume.value" value="{{ source.capacity.volume.value }}"
 							       min="0" step="0.1" placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
 						</label>
 						<label>
-							<select disabled>
-								<option>{{ localize "BF.UNITS.VOLUME.CubicFeet.Label[other]" }}</option>
+							<select name="system.capacity.volume.units">
+								{{ selectOptions CONFIG.volumeUnits.localizedOptions selected=source.capacity.volume.units }}
 							</select>
 						</label>
 					</div>

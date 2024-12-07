@@ -1,4 +1,4 @@
-import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
+import { formatDistance } from "../../utils/_module.mjs";
 import FormulaField from "./formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -40,13 +40,8 @@ export default class RangeField extends SchemaField {
 
 		Object.defineProperty(obj, "label", {
 			get() {
-				if (this.scalar) {
-					if (!this.value) return null;
-					const unit = CONFIG.BlackFlag.distanceUnits[this.units];
-					return `${numberFormat(this.value)} ${game.i18n
-						.localize(`${unit.localization}[${getPluralRules().select(this.value)}]`)
-						.toLowerCase()}`;
-				} else {
+				if (this.scalar) return this.value ? formatDistance(this.value, this.units) : null;
+				else {
 					const type = CONFIG.BlackFlag.rangeTypes[this.units];
 					if (!type) return "";
 					let label = game.i18n.localize(type.label);

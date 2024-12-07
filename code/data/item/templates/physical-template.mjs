@@ -1,4 +1,4 @@
-import { convertWeight, numberFormat } from "../../../utils/_module.mjs";
+import { convertWeight, formatWeight, formatNumber } from "../../../utils/_module.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -164,7 +164,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 				if ( !system.totalPrice ) return "—";
 				const denominationConfig = CONFIG.BlackFlag.currencies[this.denomination];
 				return game.i18n.format("BF.Currency.Display", {
-					value: numberFormat(system.totalPrice), denomination: game.i18n.localize(denominationConfig.abbreviation)
+					value: formatNumber(system.totalPrice), denomination: game.i18n.localize(denominationConfig.abbreviation)
 				});
 				// TODO: Adjust total displayed to use smallest logical units (so 5 cp x 20 = 100 cp => 1 gp)
 			},
@@ -175,7 +175,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 			get() {
 				const totalWeight = system.totalWeight;
 				if ( totalWeight instanceof Promise || !totalWeight ) return "—";
-				return numberFormat(system.totalWeight.toNearest(0.1), { unit: this.units });
+				return formatWeight(system.totalWeight.toNearest(0.1), this.units, { unitDisplay: "short" });
 				// TODO: Reduce to units in current system that result in the smallest value
 			},
 			configurable: true,

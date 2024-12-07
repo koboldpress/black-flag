@@ -1,4 +1,4 @@
-import { numberFormat } from "../../../utils/_module.mjs";
+import { formatDistance } from "../../../utils/_module.mjs";
 import ScaleTypeNumber from "./scale-type-number.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -34,8 +34,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	/** @inheritDoc */
 	get display() {
-		const unit = CONFIG.BlackFlag.distanceUnits[this.units ?? "foot"];
-		return numberFormat(this.value, { unit });
+		return formatDistance(this.value, this.units ?? "foot");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

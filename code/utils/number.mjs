@@ -55,6 +55,19 @@ export function formatCR(value, { narrow=true }={}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Form a number using the provided distance unit.
+ * @param {number} value - The distance to format.
+ * @param {string} unit - Distance unit as defined in `CONFIG.BlackFlag.distanceUnits`.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatDistance(value, unit, options={}) {
+	return _formatSystemUnits(value, unit, CONFIG.BlackFlag.distanceUnits[unit], options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * @typedef {NumberFormattingOptions}
  * @param {number} decimals - Number of decimal digits to display.
  * @param {number} digits - Number of digits before the decimal point to display.
@@ -149,4 +162,49 @@ export function formatNumber(value, options) {
 export function numberParts(value, options) {
 	const parts = getNumberFormatter(_prepareFormattingOptions(options)).formatToParts(value);
 	return parts.reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Form a number using the provided volume unit.
+ * @param {number} value - The volume to format.
+ * @param {string} unit - Volume unit as defined in `CONFIG.BlackFlag.volumeUnits`.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatVolume(value, unit, options={}) {
+	return _formatSystemUnits(value, unit, CONFIG.BlackFlag.volumeUnits[unit], options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Form a number using the provided weight unit.
+ * @param {number} value - The weight to format.
+ * @param {string} unit - Weight unit as defined in `CONFIG.BlackFlag.weightUnits`.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatWeight(value, unit, options={}) {
+	return _formatSystemUnits(value, unit, CONFIG.BlackFlag.weightUnits[unit], options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Format a number using one of core's built-in unit types.
+ * @param {number} value - Value to display.
+ * @param {string} unit - Name of the unit to use.
+ * @param {UnitConfiguration} config - Configuration data for the unit.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+function _formatSystemUnits(value, unit, config, options={}) {
+	options.unitDisplay ??= "long";
+	if ( config?.counted ) {
+		const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+		return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+	}
+	return formatNumber(value, { unit: config?.formattingUnit ?? unit, ...options });
 }

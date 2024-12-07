@@ -3887,9 +3887,23 @@
 	},
 	"VOLUME": {
 		"Label": "Volume Units",
-		"CubicFeet": {
+		"CubicFoot": {
 			"Label": "Cubic Feet",
-			"Abbreviation": "ft^3"
+			"Abbreviation": "ft^3",
+			"Counted": {
+				"narrow": {
+					"one": "{number}ft^3",
+					"other": "{number}ft^3"
+				},
+				"short": {
+					"one": "{number} cu ft",
+					"other": "{number} cu ft"
+				},
+				"long": {
+					"one": "{number} cubic foot",
+					"other": "{number} cubic feet"
+				}
+			}
 		}
 	},
 	"WEIGHT": {
@@ -3904,7 +3918,21 @@
 		},
 		"Ton": {
 			"Label": "Tons",
-			"Abbreviation": "tn"
+			"Abbreviation": "tn",
+			"Counted": {
+				"narrow": {
+					"one": "{number}t",
+					"other": "{number}t"
+				},
+				"short": {
+					"one": "{number} tn",
+					"other": "{number} tn"
+				},
+				"long": {
+					"one": "{number} ton",
+					"other": "{number} tons"
+				}
+			}
 		}
 	}
 },

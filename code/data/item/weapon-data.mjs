@@ -1,4 +1,4 @@
-import { numberFormat, stepDenomination } from "../../utils/_module.mjs";
+import { formatDistance, formatNumber, stepDenomination } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
@@ -83,7 +83,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 				short: new NumberField({ min: 0, step: 0.1 }),
 				long: new NumberField({ min: 0, step: 0.1 }),
 				reach: new NumberField({ min: 0, step: 0.1 }),
-				units: new StringField()
+				units: new StringField({ initial: "foot" })
 			}),
 			type: new SchemaField({
 				value: new StringField({ initial: "melee" }),
@@ -193,11 +193,11 @@ export default class WeaponData extends ItemDataModel.mixin(
 		const values = [];
 		if (this.range.short) values.push(this.range.short);
 		if (this.range.long && this.range.long !== this.range.short) values.push(this.range.long);
-		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
+		const unit = this.range.units ?? Object.keys(CONFIG.BlackFlag.distanceUnits)[0];
 		if (!values.length || !unit) return "";
 
-		const lengths = values.map(v => numberFormat(v)).join("/");
-		return `${lengths} ${game.i18n.localize(unit.abbreviation)}`;
+		const last = values.pop();
+		return [...values.map(v => formatNumber(v)), formatDistance(last, unit, { unitDisplay: "short" })].filterJoin("/");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -209,10 +209,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 	get reachLabel() {
 		if (this.type.value !== "melee") return "";
 
-		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
+		const unit = this.range.units ?? Object.keys(CONFIG.BlackFlag.distanceUnits)[0];
 		// TODO: Define starting reach for imperial/metric
 		const reach = this.properties.has("reach") ? this.range.reach || 5 : 0;
-		return numberFormat(5 + reach, { unit: unit?.formattingUnit });
+		return formatDistance(5 + reach, unit, { unitDisplay: "short" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -223,7 +223,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
 			...this.properties.map(p => CONFIG.BlackFlag.itemProperties.localized[p])
 		];
-		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+		const listFormatter = game.i18n.getListFormatter({ type: "unit" });
 		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
 		// Ranged
 		// Reach (total)

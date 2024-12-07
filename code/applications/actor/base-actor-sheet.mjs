@@ -1,5 +1,5 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import { numberFormat } from "../../utils/_module.mjs";
+import { formatWeight } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
@@ -210,7 +210,9 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 		context.canDuplicate = section.options?.canDuplicate !== false;
 
 		const totalWeight = await item.system.totalWeight;
-		context.weight = totalWeight ? numberFormat(totalWeight.toNearest(0.1), { unit: item.system.weight.units }) : "—";
+		context.weight = totalWeight
+			? formatWeight(totalWeight.toNearest(0.1), item.system.weight.units, { unitDisplay: "short" })
+			: "—";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -230,6 +230,23 @@ export const timeUnits = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Units that can represent volume in the system.
+ * @enum {UnitConfiguration}
+ */
+export const volumeUnits = {
+	cubicFoot: {
+		label: "BF.UNITS.VOLUME.CubicFoot.Label",
+		abbreviation: "BF.UNITS.VOLUME.CubicFoot.Abbreviation",
+		counted: "BF.UNITS.VOLUME.CubicFoot.Counted",
+		conversion: 1,
+		system: "imperial"
+	}
+};
+localizeConfig(volumeUnits);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Units that can represent weight in the system.
  * @enum {UnitConfiguration}
  */
@@ -252,6 +269,7 @@ export const weightUnits = {
 		label: "BF.UNITS.WEIGHT.Ton.Label",
 		localization: "BF.Weight.Unit.Ton.Label",
 		abbreviation: "BF.UNITS.WEIGHT.Ton.Abbreviation",
+		counted: "BF.UNITS.WEIGHT.Ton.Counted",
 		conversion: 2_000,
 		system: "imperial"
 	}
