@@ -45,9 +45,15 @@ export default class VehicleSheet extends BaseStatblockSheet {
 	/** @override */
 	async prepareActions(context) {
 		await super.prepareActions(context);
-		if (context.actions.action) {
-			context.actions.action.description = context.system.description.actions;
-			context.actions.action.descriptionKeyPath = "system.description.actions";
+		const descriptions = {
+			action: "system.description.actions",
+			bonus: "system.description.bonusActions",
+			reaction: "system.description.reactions"
+		};
+		for (const [key, keyPath] of Object.entries(descriptions)) {
+			if (!(key in context.actions)) continue;
+			context.actions[key].description = foundry.utils.getProperty(context, keyPath);
+			context.actions[key].descriptionKeyPath = keyPath;
 		}
 		context.passive.findSplice(d => d.item.identifier === "vehicle-resilience");
 	}
