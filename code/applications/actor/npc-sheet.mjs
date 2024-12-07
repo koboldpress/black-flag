@@ -1,4 +1,4 @@
-import { formatCR, numberFormat } from "../../utils/_module.mjs";
+import { formatCR, getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import BaseStatblockSheet from "./base-statblock-sheet.mjs";
 import NPCSpellcastingConfig from "./config/npc-spellcasting-config.mjs";
 
