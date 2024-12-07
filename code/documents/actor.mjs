@@ -435,7 +435,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		// If all damage resistance is present and not ignored
 		if (
 			!this.#changeIsIgnored(category, "all", { options, skipDowngrade }) &&
-			(config?.value.has("all") || (config?.nonmagical.has("all") && !magical))
+			(config?.value.has("all") || (config?.nonmagical.has("all") && !damage.magical))
 		) {
 			return setActive("all");
 		}
@@ -443,7 +443,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		// If specific type damage resistance is present and not ignored
 		if (
 			!this.#changeIsIgnored(category, type, { options, skipDowngrade }) &&
-			(config?.value.has(type) || (config?.nonmagical.has(type) && !magical))
+			(config?.value.has(type) || (config?.nonmagical.has(type) && !damage.magical))
 		) {
 			return setActive("type");
 		}
