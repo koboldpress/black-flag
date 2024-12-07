@@ -102,7 +102,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 				</button>
 			`;
 			Object.assign(li.querySelector(".icon"), { alt: effect.name, src: effect.img });
-			li.querySelector(".title").innerText(effect.name);
+			li.querySelector(".title").innerText = effect.name;
 			this.effectsList.append(li);
 			li.addEventListener("click", this._onApplyEffect.bind(this));
 		}
@@ -131,7 +131,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 			</div>
 		`;
 		Object.assign(li.querySelector(".icon"), { alt: name, src: actor.img });
-		li.querySelector(".title").innerText(name);
+		li.querySelector(".title").innerText = name;
 
 		return li;
 	}

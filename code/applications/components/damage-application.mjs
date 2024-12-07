@@ -151,7 +151,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			<menu class="damage-multipliers unlist"></menu>
 		`;
 		Object.assign(li.querySelector(".icon"), { alt: name, src: actor.img });
-		li.querySelector(".title").innerText(name);
+		li.querySelector(".title").innerText = name;
 
 		const menu = li.querySelector("menu");
 		for (const [value, display] of MULTIPLIERS) {
