@@ -4,6 +4,7 @@ import { formatNumber, formatTaggedList, simplifyBonus } from "../../utils/_modu
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
+import HPTemplate from "./templates/hp-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import ResistancesTemplate from "./templates/resistances-template.mjs";
 import SourceTemplate from "./templates/source-template.mjs";
@@ -19,6 +20,7 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
 
 /**
  * Data model for Vehicle actors.
+ * @mixes {HPTemplate}
  * @mixes {ModifiersTemplate}
  * @mixes {SourceTemplate}
  * @mixes {TraitsTemplate}
@@ -53,7 +55,12 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
  * @property {string} traits.size - Vehicle's size category.
  * @property {string} traits.type - Type of vehicle.
  */
-export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, ResistancesTemplate, SourceTemplate) {
+export default class VehicleData extends ActorDataModel.mixin(
+	HPTemplate,
+	ModifiersTemplate,
+	ResistancesTemplate,
+	SourceTemplate
+) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -95,12 +102,6 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 				}),
 				crew: new SchemaField({
 					required: new NumberField()
-				}),
-				hp: new SchemaField({
-					value: new NumberField({ min: 0, integer: true }),
-					max: new NumberField({ min: 0, integer: true }),
-					temp: new NumberField({ min: 0, integer: true }),
-					tempMax: new NumberField({ integer: true })
 				}),
 				passengers: new SchemaField({
 					max: new NumberField()
@@ -174,6 +175,7 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		this.prepareSource();
+		this.prepareDerivedHitPoints();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedResistances();
 
@@ -188,14 +190,6 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 		if (this.attributes.cargo.units === "ton") {
 			this.attributes.cargo.label += ` ${game.i18n.localize("BF.UNITS.WEIGHT.Ton.Label").toLowerCase()}`;
 		}
-
-		// Hit Points
-		const hp = this.attributes.hp;
-		hp.max ??= 0;
-		hp.baseMax = hp.max;
-		hp.max += hp.tempMax ?? 0;
-		hp.value = Math.clamp(hp.value, 0, hp.max);
-		hp.damage = hp.max - hp.value;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

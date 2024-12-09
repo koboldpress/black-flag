@@ -6,6 +6,7 @@ export { default as LairSheet } from "./lair-sheet.mjs";
 export { default as LevelUpDialog } from "./level-up-dialog.mjs";
 export { default as NPCSheet } from "./npc-sheet.mjs";
 export { default as PCSheet } from "./pc-sheet.mjs";
+export { default as SiegeWeaponSheet } from "./siege-weapon-sheet.mjs";
 export { default as VehicleSheet } from "./vehicle-sheet.mjs";
 
 export { default as BasicConfigSheet } from "./api/base-config-sheet.mjs";

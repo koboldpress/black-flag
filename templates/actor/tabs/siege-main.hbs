@@ -1,0 +1,43 @@
+<section>
+	<div class="type">
+		{{#if editable}}
+			<label>
+				<span>{{ localize "BF.Size.Label" }}</span>
+				<select name="system.traits.size">
+					{{ selectOptions CONFIG.sizes.localizedOptions selected=source.traits.size }}
+				</select>
+			</label>
+		{{else}}
+			<span>{{ labels.sizeAndType }}</span>
+		{{/if}}
+	</div>
+
+	<div class="stats">
+		{{#if editable}}
+			<label class="stats__narrow">
+				<span>{{ localize "BF.ArmorClass.Label" }}</span>
+				<input type="number" name="system.attributes.ac.value" value="{{ source.attributes.ac.value }}">
+			</label>
+			<label class="stats__narrow">
+				<span>{{ localize "BF.DAMAGE.Threshold" }}</span>
+				<input type="number" name="system.attributes.ac.threshold" value="{{ source.attributes.ac.threshold }}">
+			</label>
+		{{else}}
+		<label>
+			<span>
+				{{ localize "BF.ArmorClass.Label" }}
+			</span>
+			<span>
+				{{ localize "BF.VEHICLE.ArmorClassThreshold"
+				            ac=(blackFlag-number system.attributes.ac.value)
+										threshold=(blackFlag-number system.attributes.ac.threshold) }}
+			</span>
+		</label>
+		{{/if}}
+		{{> "blackFlag.statblock-hit-points" }}
+		{{> "blackFlag.statblock-resistances" }}
+	</div>
+	{{> "blackFlag.statblock-abilities" }}
+	{{{ enriched.description }}}
+	{{> "blackFlag.statblock-actions" }}
+</section>

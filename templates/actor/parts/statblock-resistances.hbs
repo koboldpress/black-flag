@@ -1,0 +1,45 @@
+{{#if traits.vulnerabilities}}
+	<label>
+		<span>
+			{{#if modes.editing}}
+				<button type="button" class="link-button" data-action="config" data-type="resistance"
+								data-tooltip="BF.Resistance.Action.Configure"
+								aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+			{{ localize "BF.Vulnerability.Short" }}
+		</span>
+		<span>{{{ traits.vulnerabilities }}}</span>
+	</label>
+{{/if}}
+{{#if traits.resistances}}
+	<label>
+		<span>
+			{{#if modes.editing}}
+				<button type="button" class="link-button" data-action="config" data-type="resistance"
+								data-tooltip="BF.Resistance.Action.Configure"
+								aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+			{{ localize "BF.Resistance.Short" }}
+		</span>
+		<span>{{{ traits.resistances }}}</span>
+	</label>
+{{/if}}
+{{#if traits.immunities}}
+	<label>
+		<span>
+			{{#if modes.editing}}
+				<button type="button" class="link-button" data-action="config" data-type="resistance"
+								data-tooltip="BF.Resistance.Action.Configure"
+								aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+			{{ localize "BF.Immunity.Short" }}
+		</span>
+		<span>{{{ traits.immunities }}}</span>
+	</label>
+{{/if}}

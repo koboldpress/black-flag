@@ -6,6 +6,13 @@
 	{{/if}}
 
 	<div class="features passive">
+		{{#if (or passive.description (and @root.editable passive.descriptionKeyPath))}}
+			{{#if (and @root.editable passive.descriptionKeyPath)}}
+				<textarea name="{{ passive.descriptionKeyPath }}">{{~ passive.description ~}}</textarea>
+			{{else}}
+				<p>{{ passive.description }}</p>
+			{{/if}}
+		{{/if}}
 		{{#each passive}}
 			<div class="feature" data-item-id="{{ item.id }}" {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
 				<span class="controls">

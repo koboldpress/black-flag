@@ -6,6 +6,7 @@ import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
+import HPTemplate from "./templates/hp-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
@@ -28,6 +29,7 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
  * Data model for NPC actors.
  * @mixes {ACTemplate}
  * @mixes {ConditionsTemplate}
+ * @mixes {HPTemplate}
  * @mixes {InitiativeTemplate}
  * @mixes {LanguagesTemplate}
  * @mixes {ModifiersTemplate}
@@ -58,6 +60,7 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
 export default class NPCData extends ActorDataModel.mixin(
 	ACTemplate,
 	ConditionsTemplate,
+	HPTemplate,
 	InitiativeTemplate,
 	LanguagesTemplate,
 	ModifiersTemplate,
@@ -109,15 +112,6 @@ export default class NPCData extends ActorDataModel.mixin(
 					})
 				}),
 				cr: new NumberField({ nullable: true, min: 0, initial: 0, label: "BF.ChallengeRating.Label" }),
-				hp: new SchemaField(
-					{
-						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
-						max: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
-						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
-						tempMax: new NumberField({ integer: true })
-					},
-					{ label: "BF.HitPoint.Label[other]" }
-				),
 				legendary: new SchemaField({
 					spent: new NumberField({ min: 0, initial: 0, integer: true }),
 					max: new NumberField({ min: 1, initial: null, integer: true })
@@ -190,6 +184,11 @@ export default class NPCData extends ActorDataModel.mixin(
 			ability.check ??= {};
 			ability.save ??= {};
 		}
+		Object.defineProperty(this.abilities, "_supportsProficiency", {
+			value: true,
+			configurable: true,
+			writable: false
+		});
 
 		this.attributes.proficiency = Proficiency.calculateMod(Math.max(this.attributes.cr ?? 1, 1));
 
@@ -226,20 +225,12 @@ export default class NPCData extends ActorDataModel.mixin(
 		this.prepareLanguages();
 		this.prepareSource();
 		this.prepareDerivedArmorFormulas();
+		this.prepareDerivedHitPoints();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedResistances();
 		this.prepareDerivedTraits(rollData);
 
 		this.prepareDerivedAbilities(rollData);
-
-		// Hit Points
-		const hp = this.attributes.hp;
-		hp.max ??= 0;
-		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
-		hp.baseMax = hp.max;
-		hp.max += hp.tempMax ?? 0;
-		hp.value = Math.clamp(hp.value, 0, hp.max);
-		hp.damage = hp.max - hp.value;
 
 		// Initiative
 		this.computeInitiative();
@@ -342,16 +333,6 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	async _preUpdateHP(changed, options, user) {
-		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
-		if (changedMaxHP !== undefined) {
-			const maxHPDelta = changedMaxHP - this.attributes.hp.baseMax;
-			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
-		}
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

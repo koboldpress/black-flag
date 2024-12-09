@@ -321,6 +321,14 @@ export const sheetSections = {
 			]
 		}
 	],
+	siege: [
+		{
+			id: "features",
+			tab: "features",
+			label: "BF.Item.Category.Feature.Label",
+			filters: []
+		}
+	],
 	vehicle: [
 		currencySection(),
 		{

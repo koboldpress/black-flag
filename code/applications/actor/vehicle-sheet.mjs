@@ -8,7 +8,7 @@ export default class VehicleSheet extends BaseStatblockSheet {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "actor", "sheet", "vehicle"]
+			classes: ["black-flag", "actor", "sheet", "vehicle", "statblock"]
 		});
 	}
 

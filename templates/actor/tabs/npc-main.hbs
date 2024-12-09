@@ -30,18 +30,7 @@
 				{{/with}}
 			</span>
 		</label>
-		<label>
-			<span>{{ localize "BF.HitPoint.Label[other]" }}</span>
-			{{#if modes.editing}}
-				<span>{{ system.attributes.hp.value }}</span>
-				<span class="separator">/</span>
-				<input type="number" name="system.attributes.hp.max" value="{{ source.attributes.hp.max }}" step="1" min="0">
-			{{else}}
-				<input type="text" name="system.attributes.hp.value" value="{{ system.attributes.hp.value }}">
-				<span class="separator">/</span>
-				<span>{{ system.attributes.hp.max }}</span>
-			{{/if}}
-		</label>
+		{{> "blackFlag.statblock-hit-points" }}
 		<label>
 			<span>
 				{{#if modes.editing}}
@@ -81,51 +70,7 @@
 				<span>{{ stealthLabel }}</span>
 			{{/if}}
 		</label>
-		{{#if traits.vulnerabilities}}
-			<label>
-				<span>
-					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance"
-						        data-tooltip="BF.Resistance.Action.Configure"
-						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
-							<i class="fa-solid fa-cog" inert></i>
-						</button>
-					{{/if}}
-					{{ localize "BF.Vulnerability.Short" }}
-				</span>
-				<span>{{{ traits.vulnerabilities }}}</span>
-			</label>
-		{{/if}}
-		{{#if traits.resistances}}
-			<label>
-				<span>
-					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance"
-						        data-tooltip="BF.Resistance.Action.Configure"
-						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
-							<i class="fa-solid fa-cog" inert></i>
-						</button>
-					{{/if}}
-					{{ localize "BF.Resistance.Short" }}
-				</span>
-				<span>{{{ traits.resistances }}}</span>
-			</label>
-		{{/if}}
-		{{#if traits.immunities}}
-			<label>
-				<span>
-					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance"
-						        data-tooltip="BF.Resistance.Action.Configure"
-						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
-							<i class="fa-solid fa-cog" inert></i>
-						</button>
-					{{/if}}
-					{{ localize "BF.Immunity.Short" }}
-				</span>
-				<span>{{{ traits.immunities }}}</span>
-			</label>
-		{{/if}}
+		{{> "blackFlag.statblock-resistances" }}
 		<label>
 			<span>
 				{{#if modes.editing}}
@@ -160,32 +105,6 @@
 			</button>
 		</label>
 	</div>
-	
-	<div class="abilities">
-		{{#each system.abilities}}
-			<div data-ability="{{ @key }}">
-				<label class="name" for="{{ @root.appID }}-ability-{{ @key }}">
-					{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
-				</label>
-				{{#if @root.modes.editing}}
-					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
-					       value="{{ _source.mod }}" placeholder="0" step="1">
-					<label class="proficient">
-						<span>{{ localize "BF.Modifier.Proficiency.Label" }}</span>
-						<input type="checkbox" name="system.abilities.{{ @key }}.proficient" {{ checked proficient }}>
-					</label>
-				{{else}}
-					<span id="{{ @root.appID }}-ability-{{ @key }}">
-						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"
-						        data-ability="{{ @key }}">
-							<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
-							{{ blackFlag-number mod sign=true }}
-						</button>
-					</span>
-				{{/if}}
-			</div>
-		{{/each}}
-	</div>
-
+	{{> "blackFlag.statblock-abilities" }}
 	{{> "blackFlag.statblock-actions" }}
 </section>

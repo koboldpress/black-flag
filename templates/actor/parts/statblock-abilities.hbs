@@ -1,0 +1,29 @@
+<div class="abilities">
+	{{#each system.abilities}}
+		<div data-ability="{{ @key }}">
+			<label class="name" for="{{ @root.appID }}-ability-{{ @key }}">
+				{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
+			</label>
+			{{#if @root.modes.editing}}
+				<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
+							 value="{{ _source.mod }}" placeholder="—" step="1">
+				{{#if @root.system.abilities._supportsProficiency}}
+					<label class="proficient">
+						<span>{{ localize "BF.Modifier.Proficiency.Label" }}</span>
+						<input type="checkbox" name="system.abilities.{{ @key }}.proficient" {{ checked proficient }}>
+					</label>
+				{{/if}}
+			{{else if valid}}
+				<span id="{{ @root.appID }}-ability-{{ @key }}">
+					<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"
+									data-ability="{{ @key }}">
+						<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
+						{{ blackFlag-number mod sign=true }}
+					</button>
+				</span>
+			{{else}}
+				<span>&mdash;</span>
+			{{/if}}
+		</div>
+	{{/each}}
+</div>

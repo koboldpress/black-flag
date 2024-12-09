@@ -18,7 +18,7 @@ export const _documentCategories = {
 		},
 		thing: {
 			label: "BF.Actor.Category.Thing",
-			types: [actorTypes.VehicleData]
+			types: [actorTypes.SiegeWeaponData, actorTypes.VehicleData]
 		}
 	},
 	Item: {

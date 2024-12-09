@@ -1,0 +1,42 @@
+<form class="sheet-container" id="{{ appID }}-main-form">
+	<header class="sheet-head">
+		<h1>
+			<input name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
+			       form="{{ appID }}-main-form" {{ disabled (not modes.editing) }}>
+		</h1>
+	</header>
+
+	<nav class="sheet-navigation tabs" data-group="primary">
+		<a data-tab="main">
+			{{ localize "BF.Sheet.Tab.Main" }}
+			{{ blackFlag-notificationBadge actor section="main" }}
+		</a>
+		<a data-tab="features">
+			{{ localize "BF.Sheet.Tab.Features" }}
+			{{ blackFlag-notificationBadge actor section="features" }}
+		</a>
+		<a data-tab="biography">
+			{{ localize "BF.Sheet.Tab.Description" }}
+			{{ blackFlag-notificationBadge actor section="biography" }}
+		</a>
+		<a data-tab="effects">
+			{{ localize "BF.Sheet.Tab.Effects" }}
+			{{ blackFlag-notificationBadge actor section="effects" }}
+		</a>
+	</nav>
+
+	<div class="sheet-body">
+		<div class="tab flex-tab statblock-tab" data-group="primary" data-tab="main">
+			{{> "blackFlag.siege-main" }}
+		</div>
+		<div class="tab flex-tab" data-group="primary" data-tab="features">
+			{{> "blackFlag.npc-features" }}
+		</div>
+		<div class="tab flex-tab" data-group="primary" data-tab="biography">
+			{{> "blackFlag.npc-biography" enriched=enriched.description keyPath="system.description.value" }}
+		</div>
+		<div class="tab flex-tab" data-group="primary" data-tab="effects">
+			{{> "blackFlag.actor-active-effects" }}
+		</div>
+	</div>
+</div>

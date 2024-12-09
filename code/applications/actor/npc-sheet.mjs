@@ -6,7 +6,7 @@ export default class NPCSheet extends BaseStatblockSheet {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "actor", "sheet", "npc"]
+			classes: ["black-flag", "actor", "sheet", "npc", "statblock"]
 		});
 	}
 
