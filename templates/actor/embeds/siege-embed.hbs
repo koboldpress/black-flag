@@ -1,0 +1,44 @@
+<div class="statblock vehicle">
+	<h4 class="title">
+		<span class="name">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</span>
+	</h4>
+	<div class="type">
+		<span>{{ labels.sizeAndType }}</span>
+	</div>
+	<div class="stats">
+		<dl>
+			<div>
+				<dt>{{ localize "BF.ArmorClass.Label" }}</dt>
+				<dd>
+					{{ localize "BF.VEHICLE.ArmorClassThreshold"
+											ac=(blackFlag-number system.attributes.ac.value)
+											threshold=(blackFlag-number system.attributes.ac.threshold) }}
+				</dd>
+			</div>
+			<div>
+				<dt>{{ localize "BF.HitPoint.Label[other]" }}</dt>
+				<dd>{{ system.attributes.hp.max }}</dd>
+			</div>
+			{{#if traits.vulnerabilities}}
+				<div>
+					<dt>{{ localize "BF.Vulnerability.Short" }}</dt>
+					<dd>{{{ traits.vulnerabilities }}}</dd>
+				</div>
+			{{/if}}
+			{{#if traits.resistances}}
+				<div>
+					<dt>{{ localize "BF.Resistance.Short" }}</dt>
+					<dd>{{{ traits.resistances }}}</dd>
+				</div>
+			{{/if}}
+			{{#if traits.immunities}}
+				<div>
+					<dt>{{ localize "BF.Immunity.Short" }}</dt>
+					<dd>{{{ traits.immunities }}}</dd>
+				</div>
+			{{/if}}
+		</dl>
+	</div>
+	{{{ enriched.description }}}
+	{{> "blackFlag.statblock-actions-embed" }}
+</div>

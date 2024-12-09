@@ -1,7 +1,5 @@
 import SiegeWeaponSheet from "../../applications/actor/siege-weapon-sheet.mjs";
-import Proficiency from "../../documents/proficiency.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
-import MappingField from "../fields/mapping-field.mjs";
 import HPTemplate from "./templates/hp-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import ResistancesTemplate from "./templates/resistances-template.mjs";
@@ -10,20 +8,12 @@ import SourceTemplate from "./templates/source-template.mjs";
 const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data for Siege Weapon abilities.
- *
- * @typedef {object} SiegeWeaponAbilityData
- * @property {number} mod - Ability modifier with proficiency included.
- */
-
-/**
  * Data model for Siege Weapon actors.
  * @mixes {HPTemplate}
  * @mixes {ModifiersTemplate}
  * @mixes {SourceTemplate}
  * @mixes {TraitsTemplate}
  *
- * @property {Record<string, SiegeWeaponAbilityData} abilities - Siege weapon's ability modifiers.
  * @property {object} attributes
  * @property {object} attributes.ac
  * @property {number} attributes.ac.threshold - Damage threshold.
@@ -33,7 +23,7 @@ const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields
  * @property {object} traits
  * @property {string} traits.size - Vehicle's size category.
  */
-export default class SiegeWeaponData extends ActorDataModel.mixin(
+export default class SiegeData extends ActorDataModel.mixin(
 	HPTemplate,
 	ModifiersTemplate,
 	ResistancesTemplate,
@@ -44,7 +34,7 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	static LOCALIZATION_PREFIXES = ["BF.SIEGEWEAPON", "BF.SOURCE"];
+	static LOCALIZATION_PREFIXES = ["BF.SIEGE", "BF.SOURCE"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -53,7 +43,7 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 		type: "siege",
 		category: "thing",
 		localization: "BF.Actor.Type.SiegeWeapon",
-		img: "systems/black-flag/artwork/types/siege-weapon.svg",
+		img: "systems/black-flag/artwork/types/siege.svg",
 		sheet: {
 			application: SiegeWeaponSheet,
 			label: "BF.Sheet.Default.SiegeWeapon"
@@ -65,10 +55,6 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			abilities: new MappingField(new SchemaField({ mod: new NumberField({ integer: true }) }), {
-				initialKeys: CONFIG.BlackFlag.abilities,
-				prepareKeys: true
-			}),
 			attributes: new SchemaField({
 				ac: new SchemaField({
 					threshold: new NumberField(),
@@ -100,15 +86,7 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 	/** @inheritDoc */
 	prepareBaseData() {
 		super.prepareBaseData();
-
-		for (const [key, ability] of Object.entries(this.abilities)) {
-			ability._source = this._source.abilities?.[key] ?? {};
-			ability.check ??= {};
-			ability.save ??= {};
-		}
-
 		this.attributes.proficiency = 0;
-
 		this.prepareBaseModifiers();
 	}
 
@@ -117,51 +95,10 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
-		const rollData = this.parent.getRollData({ deterministic: true });
-
 		this.prepareSource();
 		this.prepareDerivedHitPoints();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedResistances();
-
-		this.prepareDerivedAbilities(rollData);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare abilities.
-	 * @param {object} rollData
-	 */
-	prepareDerivedAbilities(rollData) {
-		for (const [key, ability] of Object.entries(this.abilities)) {
-			ability.valid = ability.mod !== null;
-			ability.mod ??= 0;
-
-			ability.check.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
-			ability.save.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
-
-			const checkData = { type: "ability-check", ability: key, proficiency: ability.check.proficiency.multiplier };
-			ability.check.modifiers = {
-				_data: checkData,
-				bonus: this.getModifiers(checkData),
-				minimum: this.getModifiers(checkData, "min"),
-				notes: this.getModifiers(checkData, "note")
-			};
-			ability.check.bonus = this.buildBonus(ability.check.modifiers.bonus, { deterministic: true, rollData });
-			const saveData = { type: "ability-save", ability: key, proficiency: ability.save.proficiency.multiplier };
-			ability.save.modifiers = {
-				_data: saveData,
-				bonus: this.getModifiers(saveData),
-				minimum: this.getModifiers(saveData, "min"),
-				notes: this.getModifiers(saveData, "note")
-			};
-			ability.save.bonus = this.buildBonus(ability.save.modifiers.bonus, { deterministic: true, rollData });
-
-			ability.check.mod = ability.mod + ability.check.proficiency.flat + ability.check.bonus;
-			ability.save.mod = ability.mod + ability.save.proficiency.flat + ability.save.bonus;
-			ability.dc = 8 + ability.mod + this.attributes.proficiency;
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -182,10 +119,7 @@ export default class SiegeWeaponData extends ActorDataModel.mixin(
 			config.cite = false;
 		}
 		const section = document.createElement("section");
-		section.innerHTML = await renderTemplate(
-			"systems/black-flag/templates/actor/embeds/siege-weapon-embed.hbs",
-			context
-		);
+		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/siege-embed.hbs", context);
 		return section.children;
 	}
 
