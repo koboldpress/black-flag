@@ -193,6 +193,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * @typedef {object} DamageAffectDescription
+	 * @property {boolean} [threshold] - Did threshold affect this description?
 	 * @property {boolean} [modifications] - Did modification affect this description?
 	 * @property {boolean} [resistance] - Did resistance affect this description?
 	 * @property {boolean} [vulnerability] - Did vulnerability affect this description?
@@ -214,6 +215,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @property {boolean|Set<string>} [ignore.immunity] - Should this actor's damage immunity be ignored?
 	 * @property {boolean|Set<string>} [ignore.modification] - Should this actor's damage modification be ignored?
 	 * @property {boolean|Set<string>} [ignore.resistance] - Should this actor's damage resistance be ignored?
+	 * @property {boolean} [ignore.threshold] - Should this actor's damage threshold be ignored?
 	 * @property {boolean|Set<string>} [ignore.vulnerability] - Should this actor's damage vulnerability be ignored?
 	 * @property {boolean} [invertHealing=true] - Automatically invert healing types to it heals, rather than damages.
 	 * @property {"damage"|"healing"} [only] - Apply only damage or healing parts. Untyped rolls will always be applied.
@@ -227,7 +229,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async applyDamage(damages, options = {}) {
 		const hp = this.system.attributes.hp;
-		if (!hp) return;
+		if (!hp?.max) return;
 
 		if (Number.isNumeric(damages)) {
 			damages = [{ value: damages }];
@@ -377,6 +379,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			d.value = d.value * damageMultiplier;
 			d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
 		});
+
+		if (this.system.attributes?.ac?.threshold && options.ignore !== true && options.ignore?.threshold !== true) {
+			const total = damages.reduce((t, d) => t + (["temp", "max"].includes(d.type) ? 0 : d.value), 0);
+			if (total < this.system.attributes.ac.threshold) {
+				for (const damage of damages) {
+					if (["temp", "max"].includes(damage.type) || damage.value <= 0) continue;
+					damage.value = 0;
+					damage.active ??= {};
+					damage.active.threshold = true;
+				}
+			}
+		}
 
 		/**
 		 * A hook event that fires after damage amount is calculated for an actor.

@@ -103,7 +103,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
 		// Calculate damage to apply
 		const targetOptions = this.getTargetOptions(uuid);
-		const { temp, tempMax, total, active } = this.calculateDamage(actor, targetOptions);
+		const { temp, tempMax, total, active, threshold } = this.calculateDamage(actor, targetOptions);
 
 		const types = [];
 		for (const [change, values] of Object.entries(active)) {
@@ -117,7 +117,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 				}
 			}
 		}
-		const changeSources = types.reduce((acc, { type, change, icon }) => {
+		let changeSources = types.reduce((acc, { type, change, icon }) => {
 			const { label, pressed } = this.getChangeSourceOptions(type, change, targetOptions);
 			acc += `
 				<button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
@@ -129,6 +129,16 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			`;
 			return acc;
 		}, "");
+		if (threshold) {
+			const { label, pressed } = this.getChangeSourceOptions(null, "threshold", targetOptions);
+			changeSources += `
+				<button class="change-source unbutton" type="button" data-change="threshold" data-tooltip="${label}"
+			        	aria-label="${label}" aria-pressed="${pressed}">
+					<blackFlag-icon src="systems/black-flag/artwork/damage/threshold.svg" inert></blackFlag-icon>
+					<i class="fa-solid fa-slash" inert></i>
+				</button>
+				`;
+		}
 
 		const li = document.createElement("li");
 		li.classList.add("target");
@@ -180,7 +190,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 	 * Calculate the total damage that will be applied to an actor.
 	 * @param {BlackFlagActor} actor
 	 * @param {DamageApplicationOptions} options
-	 * @returns {{ temp: number, total: number, active: Record<string, Set<string>> }}
+	 * @returns {{ temp: number, total: number, active: Record<string, Set<string>>, threshold: boolean }}
 	 */
 	calculateDamage(actor, options) {
 		const damages = actor.calculateDamage(this.damages, options);
@@ -190,6 +200,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 		let tempMax = 0;
 		let total = 0;
 		let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
+		let threshold = false;
 		for (const damage of damages) {
 			if (damage.type === "temp") temp += damage.value;
 			if (damage.type === "max") tempMax += damage.rollType === "healing" ? -1 * damage.value : damage.value;
@@ -198,6 +209,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 				if (damage.active.all?.[t]) active[t].add("all");
 				if (damage.active.type?.[t]) active[t].add(damage.type);
 			});
+			if (damage.active.threshold) threshold = true;
 		}
 		temp = Math.floor(Math.max(0, temp));
 		total = total > 0 ? Math.floor(total) : Math.ceil(total);
@@ -210,7 +222,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			active.immunity = active.immunity.union(options.downgrade);
 		}
 
-		return { temp, tempMax, total, active };
+		return { temp, tempMax, total, active, threshold };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -224,14 +236,21 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 	 */
 	getChangeSourceOptions(type, change, options) {
 		let mode = "active";
-		if (options.ignore?.[change]?.has(type)) mode = "ignore";
-		else if (change === "immunity" && options.downgrade?.has(type)) mode = "downgrade";
+		let label;
 
-		const typeLabel =
-			type === "all"
-				? game.i18n.localize("BF.Resistance.AllDamage")
-				: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type];
-		let label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, { type: typeLabel });
+		if (change === "threshold") {
+			if (options.ignore?.threshold) mode = "ignore";
+			label = game.i18n.localize("BF.DAMAGE.Threshold");
+		} else {
+			if (options.ignore?.[change]?.has(type)) mode = "ignore";
+			else if (change === "immunity" && options.downgrade?.has(type)) mode = "downgrade";
+			const typeLabel =
+				type === "all"
+					? game.i18n.localize("BF.Resistance.AllDamage")
+					: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type];
+			label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, { type: typeLabel });
+		}
+
 		if (mode === "ignore") label = game.i18n.format("BF.DAMAGE.Application.Ignoring", { source: label });
 		if (mode === "downgrade") label = game.i18n.format("BF.DAMAGE.Application.Downgrading", { source: label });
 
@@ -329,6 +348,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 					options.ignore.immunity ??= new Set();
 					options.ignore.immunity.add(type);
 				}
+			} else if (change === "threshold") {
+				options.ignore ??= {};
+				options.ignore.threshold = !options.ignore.threshold;
 			} else if (options.ignore?.[change]?.has(type)) options.ignore[change].delete(type);
 			else {
 				options.ignore ??= {};
