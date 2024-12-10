@@ -14,10 +14,106 @@ import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import ResistancesTemplate from "./templates/resistances-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
+import SizeTemplate from "./templates/size-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
+/**
+ * @typedef {object} PCAbilityData
+ * @property {number} base - Base ability score set during character creation.
+ * @property {number} max - Maximum ability score available during Improvement.
+ * @property {object} save
+ * @property {Proficiency} save.proficiency - Saving throw proficiency.
+ */
+
+/**
+ * Data model for PC actors.
+ * @mixes {ACTemplate}
+ * @mixes {ConditionsTemplate}
+ * @mixes {EncumbranceTemplate}
+ * @mixes {InitiativeTemplate}
+ * @mixes {LanguagesTemplate}
+ * @mixes {ModifiersTemplate}
+ * @mixes {ResistancesTemplate}
+ * @mixes {SpellcastingTemplate}
+ * @mixes {SizeTemplate}
+ * @mixes {TraitsTemplate}
+ *
+ * @property {Record<string, PCAbilityData} abilities - NPC's ability modifiers.
+ * @property {object} attributes
+ * @property {object} attributes.attunement
+ * @property {number} attributes.attunement.max - Maximum number of items that can be attuned.
+ * @property {object} attributes.death
+ * @property {string} attributes.death.status - Current character status (e.g. alive, dying, stable, dead).
+ * @property {number} attributes.death.success - Current number of death save successes.
+ * @property {number} attributes.death.failure - Current number of death save failures.
+ * @property {object} attributes.death.overrides
+ * @property {number} attributes.death.overrides.success - Number of successes needed to stabilize.
+ * @property {number} attributes.death.overrides.failure - Number of failures needed to die.
+ * @property {number} attributes.death.overrides.target - Target value to roll on death saves to succeed.
+ * @property {object} attributes.hd
+ * @property {Record<number, { spent: number }>} attributes.hd.d - Spent hit dice of each denomination.
+ * @property {object} attributes.hp
+ * @property {object} attributes.hp.bonuses
+ * @property {string} attributes.hp.bonuses.level - Per-level hit points bonus.
+ * @property {string} attributes.hp.bonuses.overall - Overall hit points bonus.
+ * @property {number} attributes.hp.override - Maximum HP override that ignores all calculation.
+ * @property {number} attributes.hp.temp - Temporary hit points.
+ * @property {number} attributes.hp.tempMax - Temporary maximum hit points.
+ * @property {number} attributes.hp.value - Current hit points.
+ * @property {object} attributes.initiative
+ * @property {string} attributes.initiative.ability - Ability to use when rolling initiative.
+ * @property {Proficiency} attributes.initiative.proficiency - Proficiency with initiative rolls.
+ * @property {object} attributes.luck
+ * @property {number} attributes.luck.value - Current luck points.
+ * @property {string} attributes.luck.formula - Formula to use when re-rolling luck.
+ * @property {object} biography
+ * @property {string} biography.age - Character's age.
+ * @property {string} biography.height - Character's height.
+ * @property {string} biography.weight - Character's weight.
+ * @property {string} biography.eyes - Character's eyes.
+ * @property {string} biography.skin - Character's skin.
+ * @property {string} biography.hair - Character's hair.
+ * @property {string} biography.backstory - Description of character's backstory.
+ * @property {string} biography.motivation - Description of character's motivation.
+ * @property {string} biography.allies - Description of character's allies.
+ * @property {object} proficiencies
+ * @property {object} proficiencies.armor
+ * @property {Set<string>} proficiencies.armor.value
+ * @property {string[]} proficiencies.armor.custom
+ * @property {object} proficiencies.base
+ * @property {Proficiency} proficiencies.base.checks - Minimum proficiency in all ability checks.
+ * @property {Proficiency} proficiencies.base.saves - Minimum proficiency in saving throws.
+ * @property {Proficiency} proficiencies.base.skills - Minimum proficiency in skill checks.
+ * @property {Proficiency} proficiencies.base.tools - Minimum proficiency in tool checks.
+ * @property {Proficiency} proficiencies.base.vehicles - Minimum proficiency in vehicle checks.
+ * @property {Record<string, { proficiency: Proficiency }>} proficiencies.skills - Skill proficiencies.
+ * @property {Record<string, { proficiency: Proficiency }>} proficiencies.tools - Tool proficiencies.
+ * @property {Record<string, { proficiency: Proficiency }>} proficiencies.vehicles - Vehicle proficiencies.
+ * @property {object} proficiencies.weapons
+ * @property {Set<string>} proficiencies.weapons.value
+ * @property {string[]} proficiencies.weapons.custom
+ * @property {object} progression
+ * @property {object} progression.abilities
+ * @property {string} progression.abilities.method - Method used to determine ability scores.
+ * @property {BaseRoll[]} progression.abilities.rolls - Rolls if rolling used to determine scores.
+ * @property {Record<string, number>} progression.abilities.assignments - Indices of scores assigned to each ability if
+ *                                                                        rolling or standard array assignment were
+ *                                                                        used, or number of steps assigned to a score
+ *                                                                        if point buy was used.
+ * @property {Record<string, number>} progression.abilities.bonuses - Indices of bonuses assigned to each score.
+ * @property {AdvancementValueField} progression.advancement - Stored advancement data.
+ * @property {BlackFlagItem} progression.background - Character's background item.
+ * @property {BlackFlagItem} progression.heritage - Character's heritage item.
+ * @property {BlackFlagItem} progression.lineage - Character's lineage item.
+ * @property {Record<number, { class: BlackFlagItem, time: TimeData }>} progression.levels - Level information.
+ * @property {object} progression.xp
+ * @property {number} progression.xp.value - Total XP earned.
+ * @property {{ amount: number, time: TimeData, source: string }[]} progression.xp.log
+ * @property {object} traits
+ * @property {CreatureTypeField} traits.type - Character's type information.
+ */
 export default class PCData extends ActorDataModel.mixin(
 	ACTemplate,
 	ConditionsTemplate,
@@ -27,6 +123,7 @@ export default class PCData extends ActorDataModel.mixin(
 	ModifiersTemplate,
 	ResistancesTemplate,
 	SpellcastingTemplate,
+	SizeTemplate,
 	TraitsTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -106,7 +203,6 @@ export default class PCData extends ActorDataModel.mixin(
 							spent: new NumberField({ min: 0, integer: true })
 						})
 					)
-					// Recovery percentage
 				}),
 				hp: new SchemaField({
 					bonuses: new SchemaField({
@@ -117,7 +213,6 @@ export default class PCData extends ActorDataModel.mixin(
 					temp: new NumberField({ min: 0, integer: true }),
 					tempMax: new NumberField({ integer: true }),
 					value: new NumberField({ min: 0, integer: true })
-					// Multiplier
 				}),
 				initiative: new SchemaField({
 					ability: new StringField({ label: "BF.Initiative.Ability.Label" }),

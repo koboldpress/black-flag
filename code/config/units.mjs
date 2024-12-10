@@ -129,7 +129,7 @@ Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
  * @property {string} [counted] - Localization path for counted plural forms. Only necessary if non-supported unit or
  *                                using a non-standard name for a supported unit.
  * @property {string} [formattingUnit] - Unit formatting value as supported by javascript's internationalization system:
- *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. only
+ *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
  *                                       required if the formatting name doesn't match the unit key.
  * @property {string} [system] - Measurement system with which this unit is associated (e.g. imperial or metric).
  */
@@ -151,7 +151,7 @@ export const distanceUnits = {
 		label: "BF.UNITS.DISTANCE.Mile.Label",
 		localization: "BF.Distance.Unit.Mile.Label",
 		abbreviation: "BF.UNITS.DISTANCE.Mile.Abbreviation",
-		conversion: 1 / 5280,
+		conversion: 5280,
 		formattingUnit: "mile",
 		system: "imperial"
 	}

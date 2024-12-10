@@ -19,7 +19,6 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
  * @property {Set<string>} traits.senses.tags - Sense tags.
  * @property {Record<string, string>} traits.senses.types - Formulas for specific sense types.
  * @property {string} traits.senses.units - Units used to measure senses.
- * @property {object} traits.size - Creature size.
  */
 export default class TraitsTemplate extends foundry.abstract.DataModel {
 
@@ -41,8 +40,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					tags: new SetField(new StringField()),
 					types: new MappingField(new FormulaField({ deterministic: true })),
 					units: new StringField({ initial: "foot" })
-				}),
-				size: new StringField({ label: "BF.Size.Label" })
+				})
 			}, {label: "BF.Trait.Label[other]"})
 		};
 	}
@@ -127,31 +125,5 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		senses.label = formatTaggedList({
 			entries: senseEntries, extras: senses.custom, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags
 		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*        Socket Event Handlers        */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	async _preCreateSize(data, options, user) {
-		if ( !foundry.utils.hasProperty(data, "prototypeToken.width")
-			&& !foundry.utils.hasProperty(data, "prototypeToken.height")) {
-			const size = CONFIG.BlackFlag.sizes[this.traits.size]?.scale;
-			this.parent.updateSource({ "prototypeToken.width": size, "prototypeToken.height": size });
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	async _preUpdateSize(changed, options, user) {
-		const newSize = foundry.utils.getProperty(changed, "system.traits.size");
-		if ( !newSize || (newSize === this.traits.size) ) return;
-
-		if ( !foundry.utils.hasProperty(changed, "prototypeToken.width")
-			&& !foundry.utils.hasProperty(changed, "prototypeToken.height") ) {
-			const size = CONFIG.BlackFlag.sizes[newSize]?.scale;
-			foundry.utils.setProperty(changed, "prototypeToken.width", size);
-			foundry.utils.setProperty(changed, "prototypeToken.height", size);
-		}
 	}
 }

@@ -12,6 +12,7 @@ import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import ResistancesTemplate from "./templates/resistances-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
+import SizeTemplate from "./templates/size-template.mjs";
 import SourceTemplate from "./templates/source-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
@@ -34,16 +35,13 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
  * @mixes {LanguagesTemplate}
  * @mixes {ModifiersTemplate}
  * @mixes {ResistancesTemplate}
+ * @mixes {SizeTemplate}
  * @mixes {SourceTemplate}
  * @mixes {TraitsTemplate}
  *
  * @property {Record<string, NPCAbilityData} abilities - NPC's ability modifiers.
  * @property {object} attributes
  * @property {number} attributes.cr - Challenge rating.
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value - Current hit points.
- * @property {number} attributes.hp.max - Maximum hit points.
- * @property {number} attributes.hp.temp - Temporary hit points.
  * @property {number} attributes.legendary.spent - Number of spent legendary actions this round.
  * @property {number} attributes.legendary.max - Number of available legendary actions per round.
  * @property {number} attributes.perception - Creature's perception score.
@@ -65,6 +63,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	LanguagesTemplate,
 	ModifiersTemplate,
 	ResistancesTemplate,
+	SizeTemplate,
 	SourceTemplate,
 	TraitsTemplate
 ) {

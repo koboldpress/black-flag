@@ -333,23 +333,17 @@ export default class VehicleData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async _preUpdate(changed, options, user) {
-		if ((await super._preUpdate(changed, options, user)) === false) return false;
-
-		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
-		if (changedMaxHP !== undefined) {
-			const maxHPDelta = changedMaxHP - this.attributes.hp.baseMax;
-			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
 	async _preCreate(data, options, user) {
 		if ((await super._preCreate(data, options, user)) === false) return false;
 		if (!data._id && !data.items?.length) {
 			foundry.utils.setProperty(options, `${game.system.id}.createResilience`, true);
+		}
+		if (
+			!foundry.utils.hasProperty(data, "prototypeToken.width") &&
+			!foundry.utils.hasProperty(data, "prototypeToken.height")
+		) {
+			const size = this.scaledTokenSize(foundry.utils.getProperty(data, "system.traits.dimensions") ?? {});
+			this.parent.updateSource({ "prototypeToken.width": size.width, "prototypeToken.height": size.height });
 		}
 	}
 
@@ -365,11 +359,51 @@ export default class VehicleData extends ActorDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _preUpdate(changed, options, user) {
+		if ((await super._preUpdate(changed, options, user)) === false) return false;
+
+		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
+		if (changedMaxHP !== undefined) {
+			const maxHPDelta = changedMaxHP - this.attributes.hp.baseMax;
+			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
+		}
+
+		let changedDimensions = foundry.utils.getProperty(changed, "system.traits.dimensions");
+		if (
+			changedDimensions &&
+			(changedDimensions.length !== this.traits.dimensions.length ||
+				changedDimensions.width !== this.traits.dimensions.width) &&
+			!foundry.utils.hasProperty(changed, "prototypeToken.width") &&
+			!foundry.utils.hasProperty(changed, "prototypeToken.height")
+		) {
+			const size = this.scaledTokenSize(
+				foundry.utils.mergeObject(this.traits.dimensions, changedDimensions, { inplace: false })
+			);
+			foundry.utils.setProperty(changed, "prototypeToken.width", size.width);
+			foundry.utils.setProperty(changed, "prototypeToken.height", size.height);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	getInitiativeRollConfig(options = {}) {
 		return { fixed: this.initiative };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate adjusted token size based on the provided dimensions.
+	 * @param {{ length: number, width: number, units: string }} dimensions
+	 * @returns {{ height: number, width: number }}
+	 */
+	scaledTokenSize(dimensions) {
+		const resize = d => Math.max(1, Math.floor((d ?? 0) / 5));
+		return { height: resize(dimensions.width), width: resize(dimensions.length) };
 	}
 }

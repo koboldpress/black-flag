@@ -14,6 +14,7 @@ export { default as InitiativeTemplate } from "./templates/initiative-template.m
 export { default as LanguagesTemplate } from "./templates/languages-template.mjs";
 export { default as ModifiersTemplate } from "./templates/modifiers-template.mjs";
 export { default as ResistancesTemplate } from "./templates/resistances-template.mjs";
+export { default as SizeTemplate } from "./templates/size-template.mjs";
 export { default as SourceTemplate } from "./templates/source-template.mjs";
 export { default as SpellcastingTemplate } from "./templates/spellcasting-template.mjs";
 export { default as TraitsTemplate } from "./templates/traits-template.mjs";

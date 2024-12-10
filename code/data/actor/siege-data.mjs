@@ -3,6 +3,7 @@ import ActorDataModel from "../abstract/actor-data-model.mjs";
 import HPTemplate from "./templates/hp-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import ResistancesTemplate from "./templates/resistances-template.mjs";
+import SizeTemplate from "./templates/size-template.mjs";
 import SourceTemplate from "./templates/source-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -11,8 +12,9 @@ const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields
  * Data model for Siege Weapon actors.
  * @mixes {HPTemplate}
  * @mixes {ModifiersTemplate}
+ * @mixes {ResistancesTemplate}
+ * @mixes {SizeTemplate}
  * @mixes {SourceTemplate}
- * @mixes {TraitsTemplate}
  *
  * @property {object} attributes
  * @property {object} attributes.ac
@@ -27,6 +29,7 @@ export default class SiegeData extends ActorDataModel.mixin(
 	HPTemplate,
 	ModifiersTemplate,
 	ResistancesTemplate,
+	SizeTemplate,
 	SourceTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
