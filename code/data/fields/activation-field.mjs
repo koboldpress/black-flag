@@ -1,4 +1,4 @@
-import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
+import { formatTime, getPluralRules, numberFormat } from "../../utils/_module.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -72,16 +72,21 @@ export default class ActivationField extends SchemaField {
 	 * @returns {string}
 	 */
 	static label(data, { style = "combined" } = {}) {
-		const type = CONFIG.BlackFlag.activationOptions({
-			pluralRule: getPluralRules().select(data.value ?? 1)
-		}).get(data.type);
-		if (!type) return "";
+		let label;
+		if (data.type in CONFIG.BlackFlag.timeUnits.time.children) {
+			label = formatTime(data.value, data.type);
+		} else {
+			const type = CONFIG.BlackFlag.activationOptions({
+				pluralRule: getPluralRules().select(data.value ?? 1)
+			}).get(data.type);
+			if (!type) return "";
 
-		let label = game.i18n.format("BF.ACTIVATION.Formatted.Scalar", {
-			number: numberFormat(data.value ?? 1),
-			type: type.label,
-			typeLowercase: type.label.toLowerCase()
-		});
+			label = game.i18n.format("BF.ACTIVATION.Formatted.Scalar", {
+				number: numberFormat(data.value ?? 1),
+				type: type.label,
+				typeLowercase: type.label.toLowerCase()
+			});
+		}
 
 		if (style === "combined") {
 			return `<span${data.condition ? ` data-tooltip="${data.condition.capitalize()}"` : ""}>${label}</span>`;

@@ -167,6 +167,20 @@ export function numberParts(value, options) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Form a number using the provided time unit.
+ * @param {number} value - The time to format.
+ * @param {string} unit - Time unit as defined in `CONFIG.BlackFlag.timeUnits.time.children`.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+	const unitConfig = CONFIG.BlackFlag.timeUnits.time.children[unit] ?? CONFIG.BlackFlag.timeUnits.combat.children[unit];
+	return _formatSystemUnits(value, unit, unitConfig, options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Form a number using the provided volume unit.
  * @param {number} value - The volume to format.
  * @param {string} unit - Volume unit as defined in `CONFIG.BlackFlag.volumeUnits`.

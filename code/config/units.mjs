@@ -190,13 +190,23 @@ export const timeUnits = {
 		label: "BF.Time.Category.Combat.Label",
 		children: {
 			turn: {
-				localization: "BF.Time.Unit.Turn.Label"
+				label: "BF.UNITS.TIME.Turn.Label",
+				abbreviation: "BF.UNITS.TIME.Turn.Abbreviation",
+				localization: "BF.Time.Unit.Turn.Label",
+				counted: "BF.UNITS.TIME.Turn.Counted"
 			},
 			round: {
-				localization: "BF.Time.Unit.Round.Label"
+				label: "BF.UNITS.TIME.Round.Label",
+				abbreviation: "BF.UNITS.TIME.Round.Abbreviation",
+				localization: "BF.Time.Unit.Round.Label",
+				counted: "BF.UNITS.TIME.Round.Counted",
+				conversion: 6
 			},
 			encounter: {
-				localization: "BF.Time.Unit.Encounter.Label"
+				label: "BF.UNITS.TIME.Encounter.Label",
+				abbreviation: "BF.UNITS.TIME.Encounter.Abbreviation",
+				localization: "BF.Time.Unit.Encounter.Label",
+				counted: "BF.UNITS.TIME.Encounter.Counted"
 			}
 		}
 	},
@@ -204,28 +214,40 @@ export const timeUnits = {
 		label: "BF.Time.Category.Time.Label",
 		children: {
 			minute: {
+				label: "BF.UNITS.TIME.Minute.Label",
+				abbreviation: "BF.UNITS.TIME.Minute.Abbreviation",
 				localization: "BF.Time.Unit.Minute.Label",
 				conversion: 1
 			},
 			hour: {
+				label: "BF.UNITS.TIME.Hour.Label",
+				abbreviation: "BF.UNITS.TIME.Hour.Abbreviation",
 				localization: "BF.Time.Unit.Hour.Label",
 				conversion: 60
 			},
 			day: {
+				label: "BF.UNITS.TIME.Day.Label",
+				abbreviation: "BF.UNITS.TIME.Day.Abbreviation",
 				localization: "BF.Time.Unit.Day.Label",
 				conversion: 1_440
 			},
 			month: {
+				label: "BF.UNITS.TIME.Month.Label",
+				abbreviation: "BF.UNITS.TIME.Month.Abbreviation",
 				localization: "BF.Time.Unit.Month.Label",
 				conversion: 43_200
 			},
 			year: {
+				label: "BF.UNITS.TIME.Year.Label",
+				abbreviation: "BF.UNITS.TIME.Year.Abbreviation",
 				localization: "BF.Time.Unit.Year.Label",
 				conversion: 525_600
 			}
 		}
 	}
 };
+localizeConfig(timeUnits, { flatten: true });
+localizeConfig(timeUnits.time.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
