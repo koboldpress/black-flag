@@ -1,6 +1,6 @@
 import VehicleSheet from "../../applications/actor/vehicle-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { formatNumber, formatTaggedList, simplifyBonus } from "../../utils/_module.mjs";
+import { formatNumber, formatPace, formatTaggedList, simplifyBonus } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
@@ -250,8 +250,6 @@ export default class VehicleData extends ActorDataModel.mixin(
 			types.unshift("walk");
 		}
 
-		const paceUnits = CONFIG.BlackFlag.paceUnits[this.traits.pace.units]?.formattingUnit;
-
 		const entries = new Map();
 		for (const type of types) {
 			const movementFormula = this.traits.movement.types[type] ?? "";
@@ -277,9 +275,8 @@ export default class VehicleData extends ActorDataModel.mixin(
 				if (pace) {
 					generatedLabel = game.i18n.format("BF.VEHICLE.FormattedPace", {
 						speed: generatedLabel,
-						// TODO: Support non-standard units
-						perHour: formatNumber(pace, { unit: `${paceUnits}-per-hour` }),
-						perDay: formatNumber(pace * 24, { unit: `${paceUnits}-per-day`, unitDisplay: "long" })
+						perHour: formatPace(pace, this.traits.pace.units, { unitDisplay: "short" }),
+						perDay: formatPace(pace * 24, this.traits.pace.units, { period: "day" })
 					});
 				}
 				entries.set(type, generatedLabel);

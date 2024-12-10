@@ -154,6 +154,22 @@ export function formatNumber(value, options) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Form a number using the provided pace unit.
+ * @param {number} value - The time to format.
+ * @param {string} unit - Time unit as defined in `CONFIG.BlackFlag.timeUnits.time.children`.
+ * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
+ * @param {string} [options.period="hour"] - Time period formatting unit (e.g. hour or day).
+ * @returns {string}
+ */
+export function formatPace(value, unit, { period="hour", ...options }={}) {
+	const unitConfig = CONFIG.BlackFlag.paceUnits[unit];
+	options.unit ??= `${unitConfig?.formattingUnit ?? unit}-per-${period}`;
+	return _formatSystemUnits(value, unit, unitConfig, options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Produce a number with the parts wrapped in their own spans.
  * @param {number} value - A number for format.
  * @param {NumberFormattingOptions} [options] - Additional formatting options.
@@ -169,7 +185,7 @@ export function numberParts(value, options) {
 /**
  * Form a number using the provided time unit.
  * @param {number} value - The time to format.
- * @param {string} unit - Time unit as defined in `CONFIG.BlackFlag.timeUnits.time.children`.
+ * @param {string} unit - Time unit as defined in `CONFIG.BlackFlag.timeUnits`.
  * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
  * @returns {string}
  */
