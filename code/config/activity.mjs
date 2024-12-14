@@ -82,3 +82,4 @@ export const attackTypes = {
 	weapon: "BF.WEAPON.Label[one]",
 	spell: "BF.Item.Type.Spell[one]"
 };
+localizeConfig(attackTypes);

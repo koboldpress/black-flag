@@ -977,10 +977,17 @@ async function rollDamage(event) {
  * @returns {HTMLElement|null} - An HTML element if the lookup could be built, otherwise null.
  *
  * @example Include a creature's name in its description:
- * ```[[lookup @name]]``
+ * ```[[lookup @name]]```
  * becomes
  * ```html
  * <span class="lookup-value">Adult Black Dragon</span>
+ * ```
+ *
+ * @example Lookup a property within an activity:
+ * ```[[lookup @target.template.size activity=Osjqpi5MJiML9pYs]]```
+ * becomes
+ * ```html
+ * <span class="lookup-value">120</span>
  * ```
  */
 function enrichLookup(config, fallback, options) {
@@ -993,12 +1000,20 @@ function enrichLookup(config, fallback, options) {
 		else if (value.startsWith("@")) keyPath ??= value;
 	}
 
+	let activity = options.relativeTo?.system.activities?.get(config.activity);
+	if (config.activity && !activity) {
+		console.warn(`Activity not found when enriching ${config._input}.`);
+		return null;
+	}
+
 	if (!keyPath) {
 		console.warn(`Lookup path must be defined to enrich ${config._input}.`);
 		return null;
 	}
 
-	const data = options.rollData ?? options.relativeTo?.getRollData?.() ?? {};
+	const data = activity
+		? activity.getRollData().activity
+		: options.rollData ?? options.relativeTo?.getRollData?.() ?? {};
 	let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
 	if (value && style) {
 		if (style === "capitalize") value = value.capitalize();

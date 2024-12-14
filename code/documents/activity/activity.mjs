@@ -1394,6 +1394,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	getRollData(options = {}) {
 		const rollData = this.item.getRollData(options);
 		const ability = this.actor?.system.abilities?.[this.ability] ?? {};
+		rollData.activity = { ...this };
 		rollData.mod = ability.adjustedMod ?? ability.mod ?? 0;
 		return rollData;
 	}
