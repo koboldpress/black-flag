@@ -1,4 +1,5 @@
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
+import Activity from "./documents/activity/activity.mjs";
 import { getSelectedTokens, getTargetDescriptors, log, simplifyBonus, simplifyFormula } from "./utils/_module.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
@@ -286,12 +287,14 @@ async function enrichAttack(config, label, options) {
 	const activity = config.activity
 		? options.relativeTo?.system.activities?.get(config.activity)
 		: !config.formula
-			? options.relativeTo?.system.activities?.getByType("attack")[0]
+			? options.relativeTo instanceof Activity
+				? options.relativeTo
+				: options.relativeTo?.system.activities?.getByType("attack")[0] ?? null
 			: null;
 
 	if (activity) {
 		config.activityUuid = activity.uuid;
-		const attackConfig = activity.getAttackDetails?.({ attackMode: config.attackMode }) ?? {};
+		const attackConfig = activity.getAttackDetails?.(config) ?? {};
 		config.formula = Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data);
 		delete config.activity;
 	}
@@ -610,6 +613,11 @@ async function enrichCheck(config, label, options) {
  * ```
  */
 async function enrichSave(config, label, options) {
+	if (config.activity && config.ability) {
+		console.warn(`Activity ID and ability found while enriching ${config._input}, only one is supported.`);
+		return null;
+	}
+
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
 		const slug = slugify(value);
@@ -617,13 +625,28 @@ async function enrichSave(config, label, options) {
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
-
 	if (foundry.utils.getType(config.ability) === "string") config.ability = [config.ability];
-	if (!config.ability) {
-		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
-		config.ability = foundry.utils.getType(ability) === "Set" ? Array.from(ability) : [ability];
-		config.dc ??= dc;
-		if (activity) config.activity = activity.uuid;
+
+	const activity = config.activity
+		? options.relativeTo?.system.activities?.get(config.activity)
+		: !config.formula
+			? options.relativeTo instanceof Activity
+				? options.relativeTo
+				: options.relativeTo?.system.activities?.getByType("save")[0] ?? null
+			: null;
+
+	if (activity) {
+		config.activityUuid = activity.uuid;
+		const saveConfig = activity.getSaveDetails?.(config) ?? {};
+		config.ability =
+			foundry.utils.getType(saveConfig.ability) === "Set" ? Array.from(saveConfig.ability) : [saveConfig.ability];
+		config.dc = saveConfig.dc;
+		delete config.activity;
+	}
+
+	if (!config.activityUuid && !config.ability) {
+		console.warn(`No ability or linked activity found while enriching ${config._input}.`);
+		return null;
 	}
 
 	config.ability = config.ability?.map(a => slugify(a)).filter(a => a in CONFIG.BlackFlag.enrichment.lookup.abilities);
@@ -633,8 +656,9 @@ async function enrichSave(config, label, options) {
 
 	config.rollAction = "ability-save";
 	if (label) label = createRollLink(label);
-	if (!label && config.ability?.length < 2) label = createRollLink(createRollLabel(config));
-	else {
+	if (!label && config.ability?.length < 2) {
+		label = createRollLink(createRollLabel({ ...config, ability: config.ability[0] }));
+	} else {
 		const abilities = config.ability.map(
 			ability =>
 				createRollLink(CONFIG.BlackFlag.abilities.localizedAbbreviations[ability].toUpperCase(), { ...config, ability })
@@ -644,8 +668,10 @@ async function enrichSave(config, label, options) {
 		const showDC = config.dc && !config.hideDC;
 		if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 		label = game.i18n.format(`BF.Enricher.Save.${config.format === "long" ? "Long" : "Short"}`, { save: label });
+		delete config.rollAction;
 	}
 
+	config.ability = config.ability.join("|");
 	return createRequestLink(label, config);
 }
 
@@ -660,7 +686,7 @@ async function requestCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
 	const buttons = [];
 
-	const abilities = JSON.parse(target.dataset.ability);
+	const abilities = target.dataset.ability?.split("|");
 	if (abilities?.length)
 		abilities.forEach(ability =>
 			buttons.push({
@@ -695,6 +721,10 @@ async function requestCheckSave(event) {
  */
 async function rollCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
+	const dataset = {
+		...(event.target.closest("[data-roll-action]")?.dataset ?? {}),
+		...(event.target.closest(".roll-link")?.dataset ?? {})
+	};
 
 	target.disabled = true;
 	try {
@@ -705,7 +735,7 @@ async function rollCheckSave(event) {
 		}
 
 		for (const actor of actors) {
-			const { rollAction, dc, ...data } = target.dataset;
+			const { rollAction, dc, ...data } = dataset;
 			const rollConfig = { event, ...data };
 			if (dc) rollConfig.target = Number(dc);
 			await actor.roll(rollAction, rollConfig);
