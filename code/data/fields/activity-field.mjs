@@ -56,17 +56,16 @@ export class ActivityCollection extends Collection {
 		for (const [id, entry] of activities) {
 			if (!(entry instanceof BaseActivity)) continue;
 			this.set(id, entry);
-			this.#types[entry.type] ??= [];
-			this.#types[entry.type].push(entry);
 		}
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * The parent DataModel to which this ActivityCollection instance belongs.
 	 * @type {DataModel}
-	 * @private
 	 */
 	#model;
 
@@ -74,10 +73,23 @@ export class ActivityCollection extends Collection {
 
 	/**
 	 * Pre-filtered arrays of activities per-type.
-	 * @type {object}
-	 * @private
+	 * @type {Map<string, Set<string>>}
 	 */
-	#types = {};
+	#types = new Map();
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Methods               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Return array of activities filtered by the provided type.
+	 * @param {string} type
+	 * @returns {Activity[]}
+	 * @deprecated
+	 */
+	byType(type) {
+		return this.getByType(type);
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -86,8 +98,49 @@ export class ActivityCollection extends Collection {
 	 * @param {string} type
 	 * @returns {Activity[]}
 	 */
-	byType(type) {
-		return this.#types[type] ?? [];
+	getByType(type) {
+		return Array.from(this.#types.get(type) ?? []).map(key => this.get(key));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Generator that yields activities for each of the provided types.
+	 * @param {string[]} types - Types to fetch.
+	 * @yields {Activity}
+	 */
+	*getByTypes(...types) {
+		for (const type of types) {
+			for (const activity of this.getByType(type)) yield activity;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	set(key, value) {
+		if (!this.#types.has(value.type)) this.#types.set(value.type, new Set());
+		this.#types.get(value.type).add(key);
+		return super.set(key, value);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	delete(key) {
+		this.#types.get(this.get(key)?.type)?.delete(key);
+		return super.delete(key);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Test the given predicate against every entry in the Collection.
+	 * @param {function(*, number, ActivityCollection): boolean} predicate - The predicate.
+	 * @returns {boolean}
+	 */
+	every(predicate) {
+		return this.reduce((pass, v, i) => pass && predicate(v, i, this), true);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

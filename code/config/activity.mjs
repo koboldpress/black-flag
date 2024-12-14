@@ -1,5 +1,6 @@
 import * as applications from "../applications/activity/_module.mjs";
 import * as documents from "../documents/activity/_module.mjs";
+import { localizeConfig } from "../utils/_module.mjs";
 
 /**
  * Configuration data for activity types.

@@ -1,4 +1,5 @@
-import { getSelectedTokens, getTargetDescriptors, log, simplifyBonus } from "./utils/_module.mjs";
+import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
+import { getSelectedTokens, getTargetDescriptors, log, simplifyBonus, simplifyFormula } from "./utils/_module.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
@@ -191,7 +192,7 @@ function _addDataset(element, dataset) {
  */
 async function handleActivation(event) {
 	const activity = await fromUuid(event.target.closest("[data-activity-uuid]")?.dataset.activityUuid);
-	if (activity) {
+	if (activity && !event.target.closest("[data-roll-action]")) {
 		event.stopPropagation();
 		activity.activate();
 	}
@@ -269,25 +270,47 @@ function handleRollAction(event) {
  * ```
  */
 async function enrichAttack(config, label, options) {
+	if (config.activity && config.formula) {
+		console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+		return null;
+	}
+
 	const formulaParts = [];
 	if (config.formula) formulaParts.push(config.formula);
-	for (const value of config.values) formulaParts.push(value);
-	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-	if (!config.formula) {
-		const { formula, activity } = options.relativeTo?.getAttackDetails?.(config) ?? {};
-		config.formula = formula || "+0";
-		if (activity) config.activity = activity.uuid;
+	for (const value of config.values) {
+		if (value in CONFIG.BlackFlag.attackModes) config.attackMode = value;
+		else formulaParts.push(value);
 	}
-	// TODO: Simplify formula as must as possible for display
-	// TODO: Improve this logic
-	if (!config.formula.startsWith("+") && !config.formula.startsWith("-")) config.formula = `+${config.formula}`;
+	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+
+	const activity = config.activity
+		? options.relativeTo?.system.activities?.get(config.activity)
+		: !config.formula
+			? options.relativeTo?.system.activities?.getByType("attack")[0]
+			: null;
+
+	if (activity) {
+		config.activityUuid = activity.uuid;
+		const attackConfig = activity.getAttackDetails?.({ attackMode: config.attackMode }) ?? {};
+		config.formula = Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data);
+		delete config.activity;
+	}
+
+	if (!config.activityUuid && !config.formula) {
+		console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+		return null;
+	}
+
 	config.rollAction = "attack";
 
 	if (label) return createRollLink(label, config);
 
+	let displayFormula = simplifyFormula(config.formula);
+	if (!displayFormula.startsWith("+") && !displayFormula.startsWith("-")) displayFormula = `+${displayFormula}`;
+
 	const span = document.createElement("span");
 	span.innerHTML = game.i18n.format("BF.Enricher.Attack.Long", {
-		formula: createRollLink(config.formula, config).outerHTML
+		formula: createRollLink(displayFormula, config).outerHTML
 	});
 	return span;
 }
@@ -301,19 +324,30 @@ async function enrichAttack(config, label, options) {
  */
 async function rollAttack(event) {
 	const target = event.target.closest("[data-roll-action]");
-	const { formula, activity: activityUuid } = target.dataset;
+	const { activityUuid, attackMode, formula } = target.dataset;
 
 	if (activityUuid) {
 		const activity = await fromUuid(activityUuid);
-		if (activity) return activity.rollAttack();
+		if (activity) return activity.rollAttack({ attackMode, event });
 	}
 
+	const targets = getTargetDescriptors();
 	const rollConfig = {
+		attackMode,
 		event,
-		rolls: [{ parts: [formula.replace(/^\s*\+\s*/, "")] }]
+		rolls: [
+			{
+				parts: [formula.replace(/^\s*\+\s*/, "")],
+				options: {
+					target: targets.length === 1 ? targets[0].ac : undefined
+				}
+			}
+		]
 	};
 
-	const dialogConfig = {};
+	const dialogConfig = {
+		applicationClass: AttackRollConfigurationDialog
+	};
 
 	const messageConfig = {
 		data: {
@@ -333,7 +367,10 @@ async function rollAttack(event) {
 
 	if (Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false) return;
 	const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
-	if (rolls?.length) Hooks.callAll("blackFlag.postRollAttack", this, rolls);
+	if (rolls?.length) {
+		Hooks.callAll("blackFlag.rollAttack", rolls, { ammoUpdate: null, subject: null });
+		Hooks.callAll("blackFlag.postRollAttack", rolls, { subject: null });
+	}
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
