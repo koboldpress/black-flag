@@ -7,7 +7,7 @@ const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", ""
  */
 export function registerCustomEnrichers() {
 	log("Registering custom enrichers");
-	const stringNames = ["attack", "check", "damage", "healing", "save", "skill", "tool", "vehicle"];
+	const stringNames = ["attack", "check", "damage", "heal", "healing", "save", "skill", "tool", "vehicle"];
 	CONFIG.TextEditor.enrichers.push(
 		{
 			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
@@ -62,6 +62,7 @@ async function enrichString(match, options) {
 			return enrichLookup(config, label, options);
 		case "save":
 			return enrichSave(config, label, options);
+		case "heal":
 		case "healing":
 			config._isHealing = true;
 		case "damage":
@@ -359,7 +360,7 @@ function enrichCalculation(config, fallback, options) {
 	formulaParts.push(...config.values);
 	const roll = new Roll(
 		formulaParts.join(" "),
-		options.rollData ?? options.relativeTo?.getRollData({ deterministic: true })
+		options.rollData ?? options.relativeTo?.getRollData?.({ deterministic: true })
 	);
 
 	if (!roll.isDeterministic) {
@@ -463,7 +464,7 @@ function createRollLabel(config) {
  * ```
  *
  * @example Create a tool check:
- * ```[[/check tool=thievesTools ability=intelligence]]```
+ * ```[[/check tool=thieves ability=intelligence]]```
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="intelligence" data-tool="thievesTools">
@@ -727,7 +728,7 @@ async function rollCheckSave(event) {
  * ```
  *
  * @example Create a healing link:
- * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * ```[[/heal 2d6]]``` or ```[[/damage 2d6 healing]]```
  * becomes
  * ```html
  * <a class="unlink" data-roll-action="damage" data-formulas="["2d6"]" data-types="["healing"]">
@@ -907,7 +908,7 @@ function enrichLookup(config, fallback, options) {
 		return null;
 	}
 
-	const data = options.rollData ?? options.relativeTo?.getRollData() ?? {};
+	const data = options.rollData ?? options.relativeTo?.getRollData?.() ?? {};
 	let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
 	if (value && style) {
 		if (style === "capitalize") value = value.capitalize();
