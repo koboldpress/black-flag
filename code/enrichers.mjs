@@ -807,6 +807,7 @@ async function enrichDamage(configs, label, options) {
 	const config = { rollAction: "damage", formulas: [], types: [], rollType: configs._isHealing ? "healing" : "damage" };
 	for (const c of configs) {
 		const formulaParts = [];
+		if (c.activity) config.activity = c.activity;
 		if (c.average) config.average = c.average;
 		if (c.magical) config.magical = true;
 		if (c.mode) config.attackMode = c.mode;
@@ -826,10 +827,29 @@ async function enrichDamage(configs, label, options) {
 			config.types.push(c.type);
 		}
 	}
+	config.types = config.types.map(t => t?.replace("/", "|"));
 
-	if (!config.formulas.length) {
-		const damageDetails = options.relativeTo?.getDamageDetails?.(config);
-		for (const r of damageDetails?.rolls ?? []) {
+	if (config.activity && config.formulas.length) {
+		console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+		return null;
+	}
+
+	let activity = options.relativeTo?.system.activities?.get(config.activity);
+	if (!activity && !config.formula) {
+		const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
+		for (const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? []) {
+			if (a.system.damage.parts.length || a.system.healing?.formula) {
+				activity = a;
+				break;
+			}
+		}
+	}
+
+	if (activity) {
+		config.activityUuid = activity.uuid;
+		configs.rollType = activity.type === "heal" ? "healing" : "damage";
+		const damageConfig = activity.getDamageDetails(config);
+		for (const r of damageConfig?.rolls ?? []) {
 			const formula = Roll.defaultImplementation.replaceFormulaData(r.parts.join(" + "), r.data, { missing: "0" });
 			if (formula) {
 				config.formulas.push(formula);
@@ -837,10 +857,13 @@ async function enrichDamage(configs, label, options) {
 				else config.types.push(r.options.damageType);
 			}
 		}
-		config.activity = damageDetails?.activity?.uuid;
+		delete config.activity;
 	}
 
-	if (!config.formulas.length) return null;
+	if (!config.activityUuid && !config.formulas.length) {
+		console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+		return null;
+	}
 
 	if (label) return createRollLink(label, config);
 
