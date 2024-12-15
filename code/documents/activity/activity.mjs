@@ -409,6 +409,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Configuration data for an activity's activation.
 	 *
 	 * @typedef {object} ActivityActivationConfiguration
+	 * @property {object} [cause]
+	 * @property {string} [cause.activity] - Relative UUID to the activity that caused this one to be activated.
+	 *                                       Activity must be on the same actor as this one.
+	 * @property {boolean|number[]} [cause.resources] - Control resource consumption on linked activity.
 	 * @property {object|false} create
 	 * @property {boolean} create.measuredTemplate - Should measured templates defined by activity be created?
 	 * @property {boolean|object} consume - Consumption configuration, set to `false` to prevent all consumption.
@@ -422,13 +426,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {Event} [event] - Triggering event.
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
 	 *                                      is not allowed.
-	 * @property {object} spell
-	 * @property {number} spell.circle - Spell circle to consume. Replaces `scaling` on property for spells.
+	 * @property {object} [spell]
+	 * @property {number} [spell.circle] - Spell circle to consume. Replaces `scaling` on property for spells.
+	 * @property {boolean} [subsequentActions=true] - Trigger subsequent actions defined by this activity.
 	 * @property {TargetDescriptor[]} targets - Tokens targeted during activation.
-	 * @property {object} [cause]
-	 * @property {string} [cause.activity] - Relative UUID to the activity that caused this one to be activated.
-	 *                                       Activity must be on the same actor as this one.
-	 * @property {boolean|number[]} [cause.resources] - Control resource consumption on linked activity.
 	 */
 
 	/**
@@ -559,7 +560,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (Hooks.call("blackFlag.postActivateActivity", activity, activationConfig, results) === false) return;
 
 		// Trigger any primary action provided by this activity
-		activity._triggerSubsequentActions(activationConfig, results);
+		if (activationConfig.subsequentActions !== false) activity._triggerSubsequentActions(activationConfig, results);
 
 		return results;
 	}
