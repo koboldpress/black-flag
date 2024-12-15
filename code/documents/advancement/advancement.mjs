@@ -352,17 +352,18 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 		});
 		let sort = updates.find(u => u.target._id === source.id)?.update?.sort ?? null;
 		if (sort !== null) sort += (index * CONST.SORT_INTEGER_DENSITY) / 100;
+		const { _stats } = game.items.fromCompendium(source);
 		return source
 			.clone(
 				foundry.utils.mergeObject(
 					{
 						_id: id,
+						_stats,
 						folder: null,
 						sort,
 						"flags.black-flag.sourceId": uuid,
 						"flags.black-flag.advancementOrigin": advancementOrigin,
-						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin,
-						"_stats.compendiumSource": uuid
+						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin
 					},
 					changes
 				),

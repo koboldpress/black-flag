@@ -548,7 +548,12 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			let newItemData = transformAll ? await transformAll(item) : item;
 			if (transformFirst && depth === 0) newItemData = await transformFirst(newItemData);
 			if (!newItemData) return;
-			if (newItemData instanceof Item) newItemData = newItemData.toObject();
+			if (newItemData instanceof Item)
+				newItemData = game.items.fromCompendium(newItemData, {
+					clearSort: false,
+					clearOwnership: false,
+					keepId: true
+				});
 			foundry.utils.mergeObject(newItemData, { "system.container": containerId });
 			if (!keepId) newItemData._id = foundry.utils.randomID();
 
