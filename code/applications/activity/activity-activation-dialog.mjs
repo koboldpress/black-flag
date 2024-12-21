@@ -285,7 +285,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if (this.activity.spellSlotScaling && context.linkedActivity && this.config.scaling !== false) {
 			const max = simplifyBonus(scale.max, rollData);
 			const minimumCircle = context.linkedActivity.system.spell?.circle ?? this.item.system.circle.base ?? 1;
-			const maximumCircle = scale.allowed ? (scale.max ? minimumLevel + max - 1 : Infinity) : minimumLevel;
+			const maximumCircle = scale.allowed ? (scale.max ? minimumCircle + max - 1 : Infinity) : minimumCircle;
 			const spellSlotOptions = Object.entries(CONFIG.BlackFlag.spellCircles())
 				.map(([circle, label]) => {
 					if (Number(circle) < minimumCircle || Number(circle) > maximumCircle) return null;

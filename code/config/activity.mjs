@@ -46,6 +46,12 @@ export const _activityTypes = {
 			config: applications.DamageSheet
 		}
 	},
+	forward: {
+		documentClass: documents.ForwardActivity,
+		sheetClasses: {
+			config: applications.ForwardSheet
+		}
+	},
 	heal: {
 		documentClass: documents.HealActivity,
 		sheetClasses: {

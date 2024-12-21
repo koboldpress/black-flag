@@ -1783,7 +1783,6 @@
 },
 
 "BF.Formula": {
-	"Label": "Formula",
 	"Action": {
 		"Customize": "Customize Formula"
 	},
@@ -1793,21 +1792,35 @@
 	"Default": {
 		"DC": "8 + Modifier + Proficiency"
 	},
+	"Label": "Formula",
 	"Warning": {
 		"MissingReference": "The {property} formula within {name} has references to missing data: {references}"
+	}
+},
+
+"BF.FORWARD": {
+	"FIELDS": {
+		"linked": {
+			"label": "Triggered Activity"
+		}
+	},
+	"Hint": "Trigger another activity with different consumption.",
+	"Title": "Forward",
+	"Warning": {
+		"NoActivity": "Linked activity must be configured before Forward activity can be used."
 	}
 },
 
 "BF.Global": "Global",
 
 "BF.HEAL": {
-	"Title": "Heal",
-	"Hint": "Provide some healing.",
 	"FIELDS": {
 		"healing": {
 			"label": "Healing"
 		}
-	}
+	},
+	"Hint": "Provide some healing.",
+	"Title": "Heal"
 },
 
 "BF.Healing": {

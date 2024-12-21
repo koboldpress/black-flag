@@ -3,6 +3,7 @@ export { default as AttackActivity } from "./attack-activity.mjs";
 export { default as CastActivity } from "./cast-activity.mjs";
 export { default as CheckActivity } from "./check-activity.mjs";
 export { default as DamageActivity } from "./damage-activity.mjs";
+export { default as ForwardActivity } from "./forward-activity.mjs";
 export { default as HealActivity } from "./heal-activity.mjs";
 export { default as SaveActivity } from "./save-activity.mjs";
 export { default as SummonActivity } from "./summon-activity.mjs";

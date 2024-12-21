@@ -168,6 +168,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			}))
 		];
 
+		context.showPrimaryActivation = this.activity.isSpell;
+
 		return context;
 	}
 
