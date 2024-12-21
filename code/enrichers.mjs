@@ -632,7 +632,7 @@ async function enrichSave(config, label, options) {
 		: !config.formula
 			? options.relativeTo instanceof Activity
 				? options.relativeTo
-				: options.relativeTo?.system.activities?.getByType("save")[0] ?? null
+				: options.relativeTo?.system?.activities?.getByType("save")[0] ?? null
 			: null;
 
 	if (activity) {
@@ -838,7 +838,7 @@ async function enrichDamage(configs, label, options) {
 	if (!activity && !config.formula) {
 		const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
 		for (const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? []) {
-			if (a.system.damage.parts.length || a.system.healing?.formula) {
+			if (a.system.damage?.parts.length || a.system.healing?.formula) {
 				activity = a;
 				break;
 			}
