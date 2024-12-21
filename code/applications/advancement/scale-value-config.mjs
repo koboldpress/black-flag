@@ -6,11 +6,14 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class ScaleValueConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["scale-value", "two-column"],
+		classes: ["scale-value"],
+		columns: 2,
 		position: {
 			width: 640
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static PARTS = {

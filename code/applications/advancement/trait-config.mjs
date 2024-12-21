@@ -16,7 +16,8 @@ export default class TraitConfig extends AdvancementConfig {
 
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["trait", "two-column"],
+		classes: ["trait"],
+		columns: 2,
 		actions: {
 			addChoice: TraitConfig.#onAddChoice,
 			deleteChoice: TraitConfig.#onDeleteChoice

@@ -13,6 +13,8 @@ export default class GrantFeaturesConfig extends AdvancementConfig {
 		}
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static PARTS = {
 		config: {

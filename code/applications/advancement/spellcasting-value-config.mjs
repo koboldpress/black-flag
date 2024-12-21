@@ -7,10 +7,13 @@ export default class SpellcastingValueConfig extends ScaleValueConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
 		classes: ["scale-value"],
+		columns: 1,
 		position: {
 			width: 400
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static PARTS = {

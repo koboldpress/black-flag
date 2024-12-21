@@ -9,6 +9,8 @@ export default class HitPointsConfig extends AdvancementConfig {
 		classes: ["hit-points"]
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static PARTS = {
 		config: {
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"

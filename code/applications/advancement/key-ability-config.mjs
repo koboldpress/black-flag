@@ -10,6 +10,8 @@ export default class KeyAbilityConfig extends AdvancementConfig {
 		classes: ["key-ability"]
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static PARTS = {
 		config: {
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"

@@ -7,9 +7,10 @@ import GrantSpellsConfig from "./grant-spells-config.mjs";
 export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["choose-spells", "two-column"],
+		classes: ["choose-spells"],
+		columns: 3,
 		position: {
-			width: 620
+			width: 920
 		}
 	};
 
@@ -21,16 +22,16 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 			classes: ["left-column"],
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
 		},
-		restrictions: {
-			classes: ["left-column"],
-			template: "systems/black-flag/templates/advancement/choose-spells-config-restrictions.hbs"
-		},
 		spellConfig: {
 			classes: ["left-column"],
 			template: "systems/black-flag/templates/advancement/parts/advancement-spell-configuration.hbs"
 		},
+		restrictions: {
+			classes: ["center-column"],
+			template: "systems/black-flag/templates/advancement/choose-spells-config-restrictions.hbs"
+		},
 		items: {
-			classes: ["left-column"],
+			classes: ["center-column"],
 			template: "systems/black-flag/templates/advancement/choose-spells-config-items.hbs",
 			templates: ["systems/black-flag/templates/advancement/parts/spells-list.hbs"]
 		},

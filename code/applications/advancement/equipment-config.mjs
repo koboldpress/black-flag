@@ -22,6 +22,8 @@ export default class EquipmentConfig extends AdvancementConfig {
 		}
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static PARTS = {
 		config: {

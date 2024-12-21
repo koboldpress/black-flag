@@ -9,6 +9,8 @@ export default class GrantSpellsConfig extends GrantFeaturesConfig {
 		classes: ["grant-spells"]
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static PARTS = {
 		config: {

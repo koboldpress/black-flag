@@ -9,6 +9,8 @@ export default class ImprovementConfig extends AdvancementConfig {
 		classes: ["improvement"]
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static PARTS = {
 		config: {
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"

@@ -7,7 +7,8 @@ import GrantFeaturesConfig from "./grant-features-config.mjs";
 export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["choose-features", "two-column"],
+		classes: ["choose-features"],
+		columns: 2,
 		position: {
 			width: 640
 		}
