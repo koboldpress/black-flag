@@ -211,6 +211,12 @@ export default class DamageRoll extends BasicRoll {
 		for (const [i, term] of this.terms.entries()) {
 			// Multiply dice terms
 			if (term instanceof foundry.dice.terms.DiceTerm) {
+				// Handle complex number term
+				if (term._number instanceof Roll) {
+					if (!term._number.isDeterministic) continue;
+					if (!term._number._evaluated) term._number.evaluateSync();
+				}
+
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if (this.isCritical) {
