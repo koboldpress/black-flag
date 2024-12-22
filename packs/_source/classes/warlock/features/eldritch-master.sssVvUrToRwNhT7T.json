@@ -10,7 +10,12 @@
         "type": "utility",
         "_id": "VHWqoXzlVCMxJyfj",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          }
+        },
         "activation": {
           "value": null,
           "type": "free",
@@ -20,7 +25,14 @@
           "targets": [
             {
               "type": "activity",
-              "value": "1"
+              "value": "1",
+              "scaling": {}
+            },
+            {
+              "type": "attribute",
+              "target": "spellcasting.slots.pact.spent",
+              "value": "@spellcasting.slots.pact.spent",
+              "scaling": {}
             }
           ],
           "scale": {
@@ -97,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.037",
-    "coreVersion": "12.328",
+    "systemVersion": "1.2.058",
+    "coreVersion": "12.331",
     "createdTime": 1719376310302,
-    "modifiedTime": 1720051443356,
+    "modifiedTime": 1734904472469,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
