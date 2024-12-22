@@ -1,4 +1,5 @@
-import { LocalDocumentField } from "../fields/_module.mjs";
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
+import LocalDocumentField from "../fields/local-document-field.mjs";
 
 const { ArrayField, BooleanField, DocumentUUIDField, SchemaField } = foundry.data.fields;
 
@@ -15,17 +16,21 @@ const { ArrayField, BooleanField, DocumentUUIDField, SchemaField } = foundry.dat
  * @property {boolean} enabled - Should the features be enabled by default when added?
  * @property {FeatureGrantConfiguration[]} pool - Items to grant.
  */
-export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
+export class GrantFeaturesConfigurationData extends AdvancementDataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Advancement.GrantFeatures"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			enabled: new BooleanField({ initial: true }),
-			pool: new ArrayField(
-				new SchemaField({
-					uuid: new DocumentUUIDField()
-				}),
-				{ label: "DOCUMENT.Items" }
-			)
+			pool: new ArrayField(new SchemaField({ uuid: new DocumentUUIDField() }))
 		};
 	}
 }

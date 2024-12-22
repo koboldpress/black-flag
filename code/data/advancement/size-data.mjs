@@ -1,9 +1,11 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
+
 const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Size advancement.
  */
-export class SizeConfigurationData extends foundry.abstract.DataModel {
+export class SizeConfigurationData extends AdvancementDataModel {
 	static defineSchema() {
 		return {
 			options: new SetField(new StringField(), {

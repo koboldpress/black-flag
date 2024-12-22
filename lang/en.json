@@ -261,16 +261,6 @@
 	"Label": "Advancement",
 
 	"Core": {
-		"Title": {
-			"Label": "Custom Title"
-		},
-		"Hint": {
-			"Label": "Hint",
-			"Hint": "Additional description of this advancement."
-		},
-		"Icon": {
-			"Label": "Custom Icon"
-		},
 		"Action": {
 			"Create": "Create Advancement",
 			"Delete": "Delete Advancement",
@@ -281,8 +271,6 @@
 			"View": "View Advancement"
 		},
 		"ClassRestriction": {
-			"Label": "Class Restriction",
-			"Hint": "Should this advancement only be applied for the first class taken on an actor or only when multiclassing into this class?",
 			"Multiclass": "Multiclass Only",
 			"None": "No Restriction",
 			"Original": "Original Class Only"
@@ -292,14 +280,95 @@
 				"Short": "Any",
 				"Long": "Any Level"
 			},
-			"None": "No Level",
-			"Reference": {
-				"Label": "Level Reference",
-				"Hint": "Is this advancement based off overall character level, or a specific class's level?"
-			}
+			"None": "No Level"
 		},
 		"Warning": {
 			"CantBeAdded": "This advancement cannot be added to this item."
+		}
+	},
+
+	"ChooseFeatures": {
+		"Action": {
+			"Choose": "Make Choice",
+			"Replace": "Replace Earlier Choice",
+			"Revert": "Revert Choice"
+		},
+		"Choose": "Choose {number}",
+		"Details": "Choice Details",
+		"Drop": "Drop a {type} here to select it",
+		"FIELDS": {
+			"allowDrops": {
+				"label": "Allow Drops"
+			},
+			"choices": {
+				"hint": "Specify how many choices are allowed at each level.",
+				"label": "Choices"
+			},
+			"pool": {
+				"label": "Features"
+			},
+			"restriction": {
+				"label": "Choice Restrictions"
+			},
+			"type": {
+				"label": "Item Type"
+			}
+		},
+		"Hint": "Present the player with a choice of features or talents that they can choose for their character at one or more levels.",
+		"Notification[one]": "A {title} choice is needed",
+		"Notification[other]": "{number} {title} choices are needed",
+		"Replacement": {
+			"Allow": "Allow Replacement",
+			"Label": "Replace",
+			"Title": "replace"
+		},
+		"Title": "Choose Features",
+		"Warning": {
+			"PreviouslyChosen": "This feature has already been chosen at a previous level.",
+			"Type": "Only {type} can be selected for this choice."
+		}
+	},
+	
+	"ChooseSpells": {
+		"FIELDS": {
+			"allowDrops": {
+				"label": "Allow Drops"
+			},
+			"restriction": {
+				"allowCantrips": {
+					"label": "Allow Cantrips",
+					"hint": "Can cantrips be selected when \"Any Available Circle\" is selected?"
+				},
+				"allowRituals": {
+					"label": "Rituals",
+					"hint": "Restriction on selection of rituals.",
+					"Allow": "Allow Rituals",
+					"None": "No Rituals",
+					"Only": "Only Rituals"
+				},
+				"circle": {
+					"label": "Spell Circle",
+					"Available": "Any Available Circle"
+				},
+				"exactCircle": {
+					"label": "Exact Circle",
+					"hint": "Does the circle need to be exactly this circle, or are spells of a lower circle allowed?"
+				},
+				"source": {
+					"label": "Source of Magic"
+				}
+			}
+		},
+		"Hint": "Present the player with a choice of spells that they may choose at one or more levels.",
+		"Title": "Choose Spells",
+		"Warning": {
+			"NoCantrips": "No cantrips can be selected for this choice.",
+			"NoRituals": "No rituals can be selected for this choice.",
+			"OnlyCantrips": "Only cantrips can be selected for this choice.",
+			"OnlyRituals": "Only rituals can be selected for this choice.",
+			"Source": "Only {source} spells can be selected for this choice.",
+			"CircleMaximum": "Only {circle} or lower spells can be selected for this choice.",
+			"CircleSpecific": "Only {circle} spells can be selected for this choice."
 		}
 	},
 
@@ -315,77 +384,6 @@
 			"Duplicate": "That item already exists on this advancement.",
 			"Invalid": "{type} items cannot be added with this advancement type.",
 			"Recursive": "You cannot grant an item in its own advancement."
-		}
-	},
-
-	"Selection": {
-		"Title": "Select Advancement Type",
-		"Error": "Must select advancement type to create."
-	},
-
-	"ChooseFeatures": {
-		"Title": "Choose Features",
-		"Hint": "Present the player with a choice of features or talents that they can choose for their character at one or more levels.",
-		"Action": {
-			"Choose": "Make Choice",
-			"Replace": "Replace Earlier Choice",
-			"Revert": "Revert Choice"
-		},
-		"ChoiceDetails": "Choice Details",
-		"Choices": {
-			"Label": "Choices",
-			"Hint": "Specify how many choices are allowed at each level."
-		},
-		"Choose": "Choose {number}",
-		"Drop": "Drop a {type} here to select it",
-		"Notification[one]": "A {title} choice is needed",
-		"Notification[other]": "{number} {title} choices are needed",
-		"Replacement": {
-			"Allow": "Allow Replacement",
-			"Label": "Replace",
-			"Title": "replace"
-		},
-		"Restrictions": "Choice Restrictions",
-		"Type": {
-			"Label": "Item Type"
-		},
-		"Warning": {
-			"PreviouslyChosen": "This feature has already been chosen at a previous level.",
-			"Type": "Only {type} can be selected for this choice."
-		}
-	},
-	
-	"ChooseSpells": {
-		"Title": "Choose Spells",
-		"Hint": "Present the player with a choice of spells that they may choose at one or more levels.",
-		"FIELDS": {
-			"restriction": {
-				"allowCantrips": {
-					"label": "Allow Cantrips",
-					"hint": "Can cantrips be selected when \"Any Available Circle\" is selected?"
-				},
-				"allowRituals": {
-					"label": "Rituals",
-					"hint": "Restriction on selection of rituals.",
-					"Allow": "Allow Rituals",
-					"None": "No Rituals",
-					"Only": "Only Rituals"
-				},
-				"exactCircle": {
-					"label": "Exact Circle",
-					"hint": "Does the circle need to be exactly this circle, or are spells of a lower circle allowed?"
-				}
-			}
-		},
-		"AvailableCircle": "Any Available Circle",
-		"Warning": {
-			"NoCantrips": "No cantrips can be selected for this choice.",
-			"NoRituals": "No rituals can be selected for this choice.",
-			"OnlyCantrips": "Only cantrips can be selected for this choice.",
-			"OnlyRituals": "Only rituals can be selected for this choice.",
-			"Source": "Only {source} spells can be selected for this choice.",
-			"CircleMaximum": "Only {circle} or lower spells can be selected for this choice.",
-			"CircleSpecific": "Only {circle} spells can be selected for this choice."
 		}
 	},
 
@@ -443,32 +441,83 @@
 		"WealthRoll": "Wealth Roll"
 	},
 
-	"GrantFeatures": {
-		"Title": "Features",
-		"Hint": "Grant the character features when they reach a certain level.",
-		"Enabled": {
-			"Label": "Enabled",
-			"Hint": "Should features start enabled when added to character?"
+	"FIELDS": {
+		"hint": {
+			"hint": "Additional description of this advancement.",
+			"label": "Hint"
+		},
+		"icon": {
+			"label": "Custom Icon"
+		},
+		"identifier": {
+			"label": "Identifier"
+		},
+		"level": {
+			"classIdentifier": {
+				"hint": "Is this advancement based off overall character level, or a specific class's level?",
+				"label": "Level Reference"
+			},
+			"classRestriction": {
+				"hint": "Should this advancement only be applied for the first class taken on an actor or only when multiclassing into this class?",
+				"label": "Class Restriction"
+			},
+			"value": {
+				"label": "Level"
+			}
+		},
+		"title": {
+			"label": "Custom Title"
 		}
 	},
 
+	"GrantFeatures": {
+		"FIELDS": {
+			"enabled": {
+				"hint": "Should features start enabled when added to character?",
+				"label": "Enabled"
+			},
+			"pool": {
+				"label": "Features"
+			}
+		},
+		"Hint": "Grant the character features when they reach a certain level.",
+		"Title": "Features"
+	},
+
 	"GrantSpells": {
-		"Title": "Spells",
-		"Hint": "Grant the character specific spells and assign them the proper details.",
 		"Action": {
 			"Reselect": "Reselect Spellcasting Ability"
 		},
+		"FIELDS": {
+			"pool": {
+				"label": "Spells"
+			},
+			"spell": {
+				"label": "Spell Settings",
+				"ability": {
+					"label": "Spellcasting Ability"
+				},
+				"alwaysPrepared": {
+					"label": "Always Prepared"
+				},
+				"mode": {
+					"label": "Preparation Mode"
+				},
+				"origin": {
+					"hint": "Class or subclass with which these spells will be associated. If the specified origin learns a limited number of spells, then these spells will count against that number.",
+					"label": "Origin"
+				},
+				"source": {
+					"hint": "Will treat added spells as belonging to this source of magic, regardless of their original source.",
+					"label": "Source of Magic"
+				}
+			}
+		},
+		"Hint": "Grant the character specific spells and assign them the proper details.",
 		"Notification": {
 			"Ability": "Select spellcasting ability"
 		},
-		"Origin": {
-			"Label": "Origin",
-			"Hint": "Class or subclass with which these spells will be associated. If the specified origin learns a limited number of spells, then these spells will count against that number."
-		},
-		"SpellSettings": "Spell Settings",
-		"Source": {
-			"Hint": "Will treat added spells as belonging to this source of magic, regardless of their original source."
-		}
+		"Title": "Spells"
 	},
 
 	"HitPoints": {
@@ -555,6 +604,11 @@
 				"Hint": "Use this for an item's uses."
 			}
 		}
+	},
+
+	"Selection": {
+		"Title": "Select Advancement Type",
+		"Error": "Must select advancement type to create."
 	},
 
 	"Size": {

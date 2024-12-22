@@ -4,10 +4,10 @@
 	<label>
 		<span>{{ localize "BF.Advancement.Trait.Mode.Label" }}</span>
 		<select name="configuration.mode">
-			{{ selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label" localize=true }}
+			{{ selectOptions CONFIG.traitModes selected=configuration.data.mode labelAttr="label" localize=true }}
 		</select>
 		<p class="hint">
-			{{ localize (lookup (lookup CONFIG.traitModes configuration.mode) "hint") }}
+			{{ localize (lookup (lookup CONFIG.traitModes configuration.data.mode) "hint") }}
 		</p>
 	</label>
 </fieldset>

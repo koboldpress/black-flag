@@ -1,61 +1,39 @@
-<label>
-	<span>{{ localize "BF.Advancement.Core.Title.Label" }}</span>
-	<input type="text" name="title" value="{{ source.title }}" placeholder="{{ default.title }}">
-</label>
-
-<label class="file">
-	<span>{{ localize "BF.Advancement.Core.Icon.Label" }}</span>
-	<file-picker name="icon" type="icon" value="{{ source.icon }}" placeholder="{{ default.icon }}"></file-picker>
-</label>
+{{ formField fields.title value=source.title placeholder=default.title rootId=partId }}
+{{ formField fields.icon value=source.icon placeholder=default.icon rootId=partId }}
 
 {{#if showHint}}
 	<label>
-		<span class="hinted-label" data-tooltip="BF.Advancement.Core.Hint.Hint">
-			{{ localize "BF.Advancement.Core.Hint.Label" }}
+		<span class="hinted-label" data-tooltip="BF.Advancement.FIELDS.hint.hint">
+			{{ localize "BF.Advancement.FIELDS.hint.label" }}
 		</span>
-		<textarea name="hint" placeholder="{{ hintPlaceholder }}">{{ advancement.hint }}</textarea>
+		<textarea name="hint" placeholder="{{ default.hint }}">{{~ source.hint ~}}</textarea>
 	</label>
 {{/if}}
 
 {{#if showIdentifier}}
-	<label>
-		<span>{{ localize "BF.Identifier.Label" }}</span>
-		<input type="text" name="identifier" value="{{ source.identifier }}" placeholder="{{ default.identifier }}">
+	<div class="form-group">
+		<label>{{ localize "BF.Advancement.FIELDS.identifier.label" }}</label>
+		<div class="form-fields">
+			{{ formInput fields.identifier value=source.identifier placeholder=default.identifier }}
+		</div>
 		{{#if default.identifierHint}}
 			<p class="hint">
 				{{{ localize default.identifierHint identifier=identifier }}}
 			</p>
 		{{/if}}
-	</label>
+	</div>
 {{/if}}
 
 {{#if showClassIdentifier}}
-	<label>
-		<span class="hinted-label" data-tooltip="BF.Advancement.Core.Level.Reference.Hint">
-			{{ localize "BF.Advancement.Core.Level.Reference.Label" }}
-		</span>
-		<select name="level.classIdentifier">
-			{{ selectOptions classIdentifierOptions selected=advancement.level.classIdentifier }}
-		</select>
-	</label>
+	{{ formField fields.level.fields.classIdentifier value=source.level.classIdentifier options=classIdentifierOptions
+	             classes="label-hinted" rootId=partId }}
 {{/if}}
 
 {{#if showLevelSelector}}
-	<label>
-		<span>{{ localize "BF.Level.Label[one]" }}</span>
-		<select name="level.value" data-dtype="Number">
-			{{ selectOptions levels selected=advancement.level.value }}
-		</select>
-	</label>
+	{{ formField fields.level.fields.value value=source.level.value options=levelOptions rootId=partId }}
 {{/if}}
 
 {{#if showClassRestriction}}
-	<label>
-		<span class="hinted-label" data-tooltip="BF.Advancement.Core.ClassRestriction.Hint">
-			{{localize "BF.Advancement.Core.ClassRestriction.Label"}}
-		</span>
-		<select name="level.classRestriction">
-			{{ selectOptions classRestrictionOptions selected=advancement.level.classRestriction }}
-		</select>
-	</label>
+	{{ formField fields.level.fields.classRestriction value=source.level.classRestriction options=classRestrictionOptions
+	             classes="label-hinted" rootId=partId }}
 {{/if}}

@@ -5,10 +5,10 @@
 		<label>
 			<span>{{ localize "BF.Advancement.ScaleValue.Type.Label" }}</span>
 			<select name="configuration.type">
-				{{ selectOptions types selected=configuration.type }}
+				{{ selectOptions types selected=configuration.data.type }}
 			</select>
 			<p class="hint type-hint">
-				{{ localize type.hint }}
+				{{ localize @root.type.hint }}
 			</p>
 		</label>
 	{{/if}}

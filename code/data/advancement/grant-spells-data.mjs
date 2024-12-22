@@ -1,6 +1,7 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
-import { GrantFeaturesConfigurationData } from "./grant-features-data.mjs";
 
 const { ArrayField, BooleanField, DocumentUUIDField, EmbeddedDataField, SchemaField, SetField, StringField } =
 	foundry.data.fields;
@@ -10,11 +11,20 @@ const { ArrayField, BooleanField, DocumentUUIDField, EmbeddedDataField, SchemaFi
  *
  * @property {SpellConfigurationData} spell - Configuration data for granted spells.
  */
-export class GrantSpellsConfigurationData extends GrantFeaturesConfigurationData {
+export class GrantSpellsConfigurationData extends AdvancementDataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Advancement.GrantSpells"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			...super.defineSchema(),
+			pool: new ArrayField(new SchemaField({ uuid: new DocumentUUIDField() })),
 			spell: new EmbeddedDataField(SpellConfigurationData)
 		};
 	}
@@ -58,23 +68,20 @@ export class GrantSpellsValueData extends foundry.abstract.DataModel {
  * Configuration data for spells that can be granted.
  *
  * @property {Set<string>} ability - One or more abilities that will be used for the provided spell.
+ * @property {boolean} alwaysPrepared - Should this spell be always prepared?
+ * @property {string} mode - Spell preparation mode to set.
  * @property {string} origin - Identifier of a class or subclass to associated with these spells.
  * @property {string} source - Source the granted spell will be treated as, regardless of original source.
- * @property {string} mode - Spell preparation mode to set.
- * @property {boolean} alwaysPrepared - Should this spell be always prepared?
  */
 export class SpellConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			ability: new SetField(new StringField()),
-			origin: new IdentifierField({
-				label: "BF.Advancement.GrantSpells.Origin.Label",
-				hint: "BF.Advancement.GrantSpells.Origin.Hint"
-			}),
-			source: new StringField({ label: "BF.Spell.Source.Label", hint: "BF.Advancement.GrantSpells.Source.Hint" }),
-			mode: new StringField({ initial: "standard", label: "BF.Spell.Preparation.Label" }),
-			alwaysPrepared: new BooleanField({ label: "BF.Spell.Preparation.AlwaysPrepared" })
+			alwaysPrepared: new BooleanField(),
+			mode: new StringField({ initial: "standard" }),
+			origin: new IdentifierField(),
+			source: new StringField()
 		};
 	}
 

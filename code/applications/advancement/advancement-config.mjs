@@ -68,7 +68,6 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/** @inheritDoc */
 	_onFirstRender(context, options) {
 		super._onFirstRender(context, options);
-		console.log(foundry.utils.deepClone(this.options));
 		let columns = [];
 		if (this.options.columns === 2) columns = ["left", "right"];
 		else if (this.options.columns === 3) columns = ["left", "center", "right"];
@@ -95,7 +94,11 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
 		].slice(this.advancement.minimumLevel);
 		const context = await super._prepareContext(options);
-		context.configuration = this.advancement.configuration;
+		context.configuration = {
+			data: this.advancement.configuration,
+			fields: this.advancement.configuration?.schema?.fields
+		};
+		context.fields = this.advancement.schema.fields;
 		context.source = this.advancement._source;
 		context.advancement = this.advancement;
 		context.default = {
@@ -105,6 +108,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 			identifierHint: this.advancement.metadata.identifier.hint
 		};
 		context.levels = Object.fromEntries(levels);
+		context.levelOptions = levels.map(([value, label]) => ({ value, label }));
 		context.showClassIdentifier = this.item.system.metadata?.category === "features";
 		context.showClassRestriction = this.item.type === "class" || !!this.advancement.level.classIdentifier;
 		context.showHint = this.advancement.metadata.configurableHint;

@@ -65,12 +65,12 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareDetailsContext(context, options) {
-		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.advancement.configuration.type];
 		context.displayType = Object.keys(CONFIG.BlackFlag.spellcastingTypes).length > 1;
 		context.progressionOptions = typeConfig?.progression;
 		context.slots = {
 			scaleValue: this.advancement.configuration.slots.scaleValue,
-			display: context.configuration.type === "pact"
+			display: this.advancement.configuration.type === "pact"
 		};
 		return context;
 	}
@@ -84,8 +84,8 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareLearningContext(context, options) {
-		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
-		if (context.configuration.spells.mode) {
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.advancement.configuration.type];
+		if (this.advancement.configuration.spells.mode) {
 			context.known = Object.entries(this.constructor.KNOWN).reduce((obj, [name, localization]) => {
 				const config = this.advancement.configuration[name];
 				const anchor = config.scaleValue?.toAnchor();
@@ -97,7 +97,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 				};
 				return obj;
 			}, {});
-			if (context.configuration.spells.mode !== "limited") delete context.known.spells;
+			if (this.advancement.configuration.spells.mode !== "limited") delete context.known.spells;
 		}
 
 		context.learningModes =

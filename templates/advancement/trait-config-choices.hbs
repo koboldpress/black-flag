@@ -5,10 +5,10 @@
 	<label>
 		<span>{{ localize "BF.Advancement.Trait.Choice.Mode.Label" }}</span>
 		<select name="configuration.choiceMode">
-			{{ selectOptions choiceModeOptions selected=configuration.choiceMode }}
+			{{ selectOptions choiceModeOptions selected=configuration.data.choiceMode }}
 		</select>
 		<p class="hint">
-			{{#if (eq configuration.choiceMode "inclusive")}}
+			{{#if (eq configuration.data.choiceMode "inclusive")}}
 				{{ localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Hint" }}
 			{{else}}
 				{{ localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Hint" }}

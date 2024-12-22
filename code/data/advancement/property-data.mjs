@@ -1,9 +1,11 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
+
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Property advancement.
  */
-export class PropertyConfigurationData extends foundry.abstract.DataModel {
+export class PropertyConfigurationData extends AdvancementDataModel {
 	static defineSchema() {
 		return {
 			changes: new ArrayField(

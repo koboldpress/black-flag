@@ -1,43 +1,20 @@
 <fieldset>
-	<legend>{{ localize "BF.Advancement.ChooseFeatures.Restrictions" }}</legend>
-	<label>
-		<span>{{ localize "BF.Spell.Circle.Label" }}</span>
-		<select name="configuration.restriction.circle">
-			<option value="-1">{{ localize "BF.Advancement.ChooseSpells.AvailableCircle" }}</option>
-			<hr>
-			{{ selectOptions spellCircles selected=configuration.restriction.circle }}
-		</select>
-	</label>
-	{{#if (gt configuration.restriction.circle 0)}}
-		<label class="full-checkbox">
-			<span class="hinted-label" data-tooltip="BF.Advancement.ChooseSpells.FIELDS.restriction.exactCircle.hint">
-				{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.exactCircle.label" }}
-			</span>
-			<input type="checkbox" name="configuration.restriction.exactCircle"
-						 {{ checked configuration.restriction.exactCircle }}>
-		</label>
+	<legend>{{ localize "BF.Advancement.ChooseFeatures.FIELDS.restriction.label" }}</legend>
+	{{ formField configuration.fields.restriction.fields.circle value=configuration.data.restriction.circle
+	             options=spellCircleOptions rootId=partId }}
+	{{#if (gt configuration.data.restriction.circle 0)}}
+		{{ formField configuration.fields.restriction.fields.exactCircle value=configuration.data.restriction.exactCircle
+		             classes="label-hinted" rootId=partId }}
 	{{/if}}
-	{{#unless (eq configuration.restriction.circle 0)}}
-		<label>
-			<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.label" }}</span>
-			<select name="configuration.restriction.allowRituals">
-				{{ selectOptions ritualModes selected=configuration.restriction.allowRituals localize=true
-					 blank=(localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.None") }}
-			</select>
-		</label>
+	{{#unless (eq configuration.data.restriction.circle 0)}}
+		{{ formField configuration.fields.restriction.fields.allowRituals value=configuration.data.restriction.allowRituals
+		             options=ritualModeOptions localize=true rootId=partId }}
 	{{/unless}}
-	{{#if (or (eq configuration.restriction.circle -1) (and (gt configuration.restriction.circle 0) (not configuration.restriction.exactCircle)))}}
-		<label class="full-checkbox">
-			<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowCantrips.label" }}</span>
-			<input type="checkbox" name="configuration.restriction.allowCantrips"
-						 {{ checked configuration.restriction.allowCantrips }}
-						 {{ disabled (eq configuration.restriction.allowRituals "only") }}>
-		</label>
+	{{#if (or (eq configuration.data.restriction.circle -1) (and (gt configuration.data.restriction.circle 0) (not configuration.data.restriction.exactCircle)))}}
+		{{ formField configuration.fields.restriction.fields.allowCantrips
+		             value=configuration.data.restriction.allowCantrips
+								 disabled=(eq configuration.data.restriction.allowRituals "only") rootId=partId }}
 	{{/if}}
-	<label>
-		<span>{{ localize "BF.Spell.Source.Label" }}</span>
-		<select name="configuration.restriction.source">
-			{{ selectOptions CONFIG.spellSources.localized selected=configuration.restriction.source blank="—"}}
-		</select>
-	</label>
+	{{ formField configuration.fields.restriction.fields.source value=configuration.data.restriction.source
+	             options=CONFIG.spellSources.localizedOptions blank="" rootId=partId }}
 </fieldset>

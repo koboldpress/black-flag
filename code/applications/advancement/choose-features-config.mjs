@@ -58,16 +58,14 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareDetailsContext(context, options) {
-		context.validTypes = this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
-			obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
-			return obj;
-		}, {});
+		context.validTypeOptions = Array.from(this.advancement.constructor.VALID_TYPES).map(value => ({
+			value,
+			label: game.i18n.localize(CONFIG.Item.typeLabels[value])
+		}));
 		const makeLabels = obj =>
-			Object.fromEntries(
-				Object.entries(obj)
-					.map(([k, d]) => [k, game.i18n.localize(`${d.localization}[one]`)])
-					.sort((lhs, rhs) => lhs[1].localeCompare(rhs[1]))
-			);
+			Object.entries(obj)
+				.map(([value, d]) => ({ value, label: game.i18n.localize(`${d.localization}[one]`) }))
+				.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 		if (this.advancement.configuration.type === "feature") {
 			const selectedCategory = CONFIG.BlackFlag.featureCategories[this.advancement.configuration.restriction.category];
 			context.typeRestriction = {

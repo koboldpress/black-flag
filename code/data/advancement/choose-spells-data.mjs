@@ -1,3 +1,4 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 import { SpellConfigurationData } from "./grant-spells-data.mjs";
 
@@ -27,9 +28,17 @@ const {
  * @property {string} restriction.source - Source of magic required for to select spells.
  * @property {SpellConfigurationData} spell - Configuration data for granted spells.
  */
-export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
+export class ChooseSpellsConfigurationData extends AdvancementDataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
-	static LOCALIZATION_PREFIXES = ["BF.Advancement.ChooseFeatures", "BF.Advancement.ChooseSpells"];
+	static LOCALIZATION_PREFIXES = [
+		...super.LOCALIZATION_PREFIXES,
+		"BF.Advancement.GrantSpells",
+		"BF.Advancement.ChooseSpells"
+	];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

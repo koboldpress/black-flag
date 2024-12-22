@@ -45,12 +45,17 @@ export default class GrantSpellsConfig extends GrantFeaturesConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	static async _prepareSpellConfigContext(context, options) {
-		context.abilities = Object.entries(CONFIG.BlackFlag.abilities.localized).reduce((obj, [key, label]) => {
-			obj[key] = { label, selected: context.configuration.spell.ability.has(key) ? "selected" : "" };
-			return obj;
-		}, {});
-		context.alwaysPreparable =
-			CONFIG.BlackFlag.spellPreparationModes[context.configuration.spell.mode]?.preparable ?? false;
+		const data = context.configuration.data.spell;
+		context.spell = {
+			abilityOptions: CONFIG.BlackFlag.abilities.localizedOptions,
+			alwaysPreparable: CONFIG.BlackFlag.spellPreparationModes[data.mode]?.preparable ?? false,
+			data,
+			fields: context.configuration.fields.spell.fields,
+			originOptions: [
+				{ value: "", label: "" },
+				...CONFIG.BlackFlag.registration.groupedOptions(["class", "subclass"]).formOptions()
+			]
+		};
 		return context;
 	}
 }

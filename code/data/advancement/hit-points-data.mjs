@@ -1,3 +1,4 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import { MappingField } from "../fields/_module.mjs";
 
 const { JSONField, NumberField } = foundry.data.fields;
@@ -7,7 +8,7 @@ const { JSONField, NumberField } = foundry.data.fields;
  *
  * @property {string} denomination - Size of hit die available.
  */
-export class HitPointsConfigurationData extends foundry.abstract.DataModel {
+export class HitPointsConfigurationData extends AdvancementDataModel {
 	static defineSchema() {
 		return {
 			denomination: new NumberField({ initial: 4, label: "BF.HitDice.Label[one]" })

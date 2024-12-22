@@ -130,7 +130,7 @@ export default class TraitConfig extends AdvancementConfig {
 			context.default.title = game.i18n.localize(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
-		context.hintPlaceholder = Trait.localizedList(this.config.grants, this.config.choices, {
+		context.default.hint = Trait.localizedList(this.config.grants, this.config.choices, {
 			choiceMode: this.config.choiceMode
 		});
 		return context;

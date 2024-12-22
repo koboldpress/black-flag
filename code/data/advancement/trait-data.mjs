@@ -1,9 +1,11 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
+
 const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Trait advancement.
  */
-export class TraitConfigurationData extends foundry.abstract.DataModel {
+export class TraitConfigurationData extends AdvancementDataModel {
 	static defineSchema() {
 		return {
 			choiceMode: new StringField({

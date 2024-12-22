@@ -185,12 +185,13 @@ export const spellSlotTable = [
  * List of spell circles with localized names.
  * @param {object} [options={}]
  * @param {boolean} [options.dashed=false] - Should there be a dash between the number and word?
+ * @param {boolean} [options.formOptions=false] - Return as form options rather than an object.
  * @param {boolean} [options.plural=false] - Return the plural names where relevant.
  * @param {boolean} [options.includeCantrip=true] - Should cantrips be included with other circles?
- * @returns {[key: number]: string]}
+ * @returns {Record<number, string>|FormSelectOption[]}
  */
-export function spellCircles({ dashed = false, plural = false, includeCantrip = true } = {}) {
-	return Array.fromRange(maxSpellCircle + Number(includeCantrip), Number(!includeCantrip)).reduce((obj, l) => {
+export function spellCircles({ dashed = false, formOptions = false, plural = false, includeCantrip = true } = {}) {
+	const obj = Array.fromRange(maxSpellCircle + Number(includeCantrip), Number(!includeCantrip)).reduce((obj, l) => {
 		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Circle.Cantrip[${plural ? "other" : "one"}]`);
 		else
 			obj[l] = game.i18n.format(`BF.Spell.Circle.Level${dashed ? "Dashed" : ""}`, {
@@ -198,6 +199,7 @@ export function spellCircles({ dashed = false, plural = false, includeCantrip = 
 			});
 		return obj;
 	}, {});
+	return formOptions ? Object.entries(obj).map(([value, label]) => ({ value, label })) : obj;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

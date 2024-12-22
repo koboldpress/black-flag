@@ -22,7 +22,7 @@
 			</label>
 		</li>
 		{{#each levels as |data level|}}
-			<li class="level {{ @root.configuration.type }}" data-level="{{ level }}">
+			<li class="level {{ @root.configuration.data.type }}" data-level="{{ level }}">
 				<label>
 					<span>{{ level }}</span>
 					{{#if (eq @root.type.input "string")}}

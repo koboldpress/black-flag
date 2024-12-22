@@ -1,3 +1,4 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 
 const { ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberField, SchemaField, StringField } =
@@ -22,7 +23,16 @@ const { ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberFiel
  * @property {string} restriction.type - Subtype of allowed items (e.g. martialTalent or channelDivinity).
  * @property {string} type - General item type to support (e.g. feature or talent).
  */
-export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
+export class ChooseFeaturesConfigurationData extends AdvancementDataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Advancement.ChooseFeatures"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {

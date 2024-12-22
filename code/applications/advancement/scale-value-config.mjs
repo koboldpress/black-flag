@@ -47,6 +47,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
 		await super._preparePartContext(partId, context, options);
+		context.type = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type].metadata;
 		if (partId === "config") return await this._prepareConfigContext(context, options);
 		if (partId === "scale") return await this._prepareScaleContext(context, options);
 		return context;
@@ -99,7 +100,6 @@ export default class ScaleValueConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
-		context.type = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type].metadata;
 		return context;
 	}
 

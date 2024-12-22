@@ -1,46 +1,13 @@
 <fieldset>
-	<legend>{{ localize "BF.Advancement.GrantSpells.SpellSettings" }}</legend>
-	<label>
-		<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
-		<select name="configuration.spell.mode">
-			{{ selectOptions CONFIG.spellPreparationModes.localized selected=configuration.spell.mode }}
-		</select>
-	</label>
-	{{#if alwaysPreparable}}
-		<label class="full-checkbox">
-			<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
-			<input type="checkbox" name="configuration.spell.alwaysPrepared"
-						 {{ checked configuration.spell.alwaysPrepared }}>
-		</label>
+	<legend>{{ localize "BF.Advancement.GrantSpells.FIELDS.spell.label" }}</legend>
+	{{ formField spell.fields.mode value=spell.data.mode options=CONFIG.spellPreparationModes.localizedOptions
+	             rootId=partId }}
+	{{#if spell.alwaysPreparable}}
+		{{ formField spell.fields.alwaysPrepared value=spell.data.alwaysPrepared rootId=partId }}
 	{{/if}}
-	<label>
-		<span class="hinted-label" data-tooltip="BF.Advancement.GrantSpells.Origin.Hint">
-			{{ localize "BF.Advancement.GrantSpells.Origin.Label" }}
-		</span>
-		<select name="configuration.spell.origin">
-			<option value=""></option>
-			<optgroup label="{{ localize 'BF.Item.Type.Class[other]' }}">
-				{{ selectOptions CONFIG.registration.all.class selected=configuration.spell.origin labelAttr="name" }}
-			</optgroup>
-			<optgroup label="{{ localize 'BF.Item.Type.Subclass[other]' }}">
-				{{ selectOptions CONFIG.registration.all.subclass selected=configuration.spell.origin labelAttr="name" }}
-			</optgroup>
-		</select>
-	</label>
-	<label>
-		<span>{{ localize "BF.Ability.Label[one]" }}</span>
-		<multi-select name="configuration.spell.ability">
-			{{#each abilities}}
-				<option value="{{ @key }}" {{ selected }}>{{ label }}</option>
-			{{/each}}
-		</multi-select>
-	</label>
-	<label>
-		<span class="hinted-label" data-tooltip="BF.Advancement.GrantSpells.Source.Hint">
-			{{ localize "BF.Spell.Source.Label" }}
-		</span>
-		<select name="configuration.spell.source">
-			{{ selectOptions CONFIG.spellSources.localized selected=configuration.spell.source blank="" }}
-		</select>
-	</label>
+	{{ formField spell.fields.origin value=spell.data.origin options=spell.originOptions classes="label-hinted"
+	             rootId=partId }}
+	{{ formField spell.fields.ability value=spell.data.ability options=CONFIG.abilities.localizedOptions rootId=partId }}
+	{{ formField spell.fields.source value=spell.data.source options=CONFIG.spellSources.localizedOptions blank=""
+	             classes="label-hinted" rootId=partId }}
 </fieldset>

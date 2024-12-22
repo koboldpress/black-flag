@@ -1,3 +1,4 @@
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import { LocalDocumentField } from "../fields/_module.mjs";
 
 const { DocumentUUIDField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -7,7 +8,7 @@ const { DocumentUUIDField, SchemaField, SetField, StringField } = foundry.data.f
  *
  * @property {Set<string>} talentList - One or more talent list from which the player can choose.
  */
-export class ImprovementConfigurationData extends foundry.abstract.DataModel {
+export class ImprovementConfigurationData extends AdvancementDataModel {
 	static defineSchema() {
 		return {
 			talentList: new SetField(new StringField(), {

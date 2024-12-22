@@ -100,6 +100,7 @@ Hooks.once("setup", function () {
 
 Hooks.once("i18nInit", function () {
 	Object.values(CONFIG.Activity.types).forEach(c => c.documentClass.localize());
+	Object.values(CONFIG.Advancement.types).forEach(c => c.documentClass.localize());
 });
 
 Hooks.once("ready", function () {

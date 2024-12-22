@@ -89,7 +89,7 @@ export default Base =>
 			});
 
 			// Add special styling for label-top hints.
-			this.element.querySelectorAll(".label-top > p.hint").forEach(hint => {
+			this.element.querySelectorAll(":is(.label-top, .label-hinted) > p.hint").forEach(hint => {
 				const label = hint.parentElement.querySelector(":scope > label");
 				if (!label) return;
 				label.classList.add("hinted-label");

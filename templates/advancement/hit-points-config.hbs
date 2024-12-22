@@ -3,12 +3,12 @@
 	<label>
 		<span>{{ localize "BF.Die.Denomination.Label" }}</span>
 		<select name="configuration.denomination">
-			{{ selectOptions hitDieSizes selected=configuration.denomination }}
+			{{ selectOptions hitDieSizes selected=configuration.data.denomination }}
 		</select>
 	</label>
 	<label>
 		<span>{{ localize "BF.Advancement.HitPoints.Starting" }}</span>
-		<span>{{ configuration.denomination }}</span>
+		<span>{{ configuration.data.denomination }}</span>
 	</label>
 	<label>
 		<span>{{ localize "BF.Advancement.HitPoints.Average" }}</span>

@@ -7,7 +7,7 @@
 					{{ localize "BF.Spellcasting.FIELDS.spells.mode.label" }}
 				</span>
 				<select name="configuration.spells.mode">
-					{{ selectOptions learningModes selected=configuration.spells.mode labelAttr="label"
+					{{ selectOptions learningModes selected=configuration.data.spells.mode labelAttr="label"
 					                 localize=true blank="" }}
 				</select>
 			</label>
@@ -27,23 +27,23 @@
 						</button>
 					{{/if}}
 				</label>
-				{{#if (and ../configuration.rituals.scaleValue (eq name "rituals"))}}
+				{{#if (and ../configuration.data.rituals.scaleValue (eq name "rituals"))}}
 					<label class="full-checkbox">
 						<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.rituals.restricted.hint">
 							{{ localize "BF.Spellcasting.FIELDS.rituals.restricted.label" }}
 						</span>
 						<input type="checkbox" name="configuration.rituals.restricted"
-						       {{ checked ../configuration.rituals.restricted }}>
+						       {{ checked ../configuration.data.rituals.restricted }}>
 					</label>
 				{{/if}}
 			{{/each}}
-			{{#if (eq configuration.spells.mode "limited")}}
+			{{#if (eq configuration.data.spells.mode "limited")}}
 				<label class="full-checkbox">
 					<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.replacement.hint">
 						{{ localize "BF.Spellcasting.FIELDS.spells.replacement.label" }}
 					</span>
 					<input type="checkbox" name="configuration.spells.replacement"
-					       {{ checked configuration.spells.replacement }}>
+					       {{ checked configuration.data.spells.replacement }}>
 				</label>
 				<label>
 					<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.schools.hint">
@@ -52,7 +52,7 @@
 					<!-- TODO: Replace with core's <multi-select> -->
 					<blackFlag-multiSelect name="configuration.spells.schools" label="{{ schoolLabel }}">
 						<datalist>
-							{{#blackFlag-multiSelect configuration.spells.schools}}
+							{{#blackFlag-multiSelect configuration.data.spells.schools}}
 								{{ selectOptions CONFIG.spellSchools.localized }}
 							{{/blackFlag-multiSelect}}
 						</datalist>
@@ -62,9 +62,9 @@
 					<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.special.hint">
 						{{ localize "BF.Spellcasting.FIELDS.spells.special.label" }}
 					</span>
-					<input type="checkbox" name="configuration.spells.special" {{ checked configuration.spells.special }}>
+					<input type="checkbox" name="configuration.spells.special" {{ checked configuration.data.spells.special }}>
 				</label>
-			{{else if (eq configuration.spells.mode "spellbook")}}
+			{{else if (eq configuration.data.spells.mode "spellbook")}}
 				<div class="field-group">
 					<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.spellbook.hint">
 						{{ localize "BF.Spellcasting.FIELDS.spells.spellbook.label" }}
@@ -72,12 +72,12 @@
 					<label>
 						<span>{{ localize "BF.Spellcasting.FIELDS.spells.spellbook.firstLevel.label" }}</span>
 						<input type="number" name="configuration.spells.spellbook.firstLevel"
-					         value="{{ configuration.spells.spellbook.firstLevel }}" min=0 step=1>
+					         value="{{ configuration.data.spells.spellbook.firstLevel }}" min=0 step=1>
 					</label>
 					<label>
 						<span>{{ localize "BF.Spellcasting.FIELDS.spells.spellbook.otherLevels.label" }}</span>
 						<input type="number" name="configuration.spells.spellbook.otherLevels"
-						       value="{{ configuration.spells.spellbook.otherLevels }}" min=0 step=1>
+						       value="{{ configuration.data.spells.spellbook.otherLevels }}" min=0 step=1>
 					</label>
 				</div>
 			{{/if}}

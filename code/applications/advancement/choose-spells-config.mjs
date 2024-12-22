@@ -62,11 +62,16 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareRestrictionsContext(context, options) {
-		context.ritualModes = {
-			allow: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Allow",
-			only: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Only"
-		};
-		context.spellCircles = CONFIG.BlackFlag.spellCircles();
+		context.ritualModeOptions = [
+			{ value: "", label: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.None" },
+			{ value: "allow", label: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Allow" },
+			{ value: "only", label: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Only" }
+		];
+		context.spellCircleOptions = [
+			{ value: -1, label: game.i18n.localize("BF.Advancement.ChooseSpells.FIELDS.restriction.circle.Available") },
+			{ rule: true },
+			...CONFIG.BlackFlag.spellCircles({ formOptions: true })
+		];
 		return context;
 	}
 }

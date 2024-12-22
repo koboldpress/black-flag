@@ -1,4 +1,5 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
@@ -29,7 +30,7 @@ const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, Set
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
  * @property {string} type - General spellcasting type (e.g. "leveled", "pact").
  */
-export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
+export class SpellcastingConfigurationData extends AdvancementDataModel {
 	/** @override */
 	static LOCALIZATION_PREFIXES = ["BF.Spellcasting"];
 

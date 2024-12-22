@@ -3,13 +3,13 @@
 	<label>
 		<span>{{ localize "BF.Spellcasting.Source" }}</span>
 		<select name="configuration.source">
-			{{ selectOptions CONFIG.spellSources selected=configuration.source labelAttr="label" localize=true blank="" }}
+			{{ selectOptions CONFIG.spellSources selected=configuration.data.source labelAttr="label" localize=true blank="" }}
 		</select>
 	</label>
 	<label>
 		<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
 		<select name="configuration.ability">
-			{{ selectOptions CONFIG.abilities.localized selected=configuration.ability }}
+			{{ selectOptions CONFIG.abilities.localized selected=configuration.data.ability }}
 		</select>
 	</label>
 	{{#if displayType}}
@@ -18,7 +18,7 @@
 				{{ localize "BF.Spellcasting.FIELDS.type.label" }}
 			</span>
 			<select name="configuration.type">
-				{{ selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true }}
+				{{ selectOptions CONFIG.spellcastingTypes selected=configuration.data.type labelAttr="label" localize=true }}
 			</select>
 		</label>
 	{{/if}}
@@ -28,7 +28,7 @@
 				{{ localize "BF.Spellcasting.FIELDS.progression.label" }}
 			</span>
 			<select name="configuration.progression">
-				{{ selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true }}
+				{{ selectOptions progressionOptions selected=configuration.data.progression labelAttr="label" localize=true }}
 			</select>
 		</label>
 	{{/if}}

@@ -7,6 +7,15 @@ const { DocumentIdField, FilePathField, NumberField, ObjectField, SchemaField, S
  * Base data model for advancement.
  */
 export default class BaseAdvancement extends foundry.abstract.DataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Advancement"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Base type information for an advancement.
 	 *
@@ -40,43 +49,29 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			_id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
-			type: new StringField({
-				required: true,
-				readOnly: true,
-				initial: this.typeName,
-				validate: v => v === this.typeName,
-				validationError: `must be the same as the Advancement type name ${this.typeName}`
-			}),
-			identifier: new IdentifierField({ label: "BF.Identifier.Label" }),
 			configuration: new TypeField(
 				{
 					modelLookup: type => this.metadata.dataModels?.configuration ?? null
 				},
 				{ required: true }
 			),
+			flags: new ObjectField(),
+			hint: new StringField(),
+			icon: new FilePathField({ categories: ["IMAGE"], base64: false }),
+			identifier: new IdentifierField(),
 			level: new SchemaField({
-				value: new NumberField({
-					integer: true,
-					initial: this.metadata?.multiLevel ? undefined : null,
-					min: 0,
-					label: "BF.Level.Label[one]"
-				}),
-				classIdentifier: new IdentifierField({
-					label: "BF.Advancement.Core.Level.Reference.Label",
-					hint: "BF.Advancement.Core.Level.Reference.Hint"
-				}),
-				classRestriction: new StringField({
-					choices: ["original", "multiclass"],
-					label: "BF.Advancement.Core.ClassRestriction.Label"
-				})
+				value: new NumberField({ integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0 }),
+				classIdentifier: new IdentifierField(),
+				classRestriction: new StringField({ choices: ["original", "multiclass"] })
 			}),
-			title: new StringField({ label: "BF.Advancement.Core.Title.Label" }),
-			icon: new FilePathField({ categories: ["IMAGE"], label: "BF.Advancement.Core.Icon.Label", base64: false }),
-			hint: new StringField({
-				label: "BF.Advancement.Core.Hint.Label",
-				hint: "BF.Advancement.Core.Hint.Hint"
-			}),
-			flags: new ObjectField()
+			title: new StringField(),
+			type: new StringField({
+				required: true,
+				readOnly: true,
+				initial: this.typeName,
+				validate: v => v === this.typeName,
+				validationError: `must be the same as the Advancement type name ${this.typeName}`
+			})
 		};
 	}
 }

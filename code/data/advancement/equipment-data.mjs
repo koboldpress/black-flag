@@ -1,5 +1,6 @@
 import SelectChoices from "../../documents/select-choices.mjs";
 import { getPluralRules, makeLabel, numberFormat } from "../../utils/_module.mjs";
+import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 
 const {
@@ -20,7 +21,7 @@ const {
  *
  * @property {EquipmentEntryData[]} pool - Different equipment entries that will be granted.
  */
-export class EquipmentConfigurationData extends foundry.abstract.DataModel {
+export class EquipmentConfigurationData extends AdvancementDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
