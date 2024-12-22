@@ -491,26 +491,6 @@
 		"FIELDS": {
 			"pool": {
 				"label": "Spells"
-			},
-			"spell": {
-				"label": "Spell Settings",
-				"ability": {
-					"label": "Spellcasting Ability"
-				},
-				"alwaysPrepared": {
-					"label": "Always Prepared"
-				},
-				"mode": {
-					"label": "Preparation Mode"
-				},
-				"origin": {
-					"hint": "Class or subclass with which these spells will be associated. If the specified origin learns a limited number of spells, then these spells will count against that number.",
-					"label": "Origin"
-				},
-				"source": {
-					"hint": "Will treat added spells as belonging to this source of magic, regardless of their original source.",
-					"label": "Source of Magic"
-				}
 			}
 		},
 		"Hint": "Grant the character specific spells and assign them the proper details.",
@@ -639,6 +619,45 @@
 
 	"SpellcastingScale": {
 		"Title": "Spellcasting Scale"
+	},
+
+	"SpellConfig": {
+		"FIELDS": {
+			"spell": {
+				"label": "Spell Settings",
+				"ability": {
+					"label": "Spellcasting Ability"
+				},
+				"alwaysPrepared": {
+					"label": "Always Prepared"
+				},
+				"mode": {
+					"label": "Preparation Mode"
+				},
+				"origin": {
+					"hint": "Class or subclass with which these spells will be associated. If the specified origin learns a limited number of spells, then these spells will count against that number.",
+					"label": "Origin"
+				},
+				"source": {
+					"hint": "Will treat added spells as belonging to this source of magic, regardless of their original source.",
+					"label": "Source of Magic"
+				},
+				"uses": {
+					"label": "Limited Uses",
+					"max": {
+						"label": "Max Uses"
+					},
+					"period": {
+						"label": "Recovery Period"
+					},
+					"requireSlot": {
+						"hint": "Require spell slot even when using limited uses.",
+						"label": "Require Slot"
+					}
+				}
+			}
+		},
+		"FreeCasting": "Free Casting"
 	},
 
 	"Trait": {

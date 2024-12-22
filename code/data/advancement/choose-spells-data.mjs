@@ -36,7 +36,7 @@ export class ChooseSpellsConfigurationData extends AdvancementDataModel {
 	/** @override */
 	static LOCALIZATION_PREFIXES = [
 		...super.LOCALIZATION_PREFIXES,
-		"BF.Advancement.GrantSpells",
+		"BF.Advancement.SpellConfig",
 		"BF.Advancement.ChooseSpells"
 	];
 

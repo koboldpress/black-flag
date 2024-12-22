@@ -1,4 +1,5 @@
 import IdentifierField from "../fields/identifier-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 
 const { DocumentIdField, FilePathField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
@@ -55,7 +56,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 				},
 				{ required: true }
 			),
-			flags: new ObjectField(),
+			flags: new MappingField(new ObjectField()),
 			hint: new StringField(),
 			icon: new FilePathField({ categories: ["IMAGE"], base64: false }),
 			identifier: new IdentifierField(),

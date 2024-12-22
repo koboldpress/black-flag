@@ -1,13 +1,24 @@
 <fieldset>
-	<legend>{{ localize "BF.Advancement.GrantSpells.FIELDS.spell.label" }}</legend>
+	<legend>{{ localize "BF.Advancement.SpellConfig.FIELDS.spell.label" }}</legend>
 	{{ formField spell.fields.mode value=spell.data.mode options=CONFIG.spellPreparationModes.localizedOptions
 	             rootId=partId }}
 	{{#if spell.alwaysPreparable}}
 		{{ formField spell.fields.alwaysPrepared value=spell.data.alwaysPrepared rootId=partId }}
 	{{/if}}
+	<hr>
 	{{ formField spell.fields.origin value=spell.data.origin options=spell.originOptions classes="label-hinted"
 	             rootId=partId }}
 	{{ formField spell.fields.ability value=spell.data.ability options=CONFIG.abilities.localizedOptions rootId=partId }}
 	{{ formField spell.fields.source value=spell.data.source options=CONFIG.spellSources.localizedOptions blank=""
 	             classes="label-hinted" rootId=partId }}
+	<hr>
+	{{ formField spell.fields.uses.fields.max value=spell.data.uses.max rootId=partId }}
+	{{#if spell.data.uses.max}}
+		{{ formField spell.fields.uses.fields.period value=spell.data.uses.period
+		             options=CONFIG.recoveryPeriods.localizedOptions rootId=partId }}
+		{{#if spell.showRequireSpellSlot}}
+			{{ formField spell.fields.uses.fields.requireSlot value=spell.data.uses.requireSlot classes="label-hinted"
+			             rootId=partId }}
+		{{/if}}
+	{{/if}}
 </fieldset>

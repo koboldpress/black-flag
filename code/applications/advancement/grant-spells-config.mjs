@@ -54,7 +54,8 @@ export default class GrantSpellsConfig extends GrantFeaturesConfig {
 			originOptions: [
 				{ value: "", label: "" },
 				...CONFIG.BlackFlag.registration.groupedOptions(["class", "subclass"]).formOptions()
-			]
+			],
+			showRequireSpellSlot: CONFIG.BlackFlag.spellPreparationModes[data.mode]?.scalable ?? false
 		};
 		return context;
 	}

@@ -161,11 +161,7 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 
 	/** @inheritDoc */
 	async createItemData(uuid, options = {}) {
-		options.changes = foundry.utils.mergeObject(
-			this.configuration.spell.getApplyChanges(options.data),
-			options.changes ?? {}
-		);
-		return super.createItemData(uuid, options);
+		return this.configuration.spell.applyChanges(await super.createItemData(uuid, options), options.data);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

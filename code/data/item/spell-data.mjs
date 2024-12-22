@@ -253,7 +253,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		// Cantrips & rituals never consume slots
 		if (this.circle.base === 0 || this.tags.has("ritual")) return false;
 
-		// TODO: At-Will & Innate Casting
+		// At Will & Innate preparation modes never consume slots
+		const prep = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode")];
+		if (!prep?.scalable) return false;
 
 		return true;
 	}

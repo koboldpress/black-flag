@@ -2,14 +2,23 @@ import { numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_mo
 import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
 import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 import UsesField from "../fields/uses-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
-const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortField, SchemaField, StringField } =
-	foundry.data.fields;
+const {
+	BooleanField,
+	DocumentIdField,
+	FilePathField,
+	HTMLField,
+	IntegerSortField,
+	ObjectField,
+	SchemaField,
+	StringField
+} = foundry.data.fields;
 
 /**
  * Data model for activities.
@@ -19,6 +28,7 @@ const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortFiel
  * @property {string} name - Name for this activity.
  * @property {string} img - Image that represents this activity.
  * @property {string} description - Activity's description.
+ * @property {Record<string, object>} flags - Flag data.
  * @property {number} sort - Sorting order for the activity.
  * @property {*} system - Type-specific data.
  * @property {ActivationField} activation
@@ -101,6 +111,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			name: new StringField({ initial: undefined }),
 			img: new FilePathField({ blank: true, initial: undefined, categories: ["IMAGE"], base64: false }),
 			description: new HTMLField(),
+			flags: new MappingField(new ObjectField()),
 			sort: new IntegerSortField(),
 			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
