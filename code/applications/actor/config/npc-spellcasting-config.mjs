@@ -57,15 +57,19 @@ export default class NPCSpellcastingConfig extends BaseConfig {
 		for (const [_id, { uses, period }] of Object.entries(spell)) {
 			const update = { _id };
 			const spell = this.object.items.get(_id);
-			const activityId = spell.system.activities.find(a => a.activation.primary)?._id;
+			const activities = spell.system.activities.filter(a => a.activation?.primary);
 			if (period) {
 				update["system.uses.max"] = uses ?? "";
 				update["system.uses.recovery"] = [{ period }];
-				if (activityId) update[`system.activites.${activityId}.consumption.targets`] = [{ type: "item" }];
+				activities.forEach(a => {
+					update[`system.activities.${a.id}.consumption.targets`] = [{ type: "item" }];
+				});
 			} else {
 				update["system.uses.max"] = "";
 				update["system.uses.recovery"] = [];
-				if (activityId) update[`system.activites.${activityId}.consumption.targets`] = [];
+				activities.forEach(a => {
+					update[`system.activities.${a.id}.consumption.targets`] = [];
+				});
 			}
 			spellUpdates.push(update);
 		}
