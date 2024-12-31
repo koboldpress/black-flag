@@ -22,8 +22,8 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
  * Data model for Vehicle actors.
  * @mixes {HPTemplate}
  * @mixes {ModifiersTemplate}
+ * @mixes {ResistancesTemplate}
  * @mixes {SourceTemplate}
- * @mixes {TraitsTemplate}
  *
  * @property {Record<string, VehicleAbilityData} abilities - Vehicle's ability modifiers.
  * @property {object} attributes
@@ -35,10 +35,6 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
  * @property {string} attributes.cargo.units - Units used to measure cargo capacity.
  * @property {object} attributes.crew
  * @property {number} attributes.crew.required - Crew required for a full complement.
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value - Current hit points.
- * @property {number} attributes.hp.max - Maximum hit points.
- * @property {number} attributes.hp.temp - Temporary hit points.
  * @property {object} attributes.passengers
  * @property {number} attributes.passengers.max - Maximum number of passengers that can be carried.
  * @property {object} description

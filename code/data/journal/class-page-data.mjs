@@ -1,7 +1,7 @@
 import ClassPageSheet from "../../applications/journal/class-page-sheet.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { DocumentUUIDField, HTMLField, NumberField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * Data definition for Class Summary journal entry pages.
@@ -36,8 +36,7 @@ export default class ClassJournalPageData extends BaseDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			item: new StringField({ label: "BF.JournalPage.Class.Item" }),
-			// TODO: Replace with UUIDField when possible
+			item: new DocumentUUIDField({ label: "BF.JournalPage.Class.Item" }),
 			headingLevel: new NumberField({ initial: 3 }),
 			description: new SchemaField({
 				additionalHitPoints: new HTMLField({
@@ -69,8 +68,7 @@ export default class ClassJournalPageData extends BaseDataModel {
 					hint: "BF.JournalPage.Class.Subclass.SectionDescription.Hint"
 				})
 			}),
-			subclasses: new SetField(new StringField(), { label: "BF.JournalPage.Class.Subclass.Items" })
-			// TODO: Replace with UUIDField when possible
+			subclasses: new SetField(new DocumentUUIDField(), { label: "BF.JournalPage.Class.Subclass.Items" })
 		};
 	}
 }

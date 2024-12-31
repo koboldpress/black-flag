@@ -1,7 +1,7 @@
 import ClassPageSheet from "../../applications/journal/class-page-sheet.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 
-const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { DocumentUUIDField, HTMLField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * Data definition for Subclass Summary journal entry pages.
@@ -30,8 +30,7 @@ export default class SubclassJournalPageData extends BaseDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			item: new StringField({ label: "BF.JournalPage.Subclass.Item" }),
-			// TODO: Replace with UUIDField when possible
+			item: new DocumentUUIDField({ label: "BF.JournalPage.Subclass.Item" }),
 			headingLevel: new NumberField({ initial: 4 }),
 			description: new SchemaField({
 				conclusion: new HTMLField({
