@@ -16,36 +16,40 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this ring, you can cast the <em>jump</em> spell from it as a bonus action. You can target only yourself with it.</p>",
+      "value": "<p>While wearing this ring, you can cast the <em>@UUID[Compendium.black-flag.spells.Item.V6dBngLQzGP0DrQt]{longstrider}</em> spell from it as a bonus action. You can target only yourself with it.</p>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
-      "LP69AKE1ox0jE5gK": {
+      "dReOKDdRqdyhdn0G": {
         "type": "cast",
-        "_id": "LP69AKE1ox0jE5gK",
-        "description": "",
-        "sort": 0,
         "system": {
           "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.V6dBngLQzGP0DrQt",
             "challenge": {
               "attack": null,
               "save": null,
               "override": false
             },
-            "circle": null,
+            "circle": 1,
             "properties": [
               "verbal",
               "somatic",
               "material"
             ],
-            "uuid": null
+            "spellbook": true,
+            "ability": ""
           }
         },
+        "_id": "dReOKDdRqdyhdn0G",
+        "description": "",
+        "flags": {},
+        "sort": 0,
         "activation": {
           "value": null,
           "override": true,
+          "primary": true,
           "type": "bonus",
           "condition": ""
         },
@@ -67,14 +71,11 @@
         "magical": false,
         "target": {
           "template": {
-            "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
           "prompt": true,
           "override": false
@@ -83,10 +84,9 @@
           "spent": 0,
           "consumeQuantity": false,
           "recovery": [],
-          "min": "",
           "max": ""
         },
-        "name": "Jump",
+        "name": "",
         "img": ""
       }
     },
@@ -120,9 +120,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.050",
+    "systemVersion": "1.2.058",
     "createdTime": 1724987000309,
-    "modifiedTime": 1729890936722,
+    "modifiedTime": 1735685004961,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!M30d1A1NR2GHn5XU"
