@@ -285,11 +285,11 @@ async function enrichAttack(config, label, options) {
 	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 
 	const activity = config.activity
-		? options.relativeTo?.system.activities?.get(config.activity)
+		? options.relativeTo?.system?.activities?.get(config.activity)
 		: !config.formula
 			? options.relativeTo instanceof Activity
 				? options.relativeTo
-				: options.relativeTo?.system.activities?.getByType("attack")[0] ?? null
+				: options.relativeTo?.system?.activities?.getByType("attack")[0] ?? null
 			: null;
 
 	if (activity) {
@@ -628,7 +628,7 @@ async function enrichSave(config, label, options) {
 	if (foundry.utils.getType(config.ability) === "string") config.ability = [config.ability];
 
 	const activity = config.activity
-		? options.relativeTo?.system.activities?.get(config.activity)
+		? options.relativeTo?.system?.activities?.get(config.activity)
 		: !config.formula
 			? options.relativeTo instanceof Activity
 				? options.relativeTo
@@ -837,10 +837,10 @@ async function enrichDamage(configs, label, options) {
 	let activity =
 		options.relativeTo instanceof Activity
 			? options.relativeTo
-			: options.relativeTo?.system.activities?.get(config.activity);
+			: options.relativeTo?.system?.activities?.get(config.activity);
 	if (!activity && !config.formula) {
 		const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
-		for (const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? []) {
+		for (const a of options.relativeTo?.system?.activities?.getByTypes(...types) ?? []) {
 			if (a.system.damage?.parts.length || a.system.healing?.formula) {
 				activity = a;
 				break;
@@ -1003,7 +1003,7 @@ function enrichLookup(config, fallback, options) {
 		else if (value.startsWith("@")) keyPath ??= value;
 	}
 
-	let activity = options.relativeTo?.system.activities?.get(config.activity);
+	let activity = options.relativeTo?.system?.activities?.get(config.activity);
 	if (config.activity && !activity) {
 		console.warn(`Activity not found when enriching ${config._input}.`);
 		return null;
