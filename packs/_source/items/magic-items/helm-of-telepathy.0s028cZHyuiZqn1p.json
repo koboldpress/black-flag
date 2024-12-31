@@ -3,7 +3,8 @@
   "name": "Helm of Telepathy",
   "system": {
     "type": {
-      "category": "wondrousItem"
+      "category": "wondrousItem",
+      "base": ""
     },
     "rarity": "uncommon",
     "price": {
@@ -98,7 +99,8 @@
               "verbal",
               "material",
               "concentration"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "eHhuWatZLPhjt4pG",
@@ -111,7 +113,13 @@
           "condition": "When focusing on a creature with detect thoughts"
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
           "scale": {
             "allowed": false
           }
@@ -141,9 +149,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "dawn",
+              "type": "recoverAll"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "name": "",
         "img": ""
@@ -179,9 +192,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "1.2.058",
     "createdTime": 1724985789403,
-    "modifiedTime": 1729531204115,
+    "modifiedTime": 1735681985008,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0s028cZHyuiZqn1p"

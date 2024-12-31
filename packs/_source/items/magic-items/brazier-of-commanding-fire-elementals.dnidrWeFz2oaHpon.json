@@ -3,7 +3,8 @@
   "name": "Brazier of Commanding Fire Elementals",
   "system": {
     "type": {
-      "category": "wondrousItem"
+      "category": "wondrousItem",
+      "base": ""
     },
     "rarity": "rare",
     "price": {
@@ -112,7 +113,12 @@
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "dawn",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
       "max": "1"
     },
@@ -142,9 +148,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.050",
+    "systemVersion": "1.2.058",
     "createdTime": 1724983559115,
-    "modifiedTime": 1730154078294,
+    "modifiedTime": 1735682182286,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!dnidrWeFz2oaHpon"

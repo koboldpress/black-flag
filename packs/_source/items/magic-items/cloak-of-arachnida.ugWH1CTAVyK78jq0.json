@@ -3,7 +3,8 @@
   "name": "Cloak of Arachnida",
   "system": {
     "type": {
-      "category": "wondrousItem"
+      "category": "wondrousItem",
+      "base": ""
     },
     "rarity": "veryRare",
     "price": {
@@ -34,7 +35,8 @@
               "verbal",
               "somatic",
               "material"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "CTXDitdcQpxRlOQZ",
@@ -45,7 +47,13 @@
           "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
           "scale": {
             "allowed": false
           }
@@ -85,7 +93,12 @@
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "dawn",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
       "max": "1"
     },
@@ -162,9 +175,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "1.2.058",
     "createdTime": 1724983714446,
-    "modifiedTime": 1729530434500,
+    "modifiedTime": 1735682160603,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ugWH1CTAVyK78jq0"

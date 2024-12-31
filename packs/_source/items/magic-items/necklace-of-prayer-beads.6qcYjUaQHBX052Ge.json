@@ -3,7 +3,8 @@
   "name": "Necklace of Prayer Beads",
   "system": {
     "type": {
-      "category": "wondrousItem"
+      "category": "wondrousItem",
+      "base": ""
     },
     "rarity": "rare",
     "price": {
@@ -36,7 +37,8 @@
               "verbal",
               "somatic",
               "material"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "DCe3G64Z78L1bBnN",
@@ -86,7 +88,7 @@
           "consumeQuantity": false,
           "recovery": [
             {
-              "period": "longRest",
+              "period": "dawn",
               "type": "recoverAll"
             }
           ],
@@ -251,7 +253,8 @@
               "verbal",
               "somatic",
               "material"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "Ae8GplXW3m4GoFpX",
@@ -299,9 +302,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "dawn",
+              "type": "recoverAll"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "name": "Bead of Favor",
         "img": ""
@@ -319,7 +327,8 @@
             "circle": 2,
             "properties": [
               "verbal"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "BMIJeAvSXM3qBtKu",
@@ -369,7 +378,7 @@
           "consumeQuantity": false,
           "recovery": [
             {
-              "period": "longRest",
+              "period": "dawn",
               "type": "recoverAll"
             }
           ],
@@ -393,7 +402,8 @@
             "properties": [
               "verbal",
               "somatic"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "Anu8D7nvuczoXwBt",
@@ -443,7 +453,7 @@
           "consumeQuantity": false,
           "recovery": [
             {
-              "period": "longRest",
+              "period": "dawn",
               "type": "recoverAll"
             }
           ],
@@ -468,7 +478,8 @@
               "verbal",
               "somatic",
               "material"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "t7XRjB1w4SQVwLO2",
@@ -518,7 +529,7 @@
           "consumeQuantity": false,
           "recovery": [
             {
-              "period": "longRest",
+              "period": "dawn",
               "type": "recoverAll"
             }
           ],
@@ -534,7 +545,7 @@
       "consumeQuantity": false,
       "recovery": [
         {
-          "period": "longRest",
+          "period": "dawn",
           "type": "recoverAll"
         }
       ],
@@ -564,9 +575,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "1.2.058",
     "createdTime": 1724986806420,
-    "modifiedTime": 1729533030420,
+    "modifiedTime": 1735681817607,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6qcYjUaQHBX052Ge"

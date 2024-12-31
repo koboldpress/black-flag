@@ -78,7 +78,8 @@
               "verbal",
               "material",
               "concentration"
-            ]
+            ],
+            "ability": ""
           }
         },
         "_id": "em6DlHHNfalwGJf6",
@@ -89,7 +90,13 @@
           "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
           "scale": {
             "allowed": false
           }
@@ -119,9 +126,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "dawn",
+              "type": "recoverAll"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "name": "",
         "img": ""
@@ -153,7 +165,8 @@
       "source": {}
     },
     "type": {
-      "category": "wondrousItem"
+      "category": "wondrousItem",
+      "base": ""
     },
     "rarity": "legendary",
     "properties": [
@@ -167,10 +180,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "1.2.058",
     "coreVersion": "12.331",
     "createdTime": 1707267181116,
-    "modifiedTime": 1729530678245,
+    "modifiedTime": 1735682136428,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
