@@ -834,7 +834,10 @@ async function enrichDamage(configs, label, options) {
 		return null;
 	}
 
-	let activity = options.relativeTo?.system.activities?.get(config.activity);
+	let activity =
+		options.relativeTo instanceof Activity
+			? options.relativeTo
+			: options.relativeTo?.system.activities?.get(config.activity);
 	if (!activity && !config.formula) {
 		const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
 		for (const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? []) {
