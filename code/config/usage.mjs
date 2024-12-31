@@ -97,6 +97,7 @@ export const consumptionTypes = {
  * @typedef {AbbreviatedConfiguration} RecoveryPeriodConfiguration
  * @property {string} [npcLabel] - Optional alternative label used to display recovery period on NPC sheets.
  * @property {boolean} [combatOnly=false] - Is this period only consumed during a combat encounter?
+ * @property {string} [group] - Localizable label for the group.
  */
 
 /**
@@ -107,26 +108,46 @@ export const recoveryPeriods = {
 	longRest: {
 		label: "BF.Rest.Type.Long.Label",
 		npcLabel: "BF.Time.Unit.Day.Label[one]",
-		abbreviation: "BF.Rest.Type.Long.Abbreviation"
+		abbreviation: "BF.Rest.Type.Long.Abbreviation",
+		group: "BF.Recovery.Group.Rest"
 	},
 	shortRest: {
 		label: "BF.Rest.Type.Short.Label",
-		abbreviation: "BF.Rest.Type.Short.Abbreviation"
+		abbreviation: "BF.Rest.Type.Short.Abbreviation",
+		group: "BF.Recovery.Group.Rest"
 	},
 	encounter: {
-		label: "BF.Recovery.Period.Encounter.Label",
-		abbreviation: "BF.Recovery.Period.Encounter.Label",
-		combatOnly: true
+		label: "BF.Recovery.Period.Encounter",
+		abbreviation: "BF.Recovery.Period.Encounter",
+		combatOnly: true,
+		group: "BF.Recovery.Group.Combat"
 	},
 	round: {
-		label: "BF.Recovery.Period.Round.Label",
-		abbreviation: "BF.Recovery.Period.Round.Label",
-		combatOnly: true
+		label: "BF.Recovery.Period.Round",
+		abbreviation: "BF.Recovery.Period.Round",
+		combatOnly: true,
+		group: "BF.Recovery.Group.Combat"
 	},
 	turn: {
-		label: "BF.Recovery.Period.Turn.Label",
-		abbreviation: "BF.Recovery.Period.Turn.Label",
-		combatOnly: true
+		label: "BF.Recovery.Period.Turn",
+		abbreviation: "BF.Recovery.Period.Turn",
+		combatOnly: true,
+		group: "BF.Recovery.Group.Combat"
+	},
+	day: {
+		label: "BF.Recovery.Period.Day",
+		abbreviation: "BF.Recovery.Period.Day",
+		group: "BF.Recovery.Group.Time"
+	},
+	dawn: {
+		label: "BF.Recovery.Period.Dawn",
+		abbreviation: "BF.Recovery.Period.Dawn",
+		group: "BF.Recovery.Group.Time"
+	},
+	dusk: {
+		label: "BF.Recovery.Period.Dusk",
+		abbreviation: "BF.Recovery.Period.Dusk",
+		group: "BF.Recovery.Group.Time"
 	}
 };
 localizeConfig(recoveryPeriods, { labelKeyPath: "label", sort: false });

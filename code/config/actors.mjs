@@ -322,7 +322,7 @@ export const rest = {
 			dialogClass: LongRestDialog,
 			recoverHitPoints: true,
 			recoverHitDice: true,
-			recoverPeriods: ["longRest", "shortRest"],
+			recoverPeriods: ["longRest", "dawn", "day", "dusk", "shortRest"],
 			recoverSpellSlotTypes: new Set(["leveled", "pact"])
 		}
 	},

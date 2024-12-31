@@ -87,10 +87,11 @@ export class UsesData extends foundry.abstract.DataModel {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";
 			Object.defineProperty(recovery, "validPeriods", {
 				get() {
-					return Object.entries(CONFIG.BlackFlag.recoveryPeriods.localized).map(([value, label]) => ({
-						value,
-						label,
-						disabled: existingPeriods.has(value) && this.period !== value
+					return Object.entries(CONFIG.BlackFlag.recoveryPeriods).map(([value, config]) => ({
+						disabled: existingPeriods.has(value) && this.period !== value,
+						group: game.i18n.localize(config.group),
+						label: game.i18n.localize(config.label),
+						value
 					}));
 				},
 				configurable: true,
