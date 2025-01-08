@@ -109,16 +109,33 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		const fields = ["system.circle.base", "system.description.short", "system.school"];
 		const uuids = new Set(this.document.system.spells);
 
+		// TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/11991 is resolved
+		const parseUuid = uuid => {
+			const parsed = foundry.utils.parseUuid(uuid);
+			const remappedUuid = uuid.startsWith("Compendium")
+				? [
+						"Compendium",
+						parsed.collection.metadata.id,
+						parsed.primaryType ?? parsed.documentType,
+						parsed.primaryId ?? parsed.documentId,
+						...parsed.embedded
+					].join(".")
+				: uuid;
+			return { ...parsed, remappedUuid };
+		};
+
 		let collections = new Collection();
+		const remappedUuids = new Set();
 		for (const uuid of uuids) {
-			const { collection } = foundry.utils.parseUuid(uuid);
+			const { collection, remappedUuid } = parseUuid(uuid);
 			if (collection && !collections.has(collection)) {
+				remappedUuids.add(remappedUuid);
 				if (collection instanceof Items) collections.set(collection, collection);
 				else collections.set(collection, collection.getIndex({ fields }));
-			} else if (!collection) uuids.delete(uuid);
+			}
 		}
 
-		const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => uuids.has(s.uuid)));
+		const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => remappedUuids.has(s.uuid)));
 
 		return spells
 			.map(spell => {
