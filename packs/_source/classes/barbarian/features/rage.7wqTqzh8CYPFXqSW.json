@@ -10,7 +10,17 @@
         "type": "utility",
         "_id": "hfcWGOvJneGdddIi",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "LkVwlaV9hQ35ooLr"
+            }
+          ]
+        },
         "activation": {
           "value": null,
           "type": "bonus",
@@ -34,7 +44,8 @@
           "value": "1"
         },
         "range": {
-          "units": "self"
+          "units": "self",
+          "special": ""
         },
         "target": {
           "template": {
@@ -120,7 +131,7 @@
         {
           "key": "system.modifiers",
           "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }",
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"kind\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }",
           "priority": null
         },
         {
@@ -148,12 +159,12 @@
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "12.328",
+        "coreVersion": "12.331",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1736380148126,
+        "lastModifiedBy": "blackflag0000000",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -171,10 +182,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.040",
-    "coreVersion": "12.329",
+    "systemVersion": "1.2.059",
+    "coreVersion": "12.331",
     "createdTime": 1717383139458,
-    "modifiedTime": 1721948709727,
+    "modifiedTime": 1736380323922,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
