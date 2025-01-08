@@ -12,7 +12,7 @@
 		</div>
 	</header>
 	<ol class="changes-list">
-		{{#each configuration.changes}}
+		{{#each configuration.data.changes}}
 			<li class="effect-change flexrow" data-index="{{ @index }}">
 				<div class="key">
 					<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
