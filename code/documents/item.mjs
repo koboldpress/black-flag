@@ -139,6 +139,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/** @inheritDoc */
 	_initializeSource(data, options = {}) {
+		if (data instanceof foundry.abstract.DataModel) data = data.toObject();
+
 		const activities = foundry.utils.getProperty(data, "system.activities");
 		if (activities)
 			Object.values(activities).forEach(data => {

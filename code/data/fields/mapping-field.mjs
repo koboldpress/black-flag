@@ -54,7 +54,10 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
 	/** @override */
 	_cleanType(value, options) {
-		Object.entries(value).forEach(([k, v]) => (value[k] = this.model.clean(v, options)));
+		Object.entries(value).forEach(([k, v]) => {
+			if (k.startsWith("-=")) return;
+			value[k] = this.model.clean(v, options);
+		});
 		return value;
 	}
 
@@ -124,6 +127,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	_validateValues(value, options) {
 		const errors = {};
 		for (const [k, v] of Object.entries(value)) {
+			if (k.startsWith("-=")) continue;
 			const error = this.model.validate(v, options);
 			if (error) errors[k] = error;
 		}
