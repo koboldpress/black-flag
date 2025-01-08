@@ -1418,8 +1418,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Configuration data for initiative rolls.
-	 *
 	 * @typedef {ChallengeRollProcessConfiguration} InitiativeRollProcessConfiguration
 	 * @property {number} [fixed] - Fixed initiative value, will bypass any rolling.
 	 */
