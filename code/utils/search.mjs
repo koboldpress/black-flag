@@ -39,7 +39,8 @@ export async function compendiums(documentClass, {
 			&& p.visible
 
 			// And if types are set and specified in the compendium flag, only include those that include the correct types
-			&& (!types.size || !p.metadata.flags.types || new Set(p.metadata.flags.types).intersects(types)))
+			&& (!types.size || !(p.metadata.flags[game.system.id].types || p.metadata.flags.types) ||
+				new Set(p.metadata.flags[game.system.id].types ?? p.metadata.flags.types).intersects(types)))
 
 		// Generate an index based on the needed fields
 		.map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) }))

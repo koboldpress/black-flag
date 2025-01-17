@@ -14,7 +14,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as enrichers from "./enrichers.mjs";
-import registerModuleData from "./module-registration.mjs";
+import { registerModuleData, setupModulePacks } from "./module-registration.mjs";
 import { default as registry } from "./registry.mjs";
 import * as settings from "./settings.mjs";
 import TooltipConductor from "./tooltips.mjs";
@@ -84,18 +84,11 @@ Hooks.once("setup", function () {
 	config._configureConsumableAttributes();
 	config._configureTrackableAttributes();
 	settings._configureOptionalRules();
+	setupModulePacks();
 
 	// Handle rich tooltips
 	TooltipConductor.activateListeners();
 	game.blackFlag.tooltipConductor.observe();
-
-	// Apply custom compendium types
-	for (const pack of game.packs) {
-		if (pack.metadata.type === "Item") pack.applicationClass = applications.item.BlackFlagItemCompendium;
-		else if (pack.metadata.flags?.display === "table-of-contents") {
-			pack.applicationClass = applications.journal.TableOfContentsCompendium;
-		}
-	}
 });
 
 Hooks.once("i18nInit", function () {

@@ -1,10 +1,12 @@
+import BlackFlagItemCompendium from "./applications/item/item-compendium.mjs";
+import TableOfContentsCompendium from "./applications/journal/table-of-contents.mjs";
 import RulesSetting from "./data/settings/rules-setting.mjs";
 import { log } from "./utils/_module.mjs";
 
 /**
  * Scan module manifests for any data that should be integrated into the system configuration.
  */
-export default function registerModuleData() {
+export function registerModuleData() {
 	log("Registering Module Data", { level: "groupCollapsed" });
 	for (const manifest of [game.system, ...game.modules.filter(m => m.active), game.world]) {
 		try {
@@ -52,4 +54,62 @@ function registerRequiredRules(manifest) {
 		RulesSetting.addRequiredRule(rule, manifest);
 	}
 	return "required rules";
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                    Compendium Packs                   */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Apply any changes to compendium packs during the setup hook.
+ */
+export function setupModulePacks() {
+	log("Setting Up Compendium Packs", { level: "groupCollapsed" });
+	for (const pack of game.packs) {
+		if (pack.metadata.type === "Item") pack.applicationClass = BlackFlagItemCompendium;
+		try {
+			const complete = setupMethods.map(m => m(pack)).filter(r => r);
+			if (complete.length) log(`Finished setting up ${pack.metadata.label}: ${complete.join(", ")}`);
+		} catch (err) {
+			log(`Error setting up ${pack.metadata.label}\n`, { extras: [err.message], level: "error" });
+		}
+	}
+	console.groupEnd();
+}
+
+const setupMethods = [setupPackDisplay, setupPackSorting];
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Set application based on `flags.black-flag.display`.
+ * @param {Compendium} pack - Pack to set up.
+ * @returns {string|void} - Description of the step.
+ */
+function setupPackDisplay(pack) {
+	const display = pack.metadata.flags[game.system.id]?.display ?? pack.metadata.flags.display;
+	if (display !== "table-of-contents") return;
+	pack.applicationClass = TableOfContentsCompendium;
+	return "table of contents";
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+let sortingChanges;
+const debouncedUpdateSorting = foundry.utils.debounce(
+	() => game.settings.set("core", "collectionSortingModes", sortingChanges),
+	250
+);
+
+/**
+ * Set default sorting order based on `flags.black-flag.sorting`.
+ * @param {Compendium} pack - Pack to set up.
+ * @returns {string|void} - Description of the step.
+ */
+function setupPackSorting(pack) {
+	sortingChanges ??= game.settings.get("core", "collectionSortingModes") ?? {};
+	if (!pack.metadata.flags[game.system.id]?.sorting || sortingChanges[pack.metadata.id]) return;
+	sortingChanges[pack.metadata.id] = pack.metadata.flags[game.system.id].sorting;
+	debouncedUpdateSorting();
+	return "default sorting";
 }
