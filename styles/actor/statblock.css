@@ -227,13 +227,18 @@
 		break-inside: avoid;
 
 		h4.title {
+			margin: 0;
+			margin-block-end: 8px;
 			border-start-end-radius: var(--end-border-radius);
 			border-end-end-radius: var(--end-border-radius);
 			padding-inline-start: 6px;
 			padding-inline-end: 12px;
 			background: var(--bf-text-color-blue);
 			color: var(--bf-text-color-white);
+			font-family: var(--bf-font-primary);
 			font-size: var(--font-size-16);
+			font-weight: 800;
+			line-height: unset;
 			text-transform: none;
 			display: flex;
 			justify-content: space-between;
@@ -253,6 +258,10 @@
 				display: inline;
 				margin: 0;
 				line-height: 1.3;
+			}
+			dt {
+				color: var(--bf-text-color-blue);
+				text-shadow: none;
 			}
 		}
 		.actions {

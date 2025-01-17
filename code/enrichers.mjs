@@ -812,9 +812,10 @@ async function enrichDamage(configs, label, options) {
 		if (c.magical) config.magical = true;
 		if (c.mode) config.attackMode = c.mode;
 		if (c.formula) formulaParts.push(c.formula);
+		c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
 		for (const value of c.values) {
-			if (value in CONFIG.BlackFlag.damageTypes) c.type = value;
-			else if (value in CONFIG.BlackFlag.healingTypes) c.type = value;
+			if (value in CONFIG.BlackFlag.damageTypes) c.type.push(value);
+			else if (value in CONFIG.BlackFlag.healingTypes) c.type.push(value);
 			else if (value === "average") config.average = true;
 			else if (value === "magical") config.magical = true;
 			else if (value === "versatile") config.attackMode ??= "twoHanded";
@@ -824,10 +825,9 @@ async function enrichDamage(configs, label, options) {
 		c.type = c.type ?? (configs._isHealing ? "healing" : null);
 		if (c.formula) {
 			config.formulas.push(c.formula);
-			config.types.push(c.type);
+			config.types.push(c.type.join("|"));
 		}
 	}
-	config.types = config.types.map(t => t?.replace("/", "|"));
 
 	if (config.activity && config.formulas.length) {
 		console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
@@ -838,7 +838,7 @@ async function enrichDamage(configs, label, options) {
 		options.relativeTo instanceof Activity
 			? options.relativeTo
 			: options.relativeTo?.system?.activities?.get(config.activity);
-	if (!activity && !config.formula) {
+	if (!activity && !config.formulas.length) {
 		const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
 		for (const a of options.relativeTo?.system?.activities?.getByTypes(...types) ?? []) {
 			if (a.system.damage?.parts.length || a.system.healing?.formula) {
