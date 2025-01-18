@@ -561,6 +561,17 @@ function createRollLabel(config) {
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
+ *
+ * @example Link an enricher to an check activity, either explicitly or automatically
+ * ```[[/check activity=RLQlsLo5InKHZadn]]``` or ```[[/check]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-roll-action="ability-check" data-ability="dexterity" data-dc="20"
+ *       data-activity-uuid="...">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 DEX</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
  */
 async function enrichCheck(config, label, options) {
 	config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
@@ -580,6 +591,33 @@ async function enrichCheck(config, label, options) {
 
 	const groups = new DefaultMap([], () => []);
 	let invalid = false;
+
+	const anything = config.ability || config.skill.length || config.tool.length || config.vehicle.length;
+	const activity = config.activity
+		? options.relativeTo?.system?.activities?.get(config.activity)
+		: !anything
+			? options.relativeTo?.system?.activities?.getByType("check")[0]
+			: null;
+
+	if (activity) {
+		if (activity.type !== "check") {
+			log(`Check enricher linked to non-check activity when enriching ${config._input}.`, { level: "warn" });
+			return null;
+		}
+
+		if (activity.system.check.ability) config.ability = activity.system.check.ability;
+		config.activityUuid = activity.uuid;
+		config.dc = activity.system.check.dc.value;
+		config.skill = [];
+		config.tool = [];
+		config.vehicle = [];
+		for (const associated of activity.system.check.associated) {
+			if (associated in CONFIG.BlackFlag.skills) config.skill.push(associated);
+			else if (associated in CONFIG.BlackFlag.tools) config.tool.push(associated);
+			else if (associated in CONFIG.BlackFlag.vehicles) config.vehicle.push(associated);
+		}
+		delete config.activity;
+	}
 
 	let abilityConfig = LOOKUP.abilities[slugify(config.ability)];
 	if (config.ability && !abilityConfig) {
@@ -632,7 +670,9 @@ async function enrichCheck(config, label, options) {
 	}
 
 	if (!abilityConfig && !groups.size) {
-		log(`No ability, skill, tool, or vehicle provided while enriching ${config._input}.`, { level: "warn" });
+		log(`No ability, skill, tool, vehicle or linked activity provided while enriching ${config._input}.`, {
+			level: "warn"
+		});
 		invalid = true;
 	}
 
@@ -783,7 +823,8 @@ async function enrichSave(config, label, options) {
 		return null;
 	}
 
-	config.ability = config.ability?.replace("/", "|").split("|") ?? [];
+	const blankAbility = config.ability === false;
+	config.ability = blankAbility ? [] : config.ability?.replace("/", "|").split("|") ?? [];
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
 		const slug = slugify(value);
@@ -798,7 +839,7 @@ async function enrichSave(config, label, options) {
 
 	const activity = config.activity
 		? options.relativeTo?.system?.activities?.get(config.activity)
-		: !config.formula
+		: !config.ability.length && !blankAbility
 			? options.relativeTo instanceof Activity
 				? options.relativeTo
 				: options.relativeTo?.system?.activities?.getByType("save")[0] ?? null
@@ -813,7 +854,7 @@ async function enrichSave(config, label, options) {
 		delete config.activity;
 	}
 
-	if (!config.activityUuid && !config.ability) {
+	if (!config.activityUuid && !config.ability.length && !blankAbility) {
 		log(`No ability or linked activity found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
@@ -861,9 +902,8 @@ async function enrichSave(config, label, options) {
  * @returns {object[]}
  */
 function createSaveRequestButtons(dataset) {
-	return (dataset.ability?.split("|") ?? []).map(ability =>
-		createRequestButton({ ...dataset, format: "long", ability })
-	);
+	const abilities = dataset.ability ? dataset.ability.split("|") : [""];
+	return abilities.map(ability => createRequestButton({ ...dataset, format: "long", ability }));
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
