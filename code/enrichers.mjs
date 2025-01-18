@@ -1,6 +1,13 @@
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
 import Activity from "./documents/activity/activity.mjs";
-import { getSelectedTokens, getTargetDescriptors, log, simplifyBonus, simplifyFormula } from "./utils/_module.mjs";
+import {
+	DefaultMap,
+	getSelectedTokens,
+	getTargetDescriptors,
+	log,
+	simplifyBonus,
+	simplifyFormula
+} from "./utils/_module.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
@@ -12,7 +19,10 @@ export function registerCustomEnrichers() {
 	const stringNames = ["attack", "check", "damage", "heal", "healing", "save", "skill", "tool", "vehicle"];
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
+			pattern: new RegExp(
+				`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`,
+				"gi"
+			),
 			enricher: enrichString
 		},
 		{
@@ -130,8 +140,9 @@ function createRequestLink(label, dataset) {
 	const span = document.createElement("span");
 	span.classList.add("roll-link-group");
 	_addDataset(span, dataset);
-	if (label instanceof HTMLElement) span.insertAdjacentElement("afterbegin", label);
-	else span.insertAdjacentHTML("afterbegin", label);
+	if (label instanceof HTMLTemplateElement) span.append(label.content);
+	else if (label instanceof HTMLElement) span.append(label);
+	else span.append(label);
 
 	// Add chat request link for GMs
 	if (game.user.isGM) {
@@ -221,7 +232,7 @@ async function handleApply(event) {
  * @returns {Promise|void}
  */
 function handleRollAction(event) {
-	const target = event.target.closest("[data-roll-action]");
+	const target = event.target.closest(".roll-link-group, [data-roll-action]");
 	if (!target) return;
 	event.stopPropagation();
 
@@ -481,7 +492,7 @@ function createRollLabel(config) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="dex">
- *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DEX
  * </a>
  * ```
  *
@@ -490,7 +501,7 @@ function createRollLabel(config) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="dexterity" data-skill="acrobatics" data-dc="20">
- *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 DEX (Acrobatics)
  * </a>
  * ```
  *
@@ -499,7 +510,7 @@ function createRollLabel(config) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="strength" data-skill="acrobatics">
- *   <i class="fa-solid fa-dice-d20" inert></i> Strength (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> STR (Acrobatics)
  * </a>
  * ```
  *
@@ -508,7 +519,7 @@ function createRollLabel(config) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="intelligence" data-tool="thievesTools">
- *   <i class="fa-solid fa-dice-d20" inert></i> Intelligence (Thieves' Tools) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> INT (Thieves' Tools)
  * </a>
  * ```
  *
@@ -517,63 +528,213 @@ function createRollLabel(config) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="charisma" data-dc="15">
- *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 Charisma check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 CHA
  * </a>
+ * ```
+ *
+ * @example Use multiple skills in a check using default abilities:
+ * ```[[/check skill=acrobatics/athletics dc=15]]```
+ * ```[[/check acrobatics athletics 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-skill="acrobatics|athletics" data-dc="15">
+ *   DC 15
+ *   <a class="roll-action" data-ability="dexterity" data-skill="acrobatics">
+ *     <i class="fa-solid fa-dice-d20" inert></i> DEX (Acrobatics)
+ *   </a> or
+ *   <a class="roll-action" data-ability="strength" data-skill="athletics">
+ *     <i class="fa-solid fa-dice-d20" inert></i> STR (Athletics)
+ *   </a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Use multiple skills with a fixed ability:
+ * ```[[/check ability=str skill=deception/persuasion dc=15]]```
+ * ```[[/check strength deception persuasion 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-ability="str" data-skill="deception|persuasion" data-dc="15">
+ *   DC 15 STR
+ *   (<a class="roll-action" data-skill="deception"><i class="fa-solid fa-dice-d20" inert></i> Deception</a> or
+ *   <a class="roll-action" data-ability="persuasion"><i class="fa-solid fa-dice-d20" inert></i> Persuasion</a>)
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  */
 async function enrichCheck(config, label, options) {
+	config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
+	config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
+	config.vehicle = config.vehicle?.replaceAll("/", "|").split("|") ?? [];
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
-		const slug = slugify(value);
+		const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
 		if (slug in LOOKUP.abilities) config.ability = LOOKUP.abilities[slug].key;
-		else if (slug in LOOKUP.skills) config.skill = LOOKUP.skills[slug].key;
-		else if (slug in LOOKUP.tools) config.tool = slug;
-		else if (slug in LOOKUP.vehicles) config.vehicle = slug;
+		else if (slug in LOOKUP.skills) config.skill.push(LOOKUP.skills[slug].key);
+		else if (slug in LOOKUP.tools) config.tool.push(slug);
+		else if (slug in LOOKUP.vehicles) config.vehicle.push(slug);
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
+	delete config.values;
 
+	const groups = new DefaultMap([], () => []);
 	let invalid = false;
 
-	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[slugify(config.skill)];
-	if (config.skill && !skillConfig) {
-		log(`Skill ${config.skill} not found while enriching ${config._input}.`, { level: "warn" });
-		invalid = true;
-	} else if (config.skill && !config.ability) {
-		config.ability = skillConfig.ability;
-	}
-
-	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[slugify(config.tool)];
-	if (config.tool && !toolConfig) {
-		log(`Tool ${config.tool} not found while enriching ${config._input}.`, { level: "warn" });
-		invalid = true;
-	}
-
-	const vehicleConfig = CONFIG.BlackFlag.enrichment.lookup.vehicles[slugify(config.vehicle)];
-	if (config.vehicle && !vehicleConfig) {
-		log(`Vehicle ${config.vehicle} not found while enriching ${config._input}.`, { level: "warn" });
-		invalid = true;
-	}
-
-	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[slugify(config.ability)];
+	let abilityConfig = LOOKUP.abilities[slugify(config.ability)];
 	if (config.ability && !abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
-	} else if (!abilityConfig) {
-		log(`No ability provided while enriching check ${config._input}.`, { level: "warn" });
+	} else if (abilityConfig?.key) config.ability = abilityConfig.key;
+
+	for (let [index, skill] of config.skill.entries()) {
+		const skillConfig = LOOKUP.skills[slugify(skill)];
+		if (skillConfig) {
+			if (skillConfig.key) skill = config.skill[index] = skillConfig.key;
+			const ability = config.ability || skillConfig.ability;
+			groups.get(ability).push({ key: skill, type: "skill", label: skillConfig.label });
+		} else {
+			log(`Skill ${skill} not found while enriching ${config._input}.`, { level: "warn" });
+			invalid = true;
+		}
+	}
+
+	for (const tool of config.tool) {
+		const toolConfig = LOOKUP.tools[slugify(tool)];
+		if (toolConfig) {
+			if (config.ability) {
+				groups.get(config.ability).push({ key: tool, type: "tool", label: toolConfig.label });
+			} else {
+				console.warn(`Tool "${tool}" found without specified ability while enriching ${config._input}.`);
+				invalid = true;
+			}
+		} else {
+			log(`Tool ${tool} not found while enriching ${config._input}.`, { level: "warn" });
+			invalid = true;
+		}
+	}
+
+	for (const vehicle of config.vehicle) {
+		const vehicleConfig = LOOKUP.vehicles[slugify(vehicle)];
+		if (vehicleConfig) {
+			if (config.ability) {
+				groups.get(config.ability).push({ key: vehicle, type: "vehicle", label: vehicleConfig.label });
+			} else {
+				console.warn(`Vehicle "${vehicle}" found without specified ability while enriching ${config._input}.`);
+				invalid = true;
+			}
+		} else {
+			log(`Vehicle ${vehicle} not found while enriching ${config._input}.`, { level: "warn" });
+			invalid = true;
+		}
+	}
+
+	if (!abilityConfig && !groups.size) {
+		console.warn(`No ability, skill, tool, or vehicle provided while enriching ${config._input}.`);
 		invalid = true;
 	}
-	if (abilityConfig?.key) config.ability = abilityConfig.key;
+
+	const complex = config.skill.length + config.tool.length + config.vehicle.length > 1;
+	if (config.passive && complex) {
+		console.warn(
+			`Multiple proficiencies and passive flag found while enriching ${config._input}, which aren't supported together.`
+		);
+		invalid = true;
+	}
+	if (label && complex) {
+		console.warn(
+			`Multiple proficiencies and a custom label found while enriching ${config._input}, which aren't supported together.`
+		);
+		invalid = true;
+	}
 
 	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
 	if (invalid) return null;
 
-	config.ability = [config.ability];
-	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check";
+	if (complex) {
+		const formatter = game.i18n.getListFormatter({ type: "disjunction" });
+		const parts = [];
+		for (const [ability, associated] of groups.entries()) {
+			const makeConfig = ({ key, type }) => ({
+				rollAction: type,
+				[type]: key,
+				ability: groups.size > 1 ? ability : undefined
+			});
+
+			// Multiple associated proficiencies, link each individually
+			if (associated.length > 1)
+				parts.push(
+					game.i18n.format("BF.Enricher.Check.Specific", {
+						ability: CONFIG.BlackFlag.abilities.localizedAbbreviations[ability],
+						type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML))
+					})
+				);
+			// Only single associated proficiency, wrap whole thing in roll link
+			else {
+				const associatedConfig = makeConfig(associated[0]);
+				parts.push(createRollLink(createRollLabel({ ...associatedConfig, ability }), associatedConfig).outerHTML);
+			}
+		}
+
+		label = formatter.format(parts);
+		if (config.dc && !config.hideDC) {
+			label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+		}
+		label = game.i18n.format(`BF.Enricher.Check.${config.format === "long" ? "Long" : "Short"}`, { check: label });
+		const template = document.createElement("template");
+		template.innerHTML = label;
+		return createRequestLink(template, {
+			rollAction: "ability-check",
+			...config,
+			skill: config.skill.join("|"),
+			tool: config.tool.join("|"),
+			vehicle: config.vehicle.join("|")
+		});
+	}
+
+	config = {
+		rollAction: config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check",
+		ability: Array.from(groups.keys())[0],
+		...config,
+		skill: config.skill[0],
+		tool: config.tool[0],
+		vehicle: config.vehicle[0]
+	};
 	label ??= createRollLabel(config);
 	if (config.passive) return createPassiveTag(label, config);
 	return createRequestLink(createRollLink(label), config);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create the buttons for a check requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createCheckRequestButtons(dataset) {
+	const skills = dataset.skill?.split("|") ?? [];
+	const tools = dataset.tool?.split("|") ?? [];
+	const vehicles = dataset.vehicle?.split("|") ?? [];
+	if (skills.length + tools.length + vehicles.length <= 1) return [createRequestButton(dataset)];
+	const baseDataset = { ...dataset };
+	delete baseDataset.skill;
+	delete baseDataset.tool;
+	delete baseDataset.vehicle;
+	return [
+		...skills.map(skill =>
+			createRequestButton({
+				ability: CONFIG.BlackFlag.skills[skill].ability,
+				...baseDataset,
+				format: "long",
+				skill,
+				rollAction: "skill"
+			})
+		),
+		...tools.map(tool => createRequestButton({ ...baseDataset, format: "long", tool, rollAction: "tool" })),
+		...vehicles.map(skill => createRequestButton({ ...baseDataset, format: "long", vehicle, rollAction: "vehicle" }))
+	];
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -618,14 +779,18 @@ async function enrichSave(config, label, options) {
 		return null;
 	}
 
+	config.ability = config.ability?.replace("/", "|").split("|") ?? [];
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
 		const slug = slugify(value);
-		if (slug in LOOKUP.abilities) config.ability = LOOKUP.abilities[slug].key;
+		if (slug in LOOKUP.abilities) config.ability.push(LOOKUP.abilities[slug].key);
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
-	if (foundry.utils.getType(config.ability) === "string") config.ability = [config.ability];
+	config.ability = config.ability
+		.map(a => slugify(a))
+		.filter(a => a in LOOKUP.abilities)
+		.map(a => LOOKUP.abilities[a].key ?? a);
 
 	const activity = config.activity
 		? options.relativeTo?.system?.activities?.get(config.activity)
@@ -649,30 +814,51 @@ async function enrichSave(config, label, options) {
 		return null;
 	}
 
-	config.ability = config.ability?.map(a => slugify(a)).filter(a => a in CONFIG.BlackFlag.enrichment.lookup.abilities);
 	if (!config.ability.length) config.ability.push("");
 
 	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
+	if (config.ability.length > 1 && label) {
+		console.warn(
+			`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`
+		);
+		return null;
+	}
+
 	config.rollAction = "ability-save";
 	if (label) label = createRollLink(label);
-	if (!label && config.ability?.length < 2) {
+	else if (config.ability?.length <= 1) {
 		label = createRollLink(createRollLabel({ ...config, ability: config.ability[0] }));
 	} else {
-		const abilities = config.ability.map(
-			ability =>
-				createRollLink(CONFIG.BlackFlag.abilities.localizedAbbreviations[ability].toUpperCase(), { ...config, ability })
-					.outerHTML
-		);
+		const abilities = config.ability.map(ability => {
+			const linkConfig = { ...config, ability };
+			delete linkConfig.rollAction;
+			return createRollLink(CONFIG.BlackFlag.abilities.localizedAbbreviations[ability].toUpperCase(), linkConfig)
+				.outerHTML;
+		});
 		label = game.i18n.getListFormatter({ type: "disjunction" }).format(abilities);
 		const showDC = config.dc && !config.hideDC;
 		if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 		label = game.i18n.format(`BF.Enricher.Save.${config.format === "long" ? "Long" : "Short"}`, { save: label });
-		delete config.rollAction;
+		const template = document.createElement("template");
+		template.innerHTML = label;
+		label = template;
 	}
 
-	config.ability = config.ability.join("|");
-	return createRequestLink(label, config);
+	return createRequestLink(label, { ...config, ability: config.ability.join("|") });
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create the buttons for a save requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createSaveRequestButtons(dataset) {
+	return (dataset.ability?.split("|") ?? []).map(ability =>
+		createRequestButton({ ...dataset, format: "long", ability })
+	);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -683,24 +869,24 @@ async function enrichSave(config, label, options) {
  * @returns {Promise|void}
  */
 async function requestCheckSave(event) {
-	const target = event.target.closest("[data-roll-action]");
-	const buttons = [];
-
-	const abilities = target.dataset.ability?.split("|");
-	if (abilities?.length)
-		abilities.forEach(ability =>
-			buttons.push({
-				visibleLabel: createRollLabel({ ...target.dataset, ability, format: "long", icon: true }),
-				hiddenLabel: createRollLabel({ ...target.dataset, ability, format: "long", icon: true, hideDC: true }),
-				dataset: { ...target.dataset, ability, action: "rollRequest" }
-			})
-		);
-	else
-		buttons.push({
-			visibleLabel: createRollLabel({ ...target.dataset, format: "long", icon: true }),
-			hiddenLabel: createRollLabel({ ...target.dataset, format: "long", icon: true, hideDC: true }),
-			dataset: { ...target.dataset, action: "rollRequest" }
-		});
+	const dataset = {
+		...(event.target.closest(".roll-link-group")?.dataset ?? {}),
+		...(event.target.closest(".roll-link")?.dataset ?? {})
+	};
+	let buttons;
+	switch (dataset.rollAction) {
+		case "ability-check":
+		case "skill":
+		case "tool":
+		case "vehicle":
+			buttons = createCheckRequestButtons(dataset);
+			break;
+		case "ability-save":
+			buttons = createSaveRequestButtons(dataset);
+			break;
+		default:
+			buttons = [createRequestButton({ ...dataset, format: "short" })];
+	}
 
 	const MessageClass = getDocumentClass("ChatMessage");
 	const chatData = {
@@ -710,6 +896,21 @@ async function requestCheckSave(event) {
 		speaker: MessageClass.getSpeaker({ user: game.user })
 	};
 	return MessageClass.create(chatData);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create a button for a chat request.
+ * @param {object} dataset
+ * @returns {object}
+ */
+function createRequestButton(dataset) {
+	return {
+		visibleLabel: createRollLabel({ ...dataset, icon: true }),
+		hiddenLabel: createRollLabel({ ...dataset, icon: true, hideDC: true }),
+		dataset: { ...dataset, action: "rollRequest", visibility: "all" }
+	};
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

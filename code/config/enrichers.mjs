@@ -11,8 +11,11 @@ Object.defineProperty(enrichment, "lookup", {
 			const addKeys = (key, object) => {
 				_enrichmentLookup[key] = {};
 				for (const [k, v] of Object.entries(object)) {
-					_enrichmentLookup[key][slugify(k)] = _enrichmentLookup[key][slugify(v.abbreviation)] =
-						foundry.utils.mergeObject({ key: k, label: object.localized[k] }, v, { inplace: false });
+					_enrichmentLookup[key][slugify(k)] = _enrichmentLookup[key][slugify(v.abbreviation)] = {
+						key: k,
+						...v,
+						label: object.localized[k] ?? v.label
+					};
 				}
 			};
 			const addTrait = trait => {
