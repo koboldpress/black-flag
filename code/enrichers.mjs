@@ -283,7 +283,7 @@ function handleRollAction(event) {
  */
 async function enrichAttack(config, label, options) {
 	if (config.activity && config.formula) {
-		console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+		log(`Activity ID and formula found while enriching ${config._input}, only one is supported.`, { level: "warn" });
 		return null;
 	}
 
@@ -311,7 +311,7 @@ async function enrichAttack(config, label, options) {
 	}
 
 	if (!config.activityUuid && !config.formula) {
-		console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+		log(`No formula or linked activity found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
@@ -605,7 +605,7 @@ async function enrichCheck(config, label, options) {
 			if (config.ability) {
 				groups.get(config.ability).push({ key: tool, type: "tool", label: toolConfig.label });
 			} else {
-				console.warn(`Tool "${tool}" found without specified ability while enriching ${config._input}.`);
+				log(`Tool "${tool}" found without specified ability while enriching ${config._input}.`, { level: "warn" });
 				invalid = true;
 			}
 		} else {
@@ -620,7 +620,9 @@ async function enrichCheck(config, label, options) {
 			if (config.ability) {
 				groups.get(config.ability).push({ key: vehicle, type: "vehicle", label: vehicleConfig.label });
 			} else {
-				console.warn(`Vehicle "${vehicle}" found without specified ability while enriching ${config._input}.`);
+				log(`Vehicle "${vehicle}" found without specified ability while enriching ${config._input}.`, {
+					level: "warn"
+				});
 				invalid = true;
 			}
 		} else {
@@ -630,20 +632,22 @@ async function enrichCheck(config, label, options) {
 	}
 
 	if (!abilityConfig && !groups.size) {
-		console.warn(`No ability, skill, tool, or vehicle provided while enriching ${config._input}.`);
+		log(`No ability, skill, tool, or vehicle provided while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
 	const complex = config.skill.length + config.tool.length + config.vehicle.length > 1;
 	if (config.passive && complex) {
-		console.warn(
-			`Multiple proficiencies and passive flag found while enriching ${config._input}, which aren't supported together.`
+		log(
+			`Multiple proficiencies and passive flag found while enriching ${config._input}, which aren't supported together.`,
+			{ level: "warn" }
 		);
 		invalid = true;
 	}
 	if (label && complex) {
-		console.warn(
-			`Multiple proficiencies and a custom label found while enriching ${config._input}, which aren't supported together.`
+		log(
+			`Multiple proficiencies and a custom label found while enriching ${config._input}, which aren't supported together.`,
+			{ level: "warn" }
 		);
 		invalid = true;
 	}
@@ -775,7 +779,7 @@ function createCheckRequestButtons(dataset) {
  */
 async function enrichSave(config, label, options) {
 	if (config.activity && config.ability) {
-		console.warn(`Activity ID and ability found while enriching ${config._input}, only one is supported.`);
+		log(`Activity ID and ability found while enriching ${config._input}, only one is supported.`, { level: "warn" });
 		return null;
 	}
 
@@ -810,7 +814,7 @@ async function enrichSave(config, label, options) {
 	}
 
 	if (!config.activityUuid && !config.ability) {
-		console.warn(`No ability or linked activity found while enriching ${config._input}.`);
+		log(`No ability or linked activity found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
@@ -819,8 +823,9 @@ async function enrichSave(config, label, options) {
 	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
 	if (config.ability.length > 1 && label) {
-		console.warn(
-			`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`
+		log(
+			`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`,
+			{ level: "warn" }
 		);
 		return null;
 	}
@@ -1031,7 +1036,7 @@ async function enrichDamage(configs, label, options) {
 	}
 
 	if (config.activity && config.formulas.length) {
-		console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+		log(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`, { level: "warn" });
 		return null;
 	}
 
@@ -1065,7 +1070,7 @@ async function enrichDamage(configs, label, options) {
 	}
 
 	if (!config.activityUuid && !config.formulas.length) {
-		console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+		log(`No formula or linked activity found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
@@ -1206,12 +1211,12 @@ function enrichLookup(config, fallback, options) {
 
 	let activity = options.relativeTo?.system?.activities?.get(config.activity);
 	if (config.activity && !activity) {
-		console.warn(`Activity not found when enriching ${config._input}.`);
+		log(`Activity not found when enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
 	if (!keyPath) {
-		console.warn(`Lookup path must be defined to enrich ${config._input}.`);
+		log(`Lookup path must be defined to enrich ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
@@ -1263,7 +1268,7 @@ async function enrichReference(config, label, options) {
 	}
 
 	if (!source) {
-		console.warn(`No valid rule foundry while enriching ${config._input}.`);
+		log(`No valid rule foundry while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
