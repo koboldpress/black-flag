@@ -903,7 +903,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async rollAbilityCheck(config = {}, dialog = {}, message = {}) {
 		const ability = this.system.abilities?.[config.ability];
-		if (!ability) return;
 		const rollData = this.getRollData();
 
 		const rollConfig = foundry.utils.deepClone(config);
@@ -912,25 +911,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			{
 				...buildRoll(
 					{
-						mod: ability.mod,
-						prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
-						bonus: this.system.buildBonus?.(ability.check.modifiers.bonus, { rollData })
+						mod: ability?.mod,
+						prof: ability?.check.proficiency.hasProficiency ? ability?.check.proficiency.term : null,
+						bonus: this.system.buildBonus?.(ability?.check.modifiers.bonus, { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum?.(ability.check.modifiers.minimum, { rollData })
+					minimum: this.system.buildMinimum?.(ability?.check.modifiers.minimum, { rollData })
 				}
 			}
 		].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.CheckSpecific", {
-			ability: game.i18n.localize(CONFIG.BlackFlag.abilities[config.ability].labels.full)
+			ability: CONFIG.BlackFlag.abilities.localized[config.ability] ?? ""
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
-					rollNotes: this.system.getModifiers?.(ability.check.modifiers._data, "note"),
+					rollNotes: this.system.getModifiers?.(ability?.check.modifiers._data, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},

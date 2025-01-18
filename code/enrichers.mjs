@@ -437,8 +437,8 @@ function enrichCalculation(config, fallback, options) {
  * @returns {string}
  */
 function createRollLabel(config) {
-	const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[config.ability]?.toUpperCase();
-	const skill = CONFIG.BlackFlag.skills.localized[config.skill];
+	const ability = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability]?.label;
+	const skill = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill]?.label;
 	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[slugify(config.tool)]?.label;
 	const vehicle = CONFIG.BlackFlag.enrichment.lookup.vehicles[slugify(config.vehicle)]?.label;
 	const longSuffix = config.format === "long" ? "Long" : "Short";
@@ -456,14 +456,17 @@ function createRollLabel(config) {
 				label = ability;
 			}
 			if (config.passive) {
-				label = game.i18n.format(`BF.Enricher.DC.Passive.${longSuffix}`, { dc: config.dc, check: label });
+				label = game.i18n.format(`BF.Enricher.${showDC ? "DC." : ""}Passive.${longSuffix}`, {
+					dc: config.dc,
+					check: label
+				});
 			} else {
 				if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 				label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
 			}
 			break;
 		case "ability-save":
-			label = (ability || config.ability)?.toUpperCase?.() ?? "";
+			label = ability || config.ability?.toUpperCase() || "";
 			if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 			label = game.i18n.format(`BF.Enricher.Save.${longSuffix}`, { save: label });
 			break;
@@ -710,7 +713,7 @@ async function enrichCheck(config, label, options) {
 			if (associated.length > 1)
 				parts.push(
 					game.i18n.format("BF.Enricher.Check.Specific", {
-						ability: CONFIG.BlackFlag.abilities.localizedAbbreviations[ability],
+						ability: LOOKUP.abilities[ability].label,
 						type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML))
 					})
 				);
@@ -879,8 +882,7 @@ async function enrichSave(config, label, options) {
 		const abilities = config.ability.map(ability => {
 			const linkConfig = { ...config, ability };
 			delete linkConfig.rollAction;
-			return createRollLink(CONFIG.BlackFlag.abilities.localizedAbbreviations[ability].toUpperCase(), linkConfig)
-				.outerHTML;
+			return createRollLink(LOOKUP.abilities[ability].label, linkConfig).outerHTML;
 		});
 		label = game.i18n.getListFormatter({ type: "disjunction" }).format(abilities);
 		const showDC = config.dc && !config.hideDC;
@@ -983,6 +985,7 @@ async function rollCheckSave(event) {
 		for (const actor of actors) {
 			const { rollAction, dc, ...data } = dataset;
 			const rollConfig = { event, ...data };
+			if (rollConfig.ability === "spellcasting") rollConfig.ability = actor.system.spellcasting?.ability;
 			if (dc) rollConfig.target = Number(dc);
 			await actor.roll(rollAction, rollConfig);
 		}

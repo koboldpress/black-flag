@@ -669,6 +669,11 @@ export default class PCData extends ActorDataModel.mixin(
 			}
 		}
 
+		const abilities = Object.values(this.spellcasting?.origins ?? {}).reduce((set, o) => {
+			set.add(o.ability);
+			return set;
+		}, new Set());
+		this.spellcasting.ability = this.selectBestAbility?.(abilities) ?? null;
 		this.spellcasting.cantripScale = SpellcastingTemplate.calculateCantripScale(this.progression.level);
 	}
 
