@@ -194,7 +194,6 @@ export default class SpellcastingDialog extends FormApplication {
 		});
 
 		const replacedUuid = this.currentSlot.replaces?.uuid;
-		console.log(this.existingSpells);
 		context.spells = filters
 			? (await this.allSpells).filter(
 					s =>
