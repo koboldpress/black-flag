@@ -128,8 +128,8 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		const remappedUuids = new Set();
 		for (const uuid of uuids) {
 			const { collection, remappedUuid } = parseUuid(uuid);
+			remappedUuids.add(remappedUuid);
 			if (collection && !collections.has(collection)) {
-				remappedUuids.add(remappedUuid);
 				if (collection instanceof Items) collections.set(collection, collection);
 				else collections.set(collection, collection.getIndex({ fields }));
 			}
