@@ -10,7 +10,7 @@ import { cleanPackEntry } from "./clean.mjs";
  * @param {object} [options={}]
  * @param {object} [config={}]
  *
- * - `npm run build:db` - Compile all JSON files into their NEDB files.
+ * - `npm run build:db` - Compile all JSON files into their LevelDB files.
  * - `npm run build:db -- classes` - Only compile the specified pack.
  */
 export default async function packDB(packName, options={}, config={}) {
