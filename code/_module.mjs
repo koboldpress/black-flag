@@ -118,7 +118,7 @@ Hooks.once("ready", function () {
 	}
 });
 
-Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));
+Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery));
 Hooks.on("renderJournalPageSheet", applications.journal.BlackFlagJournalSheet.onRenderJournalPageSheet);
 
 export { applications, config, data, dice, documents, enrichers, registry, settings, utils };

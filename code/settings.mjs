@@ -221,34 +221,50 @@ export function registerSettings() {
 /**
  * Add the Black Flag badge into the sidebar.
  * @param {HTMLElement} html - Rendered sidebar content.
+ * @returns {void}
  */
 export function renderSettingsSidebar(html) {
+	if (game.release.generation < 13) return _renderLegacy(html[0]);
+
+	const details = html.querySelector(".info .system");
+	const pip = details.querySelector(".notification-pip");
+	details.remove();
+
+	const section = document.createElement("section");
+	section.classList.add("black-flag", "sidebar-info", "flexcol");
+	section.innerHTML = `
+		<h4 class="divider">${game.i18n.localize("WORLD.GameSystem")}</h4>
+		<figure class="black-flag sidebar-badge">
+			<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
+			     data-tooltip="${game.system.title}" alt="${game.system.title}">
+			<span class="system-info">${systemVersion()}</span>
+		</figure>
+	`;
+	section.querySelector(".divider").after(_settingsLinks());
+
+	const welcomeLink = document.createElement("button");
+	welcomeLink.dataset.action = "welcome";
+	welcomeLink.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> ${game.i18n.localize("BF.WELCOME.Button")}`;
+	welcomeLink.addEventListener("click", () => new WelcomeDialog().render({ force: true }));
+	section.append(welcomeLink);
+
+	if (pip) section.querySelector(".system-info").append(pip);
+	html.querySelector(".info").after(section);
+}
+
+/**
+ * Add the Black Flag badge into the sidebar.
+ * @param {HTMLElement} html - Rendered sidebar content.
+ */
+function _renderLegacy(html) {
 	const details = html.querySelector("#game-details");
 	const pip = details.querySelector(".system-info .update");
 	details.querySelector(".system")?.remove();
 
 	const heading = document.createElement("div");
 	heading.classList.add("black-flag", "sidebar-heading");
-	heading.innerHTML = `
-		<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
-		<ul class="links">
-			<li>
-				<a href="https://koboldpress.github.io/black-flag-docs/" target="_blank">
-				  ${game.i18n.localize("BF.Link.Notes")}
-				</a>
-			</li>
-			<li>
-				<a href="https://github.com/koboldpress/black-flag/issues" target="_blank">
-					${game.i18n.localize("BF.Link.Issues")}
-				</a>
-			</li>
-			<li>
-				<a href="https://discord.com/channels/170995199584108546/1083522450148577290" target="_blank">
-					${game.i18n.localize("BF.Link.Discord")}
-				</a>
-			</li>
-		</ul>
-	`;
+	heading.innerHTML = `<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>`;
+	heading.append(_settingsLinks());
 	details.insertAdjacentElement("afterend", heading);
 
 	const badge = document.createElement("figure");
@@ -268,6 +284,33 @@ export function renderSettingsSidebar(html) {
 	const div = document.createElement("div");
 	div.append(welcomeLink);
 	badge.insertAdjacentElement("afterend", div);
+}
+
+/**
+ * Create the links for the sidebar.
+ * @returns {HTMLULElement}
+ */
+function _settingsLinks() {
+	const links = document.createElement("ul");
+	links.classList.add("links");
+	links.innerHTML = `
+		<li>
+			<a href="https://koboldpress.github.io/black-flag-docs/" target="_blank">
+				${game.i18n.localize("BF.Link.Notes")}
+			</a>
+		</li>
+		<li>
+			<a href="https://github.com/koboldpress/black-flag/issues" target="_blank">
+				${game.i18n.localize("BF.Link.Issues")}
+			</a>
+		</li>
+		<li>
+			<a href="https://discord.com/channels/170995199584108546/1083522450148577290" target="_blank">
+				${game.i18n.localize("BF.Link.Discord")}
+			</a>
+		</li>
+	`;
+	return links;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
