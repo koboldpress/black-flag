@@ -1,7 +1,23 @@
 /**
  * Compendium that renders pages as a table of contents.
  */
-export default class TableOfContentsCompendium extends Compendium {
+export default class TableOfContentsCompendium extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["table-of-contents"],
+		window: {
+			resizable: true,
+			contentTag: "article"
+		},
+		position: {
+			width: 800,
+			height: 950
+		},
+		actions: {
+			activateEntry: this.prototype._onClickLink
+		}
+	};
+
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -14,6 +30,16 @@ export default class TableOfContentsCompendium extends Compendium {
 			dragDrop: [{ dragSelector: "[data-document-id]", dropSelector: "article" }]
 		});
 	}
+
+	/* -------------------------------------------- */
+
+	/** @override */
+	static PARTS = {
+		article: {
+			root: true,
+			template: "systems/black-flag/templates/journal/table-of-contents.hbs"
+		}
+	};
 
 	/* -------------------------------------------- */
 
@@ -30,9 +56,56 @@ export default class TableOfContentsCompendium extends Compendium {
 	/*  Rendering                                   */
 	/* -------------------------------------------- */
 
+	/** @override */
+	_configureRenderParts(options) {
+		// Skip normal compendium render parts logic.
+		return foundry.utils.deepClone(this.constructor.PARTS);
+	}
+
+	/* -------------------------------------------- */
+
+	/** @override */
+	_createContextMenus() {
+		foundry.applications.ui.ContextMenu.create(this, this.element, "[data-entry-id]", this._getEntryContextOptions(), {
+			jQuery: false,
+			fixed: true
+		});
+	}
+
+	/* -------------------------------------------- */
+
 	/** @inheritDoc */
+	async _onRender(context, options) {
+		await super._onRender(context, options);
+		new DragDrop({
+			dragSelector: "[data-document-id]",
+			dropSelector: "article",
+			permissions: {
+				dragstart: this._canDragStart.bind(this),
+				drop: this._canDragDrop.bind(this)
+			},
+			callbacks: {
+				dragstart: this._onDragStart.bind(this),
+				drop: this._onDrop.bind(this)
+			}
+		}).bind(this.element);
+	}
+
+	/* -------------------------------------------- */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		return this._getData(context);
+	}
+
 	async getData(options) {
 		const context = await super.getData(options);
+		return this._getData(context);
+	}
+
+	/** @inheritDoc */
+	async _getData(context) {
 		const documents = await this.collection.getDocuments();
 
 		context.chapters = [];
@@ -107,28 +180,40 @@ export default class TableOfContentsCompendium extends Compendium {
 	}
 
 	/* -------------------------------------------- */
+
+	/** @inheritDoc */
+	async _renderFrame(options) {
+		const frame = await super._renderFrame(options);
+		frame.dataset.compendiumId = this.collection.metadata.id;
+		return frame;
+	}
+
+	/* -------------------------------------------- */
 	/*  Event Handlers                              */
 	/* -------------------------------------------- */
 
 	/** @inheritDoc */
 	activateListeners(html) {
 		super.activateListeners(html);
-		html.find("a").on("click", this._onClickLink.bind(this));
+		html.find("[data-action='activateEntry']").on("click", this._onClickLink.bind(this));
+		this.element[0].dataset.compendiumId = this.collection.metadata.id;
 	}
 
 	/* -------------------------------------------- */
 
 	/**
 	 * Handle clicking a link to a journal entry or page.
-	 * @param {PointerEvent} event - The triggering click event.
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 * @protected
 	 */
-	async _onClickLink(event) {
-		const entryId = event.currentTarget.closest("[data-entry-id]")?.dataset.entryId;
+	async _onClickLink(event, target) {
+		target ??= event.currentTarget;
+		const entryId = target.closest("[data-entry-id]")?.dataset.entryId;
 		if (!entryId) return;
 		const entry = await this.collection.getDocument(entryId);
 		entry?.sheet.render(true, {
-			pageId: event.currentTarget.closest("[data-page-id]")?.dataset.pageId
+			pageId: target.closest("[data-page-id]")?.dataset.pageId
 		});
 	}
 

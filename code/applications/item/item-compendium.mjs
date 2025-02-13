@@ -3,7 +3,25 @@ import BlackFlagItem from "../../documents/item.mjs";
 /**
  * Compendium with added support for item containers.
  */
-export default class BlackFlagItemCompendium extends Compendium {
+export default class BlackFlagItemCompendium extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
+	/** @inheritDoc */
+	async _onRender(context, options) {
+		await super._onRender(context, options);
+		let items = this.collection;
+		if (this.collection.index) {
+			if (!this.collection._reindexing) this.collection._reindexing = this.collection.getIndex();
+			await this.collection._reindexing;
+			items = this.collection.index;
+		}
+		for (const item of items) {
+			if (items.has(item.system.container)) {
+				this._element?.querySelector(`[data-entry-id="${item._id}"]`)?.remove();
+			}
+		}
+	}
+
+	/* -------------------------------------------- */
+
 	/** @inheritDoc */
 	async _render(...args) {
 		await super._render(...args);

@@ -1,9 +1,17 @@
 /**
  * Specialized ContextMenu class for displaying at mouse position.
  */
-export default class BlackFlagContextMenu extends ContextMenu {
+export default class BlackFlagContextMenu extends (foundry.applications?.ui?.ContextMenu ?? ContextMenu) {
 	/** @override */
-	_setPosition([html], [target]) {
+	_setPosition(html, target, options) {
+		if (game.release.generation > 12) {
+			html.classList.add("black-flag");
+			return this._setFixedPosition(html, target, options);
+		}
+
+		html = html[0];
+		target = target[0];
+
 		document.body.appendChild(html);
 		const { clientWidth, clientHeight } = document.documentElement;
 		const { width, height } = html.getBoundingClientRect();

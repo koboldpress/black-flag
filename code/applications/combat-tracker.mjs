@@ -1,11 +1,14 @@
 /**
  * Extended version of `CombatTracker` class to support the initiative dialog.
  */
-export default class BlackFlagCombatTracker extends CombatTracker {
-	async _onCombatantControl(event) {
-		const combatantId = event.target.closest("[data-combatant-id]").dataset.combatantId;
+export default class BlackFlagCombatTracker extends (foundry.applications?.sidebar?.tabs?.CombatTracker ??
+	CombatTracker) {
+	async _onCombatantControl(event, target) {
+		const button = target ?? event.target;
+		const combatantId = button.closest("[data-combatant-id]").dataset.combatantId;
 		const combatant = this.viewed.combatants.get(combatantId);
-		if (event.currentTarget.dataset.control === "rollInitiative" && combatant?.actor) {
+		const action = button.dataset.control || button.dataset.action;
+		if (action === "rollInitiative" && combatant?.actor) {
 			return combatant.actor.configureInitiativeRoll({ event });
 		}
 		return super._onCombatantControl(event);

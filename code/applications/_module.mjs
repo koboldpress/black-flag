@@ -16,25 +16,35 @@ export function registerSheets(documentType, categories) {
 		if (!category.sheet) continue;
 		const filtered = category.types.filter(t => !t.metadata?.sheet).map(f => f.fullType);
 		filtered.forEach(f => registered.add(f));
-		DocumentSheetConfig.registerSheet(documentType, game.system.id, category.sheet.application, {
-			types: Array.from(filtered),
-			makeDefault: true,
-			label: category.sheet.label
-		});
+		(foundry.applications?.apps?.DocumentSheetConfig ?? DocumentSheetConfig).registerSheet(
+			documentType,
+			game.system.id,
+			category.sheet.application,
+			{
+				types: Array.from(filtered),
+				makeDefault: true,
+				label: category.sheet.label
+			}
+		);
 		log(`Registered ${key} sheet for: ${filtered.join(", ")}`);
 	}
 	for (const type of new Set(Object.keys(models)).difference(registered)) {
 		const metadata = models[type]?.metadata?.sheet;
 		if (!metadata) continue;
 		registered.add(type);
-		DocumentSheetConfig.registerSheet(documentType, game.system.id, metadata.application, {
-			types: [type],
-			makeDefault: true,
-			label: metadata.label
-		});
+		(foundry.applications?.apps?.DocumentSheetConfig ?? DocumentSheetConfig).registerSheet(
+			documentType,
+			game.system.id,
+			metadata.application,
+			{
+				types: [type],
+				makeDefault: true,
+				label: metadata.label
+			}
+		);
 		log(`Registered ${type} sheet`);
 	}
-	DocumentSheetConfig.unregisterSheet(
+	(foundry.applications?.apps?.DocumentSheetConfig ?? DocumentSheetConfig).unregisterSheet(
 		documentType,
 		"core",
 		{ name: `${documentType.name}Sheet` },

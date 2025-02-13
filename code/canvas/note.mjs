@@ -1,7 +1,7 @@
 /**
  * Add support for drawing custom control icons based on linked journal page type.
  */
-export default class BlackFlagNote extends Note {
+export default class BlackFlagNote extends (foundry.canvas?.placeables?.Note ?? Note) {
 	/** @inheritDoc */
 	_drawControlIcon() {
 		const tint = Color.from(this.document.texture.tint || null);

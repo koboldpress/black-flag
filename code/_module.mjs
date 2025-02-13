@@ -36,6 +36,13 @@ globalThis.BlackFlag = {
 Hooks.once("init", function () {
 	utils.log(`Initializing the Black Flag Roleplaying system - Version ${game.system.version}`);
 
+	CONFIG.compatibility.excludePatterns.push(
+		/V1 Application framework/,
+		/Set#isSubset/,
+		/ChatMessage#getHTML/,
+		/renderChatMessage/
+	);
+
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;
@@ -76,10 +83,15 @@ Hooks.once("setup", function () {
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
 	applications.registerSheets(JournalEntryPage);
-	DocumentSheetConfig.registerSheet(JournalEntry, "black-flag", applications.journal.BlackFlagJournalSheet, {
-		makeDefault: true,
-		label: "BF.Sheet.Default.Journal"
-	});
+	(foundry.applications?.apps?.DocumentSheetConfig ?? DocumentSheetConfig).registerSheet(
+		JournalEntry,
+		"black-flag",
+		applications.journal.BlackFlagJournalSheet,
+		{
+			makeDefault: true,
+			label: "BF.Sheet.Default.Journal"
+		}
+	);
 
 	config._configureConsumableAttributes();
 	config._configureTrackableAttributes();
