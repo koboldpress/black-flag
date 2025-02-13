@@ -1355,6 +1355,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const scaledFormula = damage.scaledFormula(rollData.scaling);
 		if (scaledFormula) parts.unshift(scaledFormula);
 
+		if (index === 0 && this.item.system.damage?.bonus) {
+			parts.push(String(this.item.system.damage.bonus));
+		}
+
 		return {
 			data,
 			modifierData,
