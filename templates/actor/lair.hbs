@@ -3,7 +3,7 @@
 		<ul class="items {{ type }}">
 			{{#each items}}
 			{{#blackFlag-itemContext this as |ctx|}}
-				<li data-item-id="{{ id }}" data-activity-id="{{ ctx.activity.id }}">
+				<li data-item-id="{{ id }}">
 					{{#if @root.editable}}
 					<div class="controls">
 						<button type="button" class="mini-button" data-action="edit"

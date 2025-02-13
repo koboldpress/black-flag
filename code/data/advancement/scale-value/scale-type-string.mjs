@@ -106,7 +106,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 
 	/**
 	 * Format this object as a placeholder for display in the config form.
-	 * @returns {ScaleValueString}
+	 * @returns {object}
 	 */
 	get placeholder() {
 		const placeholder = {};
