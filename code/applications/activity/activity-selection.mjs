@@ -4,13 +4,19 @@ import PseudoDocumentSelection from "../pseudo-document-selection.mjs";
  * Presents a list of activity types to create when clicking the new activity button.
  */
 export default class ActivitySelection extends PseudoDocumentSelection {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			title: "BF.ACTIVITY.Selection.Title",
-			type: "Activity",
-			errorMessage: "BF.ACTIVITY.Selection.Error"
-		});
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		errorMessage: "BF.ACTIVITY.Selection.Error",
+		type: "Activity"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return `${game.i18n.localize("BF.ACTIVITY.Selection.Title")}: ${this.options.item.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -21,10 +27,12 @@ export default class ActivitySelection extends PseudoDocumentSelection {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.types = {};
 		for (const [name, config] of Object.entries(CONFIG.Activity.types)) {
 			if (name === CONST.BASE_DOCUMENT_TYPE) continue;

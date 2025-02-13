@@ -1,22 +1,14 @@
-<form autocomplete="off">
-	<section>
-		<ol>
-			{{#each types}}
-				<li>
-					<label>
-						<figure><img src="{{#if icon}}{{ icon }}{{else}}{{ img }}{{/if}}"></figure>
-						<h3>{{ label }}</h3>
-						<input name="type" type="radio" value="{{ @key }}" {{ disabled disabled }}>
-						<p class="hint">{{ hint }}</p>
-					</label>
-				</li>
-			{{/each}}
-		</ol>
-	</section>
-
-	<nav class="buttons">
-		<button type="button" class="heavy-button" data-button="submit">
-			<i class="fa-regular fa-save" inert></i> {{ buttonLabel }}
-		</button>
-	</nav>
-</form>
+<section>
+	<ol>
+		{{#each types}}
+			<li>
+				<label>
+					<figure><img src="{{#if icon}}{{ icon }}{{else}}{{ img }}{{/if}}"></figure>
+					<span class="name">{{ label }}</span>
+					<input name="type" type="radio" value="{{ @key }}" {{ disabled disabled }}>
+					<p class="hint">{{ hint }}</p>
+				</label>
+			</li>
+		{{/each}}
+	</ol>
+</section>

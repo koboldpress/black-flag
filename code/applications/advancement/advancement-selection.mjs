@@ -5,13 +5,19 @@ import PseudoDocumentSelection from "../pseudo-document-selection.mjs";
  * Once a type is selected, this hands the process over to the advancement's individual editing interface.
  */
 export default class AdvancementSelection extends PseudoDocumentSelection {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			title: "BF.Advancement.Selection.Title",
-			type: "Advancement",
-			errorMessage: "BF.Advancement.Selection.Error"
-		});
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		errorMessage: "BF.Advancement.Selection.Error",
+		type: "Advancement"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return `${game.i18n.localize("BF.Advancement.Selection.Title")}: ${this.options.item.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -22,10 +28,12 @@ export default class AdvancementSelection extends PseudoDocumentSelection {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.types = {};
 		for (const [name, config] of Object.entries(CONFIG.Advancement.types)) {
 			const advancement = config.documentClass;
