@@ -26,7 +26,7 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 			);
 		}
 
-		new BlackFlagContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-item-id]", [], { jQuery: true, onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

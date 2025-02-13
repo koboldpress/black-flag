@@ -46,7 +46,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			);
 		}
 
-		new BlackFlagContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-effect-id]", [], { jQuery: true, onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

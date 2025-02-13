@@ -28,7 +28,10 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 			});
 		}
 
-		new BlackFlagContextMenu(this, "[data-advancement-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-advancement-id]", [], {
+			jQuery: true,
+			onOpen: this._onContextMenu.bind(this)
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

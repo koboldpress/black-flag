@@ -35,7 +35,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 			);
 		}
 
-		new BlackFlagContextMenu(this, "[data-activity-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-activity-id]", [], { jQuery: true, onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

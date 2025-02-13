@@ -68,6 +68,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		this.querySelectorAll("input").forEach(e => e.addEventListener("focus", () => e.select()));
 
 		new BlackFlagContextMenu(this, "[data-item-id], [data-activity-id]", [], {
+			jQuery: true,
 			onOpen: this._onContextMenu.bind(this)
 		});
 	}
