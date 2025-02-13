@@ -308,7 +308,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const makeTag = levels => {
 			if (foundry.utils.getType(levels) !== "Array") levels = [levels];
 			return game.i18n.format("BF.Feature.Tag", {
-				level: game.i18n.getListFormatter().format(levels.map(l => numberFormat(l, { ordinal: true }))),
+				level: game.i18n
+					.getListFormatter()
+					.format(levels.sort((lhs, rhs) => lhs - rhs).map(l => numberFormat(l, { ordinal: true }))),
 				owner: item.name,
 				type: game.i18n.localize("BF.Item.Type.Feature[one]")
 			});
