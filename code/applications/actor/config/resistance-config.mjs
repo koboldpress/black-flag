@@ -7,10 +7,7 @@ import BaseConfigSheet from "../api/base-config-sheet.mjs";
 export default class ResistanceConfig extends BaseConfigSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["resistance"],
-		window: {
-			title: "BF.Resistance.Config"
-		}
+		classes: ["resistance"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -27,6 +24,15 @@ export default class ResistanceConfig extends BaseConfigSheet {
 			template: "systems/black-flag/templates/actor/config/resistance-entries.hbs"
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Resistance.Config") });
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
