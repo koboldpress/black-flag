@@ -1,4 +1,4 @@
-import PseudoDocumentSelection from "../pseudo-document-selection.mjs";
+import PseudoDocumentSelection from "../api/pseudo-document-selection.mjs";
 
 /**
  * Presents a list of advancement types to create when clicking the new advancement button.
