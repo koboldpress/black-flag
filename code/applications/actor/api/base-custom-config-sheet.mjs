@@ -1,4 +1,4 @@
-import BaseConfigSheet from "../api/base-config-sheet.mjs";
+import BaseConfigSheet from "./base-config-sheet.mjs";
 
 /**
  * Base configuration application that supports adding & deleting custom values.

@@ -337,13 +337,14 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 				}
 				break;
 			case "config":
+				const options = { document: this.actor, selectedId: properties.key };
 				switch (properties.type) {
 					case "ability":
-						return new AbilityConfig({ document: this.actor, selectedId: properties.key }).render({ force: true });
+						return new AbilityConfig(options).render({ force: true });
 					case "armor-class":
-						return new ArmorClassConfig({ document: this.actor }).render({ force: true });
+						return new ArmorClassConfig(options).render({ force: true });
 					case "health":
-						return new HealthConfig({ document: this.actor }).render({ force: true });
+						return new HealthConfig(options).render({ force: true });
 					case "initiative":
 						return new InitiativeConfig(this.actor).render(true);
 					case "language":
@@ -351,21 +352,21 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "luck":
 						return new LuckConfig(this.actor).render(true);
 					case "movement":
-						return new MovementConfig({ document: this.actor }).render({ force: true });
+						return new MovementConfig(options).render({ force: true });
 					case "proficiency":
 						return new ProficiencyConfig(this.actor).render(true);
 					case "resistance":
-						return new ResistanceConfig({ document: this.actor }).render({ force: true });
+						return new ResistanceConfig(options).render({ force: true });
 					case "senses":
 						return new SensesConfig(this.actor).render(true);
 					case "skill":
-						return new SkillConfig(properties.key, this.actor).render(true);
+						return new SkillConfig(options).render({ force: true });
 					case "tool":
-						return new ToolConfig(properties.key, this.actor).render(true);
+						return new ToolConfig(options).render({ force: true });
 					case "type":
-						return new TypeConfig({ document: this.actor }).render({ force: true });
+						return new TypeConfig(options).render({ force: true });
 					case "vehicle":
-						return new ToolConfig(properties.key, this.actor, { trait: "vehicles" }).render(true);
+						return new ToolConfig({ ...options, trait: "vehicles" }).render({ force: true });
 				}
 				break;
 			case "effect":

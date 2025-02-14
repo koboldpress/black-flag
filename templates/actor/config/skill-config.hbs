@@ -1,25 +1,13 @@
-<form autocomplete="off">
-	<h2>
-		<select name="skillId">
-			{{ selectOptions CONFIG.skills selected=skillId labelAttr="label" localize=true blank=(localize "BF.Global") }}
-		</select>
-	</h2>
-
+<div>
 	{{#if skill}}
 	  <fieldset>
 			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
-			<label>
-				<span>{{ localize "BF.CHECK.Label[other]" }}</span>
-				<select name="system.proficiencies.skills.{{ skillId }}.proficiency.multiplier">
-					{{ selectOptions proficiencyLevels selected=skill.proficiency.multiplier }}
-				</select>
-			</label>
+			{{ formField skill.fields.proficiency.fields.multiplier options=proficiencyOptions
+									 name=(concat ability.keyPath ".proficiency.multiplier")
+									 value=skill.data.proficiency.multiplier label="BF.CHECK.Label[other]" localize=true
+									 rootId=partId }}
 		</fieldset>
 	{{else}}
 	  <!-- TODO: Global base skill proficiency -->
 	{{/if}}
-
-	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this }}
-	{{/each}}
-</form>
+</div>

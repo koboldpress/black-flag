@@ -1,33 +1,15 @@
-<form autocomplete="off">
-	<h2>
-		<select name="toolId">
-			{{ selectOptions tools selected=toolId labelAttr="label" blank=(localize "BF.Global") }}
-		</select>
-	</h2>
-
-	{{#if tool}}
-	  <fieldset>
-			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
-			<label>
-				<span>{{ localize "BF.CHECK.Label[other]" }}</span>
-				<select name="system.proficiencies.{{ trait }}.{{ toolId }}.proficiency.multiplier">
-					{{ selectOptions proficiencyLevels selected=tool.proficiency.multiplier }}
-				</select>
-			</label>
-		</fieldset>
-	{{else}}
-		<fieldset>
-			<legend>{{ localize (ifThen (eq trait "vehicles") "BF.VEHICLE.Listed" "BF.Tool.Listed") }}</legend>
-			<multi-select name="listed-tools">
-				{{#each toolOptions}}
-					<option value="{{ @key }}" {{~ifThen selected " selected" ""}}>{{ label }}</option>
-				{{/each}}
-			</multi-select>
-		</fieldseT>
-	  <!-- TODO: Global base tool proficiency -->
-	{{/if}}
-
-	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this }}
-	{{/each}}
-</form>
+{{#if tool}}
+  <fieldset>
+		<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
+		{{ formField tool.fields.proficiency.fields.multiplier options=proficiencyOptions
+								 name=(concat tool.keyPath ".proficiency.multiplier")
+								 value=tool.data.proficiency.multiplier label="BF.CHECK.Label[other]" localize=true
+								 rootId=partId }}
+	</fieldset>
+{{else}}
+	<fieldset>
+		<legend>{{ localize (ifThen (eq trait "vehicles") "BF.VEHICLE.Listed" "BF.Tool.Listed") }}</legend>
+		{{ formInput toolSelector.field value=toolSelector.value name="listed-tools" options=toolSelector.options }}
+	</fieldseT>
+  <!-- TODO: Global base tool proficiency -->
+{{/if}}

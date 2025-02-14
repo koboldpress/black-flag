@@ -1,16 +1,9 @@
-import BaseConfigSheet from "../api/base-config-sheet.mjs";
+import BaseSelectorConfigSheet from "../api/base-selector-config-sheet.mjs";
 
 /**
  * Dialog for configuring an individual ability.
  */
-export default class AbilityConfig extends BaseConfigSheet {
-	constructor(options) {
-		super(options);
-		this.selectedId = this.options.selectedId ?? null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
+export default class AbilityConfig extends BaseSelectorConfigSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
 		classes: ["ability", "form-list"],
@@ -23,9 +16,7 @@ export default class AbilityConfig extends BaseConfigSheet {
 
 	/** @override */
 	static PARTS = {
-		selector: {
-			template: "systems/black-flag/templates/actor/config/id-selector.hbs"
-		},
+		...super.PARTS,
 		config: {
 			classes: ["contents"],
 			template: "systems/black-flag/templates/actor/config/ability-config.hbs"
@@ -40,21 +31,13 @@ export default class AbilityConfig extends BaseConfigSheet {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * The ability being modified by this app.
-	 * @type {string|null}
-	 */
-	selectedId;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @override */
 	get title() {
 		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Ability.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -63,9 +46,16 @@ export default class AbilityConfig extends BaseConfigSheet {
 		switch (partId) {
 			case "config":
 				return this._prepareConfigContext(context, options);
-			case "selector":
-				return this._prepareSelectorContext(context, options);
 		}
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareSelectorContext(context, options) {
+		context = await super._prepareSelectorContext(context, options);
+		context.options = [...context.options, ...CONFIG.BlackFlag.abilities.localizedOptions];
 		return context;
 	}
 
@@ -78,13 +68,14 @@ export default class AbilityConfig extends BaseConfigSheet {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	_prepareConfigContext(context, options) {
+	async _prepareConfigContext(context, options) {
 		context.ability = this.selectedId
 			? {
 					data:
 						context.system.source.abilities[this.selectedId] ?? context.system.data.abilities[this.selectedId] ?? {},
 					fields: context.system.fields.abilities.model.fields,
-					id: this.selectedId
+					id: this.selectedId,
+					keyPath: `system.abilities.${this.selectedId}`
 				}
 			: null;
 		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
@@ -92,21 +83,6 @@ export default class AbilityConfig extends BaseConfigSheet {
 			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
 			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") }
 		];
-		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare rendering context for the ID selector section.
-	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {Promise<ApplicationRenderContext>}
-	 * @protected
-	 */
-	_prepareSelectorContext(context, options) {
-		context.options = [{ label: "", value: "" }, ...CONFIG.BlackFlag.abilities.localizedOptions];
-		context.selected = this.selectedId;
 		return context;
 	}
 
@@ -182,17 +158,7 @@ export default class AbilityConfig extends BaseConfigSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	_onChangeForm(formConfig, event) {
-		super._onChangeForm(formConfig, event);
-		if (event.target.name === "selectedId") {
-			this.selectedId = event.target.value;
-			this.render();
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
+	/** @override */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `ability-${category}` }] };
 		if (this.selectedId) data.filter.push({ k: "ability", v: this.selectedId });

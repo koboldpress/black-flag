@@ -4,10 +4,10 @@
 			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			{{#if canSetValue}}
 				{{ formField ability.fields.base value=ability.data.base localize=true
-				             name=(concat "system.abilities." ability.id ".base") rootId=partId }}
+				             name=(concat ability.keyPath ".base") rootId=partId }}
 			{{/if}}
 			{{ formField ability.fields.save.fields.proficiency.fields.multiplier options=proficiencyOptions
-			             name=(concat "system.abilities." ability.id ".save.proficiency.multiplier")
+			             name=(concat ability.keyPath ".save.proficiency.multiplier")
 			             value=ability.data.save.proficiency.multiplier label="BF.SavingThrow.LabelLong[other]" localize=true
 			             rootId=partId }}
 		</fieldset>

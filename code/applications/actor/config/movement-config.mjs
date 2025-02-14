@@ -1,5 +1,5 @@
 import { filteredKeys } from "../../../utils/_module.mjs";
-import BaseCustomConfigSheet from "./base-custom-config-sheet.mjs";
+import BaseCustomConfigSheet from "../api/base-custom-config-sheet.mjs";
 
 /**
  * Configuration application for an actor's movement.

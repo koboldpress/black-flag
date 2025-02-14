@@ -1,99 +1,138 @@
 import { Trait } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseSelectorConfigSheet from "../api/base-selector-config-sheet.mjs";
+
+const { SetField, StringField } = foundry.data.fields;
 
 /**
- * Dialog for configuring tool & vehicle proficiencies
- * @param {string} toolId - The tool being modified by this app.
- * @param {BlackFlagActor} actor - The actor to modify.
- * @param {object} options - Additional application rendering options.
+ * Dialog for configuring tool & vehicle proficiencies.
  */
-export default class ToolConfig extends BaseConfig {
-	constructor(toolId, actor, options) {
-		super(actor, options);
-		this.toolId = toolId ?? null;
+export default class ToolConfig extends BaseSelectorConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["tool", "form-list"],
+		position: {
+			width: 450
+		},
+		trait: "tools"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		...super.PARTS,
+		config: {
+			template: "systems/black-flag/templates/actor/config/tool-config.hbs"
+		},
+		modifiers: {
+			classes: ["contents"],
+			template: "systems/black-flag/templates/actor/config/modifier-section.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: Trait.traitLabel(this.options.trait, 999) });
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "tool"],
-			template: "systems/black-flag/templates/actor/config/tool-config.hbs",
-			trait: "tools"
-		});
-	}
-
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Properties                               */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	/**
-	 * The tool being modified by this app.
-	 * @type {string|null}
-	 */
-	toolId;
-
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Config for the currently selected tool.
 	 * @type {object|null}
 	 */
 	get toolConfig() {
-		return this.toolId ? Trait.configForKey(this.toolId, { trait: this.options.trait }) : null;
+		return this.selectedId ? Trait.configForKey(this.selectedId, { trait: this.options.trait }) : null;
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	get type() {
-		return Trait.traitLabel(this.options.trait, 1);
-	}
-
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Context Preparation                      */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		const tools =
-			context.source.proficiencies[this.options.trait] ?? this.document.system.proficiencies[this.options.trait] ?? {};
-		context.toolId = this.toolId;
-		context.tool = this.toolId ? tools[this.toolId] : null;
-		context.toolOptions = Array.from(Trait.choices(this.options.trait).set).reduce((obj, k) => {
-			obj[k] = { label: Trait.keyLabel(k, { trait: this.options.trait }), selected: k in tools };
-			return obj;
-		}, {});
-		context.tools = Object.keys(tools).reduce((obj, key) => {
-			if (key in context.toolOptions) {
-				obj[key] = context.toolOptions[key];
-			}
-			return obj;
-		}, {});
-		context.toolValues = Object.keys(context.tools).join(" ");
-		context.proficiencyLevels = {
-			0: game.i18n.localize("BF.Proficiency.Level.None"),
-			0.5: game.i18n.localize("BF.Proficiency.Level.Half"),
-			1: game.i18n.localize("BF.Proficiency.Level.Proficient"),
-			2: game.i18n.localize("BF.Proficiency.Level.Expertise")
-		};
-		context.trait = this.options.trait;
+	async _preparePartContext(partId, context, options) {
+		context.toolSource =
+			context.system.source.proficiencies[this.options.trait] ??
+			context.system.data.proficiencies[this.options.trait] ??
+			{};
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "config":
+				return this._prepareConfigContext(context, options);
+		}
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	async _prepareSelectorContext(context, options) {
+		context = await super._prepareSelectorContext(context, options);
+		context.options = [
+			...context.options,
+			...Object.keys(context.toolSource).map(value => ({
+				value,
+				label: Trait.keyLabel(value, { trait: this.options.trait })
+			}))
+		];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the config section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareConfigContext(context, options) {
+		if (this.selectedId)
+			context.tool = {
+				data:
+					context.system.source.proficiencies[this.options.trait]?.[this.selectedId] ??
+					context.system.data.proficiencies[this.options.trait][this.selectedId] ??
+					{},
+				fields: context.system.fields.proficiencies.fields[this.options.trait].model.fields,
+				id: this.selectedId,
+				keyPath: `system.proficiencies.${this.options.trait}.${this.selectedId}`
+			};
+		else
+			context.toolSelector = {
+				field: new SetField(new StringField()),
+				options: Array.from(Trait.choices(this.options.trait).set).map(value => ({
+					value,
+					label: Trait.keyLabel(value, { trait: this.options.trait })
+				})),
+				value: new Set(Object.keys(context.toolSource))
+			};
+		console.log(context.toolSelector);
+		context.proficiencyOptions = [
+			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
+			{ value: 0.5, label: game.i18n.localize("BF.Proficiency.Level.Half") },
+			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") },
+			{ value: 2, label: game.i18n.localize("BF.Proficiency.Level.Expertise") }
+		];
+		context.trait = this.options.trait;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	prepareModifiers() {
 		let checkModifiers;
 		let global;
 		const shortTrait = this.options.trait.replace("s", "");
-		if (this.toolId) {
+		if (this.selectedId) {
 			checkModifiers = this.getModifiers([
 				{ k: "type", v: `${shortTrait}-check` },
-				{ k: shortTrait, v: this.toolId }
+				{ k: shortTrait, v: this.selectedId }
 			]);
 			global = false;
 		} else {
@@ -126,30 +165,14 @@ export default class ToolConfig extends BaseConfig {
 		];
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Action Handlers                          */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		const select = html.querySelector('[name="listed-tools"]');
-		if (select) {
-			select.addEventListener("change", this._onChangeTools.bind(this));
-		}
-	}
-
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onChangeInput(event) {
-		super._onChangeInput(event);
-		if (event.target.name === "toolId") {
-			this.toolId = event.target.value;
-			this.render();
-		}
+	_onChangeForm(formConfig, event) {
+		super._onChangeForm(formConfig, event);
+		if (event.target.name === "listed-tools") this._onChangeTools(event);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -167,7 +190,7 @@ export default class ToolConfig extends BaseConfig {
 			else updates[`system.proficiencies.${this.options.trait}.${key}`] = {};
 		}
 		removeKeys.forEach(key => (updates[`system.proficiencies.${this.options.trait}.-=${key}`] = null));
-		this.document.update(updates);
+		this.submit({ updateData: foundry.utils.expandObject(updates) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -176,7 +199,7 @@ export default class ToolConfig extends BaseConfig {
 	_getModifierData(category, type) {
 		const shortTrait = this.options.trait.replace("s", "");
 		const data = { type, filter: [{ k: "type", v: `${shortTrait}-${category}` }] };
-		if (this.toolId) data.filter.push({ k: shortTrait, v: this.toolId });
+		if (this.selectedId) data.filter.push({ k: shortTrait, v: this.selectedId });
 		return data;
 	}
 }

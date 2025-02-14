@@ -1,77 +1,109 @@
-import BaseConfig from "./base-config.mjs";
+import BaseSelectorConfigSheet from "../api/base-selector-config-sheet.mjs";
 
 /**
  * Dialog for configuring skill proficiencies.
- * @param {string} skillId - The skill being modified by this app.
- * @param {BlackFlagActor} actor - The actor to modify.
- * @param {object} options - Additional application rendering options.
  */
-export default class SkillConfig extends BaseConfig {
-	constructor(skillId, actor, options) {
-		super(actor, options);
-		this.skillId = skillId ?? null;
-	}
+export default class SkillConfig extends BaseSelectorConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["skill", "form-list"],
+		position: {
+			width: 450
+		}
+	};
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "skill"],
+	/** @override */
+	static PARTS = {
+		...super.PARTS,
+		config: {
+			classes: ["contents"],
 			template: "systems/black-flag/templates/actor/config/skill-config.hbs"
-		});
+		},
+		modifiers: {
+			classes: ["contents"],
+			template: "systems/black-flag/templates/actor/config/modifier-section.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Skill.Label[other]") });
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Properties                               */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * The skill being modified by this app.
-	 * @type {string|null}
-	 */
-	skillId;
-
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	get type() {
-		return game.i18n.localize(CONFIG.BlackFlag.skills[this.skillId]?.label ?? "BF.Skill.Label[one]");
-	}
-
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Context Preparation                      */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-
-	async getData(options) {
-		const context = await super.getData(options);
-		context.skillId = this.skillId;
-		context.skill = this.skillId
-			? context.source.proficiencies.skills[this.skillId] ??
-				this.document.system.proficiencies.skills[this.skillId] ??
-				{}
-			: null;
-		context.proficiencyLevels = {
-			0: game.i18n.localize("BF.Proficiency.Level.None"),
-			0.5: game.i18n.localize("BF.Proficiency.Level.Half"),
-			1: game.i18n.localize("BF.Proficiency.Level.Proficient"),
-			2: game.i18n.localize("BF.Proficiency.Level.Expertise")
-		};
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "config":
+				return this._prepareConfigContext(context, options);
+		}
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	async _prepareSelectorContext(context, options) {
+		context = await super._prepareSelectorContext(context, options);
+		context.options = [...context.options, ...CONFIG.BlackFlag.skills.localizedOptions];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the config section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareConfigContext(context, options) {
+		context.skill = this.selectedId
+			? {
+					data:
+						context.system.source.proficiencies.skills[this.selectedId] ??
+						context.system.data.proficiencies.skills[this.selectedId] ??
+						{},
+					fields: context.system.fields.proficiencies.fields.skills.model.fields,
+					id: this.selectedId,
+					keyPath: `system.proficiencies.skills.${this.selectedId}`
+				}
+			: null;
+		context.proficiencyOptions = [
+			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
+			{ value: 0.5, label: game.i18n.localize("BF.Proficiency.Level.Half") },
+			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") },
+			{ value: 2, label: game.i18n.localize("BF.Proficiency.Level.Expertise") }
+		];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	prepareModifiers() {
 		let checkModifiers;
 		let passiveModifiers;
 		let global;
-		if (this.skillId) {
+		if (this.selectedId) {
 			checkModifiers = this.getModifiers([
 				{ k: "type", v: "skill-check" },
-				{ k: "skill", v: this.skillId }
+				{ k: "skill", v: this.selectedId }
 			]);
 			passiveModifiers = this.getModifiers([
 				{ k: "type", v: "skill-passive" },
-				{ k: "skill", v: this.skillId }
+				{ k: "skill", v: this.selectedId }
 			]);
 			global = false;
 		} else {
@@ -119,19 +151,10 @@ export default class SkillConfig extends BaseConfig {
 	/*  Action Handlers                          */
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
-	_onChangeInput(event) {
-		super._onChangeInput(event);
-		if (event.target.name === "skillId") {
-			this.skillId = event.target.value;
-			this.render();
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
+	/** @override */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `skill-${category}` }] };
-		if (this.skillId) data.filter.push({ k: "skill", v: this.skillId });
+		if (this.selectedId) data.filter.push({ k: "skill", v: this.selectedId });
 		return data;
 	}
 }

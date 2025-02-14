@@ -10,6 +10,8 @@ export { default as SiegeWeaponSheet } from "./siege-weapon-sheet.mjs";
 export { default as VehicleSheet } from "./vehicle-sheet.mjs";
 
 export { default as BasicConfigSheet } from "./api/base-config-sheet.mjs";
+export { default as BaseCustomConfigSheet } from "./api/base-custom-config-sheet.mjs";
+export { default as BaseSelectorConfigSheet } from "./api/base-selector-config-sheet.mjs";
 
 export { default as AbilityConfig } from "./config/ability-config.mjs";
 export { default as ArmorClassConfig } from "./config/armor-class-config.mjs";
