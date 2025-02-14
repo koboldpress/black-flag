@@ -1,0 +1,8 @@
+<fieldset>
+	<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
+	{{ formField system.fields.spellcasting.fields.ability value=system.source.spellcasting.ability
+	             options=CONFIG.abilities.localizedOptions label=(localize "BF.Spellcasting.Ability.Label")
+							 rootId=partId }}
+	{{ formField system.fields.spellcasting.fields.dc value=system.source.spellcasting.dc
+	             placeholder=system.data.spellcasting.autoDC label=(localize "BF.Spellcasting.DC.Label") rootId=partId }}
+</fieldset>

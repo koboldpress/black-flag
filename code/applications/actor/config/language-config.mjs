@@ -53,7 +53,7 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 	async _preparePartContext(partId, context, options) {
 		context = await super._preparePartContext(partId, context, options);
 
-		const languages = context.system.data.proficiencies.languages ?? {};
+		const languages = context.system.source.proficiencies.languages ?? {};
 		context.languages = {
 			communication: Object.entries(CONFIG.BlackFlag.rangedCommunication).reduce((obj, [key, config]) => {
 				obj[key] = { label: game.i18n.localize(config.label), value: languages.communication[key] ?? {} };

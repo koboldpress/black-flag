@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>{{ localize "BF.Initiative.Label" }}</legend>
-	{{ formField initiative.fields.ability value=initiative.data.ability options=abilityOptions localize=true
+	{{ formField initiative.fields.ability value=initiative.source.ability options=abilityOptions localize=true
 	             rootId=partId }}
-	{{ formField initiative.fields.proficiency.fields.multiplier value=initiative.data.proficiency.multiplier
+	{{ formField initiative.fields.proficiency.fields.multiplier value=initiative.source.proficiency.multiplier
 	             options=proficiencyOptions label=(localize "BF.Proficiency.Label[one]") rootId=partId }}
 </fieldset>

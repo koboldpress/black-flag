@@ -49,7 +49,8 @@ export default class InitiativeConfig extends BaseConfigSheet {
 		];
 		context.initiative = {
 			data: context.system.data.attributes.initiative,
-			fields: context.system.fields.attributes.fields.initiative.fields
+			fields: context.system.fields.attributes.fields.initiative.fields,
+			source: context.system.source.attributes.initiative
 		};
 		return context;
 	}

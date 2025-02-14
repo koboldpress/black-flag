@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>{{ localize "BF.Luck.Label" }}</legend>
-	{{ formField system.fields.attributes.fields.luck.fields.value value=system.data.attributes.luck.value
+	{{ formField system.fields.attributes.fields.luck.fields.value value=system.source.attributes.luck.value
 	             label=(localize "BF.Luck.Current") rootId=partId }}
-	{{ formField system.fields.attributes.fields.luck.fields.formula value=system.data.attributes.luck.formula
+	{{ formField system.fields.attributes.fields.luck.fields.formula value=system.source.attributes.luck.formula
 	             localize=true classes="label-hinted" placeholder="1d4" disabled=formulaDisabled rootId=partId }}
 </fieldset>

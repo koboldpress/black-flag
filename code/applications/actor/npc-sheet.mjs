@@ -149,7 +149,7 @@ export default class NPCSheet extends BaseStatblockSheet {
 			case "config":
 				switch (properties.type) {
 					case "spellcasting":
-						return new NPCSpellcastingConfig(this.actor).render(true);
+						return new NPCSpellcastingConfig({ document: this.actor }).render({ force: true });
 				}
 		}
 		return super._onAction(event, dataset);

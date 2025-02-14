@@ -9,7 +9,7 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 	static DEFAULT_OPTIONS = {
 		classes: ["movement"],
 		position: {
-			width: 500
+			width: 450
 		},
 		customKeyPath: "system.traits.movement.custom"
 	};
