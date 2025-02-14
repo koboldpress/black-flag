@@ -1,0 +1,24 @@
+<fieldset>
+	<legend>{{ localize "BF.SENSES.FIELDS.traits.senses.custom.label" }}</legend>
+	<ul class="configuration-list">
+		{{#each senses.data.custom}}
+			<li>
+				<div class="item-name full-width">
+					<input type="text" name="custom.{{ @index }}" value="{{ this }}">
+				</div>
+				<div class="item-controls">
+					<button class="link-button" type="button" data-action="deleteCustom" data-index="{{ @index }}"
+									data-tooltip="BF.SENSES.Action.DeleteCustom"
+									aria-label="{{ localize 'BF.SENSES.Action.DeleteCustom' }}">
+						<i class="fa-solid fa-trash" inert></i>
+					</button>
+				</div>
+			</li>
+		{{/each}}
+		<li class="add-control">
+			<button class="link-button" type="button" data-action="addCustom">
+				<i class="fa-solid fa-plus" inert></i> {{ localize "BF.SENSES.Action.AddCustom" }}
+			</button>
+		</li>
+	</ul>
+</fieldset>

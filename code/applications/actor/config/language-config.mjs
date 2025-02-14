@@ -127,7 +127,6 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 			tags: filteredKeys(languages.tags ?? {}),
 			value: filteredKeys(languages.value ?? {})
 		});
-		console.log(foundry.utils.deepClone(submitData.system.proficiencies.languages));
 		return submitData;
 	}
 }

@@ -1,22 +1,41 @@
 import { filteredKeys } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseCustomConfigSheet from "../api/base-custom-config-sheet.mjs";
 
-export default class SensesConfig extends BaseConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "senses"],
-			template: "systems/black-flag/templates/actor/config/senses-config.hbs"
-		});
-	}
+/**
+ * Configuration application for an actor's senses.
+ */
+export default class SensesConfig extends BaseCustomConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["senses", "form-list"],
+		position: {
+			width: 450
+		},
+		customKeyPath: "system.traits.senses.custom"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		types: {
+			template: "systems/black-flag/templates/actor/config/senses-config-types.hbs"
+		},
+		tags: {
+			template: "systems/black-flag/templates/actor/config/senses-config-tags.hbs"
+		},
+		custom: {
+			template: "systems/black-flag/templates/actor/config/senses-config-custom.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get type() {
-		return game.i18n.localize("BF.SENSES.Label[other]");
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.SENSES.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -24,26 +43,31 @@ export default class SensesConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		const senses = context.source.traits.senses ?? {};
-		context.custom = senses.custom;
-		context.types = Object.entries(CONFIG.BlackFlag.senses).reduce((obj, [key, config]) => {
-			const keyPath = `system.traits.senses.types.${key}`;
-			obj[key] = {
-				label: game.i18n.localize(config.label),
-				value: senses.types?.[key] ?? "",
-				placeholder:
-					foundry.utils.getProperty(this.document.overrides, keyPath) ??
-					foundry.utils.getProperty(this.document.advancementOverrides, keyPath) ??
-					""
-			};
-			return obj;
-		}, {});
-		context.tagOptions = Object.entries(CONFIG.BlackFlag.senseTags).reduce((obj, [key, config]) => {
-			obj[key] = { label: game.i18n.localize(config.label), chosen: senses.tags?.includes(key) };
-			return obj;
-		}, {});
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+
+		const senses = context.system.source.traits.senses ?? {};
+		context.senses = {
+			data: senses,
+			fields: context.system.fields.traits.fields.senses.fields,
+			tagOptions: Object.entries(CONFIG.BlackFlag.senseTags).reduce((obj, [key, config]) => {
+				obj[key] = { label: game.i18n.localize(config.label), chosen: senses.tags?.includes(key) };
+				return obj;
+			}, {}),
+			types: Object.entries(CONFIG.BlackFlag.senses.localized).reduce((obj, [key, label]) => {
+				const keyPath = `system.traits.senses.types.${key}`;
+				obj[key] = {
+					label,
+					value: senses.types?.[key] ?? "",
+					placeholder:
+						foundry.utils.getProperty(this.document.overrides, keyPath) ??
+						foundry.utils.getProperty(this.document.advancementOverrides, keyPath) ??
+						""
+				};
+				return obj;
+			}, {})
+		};
+
 		return context;
 	}
 
@@ -52,32 +76,9 @@ export default class SensesConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		html
-			.querySelector('[data-action="add"]')
-			.addEventListener("click", event => this.submit({ updateData: { newCustom: true } }));
-
-		for (const control of html.querySelectorAll('[data-action="delete"]')) {
-			control.addEventListener("click", event =>
-				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
-			);
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_getSubmitData(...args) {
-		const data = foundry.utils.expandObject(super._getSubmitData(...args));
-		data.tags = filteredKeys(data.tags ?? {});
-
-		data.custom = Array.from(Object.values(data.custom ?? {}));
-		if (data.deleteCustom !== undefined) data.custom.splice(data.deleteCustom, 1);
-		if (data.newCustom) data.custom.push("");
-
-		return { "system.traits.senses": data };
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
+		submitData.system.traits.senses.tags = filteredKeys(submitData.system.traits.senses.tags ?? {});
+		return submitData;
 	}
 }

@@ -358,7 +358,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "resistance":
 						return new ResistanceConfig(options).render({ force: true });
 					case "senses":
-						return new SensesConfig(this.actor).render(true);
+						return new SensesConfig(options).render({ force: true });
 					case "skill":
 						return new SkillConfig(options).render({ force: true });
 					case "tool":
