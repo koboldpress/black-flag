@@ -27,9 +27,9 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get title() {
-		return game.i18n.localize("BF.MOVEMENT.Label");
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.MOVEMENT.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

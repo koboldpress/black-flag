@@ -1,26 +1,48 @@
 import { filteredKeys, Trait } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseCustomConfigSheet from "../api/base-custom-config-sheet.mjs";
 
 /**
  * Class for configuring language proficiencies.
  */
-export default class LanguageConfig extends BaseConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "language"],
-			template: "systems/black-flag/templates/actor/config/language-config.hbs",
+export default class LanguageConfig extends BaseCustomConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["language", "grid-columns"],
+		position: {
 			width: "auto"
-		});
-	}
+		},
+		customKeyPath: "system.proficiencies.languages.custom"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		dialects: {
+			container: { classes: ["column-container"], id: "column-left" },
+			template: "systems/black-flag/templates/actor/config/language-config-dialects.hbs"
+		},
+		custom: {
+			container: { classes: ["column-container"], id: "column-right" },
+			template: "systems/black-flag/templates/actor/config/language-config-custom.hbs"
+		},
+		tags: {
+			container: { classes: ["column-container"], id: "column-right" },
+			template: "systems/black-flag/templates/actor/config/language-config-tags.hbs"
+		},
+		communication: {
+			container: { classes: ["column-container"], id: "column-right" },
+			template: "systems/black-flag/templates/actor/config/language-config-communication.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get type() {
-		return game.i18n.localize("BF.Language.Label[other]");
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Language.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -28,20 +50,37 @@ export default class LanguageConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		const languages = this.document.system.proficiencies.languages ?? {};
-		context.dialects = Trait.choices("languages", { chosen: languages.value });
-		context.communication = Object.entries(CONFIG.BlackFlag.rangedCommunication).reduce((obj, [key, config]) => {
-			obj[key] = { label: game.i18n.localize(config.label), value: languages.communication[key] ?? {} };
-			return obj;
-		}, {});
-		context.custom = languages.custom;
-		context.tagOptions = Object.entries(CONFIG.BlackFlag.languageTags).reduce((obj, [key, config]) => {
-			obj[key] = { label: game.i18n.localize(config.label), chosen: languages.tags.has(key) };
-			return obj;
-		}, {});
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+
+		const languages = context.system.data.proficiencies.languages ?? {};
+		context.languages = {
+			communication: Object.entries(CONFIG.BlackFlag.rangedCommunication).reduce((obj, [key, config]) => {
+				obj[key] = { label: game.i18n.localize(config.label), value: languages.communication[key] ?? {} };
+				return obj;
+			}, {}),
+			data: languages,
+			dialects: Trait.choices("languages", { chosen: languages.value }),
+			fields: context.system.fields.proficiencies.fields.languages.fields,
+			tagOptions: Object.entries(CONFIG.BlackFlag.languageTags.localized).reduce((obj, [key, label]) => {
+				obj[key] = { label, chosen: languages.tags.has(key) };
+				return obj;
+			}, {})
+		};
+
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Life-Cycle Handlers         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_onRender(context, options) {
+		super._onRender(context, options);
+		for (const checkbox of this.element.querySelectorAll('input[type="checkbox"]:checked')) {
+			this._onToggleCategory(checkbox);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -49,31 +88,9 @@ export default class LanguageConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const checkbox of html.querySelectorAll('input[type="checkbox"]:checked')) {
-			this._onToggleCategory(checkbox);
-		}
-
-		html
-			.querySelector('[data-action="add"]')
-			.addEventListener("click", event => this.submit({ updateData: { newCustom: true } }));
-
-		for (const control of html.querySelectorAll('[data-action="delete"]')) {
-			control.addEventListener("click", event =>
-				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
-			);
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async _onChangeInput(event) {
+	_onChangeForm(formConfig, event) {
 		if (event.target instanceof HTMLInputElement) this._onToggleCategory(event.target);
-		super._onChangeInput(event);
+		super._onChangeForm(formConfig, event);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -93,26 +110,24 @@ export default class LanguageConfig extends BaseConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Form Submission           */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_getSubmitData(...args) {
-		const data = foundry.utils.expandObject(super._getSubmitData(...args));
-
-		const custom = Array.from(Object.values(data.custom ?? {}));
-		if (data.deleteCustom !== undefined) custom.splice(data.deleteCustom, 1);
-		if (data.newCustom) custom.push("");
-
-		return {
-			"system.proficiencies.languages": {
-				value: filteredKeys(data.dialects ?? {}),
-				communication: Object.entries(data.communication).reduce((obj, [key, value]) => {
-					if (!value) obj[`-=${key}`] = null;
-					else obj[`${key}.range`] = value;
-					return obj;
-				}, {}),
-				custom,
-				tags: filteredKeys(data.tags ?? {})
-			}
-		};
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
+		const languages = submitData.system.proficiencies?.languages ?? {};
+		foundry.utils.setProperty(submitData, "system.proficiencies.languages", {
+			communication: Object.entries(languages.communication ?? {}).reduce((obj, [key, value]) => {
+				if (!value) obj[`-=${key}`] = null;
+				else obj[key] = { range: value };
+				return obj;
+			}, {}),
+			custom: languages.custom,
+			tags: filteredKeys(languages.tags ?? {}),
+			value: filteredKeys(languages.value ?? {})
+		});
+		console.log(foundry.utils.deepClone(submitData.system.proficiencies.languages));
+		return submitData;
 	}
 }

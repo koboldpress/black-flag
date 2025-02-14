@@ -1,0 +1,24 @@
+<fieldset>
+	<legend>{{ localize "BF.Language.Custom.Label" }}</legend>
+	<ul class="configuration-list">
+		{{#each languages.data.custom}}
+			<li>
+				<div class="item-name activity-name">
+					<input type="text" name="custom.{{ @index }}" value="{{ this }}">
+				</div>
+				<div class="item-controls">
+					<button class="link-button" type="button" data-action="deleteCustom" data-index="{{ @index }}"
+									data-tooltip="BF.Language.Custom.Delete"
+									aria-label="{{ localize 'BF.Language.Custom.Delete' }}">
+						<i class="fa-solid fa-trash" inert></i>
+					</button>
+				</div>
+			</li>
+		{{/each}}
+		<li class="add-control">
+			<button class="link-button" type="button" data-action="addCustom">
+				<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Language.Custom.Add" }}
+			</button>
+		</li>
+	</ul>
+</fieldset>

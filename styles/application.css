@@ -6,6 +6,7 @@
 	--color-fieldset-border: var(--bf-blue);
 	--color-scrollbar: var(--bf-blue);
 	--color-shadow-primary: var(--bf-button-shadow-blue);
+	--fieldset-gap: 8px;
 	max-height: 85vh;
 	margin: 0;
 	padding: 0;
@@ -28,12 +29,38 @@
 	.window-content {
 		overflow-y: auto;
 		> section:empty { display: none; }
+		> .column-container {
+			display: flex;
+			flex-direction: column;
+			gap: var(--fieldset-gap);
+		}
 	}
 	&.form-list .window-content {
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: var(--fieldset-gap);
 		> .contents { display: contents; }
+	}
+	&.grid-columns {
+		--grid-column-left-size: 1fr;
+		--grid-column-center-size: 1fr;
+		--grid-column-right-size: 1fr;
+
+		.window-content {
+			display: grid;
+			column-gap: var(--fieldset-gap);
+
+			&:has(> .column-container:nth-of-type(2)) {
+				grid-template-columns: [left] var(--grid-column-left-size) [right] var(--grid-column-right-size);
+			}
+			&:has(> .column-container:nth-of-type(3)) {
+				grid-template-columns: [left] var(--grid-column-left-size) [center] var(--grid-column-center-size) [right] var(--grid-column-right-size);
+			}
+
+			> .column-container[data-container-id="column-left"] { grid-area: left; }
+			> .column-container[data-container-id="column-center"] { grid-area: center; }
+			> .column-container[data-container-id="column-right"] { grid-area: right; }
+		}
 	}
 
 	&.standard-form {

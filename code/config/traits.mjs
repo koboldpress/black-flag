@@ -214,6 +214,7 @@ export const languageTags = {
 		type: "inline"
 	}
 };
+localizeConfig(languageTags);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -226,3 +227,4 @@ export const rangedCommunication = {
 		label: "BF.Language.Communication.Telepathy"
 	}
 };
+localizeConfig(rangedCommunication);

@@ -1,17 +1,32 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
+ * @typedef {ApplicationContainerParts}
+ * @property {object} [container]
+ * @property {string} [container.id]         ID of the container. Containers with the same ID will be grouped together.
+ * @property {string[]} [container.classes]  Classes to add to the container.
+ */
+
+/**
  * Mixin method for ApplicationV2-based applications.
- * @param {typeof ApplicationV2} Base - Application class to extend.
- * @returns {class}
+ * @template {ApplicationV2} T
+ * @param {typeof T} Base - Application class to extend.
+ * @returns {BaseApplication}
  * @mixin
  */
-export default Base =>
-	class extends HandlebarsApplicationMixin(Base) {
+export default function ApplicationV2Mixin(Base) {
+	class BaseApplication extends HandlebarsApplicationMixin(Base) {
 		/** @override */
 		static DEFAULT_OPTIONS = {
 			classes: ["black-flag"]
 		};
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * @type {Record<string, HandlebarsTemplatePart & ApplicationContainerParts>}
+		 */
+		static PARTS = {};
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 		/*           Initialization            */
@@ -22,7 +37,7 @@ export default Base =>
 			const applicationOptions = super._initializeApplicationOptions(options);
 			// Fix focus bug caused by the use of UUIDs in application IDs
 			// TODO: Remove once https://github.com/foundryvtt/foundryvtt/issues/11742 is fixed
-			applicationOptions.uniqueId = CSS.escape(applicationOptions.uniqueId);
+			applicationOptions.uniqueId = applicationOptions.uniqueId.replace(/\./g, "-");
 			return applicationOptions;
 		}
 
@@ -76,6 +91,27 @@ export default Base =>
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/** @inheritDoc */
+		_onFirstRender(context, options) {
+			super._onFirstRender(context, options);
+			const containers = {};
+			for (const [part, config] of Object.entries(this.constructor.PARTS)) {
+				if (!config.container?.id) continue;
+				const element = this.element.querySelector(`[data-application-part="${part}"]`);
+				if (!element) continue;
+				if (!containers[config.container.id]) {
+					const div = document.createElement("div");
+					div.dataset.containerId = config.container.id;
+					div.classList.add(...(config.container.classes ?? []));
+					containers[config.container.id] = div;
+					element.replaceWith(div);
+				}
+				containers[config.container.id].append(element);
+			}
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
 		_onRender(context, options) {
 			super._onRender(context, options);
 
@@ -96,4 +132,6 @@ export default Base =>
 				label.dataset.tooltip = hint.innerHTML;
 			});
 		}
-	};
+	}
+	return BaseApplication;
+}

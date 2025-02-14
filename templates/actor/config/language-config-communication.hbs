@@ -1,0 +1,9 @@
+<fieldset>
+	<legend>{{ localize "BF.Language.Communication.Label" }}</legend>
+	{{#each languages.communication}}
+		<label>
+			<span>{{ label }}</span>
+			<input type="number" name="system.proficiencies.languages.communication.{{ @key }}" value="{{ value.range }}">
+		</label>
+	{{/each}}
+</fieldset>

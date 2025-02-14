@@ -1,12 +1,12 @@
-const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import BFDocumentSheet from "../../api/document-sheet.mjs";
 
 /**
  * Base document sheet from which all actor configuration applications should be based.
  */
-export default class BaseConfigSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
+export default class BaseConfigSheet extends BFDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["black-flag", "config-sheet", "standard-form"],
+		classes: ["config-sheet", "standard-form"],
 		sheetConfig: false,
 		actions: {
 			addModifier: BaseConfigSheet.#addModifier,
