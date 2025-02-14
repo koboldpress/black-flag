@@ -1,32 +1,18 @@
-<form autocomplete="off">
-	<h2>
-		<select name="abilityId">
-			{{ selectOptions abilities selected=abilityId blank=(localize "BF.Global") }}
-		</select>
-	</h2>
-
+<div>
 	{{#if ability}}
 	  <fieldset>
 			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			{{#if canSetValue}}
-				<label>
-					<span>{{ localize "BF.Ability.Score.Base" }}</span>
-					<input type="number" name="system.abilities.{{ abilityId }}.base" value="{{ ability.base }}">
-				</label>
+				{{ formField ability.fields.base value=ability.data.base localize=true
+				             name=(concat "system.abilities." ability.id ".base") rootId=partId }}
 			{{/if}}
-			<label>
-				<span>{{ localize "BF.SavingThrow.LabelLong[other]" }}</span>
-				<select name="system.abilities.{{ abilityId }}.save.proficiency.multiplier">
-					{{ selectOptions proficiencyLevels selected=ability.save.proficiency.multiplier }}
-				</select>
-			</label>
+			{{ formField ability.fields.save.fields.proficiency.fields.multiplier options=proficiencyOptions
+			             name=(concat "system.abilities." ability.id ".save.proficiency.multiplier")
+			             value=ability.data.save.proficiency.multiplier label="BF.SavingThrow.LabelLong[other]" localize=true
+			             rootId=partId }}
 		</fieldset>
 	{{else}}
 	  <!-- TODO: Global base check proficiency -->
 	  <!-- TODO: Global base save proficiency -->
 	{{/if}}
-	
-	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this }}
-	{{/each}}
-</form>
+</div>

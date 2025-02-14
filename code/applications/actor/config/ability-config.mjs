@@ -1,25 +1,40 @@
-import BaseConfig from "./base-config.mjs";
+import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
 /**
  * Dialog for configuring an individual ability.
- * @param {string} abilityId - The ability being modified by this app.
- * @param {BlackFlagActor} actor - The actor to whom the ability belongs.
- * @param {object} options - Additional application rendering options.
  */
-export default class AbilityConfig extends BaseConfig {
-	constructor(abilityId, actor, options) {
-		super(actor, options);
-		this.abilityId = abilityId ?? null;
+export default class AbilityConfig extends BaseConfigSheet {
+	constructor(options) {
+		super(options);
+		this.selectedId = this.options.selectedId ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "ability"],
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["ability", "form-list"],
+		position: {
+			width: 450
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		selector: {
+			template: "systems/black-flag/templates/actor/config/id-selector.hbs"
+		},
+		config: {
+			classes: ["contents"],
 			template: "systems/black-flag/templates/actor/config/ability-config.hbs"
-		});
-	}
+		},
+		modifiers: {
+			classes: ["contents"],
+			template: "systems/black-flag/templates/actor/config/modifier-section.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -29,50 +44,87 @@ export default class AbilityConfig extends BaseConfig {
 	 * The ability being modified by this app.
 	 * @type {string|null}
 	 */
-	abilityId;
+	selectedId;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	get type() {
-		return game.i18n.localize(CONFIG.BlackFlag.abilities[this.abilityId]?.labels.full ?? "BF.Ability.Label[one]");
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Ability.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async getData(options) {
-		const context = await super.getData(options);
-		context.abilities = Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [k, v]) => {
-			obj[k] = game.i18n.localize(v.labels.full);
-			return obj;
-		}, {});
-		context.abilityId = this.abilityId;
-		context.ability = this.abilityId
-			? context.source.abilities[this.abilityId] ?? this.document.system.abilities[this.abilityId] ?? {}
-			: null;
-		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
-		context.proficiencyLevels = {
-			0: game.i18n.localize("BF.Proficiency.Level.None"),
-			1: game.i18n.localize("BF.Proficiency.Level.Proficient")
-		};
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "config":
+				return this._prepareConfigContext(context, options);
+			case "selector":
+				return this._prepareSelectorContext(context, options);
+		}
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Prepare rendering context for the config section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	_prepareConfigContext(context, options) {
+		context.ability = this.selectedId
+			? {
+					data:
+						context.system.source.abilities[this.selectedId] ?? context.system.data.abilities[this.selectedId] ?? {},
+					fields: context.system.fields.abilities.model.fields,
+					id: this.selectedId
+				}
+			: null;
+		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
+		context.proficiencyOptions = [
+			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
+			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") }
+		];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the ID selector section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	_prepareSelectorContext(context, options) {
+		context.options = [{ label: "", value: "" }, ...CONFIG.BlackFlag.abilities.localizedOptions];
+		context.selected = this.selectedId;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	prepareModifiers() {
 		let checkModifiers;
 		let saveModifiers;
 		let global;
-		if (this.abilityId) {
+		if (this.selectedId) {
 			checkModifiers = this.getModifiers([
 				{ k: "type", v: "ability-check" },
-				{ k: "ability", v: this.abilityId }
+				{ k: "ability", v: this.selectedId }
 			]);
 			saveModifiers = this.getModifiers([
 				{ k: "type", v: "ability-save" },
-				{ k: "ability", v: this.abilityId }
+				{ k: "ability", v: this.selectedId }
 			]);
 			global = false;
 		} else {
@@ -130,10 +182,11 @@ export default class AbilityConfig extends BaseConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_onChangeInput(event) {
-		super._onChangeInput(event);
-		if (event.target.name === "abilityId") {
-			this.abilityId = event.target.value;
+	/** @inheritDoc */
+	_onChangeForm(formConfig, event) {
+		super._onChangeForm(formConfig, event);
+		if (event.target.name === "selectedId") {
+			this.selectedId = event.target.value;
 			this.render();
 		}
 	}
@@ -142,7 +195,7 @@ export default class AbilityConfig extends BaseConfig {
 
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `ability-${category}` }] };
-		if (this.abilityId) data.filter.push({ k: "ability", v: this.abilityId });
+		if (this.selectedId) data.filter.push({ k: "ability", v: this.selectedId });
 		return data;
 	}
 }

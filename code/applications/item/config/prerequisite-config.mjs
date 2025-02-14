@@ -81,21 +81,22 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
 		context = await super._preparePartContext(partId, context, options);
 		switch (partId) {
 			case "abilities":
-				return this.prepareAbilitiesContext(context);
+				return this._prepareAbilitiesContext(context, options);
 			case "general":
-				return this.prepareGeneralContext(context);
+				return this._prepareGeneralContext(context, options);
 			case "items":
-				return this.prepareItemsContext(context);
+				return this._prepareItemsContext(context, options);
 			case "proficiencies":
-				return this.prepareProficienciesContext(context);
+				return this._prepareProficienciesContext(context, options);
 			case "spellcasting":
-				return this.prepareSpellcastingContext(context);
+				return this._prepareSpellcastingContext(context, options);
 			case "traits":
-				return this.prepareTraitsContext(context);
+				return this._prepareTraitsContext(context, options);
 		}
 		return context;
 	}
@@ -105,9 +106,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare abilities rendering context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareAbilitiesContext(context) {
+	_prepareAbilitiesContext(context, options) {
 		context.abilities = {};
 		for (const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities)) {
 			context.abilities[key] = {
@@ -123,9 +126,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare general rendering context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareGeneralContext(context) {
+	_prepareGeneralContext(context, options) {
 		context.fields = [
 			{
 				classes: "label-hinted",
@@ -144,9 +149,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare items rendering context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareItemsContext(context) {
+	_prepareItemsContext(context, options) {
 		context.field = new SetField(new DocumentUUIDField({ type: "Item" }), {
 			label: game.i18n.localize("BF.Prerequisite.Items.Label")
 		});
@@ -158,9 +165,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare proficiencies rendering context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareProficienciesContext(context) {
+	_prepareProficienciesContext(context, options) {
 		const prepareProficiency = (trait, label) => ({
 			field: new SetField(new StringField(), { label: game.i18n.localize(label) }),
 			name: `proficiencies.${trait}`,
@@ -185,9 +194,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare spellcasting rendering context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareSpellcastingContext(context) {
+	_prepareSpellcastingContext(context, options) {
 		context.fields = [
 			{
 				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingFeature.ConfigLabel") }),
@@ -223,9 +234,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	/**
 	 * Prepare traits context.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	prepareTraitsContext(context) {
+	_prepareTraitsContext(context, options) {
 		const level = {};
 		if (context.filters.characterLevel) {
 			level.value = context.filters.characterLevel.v;

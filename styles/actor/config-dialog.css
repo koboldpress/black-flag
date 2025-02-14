@@ -1,14 +1,9 @@
 .black-flag.config.app form, .black-flag.config-sheet {
-	h2 {
-		margin: 0;
-		border: 0;
-
-		select {
-			width: 100%;
-			height: unset;
-			padding-block: 0.25rem;
-			text-align: center;
-		}
+	select[name="selectedId"] {
+		height: unset;
+		padding-block: .25em;
+		font-size: var(--font-size-18);
+		text-align: center;
 	}
 
 	label > :is(input, select, multi-select) {
@@ -39,6 +34,7 @@
 					font-size: var(--font-size-11);
 				}
 				input {
+					flex: 0;
 					width: 15px;
 					height: 15px;
 					margin: 0;
