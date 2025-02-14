@@ -1,24 +1,7 @@
-<form autocomplete="off">
-	<fieldset>
-		<legend>{{ localize "BF.Initiative.Label" }}</legend>
-		<label>
-			<span>{{ localize "BF.Initiative.Ability.Label" }}</span>
-			<select name="system.attributes.initiative.ability">
-				{{ selectOptions CONFIG.abilities.localized selected=source.attributes.initiative.ability
-				                 blank=(localize "BF.Default.Specific"
-				                 default=(lookup CONFIG.abilities.localized CONFIG.defaultAbilities.initiative)) }}
-			</select>
-		</label>
-		<label>
-			<span>{{ localize "BF.Proficiency.Label[one]" }}</span>
-			<select name="system.attributes.initiative.proficiency.multiplier">
-				{{ selectOptions proficiencyLevels selected=source.attributes.initiative.proficiency.multiplier
-				                 localize=true }}
-			</select>
-		</label>
-	</fieldset>
-	
-	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this }}
-	{{/each}}
-</form>
+<fieldset>
+	<legend>{{ localize "BF.Initiative.Label" }}</legend>
+	{{ formField initiative.fields.ability value=initiative.data.ability options=abilityOptions localize=true
+	             rootId=partId }}
+	{{ formField initiative.fields.proficiency.fields.multiplier value=initiative.data.proficiency.multiplier
+	             options=proficiencyOptions label=(localize "BF.Proficiency.Label[one]") rootId=partId }}
+</fieldset>

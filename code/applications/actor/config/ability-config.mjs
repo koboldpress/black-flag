@@ -79,10 +79,7 @@ export default class AbilityConfig extends BaseSelectorConfigSheet {
 				}
 			: null;
 		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
-		context.proficiencyOptions = [
-			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
-			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") }
-		];
+		context.proficiencyOptions = context.proficiencyOptions.filter(o => [0, 1].includes(o.value));
 		return context;
 	}
 

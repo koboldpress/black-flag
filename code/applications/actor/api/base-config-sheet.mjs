@@ -33,6 +33,12 @@ export default class BaseConfigSheet extends HandlebarsApplicationMixin(Document
 			fields: this.document.system.schema.fields
 		};
 		context.modifierSections = this.prepareModifiers();
+		context.proficiencyOptions = [
+			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
+			{ value: 0.5, label: game.i18n.localize("BF.Proficiency.Level.Half") },
+			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") },
+			{ value: 2, label: game.i18n.localize("BF.Proficiency.Level.Expertise") }
+		];
 		return context;
 	}
 

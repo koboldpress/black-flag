@@ -1,38 +1,62 @@
-import BaseConfig from "./base-config.mjs";
+import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
-export default class InitiativeConfig extends BaseConfig {
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "initiative"],
+/**
+ * Configuration application for actor initiative.
+ */
+export default class InitiativeConfig extends BaseConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["initiative", "form-list"],
+		position: {
+			width: 500
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		config: {
 			template: "systems/black-flag/templates/actor/config/initiative-config.hbs"
-		});
-	}
+		},
+		modifiers: {
+			classes: ["contents"],
+			template: "systems/black-flag/templates/actor/config/modifier-section.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	get type() {
-		return game.i18n.localize("BF.Initiative.Label");
+	/** @override */
+	get title() {
+		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Initiative.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async getData(options) {
-		const context = await super.getData(options);
-		context.proficiencyLevels = {
-			0: "BF.Proficiency.Level.None",
-			0.5: "BF.Proficiency.Level.Half",
-			1: "BF.Proficiency.Level.Proficient",
-			2: "BF.Proficiency.Level.Expertise"
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		const defaultAbility = CONFIG.BlackFlag.abilities.localized[CONFIG.BlackFlag.defaultAbilities.initiative];
+		context.abilityOptions = [
+			{ value: "", label: game.i18n.format("BF.Default.Specific", { default: defaultAbility }) },
+			{ rule: true },
+			...CONFIG.BlackFlag.abilities.localizedOptions
+		];
+		context.initiative = {
+			data: context.system.data.attributes.initiative,
+			fields: context.system.fields.attributes.fields.initiative.fields
 		};
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareModifiers() {
 		const modifiers = this.getModifiers([{ k: "type", v: "initiative" }]);
 		return [
@@ -61,6 +85,7 @@ export default class InitiativeConfig extends BaseConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: "initiative" }] };
 		return data;

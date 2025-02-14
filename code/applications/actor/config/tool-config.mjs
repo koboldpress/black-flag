@@ -111,13 +111,6 @@ export default class ToolConfig extends BaseSelectorConfigSheet {
 				})),
 				value: new Set(Object.keys(context.toolSource))
 			};
-		console.log(context.toolSelector);
-		context.proficiencyOptions = [
-			{ value: 0, label: game.i18n.localize("BF.Proficiency.Level.None") },
-			{ value: 0.5, label: game.i18n.localize("BF.Proficiency.Level.Half") },
-			{ value: 1, label: game.i18n.localize("BF.Proficiency.Level.Proficient") },
-			{ value: 2, label: game.i18n.localize("BF.Proficiency.Level.Expertise") }
-		];
 		context.trait = this.options.trait;
 		return context;
 	}

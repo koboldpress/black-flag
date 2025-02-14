@@ -346,7 +346,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "health":
 						return new HealthConfig(options).render({ force: true });
 					case "initiative":
-						return new InitiativeConfig(this.actor).render(true);
+						return new InitiativeConfig(options).render({ force: true });
 					case "language":
 						return new LanguageConfig(this.actor).render(true);
 					case "luck":
