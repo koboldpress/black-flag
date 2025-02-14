@@ -1,5 +1,5 @@
-.prerequisite.config form {
-	.ability-restrictions {
+.prerequisite.application {
+	[data-application-part="abilities"] {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5rem;
@@ -14,11 +14,6 @@
 				text-align: center;
 				width: 100%;
 			}
-		}
-	}
-	fieldset:not(.ability-restrictions) > label {
-		> span:first-child {
-			flex: 0 1 max(12em, 33%);
 		}
 	}
 	multi-select {

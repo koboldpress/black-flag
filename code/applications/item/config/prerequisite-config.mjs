@@ -1,31 +1,50 @@
 import { Trait } from "../../../utils/_module.mjs";
+import BFDocumentSheet from "../../api/document-sheet.mjs";
+
+const { BooleanField, DocumentUUIDField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration dialog for feature & talent prerequisites.
  */
-export default class PrerequisiteConfig extends DocumentSheet {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "prerequisite"],
-			template: "systems/black-flag/templates/item/config/prerequisite-config.hbs",
-			width: 450,
-			height: "auto",
-			sheetConfig: false,
-			submitOnChange: true,
-			closeOnSubmit: false
-		});
-	}
+export default class PrerequisiteConfig extends BFDocumentSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["prerequisite", "standard-form", "form-list"],
+		form: {
+			submitOnChange: true
+		},
+		position: {
+			width: 480
+		},
+		sheetConfig: false
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		general: {
+			template: "systems/black-flag/templates/shared/fieldset.hbs"
+		},
+		items: {
+			template: "systems/black-flag/templates/item/config/prerequisite-config-items.hbs"
+		},
+		abilities: {
+			template: "systems/black-flag/templates/item/config/prerequisite-config-abilities.hbs"
+		},
+		spellcasting: {
+			template: "systems/black-flag/templates/shared/fieldset.hbs"
+		},
+		proficiencies: {
+			template: "systems/black-flag/templates/shared/fieldset.hbs"
+		},
+		traits: {
+			template: "systems/black-flag/templates/shared/fieldset.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	get title() {
-		return game.i18n.localize("BF.Prerequisite.Config.Title");
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -37,111 +56,218 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return game.i18n.localize("BF.Prerequisite.Config.Title");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const filters = this.filters.reduce((obj, f) => {
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		context.filters = this.filters.reduce((obj, f) => {
 			obj[f._id] = f;
 			return obj;
 		}, {});
-		const context = foundry.utils.mergeObject(
-			{
-				CONFIG: CONFIG.BlackFlag,
-				source: this.document.toObject().system,
-				system: this.document.system,
-				abilities: this.prepareAbilities(filters),
-				items: Array.from(this.document.system.restriction.items).join(","),
-				levels: CONFIG.BlackFlag.levels(),
-				proficiencies: this.prepareProficiencies(filters),
-				spellcasting: this.prepareSpellcasting(filters),
-				spellCircles: CONFIG.BlackFlag.spellCircles({ includeCantrip: false }),
-				traits: this.prepareTraits(filters)
-			},
-			await super.getData(options)
-		);
+		context.source = this.document.system._source;
+		context.system = this.document.system;
+		context.restrictionFields = this.document.system.schema.fields.restriction.fields;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "abilities":
+				return this.prepareAbilitiesContext(context);
+			case "general":
+				return this.prepareGeneralContext(context);
+			case "items":
+				return this.prepareItemsContext(context);
+			case "proficiencies":
+				return this.prepareProficienciesContext(context);
+			case "spellcasting":
+				return this.prepareSpellcastingContext(context);
+			case "traits":
+				return this.prepareTraitsContext(context);
+		}
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare minimum abilities.
-	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
-	 * @returns {object}
+	 * Prepare abilities rendering context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
 	 */
-	prepareAbilities(filters) {
-		const abilities = {};
+	prepareAbilitiesContext(context) {
+		context.abilities = {};
 		for (const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities)) {
-			abilities[key] = {
+			context.abilities[key] = {
 				label: ability.labels.abbreviation,
-				value: filters[`ability-${key}`]?.v ?? ""
+				value: context.filters[`ability-${key}`]?.v ?? ""
 			};
 		}
-		return abilities;
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare proficiency restrictions.
-	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
-	 * @returns {object}
+	 * Prepare general rendering context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
 	 */
-	prepareProficiencies(filters) {
-		const opts = { any: true, category: true, priority: "localization" };
-		const prepareProficiency = trait =>
-			Trait.choices(trait, {
-				chosen: new Set([
-					...(filters[`${trait}Proficiency`]?.v ?? []).map(s => s._key ?? s),
-					...(filters[`${trait}Categories`]?.v ?? []).map(s => `${s}:*`)
-				]),
-				...opts
-			});
-		return {
-			armor: prepareProficiency("armor"),
-			weapons: prepareProficiency("weapons"),
-			tools: prepareProficiency("tools"),
-			skills: prepareProficiency("skills")
-		};
+	prepareGeneralContext(context) {
+		context.fields = [
+			{
+				classes: "label-hinted",
+				field: context.restrictionFields.requireAll,
+				localize: true,
+				name: "system.restriction.requireAll",
+				value: context.source.restriction.requireAll
+			}
+		];
+		context.legend = game.i18n.localize("BF.Prerequisite.Config.Details");
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare spellcasting restrictions.
-	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
-	 * @returns {object}
+	 * Prepare items rendering context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
 	 */
-	prepareSpellcasting(filters) {
-		return {
-			cantrip: filters.hasCantrips?.v,
-			circle: filters.spellCircle?.v,
-			damage: filters.hasDamagingSpells?.v,
-			feature: filters.spellcastingFeature?.v
-		};
+	prepareItemsContext(context) {
+		context.field = new SetField(new DocumentUUIDField({ type: "Item" }), {
+			label: game.i18n.localize("BF.Prerequisite.Items.Label")
+		});
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare trait restrictions.
-	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
-	 * @returns {object}
+	 * Prepare proficiencies rendering context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
 	 */
-	prepareTraits(filters) {
+	prepareProficienciesContext(context) {
+		const prepareProficiency = (trait, label) => ({
+			field: new SetField(new StringField(), { label: game.i18n.localize(label) }),
+			name: `proficiencies.${trait}`,
+			options: Trait.choices(trait, { any: true, category: true, priority: "localization" }).formOptions(),
+			value: new Set([
+				...(context.filters[`${trait}Proficiency`]?.v ?? []).map(s => s._key ?? s),
+				...(context.filters[`${trait}Categories`]?.v ?? []).map(s => `${s}:*`)
+			])
+		});
+		context.fields = [
+			prepareProficiency("armor", "BF.Item.Type.Armor[one]"),
+			prepareProficiency("weapons", "BF.Item.Type.Weapon[one]"),
+			prepareProficiency("tools", "BF.Item.Type.Tool[one]"),
+			prepareProficiency("skills", "BF.Skill.Label[one]")
+		];
+		context.legend = game.i18n.localize("BF.Proficiency.Label[other]");
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare spellcasting rendering context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
+	 */
+	prepareSpellcastingContext(context) {
+		context.fields = [
+			{
+				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingFeature.ConfigLabel") }),
+				name: "spellcasting.feature",
+				value: context.filters.spellcastingFeature?.v
+			},
+			{
+				field: new StringField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingCircle.ConfigLabel") }),
+				name: "spellcasting.circle",
+				options: [
+					{ value: "", label: "" },
+					...CONFIG.BlackFlag.spellCircles({ formOptions: true, includeCantrip: false })
+				],
+				value: context.filters.spellCircle?.v
+			},
+			{
+				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.ConfigLabel") }),
+				name: "spellcasting.cantrip",
+				value: context.filters.hasCantrips?.v
+			},
+			{
+				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingDamage.ConfigLabel") }),
+				name: "spellcasting.damage",
+				value: context.filters.hasDamagingSpells?.v
+			}
+		];
+		context.legend = game.i18n.localize("BF.Spellcasting.Label");
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare traits context.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @returns {ApplicationRenderContext}
+	 */
+	prepareTraitsContext(context) {
 		const level = {};
-		if (filters.characterLevel) {
-			level.value = filters.characterLevel.v;
-		} else if (filters.classLevel) {
-			level.class = filters.classLevel._class;
-			level.value = filters.classLevel.v;
+		if (context.filters.characterLevel) {
+			level.value = context.filters.characterLevel.v;
+		} else if (context.filters.classLevel) {
+			level.class = context.filters.classLevel._class;
+			level.value = context.filters.classLevel.v;
 		}
-		return {
-			level,
-			size: filters.creatureSize?.v
-		};
+		context.fields = [
+			{
+				field: new NumberField({
+					label: game.i18n.localize(`BF.Prerequisite.Level${level.class ? "Class" : "Character"}.ConfigLabel`)
+				}),
+				name: "traits.level.value",
+				options: [
+					{ value: "", label: "" },
+					...Object.entries(CONFIG.BlackFlag.levels()).map(([value, label]) => ({ value, label }))
+				],
+				value: level.value
+			},
+			level.value
+				? {
+						field: new StringField({ label: game.i18n.localize("BF.Advancement.FIELDS.level.classIdentifier.label") }),
+						name: "traits.level.class",
+						options: [
+							{ value: "", label: "" },
+							...Object.entries(CONFIG.BlackFlag.registration.list("class")).map(([value, { name }]) => ({
+								value,
+								label: name
+							}))
+						],
+						value: level.class
+					}
+				: null,
+			{
+				field: new StringField({ label: game.i18n.localize("BF.Size.Label") }),
+				name: "traits.size",
+				options: [{ value: "", label: "" }, ...CONFIG.BlackFlag.sizes.localizedOptions],
+				value: context.filters.creatureSize?.v
+			}
+		];
+		context.legend = game.i18n.localize("BF.Trait.Label[other]");
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -149,20 +275,8 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const element of html.querySelectorAll("multi-select")) {
-			element.addEventListener("change", this._onChangeInput.bind(this));
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async _updateObject(event, formData) {
-		const data = foundry.utils.expandObject(formData);
+	_processFormData(event, form, formData) {
+		const data = super._processFormData(event, form, formData);
 		const filters = this.filters;
 
 		const updateFilter = (_id, k, v, o, d = {}) => {
@@ -248,6 +362,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		}
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
-		super._updateObject(event, { ...formData, "system.restriction.filters": filters });
+		foundry.utils.setProperty(data, "system.restriction.filters", filters);
+		return data;
 	}
 }

@@ -94,7 +94,7 @@ export default class FeatureSheet extends BaseItemSheet {
 			case "config":
 				switch (properties.type) {
 					case "prerequisite":
-						return new PrerequisiteConfig(this.document).render(true);
+						return new PrerequisiteConfig({ document: this.document }).render({ force: true });
 				}
 		}
 		return super._onAction(event);

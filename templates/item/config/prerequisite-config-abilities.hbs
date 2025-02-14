@@ -1,0 +1,9 @@
+<fieldset>
+	<legend>{{ localize "BF.Prerequisite.Ability.Title" }}</legend>
+	{{#each abilities}}
+		<label>
+			<span>{{ localize label }}</span>
+			<input type="number" name="abilities.{{ @key }}" value="{{ value }}">
+		</label>
+	{{/each}}
+</fieldset>
