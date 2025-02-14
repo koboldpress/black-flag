@@ -350,7 +350,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "language":
 						return new LanguageConfig(options).render({ force: true });
 					case "luck":
-						return new LuckConfig(this.actor).render(true);
+						return new LuckConfig(options).render({ force: true });
 					case "movement":
 						return new MovementConfig(options).render({ force: true });
 					case "proficiency":

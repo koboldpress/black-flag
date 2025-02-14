@@ -220,7 +220,7 @@ export default class PCData extends ActorDataModel.mixin(
 				}),
 				luck: new SchemaField({
 					value: new NumberField({ min: 0, max: 5, integer: true }),
-					formula: new FormulaField({ label: "BF.Luck.Formula" })
+					formula: new FormulaField({ label: "BF.Luck.Formula.Label", hint: "BF.Luck.Formula.Hint" })
 				})
 			}),
 			biography: new SchemaField({
