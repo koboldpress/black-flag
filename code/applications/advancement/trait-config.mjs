@@ -16,8 +16,7 @@ export default class TraitConfig extends AdvancementConfig {
 
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["trait"],
-		columns: 2,
+		classes: ["trait", "grid-columns"],
 		actions: {
 			addChoice: TraitConfig.#onAddChoice,
 			deleteChoice: TraitConfig.#onDeleteChoice
@@ -32,19 +31,19 @@ export default class TraitConfig extends AdvancementConfig {
 	/** @override */
 	static PARTS = {
 		config: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/trait-config-details.hbs"
 		},
 		guaranteed: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/trait-config-guaranteed.hbs"
 		},
 		choices: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/trait-config-choices.hbs"
 		},
 		options: {
-			classes: ["right-column"],
+			container: { classes: ["column-container"], id: "column-right" },
 			template: "systems/black-flag/templates/advancement/trait-config-options.hbs"
 		}
 	};

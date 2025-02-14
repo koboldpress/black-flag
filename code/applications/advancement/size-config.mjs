@@ -7,7 +7,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class SizeConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["size"]
+		classes: ["size", "form-list"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */

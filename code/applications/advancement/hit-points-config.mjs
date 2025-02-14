@@ -6,7 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class HitPointsConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["hit-points"]
+		classes: ["hit-points", "form-list"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */

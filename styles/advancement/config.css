@@ -1,26 +1,4 @@
 .advancement-config.application {
-	&:is(.two-column, .three-column) {
-		--grid-column-left-size: 1fr;
-		--grid-column-center-size: 1fr;
-		--grid-column-right-size: 1fr;
-
-		.window-content {
-			display: grid;
-			column-gap: 8px;
-			row-gap: 0;
-
-			> .column-left { grid-area: left; }
-			> .column-center { grid-area: center; }
-			> .column-right { grid-area: right; }
-		}
-	}
-	&.two-column .window-content {
-		grid-template-columns: [left] var(--grid-column-left-size) [right] var(--grid-column-right-size);
-	}
-	&.three-column .window-content {
-		grid-template-columns: [left] var(--grid-column-left-size) [center] var(--grid-column-center-size) [right] var(--grid-column-right-size);
-	}
-
 	fieldset > label {
 		align-items: stretch;
 		> span:first-child {

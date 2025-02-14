@@ -7,7 +7,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class KeyAbilityConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["key-ability"]
+		classes: ["key-ability", "form-list"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */

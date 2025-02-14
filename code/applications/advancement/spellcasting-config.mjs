@@ -6,7 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class SpellcastingConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["spellcasting"],
+		classes: ["spellcasting", "form-list"],
 		actions: {
 			addScale: SpellcastingConfig.#onAddScale,
 			openScale: SpellcastingConfig.#onOpenScale

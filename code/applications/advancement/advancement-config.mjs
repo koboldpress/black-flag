@@ -12,8 +12,7 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 export default class AdvancementConfig extends PseudoDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["advancement-config", "form-list"],
-		columns: 1,
+		classes: ["advancement-config"],
 		actions: {
 			deleteDropped: AdvancementConfig.#onDeleteDropped
 		},
@@ -63,28 +62,6 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_onFirstRender(context, options) {
-		super._onFirstRender(context, options);
-		let columns = [];
-		if (this.options.columns === 2) columns = ["left", "right"];
-		else if (this.options.columns === 3) columns = ["left", "center", "right"];
-		if (!columns.length) return;
-		this.element.classList.add(`${this.options.columns === 2 ? "two" : "three"}-column`);
-
-		const created = [];
-		const content = this.element.querySelector(".window-content");
-		for (const column of columns) {
-			const div = document.createElement("div");
-			div.classList.add("column-container", `column-${column}`);
-			div.replaceChildren(...content.querySelectorAll(`& > .${column}-column`));
-			if (div.children.length) created.push(div);
-		}
-		created.forEach(c => content.insertAdjacentElement("beforeend", c));
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

@@ -6,8 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class ScaleValueConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["scale-value"],
-		columns: 2,
+		classes: ["scale-value", "grid-columns"],
 		position: {
 			width: 640
 		}
@@ -18,11 +17,11 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/** @override */
 	static PARTS = {
 		config: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/scale-value-config-details.hbs"
 		},
 		scale: {
-			classes: ["right-column"],
+			container: { classes: ["column-container"], id: "column-right" },
 			template: "systems/black-flag/templates/advancement/scale-value-config-scale.hbs"
 		}
 	};

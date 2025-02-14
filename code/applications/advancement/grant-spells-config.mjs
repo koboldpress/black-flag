@@ -6,7 +6,7 @@ import GrantFeaturesConfig from "./grant-features-config.mjs";
 export default class GrantSpellsConfig extends GrantFeaturesConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["grant-spells"]
+		classes: ["grant-spells", "form-list"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */

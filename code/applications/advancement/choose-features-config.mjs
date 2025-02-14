@@ -7,8 +7,7 @@ import GrantFeaturesConfig from "./grant-features-config.mjs";
 export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["choose-features"],
-		columns: 2,
+		classes: ["choose-features", "grid-columns"],
 		position: {
 			width: 640
 		}
@@ -19,20 +18,20 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	/** @override */
 	static PARTS = {
 		config: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
 		},
 		details: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/choose-features-config-details.hbs"
 		},
 		items: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/choose-features-config-items.hbs",
 			templates: ["systems/black-flag/templates/advancement/parts/features-list.hbs"]
 		},
 		levels: {
-			classes: ["right-column"],
+			container: { classes: ["column-container"], id: "column-right" },
 			template: "systems/black-flag/templates/advancement/parts/choice-levels.hbs"
 		}
 	};

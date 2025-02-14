@@ -7,8 +7,7 @@ import GrantSpellsConfig from "./grant-spells-config.mjs";
 export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["choose-spells"],
-		columns: 3,
+		classes: ["choose-spells", "grid-columns"],
 		position: {
 			width: 920
 		}
@@ -19,24 +18,24 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 	/** @override */
 	static PARTS = {
 		config: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
 		},
 		spellConfig: {
-			classes: ["left-column"],
+			container: { classes: ["column-container"], id: "column-left" },
 			template: "systems/black-flag/templates/advancement/parts/advancement-spell-configuration.hbs"
 		},
 		restrictions: {
-			classes: ["center-column"],
+			container: { classes: ["column-container"], id: "column-center" },
 			template: "systems/black-flag/templates/advancement/choose-spells-config-restrictions.hbs"
 		},
 		items: {
-			classes: ["center-column"],
+			container: { classes: ["column-container"], id: "column-center" },
 			template: "systems/black-flag/templates/advancement/choose-spells-config-items.hbs",
 			templates: ["systems/black-flag/templates/advancement/parts/spells-list.hbs"]
 		},
 		levels: {
-			classes: ["right-column"],
+			container: { classes: ["column-container"], id: "column-right" },
 			template: "systems/black-flag/templates/advancement/parts/choice-levels.hbs"
 		}
 	};

@@ -6,7 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class ImprovementConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["improvement"]
+		classes: ["improvement", "form-list"]
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */

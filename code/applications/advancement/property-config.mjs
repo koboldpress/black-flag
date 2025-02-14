@@ -6,7 +6,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class PropertyConfig extends AdvancementConfig {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["property"],
+		classes: ["property", "form-list"],
 		actions: {
 			addChange: PropertyConfig.#onAddChange,
 			deleteChange: PropertyConfig.#onDeleteChange
