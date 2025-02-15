@@ -1,9 +1,10 @@
 import { filter, Search } from "../../utils/_module.mjs";
+import BFApplication from "../api/application.mjs";
 
 /**
  * Application for learning new spells.
  */
-export default class SpellcastingDialog extends FormApplication {
+export default class SpellcastingDialog extends BFApplication {
 	constructor(advancement, levels, options = {}) {
 		super(options);
 
@@ -47,17 +48,42 @@ export default class SpellcastingDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "spell-manager"],
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			continue: SpellcastingDialog.#continue,
+			learn: SpellcastingDialog.#learn
+		},
+		classes: ["spell-manager"],
+		position: {
 			width: 775,
-			height: 700,
-			template: "systems/black-flag/templates/advancement/spellcasting-dialog.hbs",
-			resizable: true,
-			scrollY: ["section.slots", "section.spells"]
-		});
-	}
+			height: 700
+		},
+		tag: "form",
+		window: {
+			resizable: true
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		slots: {
+			template: "systems/black-flag/templates/advancement/spellcasting-dialog-slots.hbs",
+			scrollable: [""]
+		},
+		restrictions: {
+			template: "systems/black-flag/templates/advancement/spellcasting-dialog-restrictions.hbs"
+		},
+		spells: {
+			template: "systems/black-flag/templates/advancement/spellcasting-dialog-spells.hbs",
+			scrollable: [""]
+		},
+		controls: {
+			template: "systems/black-flag/templates/advancement/spellcasting-dialog-controls.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -85,6 +111,14 @@ export default class SpellcastingDialog extends FormApplication {
 	get actor() {
 		return this.advancement.actor;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The associated spellcasting advancement.
+	 * @type {SpellcastingAdvancement}
+	 */
+	advancement;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -166,12 +200,12 @@ export default class SpellcastingDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options = {}) {
-		const context = await super.getData(options);
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		if (!this.currentSlot) return context;
 		const level = this.advancement.relavantLevel(this.levels);
 
@@ -326,16 +360,13 @@ export default class SpellcastingDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Event Listeners                    */
+	/*         Life-Cycle Handlers         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const [html] = jQuery;
-
-		html.querySelector('[data-action="continue"]')?.addEventListener("click", this._onContinue.bind(this));
-		html.querySelectorAll("[data-spell-uuid]").forEach(element => {
+	_onRender(context, options) {
+		super._onRender(context, options);
+		this.element.querySelectorAll("[data-spell-uuid]").forEach(element => {
 			element.dataset.tooltip = `<section class="loading" data-uuid="${element.dataset.spellUuid}"></section>`;
 			element.dataset.tooltipClass = "black-flag black-flag-tooltip item-tooltip";
 			element.dataset.tooltipDirection = "LEFT";
@@ -343,12 +374,16 @@ export default class SpellcastingDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*  Event Listeners                    */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle continuing to the next slot.
-	 * @param {PointerEvent} event - Triggering event.
+	 * @this {SpellcastingDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	_onContinue(event) {
+	static async #continue(event, target) {
 		let nextIndex = this.selectedSlot;
 		do {
 			nextIndex += 1;
@@ -360,9 +395,47 @@ export default class SpellcastingDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Handle learning spells.
+	 * @this {SpellcastingDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #learn(event, target) {
+		const toAdd = new Map();
+		const toRemove = new Set();
+		let replacement;
+		const visibleSlots = new Set();
+
+		for (const slot of this.slots) {
+			visibleSlots.add(slot.type);
+			if (!slot.selected) continue;
+			if (slot.type === "replacement") replacement = { original: slot.replaces, replacement: slot.selected };
+			else toAdd.set(slot.selected, slot.type);
+		}
+
+		for (const spell of this.advancement._getAddedSpells(this.levels)) {
+			if (!visibleSlots.has(spell.slot) || spell.slot === "replacement") continue;
+			if (toAdd.get(spell.uuid) === spell.slot) toAdd.delete(spell.uuid);
+			else toRemove.add(spell.document);
+		}
+
+		await this.close();
+
+		if (toRemove.size) await this.advancement.reverse(this.levels, { deleteIds: toRemove });
+
+		if (toAdd.size || replacement)
+			await this.advancement.apply(this.levels, {
+				added: Array.from(toAdd.entries()).map(([uuid, slot]) => ({ uuid, slot })),
+				replacement
+			});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
-	_onChangeInput(event) {
-		super._onChangeInput(event);
+	_onChangeForm(formConfig, event) {
+		super._onChangeForm(formConfig, event);
 
 		switch (event.target.name) {
 			case "replaces":
@@ -382,37 +455,6 @@ export default class SpellcastingDialog extends FormApplication {
 				this.currentSlot.selected = event.target.value;
 				return this.render();
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	async _updateObject(event, formData) {
-		const toAdd = new Map();
-		const toRemove = new Set();
-		let replacement;
-		const visibleSlots = new Set();
-
-		for (const slot of this.slots) {
-			visibleSlots.add(slot.type);
-			if (!slot.selected) continue;
-			if (slot.type === "replacement") replacement = { original: slot.replaces, replacement: slot.selected };
-			else toAdd.set(slot.selected, slot.type);
-		}
-
-		for (const spell of this.advancement._getAddedSpells(this.levels)) {
-			if (!visibleSlots.has(spell.slot) || spell.slot === "replacement") continue;
-			if (toAdd.get(spell.uuid) === spell.slot) toAdd.delete(spell.uuid);
-			else toRemove.add(spell.document);
-		}
-
-		if (toRemove.size) await this.advancement.reverse(this.levels, { deleteIds: toRemove });
-
-		if (toAdd.size || replacement)
-			await this.advancement.apply(this.levels, {
-				added: Array.from(toAdd.entries()).map(([uuid, slot]) => ({ uuid, slot })),
-				replacement
-			});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,0 +1,24 @@
+<section class="spells">
+	<ul class="unlist spell-list">
+		{{#each spells}}
+			<li {{~#if selected}} class="selected"{{/if}} data-spell-uuid="{{ uuid }}">
+				<label>
+					<figure class="icon"><img src="{{ img }}"></figure>
+					<div class="name">{{ name }}</div>
+					<div class="control">
+						{{#if (ne @root.mode "all")}}
+							<input type="radio" name="selected-spell" value="{{ uuid }}"
+									 	{{ checked selected }} {{ disabled disabled }}>
+						{{else}}
+							<input type="checkbox" name="selected.{{ uuid }}" {{ checked selected }}>
+						{{/if}}
+					</div>
+				</label>
+			</li>
+		{{else}}
+			<li class="none-available">
+				{{ localize "BF.Spellbook.NoneAvailable" }}
+			</li>
+		{{/each}}
+	</ul>
+</section>

@@ -1,0 +1,32 @@
+<div class="restrictions">
+	{{#if replacementOptions}}
+		<div class="replacement">
+			<div class="form-group">
+				<label>{{ localize "BF.Advancement.Spellcasting.Replacement.Label" }}</label>
+				<select name="replaces">
+					{{ selectOptions replacementOptions }}
+				</select>
+			</div>
+		</div>
+	{{/if}}
+	{{#if restrictions.source}}
+		<div class="restriction">
+			<strong>{{ localize "BF.Spell.Source.Label" }}</strong>: {{ restrictions.source }}
+		</div>
+	{{/if}}
+	{{#if restrictions.circle}}
+		<div class="restriction">
+			<strong>{{ localize "BF.Spell.Circle.Label" }}</strong>: {{ restrictions.circle }}
+		</div>
+	{{/if}}
+	{{#if restrictions.maxCircle}}
+		<div class="restriction">
+			<strong>{{ localize "BF.Spell.Circle.Maximum" }}</strong>: {{ restrictions.maxCircle }}
+		</div>
+	{{/if}}
+	{{#if restrictions.schools}}
+		<div class="restriction">
+			<strong>{{ localize "BF.Spell.School.Label" }}</strong>: {{ restrictions.schools }}
+		</div>
+	{{/if}}
+</div>

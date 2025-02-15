@@ -16,40 +16,35 @@
 }
 
 .black-flag.spell-manager {
-	min-block-size: 400px;
-	min-inline-size: 600px;
+	/* min-block-size: 400px;
+	min-inline-size: 600px; */
 
 	.window-content {
 		padding: 0;
 		background: rgb(40 40 40);
 
-		.sheet-container {
-			display: grid;
-			max-height: 100%;
-			overflow: hidden;
-			grid-template-areas:
-				"slots restrictions"
-				"slots search"
-				"slots spells"
-				"slots controls";
-			grid-template-columns: 250px 1fr;
-			grid-template-rows: max-content max-content 1fr max-content;
+		display: grid;
+		overflow: hidden;
+		grid-template-areas:
+			"slots restrictions"
+			"slots search"
+			"slots spells"
+			"slots controls";
+		grid-template-columns: 250px 1fr;
+		grid-template-rows: max-content max-content 1fr max-content;
 
-			> * {
-				color: var(--bf-text-color-white);
-			}
-			> .slots {
-				grid-area: slots;
-				overflow-y: auto;
-			}
-			> .restrictions { grid-area: restrictions; }
-			> .search { grid-area: search; }
-			> .spells {
-				grid-area: spells;
-				overflow-y: auto;
-			}
-			> .controls { grid-area: controls; }
+		> * { color: var(--bf-text-color-white); }
+		> .slots {
+			grid-area: slots;
+			overflow-y: auto;
 		}
+		> .restrictions { grid-area: restrictions; }
+		> .search { grid-area: search; }
+		> .spells {
+			grid-area: spells;
+			overflow-y: auto;
+		}
+		> .controls { grid-area: controls; }
 	}
 
 	.spell-list {

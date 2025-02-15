@@ -1,0 +1,21 @@
+<section class="slots">
+	<h3>{{ localize "BF.Spellbook.Slots.Label" }}</h3>
+	<ul class="unlist spell-list news-slots">
+		{{#each slots}}
+			<li {{~#if selected}} class="selected"{{/if}}>
+				<label>
+					<figure class="icon">
+						{{#if spell.img}}<img src="{{ spell.img }}">
+						{{~else}}<div class="placeholder">{{ number }}</div>{{/if}}
+					</figure>
+					<div class="name">
+						{{#if spell.name}}{{ spell.name }}{{else}}{{ localize name }}{{/if}}
+					</div>
+					<div class="control">
+						<input type="radio" name="selected-slot" value="{{ @index }}" {{ checked selected }}>
+					</div>
+				</label>
+			</li>
+		{{/each}}
+	</ul>
+</section>
