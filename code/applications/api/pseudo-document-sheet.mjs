@@ -1,5 +1,4 @@
 import BFApplication from "./application.mjs";
-import DragDrop from "../drag-drop.mjs";
 
 /**
  * Extension of FormApplication to incorporate certain PseudoDocument-specific logic.
@@ -11,6 +10,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 		this.#pseudoDocumentType = pseudoDocument.metadata.name;
 		this.#item = pseudoDocument.item;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static DEFAULT_OPTIONS = {
@@ -24,15 +25,6 @@ export default class PseudoDocumentSheet extends BFApplication {
 			copyUuid: { handler: PseudoDocumentSheet.#onCopyUuid, buttons: [0, 2] },
 			toggleCollapsed: PseudoDocumentSheet.#toggleCollapsed
 		},
-		dragDropHandlers: {
-			dragstart: null,
-			dragend: PseudoDocumentSheet.#onDragEnd,
-			dragenter: null,
-			dragleave: null,
-			dragover: null,
-			drop: PseudoDocumentSheet.#onDragEnd
-		},
-		dragSelectors: [],
 		form: {
 			handler: this.#onSubmitDocumentForm,
 			submitOnChange: true,
@@ -185,16 +177,6 @@ export default class PseudoDocumentSheet extends BFApplication {
 	_onRender(context, options) {
 		super._onRender(context, options);
 
-		if (this.options.dragSelectors.length) {
-			const drag = this.#onDragEvent.bind(this);
-			for (const selector of this.options.dragSelectors) {
-				for (const element of this.element.querySelectorAll(selector)) {
-					element.setAttribute("draggable", true);
-					element.addEventListener("dragstart", drag);
-					element.addEventListener("dragend", drag);
-				}
-			}
-		}
 		for (const element of this.element.querySelectorAll("[data-expand-id]")) {
 			element
 				.querySelector(".collapsible")
@@ -213,19 +195,6 @@ export default class PseudoDocumentSheet extends BFApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_attachFrameListeners() {
-		super._attachFrameListeners();
-
-		const drag = this.#onDragEvent.bind(this);
-		this.element.addEventListener("dragenter", drag);
-		this.element.addEventListener("dragleave", drag);
-		this.element.addEventListener("dragover", drag);
-		this.element.addEventListener("drop", drag);
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -343,31 +312,5 @@ export default class PseudoDocumentSheet extends BFApplication {
 		const submitData = this._prepareSubmitData(event, form, formData);
 		foundry.utils.mergeObject(submitData, updateData, { inplace: true });
 		await this._processSubmitData(event, form, submitData);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*             Drag & Drop             */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Handle a drag event.
-	 * @param {Event} event - The originating drag event.
-	 */
-	#onDragEvent(event) {
-		const handler = this.options.dragDropHandlers[event.type];
-		if (!handler) return;
-		handler.call(this, event, DragDrop);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Finish the drag event.
-	 * @this {PseudoDocumentSheet}
-	 * @param {Event} event - Triggering event.
-	 * @param {DragDrop} dragDrop - The drag event manager.
-	 */
-	static #onDragEnd(event, dragDrop) {
-		dragDrop.finishDragEvent(event);
 	}
 }

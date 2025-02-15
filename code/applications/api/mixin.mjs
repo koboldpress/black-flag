@@ -1,3 +1,5 @@
+import DragDrop from "../drag-drop.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
@@ -18,7 +20,16 @@ export default function ApplicationV2Mixin(Base) {
 	class BaseApplication extends HandlebarsApplicationMixin(Base) {
 		/** @override */
 		static DEFAULT_OPTIONS = {
-			classes: ["black-flag"]
+			classes: ["black-flag"],
+			dragDropHandlers: {
+				dragstart: null,
+				dragend: BaseApplication.#onDragEnd,
+				dragenter: null,
+				dragleave: null,
+				dragover: null,
+				drop: BaseApplication.#onDragEnd
+			},
+			dragSelectors: []
 		};
 
 		/* <><><><> <><><><> <><><><> <><><><> */
@@ -115,6 +126,18 @@ export default function ApplicationV2Mixin(Base) {
 		_onRender(context, options) {
 			super._onRender(context, options);
 
+			// Attach draggable
+			if (this.options.dragSelectors.length) {
+				const drag = this.#onDragEvent.bind(this);
+				for (const selector of this.options.dragSelectors) {
+					for (const element of this.element.querySelectorAll(selector)) {
+						element.setAttribute("draggable", true);
+						element.addEventListener("dragstart", drag);
+						element.addEventListener("dragend", drag);
+					}
+				}
+			}
+
 			// Allow multi-select tags to be removed when the whole tag is clicked.
 			this.element.querySelectorAll("multi-select").forEach(select => {
 				if (select.disabled) return;
@@ -131,6 +154,47 @@ export default function ApplicationV2Mixin(Base) {
 				label.classList.add("hinted-label");
 				label.dataset.tooltip = hint.innerHTML;
 			});
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*            Event Handlers           */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
+		_attachFrameListeners() {
+			super._attachFrameListeners();
+
+			const drag = this.#onDragEvent.bind(this);
+			this.element.addEventListener("dragenter", drag);
+			this.element.addEventListener("dragleave", drag);
+			this.element.addEventListener("dragover", drag);
+			this.element.addEventListener("drop", drag);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*             Drag & Drop             */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Handle a drag event.
+		 * @param {Event} event - The originating drag event.
+		 */
+		#onDragEvent(event) {
+			const handler = this.options.dragDropHandlers[event.type];
+			if (!handler) return;
+			handler.call(this, event, DragDrop);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Finish the drag event.
+		 * @this {PseudoDocumentSheet}
+		 * @param {Event} event - Triggering event.
+		 * @param {DragDrop} dragDrop - The drag event manager.
+		 */
+		static #onDragEnd(event, dragDrop) {
+			dragDrop.finishDragEvent(event);
 		}
 	}
 	return BaseApplication;

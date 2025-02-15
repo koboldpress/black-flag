@@ -1,4 +1,4 @@
-<form autocomplete="off" class="drop-target">
+<div class="contents">
 	{{#if replacements.length}}
 		<section class="replacement">
 			<div class="form-group">
@@ -19,7 +19,7 @@
 		<section class="option" data-uuid="{{ document.uuid }}">
 			<div class="info">
 				<header>
-					<h1 class="name">{{ document.name }}</h1><!-- TODO: Shouldn't be an H1 -->
+					<div class="name">{{ document.name }}</div>
 					<div class="source">{{ system.description.source.label }}</div>
 				</header>
 				<div class="description">
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="choose">
-				<button type="button" class="light-button choose" {{ disabled invalid }}>
+				<button type="button" class="light-button" data-action="choose" {{ disabled invalid }}>
 					{{ localize "BF.Action.Choose.Generic" }}
 				</button>
 			</div>
@@ -43,4 +43,4 @@
 			<p class="hint">{{ dropLabel }}</p>
 		</section>
 	{{/if}}
-</form>
+</div>
