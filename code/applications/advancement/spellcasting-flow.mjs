@@ -31,6 +31,6 @@ export default class SpellcastingFlow extends AdvancementFlow {
 	/** @override */
 	async _updateObject(event, formData) {
 		const action = event.submitter.dataset.action;
-		if (action === "learn-spells") new SpellcastingDialog(this.advancement, this.levels).render(true);
+		if (action === "learn-spells") new SpellcastingDialog(this.advancement, this.levels).render({ force: true });
 	}
 }

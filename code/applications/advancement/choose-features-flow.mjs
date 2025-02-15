@@ -59,11 +59,13 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 			try {
 				({ choice, replaces } = await new Promise((resolve, reject) => {
 					new ChooseFeaturesDialog(this, {
-						isReplacement,
-						level: this.advancement.relavantLevel(this.levels),
+						details: {
+							isReplacement,
+							level: this.advancement.relavantLevel(this.levels)
+						},
 						resolve,
 						reject
-					}).render(true);
+					}).render({ force: true });
 				}));
 			} catch (err) {
 				return;

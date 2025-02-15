@@ -54,7 +54,7 @@ export default class ImprovementFlow extends AdvancementFlow {
 			let choice;
 			try {
 				const promise = new Promise((resolve, reject) => {
-					new ChooseFeaturesDialog(this, { resolve, reject }, { type: "talent" }).render(true);
+					new ChooseFeaturesDialog(this, { details: { type: "talent" }, resolve, reject }).render({ force: true });
 				});
 				choice = await promise;
 			} catch (err) {
