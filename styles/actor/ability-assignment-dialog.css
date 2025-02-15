@@ -1,25 +1,34 @@
-.ability-assignment-dialog form {
+.ability-assignment-dialog .window-content {
 	--score-count: 6;
 
 	h1 {
 		display: flex;
 		justify-content: space-between;
-		margin: -0.5rem;
+		margin: -1rem;
 		margin-block-end: 0.5rem;
 		border-block-end: 2px solid white;
-		padding: 0.5rem;
+		padding: 1rem;
 		background: var(--bf-gradiant-blue);
 		color: white;
+		font-family: var(--bf-font-primary);
+		font-size: var(--font-size-32);
 		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 
 		button {
 			width: unset;
 			color: white;
+			border-color: white;
 			border-radius: 0 10px;
 			padding-inline: 1rem;
 			background: rgba(0, 0, 0, 0.25);
 			box-shadow: 0 0 0 1px rgba(0, 0, 0, 1);
 		}
+	}
+	h2 {
+		font-family: var(--bf-font-primary);
+		font-size: var(--font-size-24);
+		color: var(--bf-text-color-blue);
+		text-shadow: none;
 	}
 
 	button:disabled {
@@ -39,6 +48,7 @@
 			flex-direction: column;
 			align-items: center;
 			gap: 0.5rem;
+			margin: 0;
 
 			> h2 {
 				border: none;
@@ -182,8 +192,7 @@
 				> button {
 					flex: 40% 1 1;
 					width: unset;
-					height: unset;
-					line-height: 1.75em;
+					height: 30px;
 					text-align: center;
 
 					> i {
@@ -204,6 +213,7 @@
 			margin: 0;
 			margin-block-end: 1rem;
 			border: none;
+			border-radius: 0;
 			background: none;
 
 			> caption {
@@ -218,9 +228,12 @@
 				display: flex;
 				flex-direction: column;
 			}
+	
+			th { border: none; }
 
 			:is(th, td) {
 				padding-inline: 1em;
+				line-height: 1;
 				text-align: center;
 			}
 

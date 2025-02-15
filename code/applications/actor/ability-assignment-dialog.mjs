@@ -1,19 +1,37 @@
+import BFDocumentSheet from "../api/document-sheet.mjs";
+
 /**
  * Dialog for choosing ability assignment mode and performing the assignment.
  */
-export default class AbilityAssignmentDialog extends DocumentSheet {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "ability-assignment-dialog"],
-			template: "systems/black-flag/templates/actor/ability-assignment-dialog.hbs",
-			height: "auto",
-			width: 700,
-			sheetConfig: false,
-			submitOnChange: true,
-			closeOnSubmit: false
-		});
-	}
+export default class AbilityAssignmentDialog extends BFDocumentSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			buy: AbilityAssignmentDialog.#adjustPointBuy,
+			confirm: AbilityAssignmentDialog.#confirmScoring,
+			reset: AbilityAssignmentDialog.#resetAssignment,
+			roll: AbilityAssignmentDialog.#rollScore,
+			selectMethod: AbilityAssignmentDialog.#selectMethod,
+			sell: AbilityAssignmentDialog.#adjustPointBuy
+		},
+		classes: ["ability-assignment-dialog"],
+		form: {
+			submitOnChange: true
+		},
+		position: {
+			width: 700
+		},
+		sheetConfig: false
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		dialog: {
+			template: "systems/black-flag/templates/actor/ability-assignment-dialog.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
@@ -29,11 +47,10 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		context.CONFIG = CONFIG.BlackFlag;
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.system = this.document.system;
-		context.source = this.document.toObject().system;
+		context.source = this.document.system._source;
 		context.scoreCount = Object.keys(CONFIG.BlackFlag.abilities).length;
 		switch (this.document.system.progression.abilities.method) {
 			case "rolling":
@@ -157,46 +174,19 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*         Life-Cycle Handlers         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		html.querySelector('[data-action="reset"]')?.addEventListener("click", event => {
-			const updates = { "system.progression.abilities.method": "" };
-			Object.keys(this.document.system.progression.abilities.assignments).forEach(
-				key => (updates[`system.progression.abilities.assignments.-=${key}`] = null)
-			);
-			Object.keys(this.document.system.progression.abilities.bonuses).forEach(
-				key => (updates[`system.progression.abilities.bonuses.-=${key}`] = null)
-			);
-			this.document.update(updates);
-		});
-
-		html.querySelector('[data-action="confirm"]')?.addEventListener("click", this._onConfirmScoring.bind(this));
-
-		for (const element of html.querySelectorAll('[data-action="select-method"]')) {
-			element.addEventListener("click", event =>
-				this.document.update({ "system.progression.abilities.method": event.currentTarget.dataset.method })
-			);
-		}
-
-		for (const element of html.querySelectorAll('[data-action="roll"]')) {
-			element.addEventListener("click", this._onRollScore.bind(this));
-		}
-
-		for (const element of html.querySelectorAll(".scores > fieldset button:not([disabled])")) {
-			element.addEventListener("click", this._onPointBuyAction.bind(this));
-		}
-
-		for (const element of html.querySelectorAll('.scores > fieldset [type="radio"]')) {
+	_onRender(context, options) {
+		super._onRender(context, options);
+		for (const element of this.element.querySelectorAll('.scores > fieldset [type="radio"]')) {
 			element.addEventListener("change", this._onAssignmentChoice.bind(this));
 		}
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -231,61 +221,27 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 
 	/**
 	 * Handle buying & selling scores during point-buy.
-	 * @param {ClickEvent} event - Triggering click event.
+	 * @this {AbilityAssignmentDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	async _onPointBuyAction(event) {
-		const { action } = event.currentTarget.dataset;
-		const key = event.target.closest("[data-key]").dataset.key;
+	static async #adjustPointBuy(event, target) {
+		const key = target.closest("[data-key]").dataset.key;
 		const current = this.document.system.progression.abilities.assignments[key] ?? 0;
 		await this.document.update({
-			[`system.progression.abilities.assignments.${key}`]: action === "buy" ? current + 1 : current - 1
+			[`system.progression.abilities.assignments.${key}`]: target.dataset.action === "buy" ? current + 1 : current - 1
 		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Roll for an ability score and store the result.
-	 * @param {ClickEvent} event - Triggering click event.
-	 */
-	async _onRollScore(event) {
-		const idx = event.target.closest("[data-index]").dataset.index;
-		const roll = new Roll(CONFIG.BlackFlag.abilityAssignment.rolling.formula);
-		await roll.evaluate();
-
-		// Create chat message with roll results
-		const cls = getDocumentClass("ChatMessage");
-		const flavor = game.i18n.localize("BF.AbilityAssignment.RolledAbilityScore");
-		const messageData = {
-			flavor,
-			title: `${flavor}: ${this.document.name}`,
-			speaker: cls.getSpeaker({ actor: this.document }),
-			user: game.user.id,
-			type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-			content: "",
-			sound: CONFIG.sounds.dice,
-			rolls: [roll],
-			"flags.blackFlag.type": "abilityScores"
-		};
-		const message = new cls(messageData);
-		await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
-
-		// Save rolls
-		const rollCollection = this.document.system.progression.abilities.rolls ?? [];
-		while (rollCollection.length < idx) {
-			rollCollection.push(null);
-		}
-		rollCollection[idx] = roll;
-		await this.document.update({ "system.progression.abilities.rolls": rollCollection });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Confirm scoring and set base ability scores.
-	 * @param {ClickEvent} event - Triggering click event.
+	 * @this {AbilityAssignmentDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	async _onConfirmScoring(event) {
+	static async #confirmScoring(event, target) {
 		const progression = this.document.system.progression.abilities;
 		const updates = {};
 		switch (progression.method) {
@@ -322,8 +278,71 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	async _updateObject(event, formData) {
-		await this.document.update(formData);
+	/**
+	 * Handle resting back to the start of the process.
+	 * @this {AbilityAssignmentDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #resetAssignment(event, target) {
+		const updates = { "system.progression.abilities.method": "" };
+		Object.keys(this.document.system.progression.abilities.assignments).forEach(
+			key => (updates[`system.progression.abilities.assignments.-=${key}`] = null)
+		);
+		Object.keys(this.document.system.progression.abilities.bonuses).forEach(
+			key => (updates[`system.progression.abilities.bonuses.-=${key}`] = null)
+		);
+		await this.document.update(updates);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Roll for an ability score and store the result.
+	 * @this {AbilityAssignmentDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #rollScore(event, target) {
+		const idx = target.closest("[data-index]").dataset.index;
+		const roll = new Roll(CONFIG.BlackFlag.abilityAssignment.rolling.formula);
+		await roll.evaluate();
+
+		// Create chat message with roll results
+		const cls = getDocumentClass("ChatMessage");
+		const flavor = game.i18n.localize("BF.AbilityAssignment.RolledAbilityScore");
+		const messageData = {
+			flavor,
+			title: `${flavor}: ${this.document.name}`,
+			speaker: cls.getSpeaker({ actor: this.document }),
+			user: game.user.id,
+			type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+			content: "",
+			sound: CONFIG.sounds.dice,
+			rolls: [roll],
+			"flags.blackFlag.type": "abilityScores"
+		};
+		const message = new cls(messageData);
+		await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
+
+		// Save rolls
+		const rollCollection = this.document.system.progression.abilities.rolls ?? [];
+		while (rollCollection.length < idx) {
+			rollCollection.push(null);
+		}
+		rollCollection[idx] = roll;
+		await this.document.update({ "system.progression.abilities.rolls": rollCollection });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle selecting a specific assignment method.
+	 * @this {AbilityAssignmentDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #selectMethod(event, target) {
+		this.document.update({ "system.progression.abilities.method": target.dataset.method });
 	}
 }

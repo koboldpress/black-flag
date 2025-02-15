@@ -78,7 +78,7 @@ export default class AbilityConfig extends BaseSelectorConfigSheet {
 					keyPath: `system.abilities.${this.selectedId}`
 				}
 			: null;
-		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
+		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual") || game.user.isGM;
 		context.proficiencyOptions = context.proficiencyOptions.filter(o => [0, 1].includes(o.value));
 		return context;
 	}

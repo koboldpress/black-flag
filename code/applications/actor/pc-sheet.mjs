@@ -293,11 +293,10 @@ export default class PCSheet extends BaseActorSheet {
 				break;
 			case "progression":
 				switch (subAction) {
-					case "assign-abilities":
-						return new AbilityAssignmentDialog(this.actor).render(true);
 					case "reset-abilities":
 						await this.actor.system.resetAbilities();
-						return new AbilityAssignmentDialog(this.actor).render(true);
+					case "assign-abilities":
+						return new AbilityAssignmentDialog({ document: this.actor }).render({ force: true });
 					case "level-down":
 						return Dialog.confirm({
 							title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`,
