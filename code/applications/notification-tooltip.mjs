@@ -1,18 +1,86 @@
-export default class NotificationTooltip extends Application {
-	constructor(document, notificationKeys, options = {}) {
+import BFApplication from "./api/application.mjs";
+
+/**
+ * Tooltip that displays notifications on a sheet.
+ */
+export default class NotificationTooltip extends BFApplication {
+	constructor(doc, notificationKeys, options = {}) {
 		super(options);
-		this.document = document;
+		this.document = doc;
 		this.notificationKeys = notificationKeys;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		window: {
+			frame: false,
+			positioned: false
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		tooltip: {
 			template: "systems/black-flag/templates/notification-tooltip.hbs"
-		});
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Document for which the notifications should be displayed.
+	 * @param {Document}
+	 */
+	document;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Notifications that should be displayed in the tooltip.
+	 * @param {string[]}
+	 */
+	notificationKeys;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_insertElement(element) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		context.notifications = this.notificationKeys
+			.reduce((arr, k) => {
+				let doc = this.document;
+				let notification = this.document.notifications.get(k);
+				if (!notification) {
+					const [first, ...rest] = k.split(".");
+					if (rest?.length) doc = this.document.items.get(first);
+					k = rest.join(".") ?? split[0];
+					notification = doc?.notifications?.get(k);
+				}
+				if (!notification) return arr;
+				notification = foundry.utils.deepClone(notification);
+				notification.badge = this.constructor.generateBadge([notification], doc.uuid, { displayOrder: true });
+				arr.push(notification);
+				return arr;
+			}, [])
+			.sort((lhs, rhs) => lhs.order - rhs.order);
+		return context;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -30,6 +98,8 @@ export default class NotificationTooltip extends Application {
 		);
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Factory Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -72,55 +142,9 @@ export default class NotificationTooltip extends Application {
 		const keys = element.dataset.notificationKeys?.split(";");
 		const uuid = element.dataset.uuid;
 		if (!keys || !uuid) return;
-		const document = await fromUuid(uuid);
-		const tooltip = new NotificationTooltip(document, keys);
-		const context = await tooltip.getData(this.options);
-		const content = (await tooltip._renderInner(context))[0];
-		game.tooltip.activate(element, { content, cssClass: "notification-tooltip" });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Properties             */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Document for which the notifications should be displayed.
-	 * @param {Document}
-	 */
-	document;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Notifications that should be displayed in the tooltip.
-	 * @param {string[]}
-	 */
-	notificationKeys;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		context.notifications = this.notificationKeys
-			.reduce((arr, k) => {
-				let doc = this.document;
-				let notification = this.document.notifications.get(k);
-				if (!notification) {
-					const [first, ...rest] = k.split(".");
-					if (rest?.length) doc = this.document.items.get(first);
-					k = rest.join(".") ?? split[0];
-					notification = doc?.notifications?.get(k);
-				}
-				if (!notification) return arr;
-				notification = foundry.utils.deepClone(notification);
-				notification.badge = this.constructor.generateBadge([notification], doc.uuid, { displayOrder: true });
-				arr.push(notification);
-				return arr;
-			}, [])
-			.sort((lhs, rhs) => lhs.order - rhs.order);
-		return context;
+		const doc = await fromUuid(uuid);
+		const tooltip = new NotificationTooltip(doc, keys);
+		await tooltip.render({ force: true });
+		game.tooltip.activate(element, { content: tooltip.element, cssClass: "notification-tooltip" });
 	}
 }
