@@ -27,7 +27,7 @@ export default class ContainerSheet extends EquipmentSheet {
 	expanded = new Set();
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

@@ -101,7 +101,7 @@ export default class AdvancementFlow extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {

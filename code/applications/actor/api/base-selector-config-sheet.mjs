@@ -29,7 +29,7 @@ export default class BaseSelectorConfigSheet extends BaseConfigSheet {
 	selectedId;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

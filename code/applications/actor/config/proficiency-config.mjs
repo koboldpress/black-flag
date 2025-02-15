@@ -41,7 +41,7 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -54,7 +54,7 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Rendering              */
+	/*         Life-Cycle Handlers         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
