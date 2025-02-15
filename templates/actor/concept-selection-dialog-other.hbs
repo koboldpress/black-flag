@@ -1,14 +1,16 @@
-<form autocomplete="off">
+<div class="{{ type }}">
 	{{#each choices}}
 		<section class="option" data-uuid="{{ this.document.uuid }}">
 			<figure class="poster">
 				<img src="{{ document.img }}">
-				<button class="choose">{{ localize "BF.Action.Choose.Generic" }}</button>
+				<button type="button" class="light-button" data-action="choose">
+					{{ localize "BF.Action.Choose.Generic" }}
+				</button>
 				<div class="window-mask" inert></div>
 			</figure>
 			<div class="info">
 				<header>
-					<h1 class="name">{{ document.name }}</h1>
+					<div class="name">{{ document.name }}</div>
 					<div class="source">{{ system.description.source.label }}</div>
 				</header>
 				<div class="description">
@@ -30,4 +32,4 @@
 			<p>{{ localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural }}</p>
 		</section>
 	{{/each}}
-</form>
+</div>

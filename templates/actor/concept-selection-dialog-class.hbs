@@ -1,10 +1,10 @@
-<form autocomplete="off">
+<div class="{{ type }}">
 	{{#each choices}}
 		<section class="option" data-uuid="{{ document.uuid }}"
 			{{~#if document.system.color}} style="--bf-item-color: {{ document.system.color }};"{{/if}}>
 			{{> "blackFlag.concept-summary" item=document system=document.system enriched=enriched }}
-			<button class="choose heavy-button" {{ disabled multiclassMessage }}
-			        {{#if multiclassMessage}}data-tooltip="{{ multiclassMessage }}"{{/if}}>
+			<button data-action="choose" class="light-button" {{ disabled multiclassMessage }}
+							{{#if multiclassMessage}}data-tooltip="{{ multiclassMessage }}"{{/if}}>
 				{{ localize "BF.Action.Choose.Specific" option=document.name }}
 			</button>
 		</section>
@@ -13,4 +13,4 @@
 			<p>{{ localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural }}</p>
 		</section>
 	{{/each}}
-</form>
+</div>

@@ -1,15 +1,46 @@
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
+import BFApplication from "../api/application.mjs";
 
 /**
  * Dialog that presents a list of class, subclass, lineage, heritage, or background options for the player to choose.
  */
-export default class ConceptSelectionDialog extends FormApplication {
-	constructor(actor, type, options = {}) {
-		super(actor, options);
-		this.options.classes.push(type);
-		this.type = type;
-	}
+export default class ConceptSelectionDialog extends BFApplication {
+	// constructor(type, options = {}) {
+	// 	super(options);
+	// 	this.options.classes.push(type);
+	// }
 
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			choose: ConceptSelectionDialog.#chooseConcept
+		},
+		classes: ["concept-selection-dialog"],
+		details: {
+			classIdentifier: null,
+			multiclass: false,
+			type: null
+		},
+		position: {
+			width: "auto",
+			height: "auto"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		class: {
+			template: "systems/black-flag/templates/actor/concept-selection-dialog-class.hbs"
+		},
+		other: {
+			template: "systems/black-flag/templates/actor/concept-selection-dialog-other.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -17,37 +48,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
-		return this.object;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Type of item to be selected by this dialog.
-	 * @type {string}
-	 */
-	type;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "concept-selection-dialog"],
-			width: "auto",
-			height: "auto",
-			classIdentifier: null
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Properties             */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	get template() {
-		const type = ["class", "subclass"].includes(this.type) ? "class" : "other";
-		return `systems/black-flag/templates/actor/concept-selection-dialog-${type}.hbs`;
+		return this.options.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -60,26 +61,54 @@ export default class ConceptSelectionDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+
+	/**
+	 * Type of item to be selected by this dialog.
+	 * @type {string}
+	 */
+	get type() {
+		return this.options.details.type;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		context.CONFIG = CONFIG.BlackFlag;
+	_configureRenderOptions(options) {
+		super._configureRenderOptions(options);
+		if (this.type === "class") options.parts = ["class"];
+		else options.parts = ["other"];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_onFirstRender(context, options) {
+		super._onFirstRender(context, options);
+		this.element.classList.add(this.type);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+
 		context.choices = await Promise.all(
 			Object.values(CONFIG.BlackFlag.registration.list(this.type) ?? {}).map(o => this.getOptionData(o))
 		);
 		if (this.type === "class") {
 			const existingClasses = new Set(Object.keys(this.actor.system.progression.classes));
 			context.choices = context.choices.filter(choice => !existingClasses.has(choice.document.identifier));
-		}
-		if (this.type === "subclass")
+		} else if (this.type === "subclass")
 			context.choices = context.choices.filter(
-				choice => choice.document.system.identifier.class === this.options.classIdentifier
+				choice => choice.document.system.identifier.class === this.options.details.classIdentifier
 			);
+		context.type = this.type;
 		context.typeName = game.i18n.localize(CONFIG.Item.typeLabels[this.type]).toLowerCase();
 		context.typeNamePlural = game.i18n.localize(CONFIG.Item.typeLabelsPlural[this.type]).toLowerCase();
+
 		return context;
 	}
 
@@ -100,7 +129,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 			system: doc.system
 		};
 
-		if (this.type === "class" && this.options.multiclass) {
+		if (this.type === "class" && this.options.details.multiclass) {
 			const abilities = this.actor.system.abilities;
 			const keyAbilityOptions = doc.system.advancement.byType("keyAbility")[0]?.configuration.options;
 			const validAbilities = Array.from(keyAbilityOptions).some(
@@ -128,29 +157,18 @@ export default class ConceptSelectionDialog extends FormApplication {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const element of html.querySelectorAll("button.choose")) {
-			element.addEventListener("click", this._onChoose.bind(this));
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Handle choosing an option.
-	 * @param {ClickEvent} event - Triggering click event.
+	 * @this {ConceptSelectionDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	async _onChoose(event) {
-		event.preventDefault();
+	static async #chooseConcept(event, target) {
 		const uuid = event.target.closest("[data-uuid]").dataset.uuid;
 		const document = await fromUuid(uuid);
+		await this.close();
 		if (this.type === "class") await this.actor.system.levelUp(document);
 		else if (this.type === "subclass") await this.actor.createEmbeddedDocuments("Item", [document.toObject()]);
 		else await this.actor.system.setConcept(document);
-		this.close();
 	}
 }
