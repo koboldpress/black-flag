@@ -460,10 +460,13 @@ export default class ClassPageSheet extends JournalPageSheet {
 				break;
 			case "launch-text-editor":
 				const label = event.target.closest("label");
-				return new JournalEditor(this.document, {
+				return new JournalEditor({
+					document: this.document,
 					textKeyPath: properties.target,
-					title: label?.innerText
-				}).render(true);
+					window: {
+						title: label?.querySelector("span")?.innerText
+					}
+				}).render({ force: true });
 			default:
 				return log(`Unrecognized action: ${action}`, { level: "warn" });
 		}
