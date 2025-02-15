@@ -631,6 +631,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 */
 		if (Hooks.call("blackFlag.preRestConfiguration", this, config) === false) return;
 
+		const RestDialog = config.dialog ? restConfig.dialogClass : null;
+		if (RestDialog) {
+			try {
+				foundry.utils.mergeObject(config, await RestDialog.rest(this, config));
+			} catch (err) {
+				return;
+			}
+		}
 		const result = {
 			type: config.type,
 			deltas: {},
@@ -638,14 +646,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			itemUpdates: [],
 			rolls: []
 		};
-		const RestDialog = config.dialog ? restConfig.dialogClass : null;
-		if (RestDialog) {
-			try {
-				foundry.utils.mergeObject(result, await RestDialog.rest(this, config));
-			} catch (err) {
-				return;
-			}
-		}
 
 		/**
 		 * A hook event that fires after the rest dialog is shown.

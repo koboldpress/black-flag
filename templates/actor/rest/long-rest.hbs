@@ -1,18 +1,12 @@
-<form class="dialog-content long-rest" autocomplete="off">
-	<section class="main-form">
-		<p>{{ content }}</p>
-	</section>
+<section class="contents">
+	<div class="note info">
+		{{ note }}
+	</div>
 
-	<nav class="dialog-buttons">
-		<ul>
-			{{#each buttons}}
-				<li>
-					<button type="button" class="dialog-button light-button" data-button="{{ @key }}">
-						{{{ icon }}}
-						{{{ label }}}
-					</button>
-				</li>
-			{{/each}}
-		</ul>
-	</nav>
-</form>
+	{{#if fields.length}}
+	<fieldset>
+			<legend>{{ localize "BF.Rest.Configuration" }}</legend>
+			{{> "blackFlag.field-list" fields }}
+	</fieldset>
+	{{/if}}
+</section>

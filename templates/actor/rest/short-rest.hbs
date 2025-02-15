@@ -1,39 +1,33 @@
-<form class="dialog-content short-rest" autocomplete="off">
-	<section class="main-form">
-		<p>{{ content }}</p>
+<section class="contents">
+	<div class="note info">
+		{{ note }}
+	</div>
 
-		{{#if hd}}
-			<fieldset class="hit-dice">
-				<legend>{{ localize "BF.HitDie.Label[other]" }}</legend>
-				<label>
-					<span>{{ localize "BF.HitPoint.Damage.Label" }}</span>
-					<span>{{ blackFlag-number hp.damage }}</span>
-				</label>
-				{{#each hd.d}}
-					<label class="hit-die-roll">
-						<span>d{{ @key }} ({{ localize "BF.HitDie.AvailableCount" number=(blackFlag-number available) }})</span>
-						<button type="button" class="light-button" data-action="roll-hit-die" data-denomination="{{ @key }}"
-						        {{ disabled (eq available 0) }}>
-							<blackFlag-icon class="die-icon"
-							                src="systems/black-flag/artwork/interface/dice/d{{ @key }}.svg"></blackFlag-icon>
-							{{ localize "BF.Roll.Action.RollSpecific" type=(concat "d" @key) }}
-						</button>
-					</label>
-				{{/each}}
-			</fieldset>
-		{{/if}}
-	</section>
+	{{#if fields.length}}
+	<fieldset>
+			<legend>{{ localize "BF.Rest.Configuration" }}</legend>
+			{{> "blackFlag.field-list" fields }}
+	</fieldset>
+	{{/if}}
 
-	<nav class="dialog-buttons">
-		<ul>
-			{{#each buttons}}
-				<li>
-					<button type="button" class="dialog-button light-button" data-button="{{ @key }}">
-						{{{ icon }}}
-						{{{ label }}}
+	{{#if hd}}
+		<fieldset class="hit-dice">
+			<legend>{{ localize "BF.HitDie.Label[other]" }}</legend>
+			<label>
+				<span>{{ localize "BF.HitPoint.Damage.Label" }}</span>
+				<span>{{ blackFlag-number hp.damage }}</span>
+			</label>
+			{{#each hd.d}}
+				<label class="hit-die-roll">
+					<span>d{{ @key }} ({{ localize "BF.HitDie.AvailableCount" number=(blackFlag-number available) }})</span>
+					<button type="button" class="light-button" data-action="rollHitDie" data-denomination="{{ @key }}"
+					        {{ disabled (eq available 0) }}>
+						<blackFlag-icon class="die-icon"
+						                src="systems/black-flag/artwork/interface/dice/d{{ @key }}.svg"></blackFlag-icon>
+						{{ localize "BF.Roll.Action.RollSpecific" type=(concat "d" @key) }}
 					</button>
-				</li>
+				</label>
 			{{/each}}
-		</ul>
-	</nav>
-</form>
+		</fieldset>
+	{{/if}}
+</section>
