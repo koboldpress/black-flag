@@ -310,7 +310,7 @@ export default class PCSheet extends BaseActorSheet {
 						const cls = this.actor.system.progression.levels[1]?.class;
 						if (cls) {
 							if (allowMulticlassing) {
-								return new LevelUpDialog(this.actor).render(true);
+								return new LevelUpDialog({ document: this.actor }).render({ force: true });
 							} else {
 								try {
 									return await this.actor.system.levelUp(cls);

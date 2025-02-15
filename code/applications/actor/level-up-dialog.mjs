@@ -1,32 +1,43 @@
 import { numberFormat } from "../../utils/_module.mjs";
+import BFApplication from "../api/application.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 
 /**
  * Dialog that gives the open of increasing a current class or multi-classing into a new one.
  */
-export default class LevelUpDialog extends FormApplication {
+export default class LevelUpDialog extends BFApplication {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			choose: LevelUpDialog.#chooseOption
+		},
+		classes: ["level-up-dialog"],
+		position: {
+			width: 500
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/actor/level-up-dialog.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Actor to which the level up will be applied.
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
-		return this.object;
+		return this.options.document;
 	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "level-up-dialog"],
-			width: 500,
-			height: "auto",
-			template: "systems/black-flag/templates/actor/level-up-dialog.hbs"
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -39,11 +50,10 @@ export default class LevelUpDialog extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		context.CONFIG = CONFIG.BlackFlag;
-		context.system = this.actor.system;
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 
+		context.system = this.actor.system;
 		const primaryClass = this.actor.system.progression.levels[1].class;
 		const abilityValue = this.actor.system.abilities[primaryClass.system.keyAbility]?.value ?? 0;
 		if (abilityValue < CONFIG.BlackFlag.multiclassingAbilityThreshold) {
@@ -61,26 +71,16 @@ export default class LevelUpDialog extends FormApplication {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const element of html.querySelectorAll("button")) {
-			element.addEventListener("click", this._onChoose.bind(this));
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Handle choosing an option.
-	 * @param {ClickEvent} event - Triggering click event.
+	 * @this {LevelUpDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	async _onChoose(event) {
-		event.preventDefault();
-		const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
+	static async #chooseOption(event, target) {
+		const classIdentifier = target.closest("[data-class]")?.dataset.class;
 		const cls = this.actor.system.progression.classes[classIdentifier]?.document;
+		await this.close();
 		if (cls) {
 			try {
 				this.actor.system.levelUp(cls);
@@ -92,6 +92,5 @@ export default class LevelUpDialog extends FormApplication {
 				force: true
 			});
 		}
-		this.close();
 	}
 }

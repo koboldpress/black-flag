@@ -1,42 +1,42 @@
-<form autocomplete="off">
-	<ol class="items-list large">
-		{{#each system.progression.classes}}
-			<li class="item" data-class="{{ document.identifier }}">
-				<div class="item-name">
-					<figure class="icon">
-						<img src="{{ document.img }}">
-					</figure>
-					<span>{{ document.name }}</span>
-				</div>
-				<div class="item-details">
-					<span class="levels">{{ levelsLabel }}</span>
-					{{#with document.system.description.journal as |journalUUID|}}
-						<a class="content-link" data-uuid="{{ journalUUID }}">
-							<i class="fa-solid fa-book-open"></i>
-							{{ localize "BF.Journal.Link.MoreInformation" }}
-						</a>
-					{{/with}}
-				</div>
-				<div class="item-controls">
-					<button type="submit" class="light-button">{{ localize "BF.Action.Choose.Generic" }}</button>
-				</div>
-			</li>
-		{{/each}}
-		<li class="item">
+<ol class="items-list large">
+	{{#each system.progression.classes}}
+		<li class="item" data-class="{{ document.identifier }}">
 			<div class="item-name">
-				<figure class="icon spacer">
-					<img src="icons/magic/light/explosion-star-glow-silhouette.webp">
+				<figure class="icon">
+					<img src="{{ document.img }}">
 				</figure>
-				<span>{{ localize "BF.Progression.Action.Multiclass.Label" }}</span>
+				<span>{{ document.name }}</span>
+			</div>
+			<div class="item-details">
+				<span class="levels">{{ levelsLabel }}</span>
+				{{#with document.system.description.journal as |journalUUID|}}
+					<a class="content-link" data-uuid="{{ journalUUID }}" data-link="{{ journalUUID }}">
+						<i class="fa-solid fa-book-open"></i>
+						{{ localize "BF.Journal.Link.MoreInformation" }}
+					</a>
+				{{/with}}
 			</div>
 			<div class="item-controls">
-				<button type="submit" class="heavy-button" {{ disabled multiclassMessage }}>
+				<button type="button" class="light-button" data-action="choose">
 					{{ localize "BF.Action.Choose.Generic" }}
 				</button>
 			</div>
-			{{#if multiclassMessage}}
-				<p class="warning">{{ multiclassMessage }}</p>
-			{{/if}}
 		</li>
-	</ol>
-</form>
+	{{/each}}
+	<li class="item">
+		<div class="item-name">
+			<figure class="icon spacer">
+				<img src="icons/magic/light/explosion-star-glow-silhouette.webp">
+			</figure>
+			<span>{{ localize "BF.Progression.Action.Multiclass.Label" }}</span>
+		</div>
+		<div class="item-controls">
+			<button type="button" class="heavy-button" data-action="choose" {{ disabled multiclassMessage }}>
+				{{ localize "BF.Action.Choose.Generic" }}
+			</button>
+		</div>
+		{{#if multiclassMessage}}
+			<p class="warning">{{ multiclassMessage }}</p>
+		{{/if}}
+	</li>
+</ol>
