@@ -63,7 +63,7 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 			dialects: Trait.choices("languages", { chosen: languages.value }),
 			fields: context.system.fields.proficiencies.fields.languages.fields,
 			tagOptions: Object.entries(CONFIG.BlackFlag.languageTags.localized).reduce((obj, [key, label]) => {
-				obj[key] = { label, chosen: languages.tags.has(key) };
+				obj[key] = { label, chosen: languages.tags.includes(key) };
 				return obj;
 			}, {})
 		};

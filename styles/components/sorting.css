@@ -16,6 +16,7 @@ blackFlag-sorting {
 		appearance: none;
 		position: relative;
 		height: var(--sorting-indicator-size);
+		width: var(--sorting-indicator-size);
 		margin: 0;
 
 		&::before {
@@ -27,8 +28,7 @@ blackFlag-sorting {
 			border: var(--sorting-indicator-border);
 			border-radius: var(--sorting-indicator-size);
 		}
-		&:checked::before {
-			background-color: currentcolor;
-		}
+		&:checked::before { background-color: currentcolor; }
+		&::after { display: none; }
 	}
 }

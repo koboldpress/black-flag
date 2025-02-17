@@ -82,6 +82,7 @@ export default class PseudoDocumentSelection extends DialogV2 {
 									if (!type) throw new Error(game.i18n.localize(this.DEFAULT_OPTIONS.errorMessage));
 									resolve(item.createEmbeddedDocuments(this.DEFAULT_OPTIONS.type, [{ type }], { renderSheet: true }));
 								},
+								class: "heavy-button",
 								label: game.i18n.localize("Submit"),
 								icon: "fa-regular fa-save"
 							}

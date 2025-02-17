@@ -10,6 +10,7 @@
 }
 
 .link-button, .application .link-button {
+	height: unset;
 	width: unset;
 	margin: 0;
 	padding: 0;
@@ -47,7 +48,8 @@
 .dialog .dialog-buttons button:is(.heavy-button, .light-button),
 .application button:is(.heavy-button, .light-button) {
 	position: relative;
-	block-size: unset;
+	/* block-size: unset; */
+	inline-size: 100%;
 	border: 1px solid var(--bf-color-border-blue);
 	border-radius: var(--bf-button-border-radius);
 	padding-block: 1px;
@@ -160,7 +162,7 @@
 	}
 }
 
-.unfieldset {
+.unfieldset, .standard-form .unfieldset {
 	display: contents;
 }
 
@@ -249,6 +251,7 @@ img.icon, figure.icon {
 			padding-block: 3px;
 			padding-inline: 6px;
 			font-size: var(--font-size-14);
+			/* line-height: 1; */
 			text-align: start;
 			text-transform: uppercase;
 		}

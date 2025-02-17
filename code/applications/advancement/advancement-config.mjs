@@ -12,7 +12,7 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 export default class AdvancementConfig extends PseudoDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["advancement-config"],
+		classes: ["advancement-config", "standard-form"],
 		actions: {
 			deleteDropped: AdvancementConfig.#onDeleteDropped
 		},

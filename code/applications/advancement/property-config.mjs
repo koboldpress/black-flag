@@ -67,7 +67,7 @@ export default class PropertyConfig extends AdvancementConfig {
 	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
 	 */
 	static async #onDeleteChange(event, target) {
-		event.target.closest(".effect-change").remove();
+		target.closest("[data-index]")?.remove();
 		return this.submit();
 	}
 

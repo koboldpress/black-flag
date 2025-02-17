@@ -118,6 +118,16 @@ Hooks.once("ready", function () {
 	}
 });
 
+Hooks.on("hotReload", file => {
+	// TODO: Temporary patch until https://github.com/foundryvtt/foundryvtt/issues/11939 is fixed
+	if (file.extension !== "css") return;
+	for (const style of document.querySelectorAll("head style")) {
+		if (style.textContent.includes(file.path)) {
+			setTimeout(() => (style.textContent = `@import "${file.path}?${Date.now()}" layer(system);`), 100);
+		}
+	}
+});
+
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery));
 Hooks.on("renderJournalPageSheet", applications.journal.BlackFlagJournalSheet.onRenderJournalPageSheet);
 

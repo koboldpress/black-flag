@@ -6,7 +6,7 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 export default class ActivitySheet extends PseudoDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["activity"],
+		classes: ["activity", "form-list", "standard-form"],
 		window: {
 			icon: "fa-solid fa-gauge"
 		},
@@ -273,7 +273,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 					variableTypeOptions: damageTypes.map(({ value, label }) => ({
 						value,
 						label,
-						selected: data.additionalTypes.has(value)
+						selected: data.additionalTypes?.has(value)
 					}))
 				};
 				return this._prepareDamagePartContext(context, part);

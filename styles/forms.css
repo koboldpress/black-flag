@@ -1,4 +1,4 @@
-fieldset, .standard-form fieldset {
+.black-flag fieldset, .black-flag .standard-form fieldset {
 	--fieldset-padding: 10px;
 
 	display: flex;
@@ -63,7 +63,7 @@ fieldset, .standard-form fieldset {
 	}
 }
 
-.checkbox-list {
+.black-flag .checkbox-list {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -77,12 +77,13 @@ fieldset, .standard-form fieldset {
 		font-size: var(--font-size-12);
 	}
 	input[type="checkbox"] {
+		flex-grow: 0;
 		width: 1rem;
 		height: 1rem;
 	}
 }
 
-.field-group {
+.field-group, .standard-form .field-group {
 	display: flex;
 	gap: 0.5rem;
 	align-items: stretch;
@@ -188,7 +189,7 @@ fieldset, .standard-form fieldset {
 	}
 }
 
-select:disabled {
+.black-flag select:disabled {
 	border-color: transparent;
 }
 

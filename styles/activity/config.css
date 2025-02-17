@@ -4,7 +4,10 @@
 		min-height: 300px;
 		margin-inline: -10px;
 		.editor-content { margin-inline: 10px; }
-		button.toggle { right: 12px; }
+		> button.toggle {
+			align-self: flex-end;
+			margin-inline-end: 10px;
+		}
 	}
 
 	.additional-tray {
@@ -38,8 +41,6 @@
 	}
 
 	.profiles-list {
-		--gap-size: 0;
-
 		> li { flex-wrap: wrap; }
 		.details { align-items: stretch; }
 		.content-link {
@@ -118,6 +119,7 @@
 			align-content: center;
 		}
 		.drop-area {
+			flex: 1;
 			font-size: var(--font-size-11);
 			justify-content: center;
 		}

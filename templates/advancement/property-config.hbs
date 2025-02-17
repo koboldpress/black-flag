@@ -1,37 +1,41 @@
 <fieldset class="active-effect-sheet">
-	<legend>{{ localize "EFFECT.TabEffects" }}</legend>
-	<header class="effect-change effects-header flexrow">
-		<div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
-		<div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
-		<div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
-		<div class="effect-controls">
-				<button type="button" class="link-button effect-control" data-action="addChange"
-				        data-tooltip="BF.EFFECT.Action.Add" aria-label="{{ localize 'BF.EFFECT.Action.Add' }}">
-					<i class="fa-regular fa-square-plus" inert></i>
-				</button>
-		</div>
-	</header>
-	<ol class="changes-list">
-		{{#each configuration.data.changes}}
-			<li class="effect-change flexrow" data-index="{{ @index }}">
-				<div class="key">
-					<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
-				</div>
-				<div class="mode">
-					<select name="configuration.changes.{{ @index }}.mode" data-dtype="Number">
-						{{ selectOptions ../modes selected=mode }}
-					</select>
-				</div>
-				<div class="value">
-					<input type="text" name="configuration.changes.{{ @index }}.value" value="{{ value }}">
-				</div>
-				<div class="effect-controls">
-					<button type="button" class="link-button effect-control" data-action="deleteChange"
-					        data-tooltip="BF.EFFECT.Action.Delete" aria-label="{{ localize 'BF.EFFECT.Action.Delete' }}">
-						<i class="fa-solid fa-trash" inert></i>
-					</button>
-				</div>
-			</li>
-		{{/each}}
-	</ol>
+	<legend>{{ localize "BF.Advancement.Property.FIELDS.changes.label" }}</legend>
+	<table class="fieldset-table">
+		<thead>
+			<tr>
+				<th class="key">{{ localize "BF.Advancement.Property.FIELDS.changes.*.key.label" }}</th>
+				<th class="mode">{{ localize "BF.Advancement.Property.FIELDS.changes.*.mode.label" }}</th>
+				<th class="value">{{ localize "BF.Advancement.Property.FIELDS.changes.*.value.label" }}</th>
+				<th class="effect-controls">
+						<button type="button" class="link-button effect-control" data-action="addChange"
+										data-tooltip="BF.EFFECT.Action.Add" aria-label="{{ localize 'BF.EFFECT.Action.Add' }}">
+							<i class="fa-regular fa-square-plus" inert></i>
+						</button>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each configuration.data.changes}}
+				<tr data-index="{{ @index }}">
+					<td class="key">
+						<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
+					</td>
+					<td class="mode">
+						<select name="configuration.changes.{{ @index }}.mode" data-dtype="Number">
+							{{ selectOptions ../modes selected=mode }}
+						</select>
+					</td>
+					<td class="value">
+						<input type="text" name="configuration.changes.{{ @index }}.value" value="{{ value }}">
+					</td>
+					<td class="effect-controls">
+						<button type="button" class="link-button effect-control" data-action="deleteChange"
+										data-tooltip="BF.EFFECT.Action.Delete" aria-label="{{ localize 'BF.EFFECT.Action.Delete' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </fieldset>

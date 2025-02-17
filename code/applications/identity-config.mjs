@@ -7,7 +7,7 @@ import BFDocumentSheet from "./api/document-sheet.mjs";
 export default class SourceConfig extends BFDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["config", "identity"],
+		classes: ["config", "identity", "standard-form"],
 		sheetConfig: false,
 		position: {
 			width: 500
