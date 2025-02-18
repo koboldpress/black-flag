@@ -2,6 +2,7 @@ import ActivityActivationDialog from "../../applications/activity/activity-activ
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
+import ActorDeltasField from "../../data/chat-message/fields/deltas-field.mjs";
 import {
 	areKeysPressed,
 	buildRoll,
@@ -11,6 +12,10 @@ import {
 	simplifyFormula
 } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
+
+/**
+ * @import { ActivityDeltasData } from "../../data/chat-message/activation-message-data.mjs";
+ */
 
 /**
  * Abstract base class which various activity types can subclass.
@@ -489,13 +494,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				create: true,
 				data: {
 					flags: {
-						[game.system.id]: {
-							...this.messageFlags,
-							messageType: "activation",
-							activation: {
-								effects: this.system.applicableEffects?.map(e => e.id)
-							}
-						}
+						[game.system.id]: this.messageFlags
+					},
+					system: {
+						effects: this.system.applicableEffects?.map(e => e.id)
 					}
 				},
 				hasConsumption: activationConfig.hasConsumption,
@@ -613,14 +615,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		const consumed = await this.#applyActivationUpdates(updates);
-		if (!foundry.utils.isEmpty(consumed))
-			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.activation.consumed`, consumed);
+		if (!foundry.utils.isEmpty(consumed)) foundry.utils.setProperty(messageConfig, "data.system.deltas", consumed);
 		if (activationConfig.cause?.activity)
-			foundry.utils.setProperty(
-				messageConfig,
-				`data.flags.${game.system.id}.activation.cause`,
-				activationConfig.cause.activity
-			);
+			foundry.utils.setProperty(messageConfig, "data.system.cause", activationConfig.cause.activity);
 
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated and applied.
@@ -658,17 +655,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * @typedef ActivityConsumptionDescriptor
-	 * @property {{ keyPath: string, delta: number }[]} actor - Changes for the actor.
-	 * @property {string[]} created - IDs of items created by the process.
-	 * @property {object[]} deleted - Data for items deleted by the process.
-	 * @property {Record<string, { keyPath: string, delta: number }[]>} item - Changes for each item grouped by ID.
-	 */
-
-	/**
 	 * Merge activity updates into the appropriate item updates and apply.
 	 * @param {ActivationUpdates} updates
-	 * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
+	 * @returns {ActivityDeltasData} - Information on consumption performed to store in message flag.
 	 */
 	async #applyActivationUpdates(updates) {
 		this._mergeActivityUpdates(updates);
@@ -677,30 +666,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		updates.create = updates.create?.filter(i => !this.actor.items.has(i));
 		updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
 
-		// Create the consumed flag
-		const getDeltas = (document, updates) => {
-			updates = foundry.utils.flattenObject(updates);
-			return Object.entries(updates)
-				.map(([keyPath, value]) => {
-					let currentValue;
-					if (keyPath.startsWith("system.activities")) {
-						const [id, ...kp] = keyPath.slice(18).split(".");
-						currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
-					} else currentValue = foundry.utils.getProperty(document, keyPath);
-					const delta = value - currentValue;
-					if (delta && !Number.isNaN(delta)) return { keyPath, delta };
-					return null;
-				})
-				.filter(_ => _);
-		};
-		const consumed = {
-			actor: getDeltas(this.actor, updates.actor),
-			item: updates.item.reduce((obj, { _id, ...changes }) => {
-				const deltas = getDeltas(this.actor.items.get(_id), changes);
-				if (deltas.length) obj[_id] = deltas;
-				return obj;
-			}, {})
-		};
+		const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 		if (foundry.utils.isEmpty(consumed.actor)) delete consumed.actor;
 		if (foundry.utils.isEmpty(consumed.item)) delete consumed.item;
 		if (updates.create?.length) consumed.created = updates.create;
@@ -1053,14 +1019,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		const messageConfig = foundry.utils.mergeObject(
 			{
-				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					content: await renderTemplate(message.template ?? this.metadata.usage.chatCard, context),
-					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
 						core: { canPopout: true }
-					}
-				}
+					},
+					speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
+					type: "activation"
+				},
+				rollMode: game.settings.get("core", "rollMode")
 			},
 			message
 		);
@@ -1088,6 +1055,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		return card;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Apply any activity-type specific modifications to the rendered chat card.
+	 * @param {BlackFlagChatMessage} message - Associated chat message.
+	 * @param {HTMLElement} element - Element in the chat log.
+	 * @abstract
+	 */
+	onRenderChatCard(message, element) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -49,7 +49,7 @@ export default class RestMessageData extends ChatMessageDataModel {
 
 	/**
 	 * The actor for the chat message.
-	 * @type {Actor5e}
+	 * @type {BlackFlagActor}
 	 */
 	get actor() {
 		return this.parent.getAssociatedActor();

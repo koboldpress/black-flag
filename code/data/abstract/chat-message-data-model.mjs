@@ -50,6 +50,8 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 	async getHTML(element, options) {
 		const rendered = await this.render(options);
 		if (rendered) element.querySelector(".message-content").innerHTML = rendered;
+		this.parent._renderStandardCard(element);
+		this.parent._collapseTrays(element);
 
 		const click = this.#onClick.bind(this);
 		element.addEventListener("click", click);

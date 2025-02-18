@@ -22,11 +22,15 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  * A field for storing deltas made to an actor or embedded items.
  */
 export default class ActorDeltasField extends SchemaField {
-	constructor() {
-		super({
-			actor: new ArrayField(new IndividualDeltaField()),
-			item: new MappingField(new ArrayField(new IndividualDeltaField()))
-		});
+	constructor(fields = {}, options = {}) {
+		super(
+			{
+				actor: new ArrayField(new IndividualDeltaField()),
+				item: new MappingField(new ArrayField(new IndividualDeltaField())),
+				...fields
+			},
+			options
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

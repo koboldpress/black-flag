@@ -55,7 +55,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
 	/**
 	 * The actor belonging to the combatant.
-	 * @type {Actor5e}
+	 * @type {BlackFlagActor}
 	 */
 	get actor() {
 		return this.combatant?.actor ?? this.parent.getAssociatedActor();
@@ -65,7 +65,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
 	/**
 	 * The combat during which this message was triggered.
-	 * @type {Combat5e}
+	 * @type {BlackFlagCombat}
 	 */
 	get combat() {
 		return game.combats.get(this.origin.combat);
@@ -75,7 +75,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
 	/**
 	 * The combatant to whom this message applies.
-	 * @type {Combatant5e}
+	 * @type {BlackFlagCombatant}
 	 */
 	get combatant() {
 		return this.combat?.combatants.get(this.origin.combatant);

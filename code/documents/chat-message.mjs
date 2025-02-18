@@ -83,26 +83,33 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 		if (!this.isContentVisible) return rendered;
 
-		for (const element of html.querySelectorAll(".blackFlag-icon")) {
-			const icon = document.createElement("blackFlag-icon");
-			if (element.inert) icon.setAttribute("inert", "");
-			icon.src = element.dataset.src;
-			element.replaceWith(icon);
-		}
-
-		this._renderHeader(html);
-		this._renderButtons(html);
-		this._activateActivityListeners(html);
+		this._renderStandardCard(html);
 		if (this.isRoll) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
 			await this._renderAttackUI(html);
 			await this._renderDamageUI(html);
 		}
-		this._renderEffectUI(html);
 		this._collapseTrays(html);
 
 		return rendered;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform some standard rendering steps shared across all Black Flag cards.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	async _renderStandardCard(html) {
+		if (!this.isContentVisible) return;
+		for (const element of html.querySelectorAll(".blackFlag-icon")) {
+			const icon = document.createElement("blackFlag-icon");
+			if (element.inert) icon.setAttribute("inert", "");
+			icon.src = element.dataset.src;
+			element.replaceWith(icon);
+		}
+		this._renderHeader(html);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -157,24 +164,6 @@ export default class BlackFlagChatMessage extends ChatMessage {
 				if (roll.isSuccess) result.classList.add("success");
 				else if (roll.isFailure) result.classList.add("failure");
 			}
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Control visibility of chat buttons based on current user.
-	 * @param {HTMLElement} html - Chat message HTML.
-	 */
-	_renderButtons(html) {
-		if (this.shouldDisplayChallenge) html.dataset.displayChallenge = "";
-
-		const actor = game.actors.get(this.speaker.actor);
-		const isCreator = game.user.isGM || actor?.isOwner || this.author.id === game.user.id;
-		for (const button of html.querySelectorAll(".menu button")) {
-			if (this.getAssociatedActivity()?.shouldHideChatButton(button, this)) button.hidden = true;
-			if (button.dataset.visibility === "all") continue;
-			if ((button.dataset.visibility === "gm" && !game.user.isGM) || !isCreator) button.hidden = true;
 		}
 	}
 
@@ -275,18 +264,18 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * Add the effect application UI to a message.
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
-	_renderEffectUI(html) {
-		if (this.getFlag(game.system.id, "messageType") !== "activation") return;
-		const item = this.getAssociatedItem();
-		const effects = this.getFlag(game.system.id, "activation.effects")
-			?.map(id => item?.effects.get(id))
-			.filter(e => e && game.user.isGM); // TODO: Allow effects tray to be visible to players
-		if (!effects?.length) return;
-
-		const effectApplication = document.createElement("blackFlag-effectApplication");
-		effectApplication.effects = effects;
-		html.querySelector(".message-content").appendChild(effectApplication);
-	}
+	// 	_renderEffectUI(html) {
+	// 		if (this.getFlag(game.system.id, "messageType") !== "activation") return;
+	// 		const item = this.getAssociatedItem();
+	// 		const effects = this.getFlag(game.system.id, "activation.effects")
+	// 			?.map(id => item?.effects.get(id))
+	// 			.filter(e => e && game.user.isGM); // TODO: Allow effects tray to be visible to players
+	// 		if (!effects?.length) return;
+	//
+	// 		const effectApplication = document.createElement("blackFlag-effectApplication");
+	// 		effectApplication.effects = effects;
+	// 		html.querySelector(".message-content").appendChild(effectApplication);
+	// 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -317,16 +306,6 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Add event listeners to an activity card or remove the controls if activity could not be found.
-	 * @param {HTMLElement} html - Chat message HTML.
-	 */
-	_activateActivityListeners(html) {
-		this.getAssociatedActivity()?.activateChatListeners(this, html);
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
