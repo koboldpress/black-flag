@@ -334,15 +334,11 @@ export default class NPCData extends ActorDataModel.mixin(
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Reset combat-related uses.
-	 * @param {string[]} periods - Which recovery periods should be considered.
-	 * @returns {Promise<Combatant>}
-	 */
-	async recoverCombatUses(periods) {
+	/** @override */
+	async recoverCombatUses(periods, results) {
 		// Recover legendary actions
-		if (this.attributes.legendary.max && periods.includes("roundEnd")) {
-			await this.parent.update({ "system.attributes.legendary.spent": 0 });
+		if (this.attributes.legendary.max && (periods.includes("encounter") || periods.includes("roundEnd"))) {
+			results.actor["system.attributes.legendary.spent"] = 0;
 		}
 	}
 }

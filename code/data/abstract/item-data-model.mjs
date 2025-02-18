@@ -192,6 +192,7 @@ export default class ItemDataModel extends BaseDataModel {
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _preCreate(data, options, user) {
 		await super._preCreate(data, options, user);
 
@@ -200,4 +201,14 @@ export default class ItemDataModel extends BaseDataModel {
 			this.parent.updateSource({ "flags.black-flag.-=relationship": null });
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Reset combat-related uses.
+	 * @param {string[]} periods - Which recovery periods should be considered.
+	 * @param {CombatRecoveryResults} results - Updates to perform on the actor and containing items.
+	 * @abstract
+	 */
+	async recoverCombatUses(periods, results) {}
 }

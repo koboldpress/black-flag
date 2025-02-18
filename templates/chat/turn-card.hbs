@@ -1,0 +1,13 @@
+<div class="black-flag chat-card turn-card">
+	{{#if actor}}
+
+	{{!-- Deltas --}}
+	{{#if deltas.length}}{{> "blackFlag.card-deltas" }}{{/if}}
+
+	{{!-- Actions --}}
+	{{#if activities.length}}{{> "blackFlag.card-activities" }}{{/if}}
+
+	{{else}}
+	<p>{{ localize "BF.CHATMESSAGE.TURN.NoCombatant" }}</p>
+	{{/if}}
+</div>

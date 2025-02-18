@@ -194,7 +194,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	 * Perform any item & activity uses recovery for a certain period.
 	 * @param {string[]} periods - Recovery periods to check.
 	 * @param {object} rollData - Roll data to use when evaluating recovery formulas.
-	 * @returns {{updates: object, rolls: BasicRoll[]}}
+	 * @returns {Promise<{ updates: object, rolls: BasicRoll[] }>}
 	 */
 	async recoverUses(periods, rollData) {
 		const updates = {};
@@ -203,8 +203,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		if ( this.uses.hasUses ) {
 			const result = await this.uses.recoverUses(periods, rollData);
 			if ( result ) {
-				const update = { "system.uses": result.updates };
-				foundry.utils.mergeObject(updates, update);
+				foundry.utils.mergeObject(updates, { "system.uses": result.updates });
 				rolls.push(...result.rolls);
 			}
 		}
@@ -213,9 +212,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			if ( !activity.uses.hasUses ) continue;
 			const result = await activity.uses.recoverUses(periods, rollData);
 			if ( result ) {
-				updates.system ??= {};
-				updates.system.activities ??= {};
-				updates.system.activities[activity.id] = { uses: result.updates };
+				foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
 				rolls.push(...result.rolls);
 			}
 		}
