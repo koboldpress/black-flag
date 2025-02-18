@@ -90,22 +90,23 @@ export function getAttributeOption(attribute, { actor, item }={}) {
 	let name;
 	let group;
 	let label;
+	let option;
 
 	// Activity Labels
 	if ( type === "activity" ) {
 		let [, activityId, ...keyPath] = attribute.split(".");
 		const activity = item.system.activities?.get(activityId);
-		if ( activity ) return { value: attribute, label: attribute };
+		if ( !activity ) return { value: attribute, label: attribute };
 		attribute = keyPath.join(".");
 		name = `${item.name}: ${activity.name}`;
-		if ( _attributeOptionCache.activity.has(attribute) ) label = _attributeOptionCache.activity.get(attribute);
+		if ( _attributeOptionCache.activity.has(attribute) ) option = _attributeOptionCache.activity.get(attribute);
 		else if ( attribute === "uses.spent" ) label = "BF.Uses.Short";
 	}
 
 	// Item Labels
 	else if ( type === "item" ) {
 		name = item.name;
-		if ( _attributeOptionCache.item.has(attribute) ) label = _attributeOptionCache.item.get(attribute);
+		if ( _attributeOptionCache.item.has(attribute) ) option = _attributeOptionCache.item.get(attribute);
 		else if ( attribute === "uses.spent" ) label = "BF.Uses.Short";
 		else label = getSchemaLabel(attribute, "Item", item);
 	}
@@ -209,10 +210,15 @@ export function getAttributeOption(attribute, { actor, item }={}) {
 		} 
 	}
 
-	const option = { value: attribute, label: game.i18n.localize(label) || attribute, group: game.i18n.localize(group) };
+	if ( !option ) option = {
+		value: attribute,
+		label: label ? game.i18n.localize(label) : attribute,
+		group: group ? game.i18n.localize(group) : undefined
+	};
 	if ( label ) _attributeOptionCache[type].set(attribute, option);
+	option = foundry.utils.deepClone(option);
 	if ( name ) option.label = `${name} ${option.label}`;
-	return foundry.utils.deepClone(option);
+	return option;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

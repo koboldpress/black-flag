@@ -172,10 +172,18 @@ export class UsesData extends foundry.abstract.DataModel {
 		if (recoveryProfile.type === "recoverAll") updates.spent = 0;
 		else if (recoveryProfile.type === "loseAll") updates.spent = this.max ? this.max : 0;
 		else if (recoveryProfile.formula) {
-			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData);
+			const delta =
+				this.parent instanceof BlackFlag.documents.activity.Activity
+					? { item: this.parent.item.id, keyPath: `system.activities.${this.parent.id}.uses.spent` }
+					: { item: this.parent.parent.id, keyPath: "system.uses.spent" };
+			console.log(delta);
+			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData, { delta });
 			await roll.evaluate();
-			updates.spent = Math.clamp(this.spent - roll.total, 0, this.max);
-			if (!roll.isDeterministic) rolls.push(roll);
+			const newSpent = Math.clamp(this.spent - roll.total, 0, this.max);
+			if (newSpent !== this.spent) {
+				updates.spent = newSpent;
+				if (!roll.isDeterministic) rolls.push(roll);
+			}
 		}
 
 		return { updates, rolls };
