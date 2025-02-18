@@ -36,6 +36,20 @@ export const actionTypes = {
 			}
 		}
 	},
+	combat: {
+		label: "BF.ACTIVATION.Category.Combat",
+		children: {
+			encounter: {
+				label: "BF.ACTIVATION.Type.Encounter"
+			},
+			roundStart: {
+				label: "BF.ACTIVATION.Type.RoundStart"
+			},
+			roundEnd: {
+				label: "BF.ACTIVATION.Type.RoundEnd"
+			}
+		}
+	},
 	rest: {
 		label: "BF.ACTIVATION.Category.Rest",
 		children: {
@@ -51,6 +65,7 @@ export const actionTypes = {
 localizeConfig(actionTypes, { flatten: true, keepCategories: false, pluralRule: "other", sort: false });
 localizeConfig(actionTypes.standard.children);
 localizeConfig(actionTypes.monster.children);
+localizeConfig(actionTypes.combat.children);
 localizeConfig(actionTypes.rest.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -64,8 +79,8 @@ localizeConfig(actionTypes.rest.children);
  * @returns {SelectChoices}
  */
 export function activationOptions({ categories, chosen, pluralRule } = {}) {
-	const selectChoices = _createOptions([actionTypes, timeUnits], { chosen, pluralRule });
-	selectChoices.exclude(new Set(["combat"]));
+	const time = { time: timeUnits.time };
+	const selectChoices = _createOptions([actionTypes, time], { chosen, pluralRule });
 	if (categories) selectChoices.exclude(new Set(categories));
 	return selectChoices;
 }
@@ -143,7 +158,7 @@ function _createOptions(categories, { chosen, pluralRule, isSpell }) {
 	categories.forEach(c => selectChoices.merge(new SelectChoices(c)));
 	for (const [key, category] of Object.entries(selectChoices)) {
 		category.label = makeLabel(category, { pluralRule });
-		category.scalar = key in timeUnits;
+		category.scalar = key === "time";
 		for (const [k, v] of Object.entries(category.children)) {
 			v.label = makeLabel(v, { pluralRule });
 			v.scalar ??= category.scalar || v.scalar;
