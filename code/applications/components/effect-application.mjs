@@ -108,7 +108,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	buildTargetListEntry({ uuid, name }) {
@@ -136,9 +136,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		return li;
 	}
 
-	/* -------------------------------------------- */
-	/*  Event Handlers                              */
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle applying an Active Effect to a Token.
@@ -191,7 +191,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		return applied;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle clicking the apply effect button.
@@ -213,7 +213,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle checking or unchecking a target.

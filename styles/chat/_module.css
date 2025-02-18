@@ -202,3 +202,39 @@
 		}
 	}
 }
+
+/* <><><><> <><><><> <><><><> <><><><> */
+/*          Rest & Turn Cards          */
+/* <><><><> <><><><> <><><><> <><><><> */
+
+.black-flag.chat-card {
+	--card-gap: 8px;
+
+	section > .section-header {
+		display: block;
+		margin-block-start: var(--card-gap);
+		font-family: var(--bf-font-primary);
+		font-size: var(--font-size-12);
+		font-weight: 800;
+	}
+	.activities ul {
+		margin-block-start: var(--card-gap);
+
+		li {
+			--icon-size: 32px;
+			gap: var(--card-gap);
+			.name-stacked {
+				gap: 0;
+				text-align: start;
+			}
+		}
+	}
+	.deltas ul {
+		.delta {
+			display: flex;
+			justify-content: space-between;
+			.label { flex-grow: 1; }
+			.roll { font-size: var(--font-size-12); }
+		}
+	}
+}

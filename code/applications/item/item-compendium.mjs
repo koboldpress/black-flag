@@ -20,7 +20,7 @@ export default class BlackFlagItemCompendium extends (foundry.applications?.side
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _render(...args) {
@@ -38,7 +38,7 @@ export default class BlackFlagItemCompendium extends (foundry.applications?.side
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _handleDroppedEntry(target, data) {

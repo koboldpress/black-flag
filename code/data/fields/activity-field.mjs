@@ -29,7 +29,7 @@ export class ActivityField extends MappingField {
 		return new ActivityCollection(model, super.initialize(value, model, options));
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	migrateSource(sourceData, fieldData) {

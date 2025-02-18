@@ -410,7 +410,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		return typeConfig.consumptionLabels.call(this, config, consumed);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Create hint text indicating how much of this resource will be consumed/recovered.
@@ -435,7 +435,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Create hint text indicating how much of this resource will be consumed/recovered.
@@ -458,7 +458,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Create hint text indicating how much of this resource will be consumed/recovered.
@@ -489,7 +489,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Create hint text indicating how much of this resource will be consumed/recovered.
@@ -525,7 +525,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Create hint text indicating how much of this resource will be consumed/recovered.
@@ -550,7 +550,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Resolve the cost for the consumption hint.

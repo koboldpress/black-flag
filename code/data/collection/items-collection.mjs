@@ -8,7 +8,7 @@ export default class BlackFlagItems extends Items {
 		return this.contents.filter(c => c.visible && !this.has(c.system?.container));
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async importFromCompendium(pack, id, updateData = {}, options = {}) {
 		const created = await super.importFromCompendium(pack, id, updateData, options);

@@ -118,7 +118,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		}, new foundry.utils.Collection());
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Get all of the items in this container and any sub-containers. A promise if item is within a compendium.
@@ -148,7 +148,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		}, new foundry.utils.Collection());
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Fetch a specific contained item.
@@ -161,7 +161,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		return game.items.get(id);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Number of items contained in this container including items in sub-containers. Result is a promise if item
@@ -175,7 +175,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		return items.reduce(reducer, 0);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Weight of the items in this container. Result is a promise if item is within a compendium.
@@ -202,7 +202,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * The weight of this container with all of its contents. Result is a promise if item is within a compendium.

@@ -13,14 +13,14 @@ export default class CopyableElement extends HTMLElement {
 		this.append(button);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	disconnectedCallback() {
 		this.querySelector("button")?.remove();
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle copying the contents.

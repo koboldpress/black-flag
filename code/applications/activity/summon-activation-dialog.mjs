@@ -15,9 +15,9 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 		}
 	};
 
-	/* -------------------------------------------- */
-	/*  Rendering                                   */
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _prepareCreationContext(context, options) {

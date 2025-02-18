@@ -50,7 +50,7 @@ export default class SpellListJournalPageData extends BaseDataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Different ways in which spells can be grouped on the sheet.

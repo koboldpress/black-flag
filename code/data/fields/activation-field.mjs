@@ -24,7 +24,7 @@ export default class ActivationField extends SchemaField {
 		super(fields, options);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {

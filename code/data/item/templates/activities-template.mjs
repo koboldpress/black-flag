@@ -104,7 +104,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		if ( spells.length ) this.parent.actor.createEmbeddedDocuments("Item", spells);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Prepare any item or actor changes based on activity changes.
@@ -128,7 +128,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		if ( removed.length ) foundry.utils.setProperty(options, "blackFlag.removedCachedItems", removed);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Perform any additional updates when an item with activities is updated.
@@ -159,7 +159,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		if ( cachedInserts.length ) await this.parent.actor.createEmbeddedDocuments("Item", cachedInserts);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Perform any necessary cleanup when an item with activities is deleted.

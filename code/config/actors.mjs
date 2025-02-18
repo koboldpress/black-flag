@@ -293,6 +293,7 @@ export const movementTags = {
  *                                     with optional "Full", "HitDice", & "HitPoints" variants depending
  *                                     on what resources can be recovered.
  * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
+ * @property {string[]} [activationPeriods] - Activation types that should be displayed in the chat card.
  * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
  * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {string[]} [recoverPeriods] - Recovery periods as defined in `CONFIG.BlackFlag.recoveryPeriods` that
@@ -312,6 +313,7 @@ export const rest = {
 			hint: "BF.Rest.Type.Short.Hint",
 			resultMessages: "BF.Rest.Result.Short",
 			dialogClass: ShortRestDialog,
+			activationPeriods: ["short"],
 			recoverPeriods: ["shortRest"],
 			recoverSpellSlotTypes: new Set(["pact"])
 		},
@@ -320,6 +322,7 @@ export const rest = {
 			hint: "BF.Rest.Type.Long.Hint",
 			resultMessages: "BF.Rest.Result.Long",
 			dialogClass: LongRestDialog,
+			activationPeriods: ["long"],
 			recoverHitPoints: true,
 			recoverHitDice: true,
 			recoverPeriods: ["longRest", "dawn", "day", "dusk", "shortRest"],

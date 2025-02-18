@@ -199,7 +199,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Apply any transformation to the Item data which are caused by enchantment Effects.

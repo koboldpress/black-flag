@@ -1,5 +1,7 @@
 import SkillRollConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
+import ActivationsField from "../data/chat-message/fields/activations-field.mjs";
+import ActorDeltasField from "../data/chat-message/fields/deltas-field.mjs";
+import { buildRoll, getPluralRules, log, numberFormat, Trait } from "../utils/_module.mjs";
 import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -574,6 +576,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 *
 	 * @typedef {object} RestResult
 	 * @property {string} type - Type of rest performed (e.g. "short" or "long").
+	 * @property {BlackFlagActor} clone - Clone of the actor from before the rest began.
 	 * @property {object} deltas
 	 * @property {number} deltas.hitPoints - Hit points recovered during the rest.
 	 * @property {object} deltas.hitDice - Hit dice spent or recovered during the rest, grouped by size.
@@ -615,6 +618,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (!restConfig) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
 		config = foundry.utils.mergeObject({ dialog: true, chat: true }, config);
 
+		const clone = this.clone();
 		const initialHitDice = Object.entries(this.system.attributes?.hd?.d ?? {}).reduce((obj, [d, v]) => {
 			obj[d] = v.spent;
 			return obj;
@@ -640,6 +644,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}
 		}
 		const result = {
+			clone,
 			type: config.type,
 			deltas: {},
 			actorUpdates: {},
@@ -827,7 +832,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const localizationString = `${restConfig.resultMessages}.${resultType}`;
 
 		// Prepare localization data
-		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+		const pluralRules = getPluralRules();
 		const localizationData = {
 			name: this.name,
 			hitDice: numberFormat(result.type === "long" ? totalHD : -totalHD),
@@ -840,13 +845,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const chatData = {
 			content: game.i18n.format(localizationString, localizationData),
-			flags: {
-				[game.system.id]: { messageType: "rest" }
-			},
 			flavor: game.i18n.localize(restConfig.label),
 			rolls: result.rolls,
-			speaker: { actor: this, alias: this.name },
-			user: game.user.id
+			speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
+			system: {
+				activations: ActivationsField.getActivations(this, restConfig.activationPeriods ?? []),
+				deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.actorUpdates, item: result.itemUpdates }),
+				type: result.type
+			},
+			type: "rest"
 		};
 		ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
 		return ChatMessage.create(chatData);

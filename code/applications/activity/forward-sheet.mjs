@@ -42,7 +42,7 @@ export default class ForwardSheet extends ActivitySheet {
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _prepareEffectContext(context) {
@@ -56,7 +56,7 @@ export default class ForwardSheet extends ActivitySheet {
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Prepare the tab information for the sheet.

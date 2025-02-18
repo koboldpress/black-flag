@@ -31,7 +31,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		});
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static PARTS = {
@@ -41,7 +41,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		}
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Position of pages based on type.
@@ -52,9 +52,9 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		appendix: 100
 	};
 
-	/* -------------------------------------------- */
-	/*  Rendering                                   */
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	_configureRenderParts(options) {
@@ -62,7 +62,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		return foundry.utils.deepClone(this.constructor.PARTS);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	_createContextMenus() {
@@ -72,7 +72,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		});
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _onRender(context, options) {
@@ -91,7 +91,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		}).bind(this.element);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _prepareContext(options) {
@@ -179,7 +179,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _renderFrame(options) {
@@ -188,9 +188,9 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		return frame;
 	}
 
-	/* -------------------------------------------- */
-	/*  Event Handlers                              */
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	activateListeners(html) {
@@ -199,7 +199,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		this.element[0].dataset.compendiumId = this.collection.metadata.id;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle clicking a link to a journal entry or page.
@@ -217,7 +217,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		});
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_onDragStart(event) {

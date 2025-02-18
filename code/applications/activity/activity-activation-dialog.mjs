@@ -144,7 +144,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {

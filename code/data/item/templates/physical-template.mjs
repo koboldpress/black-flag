@@ -51,7 +51,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Maximum depth items can be nested in containers.
@@ -212,7 +212,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _preUpdate(changed, options, user) {
 		if ( foundry.utils.hasProperty(changed, "system.container") ) {
@@ -220,19 +220,19 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		}
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_onCreatePhysicalItem(data, options, userId) {
 		this._renderContainers();
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_onUpdatePhysicalItem(changed, options, userId) {
 		this._renderContainers({ formerContainer: options.formerContainer });
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_onDeletePhysicalItem(options, userId) {
 		this._renderContainers();

@@ -24,6 +24,14 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	get isRoll() {
+		if (this.system?.isRoll !== undefined) return this.system.isRoll;
+		return super.isRoll;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Should roll DCs and other challenge details be displayed on this card?
 	 * @type {boolean}
@@ -64,10 +72,16 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getHTML() {
-		const jQuery = await super.getHTML();
-		if (!this.isContentVisible) return jQuery;
-		const html = jQuery[0];
+	async getHTML(options = {}) {
+		const rendered = await super.getHTML(options);
+		const html = rendered instanceof HTMLElement ? rendered : rendered[0];
+
+		if (foundry.utils.getType(this.system?.getHTML) === "function") {
+			await this.system.getHTML(html, options);
+			return rendered;
+		}
+
+		if (!this.isContentVisible) return rendered;
 
 		for (const element of html.querySelectorAll(".blackFlag-icon")) {
 			const icon = document.createElement("blackFlag-icon");
@@ -88,7 +102,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		this._renderEffectUI(html);
 		this._collapseTrays(html);
 
-		return jQuery;
+		return rendered;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

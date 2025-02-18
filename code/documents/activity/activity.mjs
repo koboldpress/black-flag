@@ -1404,7 +1404,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		return rollData;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Merge the activity updates into this activity's item updates.

@@ -58,80 +58,161 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
  * Cached options for attributes.
  * @type {Map<string, FormSelectOptions>}
  */
-const _attributeOptionCache = new Map();
+const _attributeOptionCache = {
+	activity: new Map(),
+	actor: new Map(),
+	item: new Map()
+};
 
 /**
  * Create a human readable label for the provided attribute key, if possible.
  * @param {string} attribute - Attribute key path to localize.
  * @param {object} [options={}]
  * @param {BlackFlagActor} [options.actor] - Optional actor to assist with lookups.
+ * @param {BlackFlagItem} [options.item] - Optional item to assist with lookups.
  * @returns {FormSelectOption}
  */
-export function getAttributeOption(attribute, { actor }={}) {
-	if ( _attributeOptionCache.has(attribute) ) return _attributeOptionCache.get(attribute);
+export function getAttributeOption(attribute, { actor, item }={}) {
+	if ( attribute.startsWith("system.") ) attribute = attribute.slice(7);
 
-	const cache = (label, group) => {
-		const option = { value: attribute, label: label ?? attribute };
-		if ( group ) option.group = group;
-		_attributeOptionCache.set(attribute, option);
-		return foundry.utils.deepClone(option);
+	let type = "actor";
+	if ( item ) type = attribute.startsWith("activities.") ? "activity" : "item";
+	else if ( _attributeOptionCache.actor.has(attribute) ) return _attributeOptionCache.actor.get(attribute);
+
+	const getSchemaLabel = (attr, type, doc) => {
+		if ( doc ) return doc.system.schema.getField(attr)?.label;
+		for ( const model of Object.values(CONFIG[type].dataModels) ) {
+			const field = model.schema.getField(attr);
+			if ( field ) return field.label;
+		}
 	};
 
-	switch (attribute) {
-		case "attributes.ac.flat":
-		case "attributes.ac.value": return cache(game.i18n.localize("BF.ArmorClass.Label"));
-		case "attributes.cr": return cache(game.i18n.localize("BF.ChallengeRating.Label"));
-		case "attributes.death.failure": return cache(game.i18n.localize("BF.Death.Failure.Label"));
-		case "attributes.death.success": return cache(game.i18n.localize("BF.Death.Success.Label"));
-		case "attributes.exhaustion": return cache(game.i18n.localize("BF.Condition.Exhaustion.Level"));
-		case "attributes.hp.temp": return cache(game.i18n.localize("BF.HitPoint.Temp.LabelLong"));
-		case "attributes.hp":
-		case "attributes.hp.value": return cache(game.i18n.localize("BF.HitPoint.Label[other]"));
-		case "initiative":
-		case "attributes.initiative.mod": return cache(game.i18n.localize("BF.Initiative.Label"));
-		case "attributes.legendary.spent":
-		case "attributes.legendary.value": return cache(game.i18n.localize("BF.ACTIVATION.Type.Legendary[other]"));
-		case "attributes.luck.value": return cache(game.i18n.localize("BF.Luck.Label"));
-		case "attributes.perception": return cache(game.i18n.localize("BF.Skill.Perception.Label"));
-		case "attributes.stealth": return cache(game.i18n.localize("BF.Skill.Stealth.Label"));
-		case "progression.xp":
-		case "progression.xp.value": return cache(game.i18n.localize("BF.ExperiencePoints.Label"));
-		case "spellcasting.dc": return cache(game.i18n.localize("BF.Spellcasting.DC.Label"));
+	let name;
+	let group;
+	let label;
+
+	// Activity Labels
+	if ( type === "activity" ) {
+		let [, activityId, ...keyPath] = attribute.split(".");
+		const activity = item.system.activities?.get(activityId);
+		if ( activity ) return { value: attribute, label: attribute };
+		attribute = keyPath.join(".");
+		name = `${item.name}: ${activity.name}`;
+		if ( _attributeOptionCache.activity.has(attribute) ) label = _attributeOptionCache.activity.get(attribute);
+		else if ( attribute === "uses.spent" ) label = "BF.Uses.Short";
 	}
 
-	if ( attribute.startsWith("abilities.") ) return cache(
-		CONFIG.BlackFlag.abilities.localized[attribute], game.i18n.localize("BF.Ability.Score.Label[other]")
-	);
+	// Item Labels
+	else if ( type === "item" ) {
+		name = item.name;
+		if ( _attributeOptionCache.item.has(attribute) ) label = _attributeOptionCache.item.get(attribute);
+		else if ( attribute === "uses.spent" ) label = "BF.Uses.Short";
+		else label = getSchemaLabel(attribute, "Item", item);
+	}
 
-	if ( attribute.startsWith("proficiencies.skills.") ) {
+	// Abilities
+	else if ( attribute.startsWith("abilities.") ) {
+		label = CONFIG.BlackFlag.abilities.localized[attribute];
+		group = "BF.Ability.Score.Label[other]";
+	}
+
+	// Hit Dice
+	else if ( attribute.startsWith("attributes.hd.d.") ) {
+		const denom = attribute.replace("attributes.hd.d.", "").replace(".spent", "");
+		label = game.i18n.format("BF.HitDie.LabelSpecific", { denom });
+		group = "BF.HitDie.Label[other]";
+	}
+
+	// Skills
+	else if ( attribute.startsWith("proficiencies.skills.") ) {
 		const key = attribute.replace("proficiencies.skills.", "").replace(".passive", "");
-		const skill = CONFIG.BlackFlag.skills.localized[key];
-		return cache(skill, game.i18n.localize("BF.Skill.Passive.Label"));
+		label = CONFIG.BlackFlag.skills.localized[key];
+		group = "BF.Skill.Passive.Label";
 	}
 
-	if ( attribute.startsWith("spellcasting.slots.") ) {
-		let slot;
+	// Spell Slots
+	else if ( attribute.startsWith("spellcasting.slots.") ) {
 		if ( attribute.startsWith("spellcasting.slots.pact") ) {
-			slot = game.i18n.localize("BF.Spellcasting.Type.Pact.Slots");
+			label = "BF.Spellcasting.Type.Pact.Slots";
 		} else {
 			const circle = attribute.match(/spellcasting\.slots\.circle-(\d+)(?:\.|$)/)?.[1];
-			if ( circle ) slot = CONFIG.BlackFlag.spellCircles()[Number(circle)];
+			if ( circle ) label = CONFIG.BlackFlag.spellCircles()[Number(circle)];
 		}
-		if ( !slot && actor ) slot = foundry.utils.getProperty(actor.system, attribute)?.label;
-		return cache(slot, game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.Label"));
+		if ( !label && actor ) label = foundry.utils.getProperty(actor.system, attribute)?.label;
+		group = "BF.CONSUMPTION.Type.SpellSlots.Label";
 	}
 
-	if ( attribute.startsWith("traits.movement.types.") ) return cache(
-		CONFIG.BlackFlag.movementTypes.localized[attribute.replace("traits.movement.types.", "")],
-		game.i18n.localize("BF.Speed.Label")
-	);
+	// Movement
+	else if ( attribute.startsWith("traits.movement.types.") ) {
+		label = CONFIG.BlackFlag.movementTypes.localized[attribute.replace("traits.movement.types.", "")];
+		group = "BF.Speed.Label";
+	}
 
-	if ( attribute.startsWith("traits.senses.types.") ) return cache(
-		CONFIG.BlackFlag.senses.localized[attribute.replace("traits.senses.types.", "")],
-		game.i18n.localize("BF.SENSES.Label[other]")
-	);
+	// Senses
+	else if ( attribute.startsWith("traits.senses.types.") ) {
+		label = CONFIG.BlackFlag.senses.localized[attribute.replace("traits.senses.types.", "")];
+		group = "BF.SENSES.Label[other]";
+	}
 
-	return { value: attribute, label: attribute };
+	else {
+		switch (attribute) {
+			case "attributes.ac.flat":
+			case "attributes.ac.value":
+				label = "BF.ArmorClass.Label";
+				break;
+			case "attributes.cr":
+				label = "BF.ChallengeRating.Label";
+				break;
+			case "attributes.death.failure":
+				label = "BF.Death.Failure.Label";
+				break;
+			case "attributes.death.success":
+				label = "BF.Death.Success.Label";
+				break;
+			case "attributes.exhaustion":
+				label = "BF.Condition.Exhaustion.Level";
+				break;
+			case "attributes.hp.temp":
+				label = "BF.HitPoint.Temp.LabelLong";
+				break;
+			case "attributes.hp":
+			case "attributes.hp.value":
+				label = "BF.HitPoint.Label[other]";
+				break;
+			case "initiative":
+			case "attributes.initiative.mod":
+				label = "BF.Initiative.Label";
+				break;
+			case "attributes.legendary.spent":
+			case "attributes.legendary.value":
+				label = "BF.ACTIVATION.Type.Legendary[other]";
+				break;
+			case "attributes.luck.value":
+				label = "BF.Luck.Label";
+				break;
+			case "attributes.perception":
+				label = "BF.Skill.Perception.Label";
+				break;
+			case "attributes.stealth":
+				label = "BF.Skill.Stealth.Label";
+				break;
+			case "progression.xp":
+			case "progression.xp.value":
+				label = "BF.ExperiencePoints.Label";
+				break;
+			case "spellcasting.dc":
+				label = "BF.Spellcasting.DC.Label";
+				break;
+			default:
+				label = getSchemaLabel(attribute, "Actor", actor);
+				break;
+		} 
+	}
+
+	const option = { value: attribute, label: game.i18n.localize(label) || attribute, group: game.i18n.localize(group) };
+	if ( label ) _attributeOptionCache[type].set(attribute, option);
+	if ( name ) option.label = `${name} ${option.label}`;
+	return foundry.utils.deepClone(option);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

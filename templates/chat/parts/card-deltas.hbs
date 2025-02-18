@@ -1,0 +1,14 @@
+<section class="deltas">
+	<strong class="section-header">{{ localize "BF.CHATMESSAGE.Deltas.Recovery" }}</strong>
+	<ul class="unlist">
+		{{#each deltas}}
+			<li class="delta delta-{{ type }}">
+				<span class="label">{{ label }}</span>
+				{{#each rolls}}
+					<span class="roll">{{{ anchor }}}</span>
+				{{/each}}
+				<span class="value">{{ delta }}</span>
+			</li>
+		{{/each}}
+	</ul>
+</section>

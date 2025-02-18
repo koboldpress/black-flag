@@ -62,6 +62,7 @@ Hooks.once("init", function () {
 	data.registerDataModels(ActiveEffect, { enchantment: data.activeEffect.EnchantmentData });
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);
+	CONFIG.ChatMessage.dataModels = data.chatMessage.config;
 	data.registerDataModels(JournalEntryPage);
 	dice.registerDice();
 	documents.BlackFlagActiveEffect.registerHUDListeners();

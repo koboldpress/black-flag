@@ -23,7 +23,7 @@ export default class AppliedEffectField extends SchemaField {
 		);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {
