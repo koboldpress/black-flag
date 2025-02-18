@@ -12,6 +12,34 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	static TRAY_TYPES = ["blackFlag-attackResult", "blackFlag-damageApplication", "blackFlag-effectApplication"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_initializeSource(data, options = {}) {
+		if (data instanceof foundry.abstract.DataModel) data = data.toObject();
+
+		// Migrate old activation messages to the new ones
+		// Added in 1.3.063
+		if (data.flags?.[game.system.id]?.messageType === "activation" && data.type !== "activation") {
+			data.type = "activation";
+			delete data.flags[game.system.id].messageType;
+			const move = (origin, destination) => {
+				const value = foundry.utils.getProperty(data, `flags.${game.system.id}.${origin}`);
+				if (value && !foundry.utils.hasProperty(data, `system.${destination}`)) {
+					foundry.utils.setProperty(data, `system.${destination}`, value);
+					foundry.utils.setProperty(data, `flags.${game.system.id}.${origin}`, null);
+				}
+			};
+			move("activation.cause", "cause");
+			move("activation.consumed", "deltas");
+			move("activation.effects", "effects");
+		}
+
+		return super._initializeSource(data, options);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
