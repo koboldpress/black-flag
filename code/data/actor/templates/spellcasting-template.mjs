@@ -94,7 +94,8 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	static computeLeveledProgression(progression, cls, { actor, levels=1, spellcasting, count=1 }) {
 		const prog = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[spellcasting.progression];
 		if ( prog ) {
-			this._computeRoundedProgression(progression, levels, prog.divisor, prog.roundUp);
+			const roundUp = prog.roundUp !== undefined ? prog.roundUp : count === 1;
+			this._computeRoundedProgression(progression, levels, prog.divisor, roundUp);
 			if ( spellcasting?.cantrips.formula ) progression.cantrips = true;
 		}
 	}
@@ -128,8 +129,8 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 * Adjust the leveled count based on a divided and rounded levels value.
 	 * @param {object} progression - Spellcasting progression data. *Will be mutated.*
 	 * @param {number} levels - Number of levels for the class.
-	 * @param {number} divisor - Amount by which to divide the levels.
-	 * @param {boolean} roundUp - Should it be rounded up rather than down?
+	 * @param {number} [divisor=1] - Amount by which to divide the levels.
+	 * @param {boolean} [roundUp=false] - Should it be rounded up rather than down?
 	 */
 	static _computeRoundedProgression(progression, levels, divisor=1, roundUp=false) {
 		const rounding = roundUp ? Math.ceil : Math.floor;

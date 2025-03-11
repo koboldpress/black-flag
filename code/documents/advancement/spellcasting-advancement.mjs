@@ -115,17 +115,21 @@ export default class SpellcastingAdvancement extends Advancement {
 		)
 			return table;
 
-		const slots = {};
-		Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).forEach(l => (slots[`circle-${l}`] = {}));
+		const baseSlots = {};
+		Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).forEach(l => (baseSlots[`circle-${l}`] = {}));
 
 		let largestSlot;
 		for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse()) {
+			const divisor = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[this.configuration.progression]?.divisor;
 			const progression = { leveled: 0 };
-			SpellcastingTemplate.computeClassProgression(progression, this.item, {
-				levels: level,
-				spellcasting: this.configuration
-			});
-			SpellcastingTemplate.prepareSpellcastingSlots(slots, "leveled", progression);
+			const slots = foundry.utils.deepClone(baseSlots);
+			if (level >= (divisor ?? 1)) {
+				SpellcastingTemplate.computeClassProgression(progression, this.item, {
+					levels: level,
+					spellcasting: this.configuration
+				});
+				SpellcastingTemplate.prepareSpellcastingSlots(slots, "leveled", progression);
+			}
 
 			if (!largestSlot)
 				largestSlot = Object.values(slots).reduce(

@@ -262,12 +262,13 @@ export default class ClassPageSheet extends JournalPageSheet {
 						.map(f => (foundry.utils.getType(f) === "string" ? f : f.outerHTML))
 						.join(", ")
 				});
-			scaleValues.column.forEach(s => cells.push({ class: "scale", content: s.valueForLevel(level)?.display }));
+			scaleValues.column.forEach(s => cells.push({ class: "scale", content: s.valueForLevel(level)?.display ?? "—" }));
 			const spellCells = spellProgression?.rows[level - 1];
 			if (spellCells) cells.push(...spellCells);
 
 			// Skip empty rows on subclasses
-			if (item.type !== "subclass" || !foundry.utils.isEmpty(features) || scaleValues.length || spellCells) {
+			const hasContent = !foundry.utils.isEmpty(features) || scaleValues.length || spellCells;
+			if (item.type !== "subclass" || (level >= CONFIG.BlackFlag.subclassLevel && hasContent)) {
 				rows.push(cells);
 			}
 		}
