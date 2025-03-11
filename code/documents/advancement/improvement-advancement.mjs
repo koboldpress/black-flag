@@ -245,4 +245,31 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 			i => i.system.restriction?.allowMultipleTimes || !this.actor?.sourcedItems.get(i.uuid)?.size
 		);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_validateItemType(item, { flow = false, strict = true } = {}) {
+		super._validateItemType(item, { strict });
+
+		// Check restrictions defined by the dropped item
+		if (this.actor && flow) {
+			const messages = item.system.validatePrerequisites(this.actor);
+			if (messages !== true && messages !== null) {
+				if (strict) {
+					const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction", style: "long" });
+					throw new Error(
+						game.i18n.format("BF.Prerequisite.Warning.Failure", {
+							name: this.actor.name,
+							requirements: listFormatter.format(messages),
+							type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]).toLowerCase()
+						})
+					);
+				}
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

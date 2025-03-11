@@ -9,6 +9,10 @@ const { BooleanField, DocumentUUIDField, NumberField, SetField, StringField } = 
 export default class PrerequisiteConfig extends BFDocumentSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
+		actions: {
+			addCustom: PrerequisiteConfig.#addCustom,
+			deleteCustom: PrerequisiteConfig.#deleteCustom
+		},
 		classes: ["prerequisite", "standard-form", "form-list"],
 		form: {
 			submitOnChange: true
@@ -40,6 +44,9 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 		},
 		traits: {
 			template: "systems/black-flag/templates/shared/fieldset.hbs"
+		},
+		custom: {
+			template: "systems/black-flag/templates/item/config/prerequisite-config-custom.hbs"
 		}
 	};
 
@@ -76,6 +83,11 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 		context.source = this.document.system._source;
 		context.system = this.document.system;
 		context.restrictionFields = this.document.system.schema.fields.restriction.fields;
+		context.custom = (context.source.restriction.custom ?? []).map((value, index) => ({
+			field: context.restrictionFields.custom.element,
+			name: `system.restriction.custom.${index}`,
+			value
+		}));
 		return context;
 	}
 
@@ -285,6 +297,41 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle adding a new custom entry.
+	 * @this {PrerequisiteConfig}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static #addCustom(event, target) {
+		const custom = this.document.system.toObject().restriction.custom ?? [];
+		this.submit({
+			updateData: {
+				"system.restriction.custom": [...custom, ""]
+			}
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle removing a custom entry.
+	 * @this {PrerequisiteConfig}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static #deleteCustom(event, target) {
+		const custom = this.document.system.toObject().restriction.custom ?? [];
+		custom.splice(target.closest("[data-index]").dataset.index, 1);
+		this.submit({
+			updateData: {
+				"system.restriction.custom": custom
+			}
+		});
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

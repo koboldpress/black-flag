@@ -673,6 +673,7 @@ export default class PCData extends ActorDataModel.mixin(
 			set.add(o.ability);
 			return set;
 		}, new Set());
+		// TODO: Bugged, move to prepareFinalSpellcasting
 		this.spellcasting.ability = this.selectBestAbility?.(abilities) ?? null;
 		this.spellcasting.cantripScale = SpellcastingTemplate.calculateCantripScale(this.progression.level);
 	}

@@ -1,0 +1,18 @@
+<fieldset>
+	<legend>{{ localize "BF.Prerequisite.Custom.Label" }}</legend>
+	{{#each custom}}
+		<div class="form-group" data-index="{{ @index }}">
+			<div class="form-fields">
+				{{ formInput field name=name value=value }}
+				<button type="button" class="link-button" data-action="deleteCustom"
+				        data-tooltip="BF.Prerequisite.Action.DeleteCustom"
+				        aria-label="{{ localize 'BF.Prerequisite.Action.DeleteCustom' }}">
+					<i class="fa-solid fa-trash" inert></i>
+				</button>
+			</div>
+		</div>
+	{{/each}}
+	<button type="button" class="link-button" data-action="addCustom">
+		<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Prerequisite.Action.AddCustom" }}
+	</button>
+</fieldset>

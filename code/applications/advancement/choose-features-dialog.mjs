@@ -124,7 +124,8 @@ export default class ChooseFeaturesDialog extends BFApplication {
 		};
 		if (doc.system.restriction) {
 			optionContext.prerequisite = doc.system.createPrerequisiteLabel(this.advancement.actor);
-			optionContext.invalid = doc.system.validatePrerequisites(this.advancement.actor) !== true;
+			const validation = doc.system.validatePrerequisites(this.advancement.actor);
+			optionContext.invalid = validation !== true && validation !== null;
 		}
 		return optionContext;
 	}

@@ -173,6 +173,18 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Has the actor reached the limit of this item? Based on whether other items from the same source ID are already
+	 * on the actor and whether the item has the `allowMultipleTimes` restriction.
+	 * @param {BlackFlagItem} item - Item to check.
+	 * @returns {boolean}
+	 */
+	selectionLimitReached(item) {
+		return !item.system.restriction?.allowMultipleTimes && !!this.actor?.sourcedItems.get(item.uuid)?.size;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Verify that the provided item can be used with this advancement based on the configuration.
 	 * @param {BlackFlagItem} item - Item that needs to be tested.
 	 * @param {object} config

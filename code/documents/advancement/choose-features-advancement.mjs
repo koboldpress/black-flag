@@ -228,7 +228,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		// Check restrictions defined by the dropped item
 		if (this.actor && flow) {
 			const messages = item.system.validatePrerequisites(this.actor);
-			if (messages !== true) {
+			if (messages !== true && messages !== null) {
 				if (strict) {
 					const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction", style: "long" });
 					throw new Error(
@@ -263,17 +263,5 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 			if (!this.selectionLimitReached(item)) choices.push(item);
 		}
 		return choices;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Has the actor reached the limit of this item? Based on whether other items from the same source ID are already
-	 * on the actor and whether the item has the `allowMultipleTimes` restriction.
-	 * @param {BlackFlagItem} item - Item to check.
-	 * @returns {boolean}
-	 */
-	selectionLimitReached(item) {
-		return !item.system.restriction?.allowMultipleTimes && !!this.actor?.sourcedItems.get(item.uuid)?.size;
 	}
 }

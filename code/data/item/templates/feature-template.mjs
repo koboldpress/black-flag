@@ -1,13 +1,14 @@
 import { filter, linkForUUID, numberFormat, Trait } from "../../../utils/_module.mjs";
 import FilterField from "../../fields/filter-field.mjs";
 
-const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Feature and Talent items.
  *
  * @property {object} restriction
  * @property {boolean} restriction.allowMultipleTimes - Can this talent be taken more than once?
+ * @property {string[]} restriction.custom - Custom restrictions with no mechanical effect.
  * @property {FilterField} restriction.filters - Filters limiting when this item can be selected.
  * @property {Set<string>} restriction.items - Other items that must be present on the actor to take this feature.
  * @property {boolean} restriction.requireAll - Do all filters need to be satisfied to take this feature, or only one.
@@ -25,6 +26,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 					label: "BF.Prerequisite.AllowMultipleTimes.Label",
 					hint: "BF.Prerequisite.AllowMultipleTimes.Hint"
 				}),
+				custom: new ArrayField(new StringField()),
 				filters: new FilterField(),
 				items: new SetField(new StringField()),
 				requireAll: new BooleanField({
@@ -199,6 +201,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			prerequisites.push(label);
 		}
 
+		prerequisites.push(...this.restriction.custom.filter(_ => _));
+
 		// TODO: Send out hook for custom filter handling
 
 		if ( !prerequisites.length ) return "";
@@ -213,7 +217,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	/**
 	 * Validate item prerequisites against actor data.
 	 * @param {BlackFlagActor} actor - Actor that needs to be validated.
-	 * @returns {true|string[]} - True if the item is valid, or a list of invalid descriptions if not.
+	 * @returns {true|null|string[]} - True if the item is valid, null if custom restrictions are provided that can't
+	 *                                 be properly evaluated, or a list of invalid descriptions if validation failed.
 	 */
 	validatePrerequisites(actor) {
 		let missingItems = this.restriction.items.filter(uuid => !actor.sourcedItems.get(uuid)?.size);
@@ -221,8 +226,9 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		let invalidFilters;
 		if ( this.restriction.requireAll ) {
 			invalidFilters = this.restriction.filters.filter(f => !filter.performCheck(actor, [f]));
-			if ( !invalidFilters.length && !missingItems.size ) return true;
+			if ( !invalidFilters.length && !missingItems.size ) return this.restriction.custom.length ? null : true;
 		} else {
+			if ( this.restriction.custom.length ) return null;
 			const atLeastOneItem = missingItems.size < this.restriction.items.size;
 			if ( this.restriction.filters.some(f => filter.performCheck(actor, [f])) || atLeastOneItem ) return true;
 			invalidFilters = this.restriction.filters;
