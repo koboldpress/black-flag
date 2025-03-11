@@ -6,20 +6,50 @@
   "img": "icons/skills/melee/strike-sword-blood-red.webp",
   "system": {
     "activities": {
-      "7RvPGxNj3yKmt0UL": {
-        "type": "utility",
-        "_id": "7RvPGxNj3yKmt0UL",
+      "vfkZhMyu5NGl0hvp": {
+        "type": "damage",
+        "_id": "vfkZhMyu5NGl0hvp",
         "description": "",
-        "system": {},
+        "flags": {},
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "effects": []
+        },
         "activation": {
           "value": null,
+          "override": false,
+          "primary": true,
           "type": "free",
           "condition": "When you hit a creature with a weapon attack"
         },
         "consumption": {
           "targets": [
             {
-              "type": "activity",
+              "type": "item",
+              "target": "",
               "value": "1",
               "scaling": {
                 "mode": ""
@@ -42,14 +72,17 @@
         },
         "duration": {
           "units": "instantaneous",
+          "concentration": false,
           "override": false
         },
         "range": {
+          "override": false,
           "units": ""
         },
+        "magical": false,
         "target": {
           "template": {
-            "count": 1,
+            "contiguous": false,
             "units": "foot",
             "type": ""
           },
@@ -57,30 +90,126 @@
             "choice": false,
             "type": ""
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [
+          "recovery": [],
+          "max": ""
+        },
+        "name": "Damage",
+        "img": ""
+      },
+      "QZlV8TdguW0eJGw4": {
+        "type": "damage",
+        "description": "",
+        "flags": {},
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "primary": true,
+          "type": "free",
+          "condition": "When you hit a creature with a weapon attack"
+        },
+        "consumption": {
+          "targets": [
             {
-              "period": "turn",
-              "type": "recoverAll"
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": ""
+              }
+            },
+            {
+              "type": "spellSlots",
+              "target": "1",
+              "value": "1",
+              "scaling": {
+                "mode": "circle",
+                "formula": ""
+              }
             }
           ],
-          "min": "",
-          "max": "1"
+          "scale": {
+            "allowed": true,
+            "max": "9"
+          }
         },
-        "name": "",
-        "img": ""
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "name": "Damage vs. Fiend or Undead",
+        "img": "",
+        "_id": "QZlV8TdguW0eJGw4"
       }
     },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "turn",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
@@ -114,10 +243,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "1.2.060",
+    "systemVersion": "1.3.064",
     "coreVersion": "12.331",
     "createdTime": 1718399649369,
-    "modifiedTime": 1737395389361,
+    "modifiedTime": 1741735759185,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
