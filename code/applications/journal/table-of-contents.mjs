@@ -99,12 +99,17 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 		return this._getData(context);
 	}
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		return this._getData(context);
 	}
 
-	/** @inheritDoc */
+	/**
+	 * Shared context preparation between V12 & V13.
+	 * @param {object} context
+	 * @returns {object}
+	 */
 	async _getData(context) {
 		const documents = await this.collection.getDocuments();
 

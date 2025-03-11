@@ -715,8 +715,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		const canScale = linked ? linked.consumption.scale.allowed : this.canScale;
 		const linkedDelta = (linked?.system.spell?.circle ?? Infinity) - (this.item.system.circle?.base ?? Infinity);
-		if (canScale) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
-		else config.scaling = false;
+		if (!canScale) config.scaling = false;
+		else if (Number.isFinite(linkedDelta)) config.scaling ??= linkedDelta;
 
 		if (this.spellSlotScaling) {
 			const mode = this.item.getFlag(game.system.id, "relationship.mode");
@@ -726,8 +726,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				: mode in this.actor.system.spellcasting.slots
 					? mode
 					: `circle-${this.item.system.circle.base}`;
+			const scaling =
+				(this.actor.system.spellcasting.slots[config.spell.slot]?.circle ?? 0) -
+				(this.item.system.circle?.base ?? -Infinity);
+			if (scaling > 0) config.scaling ??= scaling;
 		}
 
+		config.scaling ??= 0;
 		config.targets ??= getTargetDescriptors();
 
 		// TODO: Begin concentration
@@ -1284,7 +1289,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	getDamageConfig(config = {}) {
 		if (!this.system.damage?.parts) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-		const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
+		const rollConfig = foundry.utils.deepClone(config);
 		const rollData = this.getRollData();
 		rollConfig.rolls = this.system.damage.parts
 			.map((d, index) => this._processDamagePart(d, rollConfig, rollData, { index }))
@@ -1329,7 +1334,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			},
 			rollData
 		);
-		const scaledFormula = damage.scaledFormula(rollData.scaling);
+		const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
 		if (scaledFormula) parts.unshift(scaledFormula);
 
 		if (index === 0 && this.item.system.damage?.bonus) {
