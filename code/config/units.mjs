@@ -181,13 +181,14 @@ localizeConfig(paceUnits);
 /**
  * Time periods usable by the system, split into combat periods and otherwise.
  * @type {{
- *   combat: {Record<string, LabeledConfiguration>},
- *   clock: {Record<string, UnitConfiguration>}
+ *   combat: {Record<string, UnitConfiguration>},
+ *   time: {Record<string, UnitConfiguration>}
  * }}
  */
 export const timeUnits = {
 	combat: {
 		label: "BF.Time.Category.Combat.Label",
+		scalar: true,
 		children: {
 			turn: {
 				label: "BF.UNITS.TIME.Turn.Label",
@@ -212,6 +213,7 @@ export const timeUnits = {
 	},
 	time: {
 		label: "BF.Time.Category.Time.Label",
+		scalar: true,
 		children: {
 			minute: {
 				label: "BF.UNITS.TIME.Minute.Label",

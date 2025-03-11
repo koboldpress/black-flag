@@ -158,7 +158,7 @@ function _createOptions(categories, { chosen, pluralRule, isSpell }) {
 	categories.forEach(c => selectChoices.merge(new SelectChoices(c)));
 	for (const [key, category] of Object.entries(selectChoices)) {
 		category.label = makeLabel(category, { pluralRule });
-		category.scalar = key === "time";
+		category.scalar = category.scalar;
 		for (const [k, v] of Object.entries(category.children)) {
 			v.label = makeLabel(v, { pluralRule });
 			v.scalar ??= category.scalar || v.scalar;
