@@ -141,7 +141,7 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 		for (const id of ids) {
 			const item = this.actor.items.get(id);
 			const sourceId = item.flags["black-flag"]?.sourceId ?? item._stats.compendiumSource ?? item.flags.core?.sourceId;
-			items.push({ _id: id, ...this.configuration.spell.getApplyChanges(data) });
+			items.push(this.configuration.spell.applyChanges(item.toObject(), data));
 			updated.push({ document: id, modified: true, uuid: sourceId });
 		}
 		await this.actor.updateEmbeddedDocuments("Item", items, { render });
