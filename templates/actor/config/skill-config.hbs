@@ -3,7 +3,7 @@
 	  <fieldset>
 			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			{{ formField skill.fields.proficiency.fields.multiplier options=proficiencyOptions
-									 name=(concat ability.keyPath ".proficiency.multiplier")
+									 name=(concat skill.keyPath ".proficiency.multiplier")
 									 value=skill.data.proficiency.multiplier label="BF.CHECK.Label[other]" localize=true
 									 rootId=partId }}
 		</fieldset>

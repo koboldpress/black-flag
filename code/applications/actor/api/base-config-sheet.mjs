@@ -132,12 +132,14 @@ export default class BaseConfigSheet extends BFDocumentSheet {
 		if ("modifier" in submitData) {
 			const modifierData = this.document.system.toObject().modifiers ?? [];
 			for (const [index, updates] of Object.entries(submitData.modifier)) {
+				const entryData = modifierData[Number(index)];
+				if (!entryData) continue;
 				if ("requireProficiency" in updates) {
-					updates.filter = modifierData[Number(index)].filter;
+					updates.filter = entryData.filter;
 					if (updates.requireProficiency) updates.filter.push({ k: "proficiency", v: 1, o: "gte" });
 					else updates.filter.findSplice(f => f.k === "proficiency");
 				}
-				foundry.utils.mergeObject(modifierData[Number(index)], updates, { performDeletions: true });
+				foundry.utils.mergeObject(entryData, updates, { performDeletions: true });
 			}
 			delete submitData.modifier;
 			foundry.utils.setProperty(submitData, "system.modifiers", modifierData);
