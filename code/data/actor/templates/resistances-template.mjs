@@ -59,7 +59,7 @@ export default class ResistancesTemplate extends foundry.abstract.DataModel {
 		// Adjust resistances & immunities based on status effects
 		if ( this.hasConditionEffect("petrification") ) {
 			this.traits.condition.immunities.value.add("poisoned");
-			this.traits.damage.resistances.value.push("all");
+			this.traits.damage.resistances.value.add("all");
 			this.traits.damage.immunities.value.add("poison");
 		}
 
