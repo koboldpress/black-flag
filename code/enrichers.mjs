@@ -437,8 +437,8 @@ function enrichCalculation(config, fallback, options) {
  * @returns {string}
  */
 function createRollLabel(config) {
-	const ability = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability]?.label;
-	const skill = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill]?.label;
+	const ability = CONFIG.BlackFlag.enrichment.lookup.abilities[slugify(config.ability)]?.label;
+	const skill = CONFIG.BlackFlag.enrichment.lookup.skills[slugify(config.skill)]?.label;
 	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[slugify(config.tool)]?.label;
 	const vehicle = CONFIG.BlackFlag.enrichment.lookup.vehicles[slugify(config.vehicle)]?.label;
 	const longSuffix = config.format === "long" ? "Long" : "Short";
