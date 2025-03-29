@@ -1,4 +1,3 @@
-import DragDrop from "../drag-drop.mjs";
 import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 
 /**
@@ -112,7 +111,7 @@ export default class BaseItemSheet extends DocumentSheetMixin(foundry.appv1.shee
 
 	/** @inheritDoc */
 	async _onDrop(event) {
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 
 		// Forward dropped items to the advancement element
 		// TODO: Handle folders

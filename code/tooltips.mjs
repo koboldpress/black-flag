@@ -103,7 +103,7 @@ export default class TooltipConductor {
 	 * @protected
 	 */
 	_positionTooltip(direction) {
-		const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
+		const dirs = foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS;
 		if (!direction) {
 			direction = dirs.LEFT;
 			game.tooltip._setAnchor(direction);
@@ -112,13 +112,13 @@ export default class TooltipConductor {
 		const position = this.tooltip.getBoundingClientRect();
 		switch (direction) {
 			case dirs.UP:
-				if (position.y - TooltipManager.TOOLTIP_MARGIN_PX <= 0) direction = dirs.DOWN;
+				if (position.y - foundry.helpers.interaction.TooltipManager.TOOLTIP_MARGIN_PX <= 0) direction = dirs.DOWN;
 				break;
 			case dirs.DOWN:
 				if (position.y + this.tooltip.offsetHeight > window.innerHeight) direction = dirs.UP;
 				break;
 			case dirs.LEFT:
-				if (position.x - TooltipManager.TOOLTIP_MARGIN_PX <= 0) direction = dirs.RIGHT;
+				if (position.x - foundry.helpers.interaction.TooltipManager.TOOLTIP_MARGIN_PX <= 0) direction = dirs.RIGHT;
 				break;
 			case dirs.RIGHT:
 				if (position.x + this.tooltip.offsetWidth > window.innerWith) direction = dirs.LEFT;

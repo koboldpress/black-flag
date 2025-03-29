@@ -1,7 +1,6 @@
 import BlackFlagItem from "../../documents/item.mjs";
 import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
 import SortingElement from "./sorting.mjs";
@@ -463,7 +462,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	async _onDragStart(event) {
 		const itemId = event.currentTarget.dataset.itemId;
 		const item = await this.getItem(itemId);
-		if (item) DragDrop.beginDragEvent(event, item);
+		if (item) CONFIG.ux.DragDrop.beginDragEvent(event, item);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -480,7 +479,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 
 		if (!this.isEditable) return false;
 
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 		// TODO: Add support for dropping folders
 
@@ -492,7 +491,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			if (!item) return false;
 			return this.constructor.dropItems(event, this.document, [item]);
 		} finally {
-			DragDrop.finishDragEvent(event);
+			CONFIG.ux.DragDrop.finishDragEvent(event);
 		}
 	}
 
