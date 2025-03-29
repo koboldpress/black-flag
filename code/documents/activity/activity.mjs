@@ -384,7 +384,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/** @inheritDoc */
 	async _createInlineEmbed(content, config, options) {
-		if (!config.values?.includes("activate") || !this.item.isEmbedded) {
+		if (!config?.values?.includes("activate") || !this.item.isEmbedded) {
 			return super._createInlineEmbed(content, config, options);
 		}
 
@@ -403,7 +403,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		control.classList.add("inline-caption", "link-button");
 		control.dataset.action = "activate";
 		control.dataset.activityUuid = this.uuid;
-		control.innerText = config.label ?? this.name;
+		control.innerText = config?.label ?? this.name;
 		section.children[0].insertAdjacentElement("afterbegin", control);
 
 		return section;

@@ -1,8 +1,7 @@
 /**
  * Extended version of `CombatTracker` class to support the initiative dialog.
  */
-export default class BlackFlagCombatTracker extends (foundry.applications?.sidebar?.tabs?.CombatTracker ??
-	CombatTracker) {
+export default class BlackFlagCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
 	async _onCombatantControl(event, target) {
 		const button = target ?? event.target;
 		const combatantId = button.closest("[data-combatant-id]").dataset.combatantId;
