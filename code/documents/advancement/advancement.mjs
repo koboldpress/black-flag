@@ -85,7 +85,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * Perform the pre-localization of this data model.
 	 */
 	static localize() {
-		(foundry.helpers?.Localization ?? Localization).localizeDataModel(this);
+		foundry.helpers.Localization.localizeDataModel(this);
 		this.metadata.dataModels?.configuration?.localize?.();
 	}
 
@@ -356,7 +356,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 		id ??= foundry.utils.randomID();
 		const advancementOrigin = `${this.item.id}.${this.id}`;
 		const ultimateOrigin = this.item.getFlag("black-flag", "ultimateOrigin");
-		const updates = (foundry.utils?.SortingHelpers ?? SortingHelpers).performIntegerSort(source, {
+		const updates = foundry.utils.SortingHelpers.performIntegerSort(source, {
 			target: ultimateOrigin && ultimateOrigin !== advancementOrigin ? this.item : undefined,
 			siblings: this.item.actor.items
 		});

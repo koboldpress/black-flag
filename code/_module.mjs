@@ -36,13 +36,6 @@ globalThis.BlackFlag = {
 Hooks.once("init", function () {
 	utils.log(`Initializing the Black Flag Roleplaying system - Version ${game.system.version}`);
 
-	CONFIG.compatibility.excludePatterns.push(
-		/V1 Application framework/,
-		/Set#isSubset/,
-		/ChatMessage#getHTML/,
-		/renderChatMessage/
-	);
-
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;

@@ -71,7 +71,7 @@ export default class LairData extends ActorDataModel.mixin(SourceTemplate) {
 		const context = await this.parent.sheet.getData();
 		context.headerLevel = 4;
 		const section = document.createElement("section");
-		section.innerHTML = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+		section.innerHTML = await foundry.applications.handlebars.renderTemplate(
 			"systems/black-flag/templates/actor/embeds/lair-embed.hbs",
 			context
 		);

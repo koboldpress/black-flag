@@ -10,7 +10,7 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	 * Perform the pre-localization of this data model.
 	 */
 	static localize() {
-		(foundry.helpers?.Localization ?? Localization).localizeDataModel(this);
+		foundry.helpers.Localization.localizeDataModel(this);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

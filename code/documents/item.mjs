@@ -435,7 +435,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-					content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+					content: await foundry.applications.handlebars.renderTemplate(
 						"systems/black-flag/templates/chat/item-card.hbs",
 						context
 					),

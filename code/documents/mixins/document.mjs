@@ -97,7 +97,7 @@ export default Base =>
 			}
 
 			// Render the document creation form
-			const html = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+			const html = await foundry.applications.handlebars.renderTemplate(
 				"systems/black-flag/templates/shared/document-create.hbs",
 				{
 					folders: folders
@@ -123,7 +123,7 @@ export default Base =>
 				label: title,
 				callback: async html => {
 					const form = html[0].querySelector("form");
-					const fd = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(form);
+					const fd = new foundry.applications.ux.FormDataExtended(form);
 					foundry.utils.mergeObject(data, fd.object, { inplace: true });
 					if (!data.folder) delete data.folder;
 					if (types.length === 1) data.type = types[0];

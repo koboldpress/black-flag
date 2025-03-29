@@ -4,7 +4,7 @@ import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 /**
  * Sheet upon which all other item sheets are based.
  */
-export default class BaseItemSheet extends DocumentSheetMixin(foundry.appv1?.sheets?.ItemSheet ?? ItemSheet) {
+export default class BaseItemSheet extends DocumentSheetMixin(foundry.appv1.sheets.ItemSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {

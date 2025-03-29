@@ -200,13 +200,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 					blank: false
 				}),
 				name: "rollMode",
-				options:
-					game.release.generation < 13
-						? Object.entries(CONFIG.Dice.rollModes).map(([value, l]) => ({ value, label: game.i18n.localize(l) }))
-						: Object.entries(CONFIG.Dice.rollModes).map(([value, { label }]) => ({
-								value,
-								label: game.i18n.localize(label)
-							})),
+				options: Object.entries(CONFIG.Dice.rollModes).map(([value, { label }]) => ({
+					value,
+					label: game.i18n.localize(label)
+				})),
 				value: this.message.rollMode ?? this.options.default?.rollMode
 			}
 		];
@@ -349,7 +346,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	_onChangeForm(formConfig, event) {
 		super._onChangeForm(formConfig, event);
 
-		const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(this.element);
+		const formData = new foundry.applications.ux.FormDataExtended(this.element);
 		this._handleFormChanges(formData);
 		this.#buildRolls(foundry.utils.deepClone(this.config), formData);
 		this.render({ parts: ["formulas", "notes"] });

@@ -938,7 +938,7 @@ async function requestCheckSave(event) {
 	const MessageClass = getDocumentClass("ChatMessage");
 	const chatData = {
 		user: game.user.id,
-		content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+		content: await foundry.applications.handlebars.renderTemplate(
 			"systems/black-flag/templates/chat/request-card.hbs",
 			{ buttons }
 		),

@@ -1,7 +1,7 @@
 /**
  * Custom measured template class with helpers to handle placing templates from activities.
  */
-export default class AbilityTemplate extends (foundry.canvas?.placeables?.MeasuredTemplate ?? MeasuredTemplate) {
+export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
 	/**
 	 * Track the timestamp when the last mouse move event was captured.
 	 * @type {number}

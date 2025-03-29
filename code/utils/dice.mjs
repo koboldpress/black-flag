@@ -1,4 +1,4 @@
-const { MODIFIER_CODES, MODIFIER_KEYS } = (foundry.helpers?.interaction?.KeyboardManager ?? KeyboardManager);
+const { MODIFIER_CODES, MODIFIER_KEYS } = foundry.helpers.interaction.KeyboardManager;
 
 /**
  * Determine which keys are pressed that might trigger the provided keybinding.

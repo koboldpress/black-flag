@@ -46,10 +46,7 @@ export default class PseudoDocumentSelection extends DialogV2 {
 	/** @override */
 	async _renderHTML(context, options) {
 		const form = await super._renderHTML(context, options);
-		const content = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
-			this.constructor.TEMPLATE,
-			context
-		);
+		const content = await foundry.applications.handlebars.renderTemplate(this.constructor.TEMPLATE, context);
 		form.insertAdjacentHTML("afterbegin", `<div class="dialog-content standard-form">${content}</div>`);
 		if (context.buttonLabel) {
 			form.querySelector("button").innerHTML = `<i class="fa-regular fa-save" inert></i> ${context.buttonLabel}`;
@@ -80,7 +77,7 @@ export default class PseudoDocumentSelection extends DialogV2 {
 							{
 								action: "submit",
 								callback: (event, target, dialog) => {
-									const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(
+									const formData = new foundry.applications.ux.FormDataExtended(
 										target.closest("form")
 									);
 									const type = formData.object.type;

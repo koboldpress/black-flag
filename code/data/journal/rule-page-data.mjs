@@ -48,7 +48,7 @@ export default class RuleJournalPageData extends BaseDataModel {
 			)
 		};
 		return {
-			content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+			content: await foundry.applications.handlebars.renderTemplate(
 				"systems/black-flag/templates/journal/rule-page-tooltip.hbs",
 				context
 			),

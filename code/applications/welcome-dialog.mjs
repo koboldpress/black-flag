@@ -14,9 +14,6 @@ export default class WelcomeDialog extends BFApplication {
 			title: "BF.WELCOME.Title",
 			icon: "fa-solid fa-flag-checkered"
 		},
-		actions: {
-			openDocumentation: WelcomeDialog.#openDocumentation
-		},
 		position: {
 			width: 720,
 			top: 100
@@ -147,9 +144,7 @@ export default class WelcomeDialog extends BFApplication {
 		`.replace(
 			/<documentation-link>(?<content>[^<]+)<\/documentation-link>/i,
 			`
-			<button type="button" class="link-button" data-action="openDocumentation">
-				$<content>
-			</button>
+			<a href="https://koboldpress.github.io/black-flag-docs/">$<content></a>
 		`
 		);
 		return context;
@@ -225,22 +220,5 @@ export default class WelcomeDialog extends BFApplication {
 			await game.settings.set("core", "moduleConfiguration", moduleConfiguration);
 			SettingsConfig.reloadConfirm({ world: true });
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Handle displaying the documentation browser.
-	 * @this {WelcomeDialog}
-	 * @param {Event} event - Triggering click event.
-	 * @param {HTMLElement} target - Button that was clicked.
-	 */
-	static async #openDocumentation(event, target) {
-		new FrameViewer("https://koboldpress.github.io/black-flag-docs/", {
-			classes: ["black-flag", "documentation"],
-			title: "BF.WELCOME.Documentation"
-		}).render(true);
 	}
 }

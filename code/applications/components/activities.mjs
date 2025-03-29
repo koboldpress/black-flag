@@ -288,7 +288,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		const dropActivity = this.activities.get(dropRow?.dataset.activityId);
 		if (!dragActivity || !dropActivity || dragActivity === dropActivity) return;
 		const siblings = this.activities.contents.filter(a => a.id !== dragActivity.id);
-		const sortUpdates = (foundry.utils?.SortingHelpers ?? SortingHelpers).performIntegerSort(dragActivity, {
+		const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(dragActivity, {
 			target: dropActivity,
 			siblings
 		});

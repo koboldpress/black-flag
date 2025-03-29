@@ -156,9 +156,10 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 		let ability;
 		let dc;
 		if (context.editable) {
-			ability = `<select name="system.spellcasting.ability">${(
-				foundry.applications?.handlebars?.selectOptions ?? HandlebarsHelpers.selectOptions
-			)(CONFIG.BlackFlag.abilities.localized, { hash: { selected: spellcasting.ability } })}</select>`;
+			ability = `<select name="system.spellcasting.ability">${foundry.applications.handlebars.selectOptions(
+				CONFIG.BlackFlag.abilities.localized,
+				{ hash: { selected: spellcasting.ability } }
+			)}</select>`;
 			dc = `<input type="number" name="system.spellcasting.dc" value="${context.source.spellcasting.dc}"
 			       placeholder="${spellcasting.autoDC}" step="1" min="0">`;
 		} else {

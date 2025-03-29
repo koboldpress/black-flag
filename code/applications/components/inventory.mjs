@@ -435,7 +435,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		} else {
 			// If no summary section exists yet, render and insert one
 			if (!expanded.querySelector(".item-summary")) {
-				const summary = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+				const summary = await foundry.applications.handlebars.renderTemplate(
 					"systems/black-flag/templates/shared/parts/inventory-summary.hbs",
 					await item.getSummaryContext({ sections: this.document.isOwner })
 				);
@@ -598,10 +598,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		}
 
 		// Perform the sort
-		const sortUpdates = (foundry.utils?.SortingHelpers ?? SortingHelpers).performIntegerSort(item, {
-			target: sortTarget,
-			siblings
-		});
+		const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(item, { target: sortTarget, siblings });
 		const updateData = sortUpdates.map(u => {
 			const update = u.update;
 			update._id = u.target.id;

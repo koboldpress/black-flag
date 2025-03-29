@@ -68,10 +68,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 	 */
 	async render(options) {
 		if (!this.template) return "";
-		return (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
-			this.template,
-			await this._prepareContext(options)
-		);
+		return foundry.applications.handlebars.renderTemplate(this.template, await this._prepareContext(options));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

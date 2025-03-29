@@ -164,11 +164,12 @@ export default class PCData extends ActorDataModel.mixin(
 			),
 			attributes: new SchemaField({
 				attunement: new SchemaField({
-					max: new NumberField({ initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" })
+					max: new NumberField({ required: true, initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" })
 				}),
 				death: new SchemaField({
 					status: new StringField({ initial: "alive", blank: false }),
 					success: new NumberField({
+						required: true,
 						nullable: false,
 						initial: 0,
 						min: 0,
@@ -176,6 +177,7 @@ export default class PCData extends ActorDataModel.mixin(
 						label: "BF.Death.Success.Label"
 					}),
 					failure: new NumberField({
+						required: true,
 						nullable: false,
 						initial: 0,
 						min: 0,
@@ -209,7 +211,7 @@ export default class PCData extends ActorDataModel.mixin(
 						level: new FormulaField({ deterministic: true }),
 						overall: new FormulaField({ deterministic: true })
 					}),
-					override: new NumberField({ integer: true }),
+					override: new NumberField({ required: true, integer: true }),
 					temp: new NumberField({ required: true, min: 0, integer: true }),
 					tempMax: new NumberField({ required: true, integer: true }),
 					value: new NumberField({ required: true, min: 0, integer: true })
