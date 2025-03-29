@@ -1,6 +1,5 @@
 import { log } from "../../utils/_module.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
@@ -286,7 +285,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 */
 	_onDragStart(event) {
 		const effect = this.getEffect(event.currentTarget.dataset);
-		DragDrop.beginDragEvent(event, effect);
+		CONFIG.ux.DragDrop.beginDragEvent(event, effect);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -302,7 +301,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 
 		if (!this.isEditable) return false;
 
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 
 		try {
@@ -310,7 +309,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			if (!effect) return false;
 			return this.constructor.dropEffects(event, this.document, [effect]);
 		} finally {
-			DragDrop.finishDragEvent(event);
+			CONFIG.ux.DragDrop.finishDragEvent(event);
 		}
 	}
 

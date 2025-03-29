@@ -1,7 +1,7 @@
-export default class DragDrop {
+export default class BlackFlagDragDrop extends foundry.applications.ux.DragDrop {
 	/**
 	 * Data about the ongoing drag event.
-	 * @type {{event: DragEvent, data: *, document: Document}|null}
+	 * @type {{event: DragEvent, data: *, [document]: Document, [rect]: DOMRect}|null}
 	 */
 	static #currentDrag;
 
@@ -9,7 +9,7 @@ export default class DragDrop {
 
 	/**
 	 * Tracking rect for the current drag area.
-	 * @
+	 * @type {DOMRect}
 	 */
 	static #rect;
 
@@ -84,17 +84,49 @@ export default class DragDrop {
 	/**
 	 * Retrieve the drag data for the provided drag operation.
 	 * @param {DragEvent} event - Drag event for which to fetch data.
-	 * @returns {DragEventPayload}
+	 * @returns {DragEventData}
 	 */
 	static getDragData(event) {
 		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 		if (!foundry.utils.isEmpty(data)) return { area: this.#currentDrag?.area, data };
-		if (this.#currentDrag?.data)
-			return {
-				area: this.#currentDrag.area,
-				data: this.#currentDrag.data,
-				document: this.#currentDrag.document
-			};
+		if (this.#currentDrag?.data) return { ...this.#currentDrag };
 		return {};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the data payload for the current drag event.
+	 * @param {DragEvent} event
+	 * @returns {any}
+	 */
+	static getPayload(event) {
+		if (!BlackFlagDragDrop.#currentDrag?.data) return null;
+		return BlackFlagDragDrop.#currentDrag.data;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _handleDragStart(event) {
+		await this.callback(event, "dragstart");
+		if (event.dataTransfer.items.length) {
+			event.stopPropagation();
+			let data = event.dataTransfer.getData("application/json") || event.dataTransfer.getData("text/plain");
+			try {
+				data = JSON.parse(data);
+			} catch (err) {}
+			BlackFlagDragDrop.#currentDrag = data ? { event, data } : null;
+		} else {
+			BlackFlagDragDrop.#currentDrag = null;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _handleDragEnd(event) {
+		await this.callback(event, "dragend");
+		BlackFlagDragDrop.finishDragEvent(event);
 	}
 }

@@ -1,7 +1,6 @@
 import { log } from "../../utils/_module.mjs";
 import AdvancementSelection from "../advancement/advancement-selection.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
@@ -235,7 +234,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	_onDragStart(event) {
 		const advancementId = event.currentTarget.dataset.advancementId;
 		const advancement = this.advancement.get(advancementId);
-		DragDrop.beginDragEvent(event, advancement);
+		CONFIG.ux.DragDrop.beginDragEvent(event, advancement);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -251,7 +250,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 
 		if (!this.isEditable) return false;
 
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 		if (data.uuid?.startsWith(this.item.uuid)) return false;
 		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 
@@ -260,7 +259,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 			if (!advancement) return false;
 			return this.constructor.dropAdvancement(event, this.document, [advancement]);
 		} finally {
-			DragDrop.finishDragEvent(event);
+			CONFIG.ux.DragDrop.finishDragEvent(event);
 		}
 	}
 

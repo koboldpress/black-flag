@@ -2,7 +2,6 @@ import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import { formatWeight } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
-import DragDrop from "../drag-drop.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
@@ -474,7 +473,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1.she
 
 	/** @inheritDoc */
 	async _onDrop(event) {
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 
 		// TODO: Handle folders
 		// Forward dropped effects to the effects element

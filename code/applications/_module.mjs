@@ -93,7 +93,7 @@ export { default as BlackFlagCombatTracker } from "./combat-tracker.mjs";
 export { default as BlackFlagContextMenu } from "./context-menu.mjs";
 export { default as BlackFlagDialog } from "./dialog.mjs";
 export * as dice from "./dice/_module.mjs";
-export { default as DragDrop } from "./drag-drop.mjs";
+export { default as BlackFlagDragDrop } from "./drag-drop.mjs";
 export { default as IdentityConfig } from "./identity-config.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";

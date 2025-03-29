@@ -1,5 +1,3 @@
-import DragDrop from "../drag-drop.mjs";
-
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**

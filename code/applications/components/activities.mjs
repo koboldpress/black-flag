@@ -1,6 +1,5 @@
 import ActivitySelection from "../activity/activity-selection.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
@@ -181,7 +180,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	_onDragStart(event) {
 		const activityId = event.currentTarget.dataset.activityId;
 		const activity = this.activities.get(activityId);
-		DragDrop.beginDragEvent(event, activity);
+		CONFIG.ux.DragDrop.beginDragEvent(event, activity);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -201,7 +200,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
 	_onDragEnter(event) {
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 		if (!data) this.dataset.dropStatus = "unknown";
 		else this.dataset.dropStatus = this._validateDrop(data) ? "valid" : "invalid";
 	}
@@ -244,7 +243,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	 */
 	async _onDrop(event) {
 		event.stopImmediatePropagation();
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 		if (!this._validateDrop(data)) return false;
 
 		if (data.uuid?.startsWith(this.item.uuid)) return this._onSortActivity(event, data);
@@ -270,7 +269,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 				created[0]?.sheet.render({ force: true });
 			}
 		} finally {
-			DragDrop.finishDragEvent(event);
+			CONFIG.ux.DragDrop.finishDragEvent(event);
 		}
 	}
 

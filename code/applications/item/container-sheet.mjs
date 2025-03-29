@@ -1,6 +1,5 @@
 import { numberFormat } from "../../utils/_module.mjs";
 import InventoryElement from "../components/inventory.mjs";
-import DragDrop from "../drag-drop.mjs";
 import EquipmentSheet from "./equipment-sheet.mjs";
 
 export default class ContainerSheet extends EquipmentSheet {
@@ -77,7 +76,7 @@ export default class ContainerSheet extends EquipmentSheet {
 
 	/** @override */
 	async _onDrop(event) {
-		const { data } = DragDrop.getDragData(event);
+		const { data } = CONFIG.ux.DragDrop.getDragData(event);
 
 		// Forward dropped items to the inventory element
 		// TODO: Handle folders
