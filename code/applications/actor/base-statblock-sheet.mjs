@@ -153,7 +153,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 		let ability;
 		let dc;
 		if (context.editable) {
-			ability = `<select name="system.spellcasting.ability">${HandlebarsHelpers.selectOptions(
+			ability = `<select name="system.spellcasting.ability">${foundry.applications.handlebars.selectOptions(
 				CONFIG.BlackFlag.abilities.localized,
 				{ hash: { selected: spellcasting.ability } }
 			)}</select>`;

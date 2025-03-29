@@ -32,7 +32,7 @@ export default class ShortRestDialog extends BaseRestDialog {
 	static async #rollHitDie(event, target) {
 		const denomination = target.dataset.denomination;
 		await this.actor.rollHitDie({ denomination });
-		foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
+		foundry.utils.mergeObject(this.config, new foundry.applications.ux.FormDataExtended(this.form).object);
 		this.render();
 	}
 }

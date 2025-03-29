@@ -307,7 +307,7 @@ export default class EquipmentConfig extends AdvancementConfig {
 		if (target && target !== dragEntry) {
 			updateData ??= {};
 			const siblings = this.document.configuration.pool.filter(s => s._id !== dragEntry._id);
-			const sortUpdates = SortingHelpers.performIntegerSort(dragEntry, { target, siblings, sortBefore });
+			const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(dragEntry, { target, siblings, sortBefore });
 			for (const update of sortUpdates) {
 				updateData[`pool.${update.target._id}.sort`] = update.update.sort;
 			}

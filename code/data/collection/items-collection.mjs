@@ -3,7 +3,7 @@ import BlackFlagItem from "../../documents/item.mjs";
 /**
  * Custom items collection to hide items in containers automatically.
  */
-export default class BlackFlagItems extends Items {
+export default class BlackFlagItems extends foundry.documents.collections.Items {
 	_getVisibleTreeContents(entry) {
 		return this.contents.filter(c => c.visible && !this.has(c.system?.container));
 	}

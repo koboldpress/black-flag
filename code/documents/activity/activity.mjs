@@ -67,7 +67,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Perform the pre-localization of this data model.
 	 */
 	static localize() {
-		Localization.localizeDataModel(this);
+		foundry.helpers.Localization.localizeDataModel(this);
 		if (this.metadata.dataModel) this.metadata.dataModel.localize();
 	}
 
@@ -1025,7 +1025,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
-					content: await renderTemplate(message.template ?? this.metadata.usage.chatCard, context),
+					content: await foundry.applications.handlebars.renderTemplate(
+						message.template ?? this.metadata.usage.chatCard,
+						context
+					),
 					flags: {
 						core: { canPopout: true }
 					},

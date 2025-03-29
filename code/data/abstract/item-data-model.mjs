@@ -135,7 +135,10 @@ export default class ItemDataModel extends BaseDataModel {
 	async richTooltip(enrichmentOptions = {}) {
 		if (!this.metadata.tooltipTemplate) return null;
 		return {
-			content: await renderTemplate(this.metadata.tooltipTemplate, await this.getTooltipData(enrichmentOptions)),
+			content: await foundry.applications.handlebars.renderTemplate(
+				this.metadata.tooltipTemplate,
+				await this.getTooltipData(enrichmentOptions)
+			),
 			classes: ["black-flag", "black-flag-tooltip", "item-tooltip"]
 		};
 	}

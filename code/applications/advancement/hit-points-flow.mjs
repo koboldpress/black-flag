@@ -45,7 +45,6 @@ export default class HitPointsFlow extends AdvancementFlow {
 				title: `${flavor}: ${this.advancement.actor.name}`,
 				speaker: cls.getSpeaker({ actor: this.advancement.actor }),
 				user: game.user.id,
-				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
 				content: "",
 				sound: CONFIG.sounds.dice,
 				rolls: [roll],

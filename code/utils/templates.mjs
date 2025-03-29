@@ -41,7 +41,7 @@ function groupedSelectOptions(choices, options) {
 		formOptions.unshift({ value: "", label: options.blank ?? "" });
 		if ( options.rule ) formOptions.unshift({ rule: true });
 	}
-	return HandlebarsHelpers.selectOptions(formOptions, { hash: {} });
+	return foundry.applications.handlebars.selectOptions(formOptions, { hash: {} });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -237,5 +237,5 @@ export async function registerHandlebarsPartials() {
 		paths[`blackFlag.${path.split("/").pop().replace(".hbs", "")}`] = path;
 	}
 
-	return loadTemplates(paths);
+	return foundry.applications.handlebars.loadTemplates(paths);
 }

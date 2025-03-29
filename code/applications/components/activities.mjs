@@ -288,7 +288,10 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		const dropActivity = this.activities.get(dropRow?.dataset.activityId);
 		if (!dragActivity || !dropActivity || dragActivity === dropActivity) return;
 		const siblings = this.activities.contents.filter(a => a.id !== dragActivity.id);
-		const sortUpdates = SortingHelpers.performIntegerSort(dragActivity, { target: dropActivity, siblings });
+		const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(dragActivity, {
+			target: dropActivity,
+			siblings
+		});
 		const updateData = {};
 		for (const update of sortUpdates) {
 			updateData[`system.activities.${update.target.id}.sort`] = update.update.sort;

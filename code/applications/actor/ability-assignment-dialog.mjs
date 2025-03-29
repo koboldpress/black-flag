@@ -316,7 +316,6 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 			title: `${flavor}: ${this.document.name}`,
 			speaker: cls.getSpeaker({ actor: this.document }),
 			user: game.user.id,
-			type: CONST.CHAT_MESSAGE_TYPES.ROLL,
 			content: "",
 			sound: CONFIG.sounds.dice,
 			rolls: [roll],

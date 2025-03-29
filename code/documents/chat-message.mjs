@@ -100,16 +100,15 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getHTML(options = {}) {
-		const rendered = await super.getHTML(options);
-		const html = rendered instanceof HTMLElement ? rendered : rendered[0];
+	async renderHTML(options = {}) {
+		const html = await super.renderHTML(options);
 
 		if (foundry.utils.getType(this.system?.getHTML) === "function") {
 			await this.system.getHTML(html, options);
-			return rendered;
+			return html;
 		}
 
-		if (!this.isContentVisible) return rendered;
+		if (!this.isContentVisible) return html;
 
 		this._renderStandardCard(html);
 		if (this.isRoll) {
@@ -120,7 +119,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		}
 		this._collapseTrays(html);
 
-		return rendered;
+		return html;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -233,7 +232,10 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			{ formulaParts: [], total: 0, parts: [] }
 		);
 		context.formula = context.formulaParts.join("").replace(/^ \+ /, "");
-		const rendered = await renderTemplate(`systems/${game.system.id}/templates/chat/damage-tooltip.hbs`, context);
+		const rendered = await foundry.applications.handlebars.renderTemplate(
+			`systems/${game.system.id}/templates/chat/damage-tooltip.hbs`,
+			context
+		);
 		html.querySelectorAll(".message-content .dice-roll").forEach(e => e.remove());
 		html.querySelector(".message-content").insertAdjacentHTML("afterbegin", rendered);
 

@@ -272,7 +272,7 @@ export function localizeConfig(config, { propertyName="localized", ...options }=
  * @param {string[]} prefixes
  */
 export function localizeSchema(schema, prefixes) {
-	Localization.localizeDataModel({ schema }, { prefixes });
+	foundry.helpers.Localization.localizeDataModel({ schema }, { prefixes });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

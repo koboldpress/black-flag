@@ -475,7 +475,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			: this.duration.label;
 
 		const section = document.createElement("section");
-		section.innerHTML = await renderTemplate("systems/black-flag/templates/item/embeds/spell-embed.hbs", context);
+		section.innerHTML = await foundry.applications.handlebars.renderTemplate(
+			"systems/black-flag/templates/item/embeds/spell-embed.hbs",
+			context
+		);
 		return section.children;
 	}
 

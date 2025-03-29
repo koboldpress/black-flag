@@ -7,12 +7,15 @@ export default class CurrencyElement extends InventoryElement {
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 */
 	async _onAddItem(target) {
-		const content = await renderTemplate("systems/black-flag/templates/shared/add-currency-dialog.hbs", {
-			currencies: Object.entries(CONFIG.BlackFlag.currencies).reduce((obj, [k, config]) => {
-				if (config.default) obj[k] = config;
-				return obj;
-			}, {})
-		});
+		const content = await foundry.applications.handlebars.renderTemplate(
+			"systems/black-flag/templates/shared/add-currency-dialog.hbs",
+			{
+				currencies: Object.entries(CONFIG.BlackFlag.currencies).reduce((obj, [k, config]) => {
+					if (config.default) obj[k] = config;
+					return obj;
+				}, {})
+			}
+		);
 
 		let formData;
 		try {

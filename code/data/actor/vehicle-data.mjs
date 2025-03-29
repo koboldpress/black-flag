@@ -317,7 +317,10 @@ export default class VehicleData extends ActorDataModel.mixin(
 			config.cite = false;
 		}
 		const section = document.createElement("section");
-		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/vehicle-embed.hbs", context);
+		section.innerHTML = await foundry.applications.handlebars.renderTemplate(
+			"systems/black-flag/templates/actor/embeds/vehicle-embed.hbs",
+			context
+		);
 		return section.children;
 	}
 

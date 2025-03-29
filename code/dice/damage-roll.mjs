@@ -305,6 +305,6 @@ export default class DamageRoll extends BasicRoll {
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
 			damageType: isPrivate ? "???" : this.options.damageType
 		};
-		return renderTemplate(template, chatData);
+		return foundry.applications.handlebars.renderTemplate(template, chatData);
 	}
 }

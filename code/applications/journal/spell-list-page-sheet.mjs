@@ -3,7 +3,7 @@ import { linkForUUID } from "../../utils/_module.mjs";
 /**
  * Journal entry page the displays a list of spells.
  */
-export default class JournalSpellListPageSheet extends JournalPageSheet {
+export default class JournalSpellListPageSheet extends foundry.appv1.sheets.JournalPageSheet {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {

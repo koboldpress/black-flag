@@ -22,7 +22,7 @@ import TypeConfig from "./config/type-config.mjs";
 /**
  * Sheet class containing implementation shared across all actor types.
  */
-export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
+export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1.sheets.ActorSheet) {
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -421,7 +421,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 		const attr = event.currentTarget.dataset.edit;
 		const current = foundry.utils.getProperty(this.object, attr);
 		const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
-		const fp = new FilePicker({
+		const fp = new foundry.applications.apps.FilePicker({
 			current,
 			type: "image",
 			redirectToRoot: img ? [img] : [],
@@ -444,7 +444,9 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 	 */
 	_onShowArtwork(event) {
 		const path = event.target.src;
-		new ImagePopout(path, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+		new foundry.applications.apps.ImagePopout(path, { title: this.actor.name, uuid: this.actor.uuid }).render({
+			force: true
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

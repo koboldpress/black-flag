@@ -97,21 +97,24 @@ export default Base =>
 			}
 
 			// Render the document creation form
-			const html = await renderTemplate("systems/black-flag/templates/shared/document-create.hbs", {
-				folders: folders
-					? [{ value: "", label: "" }, ...folders.map(({ id, name }) => ({ value: id, label: name }))]
-					: null,
-				name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
-				folder: data.folder,
-				hasFolders: folders.length >= 1,
-				type: selectedType,
-				categories,
-				types: extraTypes.reduce((obj, t) => {
-					const label = CONFIG[documentName]?.typeLabels?.[t] ?? t;
-					obj[t] = game.i18n.localize(label);
-					return obj;
-				}, {})
-			});
+			const html = await foundry.applications.handlebars.renderTemplate(
+				"systems/black-flag/templates/shared/document-create.hbs",
+				{
+					folders: folders
+						? [{ value: "", label: "" }, ...folders.map(({ id, name }) => ({ value: id, label: name }))]
+						: null,
+					name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
+					folder: data.folder,
+					hasFolders: folders.length >= 1,
+					type: selectedType,
+					categories,
+					types: extraTypes.reduce((obj, t) => {
+						const label = CONFIG[documentName]?.typeLabels?.[t] ?? t;
+						obj[t] = game.i18n.localize(label);
+						return obj;
+					}, {})
+				}
+			);
 
 			// Render the confirmation dialog window
 			return Dialog.prompt({
@@ -120,7 +123,7 @@ export default Base =>
 				label: title,
 				callback: async html => {
 					const form = html[0].querySelector("form");
-					const fd = new FormDataExtended(form);
+					const fd = new foundry.applications.ux.FormDataExtended(form);
 					foundry.utils.mergeObject(data, fd.object, { inplace: true });
 					if (!data.folder) delete data.folder;
 					if (types.length === 1) data.type = types[0];

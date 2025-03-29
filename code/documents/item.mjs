@@ -429,7 +429,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-					content: await renderTemplate("systems/black-flag/templates/chat/item-card.hbs", context),
+					content: await foundry.applications.handlebars.renderTemplate(
+						"systems/black-flag/templates/chat/item-card.hbs",
+						context
+					),
 					speaker: ChatMessage.getSpeaker({ actor: this.actor }),
 					flags: {
 						core: { canPopout: true },

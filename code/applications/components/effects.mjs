@@ -214,7 +214,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				return this._onAddEffect(target);
 			case "edit":
 			case "view":
-				return effect.sheet.render(true);
+				return effect.sheet.render({ force: true });
 			case "delete":
 				return effect.deleteDialog();
 			case "duplicate":

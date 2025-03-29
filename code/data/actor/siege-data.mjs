@@ -122,7 +122,10 @@ export default class SiegeData extends ActorDataModel.mixin(
 			config.cite = false;
 		}
 		const section = document.createElement("section");
-		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/siege-embed.hbs", context);
+		section.innerHTML = await foundry.applications.handlebars.renderTemplate(
+			"systems/black-flag/templates/actor/embeds/siege-embed.hbs",
+			context
+		);
 		return section.children;
 	}
 
