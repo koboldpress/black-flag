@@ -154,7 +154,7 @@ export class UsesData extends foundry.abstract.DataModel {
 	 */
 	async recoverUses(periods, rollData) {
 		if (!this.recovery.length) return false;
-		if (periods.includes("round")) periods.unshift("recharge");
+		if (periods.includes("roundStart")) periods.unshift("recharge");
 		const matchingPeriod = periods.find(p => this.recovery.find(r => r.period === p));
 		const recoveryProfile = this.recovery.find(r => r.period === matchingPeriod);
 		if (!recoveryProfile) return false;
@@ -176,7 +176,6 @@ export class UsesData extends foundry.abstract.DataModel {
 				this.parent instanceof BlackFlag.documents.activity.Activity
 					? { item: this.parent.item.id, keyPath: `system.activities.${this.parent.id}.uses.spent` }
 					: { item: this.parent.parent.id, keyPath: "system.uses.spent" };
-			console.log(delta);
 			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData, { delta });
 			await roll.evaluate();
 			const newSpent = Math.clamp(this.spent - roll.total, 0, this.max);
@@ -198,7 +197,18 @@ export class UsesData extends foundry.abstract.DataModel {
 	 */
 	async rollRecharge(target) {
 		const rollConfig = {
-			rolls: [{ parts: ["1d6"], options: { target } }],
+			rolls: [
+				{
+					parts: ["1d6"],
+					options: {
+						delta:
+							this.parent.parent instanceof Item
+								? { item: this.parent.parent.id, keyPath: "system.uses.spent" }
+								: { item: this.parent.item.id, keyPath: `system.activities.${this.parent.id}.uses.spent` },
+						target
+					}
+				}
+			],
 			origin: this.parent
 		};
 
