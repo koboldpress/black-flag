@@ -262,7 +262,7 @@ export default class SelectChoices {
 				if (trait.children) {
 					if (filter.has(forcedCategoryKey)) {
 						trait.children.filter(filter);
-						if (foundry.utils.isEmpty(trait.children)) delete trait.children;
+						if (!Object.keys(trait.children ?? {}).length) delete trait.children;
 					} else delete trait.children;
 				}
 			}
@@ -270,7 +270,7 @@ export default class SelectChoices {
 			// Check children, remove entry if no children match filter
 			else if (!filter.has(wildcardKey) && !filter.has(`${key}:*`)) {
 				if (trait.children) trait.children.filter(filter);
-				if (foundry.utils.isEmpty(trait.children ?? {})) delete this[key];
+				if (!Object.keys(trait.children ?? {}).length) delete this[key];
 			}
 
 			// Top-level wildcard ("languages:*") - Include all entries & children
