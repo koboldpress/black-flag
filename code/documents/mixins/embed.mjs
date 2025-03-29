@@ -1,6 +1,5 @@
 /**
  * Mixin used to share backported embed logic between Documents and PseudoDocuments.
- * Backported from V12, can be removed when V11 support is dropped.
  * @type {function(Class): Class}
  * @mixin
  */

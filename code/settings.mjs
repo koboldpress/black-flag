@@ -224,8 +224,6 @@ export function registerSettings() {
  * @returns {void}
  */
 export function renderSettingsSidebar(html) {
-	if (game.release.generation < 13) return _renderLegacy(html[0]);
-
 	const details = html.querySelector(".info .system");
 	const pip = details.querySelector(".notification-pip");
 	details.remove();
@@ -233,7 +231,7 @@ export function renderSettingsSidebar(html) {
 	const section = document.createElement("section");
 	section.classList.add("black-flag", "sidebar-info", "flexcol");
 	section.innerHTML = `
-		<h4 class="divider">${game.i18n.localize("WORLD.GameSystem")}</h4>
+		<h4 class="divider">${game.i18n.localize("WORLD.FIELDS.system.label")}</h4>
 		<figure class="black-flag sidebar-badge">
 			<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
 			     data-tooltip="${game.system.title}" alt="${game.system.title}">
@@ -250,40 +248,6 @@ export function renderSettingsSidebar(html) {
 
 	if (pip) section.querySelector(".system-info").append(pip);
 	html.querySelector(".info").after(section);
-}
-
-/**
- * Add the Black Flag badge into the sidebar.
- * @param {HTMLElement} html - Rendered sidebar content.
- */
-function _renderLegacy(html) {
-	const details = html.querySelector("#game-details");
-	const pip = details.querySelector(".system-info .update");
-	details.querySelector(".system")?.remove();
-
-	const heading = document.createElement("div");
-	heading.classList.add("black-flag", "sidebar-heading");
-	heading.innerHTML = `<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>`;
-	heading.append(_settingsLinks());
-	details.insertAdjacentElement("afterend", heading);
-
-	const badge = document.createElement("figure");
-	badge.classList.add("black-flag", "sidebar-badge");
-	badge.innerHTML = `
-		<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
-		     data-tooltip="${game.system.title}" alt="${game.system.title}">
-		<span class="system-info">${systemVersion()}</span>
-	`;
-	if (pip) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
-	heading.insertAdjacentElement("afterend", badge);
-
-	const welcomeLink = document.createElement("button");
-	welcomeLink.dataset.action = "welcome";
-	welcomeLink.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> ${game.i18n.localize("BF.WELCOME.Button")}`;
-	welcomeLink.addEventListener("click", () => new WelcomeDialog().render({ force: true }));
-	const div = document.createElement("div");
-	div.append(welcomeLink);
-	badge.insertAdjacentElement("afterend", div);
 }
 
 /**

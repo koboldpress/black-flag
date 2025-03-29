@@ -1,6 +1,6 @@
 import BlackFlagChatMessage from "../documents/chat-message.mjs";
 
-export default class BlackFlagChatLog extends (foundry.applications?.sidebar?.tabs?.ChatLog ?? ChatLog) {
+export default class BlackFlagChatLog extends foundry.applications.sidebar.tabs.ChatLog {
 	/** @inheritDoc */
 	async updateMessage(message, notify = false) {
 		const element = this.element instanceof HTMLElement ? this.element : this.element[0];

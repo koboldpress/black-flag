@@ -1,7 +1,7 @@
 /**
  * Compendium that renders pages as a table of contents.
  */
-export default class TableOfContentsCompendium extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
+export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
 	/** @override */
 	static DEFAULT_OPTIONS = {
 		classes: ["table-of-contents"],
@@ -17,19 +17,6 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 			activateEntry: this.prototype._onClickLink
 		}
 	};
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["table-of-contents"],
-			template: "systems/black-flag/templates/journal/table-of-contents.hbs",
-			width: 800,
-			height: 950,
-			resizable: true,
-			contextMenuSelector: "[data-entry-id]",
-			dragDrop: [{ dragSelector: "[data-document-id]", dropSelector: "article" }]
-		});
-	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -96,21 +83,6 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 	/** @inheritDoc */
 	async _prepareContext(options) {
 		const context = await super._prepareContext(options);
-		return this._getData(context);
-	}
-
-	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		return this._getData(context);
-	}
-
-	/**
-	 * Shared context preparation between V12 & V13.
-	 * @param {object} context
-	 * @returns {object}
-	 */
-	async _getData(context) {
 		const documents = await this.collection.getDocuments();
 
 		context.chapters = [];
@@ -195,15 +167,6 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	activateListeners(html) {
-		super.activateListeners(html);
-		html.find("[data-action='activateEntry']").on("click", this._onClickLink.bind(this));
-		this.element[0].dataset.compendiumId = this.collection.metadata.id;
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
