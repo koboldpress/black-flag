@@ -17,7 +17,7 @@ function dataset(context, options) {
 	const entries = [];
 	for ( let [key, value] of Object.entries(context ?? {}) ) {
 		key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
-		entries.push(`data-${key}="${value}"`);
+		entries.push(`data-${key}="${Handlebars.escapeExpression(value)}"`);
 	}
 	return new Handlebars.SafeString(entries.join(" "));
 }
