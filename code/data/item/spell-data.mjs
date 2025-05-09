@@ -557,6 +557,59 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
+	async getSheetData(context) {
+		const has = (data, key) => data?.includes?.(key) ?? data?.has?.(key);
+		context.descriptionParts = ["blackFlag.description-spell"];
+		context.detailsParts = ["blackFlag.details-spell"];
+
+		context.components = Object.entries(CONFIG.BlackFlag.spellComponents).reduce((obj, [k, p]) => {
+			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.components.required, k) };
+			return obj;
+		}, {});
+		context.tags = Object.entries(CONFIG.BlackFlag.spellTags).reduce((obj, [k, p]) => {
+			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.tags, k) };
+			return obj;
+		}, {});
+
+		context.data = {
+			range: context.source.range,
+			target: context.source.target
+		};
+		context.activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.source.casting.type });
+		context.durationOptions = CONFIG.BlackFlag.durationOptions({
+			chosen: context.source.duration.units,
+			isSpell: true
+		});
+		context.originOptions = [
+			{ value: "", label: "" },
+			...Object.entries(CONFIG.BlackFlag.registration.list("class")).map(([value, data]) => ({
+				value,
+				label: data.name,
+				group: game.i18n.localize("BF.Item.Type.Class[other]")
+			})),
+			...Object.entries(CONFIG.BlackFlag.registration.list("subclass")).map(([value, data]) => ({
+				value,
+				label: data.name,
+				group: game.i18n.localize("BF.Item.Type.Subclass[other]")
+			}))
+		];
+		context.rangeOptions = [
+			{ value: "", label: "" },
+			{ rule: true },
+			...CONFIG.BlackFlag.rangeTypes.localizedOptions,
+			...CONFIG.BlackFlag.distanceUnits.localizedOptions.map(o => ({
+				...o,
+				group: game.i18n.localize("BF.Distance.Label")
+			}))
+		];
+		context.showConfiguration = this.parent.isEmbedded && !this.parent.getFlag(game.system.id, "cachedFor");
+
+		context.spellCircles = CONFIG.BlackFlag.spellCircles();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	async prepareActivationChatContext(context) {
 		const rollData = context.activity.getRollData();
 		const spellCircle = CONFIG.BlackFlag.spellCircles()[rollData.item.circle.value || rollData.item.circle.base];

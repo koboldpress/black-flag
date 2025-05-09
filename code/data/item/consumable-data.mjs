@@ -97,4 +97,13 @@ export default class ConsumableData extends ItemDataModel.mixin(
 		const rollData = this.parent.getRollData({ deterministic: true });
 		this.prepareFinalActivities(rollData);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		context.detailsParts = ["blackFlag.details-consumable"];
+	}
 }

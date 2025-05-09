@@ -1,0 +1,25 @@
+<section>
+	<div class="category">
+		<label>
+			<span>{{ localize "BF.Feature.Talent.Category.Label" }}</span>
+			<select name="system.type.category">
+				{{ selectOptions type.categories selected=system.type.category blank="" }}
+			</select>
+		</label>
+	</div>
+	{{#if (or editable system.restriction.label)}}
+		<div class="prerequisite">
+			<span>
+				{{ localize "BF.Prerequisite.Label" }}: {{#if system.restriction.label}}
+					{{~ system.restriction.label }}{{else}}{{ localize "None" }}{{/if}}
+			</span>
+			{{#if editable}}
+				<button type="button" class="link-button" data-action="config" data-type="prerequisite"
+								data-tooltip="BF.Prerequisite.Action.Config"
+								aria-label="{{ localize 'BF.Prerequisite.Action.Config' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+		</div>
+	{{/if}}
+</section>

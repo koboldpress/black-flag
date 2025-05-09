@@ -34,6 +34,7 @@ export default class HeritageData extends ItemDataModel.mixin(
 				icon: "fa-solid fa-monument",
 				img: "systems/black-flag/artwork/types/heritage.svg",
 				accentColor: "#aa0000",
+				hasEffects: false,
 				register: true
 			},
 			{ inplace: false }

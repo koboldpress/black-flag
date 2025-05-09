@@ -11,6 +11,8 @@ export default class ItemDataModel extends BaseDataModel {
 	 *
 	 * @typedef {BaseDataMetadata} ItemDataMetadata
 	 * @property {string} [accentColor] - Accent color to use if none is specified by system data.
+	 * @property {boolean} [hasDetails=true] - Does this item's sheet have a details tab?
+	 * @property {boolean} [hasEffects=true] - Does this item accept active effects?
 	 * @property {boolean|ItemRegistrationConfig} [register] - Register all items of this type within the central list.
 	 * @property {string} [tooltipTemplate]
 	 */
@@ -20,6 +22,8 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @type {ItemDataMetadata}
 	 */
 	static metadata = Object.freeze({
+		hasDetails: true,
+		hasEffects: true,
 		tooltipTemplate: "systems/black-flag/templates/item/item-tooltip.hbs"
 	});
 
@@ -182,6 +186,15 @@ export default class ItemDataModel extends BaseDataModel {
 		const rollData = { ...(this.parent.actor?.getRollData(options) ?? {}), item: { ...this } };
 		return rollData;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare type-specific data for the Item sheet.
+	 * @param {ApplicationRenderContext} context - Sheet context data.
+	 * @returns {Promise<void>}
+	 */
+	async getSheetData(context) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -32,7 +32,9 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 				category: "equipment",
 				localization: "BF.Item.Type.Sundry",
 				icon: "fa-solid fa-boxes-stacked",
-				img: "systems/black-flag/artwork/types/sundry.svg"
+				img: "systems/black-flag/artwork/types/sundry.svg",
+				hasDetails: false,
+				hasEffects: false
 			},
 			{ inplace: false }
 		)

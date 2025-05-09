@@ -1,0 +1,43 @@
+{{> "blackFlag.equipment-attunement" }}
+
+<fieldset class="properties checkbox-list">
+	<legend>{{ localize "BF.Property.Label[other]" }}</legend>
+	{{#each properties}}
+		<label>
+			<input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
+		</label>
+	{{/each}}
+</fieldset>
+
+<fieldset>
+	<legend>{{ localize "BF.Container.Capacity.Label" }}</legend>
+	<label>
+		<span>{{ localize "BF.Container.Capacity.Number.Label" }}</span>
+		<input type="number" name="system.capacity.count" value="{{ source.capacity.count }}" min="0" step="1"
+		       placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
+	</label>
+	<div class="field-group">
+		<span>{{ localize "BF.Container.Capacity.Weight.Label" }}</span>
+		<label>
+			<input type="number" name="system.capacity.weight.value" value="{{ source.capacity.weight.value }}"
+			       min="0" step="0.1" placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
+		</label>
+		<label>
+			<select name="system.capacity.weight.units">
+				{{ selectOptions CONFIG.weightUnits.localizedOptions selected=source.capacity.weight.units }}
+			</select>
+		</label>
+	</div>
+	<div class="field-group">
+		<span>{{ localize "BF.Container.Capacity.Volume.Label" }}</span>
+		<label>
+			<input type="number" name="system.capacity.volume.value" value="{{ source.capacity.volume.value }}"
+			       min="0" step="0.1" placeholder="{{ localize 'BF.Container.Capacity.Unlimited' }}">
+		</label>
+		<label>
+			<select name="system.capacity.volume.units">
+				{{ selectOptions CONFIG.volumeUnits.localizedOptions selected=source.capacity.volume.units }}
+			</select>
+		</label>
+	</div>
+</fieldset>

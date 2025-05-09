@@ -93,4 +93,43 @@ export default class FeatureData extends ItemDataModel.mixin(
 	async toEmbed(...args) {
 		return this.embedPrerequisite(await super.toEmbed(...args));
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		context.descriptionParts = ["blackFlag.description-feature"];
+		context.detailsParts = ["blackFlag.details-feature"];
+
+		context.type ??= {};
+		context.type.categories = CONFIG.BlackFlag.featureCategories.localized;
+
+		const featureCategory = CONFIG.BlackFlag.featureCategories[context.source.type.category];
+		const id = new Set([context.source.identifier.associated]);
+		if (featureCategory?.sources)
+			context.type.categorySources = CONFIG.BlackFlag.registration.groupedOptions(featureCategory.sources, id);
+		const featureType = featureCategory?.children?.[context.source.type.value];
+		if (featureType?.sources)
+			context.type.typeSources = CONFIG.BlackFlag.registration.groupedOptions(featureType.sources, id);
+
+		if (
+			(featureCategory && ["class", "lineage", "heritage"].includes(context.source.type.category)) ||
+			featureCategory?.children
+		) {
+			context.type.types = {
+				label: game.i18n.format("BF.Feature.Type.LabelSpecific", {
+					type: game.i18n.localize(`${featureCategory.localization}[one]`)
+				}),
+				options: featureCategory?.children?.localized ?? null,
+				selected: context.source.type.value || context.source.identifier.associated
+			};
+		}
+
+		if (context.source.type.category === "class" && (featureType || context.source.identifier.associated)) {
+			context.type.displayLevel = featureType?.level !== false;
+			context.type.fixedLevel = featureType?.level;
+		}
+	}
 }

@@ -1,14 +1,21 @@
 .black-flag.item.sheet:not(.concept) {
 	--item-background: var(--bf-background-color-half-white);
-	min-width: 475px;
-	min-height: 375px;
 
-	form {
+	&:not(.minimized, .minimizing, .maximizing) {
+		min-width: 475px;
+		min-height: 375px;
+	}
+
+	.window-content {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 
 		.sheet-header {
+			display: flex;
+			gap: 16px;
+			align-items: center;
+
 			.icon {
 				flex: 0 0 64px;
 				margin: 0;
@@ -16,10 +23,17 @@
 				> img {
 					width: 64px;
 					height: 64px;
+					&[data-edit] {
+						outline: 1px solid var(--bf-color-border-black);
+						outline-offset: 2px;
+					}
 				}
 			}
-			> h1 {
+			> .document-name {
+				height: unset;
 				flex-grow: 1;
+				font-size: var(--font-size-24);
+				line-height: 2;
 			}
 		}
 
@@ -27,22 +41,23 @@
 			--tab-background-active: var(--item-background);
 		}
 
-		.sheet-body {
+		[data-container-id="sheet-body"] {
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-			margin: -8px;
-			padding: 8px;
+			margin: -1rem;
+			margin-block-start: -.5rem;
+			padding: 1rem;
 			background: var(--item-background);
 
 			[data-tab] {
 				height: 100%;
+				flex-direction: column;
+				gap: 0.5rem;
+
+				&.active { display: flex; }
 
 				> section {
-					display: flex;
-					flex-direction: column;
-					gap: 0.5rem;
-
 					&:first-child:last-child {
 						height: 100%;
 					}
@@ -50,18 +65,16 @@
 			}
 
 			[data-tab="description"] {
-				> section {
-					gap: 0;
-				}
+				gap: 0;
 
 				.category {
 					display: flex;
 					gap: 0.5rem;
-					margin-inline: -0.5rem;
+					margin-inline: -1rem;
 					margin-block-end: 0.25rem;
 					border-block: 1px groove var(--bf-color-border-blue);
 					padding-block: 4px;
-					padding-inline: 0.5rem;
+					padding-inline: 1rem;
 
 					> label {
 						flex: 1 1 20em;
@@ -78,6 +91,9 @@
 						> input, select {
 							width: 100%;
 						}
+					}
+					select, blackFlag-multiSelect {
+						font-variant: normal;
 					}
 				}
 
@@ -138,14 +154,6 @@
 						font-variant: small-caps;
 						font-weight: 700;
 					}
-					> input {
-						flex-grow: 1;
-						width: unset;
-						height: unset;
-						padding-inline: 0.35em;
-						font-size: var(--font-size-12);
-						font-variant: small-caps;
-					}
 				}
 			}
 		}
@@ -163,6 +171,16 @@
 					}
 				}
 			}
+		}
+	}
+}
+
+.black-flag.sheet.item {
+	blackFlag-effects {
+		.effect-name { width: 200px; }
+		.effect-controls {
+			width: 40px;
+			> .layout { justify-content: center; }
 		}
 	}
 }

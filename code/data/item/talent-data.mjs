@@ -71,4 +71,17 @@ export default class TalentData extends ItemDataModel.mixin(
 	async toEmbed(...args) {
 		return this.embedPrerequisite(await super.toEmbed(...args));
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		context.descriptionParts = ["blackFlag.description-talent"];
+		context.detailsParts = ["blackFlag.details-talent"];
+
+		context.type ??= {};
+		context.type.categories = CONFIG.BlackFlag.talentCategories.localized;
+	}
 }

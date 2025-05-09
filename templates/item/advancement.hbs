@@ -1,0 +1,18 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	<blackFlag-advancement>
+		<!-- TODO: Move this into shared create button -->
+		{{#if editable}}
+			<div class="controls">
+				<button type="button" class="link-button" data-action="add"
+								data-tooltip="BF.Advancement.Core.Action.Create"
+								aria-label="{{ localize 'BF.Advancement.Core.Action.Create' }}">
+					<i class="fa-solid fa-plus" inert></i>
+				</button>
+			</div>
+		{{/if}}
+
+		{{#each advancement as |data level|}}
+			{{> "systems/black-flag/templates/item/parts/advancement-section.hbs" data=data level=level }}
+		{{/each}}
+	</blackFlag-advancement>
+</section>

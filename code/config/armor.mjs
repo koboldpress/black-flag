@@ -93,7 +93,8 @@ export const armor = {
 		link: "Compendium.black-flag.items.Item.eLqVG90tzGjKbWCp"
 	}
 };
-localizeConfig(armor, { flatten: true, sort: false });
+localizeConfig(armor, { sort: false });
+localizeConfig(armor, { flatten: true, propertyName: "allLocalized" });
 localizeConfig(armor.light.children);
 localizeConfig(armor.medium.children);
 localizeConfig(armor.heavy.children);

@@ -39,6 +39,7 @@ export default class SubclassData extends ItemDataModel.mixin(
 				localization: "BF.Item.Type.Subclass",
 				icon: "fa-solid fa-landmark-flag",
 				img: "systems/black-flag/artwork/types/subclass.svg",
+				hasEffects: false,
 				register: true
 			},
 			{ inplace: false }
@@ -120,6 +121,15 @@ export default class SubclassData extends ItemDataModel.mixin(
 		super.prepareFinalData();
 		this.prepareDescription();
 		this.prepareSpellcastingSource();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		context.showClassSelector = context.editable;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

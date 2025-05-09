@@ -34,6 +34,8 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 				localization: "BF.Item.Type.Currency",
 				icon: "fa-solid fa-boxes-stacked",
 				img: "systems/black-flag/artwork/types/currency.svg",
+				hasDetails: false,
+				hasEffects: false,
 				register: {
 					cache: true
 				},

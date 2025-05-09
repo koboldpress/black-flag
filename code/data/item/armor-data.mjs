@@ -172,7 +172,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 		this.prepareEquippedArmor();
 		this.preparePhysicalLabels();
 
-		const type = CONFIG.BlackFlag.armor.localized[this.type.base ?? this.type.category];
+		const type = CONFIG.BlackFlag.armor.allLocalized[this.type.base ?? this.type.category];
 		if (type) this.type.label = `${game.i18n.localize("BF.Armor.Label[one]")} (${type})`;
 		else this.type.label = game.i18n.localize("BF.Armor.Label[one]");
 
@@ -275,6 +275,15 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		context.detailsParts = ["blackFlag.details-armor"];
+		// Hack to get around handlebars' weird behavior when calling methods
+		context.modifierHint = context.system.modifierHint?.();
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

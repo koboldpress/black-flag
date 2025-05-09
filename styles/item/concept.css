@@ -1,45 +1,46 @@
 .black-flag.concept.sheet .window-content {
+	flex-direction: row;
+	gap: 0.5rem;
 	padding: 0;
+	scrollbar-gutter: stable;
 
-	form {
-		display: flex;
-		gap: 0.5rem;
+	.summary {
+		flex: 0 0 400px;
 
-		.summary {
-			width: 400px;
-
-			textarea[name="system.description.short"] {
-				min-height: calc(6em + 12px);
-			}
+		textarea[name="system.description.short"] {
+			min-height: calc(6em + 12px);
 		}
-		.details {
-			margin-inline-end: 8px;
+	}
+	.details {
+		margin-inline-end: 8px;
 
-			> nav {
-				display: flex;
-				justify-content: center;
-				gap: 12px;
+		> nav {
+			display: flex;
+			justify-content: center;
+			gap: 12px;
+			border: none;
 
-				> a {
-					padding-block: 8px;
-					font-family: var(--bf-font-header);
+			> a {
+				padding-block: 8px;
+				font-family: var(--bf-font-header);
 
-					&.active {
-						text-decoration: underline;
-						text-decoration-thickness: 2px;
-						text-underline-offset: 4px;
-					}
+				&.active {
+					text-decoration: underline;
+					text-decoration-thickness: 2px;
+					text-underline-offset: 4px;
 				}
 			}
 		}
-		.details, .details .tab-area, .details .tab-area [data-tab].active {
-			flex-grow: 1;
-			display: flex;
-			flex-direction: column;
 
-			[data-tab] > * {
-				flex-grow: 1;
-			}
+		prose-mirror { height: 100%; }
+	}
+	.details, .details section.tab.active {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+
+		[data-tab] > * {
+			flex-grow: 1;
 		}
 	}
 
@@ -55,42 +56,6 @@
 				font-weight: bold;
 			}
 		}
-	}
-
-	.sheet-body {
-		.description {
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-			padding: 0;
-			padding-block-end: 0.5rem;
-
-			legend {
-				margin-inline: 0.5rem;
-			}
-
-			label {
-				display: flex;
-				gap: 0.5rem;
-				align-items: first baseline;
-				padding-inline: 0.5rem;
-
-				span {
-					flex: 0 0 25%;
-					font-size: var(--font-size-12);
-					font-weight: bold;
-				}
-
-				input {
-					flex-grow: 1;
-					width: unset;
-				}
-			}
-		}
-	}
-
-	[data-tab="description"] {
-		
 	}
 }
 
@@ -110,26 +75,22 @@
 			border: none;
 		}
 
-		.name {
+		.name, .document-name {
 			position: absolute;
 			top: 410px;
 			left: 0;
 			right: 0;
+			height: unset;
+			width: unset;
 			text-align: center;
 			border: none;
 			margin-block: 0;
 			margin-inline: 1rem;
 			z-index: 1;
+			background: none;
 			color: white;
-
-			input {
-				margin-block-start: -0.5rem;
-				border: none;
-				height: unset;
-				background: none;
-				color: white;
-				line-height: 1.5em;
-			}
+			font-size: var(--font-size-28);
+			line-height: 1.5em;
 		}
 
 		.color {
@@ -195,25 +156,11 @@
 		margin-inline: 1rem;
 
 		.description {
-			.editor {
+			textarea {
 				max-height: 12rem;
 				max-width: unset;
-				margin-inline: -0.5rem;
+				width: 100%;
 				border-radius: 10px;
-
-				.editor-menu {
-					border-radius: 0;
-				}
-				.editor-container {
-					min-height: 6em;
-					margin: 0;
-					background-color: var(--bf-background-color-half-white);
-					border-bottom-radius: 5px;
-
-					.editor-content {
-						padding: 0.5rem 1rem;
-					}
-				}
 			}
 		}
 

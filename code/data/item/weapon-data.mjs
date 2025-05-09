@@ -342,6 +342,19 @@ export default class WeaponData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async getSheetData(context) {
+		const has = (data, key) => data.includes?.(key) ?? data.has?.(key);
+		context.detailsParts = ["blackFlag.details-weapon"];
+		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
+			obj[k] = { label: game.i18n.localize(o.label), selected: has(context.source.options, k) };
+			return obj;
+		}, {});
+		context.types = { options: CONFIG.BlackFlag.weaponTypes.localized };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

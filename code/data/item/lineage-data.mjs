@@ -34,6 +34,7 @@ export default class LineageData extends ItemDataModel.mixin(
 				icon: "fa-solid fa-globe",
 				img: "systems/black-flag/artwork/types/lineage.svg",
 				accentColor: "#00aa00",
+				hasEffects: false,
 				register: true
 			},
 			{ inplace: false }

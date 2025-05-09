@@ -1,37 +1,28 @@
 import { filteredKeys, makeLabel, sortObjectEntries } from "../../utils/_module.mjs";
-import EffectsElement from "../components/effects.mjs";
-import BaseItemSheet from "./base-item-sheet.mjs";
+import BaseItemSheet from "./api/base-item-sheet.mjs";
 
+/**
+ * Item sheet responsible for displaying physical items.
+ */
 export default class EquipmentSheet extends BaseItemSheet {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "equipment", "item", "sheet"],
-			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description" }],
-			scrollY: ["[data-tab] > section"],
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["equipment"],
+		position: {
 			width: 600,
 			height: 500
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*             Properties              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	get template() {
-		return `systems/black-flag/templates/item/${this.document.type}.hbs`;
-	}
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-
-		context.effects = EffectsElement.prepareItemContext(this.item.effects);
+	async _prepareDescriptionContext(context, options) {
+		context = await super._prepareDescriptionContext(context, options);
+		context.descriptionParts = ["blackFlag.description-equipment"];
+		context.showSidebar = true;
 
 		// Category
 		if (context.system.validCategories?.localized)
@@ -39,11 +30,6 @@ export default class EquipmentSheet extends BaseItemSheet {
 				options: context.system.validCategories.localized,
 				blank: ""
 			};
-
-		// Type
-		if (this.item.type === "weapon") {
-			context.types = { options: CONFIG.BlackFlag.weaponTypes.localized };
-		}
 
 		// Base
 		const category = context.system.validCategories?.[context.source.type.category];
@@ -63,13 +49,16 @@ export default class EquipmentSheet extends BaseItemSheet {
 				blank: ""
 			};
 
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareDetailsContext(context, options) {
+		context = await super._prepareDetailsContext(context, options);
+
 		const has = (data, key) => data.includes?.(key) ?? data.has?.(key);
-
-		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
-			obj[k] = { label: game.i18n.localize(o.label), selected: has(context.source.options, k) };
-			return obj;
-		}, {});
-
 		context.attunementOptions = [
 			{ value: "", label: game.i18n.localize("BF.Attunement.Type.None") },
 			{ value: "optional", label: game.i18n.localize("BF.Attunement.Type.Optional") },
@@ -80,38 +69,34 @@ export default class EquipmentSheet extends BaseItemSheet {
 			{ value: true, label: game.i18n.localize("BF.Proficiency.Override.Always") },
 			{ value: false, label: game.i18n.localize("BF.Proficiency.Override.Never") }
 		];
-
 		context.properties = Object.entries(context.system.validProperties ?? {}).reduce((obj, [k, label]) => {
 			obj[k] = { label, selected: has(context.source.properties, k) };
 			return obj;
 		}, {});
 
-		// Hack for armor to get around handlebars' weird behavior when calling methods
-		context.modifierHint = context.system.modifierHint?.();
-
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*           Form Submission           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_getSubmitData(updateData = {}) {
-		const data = foundry.utils.expandObject(super._getSubmitData(updateData));
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
 
-		if (foundry.utils.hasProperty(data, "system.options")) {
-			data.system.options = filteredKeys(data.system.options);
+		if (foundry.utils.hasProperty(submitData, "system.options")) {
+			submitData.system.options = filteredKeys(submitData.system.options);
 		}
 
-		if (foundry.utils.hasProperty(data, "system.properties")) {
-			data.system.properties = filteredKeys(data.system.properties);
+		if (foundry.utils.hasProperty(submitData, "system.properties")) {
+			submitData.system.properties = filteredKeys(submitData.system.properties);
 		}
 
-		if (foundry.utils.hasProperty(data, "system.overrides.proficiency")) {
-			if (data.system.overrides.proficiency === "null") data.system.overrides.proficiency = null;
+		if (foundry.utils.hasProperty(submitData, "system.overrides.proficiency")) {
+			if (submitData.system.overrides.proficiency === "null") submitData.system.overrides.proficiency = null;
 		}
 
-		return foundry.utils.flattenObject(data);
+		return submitData;
 	}
 }

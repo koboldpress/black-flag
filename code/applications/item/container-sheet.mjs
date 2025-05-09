@@ -2,18 +2,38 @@ import { numberFormat } from "../../utils/_module.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import EquipmentSheet from "./equipment-sheet.mjs";
 
+/**
+ * Item sheet responsible for displaying containers.
+ */
 export default class ContainerSheet extends EquipmentSheet {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "container", "equipment", "item", "sheet"],
-			dragDrop: [{ dragSelector: null, dropSelector: "form" }],
-			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "contents" }],
-			scrollY: ["[data-tab] > section"],
-			width: 600,
-			height: 500
-		});
-	}
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["container"]
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		...super.PARTS,
+		contents: {
+			container: { id: "sheet-body" },
+			template: "systems/black-flag/templates/item/contents.hbs",
+			scrollable: [""]
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static TABS = [{ tab: "contents", label: "BF.Sheet.Tab.Contents" }, ...super.TABS];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	tabGroups = {
+		primary: "contents"
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -24,15 +44,33 @@ export default class ContainerSheet extends EquipmentSheet {
 	 * @type {Set<string>}
 	 */
 	expanded = new Set();
+	// TODO: Replace this with expandedSections
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "contents":
+				context = await this._prepareContentsContext(context, options);
+				break;
+		}
+		return context;
+	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the contents tab.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {ApplicationRenderContext}
+	 * @protected
+	 */
+	async _prepareContentsContext(context, options) {
 		context.items = Array.from(await this.item.system.contents);
 		context.itemContext = {};
 
@@ -47,6 +85,24 @@ export default class ContainerSheet extends EquipmentSheet {
 
 		await this.prepareItems(context);
 
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareDescriptionContext(context, options) {
+		context = await super._prepareDescriptionContext(context, options);
+		context.descriptionParts = [];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareDetailsContext(context, options) {
+		context = await super._prepareDetailsContext(context, options);
+		context.detailsParts = ["blackFlag.details-container"];
 		return context;
 	}
 

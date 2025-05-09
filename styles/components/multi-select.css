@@ -34,10 +34,10 @@ blackFlag-multiSelect {
 		border: none;
 		padding: 0 3px;
 		background: none;
-		cursor: revert;
 
 		&:hover, &:focus {
 			box-shadow: none;
+			color: inherit;
 		}
 	}
 
@@ -77,5 +77,42 @@ blackFlag-multiSelect {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+	}
+}
+
+blackFlag-multiSelect {
+	--input-background-color: var(--color-cool-4);
+	--input-border-color: transparent;
+	--input-focus-outline-color: var(--color-cool-3);
+	--input-text-color: var(--color-light-3);
+	--input-placeholder-color: var(--color-light-5);
+
+	&[disabled] {
+		--input-background-color: var(--color-cool-5);
+		--input-border-color: var(--color-cool-4);
+		--input-text-color: var(--color-light-4);
+	}
+}
+
+body.theme-light blackFlag-multiSelect {
+	--input-background-color: rgba(0, 0, 0, 0.1);
+	--input-border-color: var(--color-dark-6);
+	--input-text-color: var(--color-dark-2);
+	--input-focus-outline-color: var(--bf-button-shadow-blue);
+	--input-placeholder-color: var(--color-dark-4);
+
+	&[disabled] {
+		--input-background-color: rgba(0, 0, 0, 0.2);
+		--input-border-color: transparent;
+		--input-text-color: var(--color-dark-3);
+	}
+}
+
+.application blackFlag-multiSelect {
+	background: var(--input-background-color);
+	border: 1px solid var(--input-border-color);
+
+	[disabled] {
+		
 	}
 }

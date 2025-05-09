@@ -1,0 +1,56 @@
+<section>
+	<div class="category">
+		<label>
+			<span>{{ localize "BF.Feature.Category.Label" }}</span>
+			<select name="system.type.category">
+				{{ selectOptions type.categories selected=system.type.category blank="" }}
+			</select>
+		</label>
+		{{#if type.types}}
+			<label>
+				<span>{{ localize "BF.Feature.Type.Label" }}</span>
+				<select name="system.type.value">
+					<option value=""></option>
+					{{#if type.categorySources}}
+						{{ blackFlag-groupedSelectOptions type.categorySources }}
+					{{/if}}
+					{{#if type.types.options}}
+						<optgroup label="{{ type.types.label }}">
+							{{ selectOptions type.types.options selected=system.type.value }}
+						</optgroup>
+					{{/if}}
+				</select>
+			</label>
+		{{/if}}
+		{{#if type.typeSources}}
+			<label>
+				<span>{{ localize "BF.Feature.Source" }}</span>
+				<select name="system.identifier.associated">
+					{{ blackFlag-groupedSelectOptions type.typeSources blank="" }}
+				</select>
+			</label>
+		{{/if}}
+		{{#if type.displayLevel}}
+			<label>
+				<span>{{ localize "BF.Level.Label[one]" }}</span>
+				<input type="number" name="system.level.value" {{#if type.fixedLevel}}value="
+							 {{~ type.fixedLevel }}" disabled {{~else~}} value="{{ system.level.value }}"{{/if}}>
+			</label>
+		{{/if}}
+	</div>
+	{{#if (or editable system.restriction.label)}}
+		<div class="prerequisite">
+			<span>
+				{{ localize "BF.Prerequisite.Label" }}: {{#if system.restriction.label}}
+				{{~{ system.restriction.label }}}{{else}}{{ localize "None" }}{{/if}}
+			</span>
+			{{#if editable}}
+				<button type="button" class="link-button" data-action="showConfiguration" data-type="prerequisite"
+								data-tooltip="BF.Prerequisite.Action.Config"
+								aria-label="{{ localize 'BF.Prerequisite.Action.Config' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+		</div>
+	{{/if}}
+</section>

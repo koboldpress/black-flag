@@ -228,6 +228,14 @@ img.icon, figure.icon {
 	}
 }
 
+table {
+	:where(td, th) > .layout {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+}
+
 .untable, .application .untable {
 	&, thead, tbody, tr, tr:nth-child(2n), th, td { all: revert; }
 	th {
@@ -259,6 +267,12 @@ img.icon, figure.icon {
 	}
 	td, th {
 		padding-inline: 6px;
+	}
+	.item-title {
+		.item-image {
+			block-size: 28px;
+			inline-size: 28px;
+		}
 	}
 }
 

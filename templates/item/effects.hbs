@@ -1,0 +1,7 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	<blackFlag-effects>
+		{{#each effects}}
+			{{> "systems/black-flag/templates/item/parts/effects-section.hbs" section=this }}
+		{{/each}}
+	</blackFlag-effects>
+</section>

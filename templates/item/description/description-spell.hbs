@@ -1,0 +1,26 @@
+<section>
+	<div class="category">
+		<label>
+			<span>{{ localize "BF.Spell.Circle.Label" }}</span>
+			<select name="system.circle.base">
+				{{ selectOptions spellCircles selected=source.circle.base }}
+			</select>
+		</label>
+		<label>
+			<span>{{ localize "BF.Spell.Source.Label" }}</span>
+			<blackFlag-multiSelect name="system.source" label="{{ system.source.label }}">
+				<datalist>
+					{{#blackFlag-multiSelect system.source}}
+						{{ selectOptions CONFIG.spellSources.localized }}
+					{{/blackFlag-multiSelect}}
+				</datalist>
+			</blackFlag-multiSelect>
+		</label>
+		<label>
+			<span>{{ localize "BF.Spell.School.Label" }}</span>
+			<select name="system.school">
+				{{ selectOptions CONFIG.spellSchools selected=system.school labelAttr="label" blank="" localize=true }}
+			</select>
+		</label>
+	</div>
+</section>

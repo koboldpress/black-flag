@@ -33,6 +33,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 				localization: "BF.Item.Type.Class",
 				icon: "fa-solid fa-landmark-dome",
 				img: "systems/black-flag/artwork/types/class.svg",
+				hasEffects: false,
 				register: true
 			},
 			{ inplace: false }
