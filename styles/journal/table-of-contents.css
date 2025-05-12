@@ -1,4 +1,9 @@
 .table-of-contents.app, .table-of-contents.application {
+	.window-header {
+		background: var(--color-header-background);
+		h1 { visibility: visible; }
+	}
+
 	.window-content {
 		background: var(--bf-background-color-white);
 		color: var(--bf-text-color-black);
@@ -61,3 +66,7 @@
 		.level-3 { margin-inline-start: 16px; }
 	}
 }
+
+/* .table-of-contents.application.theme-light {
+	.window-header, h1, .header-control { color: var(--color-dark-1); }
+} */
