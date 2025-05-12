@@ -79,9 +79,9 @@ export default class PseudoDocumentSelection extends DialogV2 {
 						buttons: [
 							{
 								action: "submit",
-								callback: (event, target, html) => {
+								callback: (event, target, dialog) => {
 									const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(
-										html.querySelector("form")
+										target.closest("form")
 									);
 									const type = formData.object.type;
 									if (!type) throw new Error(game.i18n.localize(this.DEFAULT_OPTIONS.errorMessage));
@@ -89,7 +89,8 @@ export default class PseudoDocumentSelection extends DialogV2 {
 								},
 								class: "heavy-button",
 								label: game.i18n.localize("Submit"),
-								icon: "fa-regular fa-save"
+								icon: "fa-regular fa-save",
+								type: "submit"
 							}
 						],
 						close: () => {
