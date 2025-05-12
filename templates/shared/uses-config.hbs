@@ -39,7 +39,7 @@
 							<label class="recharge">
 								<span>{{ localize "BF.Recovery.Recharge.Trigger" }}</span>
 								<select name="$.recovery.{{ @index }}.formula">
-									{{ selectOptions recharge.options selected=formula nameAttr="key" labelAttr="label" }}
+									{{ selectOptions recharge.options selected=formula valueAttr="key" labelAttr="label" }}
 								</select>
 							</label>
 						{{else}}
