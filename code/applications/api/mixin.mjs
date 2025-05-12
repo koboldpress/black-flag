@@ -167,7 +167,23 @@ export default function ApplicationV2Mixin(Base) {
 			this.element.addEventListener("dragleave", drag);
 			this.element.addEventListener("dragover", drag);
 			this.element.addEventListener("drop", drag);
+			this.element.addEventListener("plugins", this._onConfigurePlugins.bind(this));
 		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Configure plugins for the ProseMirror instance.
+		 * @param {ProseMirrorPluginsEvent} event
+		 * @protected
+		 */
+		_onConfigurePlugins(event) {
+			event.plugins.highlightDocumentMatches = ProseMirror.ProseMirrorHighlightMatchesPlugin.build(
+				ProseMirror.defaultSchema
+			);
+		}
+
+		/* -------------------------------------------- */
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 		/*             Drag & Drop             */
