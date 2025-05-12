@@ -233,7 +233,7 @@ export function renderSettingsSidebar(html) {
 	const section = document.createElement("section");
 	section.classList.add("black-flag", "sidebar-info", "flexcol");
 	section.innerHTML = `
-		<h4 class="divider">${game.i18n.localize("WORLD.GameSystem")}</h4>
+		<h4 class="divider">${game.i18n.localize("BF.GameSystem")}</h4>
 		<figure class="black-flag sidebar-badge">
 			<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
 			     data-tooltip="${game.system.title}" alt="${game.system.title}">
@@ -263,7 +263,7 @@ function _renderLegacy(html) {
 
 	const heading = document.createElement("div");
 	heading.classList.add("black-flag", "sidebar-heading");
-	heading.innerHTML = `<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>`;
+	heading.innerHTML = `<h2>${game.i18n.localize("BF.GameSystem")}</h2>`;
 	heading.append(_settingsLinks());
 	details.insertAdjacentElement("afterend", heading);
 
