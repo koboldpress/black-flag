@@ -38,11 +38,17 @@
 	button {
 		width: unset;
 		margin: 0;
+		background: var(--bf-background-color-half-white);
 		border: 1px solid var(--bf-color-border-gray);
 		border-radius: 5px;
 
 		&:disabled {
 			opacity: 0.5;
+		}
+		&:hover, &:focus-visible {
+			background: var(--bf-background-color-half-white);
+			color: inherit;
+			box-shadow: 0 0 4px var(--bf-button-shadow-blue);
 		}
 	}
 }

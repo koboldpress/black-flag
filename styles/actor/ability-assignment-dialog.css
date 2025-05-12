@@ -12,10 +12,12 @@
 		color: white;
 		font-family: var(--bf-font-primary);
 		font-size: var(--font-size-32);
+		font-weight: normal;
 		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 
 		button {
-			width: unset;
+			block-size: unset;
+			inline-size: unset;
 			color: white;
 			border-color: white;
 			border-radius: 0 10px;
@@ -240,6 +242,7 @@
 
 			> thead {
 				background-color: var(--bf-blue);
+				border-radius: 0;
 				color: var(--bf-text-color-white);
 				text-shadow: none;
 				text-transform: uppercase;
