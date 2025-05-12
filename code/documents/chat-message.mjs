@@ -233,7 +233,10 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			{ formulaParts: [], total: 0, parts: [] }
 		);
 		context.formula = context.formulaParts.join("").replace(/^ \+ /, "");
-		const rendered = await renderTemplate(`systems/${game.system.id}/templates/chat/damage-tooltip.hbs`, context);
+		const rendered = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+			`systems/${game.system.id}/templates/chat/damage-tooltip.hbs`,
+			context
+		);
 		html.querySelectorAll(".message-content .dice-roll").forEach(e => e.remove());
 		html.querySelector(".message-content").insertAdjacentHTML("afterbegin", rendered);
 

@@ -135,7 +135,10 @@ export default class ItemDataModel extends BaseDataModel {
 	async richTooltip(enrichmentOptions = {}) {
 		if (!this.metadata.tooltipTemplate) return null;
 		return {
-			content: await renderTemplate(this.metadata.tooltipTemplate, await this.getTooltipData(enrichmentOptions)),
+			content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+				this.metadata.tooltipTemplate,
+				await this.getTooltipData(enrichmentOptions)
+			),
 			classes: ["black-flag", "black-flag-tooltip", "item-tooltip"]
 		};
 	}
@@ -152,7 +155,7 @@ export default class ItemDataModel extends BaseDataModel {
 		const rollData = this.parent.getRollData();
 		const context = {
 			item: this.parent,
-			description: await TextEditor.enrichHTML(description, {
+			description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(description, {
 				rollData,
 				relativeTo: this.parent,
 				...enrichmentOptions

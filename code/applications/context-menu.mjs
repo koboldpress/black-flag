@@ -1,7 +1,7 @@
 /**
  * Specialized ContextMenu class for displaying at mouse position.
  */
-export default class BlackFlagContextMenu extends (foundry.applications?.ui?.ContextMenu ?? ContextMenu) {
+export default class BlackFlagContextMenu extends (foundry.applications?.ux?.ContextMenu ?? ContextMenu) {
 	/** @override */
 	_setPosition(html, target, options) {
 		if (game.release.generation > 12) {

@@ -1,7 +1,8 @@
 /**
  * Journal entry page that displays a controls for editing rule page tooltip & type.
  */
-export default class JournalRulePageSheet extends JournalTextPageSheet {
+export default class JournalRulePageSheet extends (foundry.appv1?.sheets?.JournalTextPageSheet ??
+	JournalTextPageSheet) {
 	/** @inheritdoc */
 	static get defaultOptions() {
 		const options = super.defaultOptions;
@@ -25,11 +26,14 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
-		context.enrichedTooltip = await TextEditor.enrichHTML(this.object.system.tooltip, {
-			relativeTo: this.object,
-			secrets: this.object.isOwner,
-			async: true
-		});
+		context.enrichedTooltip = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+			this.object.system.tooltip,
+			{
+				relativeTo: this.object,
+				secrets: this.object.isOwner,
+				async: true
+			}
+		);
 		return context;
 	}
 }

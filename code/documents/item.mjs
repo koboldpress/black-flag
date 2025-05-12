@@ -385,12 +385,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	async getSummaryContext(enrichmentOptions = {}) {
 		const context = {
 			enriched: {
-				description: await TextEditor.enrichHTML(this.system.description.value, {
-					async: true,
-					relativeTo: this,
-					rollData: this.getRollData(),
-					...enrichmentOptions
-				})
+				description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+					this.system.description.value,
+					{
+						async: true,
+						relativeTo: this,
+						rollData: this.getRollData(),
+						...enrichmentOptions
+					}
+				)
 			},
 			item: this,
 			system: this.system
@@ -415,12 +418,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			tags: Array.from((this.system.chatTags ?? this.chatTags).entries())
 				.map(([key, label]) => ({ key, label }))
 				.filter(t => t.label),
-			description: await TextEditor.enrichHTML(this.system.description?.value ?? "", {
-				relativeTo: this,
-				rollData: this.getRollData(),
-				secrets: false,
-				async: true
-			})
+			description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				this.system.description?.value ?? "",
+				{
+					relativeTo: this,
+					rollData: this.getRollData(),
+					secrets: false,
+					async: true
+				}
+			)
 		};
 		const context = this.system.prepareChatContext?.(baseContext) ?? baseContext;
 
@@ -429,7 +435,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-					content: await renderTemplate("systems/black-flag/templates/chat/item-card.hbs", context),
+					content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+						"systems/black-flag/templates/chat/item-card.hbs",
+						context
+					),
 					speaker: ChatMessage.getSpeaker({ actor: this.actor }),
 					flags: {
 						core: { canPopout: true },

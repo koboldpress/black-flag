@@ -22,7 +22,7 @@ import TypeConfig from "./config/type-config.mjs";
 /**
  * Sheet class containing implementation shared across all actor types.
  */
-export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
+export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -97,7 +97,10 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 		};
 		context.enriched = {};
 		for (const [key, path] of Object.entries(this.constructor.enrichedFields)) {
-			context.enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
+			context.enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				foundry.utils.getProperty(context, path),
+				enrichmentContext
+			);
 		}
 		context.editorSelected = this.editorSelected;
 

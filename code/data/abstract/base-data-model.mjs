@@ -270,10 +270,13 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	async toEmbed(config, options = {}) {
 		const keyPath = this.embeddedDescriptionKeyPath;
 		if (!keyPath || !foundry.utils.hasProperty(this, keyPath)) return null;
-		const enriched = await TextEditor.enrichHTML(foundry.utils.getProperty(this, keyPath), {
-			...options,
-			relativeTo: this.parent
-		});
+		const enriched = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+			foundry.utils.getProperty(this, keyPath),
+			{
+				...options,
+				relativeTo: this.parent
+			}
+		);
 		const container = document.createElement("div");
 		container.innerHTML = enriched;
 		return container.children;

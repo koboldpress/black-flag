@@ -152,7 +152,7 @@ export default class SummonSheet extends ActivitySheet {
 	 */
 	async #onDrop(event) {
 		// Try to extract the data
-		const data = TextEditor.getDragEventData(event);
+		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 
 		// Handle dropping linked items
 		if (data?.type !== "Actor") return;

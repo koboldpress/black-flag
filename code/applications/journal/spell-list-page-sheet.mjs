@@ -3,7 +3,7 @@ import { linkForUUID } from "../../utils/_module.mjs";
 /**
  * Journal entry page the displays a list of spells.
  */
-export default class JournalSpellListPageSheet extends JournalPageSheet {
+export default class JournalSpellListPageSheet extends (foundry.appv1?.sheets?.JournalPageSheet ?? JournalPageSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {
@@ -55,7 +55,10 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
 		context.enriched = {};
 		for (const key of ["conclusion", "introduction"]) {
-			context.enriched[key] = await TextEditor.enrichHTML(context.system.description[key], { relativeTo: this });
+			context.enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				context.system.description[key],
+				{ relativeTo: this }
+			);
 			if (context.enriched[key] === "<p></p>") context.enriched[key] = "";
 		}
 
@@ -205,7 +208,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
 	/** @inheritDoc */
 	async _onDrop(event) {
-		const data = TextEditor.getDragEventData(event);
+		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 		let spells;
 		switch (data?.type) {
 			case "Folder":

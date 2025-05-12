@@ -85,7 +85,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * Perform the pre-localization of this data model.
 	 */
 	static localize() {
-		Localization.localizeDataModel(this);
+		(foundry.helpers?.Localization ?? Localization).localizeDataModel(this);
 		this.metadata.dataModels?.configuration?.localize?.();
 	}
 

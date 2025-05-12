@@ -4,7 +4,7 @@ import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 /**
  * Sheet upon which all other item sheets are based.
  */
-export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
+export default class BaseItemSheet extends DocumentSheetMixin(foundry.appv1?.sheets?.ItemSheet ?? ItemSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -43,7 +43,10 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 			async: true
 		};
 		context.enriched = await Object.entries(this.constructor.enrichedFields).reduce(async (enriched, [key, path]) => {
-			enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
+			enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				foundry.utils.getProperty(context, path),
+				enrichmentContext
+			);
 			return enriched;
 		}, {});
 

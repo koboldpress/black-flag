@@ -308,7 +308,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 			);
 		const form = this.element;
 		const event = new Event("submit");
-		const formData = new FormDataExtended(form);
+		const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(form);
 		const submitData = this._prepareSubmitData(event, form, formData);
 		foundry.utils.mergeObject(submitData, updateData, { inplace: true });
 		await this._processSubmitData(event, form, submitData);

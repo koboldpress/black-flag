@@ -5,7 +5,7 @@ import JournalEditor from "./journal-editor.mjs";
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class ClassPageSheet extends JournalPageSheet {
+export default class ClassPageSheet extends (foundry.appv1?.sheets?.JournalPageSheet ?? JournalPageSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {
@@ -171,7 +171,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		return Object.fromEntries(
 			await Promise.all(
 				Object.entries(page.system.description ?? {}).map(async ([id, text]) => {
-					const enriched = await TextEditor.enrichHTML(text, {
+					const enriched = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(text, {
 						relativeTo: this.object,
 						secrets: this.object.isOwner,
 						async: true
@@ -330,11 +330,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 						level,
 						document,
 						name: doc.name,
-						description: await TextEditor.enrichHTML(doc.system.description.value, {
-							relativeTo: doc,
-							secrets: false,
-							async: true
-						}),
+						description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+							doc.system.description.value,
+							{
+								relativeTo: doc,
+								secrets: false,
+								async: true
+							}
+						),
 						tag: makeTag(levels)
 					};
 				})
@@ -358,11 +361,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 				level: CONFIG.BlackFlag.subclassLevel,
 				name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
 				description: this.document.system.description.subclassAdvancement
-					? await TextEditor.enrichHTML(this.document.system.description.subclassAdvancement, {
-							relativeTo: item,
-							secrets: false,
-							async: true
-						})
+					? await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+							this.document.system.description.subclassAdvancement,
+							{
+								relativeTo: item,
+								secrets: false,
+								async: true
+							}
+						)
 					: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
 				tag: makeTag(CONFIG.BlackFlag.subclassFeatureLevels)
 			});
@@ -399,11 +405,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 					return {
 						document,
 						name: document.name,
-						description: await TextEditor.enrichHTML(document.system.description.value, {
-							relativeTo: document,
-							secrets: false,
-							async: true
-						}),
+						description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+							document.system.description.value,
+							{
+								relativeTo: document,
+								secrets: false,
+								async: true
+							}
+						),
 						features: await this._getFeatures(document, { features }),
 						table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
 					};
@@ -486,7 +495,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 	/** @override */
 	async _onDrop(event) {
-		const data = TextEditor.getDragEventData(event);
+		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 
 		if (data?.type !== "Item") return false;
 		const item = await Item.implementation.fromDropData(data);

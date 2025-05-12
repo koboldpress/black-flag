@@ -400,7 +400,9 @@ export default class ActivityActivationDialog extends BFFormDialog {
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static async #onUse(event, target) {
-		const formData = new FormDataExtended(this.element.querySelector("form"));
+		const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(
+			this.element.querySelector("form")
+		);
 		const submitData = this._prepareSubmitData(event, formData);
 		foundry.utils.mergeObject(this.#config, submitData);
 		this.#used = true;

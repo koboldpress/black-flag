@@ -112,12 +112,15 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 				const data = {
 					activity: onlyActivity,
 					item,
-					description: await TextEditor.enrichHTML(item.system.description.value, {
-						secrets: false,
-						rollData: item.getRollData(),
-						async: true,
-						relativeTo: item
-					}),
+					description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+						item.system.description.value,
+						{
+							secrets: false,
+							rollData: item.getRollData(),
+							async: true,
+							relativeTo: item
+						}
+					),
 					uses: this.prepareUsesDisplay(item, onlyActivity)
 				};
 				if (actionTypes.has("action")) context.actions.action.items.push(data);
@@ -153,10 +156,9 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 		let ability;
 		let dc;
 		if (context.editable) {
-			ability = `<select name="system.spellcasting.ability">${HandlebarsHelpers.selectOptions(
-				CONFIG.BlackFlag.abilities.localized,
-				{ hash: { selected: spellcasting.ability } }
-			)}</select>`;
+			ability = `<select name="system.spellcasting.ability">${(
+				foundry.applications?.handlebars?.selectOptions ?? HandlebarsHelpers.selectOptions
+			)(CONFIG.BlackFlag.abilities.localized, { hash: { selected: spellcasting.ability } })}</select>`;
 			dc = `<input type="number" name="system.spellcasting.dc" value="${context.source.spellcasting.dc}"
 			       placeholder="${spellcasting.autoDC}" step="1" min="0">`;
 		} else {

@@ -295,11 +295,14 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	 */
 	async _prepareIdentityContext(context, options) {
 		context.tab = context.tabs.identity;
-		context.description = await TextEditor.enrichHTML(context.source.description ?? "", {
-			relativeTo: this.activity,
-			rollData: this.item.getRollData(),
-			secrets: true
-		});
+		context.description = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+			context.source.description ?? "",
+			{
+				relativeTo: this.activity,
+				rollData: this.item.getRollData(),
+				secrets: true
+			}
+		);
 		context.placeholder = {
 			name: game.i18n.localize(this.activity.metadata.title),
 			img: this.activity.metadata.icon

@@ -1,6 +1,4 @@
 <fieldset>
 	<legend>{{ localize "BF.Roll.Configuration.LabelGeneric" }}</legend>
-	{{#each fields}}
-		{{ formField field name=name value=value options=options input=input }}
-	{{/each}}
+	{{> "blackFlag.fieldlist" fields }}
 </fieldset>

@@ -1,7 +1,8 @@
 /**
  * Journal entry page to display a special map marker.
  */
-export default class MapLocationPageSheet extends JournalTextPageSheet {
+export default class MapLocationPageSheet extends (foundry.appv1?.sheets?.JournalTextPageSheet ??
+	JournalTextPageSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		const options = super.defaultOptions;

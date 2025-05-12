@@ -326,7 +326,10 @@ export default class NPCData extends ActorDataModel.mixin(
 			config.cite = false;
 		}
 		const section = document.createElement("section");
-		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/npc-embed.hbs", context);
+		section.innerHTML = await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+			"systems/black-flag/templates/actor/embeds/npc-embed.hbs",
+			context
+		);
 		return section.children;
 	}
 

@@ -107,7 +107,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	#createValue() {
 		const form = document.createElement("form");
 		Array.from(this.children).forEach(c => form.insertAdjacentElement("beforeend", c));
-		const formData = new FormDataExtended(form);
+		const formData = new (foundry.applications?.ux?.FormDataExtended ?? FormDataExtended)(form);
 		Array.from(form.children).forEach(c => this.insertAdjacentElement("beforeend", c));
 		let object = foundry.utils.expandObject(formData.object).$ ?? {};
 		object = this._mutateFormData(object) ?? object;

@@ -938,7 +938,10 @@ async function requestCheckSave(event) {
 	const MessageClass = getDocumentClass("ChatMessage");
 	const chatData = {
 		user: game.user.id,
-		content: await renderTemplate("systems/black-flag/templates/chat/request-card.hbs", { buttons }),
+		content: await (foundry.applications?.handlebars?.renderTemplate ?? renderTemplate)(
+			"systems/black-flag/templates/chat/request-card.hbs",
+			{ buttons }
+		),
 		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
 		speaker: MessageClass.getSpeaker({ user: game.user })
 	};
