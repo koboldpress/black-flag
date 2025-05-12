@@ -33,6 +33,16 @@ export default class SelectChoices {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Are there no entries in this choices object.
+	 * @type {boolean}
+	 */
+	get isEmpty() {
+		return Object.keys(this).length === 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Create a set of available choice keys.
 	 * @type {Set<string>}
 	 */
@@ -262,7 +272,7 @@ export default class SelectChoices {
 				if (trait.children) {
 					if (filter.has(forcedCategoryKey)) {
 						trait.children.filter(filter);
-						if (foundry.utils.isEmpty(trait.children)) delete trait.children;
+						if (!trait.children || trait.children.isEmpty) delete trait.children;
 					} else delete trait.children;
 				}
 			}
@@ -270,7 +280,7 @@ export default class SelectChoices {
 			// Check children, remove entry if no children match filter
 			else if (!filter.has(wildcardKey) && !filter.has(`${key}:*`)) {
 				if (trait.children) trait.children.filter(filter);
-				if (foundry.utils.isEmpty(trait.children ?? {})) delete this[key];
+				if (!trait.children || trait.children.isEmpty) delete this[key];
 			}
 
 			// Top-level wildcard ("languages:*") - Include all entries & children
