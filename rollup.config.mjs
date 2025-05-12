@@ -10,7 +10,8 @@ export default {
 	},
 	plugins: [
 		postcss({
-			extract: path.resolve("black-flag.css")
+			extract: path.resolve("black-flag.css"),
+			sourceMap: true
 		})
 	],
 	external: []
