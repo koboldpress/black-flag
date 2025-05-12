@@ -60,7 +60,11 @@ export default class BlackFlagDialog extends Dialog {
 					content = content[0];
 				}
 				content.classList.add("dialog-tooltip");
-				game.tooltip.activate(element, { content, locked: true, ...tooltipOptions });
+				game.tooltip.activate(element, {
+					[game.release.generation < 12 ? "content" : "html"]: content,
+					locked: true,
+					...tooltipOptions
+				});
 			});
 		});
 
