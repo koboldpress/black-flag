@@ -17,10 +17,10 @@ export default class HPTemplate extends foundry.abstract.DataModel {
 			attributes: new SchemaField({
 				hp: new SchemaField(
 					{
-						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
-						max: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
-						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
-						tempMax: new NumberField({ integer: true, label: "BF.HitPoint.TempMax.LabelLong" })
+						value: new NumberField({ required: true, min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
+						max: new NumberField({ required: true, min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
+						temp: new NumberField({ required: true, min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
+						tempMax: new NumberField({ required: true, integer: true, label: "BF.HitPoint.TempMax.LabelLong" })
 					},
 					{ label: "BF.HitPoint.Label[other]" }
 				)

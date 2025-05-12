@@ -200,7 +200,7 @@ export default class PCData extends ActorDataModel.mixin(
 				hd: new SchemaField({
 					d: new MappingField(
 						new SchemaField({
-							spent: new NumberField({ min: 0, integer: true })
+							spent: new NumberField({ required: true, min: 0, integer: true })
 						})
 					)
 				}),
@@ -210,16 +210,16 @@ export default class PCData extends ActorDataModel.mixin(
 						overall: new FormulaField({ deterministic: true })
 					}),
 					override: new NumberField({ integer: true }),
-					temp: new NumberField({ min: 0, integer: true }),
-					tempMax: new NumberField({ integer: true }),
-					value: new NumberField({ min: 0, integer: true })
+					temp: new NumberField({ required: true, min: 0, integer: true }),
+					tempMax: new NumberField({ required: true, integer: true }),
+					value: new NumberField({ required: true, min: 0, integer: true })
 				}),
 				initiative: new SchemaField({
 					ability: new StringField({ label: "BF.Initiative.Ability.Label" }),
 					proficiency: new ProficiencyField()
 				}),
 				luck: new SchemaField({
-					value: new NumberField({ min: 0, max: 5, integer: true }),
+					value: new NumberField({ required: true, min: 0, max: 5, integer: true }),
 					formula: new FormulaField({ label: "BF.Luck.Formula.Label", hint: "BF.Luck.Formula.Hint" })
 				})
 			}),
