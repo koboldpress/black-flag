@@ -356,7 +356,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 		id ??= foundry.utils.randomID();
 		const advancementOrigin = `${this.item.id}.${this.id}`;
 		const ultimateOrigin = this.item.getFlag("black-flag", "ultimateOrigin");
-		const updates = SortingHelpers.performIntegerSort(source, {
+		const updates = (foundry.utils?.SortingHelpers ?? SortingHelpers).performIntegerSort(source, {
 			target: ultimateOrigin && ultimateOrigin !== advancementOrigin ? this.item : undefined,
 			siblings: this.item.actor.items
 		});
