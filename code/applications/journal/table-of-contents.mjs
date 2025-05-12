@@ -66,10 +66,14 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 
 	/** @override */
 	_createContextMenus() {
-		foundry.applications.ui.ContextMenu.create(this, this.element, "[data-entry-id]", this._getEntryContextOptions(), {
-			jQuery: false,
-			fixed: true
-		});
+		if (game.release.generation < 12) {
+			ContextMenu.create(this, this.element, "[data-entry-id]", this._getEntryContextOptions(), {
+				jQuery: false,
+				fixed: true
+			});
+		} else {
+			this._createContextMenu(this._getEntryContextOptions, "[data-entry-id]", { fixed: true });
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -77,7 +81,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 	/** @inheritDoc */
 	async _onRender(context, options) {
 		await super._onRender(context, options);
-		new DragDrop({
+		new (foundry.applications?.ux?.DragDrop ?? DragDrop)({
 			dragSelector: "[data-document-id]",
 			dropSelector: "article",
 			permissions: {
