@@ -146,7 +146,7 @@ export default class NotificationTooltip extends BFApplication {
 		const tooltip = new NotificationTooltip(doc, keys);
 		await tooltip.render({ force: true });
 		game.tooltip.activate(element, {
-			[game.release.generation < 12 ? "content" : "html"]: tooltip.element,
+			[game.release.generation < 13 ? "content" : "html"]: tooltip.element,
 			cssClass: "notification-tooltip"
 		});
 	}

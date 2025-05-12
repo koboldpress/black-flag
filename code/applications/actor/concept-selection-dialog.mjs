@@ -5,11 +5,6 @@ import BFApplication from "../api/application.mjs";
  * Dialog that presents a list of class, subclass, lineage, heritage, or background options for the player to choose.
  */
 export default class ConceptSelectionDialog extends BFApplication {
-	// constructor(type, options = {}) {
-	// 	super(options);
-	// 	this.options.classes.push(type);
-	// }
-
 	/** @override */
 	static DEFAULT_OPTIONS = {
 		actions: {
@@ -77,7 +72,7 @@ export default class ConceptSelectionDialog extends BFApplication {
 	/** @inheritDoc */
 	_configureRenderOptions(options) {
 		super._configureRenderOptions(options);
-		if (this.type === "class") options.parts = ["class"];
+		if (["class", "subclass"].includes(this.type)) options.parts = ["class"];
 		else options.parts = ["other"];
 	}
 

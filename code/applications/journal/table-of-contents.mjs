@@ -66,7 +66,7 @@ export default class TableOfContentsCompendium extends (foundry.applications?.si
 
 	/** @override */
 	_createContextMenus() {
-		if (game.release.generation < 12) {
+		if (game.release.generation < 13) {
 			ContextMenu.create(this, this.element, "[data-entry-id]", this._getEntryContextOptions(), {
 				jQuery: false,
 				fixed: true

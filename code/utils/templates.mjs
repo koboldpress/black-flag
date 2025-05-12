@@ -237,5 +237,5 @@ export async function registerHandlebarsPartials() {
 		paths[`blackFlag.${path.split("/").pop().replace(".hbs", "")}`] = path;
 	}
 
-	return game.release.generation < 12 ? loadTemplates(paths) : foundry.applications.handlebars.loadTemplates(paths);
+	return game.release.generation < 13 ? loadTemplates(paths) : foundry.applications.handlebars.loadTemplates(paths);
 }
