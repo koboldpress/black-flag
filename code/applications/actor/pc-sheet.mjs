@@ -40,7 +40,7 @@ export default class PCSheet extends BaseActorSheet {
 	/** @override */
 	modes = {
 		editing: false,
-		progression: false
+		progression: true
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
