@@ -38,12 +38,15 @@ export default class LairSheet extends BaseActorSheet {
 	async prepareItem(item, context, section) {
 		await super.prepareItem(item, context, section);
 		context.activity = item.system.activities.find(a => a.activation.primary) ?? item.system.activities.contents[0];
-		context.description = await TextEditor.enrichHTML(item.system.description.value, {
-			relativeTo: item,
-			rollData: item.getRollData(),
-			secrets: false,
-			async: true
-		});
+		context.description = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+			item.system.description.value,
+			{
+				relativeTo: item,
+				rollData: item.getRollData(),
+				secrets: false,
+				async: true
+			}
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -13,6 +13,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
 		this.replaceChildren();
@@ -22,12 +23,16 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	disconnectedCallback() {
 		Hooks.off("updateActor", this.#hookID);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Render the luck interface.
+	 */
 	#createLuckInterface() {
 		// Add controls based on current status
 		const createLuckPoints = (total, selected) => {
@@ -77,9 +82,12 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * The actor that performed the roll.
+	 * @type {BFActor}
+	 */
 	get actor() {
-		// TODO: Adjust this logic to work fully with unlinked tokens
-		return game.actors.get(this.message.speaker.actor);
+		return this.message.getAssociatedActor();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -149,7 +157,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		let bonusTerm = roll.terms.find(t => t.options.luckBonus);
 		if (!bonusTerm) {
 			const operatorTerm = new foundry.dice.terms.OperatorTerm({ operator: "+" });
-			await operatorTerm.evaluate();
+			if (game.release.generation < 13) await operatorTerm.evaluate();
 			roll.terms.push(operatorTerm);
 			bonusTerm = new foundry.dice.terms.NumericTerm({ number: 0, options: { luckBonus: true } });
 			await bonusTerm.evaluate();

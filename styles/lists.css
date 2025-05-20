@@ -161,6 +161,9 @@ ul.configuration-list {
 		.field-group {
 			flex: 1 1 100%;
 			gap: var(--gap-size);
+			label > :where(input, select) {
+				align-self: stretch;
+			}
 		}
 
 		.controls {

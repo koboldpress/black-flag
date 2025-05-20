@@ -96,7 +96,10 @@ export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1.she
 		};
 		context.enriched = {};
 		for (const [key, path] of Object.entries(this.constructor.enrichedFields)) {
-			context.enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
+			context.enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				foundry.utils.getProperty(context, path),
+				enrichmentContext
+			);
 		}
 		context.editorSelected = this.editorSelected;
 

@@ -87,7 +87,7 @@ export default class BlackFlagDragDrop extends foundry.applications.ux.DragDrop 
 	 * @returns {DragEventData}
 	 */
 	static getDragData(event) {
-		const data = TextEditor.getDragEventData(event);
+		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 		if (!foundry.utils.isEmpty(data)) return { area: this.#currentDrag?.area, data };
 		if (this.#currentDrag?.data) return { ...this.#currentDrag };
 		return {};

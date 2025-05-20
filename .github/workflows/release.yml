@@ -124,6 +124,7 @@ jobs:
             ...(manifest.esmodules ?? []),
             ...(manifest.esmodules?.map(s => `${s}.map`) ?? []),
             ...(manifest.styles ?? []),
+            ...(manifest.styles?.map(s => `${s}.map`) ?? []),
             ...(manifest.packs?.map(p => p.path) ?? []),
             ...(manifest.languages?.map(l => l.path) ?? []),
             ...(manifest.includes ?? [])

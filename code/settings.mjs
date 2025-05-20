@@ -240,7 +240,7 @@ export function renderSettingsSidebar(html) {
 	const section = document.createElement("section");
 	section.classList.add("black-flag", "sidebar-info", "flexcol");
 	section.innerHTML = `
-		<h4 class="divider">${game.i18n.localize("WORLD.FIELDS.system.label")}</h4>
+		<h4 class="divider">${game.i18n.localize("BF.GameSystem")}</h4>
 		<figure class="black-flag sidebar-badge">
 			<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
 			     data-tooltip="${game.system.title}" alt="${game.system.title}">

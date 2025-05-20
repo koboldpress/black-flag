@@ -112,12 +112,15 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 				const data = {
 					activity: onlyActivity,
 					item,
-					description: await TextEditor.enrichHTML(item.system.description.value, {
-						secrets: false,
-						rollData: item.getRollData(),
-						async: true,
-						relativeTo: item
-					}),
+					description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+						item.system.description.value,
+						{
+							secrets: false,
+							rollData: item.getRollData(),
+							async: true,
+							relativeTo: item
+						}
+					),
 					uses: this.prepareUsesDisplay(item, onlyActivity)
 				};
 				if (actionTypes.has("action")) context.actions.action.items.push(data);

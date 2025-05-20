@@ -55,7 +55,10 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
 
 		context.enriched = {};
 		for (const key of ["conclusion", "introduction"]) {
-			context.enriched[key] = await TextEditor.enrichHTML(context.system.description[key], { relativeTo: this });
+			context.enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				context.system.description[key],
+				{ relativeTo: this }
+			);
 			if (context.enriched[key] === "<p></p>") context.enriched[key] = "";
 		}
 
@@ -205,7 +208,7 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
 
 	/** @inheritDoc */
 	async _onDrop(event) {
-		const data = TextEditor.getDragEventData(event);
+		const data = (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).getDragEventData(event);
 		let spells;
 		switch (data?.type) {
 			case "Folder":

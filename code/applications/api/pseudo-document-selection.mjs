@@ -76,15 +76,18 @@ export default class PseudoDocumentSelection extends DialogV2 {
 						buttons: [
 							{
 								action: "submit",
-								callback: (event, target, html) => {
-									const formData = new foundry.applications.ux.FormDataExtended(html.querySelector("form"));
+								callback: (event, target, dialog) => {
+									const formData = new foundry.applications.ux.FormDataExtended(
+										target.closest("form")
+									);
 									const type = formData.object.type;
 									if (!type) throw new Error(game.i18n.localize(this.DEFAULT_OPTIONS.errorMessage));
 									resolve(item.createEmbeddedDocuments(this.DEFAULT_OPTIONS.type, [{ type }], { renderSheet: true }));
 								},
 								class: "heavy-button",
 								label: game.i18n.localize("Submit"),
-								icon: "fa-regular fa-save"
+								icon: "fa-regular fa-save",
+								type: "submit"
 							}
 						],
 						close: () => {

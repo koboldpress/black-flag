@@ -369,11 +369,14 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/** @override */
 	async toEmbedContents(config, options) {
 		const div = document.createElement("div");
-		div.innerHTML = await TextEditor.enrichHTML(this.description, {
-			relativeTo: this,
-			secrets: false,
-			rollData: this.item.getRollData()
-		});
+		div.innerHTML = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+			this.description,
+			{
+				relativeTo: this,
+				secrets: false,
+				rollData: this.item.getRollData()
+			}
+		);
 		return div.children;
 	}
 
@@ -946,12 +949,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			tags: Array.from(this.chatTags.entries())
 				.map(([key, label]) => ({ key, label }))
 				.filter(t => t.label),
-			description: await TextEditor.enrichHTML(this.description || this.item.system.description.value, {
-				relativeTo: this.description ? this : this.item,
-				rollData: this.item.getRollData(),
-				secrets: false,
-				async: true
-			})
+			description: await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				this.description || this.item.system.description.value,
+				{
+					relativeTo: this.description ? this : this.item,
+					rollData: this.item.getRollData(),
+					secrets: false,
+					async: true
+				}
+			)
 		};
 	}
 

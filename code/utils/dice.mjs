@@ -1,3 +1,5 @@
+const { MODIFIER_CODES, MODIFIER_KEYS } = foundry.helpers.interaction.KeyboardManager;
+
 /**
  * Determine which keys are pressed that might trigger the provided keybinding.
  * @param {Event} event - Triggering event.
@@ -9,11 +11,11 @@ export function areKeysPressed(event, action) {
 	const activeModifiers = {};
 	const addModifiers = (key, pressed) => {
 		activeModifiers[key] = pressed;
-		foundry.helpers.interaction.KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+		MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
 	};
-	addModifiers(foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-	addModifiers(foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
-	addModifiers(foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+	addModifiers(MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
+	addModifiers(MODIFIER_KEYS.SHIFT, event.shiftKey);
+	addModifiers(MODIFIER_KEYS.ALT, event.altKey);
 	return game.keybindings.get(game.system.id, action).some(b => {
 		if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
 		if ( b.modifiers.length ) return false;

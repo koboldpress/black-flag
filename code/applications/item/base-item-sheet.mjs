@@ -42,7 +42,10 @@ export default class BaseItemSheet extends DocumentSheetMixin(foundry.appv1.shee
 			async: true
 		};
 		context.enriched = await Object.entries(this.constructor.enrichedFields).reduce(async (enriched, [key, path]) => {
-			enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
+			enriched[key] = await (foundry.applications?.ux?.TextEditor?.implementation ?? TextEditor).enrichHTML(
+				foundry.utils.getProperty(context, path),
+				enrichmentContext
+			);
 			return enriched;
 		}, {});
 

@@ -202,7 +202,7 @@ export default class PCData extends ActorDataModel.mixin(
 				hd: new SchemaField({
 					d: new MappingField(
 						new SchemaField({
-							spent: new NumberField({ min: 0, integer: true })
+							spent: new NumberField({ required: true, min: 0, integer: true })
 						})
 					)
 				}),

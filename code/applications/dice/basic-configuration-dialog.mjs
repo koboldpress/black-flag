@@ -194,7 +194,11 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	async _prepareConfigurationContext(context, options) {
 		context.fields = [
 			{
-				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.Roll.Mode.Label") }),
+				field: new foundry.data.fields.StringField({
+					label: game.i18n.localize("BF.Roll.Mode.Label"),
+					required: true,
+					blank: false
+				}),
 				name: "rollMode",
 				options: Object.entries(CONFIG.Dice.rollModes).map(([value, { label }]) => ({
 					value,
