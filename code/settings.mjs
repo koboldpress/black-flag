@@ -181,6 +181,15 @@ export function registerSettings() {
 		type: Boolean
 	});
 
+	game.settings.register(game.system.id, "criticalChecksAndThrows", {
+		name: "BF.Settings.CriticalChecksAndThrows.Label",
+		hint: "BF.Settings.CriticalChecksAndThrows.Hint",
+		scope: "world",
+		config: true,
+		default: false,
+		type: Boolean
+	});
+
 	game.settings.register(game.system.id, "criticalMaximizeDamage", {
 		name: "BF.Settings.CriticalMaximizeDamage.Label",
 		hint: "BF.Settings.CriticalMaximizeDamage.Hint",
