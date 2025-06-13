@@ -212,11 +212,11 @@ export default class TraitConfig extends AdvancementConfig {
 	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
 	 */
 	static async #onAddChoice(event, target) {
-		this.config.choices.push({ count: 1 });
+		this.config.choices.push({ count: 1, pool: [] });
 		this.selected = this.config.choices.length - 1;
 		this.config.grants = Array.from(this.advancement.configuration.grants);
 		this.config.choices.forEach(c => {
-			if (!c.pool) {c.pool = []; return};
+			if (!c.pool) return;
 			c.pool = Array.from(c.pool);
 		});
 		await this.advancement.update({ configuration: this.config });
