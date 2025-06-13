@@ -9,7 +9,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 	static DEFAULT_OPTIONS = {
 		classes: ["equipment"],
 		position: {
-			width: 600,
+			width: 620,
 			height: 500
 		}
 	};

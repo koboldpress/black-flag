@@ -104,8 +104,8 @@
 					align-items: flex-start;
 
 					.sidebar {
-						flex: 0 0 144px;
-						max-inline-size: 144px;
+						flex: 0 0 160px;
+						max-inline-size: 160px;
 						display: flex;
 						flex-direction: column;
 						gap: 0.5rem;
@@ -123,7 +123,8 @@
 
 							> span:first-child { font-weight: bold; }
 							input, select {
-								height: 1.75em;
+								block-size: 1.75em;
+								min-inline-size: 3.5em;
 								text-align: end;
 							}
 
@@ -177,6 +178,8 @@
 
 .black-flag.sheet.item {
 	blackFlag-effects {
+		display: contents;
+
 		.effect-name { width: 200px; }
 		.effect-controls {
 			width: 40px;
