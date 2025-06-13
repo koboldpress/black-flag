@@ -216,7 +216,7 @@ export default class TraitConfig extends AdvancementConfig {
 		this.selected = this.config.choices.length - 1;
 		this.config.grants = Array.from(this.advancement.configuration.grants);
 		this.config.choices.forEach(c => {
-			if (!c.pool) return;
+			if (!c.pool) {c.pool = []; return};
 			c.pool = Array.from(c.pool);
 		});
 		await this.advancement.update({ configuration: this.config });
