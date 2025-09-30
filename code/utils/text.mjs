@@ -7,7 +7,7 @@
  */
 export function formatIdentifier(text, options) {
 	text = text.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-	return text.slugify(options);
+	return text.slugify({ ...options, strict: true });
 }
 
 export function slugify(text, options) {
