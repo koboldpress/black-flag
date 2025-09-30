@@ -70,7 +70,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			case "all":
 				return true;
 			case "player":
-				return !this.author.isGM;
+				return !this.author?.isGM;
 			default:
 				return false;
 		}

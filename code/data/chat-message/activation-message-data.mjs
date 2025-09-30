@@ -91,7 +91,7 @@ export default class ActivationMessageData extends ChatMessageDataModel {
 			}),
 			effects: this.effects
 				.map(id => this.item?.effects.get(id))
-				.filter(e => e && (game.user.isGM || (e.transfer && this.parent.author.id === game.user.id)))
+				.filter(e => e && (game.user.isGM || (e.transfer && this.parent.author?.id === game.user.id)))
 		};
 	}
 
@@ -115,7 +115,7 @@ export default class ActivationMessageData extends ChatMessageDataModel {
 	_renderButtons(element) {
 		if (this.parent.shouldDisplayChallenge) element.dataset.displayChallenge = "";
 
-		const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.author.id === game.user.id;
+		const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.author?.id === game.user.id;
 		for (const button of element.querySelectorAll(".menu button")) {
 			if (this.activity?.shouldHideChatButton(button, this)) button.hidden = true;
 			if (button.dataset.visibility === "all") continue;
