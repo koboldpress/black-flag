@@ -707,10 +707,13 @@ async function enrichCheck(config, label, options) {
 	let invalid = false;
 
 	const anything = config.ability || config.skill.length || config.tool.length || config.vehicle.length;
+	const item = options.relativeTo instanceof Item ? options.relativeTo : options.relativeTo?.item;
 	const activity = config.activity
-		? options.relativeTo?.system?.activities?.get(config.activity)
+		? item?.system?.activities?.get(config.activity)
 		: !anything
-			? options.relativeTo?.system?.activities?.getByType("check")[0]
+			? options.relativeTo instanceof Activity && options.relativeTo.type === "check"
+				? options.relativeTo
+				: item?.system?.activities?.getByType("check")[0] ?? null
 			: null;
 
 	if (activity) {
@@ -951,12 +954,13 @@ async function enrichSave(config, label, options) {
 		.filter(a => a in LOOKUP.abilities)
 		.map(a => LOOKUP.abilities[a].key ?? a);
 
+	const item = options.relativeTo instanceof Item ? options.relativeTo : options.relativeTo?.item;
 	const activity = config.activity
-		? options.relativeTo?.system?.activities?.get(config.activity)
+		? item?.system?.activities?.get(config.activity)
 		: !config.ability.length && !blankAbility
-			? options.relativeTo instanceof Activity
+			? options.relativeTo instanceof Activity && options.relativeTo.type === "save"
 				? options.relativeTo
-				: options.relativeTo?.system?.activities?.getByType("save")[0] ?? null
+				: item?.system?.activities?.getByType("save")[0] ?? null
 			: null;
 
 	if (activity) {
