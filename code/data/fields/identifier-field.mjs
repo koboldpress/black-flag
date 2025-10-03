@@ -5,8 +5,9 @@ import { isValidIdentifier } from "../../utils/validation.mjs";
  */
 export default class IdentifierField extends foundry.data.fields.StringField {
 	static get _defaults() {
-		// TODO: Remove these defaults so LOCALIZATION_PREFIXES can properly localize identifier fields
 		return foundry.utils.mergeObject(super._defaults, {
+			allowType: false,
+			// TODO: Remove these label & hint defaults so LOCALIZATION_PREFIXES can properly localize identifier fields
 			label: "BF.Identifier.Label",
 			hint: "BF.Identifier.Hint"
 		});
@@ -16,7 +17,7 @@ export default class IdentifierField extends foundry.data.fields.StringField {
 
 	/** @override */
 	_validateType(value) {
-		if (!isValidIdentifier(value)) {
+		if (!isValidIdentifier(value, { allowType: this.allowType })) {
 			throw new Error(game.i18n.format("BF.Identifier.Error.Invalid", { value }));
 		}
 	}

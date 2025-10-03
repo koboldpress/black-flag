@@ -1,9 +1,17 @@
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier - Identifier to verify.
+ * @param {object} [options={}]
+ * @param {boolean} [options.allowType] - Consider an identifier with a single ":" to be valid. Only the portion after
+ *                                        the colon must follow the strict identifier validation.
  * @returns {boolean}
  */
-export function isValidIdentifier(identifier) {
+export function isValidIdentifier(identifier, { allowType=false }={}) {
+	if ( allowType ) {
+		const split = identifier.split(":");
+		if ( split.length > 2 ) return false;
+		identifier = split[1];
+	}
 	return /^([a-z0-9_-]+)$/i.test(identifier);
 }
 

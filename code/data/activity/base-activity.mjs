@@ -328,27 +328,55 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			enumerable: false
 		});
 
-		// Re-link UUIDs in consumption fields to explicit items
 		if (this.item.isEmbedded) {
 			for (const target of this.consumption.targets) {
-				if (target.target && target.type === "item") {
-					if (target.target?.includes(".")) {
-						const item = this.item.actor.sourcedItems?.get(target.target)?.first();
-						if (item) target.target = item.id;
-					}
-					if (!this.item.actor.items.get(target.target))
-						this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
-							level: "error",
-							section: "auto",
-							message: game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
-						});
-				}
+				if (target.type !== "item" || !target.target) continue;
+
+				// Re-link UUID or identifier target to explicit item on the actor
+				target.target = this._remapConsumptionTarget(target.target);
+
+				// If targeted item isn't found, display preparation warning
+				if (!this.item.actor.items.get(target.target))
+					this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
+						level: "error",
+						section: "auto",
+						message: game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
+					});
 			}
 		}
 
 		if (this.inheritMagical) this.magical = this.isSpell || this.item.system.properties.has("magical");
 
 		this.system.prepareFinalData?.();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Remap a UUID or identifier in a consumption target to the ID of an item on the actor.
+	 * @param {string} target
+	 * @returns {string}
+	 * @internal
+	 */
+	_remapConsumptionTarget(target) {
+		if (!target || !this.actor || this.actor.items.has(target)) return target;
+
+		// Re-link UUID target
+		const { type } = foundry.utils.parseUuid(target) ?? {};
+		if (type === "Item") {
+			const item = this.actor.sourcedItems?.get(target)?.first();
+			if (item) return item.id;
+		}
+
+		// Re-link identifier target
+		else {
+			const item = this.actor.identifiedItems?.get(target)?.first();
+			if (item) return item.id;
+		}
+
+		return target;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

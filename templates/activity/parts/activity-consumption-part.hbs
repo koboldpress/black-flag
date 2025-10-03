@@ -1,11 +1,6 @@
 <div class="consumption form-group split-group">
 	{{ formField fields.type name=(concat prefix "type") value=consumption.type options=@root.consumptionTypeOptions
 	             classes="label-top" rootId=@root.partId }}
-	{{#if consumption.showTargets}}
-		{{ formField fields.target name=(concat prefix "target") value=consumption.target options=consumption.validTargets
-		             blank=(not consumption.validTargets) placeholder=consumption.placeholder classes="label-top"
-		             rootId=@root.partId }}
-	{{/if}}
 	{{ formField fields.value name=(concat prefix "value") value=consumption.value classes="label-top"
 	             rootId=@root.partId }}
 </div>
@@ -19,6 +14,14 @@
 		</button>
 	{{/if}}
 </div>
+
+{{#if consumption.showTargets}}
+	<div class="form-group full-width">
+		{{ formField fields.target name=(concat prefix "target") value=consumption.target options=consumption.validTargets
+		             blank=(not consumption.validTargets) placeholder=consumption.placeholder classes="label-top"
+		             rootId=@root.partId }}
+	</div>
+{{/if}}
 
 {{#if (and scalingAllowed consumption.scalingModes)}}
 	<div class="consumption-scaling form-group split-group full-width">

@@ -2070,6 +2070,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 class IdentifiedItemsMap extends Map {
 	/** @inheritDoc */
 	get(key, { type } = {}) {
+		if (key.includes(":") && !type) [type, key] = key.split(":", 2);
 		const result = super.get(key);
 		if (!result?.size || !type) return result;
 		return result.filter(i => i.type === type);
