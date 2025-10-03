@@ -459,7 +459,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	 */
 	static #showArtwork(event, target) {
 		new foundry.applications.apps.ImagePopout({
-			src: event.target.src,
+			src: target.getAttribute("src"),
 			uuid: this.actor.uuid,
 			window: { title: this.actor.name }
 		}).render({ force: true });
