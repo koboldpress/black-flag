@@ -1,20 +1,22 @@
 /**
  * Configuration information for a token placement operation.
  *
- * @typedef {object} TokenPlacementConfiguration
- * @property {PrototypeToken[]} tokens  Prototype token information for rendering.
+ * @typedef TokenPlacementConfiguration
+ * @property {TokenDocument} [origin] - Token that is the origin point of the placement.
+ * @property {PrototypeToken[]} tokens - Prototype token information for rendering.
  */
 
 /**
  * Data for token placement on the scene.
  *
- * @typedef {object} PlacementData
+ * @typedef PlacementData
  * @property {PrototypeToken} prototypeToken
  * @property {object} index
- * @property {number} index.total             Index of the placement across all placements.
- * @property {number} index.unique            Index of the placement across placements with the same original token.
+ * @property {number} index.total - Index of the placement across all placements.
+ * @property {number} index.unique - Index of the placement across placements with the same original token.
  * @property {number} x
  * @property {number} y
+ * @property {number} elevation
  * @property {number} rotation
  */
 
@@ -143,7 +145,13 @@ export default class TokenPlacement {
 			if (tokenData.randomImg) tokenData.texture.src = prototypeToken.actor.img;
 			const cls = getDocumentClass("Token");
 			const doc = new cls(tokenData, { parent: canvas.scene });
-			this.#placements.push({ prototypeToken, x: 0, y: 0, rotation: tokenData.rotation ?? 0 });
+			this.#placements.push({
+				prototypeToken,
+				x: 0,
+				y: 0,
+				elevation: this.config.origin?.elevation ?? 0,
+				rotation: tokenData.rotation ?? 0
+			});
 			this.#previews.push(doc);
 		}
 	}

@@ -1,10 +1,12 @@
 /**
  * Get currently selected tokens in the scene or user's character's tokens.
+ * @param {BlackFlagActor} [actor] - Only allow tokens associated with this specific actor.
  * @returns {Token5e[]}
  */
-export function getSelectedTokens() {
-	let targets = canvas.tokens.controlled.filter(t => t.actor);
-	if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+export function getSelectedTokens(actor) {
+	let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+	if ( !targets.length && actor ) targets = actor.getActiveTokens();
+	else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
 	return targets;
 }
 

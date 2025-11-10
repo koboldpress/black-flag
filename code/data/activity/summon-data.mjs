@@ -123,7 +123,7 @@ export class SummonData extends ActivityDataModel {
 	 * @type {SummonsProfile[]}
 	 */
 	get availableProfiles() {
-		const level = this.relevantLevel;
+		const level = this.parent.relevantLevel;
 		return this.profiles.filter(e => (e.level.min ?? -Infinity) <= level && level <= (e.level.max ?? Infinity));
 	}
 

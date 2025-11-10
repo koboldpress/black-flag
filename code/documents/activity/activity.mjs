@@ -6,6 +6,7 @@ import ActorDeltasField from "../../data/chat-message/fields/deltas-field.mjs";
 import {
 	areKeysPressed,
 	buildRoll,
+	getSelectedTokens,
 	getTargetDescriptors,
 	localizeSchema,
 	formatNumber,
@@ -1466,6 +1467,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		rollData.consumed = this.item.flags.dnd5e?.consumed;
 		rollData.mod = ability.adjustedMod ?? ability.mod ?? 0;
 		return rollData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the best matched token from which this activity is being used if one can be found for this actor
+	 * in the current scene.
+	 * @returns {TokenDocument|void}
+	 */
+	getUsageToken() {
+		return getSelectedTokens(this.actor)[0]?.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
