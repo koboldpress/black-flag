@@ -210,8 +210,10 @@ export default class SummonActivity extends Activity {
 			a =>
 				// Has been cloned for summoning use
 				a.getFlag(game.system.id, "summonedCopy") &&
+				// User has ownership of existing actor
+				a.isOwner &&
 				// Sourced from the desired actor UUID
-				a._stats?.compendiumSource === uuid &&
+				(a._stats?.compendiumSource === uuid || a._stats?.duplicateSource === uuid) &&
 				// Unlinked or created from this activity specifically
 				(a.getFlag(game.system.id, "summon.origin") === this.uuid || !a.prototypeToken.actorLink)
 		);
@@ -231,7 +233,8 @@ export default class SummonActivity extends Activity {
 			return actor.clone(
 				{
 					[`flags.${game.system.id}.summonedCopy`]: true,
-					"_stats.compendiumSource": actor.uuid
+					"_stats.compendiumSource": actor._stats.compendiumSource,
+					"_stats.duplicateSource": actor.uuid
 				},
 				{ save: true }
 			);
