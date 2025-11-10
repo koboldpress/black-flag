@@ -253,20 +253,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		damages = this.calculateDamage(damages, options);
 		if (!damages) return this;
 
-		// Round damage towards zero
-		let { amount, temp, tempMax } = damages.reduce(
-			(acc, d) => {
-				if (d.type === "temp") acc.temp += d.value;
-				else if (d.type === "max") acc.tempMax += d.rollType === "healing" ? -1 * d.value : d.value;
-				else acc.amount += d.value;
-				return acc;
-			},
-			{ amount: 0, temp: 0, tempMax: 0 }
-		);
-		amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
-		if (tempMax < 0) amount += tempMax;
-
 		// Subtract from temp HP first & then from normal HP
+		const { amount, temp, tempMax } = damages;
 		const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
 		const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage + tempMax, hp.value - tempMax);
 		const updates = {
@@ -343,6 +331,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	calculateDamage(damages, options = {}) {
 		damages = foundry.utils.deepClone(damages);
+		damages.amount = 0;
+		damages.temp = 0;
+		damages.tempMax = 0;
 
 		/**
 		 * A hook event that fires before damage amount is calculated for an actor.
@@ -392,17 +383,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 			d.value = d.value * damageMultiplier;
 			d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
+			if (d.type === "temp") damages.temp += d.value;
+			else if (d.type === "max") damages.tempMax += d.value * (d.type === "healing" ? -1 : 1);
+			else damages.amount += d.value;
 		});
 
-		if (this.system.attributes?.ac?.threshold && options.ignore !== true && options.ignore?.threshold !== true) {
-			const total = damages.reduce((t, d) => t + (["temp", "max"].includes(d.type) ? 0 : d.value), 0);
-			if (total < this.system.attributes.ac.threshold) {
-				for (const damage of damages) {
-					if (["temp", "max"].includes(damage.type) || damage.value <= 0) continue;
-					damage.value = 0;
-					damage.active ??= {};
-					damage.active.threshold = true;
-				}
+		damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+		if (damages.tempMax < 0) damages.amount += damages.tempMax;
+
+		// Apply damage threshold
+		if (
+			damages.amount < (this.system.attributes?.ac?.threshold ?? -Infinity) &&
+			!(options.ignore === true || options.ignore?.threshold)
+		) {
+			damages.amount = 0;
+			for (const damage of damages) {
+				if (["temp", "max"].includes(damage.type) || damage.value <= 0) continue;
+				damage.value = 0;
+				damage.active.multiplier = 0;
+				damage.active.threshold = true;
 			}
 		}
 

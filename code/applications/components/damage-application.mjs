@@ -194,35 +194,29 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 	 */
 	calculateDamage(actor, options) {
 		const damages = actor.calculateDamage(this.damages, options);
-		const types = ["resistance", "vulnerability", "immunity"];
+		let { amount, temp, tempMax } = damages;
+		const categories = ["resistance", "vulnerability", "immunity"];
 
-		let temp = 0;
-		let tempMax = 0;
-		let total = 0;
 		let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
 		let threshold = false;
 		for (const damage of damages) {
-			if (damage.type === "temp") temp += damage.value;
-			if (damage.type === "max") tempMax += damage.rollType === "healing" ? -1 * damage.value : damage.value;
-			else total += damage.value;
-			types.forEach(t => {
+			categories.forEach(t => {
 				if (damage.active.all?.[t]) active[t].add("all");
 				if (damage.active.type?.[t]) active[t].add(damage.type);
 			});
 			if (damage.active.threshold) threshold = true;
 		}
 		temp = Math.floor(Math.max(0, temp));
-		total = total > 0 ? Math.floor(total) : Math.ceil(total);
 
 		// Add values from options to prevent active changes from being lost when re-rendering target list
-		types.forEach(t => {
+		categories.forEach(t => {
 			if (foundry.utils.getType(options.ignore?.[t]) === "Set") active[t] = active[t].union(options.ignore[t]);
 		});
 		if (foundry.utils.getType(options.downgrade) === "Set") {
 			active.immunity = active.immunity.union(options.downgrade);
 		}
 
-		return { temp, tempMax, total, active, threshold };
+		return { temp, tempMax, total: amount, active, threshold };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

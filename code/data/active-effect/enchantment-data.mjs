@@ -106,9 +106,6 @@ export default class EchantmentData extends ActiveEffectDataModel {
 		// TODO: Support Enchant Activity as origin when added
 		if (!(item instanceof Item)) return riders;
 
-		const riderActivities = {};
-		let riderEffects = [];
-
 		// Create Activities
 		const createdActivities = await this.item.createEmbeddedDocuments(
 			"Activity",
