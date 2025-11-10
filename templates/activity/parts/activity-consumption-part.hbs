@@ -18,8 +18,8 @@
 {{#if consumption.showTargets}}
 	<div class="form-group full-width">
 		{{ formField fields.target name=(concat prefix "target") value=consumption.target options=consumption.validTargets
-		             blank=(not consumption.validTargets) placeholder=consumption.placeholder classes="label-top"
-		             rootId=@root.partId }}
+		             hint=consumption.targetHint blank=(not consumption.validTargets) placeholder=consumption.placeholder
+		             classes="label-top" rootId=@root.partId }}
 	</div>
 {{/if}}
 

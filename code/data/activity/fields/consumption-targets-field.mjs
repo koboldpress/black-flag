@@ -118,6 +118,16 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Hint displayed for the target field.
+	 * @type {string|void}
+	 */
+	get targetHint() {
+		return this.item.isEmbedded ? undefined : CONFIG.BlackFlag.consumptionTypes[this.type].nonEmbeddedHint;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * List of valid targets within the current context.
 	 * @type {FormSelectOption[]|null}
 	 */

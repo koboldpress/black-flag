@@ -13,8 +13,10 @@ export const consumableResources = [];
  * Configuration information for activity consumption types.
  *
  * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
- * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
- * @property {ConsumptionLabelsFunction} consumptionLabels      Function used to generate a hint of consumption amount.
+ * @property {ConsumptionConsumeFunction} consume - Function used to consume according to this type.
+ * @property {ConsumptionLabelsFunction} consumptionLabels - Function used to generate a hint of consumption amount.
+ * @property {string} [nonEmbeddedHint] - Hint displayed in the target field when this type is configured on an
+ *                                        non-embedded item.
  * @property {LabeledConfiguration} [scalingModes] - Consumption parts that can be scaled.
  * @property {boolean} [targetRequiresEmbedded] - Display text input rather than limited options when not embedded.
  * @property {ConsumptionValidTargetsFunction} [validTargets] - Function used to build list of targets for this type.
@@ -58,6 +60,7 @@ export const consumptionTypes = {
 		prompt: "BF.CONSUMPTION.Type.ItemUses.Prompt",
 		consume: ConsumptionTargetData.consumeItemUses,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
+		nonEmbeddedHint: "BF.CONSUMPTION.Type.ItemUses.NonEmbeddedHint",
 		targetRequiresEmbedded: true,
 		validTargets: ConsumptionTargetData.validItemUsesTargets
 	},
@@ -66,6 +69,7 @@ export const consumptionTypes = {
 		prompt: "BF.CONSUMPTION.Type.Attribute.Prompt",
 		consume: ConsumptionTargetData.consumeAttribute,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsAttribute,
+		nonEmbeddedHint: "BF.CONSUMPTION.Type.Attribute.NonEmbeddedHint",
 		targetRequiresEmbedded: true,
 		validTargets: ConsumptionTargetData.validAttributeTargets
 	},
