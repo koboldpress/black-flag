@@ -95,6 +95,8 @@ export default class CastSheet extends ActivitySheet {
 				name: context.spell.document.name,
 				img: context.spell.document.img
 			};
+		const requireAttunementField = context.visibilityFields.find(f => f.field.name === "requireAttunement");
+		if (requireAttunementField?.disabled) requireAttunementField.value = true;
 		const requireMagicField = context.visibilityFields.find(f => f.field.name === "requireMagic");
 		if (requireMagicField) Object.assign(requireMagicField, { disabled: true, value: true });
 		return context;
