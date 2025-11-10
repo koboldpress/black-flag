@@ -122,7 +122,7 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @type {string}
 	 */
 	get _compendiumSource() {
-		return this.parent.flags[game.system.id]?.sourceId ?? this.parent._stats.compendiumSource;
+		return this.parent._stats.compendiumSource ?? this.parent.flags[game.system.id]?.sourceId;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
