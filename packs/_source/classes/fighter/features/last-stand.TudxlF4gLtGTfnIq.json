@@ -32,7 +32,14 @@
             "type": "healing",
             "denomination": "",
             "bonus": "@abilities.constitution.mod",
-            "custom": ""
+            "custom": {
+              "formula": "@consumed.hd + @abilities.constitution.mod",
+              "enabled": true
+            },
+            "number": null,
+            "scaling": {
+              "mode": ""
+            }
           },
           "ability": ""
         },
@@ -44,8 +51,12 @@
           "targets": [
             {
               "type": "hitDice",
+              "value": "1",
               "target": "largest",
-              "value": "1"
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
             }
           ],
           "scale": {
@@ -60,7 +71,25 @@
           "max": ""
         },
         "name": "",
-        "img": ""
+        "img": "",
+        "target": {
+          "affects": {
+            "type": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "identifier": ""
+        },
+        "range": {
+          "unit": "self"
+        }
       }
     },
     "uses": {
@@ -75,10 +104,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.026",
-    "coreVersion": "13.347",
+    "systemVersion": "2.0.074",
+    "coreVersion": "13.350",
     "createdTime": 1695229305563,
-    "modifiedTime": 1715717919927,
+    "modifiedTime": 1762810958137,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null,
     "exportSource": null
