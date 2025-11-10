@@ -15,6 +15,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * @import { ActivityDeltasData } from "../../data/chat-message/activation-message-data.mjs";
+ * @import { ActorDeltasData } from "../../data/chat-message/fields/deltas-field.mjs";
  */
 
 /**
@@ -592,7 +593,14 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (Hooks.call("blackFlag.postActivateActivity", activity, activationConfig, results) === false) return;
 
 		// Trigger any primary action provided by this activity
-		if (activationConfig.subsequentActions !== false) activity._triggerSubsequentActions(activationConfig, results);
+		if (activationConfig.subsequentActions !== false) {
+			const deltas = activity.createConsumedFlag(
+				activity.actor,
+				results.message?.system?.deltas ?? results.message?.data?.system?.deltas
+			);
+			if (deltas) item.updateSource({ "flags.dnd5e.consumed": deltas });
+			activity._triggerSubsequentActions(activationConfig, results);
+		}
 
 		return results;
 	}
@@ -1239,12 +1247,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
 	async #onChatAction(event, target, message) {
+		const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
 		const scaling = message.getFlag(game.system.id, "scaling") ?? 0;
 		let item = this.item;
-		if (scaling) {
-			const updates = { [`flags.${game.system.id}.scaling`]: scaling };
-			if (item.type === "spell") {
-				updates["system.circle.value"] = (item.system.circle.value ?? item.system.circle.base) + scaling;
+		if (consumed || scaling) {
+			const updates = {};
+			if (consumed) updates["flags.dnd5e.consumed"] = consumed;
+			if (scaling) {
+				const updates = { [`flags.${game.system.id}.scaling`]: scaling };
+				if (item.type === "spell") {
+					updates["system.circle.value"] = (item.system.circle.value ?? item.system.circle.base) + scaling;
+				}
 			}
 			item = item.clone(updates, { keepId: true });
 		}
@@ -1309,6 +1322,30 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Retrieve consumed flag for given update data.
+	 * @param {BlackFlagActor} actor
+	 * @type {ActivationUpdates|ActorDeltasData} deltas
+	 * @returns {{ hd: string }|void}
+	 */
+	createConsumedFlag(actor, deltas) {
+		if (!actor || !deltas) return;
+		const hitDice = (deltas.actor ?? []).reduce((obj, { delta, keyPath }) => {
+			if (!keyPath.startsWith("system.attributes.hd.d.")) return obj;
+			const denomination = keyPath.replace("system.attributes.hd.d.", "").replace(".spent", "");
+			if (Number.isNumeric(denomination)) obj[denomination] = (obj[denomination] ?? 0) + delta;
+			return obj;
+		}, {});
+		if (foundry.utils.isEmpty(hitDice)) return;
+		return {
+			hd: Object.entries(hitDice)
+				.map(([d, n]) => `${n}d${d}`)
+				.join(" + ")
+		};
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -1426,6 +1463,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const rollData = this.item.getRollData(options);
 		const ability = this.actor?.system.abilities?.[this.ability] ?? {};
 		rollData.activity = { ...this };
+		rollData.consumed = this.item.flags.dnd5e?.consumed;
 		rollData.mod = ability.adjustedMod ?? ability.mod ?? 0;
 		return rollData;
 	}
