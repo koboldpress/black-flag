@@ -431,8 +431,8 @@ export function numberParts(value, options={}) {
 
 /**
  * Form a number using the provided pace unit.
- * @param {number} value - The time to format.
- * @param {string} unit - Time unit as defined in `CONFIG.BlackFlag.timeUnits.time.children`.
+ * @param {number} value - The pace to format.
+ * @param {string} unit - Pace unit as defined in `CONFIG.BlackFlag.paceUnits`.
  * @param {Partial<NumberFormattingOptions>} [options={}] - Formatting options passed to `formatNumber`.
  * @param {string} [options.period="hour"] - Time period formatting unit (e.g. hour or day).
  * @returns {string}
