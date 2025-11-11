@@ -1,3 +1,4 @@
+import ScaleTypeUsage from "../advancement/scale-value/scale-type-usage.mjs";
 import FormulaField from "./formula-field.mjs";
 
 const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -16,7 +17,7 @@ export default class UsesField extends EmbeddedDataField {
 /**
  * Data for a recovery profile for an activity's uses.
  *
- * @typedef {object} UsesRecoveryData
+ * @typedef UsesRecoveryData
  * @property {string} period   Period at which this profile is activated.
  * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
  * @property {string} formula  Formula used to determine recovery if type is not reset.
@@ -66,6 +67,16 @@ export class UsesData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Containing item for this uses.
+	 * @type {BlackFlagItem}
+	 */
+	get item() {
+		return this.parent instanceof BlackFlag.documents.activity.Activity ? this.parent.item : this.parent.parent;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Can an item's quantity be consumed as part of the usage consumption?
 	 * @type {boolean}
 	 */
@@ -83,6 +94,7 @@ export class UsesData extends foundry.abstract.DataModel {
 	 */
 	prepareData(rollData) {
 		const existingPeriods = new Set(this.recovery.map(r => r.period));
+		const item = this.item;
 		for (const recovery of this.recovery) {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";
 			Object.defineProperty(recovery, "validPeriods", {
@@ -99,16 +111,32 @@ export class UsesData extends foundry.abstract.DataModel {
 			});
 			Object.defineProperty(recovery, "periodOptions", {
 				get() {
-					return [
-						...this.validPeriods,
-						{ rule: true },
-						{
-							value: "recharge",
-							label: game.i18n.localize("BF.Recovery.Recharge.Label"),
-							disabled: this.recharge.disabled
-						},
-						{ value: "@scale.", label: game.i18n.localize("BF.Advancement.ScaleValue.Title") }
-					];
+					const usesScaleValues = [];
+					if (item?.isEmbedded) {
+						for (const [itemIdentifier, scaleValues] of Object.entries(item.actor.system.scale ?? {})) {
+							for (const [scaleIdentifier, scaleValue] of Object.entries(scaleValues)) {
+								if (scaleValue instanceof ScaleTypeUsage)
+									usesScaleValues.push({
+										value: `@scale.${itemIdentifier}.${scaleIdentifier}`,
+										label: scaleValue.parent.title
+									});
+							}
+						}
+					}
+					return this.period.startsWith("@scale") && !item?.isEmbedded
+						? null
+						: [
+								...this.validPeriods,
+								{ rule: true },
+								{
+									value: "recharge",
+									label: game.i18n.localize("BF.Recovery.Recharge.Label"),
+									disabled: this.recharge.disabled
+								},
+								...(item?.isEmbedded
+									? usesScaleValues
+									: [{ value: "@scale.", label: game.i18n.localize("BF.Advancement.ScaleValue.Title") }])
+							];
 				},
 				configurable: true,
 				enumerable: false
@@ -119,10 +147,10 @@ export class UsesData extends foundry.abstract.DataModel {
 						disabled: existingPeriods.has("recharge") && this.period !== "recharge",
 						options: [
 							...Array.fromRange(4, 2).map(min => ({
-								key: min,
+								value: min,
 								label: game.i18n.format("BF.Recovery.Recharge.Range", { min })
 							})),
-							{ key: 6, label: game.i18n.localize("BF.Recovery.Recharge.Single") }
+							{ value: 6, label: game.i18n.localize("BF.Recovery.Recharge.Single") }
 						].reverse()
 					};
 				},

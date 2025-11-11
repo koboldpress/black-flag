@@ -175,3 +175,4 @@ export const recoveryTypes = {
 		label: "BF.Recovery.Type.Formula"
 	}
 };
+localizeConfig(recoveryTypes, { sort: false });

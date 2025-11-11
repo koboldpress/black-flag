@@ -13,41 +13,29 @@
 	<fieldset>
 		<legend>{{ localize "BF.Recovery.Label" }}</legend>
 		<ul class="configuration-list">
-			{{#each derived.recovery}}
+			{{#each usesRecovery}}
 				<li data-index="{{ @index }}">
-					<div class="field-group">
-						<label class="period">
-							<span>{{ localize "BF.Recovery.Period.Label" }}</span>
-							{{#if isScaleValue}}
-								<input type="text" name="$.recovery.{{ @index }}.period" value="{{ period }}">
-							{{else}}
-								<select name="$.recovery.{{ @index }}.period">
-									{{ selectOptions periodOptions selected=period }}
-								</select>
-							{{/if}}
-						</label>
-						{{#if (eq period "recharge")}}
-							<label class="recharge">
-								<span>{{ localize "BF.Recovery.Recharge.Trigger" }}</span>
-								<select name="$.recovery.{{ @index }}.formula">
-									{{ selectOptions recharge.options selected=formula valueAttr="key" labelAttr="label" }}
-								</select>
-							</label>
-						{{else}}
-							<label class="type">
-								<span>{{ localize "BF.Recovery.Type.Label" }}</span>
-								<select name="$.recovery.{{ @index }}.type">
-									{{ selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true }}
-								</select>
-							</label>
-							{{#if (eq type "formula")}}
-								<label class="formula">
-									<span>{{ localize "BF.Recovery.Formula.Label" }}</span>
-									<input type="text" name="$.recovery.{{ @index }}.formula" value="{{ formula }}">
-								</label>
-							{{/if}}
+					{{#blackFlag-formGroup classes="full-width"}}
+						{{!-- Period --}}
+						{{ formField fields.period name=(concat prefix "period") value=source.period options=data.periodOptions
+						             blank=false localize=true classes="label-top" rootId=@root.partId }}
+
+						{{!-- Type --}}
+						{{#unless (eq source.period "recharge")}}
+						  {{ formField fields.type name=(concat prefix "type") value=source.type classes="label-top" localize=true
+							             options=@root.CONFIG.recoveryTypes.localizedOptions blank=false rootId=@root.partId }}
+						{{/unless}}
+
+						{{!-- Formula --}}
+						{{#if (eq source.period "recharge")}}{{log data.recharge.options}}
+							{{ formField fields.formula name=(concat prefix "formula") value=source.formula localize=true
+							             options=data.recharge.options classes="label-top" label="BF.Recovery.Recharge.Trigger"
+							             blank=false rootId=@root.partId }}
+						{{else if (eq source.type "formula")}}
+							{{ formField fields.formula name=(concat prefix "formula") value=source.formula localize=true
+							             classes="label-top" rootId=@root.partId }}
 						{{/if}}
-					</div>
+					{{/blackFlag-formGroup}}
 					<div class="controls">
 						{{#if @root.editable}}
 							<button type="button" class="link-button" data-action="delete"

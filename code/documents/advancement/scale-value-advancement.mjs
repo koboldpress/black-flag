@@ -75,7 +75,7 @@ export default class ScaleValueAdvancement extends Advancement {
 			if (Number(key) > level) continue;
 			validKeys.forEach(k => (data[k] ??= value[k]));
 		}
-		return foundry.utils.isEmpty(data) ? null : new ScaleValueType(data);
+		return foundry.utils.isEmpty(data) ? null : new ScaleValueType(data, { parent: this });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -170,6 +170,13 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
 		context.showPrimaryActivation = this.activity.isSpell;
 
+		context.usesRecovery = (context.activity.uses?.recovery ?? []).map((data, index) => ({
+			data,
+			fields: context.fields.uses.fields.recovery.element.fields,
+			prefix: `uses.recovery.${index}.`,
+			source: context.source.uses.recovery[index] ?? data
+		}));
+
 		return context;
 	}
 

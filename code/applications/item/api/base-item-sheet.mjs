@@ -224,6 +224,12 @@ export default class BaseItemSheet extends PrimarySheetMixin(BFDocumentSheet) {
 	 */
 	async _prepareDetailsContext(context, options) {
 		context.activities = this.item.system.activities?.filter(a => a.canConfigure);
+		context.usesRecovery = (context.system.uses?.recovery ?? []).map((data, index) => ({
+			data,
+			fields: context.fields.uses.fields.recovery.element.fields,
+			prefix: `system.uses.recovery.${index}.`,
+			source: context.source.uses.recovery[index] ?? data
+		}));
 		return context;
 	}
 
