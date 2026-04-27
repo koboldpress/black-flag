@@ -545,6 +545,14 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (Object.hasOwn(this.system.identifier ?? {}, "value") && !this.system.identifier.value) {
 			await this.updateSource({ "system.identifier.value": formatIdentifier(data.name) });
 		}
+
+		// Initialize spell relationship data if missing (default mode is "standard")
+		// Failure to do this may result in spells that lack a "prepared" icon (issue 1084)
+		if (this.type === "spell" && !this.getFlag("black-flag", "relationship.mode")) {
+			await this.updateSource({
+				"flags.black-flag.relationship.mode": "standard"
+			});
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
