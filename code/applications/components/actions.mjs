@@ -69,58 +69,58 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 	_getContextMenuOptions(item, activity) {
 		return [
 			{
-				name: "BF.ACTIVITY.Core.Action.View",
+				label: "BF.ACTIVITY.Core.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => activity?.canConfigure && !this.isEditable,
-				callback: li => this._onAction(li[0], "view"),
+				visible: () => activity?.canConfigure && !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "view", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Activate",
+				label: "BF.ACTIVITY.Core.Action.Activate",
 				icon: '<i class="fa-solid fa-power-off fa-fw" inert></i>',
-				condition: li => activity && this.isEditable,
-				callback: li => this._onAction(li[0], "activate"),
+				visible: () => activity && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "activate", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Edit",
+				label: "BF.ACTIVITY.Core.Action.Edit",
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => activity?.canConfigure && this.isEditable,
-				callback: li => this._onAction(li[0], "edit"),
+				visible: () => activity?.canConfigure && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "edit", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Delete",
+				label: "BF.ACTIVITY.Core.Action.Delete",
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => activity?.canConfigure && this.isEditable,
-				callback: li => this._onAction(li[0], "delete"),
+				visible: () => activity?.canConfigure && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.Item.Action.Post",
+				label: "BF.Item.Action.Post",
 				icon: '<i class="fa-solid fa-envelope fa-fw" inert></i>',
-				callback: li => this._onAction(li[0], "post"),
+				onClick: (event, target) => this._onAction(target, "post", { event }),
 				group: "item"
 			},
 			{
-				name: "BF.Item.Action.View",
+				label: "BF.Item.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !this.isEditable,
-				callback: li => this._onAction(li[0], "viewItem"),
+				visible: () => !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "viewItem", { event }),
 				group: "item"
 			},
 			{
-				name: "BF.Item.Action.Edit",
+				label: "BF.Item.Action.Edit",
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "editItem"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "editItem", { event }),
 				group: "item"
 			},
 			{
-				name: "BF.Item.Action.Delete",
+				label: "BF.Item.Action.Delete",
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "deleteItem"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "deleteItem", { event }),
 				group: "item"
 			}
 		];

@@ -95,28 +95,28 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		if (!activity?.canConfigure) return [];
 		return [
 			{
-				name: "BF.ACTIVITY.Core.Action.View",
+				label: "BF.ACTIVITY.Core.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !this.isEditable,
-				callback: li => this._onAction(li[0], "view")
+				visible: () => !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "view", { event })
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Edit",
+				label: "BF.ACTIVITY.Core.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "edit")
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "edit", { event })
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Duplicate",
+				label: "BF.ACTIVITY.Core.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "duplicate")
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "duplicate", { event })
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Delete",
+				label: "BF.ACTIVITY.Core.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "delete"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "destructive"
 			}
 		];
@@ -128,9 +128,11 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	 * Handle one of the actions from the buttons or context menu.
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
+	 * @param {object} [options={}]
+	 * @param {Event} [options.event] - Triggering event.
 	 * @returns {Promise|void}
 	 */
-	_onAction(target, action) {
+	_onAction(target, action, { event } = {}) {
 		const id = target.closest("[data-activity-id]")?.dataset.activityId;
 		const activity = this.activities.get(id);
 		if (["edit", "delete", "duplicate"].includes(action) && !activity) return;

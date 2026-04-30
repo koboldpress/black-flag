@@ -126,12 +126,12 @@ export default function PrimarySheetMixin(Base) {
 					handler = handler.handler;
 				}
 				yield {
-					name: label,
+					label,
 					icon: `<i class="${icon}" inert></i>`,
-					callback: li => {
-						if (onClick) onClick(window.event);
-						else if (handler) handler.call(this, window.event, li);
-						else this._onClickAction(window.event, li);
+					onClick: (event, target) => {
+						if (onClick) onClick(event);
+						else if (handler) handler.call(this, event, target);
+						else this._onClickAction(event, target);
 					}
 				};
 			}

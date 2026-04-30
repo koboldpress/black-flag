@@ -141,111 +141,111 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		const type = item.type === "spell" ? "Spell" : item.system.isPhysical ? "Item" : "Feature";
 		return [
 			{
-				name: "BF.ACTIVITY.Core.Action.View",
+				label: "BF.ACTIVITY.Core.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => activity && !this.isEditable,
-				callback: li => this._onAction(li[0], "viewActivity"),
+				visible: () => activity && !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "viewActivity", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Activate",
+				label: "BF.ACTIVITY.Core.Action.Activate",
 				icon: '<i class="fa-solid fa-power-off fa-fw" inert></i>',
-				condition: li => activity && this.isEditable,
-				callback: li => this._onAction(li[0], "activate"),
+				visible: () => activity && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "activate", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Edit",
+				label: "BF.ACTIVITY.Core.Action.Edit",
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => activity && this.isEditable,
-				callback: li => this._onAction(li[0], "editActivity"),
+				visible: () => activity && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "editActivity", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.ACTIVITY.Core.Action.Delete",
+				label: "BF.ACTIVITY.Core.Action.Delete",
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => activity && this.isEditable,
-				callback: li => this._onAction(li[0], "deleteActivity"),
+				visible: () => activity && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "deleteActivity", { event }),
 				group: "activity"
 			},
 			{
-				name: "BF.Item.Action.Post",
+				label: "BF.Item.Action.Post",
 				icon: '<i class="fa-solid fa-envelope fa-fw" inert></i>',
-				callback: li => this._onAction(li[0], "post"),
+				onClick: (event, target) => this._onAction(target, "post", { event }),
 				group: "item"
 			},
 			{
-				name: `BF.${type}.Action.View`,
+				label: `BF.${type}.Action.View`,
 				icon: '<i class="fa-solid fa-eye fa-fw" inert></i>',
-				condition: li => !this.isEditable,
-				callback: li => this._onAction(li[0], "view"),
+				visible: () => !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "view", { event }),
 				group: "item"
 			},
 			{
-				name: `BF.${type}.Action.Edit`,
+				label: `BF.${type}.Action.Edit`,
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "edit"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "edit", { event }),
 				group: "item"
 			},
 			{
-				name: `BF.${type}.Action.Duplicate`,
+				label: `BF.${type}.Action.Duplicate`,
 				icon: '<i class="fa-solid fa-copy fa-fw" inert></i>',
-				condition: li => this.isEditable && section?.options?.canDuplicate !== false,
-				callback: li => this._onAction(li[0], "duplicate"),
+				visible: () => this.isEditable && section?.options?.canDuplicate !== false,
+				onClick: (event, target) => this._onAction(target, "duplicate", { event }),
 				group: "item"
 			},
 			{
-				name: `BF.${type}.Action.Delete`,
+				label: `BF.${type}.Action.Delete`,
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => this.isEditable && section?.options?.canDelete !== false,
-				callback: li => this._onAction(li[0], "delete"),
+				visible: () => this.isEditable && section?.options?.canDelete !== false,
+				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "item"
 			},
 			{
-				name: "BF.SplitStack.Title",
+				label: "BF.SplitStack.Title",
 				icon: '<i class="fa-solid fa-arrows-split-up-and-left" inert></i>',
-				condition: () => this.isEditable && (item.system.quantity ?? 0) > 1,
+				visible: () => this.isEditable && (item.system.quantity ?? 0) > 1,
 				callback: () => new SplitStackDialog({ document: item }).render({ force: true }),
 				group: "action"
 			},
 			{
-				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
+				label: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
 				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw" inert></i>`,
-				condition: () =>
+				visible: () =>
 					this.actor &&
 					this.isEditable &&
 					item.system.activities?.size &&
 					(this.actor.type === "npc" || type === "Feature"),
-				callback: li => this._onAction(li[0], "enable"),
+				onClick: (event, target) => this._onAction(target, "enable", { event }),
 				group: "state"
 			},
 			{
-				name: `BF.Item.Action.${item.system.attuned ? "Unattune" : "Attune"}`,
+				label: `BF.Item.Action.${item.system.attuned ? "Unattune" : "Attune"}`,
 				icon: '<i class="fa-solid fa-sun fa-fw" inert></i>',
-				condition: () => this.actor && this.isEditable && type === "Item" && item.system.attunable,
-				callback: li => this._onAction(li[0], "attune"),
+				visible: () => this.actor && this.isEditable && type === "Item" && item.system.attunable,
+				onClick: (event, target) => this._onAction(target, "attune", { event }),
 				group: "state"
 			},
 			{
-				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
+				label: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
 				icon: '<i class="fa-solid fa-shield-alt fa-fw" inert></i>',
-				condition: () => this.actor && this.isEditable && type === "Item" && item.system.equippable,
-				callback: li => this._onAction(li[0], "equip"),
+				visible: () => this.actor && this.isEditable && type === "Item" && item.system.equippable,
+				onClick: (event, target) => this._onAction(target, "equip", { event }),
 				group: "state"
 			},
 			{
-				name: `BF.IDENTIFIABLE.Action.${item.system.identified ? "Unidentify" : "Identify"}`,
+				label: `BF.IDENTIFIABLE.Action.${item.system.identified ? "Unidentify" : "Identify"}`,
 				icon: '<i class="fa-solid fa-wand-sparkles fa-fw" inert></i>',
-				condition: () => item.system.identifiable && game.user.isGM,
-				callback: li => this._onAction(li[0], "identify"),
+				visible: () => item.system.identifiable && game.user.isGM,
+				onClick: (event, target) => this._onAction(target, "identify", { event }),
 				group: "state"
 			},
 			{
-				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
+				label: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
 				icon: '<i class="fa-solid fa-sun fa-fw" inert></i>',
-				condition: () => this.actor && this.isEditable && type === "Spell" && item.system.preparable,
-				callback: li => this._onAction(li[0], "prepare"),
+				visible: () => this.actor && this.isEditable && type === "Spell" && item.system.preparable,
+				onClick: (event, target) => this._onAction(target, "prepare", { event }),
 				group: "state"
 			}
 		];
@@ -258,17 +258,17 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
 	 * @param {object} [options={}]
-	 * @param {Event} [options.originalEvent] - Original triggering event.
+	 * @param {Event} [options.event] - Triggering event.
 	 * @returns {Promise}
 	 * @protected
 	 */
-	async _onAction(target, action, { originalEvent } = {}) {
-		const event = new CustomEvent("bf-inventory", {
+	async _onAction(target, action, { event } = {}) {
+		const actionEvent = new CustomEvent("bf-inventory", {
 			bubbles: true,
 			cancelable: true,
 			detail: action
 		});
-		if (target.dispatchEvent(event) === false) return;
+		if (target.dispatchEvent(actionEvent) === false) return;
 
 		const dataset = (target.closest("[data-item-id]") || target)?.dataset ?? {};
 		const item = await this.getItem(dataset.itemId);
@@ -302,7 +302,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			case "expand":
 				return this._onExpand(item, target);
 			case "activate":
-				if (activity) return activity.activate({ event: originalEvent });
+				if (activity) return activity.activate({ event });
 			case "identify":
 				return item.system.toggleIdentification();
 			case "post":

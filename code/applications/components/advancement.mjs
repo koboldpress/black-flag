@@ -124,30 +124,30 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	_getContextMenuOptions(advancement) {
 		return [
 			{
-				name: "BF.Advancement.Core.Action.View",
+				label: "BF.Advancement.Core.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw' inert></i>",
-				condition: li => advancement && !this.isEditable,
-				callback: li => this._onAction(li[0], "view")
+				visible: () => advancement && !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "view", { event })
 			},
 			{
-				name: "BF.Advancement.Core.Action.Edit",
+				label: "BF.Advancement.Core.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw' inert></i>",
-				condition: li => advancement && this.isEditable,
-				callback: li => this._onAction(li[0], "edit")
+				visible: () => advancement && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "edit", { event })
 			},
 			{
-				name: "BF.Advancement.Core.Action.Duplicate",
+				label: "BF.Advancement.Core.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw' inert></i>",
-				condition: li => this.isEditable && advancement?.constructor.availableForItem(this.item),
-				callback: li => this._onAction(li[0], "duplicate")
+				visible: () => this.isEditable && advancement?.constructor.availableForItem(this.item),
+				onClick: (event, target) => this._onAction(target, "duplicate", { event })
 			},
 			{
-				name: "BF.JournalPage.Class.DisplayAdvancement",
+				label: "BF.JournalPage.Class.DisplayAdvancement",
 				icon: `<i class="fa-regular fa-square${
 					advancement?.getFlag(game.system.id, "hideOnClassTable") ? "" : "-check"
 				} fa-fw"></i>`,
-				condition: li => advancement && this.isEditable,
-				callback: li => {
+				visible: () => advancement && this.isEditable,
+				onClick: (event, target) => {
 					if (advancement.getFlag(game.system.id, "hideOnClassTable") === true) {
 						advancement.unsetFlag(game.system.id, "hideOnClassTable");
 					} else {
@@ -157,10 +157,10 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 				group: "state"
 			},
 			{
-				name: "BF.Advancement.Core.Action.Delete",
+				label: "BF.Advancement.Core.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw' inert></i>",
-				condition: li => advancement && this.isEditable,
-				callback: li => this._onAction(li[0], "delete"),
+				visible: () => advancement && this.isEditable,
+				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "destructive"
 			}
 		];
@@ -172,15 +172,17 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	 * Handle one of the actions from the buttons or context menu.
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
+	 * @param {object} [options={}]
+	 * @param {Event} [options.event] - Triggering event.
 	 * @returns {Promise|void}
 	 */
-	_onAction(target, action) {
-		const event = new CustomEvent("bf-advancement", {
+	_onAction(target, action, { event } = {}) {
+		const actionEvent = new CustomEvent("bf-advancement", {
 			bubbles: true,
 			cancelable: true,
 			detail: action
 		});
-		if (target.dispatchEvent(event) === false) return;
+		if (target.dispatchEvent(actionEvent) === false) return;
 
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.advancement.get(id);

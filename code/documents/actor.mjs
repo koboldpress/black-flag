@@ -119,10 +119,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	applyActiveEffects() {
-		this.system.prepareEmbeddedData?.();
-		this.applyAdvancementEffects();
-		return super.applyActiveEffects();
+	applyActiveEffects(phase) {
+		if (phase === "initial") {
+			this.system.prepareEmbeddedData?.();
+			this.applyAdvancementEffects();
+		}
+		return super.applyActiveEffects(phase);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1920,15 +1922,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	static getActorDirectoryEntryContext(html, menuItems) {
 		const ownershipIndex = menuItems.findIndex(o => o.icon.includes("fa-lock"));
 		menuItems.splice(ownershipIndex + 1, 0, {
-			name: "BF.Luck.Action.Grant",
+			label: "BF.Luck.Action.Grant",
 			icon: '<i class="fa-solid fa-clover"></i>',
-			condition: li => {
+			visible: li => {
 				if (!game.user.isGM) return false;
 				const actor = game.actors.get(li.dataset.entryId);
 				return actor?.type === "pc";
 			},
-			callback: li => {
-				const actor = game.actors.get(li.dataset.entryId);
+			onClick: (event, target) => {
+				const actor = game.actors.get(target.dataset.entryId);
 				actor.system.addLuck();
 			},
 			group: "system"
@@ -1945,15 +1947,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	static getUserContextOptions(html, menuItems) {
 		const viewAvatarIndex = menuItems.findIndex(o => o.icon.includes("fa-image"));
 		menuItems.splice(viewAvatarIndex + 1, 0, {
-			name: "BF.Luck.Action.Grant",
+			label: "BF.Luck.Action.Grant",
 			icon: '<i class="fa-solid fa-clover"></i>',
-			condition: li => {
+			visible: li => {
 				if (!game.user.isGM) return false;
 				const user = game.users.get(li.dataset.userId);
 				return user.character?.type === "pc";
 			},
-			callback: li => {
-				const actor = game.users.get(li.dataset.userId).character;
+			onClick: (event, target) => {
+				const actor = game.users.get(target.dataset.userId).character;
 				actor.system.addLuck();
 			}
 		});

@@ -518,15 +518,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	static getContextOptions(html, menuItems) {
 		const ownershipIndex = menuItems.findIndex(o => o.icon.includes("fa-lock"));
 		menuItems.splice(ownershipIndex + 1, 0, {
-			name: "BF.IDENTIFIABLE.Action.Toggle",
+			label: "BF.IDENTIFIABLE.Action.Toggle",
 			icon: '<i class="fa-solid fa-wand-sparkles"></i>',
-			condition: li => {
+			visible: li => {
 				if (!game.user.isGM) return false;
 				const item = game.items.get(li.dataset.entryId);
 				return item?.system.identifiable === true;
 			},
-			callback: li => {
-				const item = game.items.get(li.dataset.entryId);
+			onClick: (event, target) => {
+				const item = game.items.get(target.dataset.entryId);
 				item?.system.toggleIdentification?.();
 			},
 			group: "system"

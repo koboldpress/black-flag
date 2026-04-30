@@ -155,35 +155,35 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	_getContextMenuOptions(effect) {
 		return [
 			{
-				name: "BF.EFFECT.Action.View",
+				label: "BF.EFFECT.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !this.isEditable,
-				callback: li => this._onAction(li[0], "view")
+				visible: () => !this.isEditable,
+				onClick: (event, target) => this._onAction(target, "view", { event })
 			},
 			{
-				name: "BF.EFFECT.Action.Edit",
+				label: "BF.EFFECT.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "edit")
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "edit", { event })
 			},
 			{
-				name: "BF.EFFECT.Action.Duplicate",
+				label: "BF.EFFECT.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "duplicate")
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "duplicate", { event })
 			},
 			{
-				name: "BF.EFFECT.Action.Delete",
+				label: "BF.EFFECT.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "delete"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "destructive"
 			},
 			{
-				name: `BF.EFFECT.Action.${effect.disabled ? "Enable" : "Disable"}`,
+				label: `BF.EFFECT.Action.${effect.disabled ? "Enable" : "Disable"}`,
 				icon: `<i class='fa-solid fa-${effect.disabled ? "check" : "times"} fa-fw'></i>`,
-				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "toggle"),
+				visible: () => this.isEditable,
+				onClick: (event, target) => this._onAction(target, "toggle", { event }),
 				group: "state"
 			}
 		];
@@ -195,16 +195,18 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 * Handle one of the actions from the buttons or context menu.
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
+	 * @param {object} [options={}]
+	 * @param {Event} [options.event] - Triggering event.
 	 * @returns {Promise|void}
 	 * @protected
 	 */
-	_onAction(target, action) {
-		const event = new CustomEvent("bf-effect", {
+	_onAction(target, action, { event }) {
+		const actionEvent = new CustomEvent("bf-effect", {
 			bubbles: true,
 			cancelable: true,
 			detail: action
 		});
-		if (target.dispatchEvent(event) === false) return;
+		if (target.dispatchEvent(actionEvent) === false) return;
 
 		const effect = this.getEffect(target.closest("[data-effect-id]")?.dataset);
 		if (action !== "add" && !effect) return;
