@@ -32,11 +32,11 @@ export class AdvancementField extends MappingField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	migrateSource(sourceData, fieldData) {
-		for (const value of Object.values(fieldData ?? {})) {
-			this.model.migrateSource(sourceData, value);
-		}
-	}
+	// migrateSource(sourceData, fieldData) {
+	// 	for (const value of Object.values(fieldData ?? {})) {
+	// 		this.model.migrateSource(sourceData, value);
+	// 	}
+	// }
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

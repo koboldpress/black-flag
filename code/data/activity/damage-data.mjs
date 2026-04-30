@@ -51,5 +51,7 @@ export class DamageData extends ActivityDataModel {
 				foundry.utils.setProperty(source, "damage.critical.allow", source.damage.allowCritical);
 			}
 		}
+
+		return source;
 	}
 }

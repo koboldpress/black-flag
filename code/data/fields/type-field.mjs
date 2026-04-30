@@ -43,11 +43,11 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	_cleanType(value, options) {
+	_cleanType(value, options, _state) {
 		if (!(typeof value === "object")) value = {};
 
 		const cls = this.getModel(value);
-		if (cls) return cls.cleanData(value, options);
+		if (cls) return cls.cleanData(value, options, _state);
 		return value;
 	}
 
@@ -66,13 +66,10 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Migrate this field's candidate source data.
-	 * @param {object} sourceData - Candidate source data of the root model.
-	 * @param {any} fieldData - The value of this field within the source data.
-	 */
-	migrateSource(sourceData, fieldData) {
-		const cls = this.getModel(fieldData, sourceData);
-		if (cls) cls.migrateDataSafe(fieldData);
+	/** @override */
+	_migrate(value, options, _state) {
+		const cls = this.getModel();
+		if (cls) cls.migrateDataSafe(value);
+		return value;
 	}
 }

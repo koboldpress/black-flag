@@ -301,7 +301,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
 		this._migrateWeightUnits(source);
 
@@ -319,6 +319,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 		// Added in 2.0.068
 		this._migrateObjectUnits(source.range);
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

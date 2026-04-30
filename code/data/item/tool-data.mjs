@@ -95,9 +95,10 @@ export default class ToolData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
 		this._migrateWeightUnits(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

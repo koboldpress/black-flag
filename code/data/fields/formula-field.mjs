@@ -10,6 +10,7 @@
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */
 export default class FormulaField extends foundry.data.fields.StringField {
+	/** @inheritDoc */
 	static get _defaults() {
 		return foundry.utils.mergeObject(super._defaults, {
 			deterministic: false
@@ -18,6 +19,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_validateType(value) {
 		if (this.options.deterministic) {
 			const roll = new Roll(value);
@@ -25,6 +27,27 @@ export default class FormulaField extends foundry.data.fields.StringField {
 			Roll.safeEval(roll.formula);
 		} else Roll.validate(value);
 		super._validateType(value);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*  Form Field Integration             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	toFormGroup(groupConfig = {}, inputConfig = {}) {
+		groupConfig.classes ||= [];
+		groupConfig.classes.push("formula-input");
+		return super.toFormGroup(groupConfig, inputConfig);
+	}
+
+	/* -------------------------------------------- */
+
+	/** @inheritDoc */
+	_toInput(config) {
+		const input = super._toInput(config);
+		if (input.tagName !== "INPUT") return input;
+		config.value ??= this.getInitialValue({}) ?? "";
+		return foundry.applications.elements.HTMLFormulaInputElement.create(config);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -41,14 +64,17 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/** @override */
 	_applyChangeAdd(value, delta, model, change) {
 		if (!value) return delta;
-		let operator = "+";
-		if (delta.startsWith("+")) {
-			delta = delta.replace("+", "").trim();
-		} else if (delta.startsWith("-")) {
-			delta = delta.replace("-", "").trim();
-			operator = "-";
-		}
+		const operator = delta.startsWith("-") ? "-" : "+";
+		delta = delta.replace(/^[+-]/, "").trim();
 		return `${value} ${operator} ${delta}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_applyChangeSubtract(value, delta, model, change) {
+		if (!value) return `-(${delta})`;
+		return `${value} - (${delta})`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -56,8 +82,8 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/** @override */
 	_applyChangeMultiply(value, delta, model, change) {
 		if (!value) return value;
-		const terms = new Roll(value).terms;
-		if (terms.length > 1) return `(${value}) * ${delta}`;
+		if (new Roll(value).terms.length > 1) value = `(${value})`;
+		if (new Roll(delta).terms.length > 1) delta = `(${delta})`;
 		return `${value} * ${delta}`;
 	}
 

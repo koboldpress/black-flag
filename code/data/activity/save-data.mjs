@@ -108,6 +108,8 @@ export class SaveData extends ActivityDataModel {
 			if (source.save.ability) source.save.ability = [source.save.ability];
 			else source.save.ability = [];
 		}
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

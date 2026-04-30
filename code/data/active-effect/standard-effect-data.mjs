@@ -31,12 +31,13 @@ export default class StandardEffectData extends ActiveEffectDataModel {
 
 	/** @inheritDoc */
 	static defineSchema() {
-		return this.mergeSchema(super.defineSchema(), {
+		return {
+			...super.defineSchema(),
 			magical: new BooleanField(),
 			rider: new SchemaField({
 				statuses: new SetField(new StringField())
 			})
-		});
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

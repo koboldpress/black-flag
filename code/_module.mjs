@@ -57,7 +57,6 @@ Hooks.once("init", function () {
 	config._configureFonts();
 	config._configureRedirects();
 	config.registration.setupHooks();
-	data.fields.applyEffectApplicationPatches();
 	data.registerDataModels(ActiveEffect, {
 		enchantment: data.activeEffect.EnchantmentData,
 		standard: data.activeEffect.StandardEffectData

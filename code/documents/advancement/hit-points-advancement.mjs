@@ -122,9 +122,13 @@ export default class HitPointsAdvancement extends Advancement {
 		const value = data[level];
 		if (value === "max") return denomination;
 		if (value === "avg") return denomination / 2 + 1;
-		if (value?.total) return value.total;
 		if (Number.isNumeric(value)) return Number(value);
-		return null;
+		try {
+			const roll = JSON.parse(value);
+			return roll.total;
+		} catch (err) {
+			return null;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

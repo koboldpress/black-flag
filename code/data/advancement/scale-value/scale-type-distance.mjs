@@ -56,5 +56,6 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 	/** @override */
 	static migrateData(source) {
 		BaseDataModel._migrateObjectUnits(source);
+		return source;
 	}
 }

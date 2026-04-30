@@ -48,5 +48,6 @@ export class HealData extends ActivityDataModel {
 	/** @override */
 	static migrateData(source) {
 		if ("healing" in source) BaseActivity._migrateCustomDamageFormula(source.healing);
+		return source;
 	}
 }

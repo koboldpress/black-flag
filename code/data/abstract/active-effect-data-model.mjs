@@ -1,10 +1,10 @@
-import BaseDataModel from "./base-data-model.mjs";
+import BaseDataMixin from "./base-data-mixin.mjs";
 
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
-export default class ActiveEffectDataModel extends BaseDataModel {
+export default class ActiveEffectDataModel extends BaseDataMixin(foundry.data.ActiveEffectTypeDataModel) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */

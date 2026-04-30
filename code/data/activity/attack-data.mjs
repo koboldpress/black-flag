@@ -168,6 +168,8 @@ export class AttackData extends ActivityDataModel {
 				foundry.utils.setProperty(source, "damage.includeBase", source.damage.includeBaseDamage);
 			}
 		}
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

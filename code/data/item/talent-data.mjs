@@ -50,9 +50,10 @@ export default class TalentData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateFilterIds(source);
 		this._migrateSource(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

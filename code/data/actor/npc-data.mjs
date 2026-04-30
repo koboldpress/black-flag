@@ -178,7 +178,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateCommunication(source);
 		this._migrateMovementSenses(source);
 
@@ -193,6 +193,8 @@ export default class NPCData extends ActorDataModel.mixin(
 			source.description ??= {};
 			source.description.source = foundry.utils.mergeObject(source.description.source ?? {}, source.biography.source);
 		}
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -127,6 +127,7 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 	/** @override */
 	static migrateData(source) {
 		if ("circle" in source) source.source = source.circle;
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

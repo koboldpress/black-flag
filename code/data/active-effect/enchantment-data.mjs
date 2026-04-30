@@ -40,7 +40,8 @@ export default class EchantmentData extends ActiveEffectDataModel {
 
 	/** @inheritDoc */
 	static defineSchema() {
-		return this.mergeSchema(super.defineSchema(), {
+		return {
+			...super.defineSchema(),
 			dependent: new SchemaField({
 				activities: new DependentsField({ type: "Activity" }),
 				effects: new DependentsField({ type: "ActiveEffect" })
@@ -50,7 +51,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 				activities: new SetField(new DocumentIdField()),
 				effects: new SetField(new DocumentIdField())
 			})
-		});
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

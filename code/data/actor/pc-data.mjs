@@ -358,10 +358,11 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateCircles(source);
 		this._migrateCommunication(source);
 		this._migrateMovementSenses(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -452,6 +453,7 @@ export default class PCData extends ActorDataModel.mixin(
 				const result = Math.clamp(Math.round(((this.value - this.min) * 100) / (this.max - this.min)), 0, 100);
 				return Number.isNaN(result) ? 100 : result;
 			},
+			configurable: true,
 			enumerable: false
 		});
 

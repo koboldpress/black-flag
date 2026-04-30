@@ -35,5 +35,6 @@ export default class ScaleValueConfigurationData extends AdvancementDataModel {
 		Object.values(source.scale ?? {}).forEach(v =>
 			CONFIG.Advancement.types.scaleValue.dataTypes[source.type]?.migrateData(v)
 		);
+		return source;
 	}
 }

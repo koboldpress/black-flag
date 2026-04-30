@@ -82,7 +82,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 			const message = new cls(messageData);
 			await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
 
-			return this.advancement.apply(this.levels, { [level]: roll });
+			return this.advancement.apply(this.levels, { [level]: JSON.stringify(roll.toJSON()) });
 		}
 	}
 }

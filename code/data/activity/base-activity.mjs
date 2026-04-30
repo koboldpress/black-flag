@@ -206,7 +206,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 
 		// Added in 2.0.068
 		BaseDataModel._migrateObjectUnits(source.duration);
@@ -216,6 +216,8 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			foundry.utils.setProperty(source, "visibility.identifier", source.system.summon.identifier);
 			delete source.system.summon.identifier;
 		}
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

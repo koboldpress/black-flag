@@ -1,7 +1,7 @@
 import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import { MappingField } from "../fields/_module.mjs";
 
-const { JSONField, NumberField } = foundry.data.fields;
+const { NumberField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Hit Points advancement.
@@ -31,7 +31,7 @@ export class HitPointsConfigurationData extends AdvancementDataModel {
 /**
  * Value data for the Hit Points advancement.
  *
- * @property {{[key: number]: object}} granted - Hit points granted at various levels. This is stored as stringified
+ * @property {{[key: number]: string}} granted - Hit points granted at various levels. This is stored as stringified
  *                                               JSON containing either a serialized roll or a string indicating that
  *                                               the "avg" or "max" values were taken for a level.
  */
@@ -39,7 +39,7 @@ export class HitPointsValueData extends foundry.abstract.DataModel {
 	/** @override */
 	static defineSchema() {
 		return {
-			granted: new MappingField(new JSONField(), { required: false, initial: undefined })
+			granted: new MappingField(new StringField(), { blank: false, required: false, trim: false, initial: undefined })
 		};
 	}
 }

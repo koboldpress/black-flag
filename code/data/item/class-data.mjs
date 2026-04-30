@@ -102,8 +102,9 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

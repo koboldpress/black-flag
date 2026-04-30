@@ -240,13 +240,15 @@ export default class ContainerData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
 		this._migrateWeightUnits(source);
 
 		// Added in 2.0.068
 		this._migrateObjectUnits(source.capacity?.volume);
 		this._migrateObjectUnits(source.capacity?.weight);
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

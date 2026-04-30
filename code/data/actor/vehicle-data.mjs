@@ -185,13 +185,15 @@ export default class VehicleData extends ActorDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 
 		// Added in 2.0.068
 		this._migrateObjectUnits(source.attributes?.cargo);
 		this._migrateObjectUnits(source.traits?.dimensions);
 		this._migrateObjectUnits(source.traits?.movement);
 		this._migrateObjectUnits(source.traits?.pace);
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

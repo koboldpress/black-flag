@@ -295,7 +295,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
 
 		// Added in 0.9.023
@@ -307,6 +307,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		this._migrateObjectUnits(source.duration);
 		this._migrateObjectUnits(source.range);
 		this._migrateObjectUnits(source.target?.template);
+
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

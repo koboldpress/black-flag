@@ -34,6 +34,8 @@ export class ImprovementConfigurationData extends AdvancementDataModel {
 		if (foundry.utils.getType(source.talentList) === "string") {
 			source.talentList = [source.talentList];
 		}
+
+		return source;
 	}
 }
 
@@ -76,5 +78,7 @@ export class ImprovementValueData extends foundry.abstract.DataModel {
 		if (foundry.utils.getType(source.ability) === "string") {
 			source.ability = { one: source.ability };
 		}
+
+		return source;
 	}
 }

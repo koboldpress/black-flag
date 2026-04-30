@@ -119,8 +119,9 @@ export default class SubclassData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	static migrateData(source) {
-		super.migrateData(source);
+		source = super.migrateData(source);
 		this._migrateSource(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -63,6 +63,8 @@ export class ChooseFeaturesConfigurationData extends AdvancementDataModel {
 			Object.entries(source.choices).forEach(([k, c]) => {
 				if (foundry.utils.getType(c) === "number") source.choices[k] = { count: c };
 			});
+
+		return source;
 	}
 }
 
