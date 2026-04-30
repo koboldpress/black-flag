@@ -1,7 +1,7 @@
 /**
  * Abstract custom element that connects with a Foundry application.
  */
-export default class AppAssociatedElement extends HTMLElement {
+export default class AppAssociatedElement extends foundry.applications.elements.AdoptableHTMLElement {
 	connectedCallback() {
 		this.#app =
 			ui.windows[this.closest(".app")?.dataset.appid] ??

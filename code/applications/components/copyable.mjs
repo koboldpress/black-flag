@@ -1,7 +1,7 @@
 /**
  * Bit of text with a button after it for copying it.
  */
-export default class CopyableElement extends HTMLElement {
+export default class CopyableElement extends foundry.applications.elements.AdoptableHTMLElement {
 	/** @override */
 	connectedCallback() {
 		const button = document.createElement("button");
