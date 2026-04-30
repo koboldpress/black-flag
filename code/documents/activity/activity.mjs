@@ -1328,7 +1328,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Retrieve consumed flag for given update data.
 	 * @param {BlackFlagActor} actor
-	 * @type {ActivationUpdates|ActorDeltasData} deltas
+	 * @type {ActorDeltasData} deltas
 	 * @returns {{ hd: string }|void}
 	 */
 	createConsumedFlag(actor, deltas) {

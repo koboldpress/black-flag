@@ -47,13 +47,13 @@ export default class WelcomeDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * @typedef {object} OfficialModules
+	 * @typedef OfficialModules
 	 * @property {OfficialModuleDetails[]} core - Core rules modules (e.g. Player's Guide or Monster Vault).
 	 * @property {OfficialModuleDetails[]} adventures - Adventure modules.
 	 */
 
 	/**
-	 * @typedef {OfficialModuleDetails}
+	 * @typedef OfficialModuleDetails
 	 * @property {string} id - Foundry ID for the module.
 	 * @property {string} name - Display name in the interface.
 	 * @property {string} description - Brief description in HTML.
