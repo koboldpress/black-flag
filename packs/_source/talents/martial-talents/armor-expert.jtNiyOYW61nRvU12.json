@@ -14,6 +14,20 @@
       "max": ""
     },
     "advancement": {},
+    "changes": [
+      {
+        "key": "system.modifiers",
+        "mode": 2,
+        "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }, { \"k\": \"armored\", \"v\": true }, { \"k\": \"armor.type.category\", \"o\" : \"in\", \"v\" : [\"heavy\", \"medium\"]}], \"formula\": \"1\" }",
+        "priority": null
+      },
+      {
+        "key": "system.modifiers",
+        "mode": 2,
+        "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves to avoid being pulled, shoved, or knocked prone.\" } }",
+        "priority": null
+      }
+    ],
     "description": {
       "value": "<p>Your experience with armor allows you to weather mighty onslaughts. While you are wearing medium or heavy armor with which you are proficient, you gain these benefits:</p><ul><li><p>Your AC increases by 1.</p></li><li><p>You have advantage on saves to avoid being pulled, shoved, or knocked prone.</p></li></ul>",
       "source": {}
