@@ -81,11 +81,22 @@ export default class AttackActivity extends Activity {
 
 	/** @inheritDoc */
 	get modifierData() {
+		// Identify if a specific attack is a thrown weapon. 
+		// By default, most attacks have the correct type throughout, but a thrown weapon moves from "melee" to "ranged" at the time of the attack
+		const defaultAttackMode = this.item.system.attackModes[0]?.value;
+		const defaultAttackType =
+			defaultAttackMode === "thrown" || defaultAttackMode === "thrownOffhand" ? "ranged" : this.item.system.type.value;
+
 		return {
 			type: "attack",
 			kind: "attack",
 			ability: this.ability,
-			...super.modifierData
+			...foundry.utils.mergeObject(super.modifierData, {
+				activity: {
+					type: { value: defaultAttackType },
+					...this.system
+				}
+			})
 		};
 	}
 
@@ -497,6 +508,18 @@ export default class AttackActivity extends Activity {
 		if (this.item.system.properties?.has("versatile") && rollConfig.attackMode === "twoHanded") {
 			damage = this.item.system.versatileDamage ?? damage;
 		}
+
+		// Compute the correct attack type based on attackMode for thrown weapons
+		const attackMode = rollConfig.attackMode ?? this.item.system.attackModes[0]?.value;
+		const attackType =
+			attackMode === "thrown" || attackMode === "thrownOffhand" ? "ranged" : this.item.system.type.value;
+
+		modifierData = foundry.utils.mergeObject(modifierData, {
+			activity: {
+				...this.system,
+				type: { value: attackType }
+			}
+		});
 
 		const roll = super._processDamagePart(damage, rollConfig, rollData, {
 			...config,
