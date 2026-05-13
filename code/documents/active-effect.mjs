@@ -1,6 +1,6 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { formatNumber, staticID } from "../utils/_module.mjs";
+import { formatNumber, parseOrString, staticID } from "../utils/_module.mjs";
 
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -133,28 +133,30 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	apply(doc, change) {
+	static applyChange(model, change, options = {}) {
 		// Handle special actor flags
-		if (change.key.startsWith("flags.black-flag.")) {
-			const config = CONFIG.BlackFlag.actorFlags[change.key.replace("flags.black-flag.", "")];
-			if (config?.actorTypes.has(doc.type)) return this.constructor.applyField(doc, change, config.field);
+		if (change.key.startsWith(`flags.${game.system.id}.`)) {
+			const config = CONFIG.BlackFlag.actorFlags[change.key.replace(`flags.${game.system.id}.`, "")];
+			// TODO: Make sure this actually works
+			if (config?.actorTypes.has(model.type)) options.field = config.field;
+			// if (config?.actorTypes.has(doc.type)) return this.constructor.applyField(doc, change, config.field);
 		}
 
 		// Properly handle formulas that don't exist as part of the data model
-		if (this.constructor.FORMULA_FIELDS.has(change.key)) {
-			const value = foundry.utils.getProperty(doc, change.key) ?? null;
+		if (this.FORMULA_FIELDS.has(change.key)) {
 			const field = new FormulaField({ deterministic: true });
-			const update = field.applyChange(value, null, change);
-			foundry.utils.setProperty(doc, change.key, update);
-			return { [change.key]: update };
+			return { [change.key]: this.applyChangeField(model, change, { field }) };
 		}
 
 		// Handle activity-targeted changes
-		if ((change.key.startsWith("activities[") || change.key.startsWith("system.activities.")) && doc instanceof Item) {
-			return this.applyActivity(doc, change);
+		if (
+			(change.key.startsWith("activities[") || change.key.startsWith("system.activities.")) &&
+			model instanceof Item
+		) {
+			return change.effect.applyActivity(model, change);
 		}
 
-		return super.apply(doc, change);
+		return super.applyChange(model, change, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -185,22 +187,20 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	static applyField(model, change, field) {
-		field ??= model.schema.getField(change.key);
-		change = foundry.utils.deepClone(change);
+	static applyChangeField(model, change, options = {}) {
 		const current = foundry.utils.getProperty(model, change.key);
-		const modes = CONST.ACTIVE_EFFECT_MODES;
+		const { field } = options;
 
 		// Replace value when using string interpolation syntax
-		if (field instanceof StringField && change.mode === modes.OVERRIDE && change.value.includes("{}")) {
+		if (field instanceof StringField && change.type === "override" && change.value.includes("{}")) {
 			change.value = change.value.replace("{}", current ?? "");
 		}
 
 		// If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
-		if (current === null && [modes.UPGRADE, modes.DOWNGRADE].includes(change.mode)) change.mode = modes.OVERRIDE;
+		if (current === null && ["upgrade", "downgrade"].includes(change.type)) change.type = "override";
 
 		// Handle removing entries from sets
-		if (field instanceof SetField && change.mode === modes.ADD && foundry.utils.getType(current) === "Set") {
+		if (field instanceof SetField && change.type === "add" && foundry.utils.getType(current) === "Set") {
 			for (const value of field._castChangeDelta(change.value)) {
 				const neg = value.replace(/^\s*-\s*/, "");
 				if (neg !== value) current.delete(neg);
@@ -225,30 +225,31 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 		// Parse any JSON provided when targeting an object
 		if (field instanceof ObjectField || field instanceof SchemaField) {
-			change = { ...change, value: this.prototype._parseOrString(change.value) };
+			change = { ...change, value: parseOrString(change.value) };
 		}
 
-		return super.applyField(model, change, field);
+		return super.applyChangeField(model, change, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_applyUpgrade(actor, change, current, delta, changes) {
-		if (current === null) return this._applyOverride(actor, change, current, delta, changes);
-		// TODO: Apply fix for this core issue: https://github.com/foundryvtt/foundryvtt/issues/11527
-		// Can be removed and replaced with super._applyUpgrade(actor, change, current, delta, changes);
-		// when the system goes V13-only
-		let update;
-		const ct = foundry.utils.getType(current);
-		switch (ct) {
-			case "boolean":
-			case "number":
-				if (change.mode === CONST.ACTIVE_EFFECT_MODES.UPGRADE && delta > current) update = delta;
-				else if (change.mode === CONST.ACTIVE_EFFECT_MODES.DOWNGRADE && delta < current) update = delta;
-				break;
+	static _applyChangeUnguided(actor, change, changes, { replacementData } = {}) {
+		// Double-check whether the target should be treated as a formula if the key has been modified
+		if (BlackFlagActiveEffect.FORMULA_FIELDS.has(change.key)) {
+			const field = new FormulaField({ deterministic: true });
+			return { [change.key]: this.applyChangeField(actor, change, { field }) };
 		}
-		if (update !== undefined) changes[change.key] = update;
+
+		super._applyChangeUnguided(actor, change, changes, { replacementData });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static _applyChangeUpgrade(actor, change, current, delta, changes) {
+		if (current === null) return this._applyChangeOverride(actor, change, current, delta, changes);
+		return super._applyChangeUpgrade(actor, change, current, delta, changes);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

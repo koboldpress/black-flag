@@ -147,7 +147,7 @@ export default class CastActivity extends Activity {
 			delete data.override;
 			changes.push({
 				key: `system.${type === "activation" ? "casting" : type}`,
-				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				type: "override",
 				value: JSON.stringify(data)
 			});
 		}
@@ -156,7 +156,7 @@ export default class CastActivity extends Activity {
 		if (this.system.spell.ability)
 			changes.push({
 				key: "flags.black-flag.relationship.origin.ability",
-				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				type: "override",
 				value: this.system.spell.ability
 			});
 
@@ -164,7 +164,7 @@ export default class CastActivity extends Activity {
 		for (const property of this.system.spell.properties) {
 			changes.push({
 				key: `system.${property in CONFIG.BlackFlag.spellComponents ? "components.required" : "tags"}`,
-				mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+				type: "add",
 				value: `-${property}`
 			});
 		}
@@ -175,12 +175,12 @@ export default class CastActivity extends Activity {
 			changes.push(
 				{
 					key: "activities[attack].system.attack.bonus",
-					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+					type: "override",
 					value: challenge.attack
 				},
 				{
 					key: "activities[attack].system.attack.flat",
-					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+					type: "override",
 					value: true
 				}
 			);
@@ -188,12 +188,12 @@ export default class CastActivity extends Activity {
 			changes.push(
 				{
 					key: "activities[save].system.save.dc.ability",
-					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+					type: "override",
 					value: "custom"
 				},
 				{
 					key: "activities[save].system.save.dc.formula",
-					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+					type: "override",
 					value: challenge.save
 				}
 			);

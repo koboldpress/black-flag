@@ -4,7 +4,7 @@
 		<thead>
 			<tr>
 				<th class="key">{{ localize "BF.Advancement.Property.FIELDS.changes.element.key.label" }}</th>
-				<th class="mode">{{ localize "BF.Advancement.Property.FIELDS.changes.element.mode.label" }}</th>
+				<th class="mode">{{ localize "BF.Advancement.Property.FIELDS.changes.element.type.label" }}</th>
 				<th class="value">{{ localize "BF.Advancement.Property.FIELDS.changes.element.value.label" }}</th>
 				<th class="effect-controls">
 						<button type="button" class="link-button effect-control" data-action="addChange"
@@ -21,8 +21,8 @@
 						<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
 					</td>
 					<td class="mode">
-						<select name="configuration.changes.{{ @index }}.mode" data-dtype="Number">
-							{{ selectOptions ../modes selected=mode }}
+						<select name="configuration.changes.{{ @index }}.type">
+							{{ selectOptions ../typeOptions selected=type }}
 						</select>
 					</td>
 					<td class="value">

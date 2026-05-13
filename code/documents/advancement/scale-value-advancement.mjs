@@ -89,7 +89,7 @@ export default class ScaleValueAdvancement extends Advancement {
 			? [
 					{
 						key: `system.scale.${this.parentIdentifier}.${this.identifier}`,
-						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						type: "override",
 						value
 					}
 				]

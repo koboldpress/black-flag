@@ -88,7 +88,7 @@ export default class SizeAdvancement extends Advancement {
 		return [
 			{
 				key: "system.traits.size",
-				mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+				type: "override",
 				value: this.value.selected
 			}
 		];

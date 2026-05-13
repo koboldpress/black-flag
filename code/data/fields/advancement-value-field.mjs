@@ -4,6 +4,7 @@
  */
 export default class AdvancementValueField extends foundry.data.fields.ObjectField {
 	initialize(value, model, options = {}) {
+		if (!value) return value;
 		const obj = foundry.utils.deepClone(value);
 		for (const [itemID, values] of Object.entries(obj)) {
 			const item = model.parent?.items?.get(itemID);

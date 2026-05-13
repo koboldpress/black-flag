@@ -32,8 +32,7 @@ export default Base =>
 		 * @property {BlackFlagActiveEffect} document - Active effect document.
 		 * @property {string} label - Descriptive label that will be displayed. If the label is in the form
 		 *                            of an @ property, the system will try to turn it into a human-readable label.
-		 * @property {number} mode - Application mode for this step as defined in
-		 *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
+		 * @property {number} type - Application type for this step as defined in active effects.
 		 * @property {number} value - Value of this step.
 		 */
 
@@ -52,10 +51,10 @@ export default Base =>
 				if (!source || e.disabled || e.isSuppressed) continue;
 				const value = e.changes.reduce((n, change) => {
 					if (change.key !== keyPath) return n;
-					if (change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD) return n;
+					if (change.type !== "add") return n;
 					return n + simplifyBonus(change.value, rollData);
 				}, 0);
-				if (value) attributions.push({ document: e, value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+				if (value) attributions.push({ document: e, value, label: source, type: "add" });
 			}
 			return attributions;
 		}

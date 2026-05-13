@@ -170,13 +170,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		if (this.value.ability.one)
 			changes.push({
 				key: `system.abilities.${this.value.ability.one}.value`,
-				mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+				type: "add",
 				value: 1
 			});
 		if (this.value.ability.two)
 			changes.push({
 				key: `system.abilities.${this.value.ability.two}.value`,
-				mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+				type: "add",
 				value: 1
 			});
 		if (changes.length) return changes;

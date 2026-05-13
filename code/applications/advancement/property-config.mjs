@@ -34,10 +34,9 @@ export default class PropertyConfig extends AdvancementConfig {
 	/** @inheritDoc */
 	async _prepareContext(options) {
 		const context = await super._prepareContext(options);
-		context.modes = Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
-			obj[e[1]] = game.i18n.localize(`EFFECT.MODE_${e[0]}`);
-			return obj;
-		}, {});
+		context.typeOptions = Object.entries(ActiveEffect.implementation.CHANGE_TYPES)
+			.map(([value, { label }]) => ({ value, label: _loc(label) }))
+			.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
 		return context;
 	}
 

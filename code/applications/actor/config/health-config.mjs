@@ -65,7 +65,7 @@ export default class HealthConfig extends BaseConfigSheet {
 		Object.keys(context.effects).forEach(
 			k =>
 				(context.effects[k] = context.effects[k]
-					.filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD)
+					.filter(e => e.type === "add")
 					.map(e => ({ ...e, anchor: e.document.toAnchor().outerHTML })))
 		);
 

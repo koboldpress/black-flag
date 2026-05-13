@@ -104,14 +104,14 @@ export default class TraitAdvancement extends Advancement {
 			if (foundry.utils.getType(existingValue) === "Set") {
 				changes.push({
 					key: keyPath,
-					mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+					type: "add",
 					value: key.split(":").pop()
 				});
 			} else {
 				changes.push({
 					key: keyPath,
-					mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
 					priority: Object.keys(CONFIG.BlackFlag.traitModes).findIndex(k => k === this.configuration.mode) * 10,
+					type: "upgrade",
 					value:
 						this.configuration.mode === "default" || (this.configuration.mode === "upgrade" && existingValue === 0)
 							? 1

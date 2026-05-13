@@ -200,7 +200,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 * @returns {Promise|void}
 	 * @protected
 	 */
-	_onAction(target, action, { event }) {
+	_onAction(target, action, { event } = {}) {
 		const actionEvent = new CustomEvent("bf-effect", {
 			bubbles: true,
 			cancelable: true,

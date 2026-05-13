@@ -22,10 +22,39 @@ export class PropertyConfigurationData extends AdvancementDataModel {
 				new SchemaField({
 					key: new StringField({ required: true }),
 					value: new StringField({ required: true }),
-					mode: new NumberField({ integer: true, initial: CONST.ACTIVE_EFFECT_MODES.ADD }),
+					type: new StringField({ integer: true, initial: "add" }),
 					priority: new NumberField()
 				})
 			)
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static #MODES_TO_TYPES = {
+		0: "custom",
+		1: "multiply",
+		2: "add",
+		3: "downgrade",
+		4: "upgrade",
+		5: "override"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		if (Array.isArray(source.changes)) {
+			for (const change of source.changes) {
+				if (!Object.hasOwn(change, "type") && typeof change.mode === "number") {
+					change.type = PropertyConfigurationData.#MODES_TO_TYPES[change.mode] ?? `custom.${change.mode}`;
+					console.log(change.mode, change.type);
+					delete change.mode;
+				}
+			}
+		}
+		return super.migrateData(source);
 	}
 }

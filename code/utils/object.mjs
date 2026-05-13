@@ -65,6 +65,18 @@ export function flattenChildren(object, { keepCategories=false }={}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Test if a given string is serialized JSON, and parse it if so.
+ * @param {string} raw - The raw value.
+ * @returns {any} - The parsed value, or the original value if it was not serialized JSON.
+ */
+export function parseOrString(raw) {
+	try { return JSON.parse(raw); } catch(err) {}
+	return raw;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Sort the provided object by its values or by an inner sortKey.
  * @param {object} obj - The object to sort.
  * @param {object} [options={}]

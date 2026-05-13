@@ -134,13 +134,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	applyAdvancementEffects() {
 		const cls = getDocumentClass("ActiveEffect");
-		const applier = new cls({ name: "temp" });
 		const overrides = {};
 
 		const levels = [
 			{ character: 0, class: 0 },
 			...Object.values(this.system.progression?.levels ?? {}).map(l => l.levels)
 		];
+		const MODES_TO_TYPE = {
+			0: "custom",
+			1: "multiply",
+			2: "add",
+			3: "downgrade",
+			4: "upgrade",
+			5: "overrride"
+		};
 		const applied = new Map();
 		for (const level of levels) {
 			for (const advancement of this.advancementForLevel(level.character)) {
@@ -148,6 +155,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					.changes(level)
 					?.map(change => {
 						const c = foundry.utils.deepClone(change);
+						if ("mode" in c) {
+							foundry.utils.logCompatibilityWarning(
+								"Advancement changes should provide `type` rather than `mode` to reflect changes to core active effects.",
+								{ since: "Black Flag 3.0", until: "Black Flag 4.0" }
+							);
+							c.type = MODES_TO_TYPE[c.mode];
+						}
 						c.advancement = advancement;
 						c.priority ??= c.mode * 10;
 						return c;
@@ -155,13 +169,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					.sort((lhs, rhs) => lhs.priority - rhs.priority)
 					.forEach(c => {
 						// Special handling of override to avoid issue with scale values
-						if (
-							c.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE &&
-							["Object", "Unknown"].includes(foundry.utils.getType(c.value))
-						) {
+						if (c.type === "override" && ["Object", "Unknown"].includes(foundry.utils.getType(c.value))) {
 							foundry.utils.setProperty(this, c.key, c.value);
 							overrides[c.key] = c.value;
-						} else Object.assign(overrides, applier.apply(this, c));
+						} else Object.assign(overrides, BlackFlagActiveEffect.applyChange(this, c));
 						if (!applied.has(level)) applied.set(level, []);
 						applied.get(level).push(c);
 					});

@@ -288,7 +288,7 @@ export default class SummonActivity extends Activity {
 				changes: [
 					{
 						key: "system.attributes.proficiency",
-						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						type: "override",
 						value: prof
 					}
 				],
@@ -317,7 +317,7 @@ export default class SummonActivity extends Activity {
 							changes: [
 								{
 									key: "system.modifiers",
-									mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+									type: "add",
 									value: JSON.stringify({
 										type: "bonus",
 										filter: [{ k: "type", v: "armor-class" }],
@@ -348,7 +348,7 @@ export default class SummonActivity extends Activity {
 						changes: [
 							{
 								key: `system.attributes.hp.${hpField}`,
-								mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+								type: "add",
 								value: hpBonus.total
 							}
 						],
@@ -408,7 +408,7 @@ export default class SummonActivity extends Activity {
 					changes: [
 						{
 							key: "system.modifiers",
-							mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+							type: "add",
 							value: JSON.stringify({
 								type: "bonus",
 								filter: [
@@ -434,7 +434,7 @@ export default class SummonActivity extends Activity {
 			if (this.system.match.attacks && item.system.activities?.byType("attack")?.length) {
 				changes.push({
 					key: "activities[attack].system.attack.flat",
-					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+					type: "override",
 					value: true
 				});
 				for (const activity of item.system.activities.byType("attack")) {
@@ -451,7 +451,7 @@ export default class SummonActivity extends Activity {
 					);
 					changes.push({
 						key: `system.activities.${activity.id}.system.attack.bonus`,
-						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						type: "override",
 						value: simplifyFormula(Roll.replaceFormulaData(parts.join(" + "), data))
 					});
 				}
@@ -466,12 +466,12 @@ export default class SummonActivity extends Activity {
 				changes.push(
 					{
 						key: "activities[save].system.save.dc.ability",
-						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						type: "override",
 						value: "custom"
 					},
 					{
 						key: "activities[save].system.save.dc.formula",
-						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						type: "override",
 						value: dc
 					}
 				);
