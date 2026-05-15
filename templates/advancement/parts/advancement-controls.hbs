@@ -1,5 +1,5 @@
-{{ formField fields.title value=source.title placeholder=default.title rootId=partId }}
-{{ formField fields.icon value=source.icon placeholder=default.icon rootId=partId }}
+{{ formField fields.title name="title" value=source.title placeholder=default.title rootId=partId }}
+{{ formField fields.icon name="icon" value=source.icon placeholder=default.icon rootId=partId }}
 
 {{#if showHint}}
 	<div class="form-group">
@@ -27,15 +27,16 @@
 {{/if}}
 
 {{#if showClassIdentifier}}
-	{{ formField fields.level.fields.classIdentifier value=source.level.classIdentifier options=classIdentifierOptions
-	             classes="label-hinted" localize=true rootId=partId }}
+	{{ formField fields.level.fields.classIdentifier name="level.classIdentifier" value=source.level.classIdentifier
+	             options=classIdentifierOptions classes="label-hinted" localize=true rootId=partId }}
 {{/if}}
 
 {{#if showLevelSelector}}
-	{{ formField fields.level.fields.value value=source.level.value options=levelOptions rootId=partId }}
+	{{ formField fields.level.fields.value name="level.value" value=source.level.value options=levelOptions
+	             rootId=partId }}
 {{/if}}
 
 {{#if showClassRestriction}}
-	{{ formField fields.level.fields.classRestriction value=source.level.classRestriction options=classRestrictionOptions
-	             rootId=partId }}
+	{{ formField fields.level.fields.classRestriction name="level.classRestriction" value=source.level.classRestriction
+	             options=classRestrictionOptions rootId=partId }}
 {{/if}}
