@@ -1591,22 +1591,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				{ type: "skill-check", ability: abilityId, skill: config.skill, proficiency: skill.proficiency.multiplier }
 			];
 
+			const { parts, data } = buildRoll(
+				{
+					mod: ability?.mod,
+					prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
+					bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+					situational: rollConfig.data?.situational
+				},
+				{ ...rollData }
+			);
+
 			rollConfig = foundry.utils.mergeObject(rollConfig, {
-				...buildRoll(
-					{
-						mod: ability?.mod,
-						prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
-						situational: rollConfig.data?.situational
-					},
-					{ ...rollData }
-				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
 				}
 			});
-			rollConfig.data.abilityId = abilityId;
+			rollConfig.data = { ...(baseConfig.data ?? {}), ...data, abilityId };
+			rollConfig.parts = parts.concat(config.parts ?? []);
 
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
@@ -1708,22 +1710,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				{ type: "tool-check", ability: abilityId, tool: config.tool, proficiency: tool.proficiency.multiplier }
 			];
 
+			const { parts, data } = buildRoll(
+				{
+					mod: ability?.mod,
+					prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
+					bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+					situational: rollConfig.data?.situational
+				},
+				{ ...rollData }
+			);
+
 			rollConfig = foundry.utils.mergeObject(rollConfig, {
-				...buildRoll(
-					{
-						mod: ability?.mod,
-						prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
-						situational: rollConfig.data?.situational
-					},
-					{ ...rollData }
-				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
 				}
 			});
-			rollConfig.data.abilityId = abilityId;
+			rollConfig.data = { ...(baseConfig.data ?? {}), ...data, abilityId };
+			rollConfig.parts = parts.concat(config.parts ?? []);
 
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
@@ -1830,22 +1834,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				}
 			];
 
+			const { parts, data } = buildRoll(
+				{
+					mod: ability?.mod,
+					prof: vehicle.proficiency.hasProficiency ? vehicle.proficiency.term : null,
+					bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+					situational: rollConfig.data?.situational
+				},
+				{ ...rollData }
+			);
+
 			rollConfig = foundry.utils.mergeObject(rollConfig, {
-				...buildRoll(
-					{
-						mod: ability?.mod,
-						prof: vehicle.proficiency.hasProficiency ? vehicle.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
-						situational: rollConfig.data?.situational
-					},
-					{ ...rollData }
-				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
 				}
 			});
-			rollConfig.data.abilityId = abilityId;
+			rollConfig.data = { ...(baseConfig.data ?? {}), ...data, abilityId };
+			rollConfig.parts = parts.concat(config.parts ?? []);
 
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};

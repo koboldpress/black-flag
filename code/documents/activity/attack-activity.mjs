@@ -195,14 +195,14 @@ export default class AttackActivity extends Activity {
 			);
 
 			foundry.utils.mergeObject(rollConfig, {
-				data,
-				parts,
 				options: {
 					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 						rollData: data
 					})
 				}
 			});
+			rollConfig.data = { ...(rollConfig.data ?? {}), ...data };
+			rollConfig.parts = parts.concat(config.parts ?? []);
 			if (Number.isFinite(threshold)) rollConfig.options.criticalSuccess = threshold;
 			if (targets.length === 1) rollConfig.options.target = targets[0].ac;
 
