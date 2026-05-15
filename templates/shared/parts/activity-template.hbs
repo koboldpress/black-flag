@@ -11,24 +11,24 @@
 	{{/blackFlag-formGroup}}
 	{{#with target.aoeSizes as |aoeSizes|}}
 		{{#blackFlag-formGroup "BF.TARGET.FIELDS.target.template.size.label"}}
-			{{ formField ../fields.target.fields.template.fields.size name=(concat prefix "target.template.size")
+			{{ formField ../fields.target.fields.template.fields.size name=(concat ../prefix "target.template.size")
 			             value=../data.target.template.size classes="label-top" label=(localize aoeSizes.size)
-			             hint="" rootId=partId }}
+			             hint="" rootId=../partId }}
 			{{#if aoeSizes.width}}
 				<i class="fa-solid fa-times separator" inert></i>
-				{{ formField ../fields.target.fields.template.fields.width name=(concat prefix "target.template.width")
+				{{ formField ../fields.target.fields.template.fields.width name=(concat ../prefix "target.template.width")
 				             value=../data.target.template.width classes="label-top" label=(localize aoeSizes.width)
-				             hint="" rootId=partId }}
+				             hint="" rootId=../partId }}
 			{{/if}}
 			{{#if aoeSizes.height}}
 				<i class="fa-solid fa-times separator" inert></i>
-				{{ formField ../fields.target.fields.template.fields.height name=(concat prefix "target.template.height")
+				{{ formField ../fields.target.fields.template.fields.height name=(concat ../prefix "target.template.height")
 				             value=../data.target.template.height classes="label-top" label=(localize aoeSizes.height)
-				             hint="" rootId=partId }}
+				             hint="" rootId=../partId }}
 			{{/if}}
-			{{ formField ../fields.target.fields.template.fields.unit name=(concat prefix "target.template.unit")
+			{{ formField ../fields.target.fields.template.fields.unit name=(concat ../prefix "target.template.unit")
 									 value=../data.target.template.unit options=../CONFIG.distanceUnits.localizedOptions
-									 classes="label-top" hint="" rootId=partId }}
+									 classes="label-top" hint="" rootId=../partId }}
 		{{/blackFlag-formGroup}}
 	{{/with}}
 	{{#if (and data.target.template.type data.target.template.count)}}
