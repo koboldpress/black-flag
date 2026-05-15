@@ -211,7 +211,8 @@ export class SpellcastingValueData extends foundry.abstract.DataModel {
 					original: new DocumentIdField(),
 					replacement: new DocumentIdField(),
 					slot: new StringField()
-				})
+				}),
+				{ required: false }
 			)
 		};
 	}
