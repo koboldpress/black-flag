@@ -898,7 +898,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			},
 			type: "rest"
 		};
-		ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+		ChatMessage.applyMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
 		return ChatMessage.create(chatData);
 	}
 
@@ -1281,7 +1281,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				content: game.i18n.format(details.chatString, { name: this.name, counted }),
 				speaker: messageConfig.data.speaker
 			};
-			ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+			ChatMessage.applyMode(chatData, roll.options.rollMode);
 			await ChatMessage.create(chatData);
 		}
 

@@ -80,7 +80,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 				"flags.blackFlag.type": "hitPoints"
 			};
 			const message = new cls(messageData);
-			await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
+			await cls.create(message.toObject(), { messageMode: CONFIG.Dice.BasicRoll.getMessageMode() });
 
 			return this.advancement.apply(this.levels, { [level]: JSON.stringify(roll.toJSON()) });
 		}

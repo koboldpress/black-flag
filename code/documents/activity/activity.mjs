@@ -1084,11 +1084,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 					speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
 					type: "activation"
 				},
-				rollMode: game.settings.get("core", "rollMode")
+				rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
 			},
 			message
 		);
-		ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+		ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
 
 		/**
 		 * A hook event that fires before an activity activation card is created.

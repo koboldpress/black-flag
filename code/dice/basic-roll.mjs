@@ -52,7 +52,7 @@ import { buildRoll } from "../utils/_module.mjs";
  * @property {object} [data={}] - Additional data used when creating the message.
  * @property {BlackFlagChatMessage} [document] - Final created chat message document once process is completed.
  * @property {PreCreateRollMessageCallback} [preCreate] - Message configuration callback.
- * @property {string} [rollMode] - The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
+ * @property {string} [rollMode] - The roll mode to apply to this message from `CONFIG.ChatMessage.modes`.
  */
 
 /**
@@ -282,7 +282,7 @@ export default class BasicRoll extends Roll {
 	 * @param {options} [options] - Additional options which modify the created message.
 	 * @param {boolean} [options.create=true] - Whether to automatically create the chat message, or only return the
 	 *                                          prepared chatData object.
-	 * @param {string} [options.rollMode] - The template roll mode to use for the message from CONFIG.Dice.rollModes.
+	 * @param {string} [options.rollMode] - The template roll mode to use for the message from `CONFIG.ChatMessage.modes`.
 	 * @returns {Promise<ChatMessage|object>} - A promise which resolves to the created ChatMessage document if create is
 	 *                                         true, or the Object of prepared chatData otherwise.
 	 */
@@ -291,7 +291,7 @@ export default class BasicRoll extends Roll {
 			if (!roll._evaluated) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
 			rollMode ??= roll.options.rollMode;
 		}
-		rollMode ??= game.settings.get("core", "rollMode");
+		rollMode ??= BasicRoll.getMessageMode();
 
 		// Prepare chat data
 		messageData = foundry.utils.mergeObject(
@@ -309,9 +309,9 @@ export default class BasicRoll extends Roll {
 		const msg = new cls(messageData);
 
 		// Either create or return the data
-		if (create) return cls.create(msg.toObject(), { rollMode });
+		if (create) return cls.create(msg.toObject(), { messageMode: rollMode });
 		else {
-			if (rollMode) msg.applyRollMode(rollMode);
+			if (rollMode) msg.applyMode(rollMode);
 			return msg.toObject();
 		}
 	}
@@ -364,6 +364,18 @@ export default class BasicRoll extends Roll {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Retrieve the message mode to use, treating in-character as public by default.
+	 * @param {boolean} [ignoreIC=true]  Ignore in-character message mode.
+	 * @returns {string}}
+	 */
+	static getMessageMode(ignoreIC = true) {
+		const mode = game.settings.get("core", "messageMode");
+		return ignoreIC && mode === "ic" ? "public" : mode;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

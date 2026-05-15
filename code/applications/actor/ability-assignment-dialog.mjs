@@ -323,7 +323,7 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 			"flags.blackFlag.type": "abilityScores"
 		};
 		const message = new cls(messageData);
-		await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
+		await cls.create(message.toObject(), { messageMode: CONFIG.Dice.BasicRoll.getMessageMode() });
 
 		// Save rolls
 		const rollCollection = this.document.system.progression.abilities.rolls ?? [];

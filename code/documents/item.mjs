@@ -445,7 +445,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 		const messageConfig = foundry.utils.mergeObject(
 			{
-				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
 					content: await foundry.applications.handlebars.renderTemplate(
@@ -460,12 +459,13 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 							uuid: this.uuid
 						}
 					}
-				}
+				},
+				rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
 			},
 			message
 		);
 
-		ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+		ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
 
 		// TODO: Call preCreateItemMessage hook
 

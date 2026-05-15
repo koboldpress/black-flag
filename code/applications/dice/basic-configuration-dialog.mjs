@@ -201,11 +201,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 					blank: false
 				}),
 				name: "rollMode",
-				options: Object.entries(CONFIG.Dice.rollModes).map(([value, { label }]) => ({
-					value,
-					label: game.i18n.localize(label)
-				})),
-				value: this.message.rollMode ?? this.options.default?.rollMode
+				options: Object.entries(CONFIG.ChatMessage.modes)
+					.filter(([k]) => k !== "ic")
+					.map(([value, { label }]) => ({ value, label: game.i18n.localize(label) })),
+				value: this.message.rollMode ?? this.options.default?.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode()
 			}
 		];
 		return context;
