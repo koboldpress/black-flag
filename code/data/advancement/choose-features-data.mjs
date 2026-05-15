@@ -103,7 +103,8 @@ export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
 					level: new NumberField({ integer: true, min: 0 }),
 					original: new DocumentIdField(),
 					replacement: new DocumentIdField()
-				})
+				}),
+				{ required: false }
 			)
 		};
 	}

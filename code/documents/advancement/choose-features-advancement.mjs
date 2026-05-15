@@ -172,7 +172,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		await this.actor.deleteEmbeddedDocuments("Item", [data.id], { render: false });
 		const valueData = { [`${this.valueKeyPath}.${keyPath}`]: addedCollection };
 
-		const replaced = this.value.replaced[level];
+		const replaced = this.value.replaced?.[level];
 		const uuid = this.value._source.added?.[replaced?.level]?.find(d => d.document === replaced.original)?.uuid;
 		if (uuid) {
 			const itemData = await this.createItemData(uuid, { data, id: replaced.original });

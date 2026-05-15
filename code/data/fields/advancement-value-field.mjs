@@ -3,6 +3,7 @@
  * `ObjectField` to prevent issues with custom types that aren't currently loaded.
  */
 export default class AdvancementValueField extends foundry.data.fields.ObjectField {
+	/** @override */
 	initialize(value, model, options = {}) {
 		if (!value) return value;
 		const obj = foundry.utils.deepClone(value);
