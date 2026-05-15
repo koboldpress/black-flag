@@ -5,6 +5,8 @@
 		"build:db": "node ./utils/cli.mjs package pack",
 		"build:styles": "postcss styles/_module.css -o black-flag.css -m",
 		"build:json": "node ./utils/cli.mjs package unpack",
+		"compile": "npm run build:db",
+		"extract": "npm run build:json",
 		"lint": "eslint --ext .mjs ./code",
 		"lint:fix": "eslint --ext .mjs ./code --fix",
 		"prettier": "npx prettier . --check",
