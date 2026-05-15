@@ -193,7 +193,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 * @type {boolean}
 	 */
 	get alwaysPreparable() {
-		const config = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode")];
+		const config =
+			CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode") ?? "standard"];
 		return config?.preparable && this.circle.base !== 0 && !this.tags.has("ritual");
 	}
 
