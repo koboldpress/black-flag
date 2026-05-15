@@ -621,11 +621,11 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (!rider.activities.size && !rider.effects.size) this.unsetFlag(game.system.id, "rider");
 		else
 			this.update(
-				Object.entries(rider).reduce((updates, [key, value]) => {
-					if (value.size) updates[`flags.${game.system.id}.rider.${key}`] = Array.from(value);
-					else updates[`flags.${game.system.id}.rider.-=${key}`] = null;
-					return updates;
-				}, {})
+				Object.entries(rider).reduce(
+					(updates, [key, value]) =>
+						(updates[`flags.${game.system.id}.rider.${key}`] = value.size ? Array.from(value) : _del),
+					{}
+				)
 			);
 	}
 

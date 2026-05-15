@@ -60,7 +60,7 @@ export default class SpellcastingValueConfig extends ScaleValueConfig {
 			// If no value or value is not greater than previous value, remove whole entry
 			if (!value.value || value.value <= lastValue.value) {
 				delete scale[level];
-				scale[`-=${level}`] = null;
+				scale[level] = _del;
 			}
 
 			// Otherwise store it and track it as the last value

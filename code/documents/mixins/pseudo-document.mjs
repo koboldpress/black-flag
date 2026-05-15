@@ -320,7 +320,7 @@ export default Base =>
 						data.type ?? context.parent.getEmbeddedDocument(this.documentName, data._id)?.type
 					];
 				const removals = Object.entries(foundry.utils.flattenObject(data)).reduce((obj, [k, v]) => {
-					if (k.includes("-=")) obj[k] = v;
+					if (v instanceof foundry.data.operators.ForcedDeletion) obj[k] = _del;
 					return obj;
 				}, {});
 				updates[data._id] = foundry.utils.mergeObject(
@@ -355,7 +355,7 @@ export default Base =>
 					const doc = context.parent.getEmbeddedDocument(this.documentName, id);
 					closing.push(Promise.allSettled(doc.constructor._apps.get(doc.uuid)?.map(a => a.close()) ?? []));
 					documents.push(doc);
-					updates[`system.${this.collectionName}.-=${id}`] = null;
+					updates[`system.${this.collectionName}.${id}`] = _del;
 					return { updates, documents };
 				},
 				{ updates: {}, documents: [] }
@@ -485,9 +485,7 @@ export default Base =>
 		async unsetFlag(scope, key) {
 			const scopes = Item.database.getFlagScopes();
 			if (!scopes.includes(scope)) throw new Error(`Flag scope "${scope}" is not valid or not currently active.`);
-			const head = key.split(".");
-			const tail = `-=${head.pop()}`;
-			return this.update({ [["flags", scope, ...head, tail].join(".")]: null });
+			return this.update({ [["flags", scope, key].join(".")]: _del });
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */

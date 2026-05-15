@@ -117,10 +117,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 
 		// Track changes to cached spells on cast activities
 		const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
-			if ( key.startsWith("-=") ) {
-				const id = key.replace("-=", "");
-				return this.activities.get(id).cachedSpell?.id;
-			} else if ( foundry.utils.hasProperty(data, "system.spell.uuid") ) {
+			if ( data instanceof foundry.data.operators.ForcedDeletion || foundry.utils.hasProperty(data, "system.spell.uuid") ) {
 				return this.activities.get(key)?.cachedSpell?.id;
 			}
 			return null;

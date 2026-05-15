@@ -288,10 +288,10 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 	static async #resetAssignment(event, target) {
 		const updates = { "system.progression.abilities.method": "" };
 		Object.keys(this.document.system.progression.abilities.assignments).forEach(
-			key => (updates[`system.progression.abilities.assignments.-=${key}`] = null)
+			key => (updates[`system.progression.abilities.assignments.${key}`] = _del)
 		);
 		Object.keys(this.document.system.progression.abilities.bonuses).forEach(
-			key => (updates[`system.progression.abilities.bonuses.-=${key}`] = null)
+			key => (updates[`system.progression.abilities.bonuses.${key}`] = _del)
 		);
 		await this.document.update(updates);
 	}

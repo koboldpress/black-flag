@@ -230,7 +230,7 @@ export default class ItemDataModel extends BaseDataModel {
 
 		// Clear "relationship" flags when moved
 		if ("_id" in data && !options.keepRelationship) {
-			this.parent.updateSource({ "flags.black-flag.-=relationship": null });
+			this.parent.updateSource({ "flags.black-flag.relationship": _del });
 		}
 	}
 

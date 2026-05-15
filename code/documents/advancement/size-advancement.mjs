@@ -111,6 +111,6 @@ export default class SizeAdvancement extends Advancement {
 
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
-		return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null }, { render });
+		return await this.actor.update({ [`${this.valueKeyPath}.selected`]: _del }, { render });
 	}
 }

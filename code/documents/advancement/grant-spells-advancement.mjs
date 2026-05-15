@@ -111,7 +111,7 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 			{
 				[this.valueKeyPath]: {
 					ability: null,
-					[keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")]: null
+					[keyPath]: _del
 				}
 			},
 			{ render }

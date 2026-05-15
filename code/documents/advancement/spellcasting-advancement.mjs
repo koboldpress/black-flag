@@ -283,7 +283,7 @@ export default class SpellcastingAdvancement extends Advancement {
 						slot: originalReplacedSlot ?? replacedSlot.slot
 					};
 				} else {
-					valueData[`${this.valueKeyPath}.replaced.-=${level}`] = null;
+					valueData[`${this.valueKeyPath}.replaced.${level}`] = _del;
 				}
 			}
 
@@ -354,8 +354,8 @@ export default class SpellcastingAdvancement extends Advancement {
 			await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
 			return await this.actor.update(
 				{
-					[`${this.valueKeyPath}.added.-=${level}`]: null,
-					[`${this.valueKeyPath}.replaced.-=${level}`]: null
+					[`${this.valueKeyPath}.added.${level}`]: _del,
+					[`${this.valueKeyPath}.replaced.${level}`]: _del
 				},
 				{ render }
 			);

@@ -63,7 +63,7 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 
 		// Remove any remaining advancement data
 		this.parent.actor.enqueueAdvancementChange(this.parent.actor, "update", [
-			{ [`system.progression.advancement.-=${this.parent.id}`]: null }, { render: false }
+			{ [`system.progression.advancement.${this.parent.id}`]: _del }, { render: false }
 		]);
 	}
 }

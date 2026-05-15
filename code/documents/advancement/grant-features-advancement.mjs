@@ -136,7 +136,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
 		return await this.actor.update(
 			{
-				[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null
+				[`${this.valueKeyPath}.${keyPath}`]: _del
 			},
 			{ render }
 		);

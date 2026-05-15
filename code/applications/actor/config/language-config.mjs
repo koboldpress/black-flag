@@ -87,7 +87,7 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 		const languages = submitData.system.proficiencies?.languages ?? {};
 		foundry.utils.setProperty(submitData, "system.proficiencies.languages", {
 			communication: Object.entries(languages.communication ?? {}).reduce((obj, [key, value]) => {
-				if (!value?.range) obj[`-=${key}`] = null;
+				if (!value?.range) obj[key] = _del;
 				else obj[key] = value;
 				return obj;
 			}, {}),

@@ -182,7 +182,7 @@ export default class ToolConfig extends BaseSelectorConfigSheet {
 			if (key in this.document.system.proficiencies[this.options.trait]) removeKeys.delete(key);
 			else updates[`system.proficiencies.${this.options.trait}.${key}`] = {};
 		}
-		removeKeys.forEach(key => (updates[`system.proficiencies.${this.options.trait}.-=${key}`] = null));
+		removeKeys.forEach(key => (updates[`system.proficiencies.${this.options.trait}.${key}`] = _del));
 		this.submit({ updateData: foundry.utils.expandObject(updates) });
 	}
 

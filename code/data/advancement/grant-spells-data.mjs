@@ -178,9 +178,9 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 	getReverseChanges(spell, data = {}) {
 		const updates = {};
 		if (this.alwaysPrepared) updates["flags.black-flag.relationship.alwaysPrepared"] = false;
-		if (this.ability.size) updates["flags.black-flag.relationship.origin.-=ability"] = null;
-		if (this.origin) updates["flags.black-flag.relationship.origin.-=identifier"] = null;
-		if (this.source) updates["flags.black-flag.relationship.origin.-=source"] = null;
+		if (this.ability.size) updates["flags.black-flag.relationship.origin.ability"] = _del;
+		if (this.origin) updates["flags.black-flag.relationship.origin.identifier"] = _del;
+		if (this.source) updates["flags.black-flag.relationship.origin.source"] = _del;
 
 		if (this.uses.max) {
 			updates["system.uses.max"] = "";
@@ -192,7 +192,7 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 
 			for (const activity of spell.system.activities) {
 				if (deleteForwardActivity) {
-					if (activity.flags[game.system.id]?.fromAdvancement) updates[`system.activities.-=${activity.id}`] = null;
+					if (activity.flags[game.system.id]?.fromAdvancement) updates[`system.activities.${activity.id}`] = _del;
 				} else if (activity.activation?.primary) {
 					updates[`system.activities.${activity.id}.consumption.targets`] = activity.consumption.targets.filter(
 						t => t.type !== "item"

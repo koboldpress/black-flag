@@ -177,7 +177,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		if (uuid) {
 			const itemData = await this.createItemData(uuid, { data, id: replaced.original });
 			await this.actor.createEmbeddedDocuments("Item", [itemData], { keepId: true, render: false });
-			valueData[`${this.valueKeyPath}.replaced.-=${level}`] = null;
+			valueData[`${this.valueKeyPath}.replaced.${level}`] = _del;
 		}
 
 		return await this.actor.update(valueData, { render });

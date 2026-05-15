@@ -210,13 +210,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	async reverse(levels, data, { render = true } = {}) {
 		const valueUpdates = {};
 
-		if (!data?.key || data?.key === "ability") valueUpdates["-=ability"] = null;
-		else if (data?.key === "ability.one") valueUpdates["ability.-=one"] = null;
-		else if (data?.key === "ability.two") valueUpdates["ability.-=two"] = null;
+		if (!data?.key || data?.key === "ability") valueUpdates["ability"] = _del;
+		else if (data?.key === "ability.one") valueUpdates["ability.one"] = _del;
+		else if (data?.key === "ability.two") valueUpdates["ability.two"] = _del;
 
 		if (!data?.key || data?.key === "talent") {
 			await this.value.talent?.document?.delete();
-			valueUpdates["-=talent"] = null;
+			valueUpdates["talent"] = _del;
 		}
 
 		return await this.actor.update({ [`${this.valueKeyPath}`]: valueUpdates }, { render });

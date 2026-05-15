@@ -150,7 +150,7 @@ export default class TraitAdvancement extends Advancement {
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		if (!this.value.selected) return;
-		if (!data?.key) return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null });
+		if (!data?.key) return await this.actor.update({ [`${this.valueKeyPath}.selected`]: _del });
 
 		const selectedCollection = this.value.selected;
 		selectedCollection.delete(data.key);

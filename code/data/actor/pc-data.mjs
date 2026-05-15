@@ -1034,7 +1034,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 		// Remove progression data for level
 		this.parent.enqueueAdvancementChange(this.parent, "update", [
-			{ [`system.progression.levels.-=${this.progression.level}`]: null },
+			{ [`system.progression.levels.${this.progression.level}`]: _del },
 			{ render: false, blackFlag: { levelDown: true } }
 		]);
 

@@ -118,7 +118,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		for (const level of this.levelRange) {
 			const value = this.advancement.valueForLevel(level);
 			if (value) submitData.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
-			else submitData.configuration.scale[`-=${level}`] = null;
+			else submitData.configuration.scale[level] = _del;
 		}
 		submitData.configuration.type = type;
 
@@ -142,7 +142,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 			scale[level] ??= {};
 			for (const key of validKeys) {
 				// No value or same as previous value, don't store it
-				if (!value[key] || value[key] === lastValue[key]) scale[level][`-=${key}`] = null;
+				if (!value[key] || value[key] === lastValue[key]) scale[level][key] = _del;
 				// Value is new, store it and update lastValue
 				else lastValue[key] = scale[level][key] = value[key];
 				// TODO: Run value through validator on DataField
@@ -150,13 +150,12 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
 			// Strip out any unrecognized keys
 			for (const key of Object.keys(this.advancement.configuration.scale[level] ?? {})) {
-				if (!validKeys.includes(key)) scale[level][`-=${key}`] = null;
+				if (!validKeys.includes(key)) scale[level][key] = _del;
 			}
 
 			// If all updates are removals, just remove the level
-			if (Object.keys(scale[level]).every(k => k.startsWith("-="))) {
-				delete scale[level];
-				scale[`-=${level}`] = null;
+			if (Object.values(scale[level]).every(v => v instanceof foundry.data.operators.ForcedDeletion)) {
+				scale[level] = _del;
 			}
 		}
 		configuration.scale = scale;

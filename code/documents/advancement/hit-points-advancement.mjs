@@ -203,7 +203,7 @@ export default class HitPointsAdvancement extends Advancement {
 		return await this.actor.update(
 			{
 				"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
-				[`${this.valueKeyPath}.granted.-=${level}`]: null
+				[`${this.valueKeyPath}.granted.${level}`]: _del
 			},
 			{ render }
 		);

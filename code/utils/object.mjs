@@ -2,7 +2,7 @@
  * Generate an update object to remove any empty object keys.
  * @param {object} object - Object to be cleaned.
  * @returns {object} - Copy of object with only non false-ish values included and others marked
- *                     using `-=` syntax to be removed by update process.
+ *                     using `foundry.data.operators.ForcedDeletion` to be removed by update process.
  */
 export function cleanedObjectUpdate(object) {
 	return Object.entries(object).reduce((obj, [key, value]) => {
@@ -10,7 +10,7 @@ export function cleanedObjectUpdate(object) {
 		if ( foundry.utils.getType(value) === "Object" ) keep = Object.values(value).some(v => v);
 		else if ( value ) keep = true;
 		if ( keep ) obj[key] = value;
-		else obj[`-=${key}`] = null;
+		else obj[key] = _del;
 		return obj;
 	}, {});
 }
