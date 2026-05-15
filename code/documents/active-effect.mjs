@@ -211,12 +211,13 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 		// If attempting to apply active effect to empty MappingField entry, create it
 		if (current === undefined && change.key.startsWith("system.")) {
-			let keyPath = change.key;
+			const keyPathParts = change.key.split(".");
 			let mappingField = field;
 			while (!(mappingField instanceof MappingField) && mappingField) {
-				if (mappingField.name) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
+				if (mappingField.name && mappingField.name !== "element") keyPathParts.pop();
 				mappingField = mappingField.parent;
 			}
+			const keyPath = keyPathParts.join(".");
 			if (mappingField && foundry.utils.getProperty(model, keyPath) === undefined) {
 				const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
 				foundry.utils.setProperty(model, keyPath, created);
