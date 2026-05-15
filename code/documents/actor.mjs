@@ -882,7 +882,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			hitDiceLabel: game.i18n.localize(getPluralLocalizationKey(totalHD, pr => `BF.HitDie.Label[${pr}]`)).toLowerCase(),
 			hitPoints: formatNumber(result.deltas.hitPoints),
 			hitPointsLabel: game.i18n
-				.localize(getPluralLocalizationKey(results.deltas.hitPoints, pr => `BF.HitPoint.Label[${pr}]`))
+				.localize(getPluralLocalizationKey(result.deltas.hitPoints, pr => `BF.HitPoint.Label[${pr}]`))
 				.toLowerCase()
 		};
 
