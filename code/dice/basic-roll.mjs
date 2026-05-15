@@ -225,6 +225,7 @@ export default class BasicRoll extends Roll {
 				create: message.create,
 				rollMode: message.rollMode
 			});
+			if (message.document) rolls.forEach(r => (r.parent = message.document));
 		}
 
 		return message.document;
@@ -300,8 +301,8 @@ export default class BasicRoll extends Roll {
 			},
 			messageData
 		);
-		messageData.rolls = rolls;
 		this._prepareMessageData(rolls, messageData);
+		messageData.rolls = rolls.map(r => this.fromData(r.toJSON()));
 
 		// Either create the message or just return the chat data
 		const cls = getDocumentClass("ChatMessage");
