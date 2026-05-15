@@ -12,6 +12,7 @@ export default function PrimarySheetMixin(Base) {
 		static DEFAULT_OPTIONS = {
 			actions: {
 				configureIdentity: PrimarySheet.#configureIdentity,
+				editImage: PrimarySheet._onEditImage,
 				toggleSheetMode: PrimarySheet.#toggleSheetMode
 			},
 			window: {

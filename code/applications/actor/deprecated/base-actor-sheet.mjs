@@ -428,28 +428,6 @@ export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1.she
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	_onEditImage(event) {
-		const attr = event.currentTarget.dataset.edit;
-		const current = foundry.utils.getProperty(this.object, attr);
-		const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
-		const fp = new foundry.applications.apps.FilePicker({
-			current,
-			type: "image",
-			redirectToRoot: img ? [img] : [],
-			callback: path => {
-				event.currentTarget.src = path;
-				if (this.options.submitOnChange) return this._onSubmit(event, { updateData: { [attr]: path } });
-			},
-			top: this.position.top + 40,
-			left: this.position.left + 10,
-			document: this.document
-		});
-		return fp.browse();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Handle showing the actor's portrait or token artwork.
 	 * @param {PointerEvent} event - Triggering click event.
