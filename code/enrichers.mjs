@@ -855,7 +855,13 @@ async function enrichCheck(config, label, options) {
 	}
 
 	config = {
-		rollAction: config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check",
+		rollAction: config.skill.length
+			? "skill"
+			: config.tool.length
+				? "tool"
+				: config.vehicle.length
+					? "vehicle"
+					: "ability-check",
 		ability: Array.from(groups.keys())[0],
 		...config,
 		skill: config.skill[0],
