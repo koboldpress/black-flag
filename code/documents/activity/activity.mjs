@@ -296,11 +296,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {object}
 	 */
 	get messageFlags() {
-		return {
+		const flags = {
 			activity: { type: this.type, id: this.id, uuid: this.uuid },
 			item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid },
 			targets: getTargetDescriptors()
 		};
+
+		const scaling = Number(this.item.getFlag(game.system.id, "scaling")) || 0;
+		if (scaling > 0) flags.scaling = scaling;
+
+		return flags;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1255,7 +1260,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			const updates = {};
 			if (consumed) updates["flags.dnd5e.consumed"] = consumed;
 			if (scaling) {
-				const updates = { [`flags.${game.system.id}.scaling`]: scaling };
+				updates[`flags.${game.system.id}.scaling`] = scaling;
 				if (item.type === "spell") {
 					updates["system.circle.value"] = (item.system.circle.value ?? item.system.circle.base) + scaling;
 				}
