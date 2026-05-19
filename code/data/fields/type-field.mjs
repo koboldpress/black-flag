@@ -56,11 +56,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	/** @override */
 	initialize(value, model, options = {}) {
 		const cls = this.getModel(value, model);
-		if (cls) {
-			const created = cls.fromSource(value, { parent: model, ...options });
-			if (created.schema) created.schema.name = this.name;
-			return created;
-		}
+		if (cls) return cls.fromSource(value, { parent: model, ...options });
 		return foundry.utils.deepClone(value);
 	}
 
