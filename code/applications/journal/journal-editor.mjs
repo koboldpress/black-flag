@@ -54,7 +54,6 @@ export default class JournalEditor extends BFDocumentSheet {
 		const context = await super._prepareContext(options);
 		const rawText = foundry.utils.getProperty(this.document, this.options.textKeyPath) ?? "";
 		return foundry.utils.mergeObject(context, {
-			document: this.document,
 			enriched: await foundry.applications.ux.TextEditor.implementation.enrichHTML(rawText, {
 				relativeTo: this.document,
 				secrets: this.document.isOwner
