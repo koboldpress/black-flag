@@ -117,7 +117,9 @@ export default Base =>
 		 * @type {string}
 		 */
 		get uuid() {
-			return `${this.item.uuid}.${this.documentName}.${this.id}`;
+			const id = this.id ?? this._source.id;
+			if (!this.item || !id) return null;
+			return `${this.item.uuid}.${this.documentName}.${id}`;
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
@@ -127,7 +129,7 @@ export default Base =>
 		 * @type {BlackFlagItem}
 		 */
 		get item() {
-			return this.parent.parent;
+			return this.parent?.parent;
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
@@ -137,7 +139,7 @@ export default Base =>
 		 * @type {BlackFlagActor|null}
 		 */
 		get actor() {
-			return this.item.parent ?? null;
+			return this.item?.parent ?? null;
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
