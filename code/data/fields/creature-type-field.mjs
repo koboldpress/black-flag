@@ -6,7 +6,7 @@ const { ArrayField, SetField, StringField } = foundry.data.fields;
  * @param {object} options - Options that will be merged with default options.
  */
 export default class CreatureTypeField extends foundry.data.fields.SchemaField {
-	constructor(fields = {}, options = {}) {
+	constructor(fields = {}, options = {}, context = {}) {
 		fields = {
 			value: new StringField({ initial: "humanoid", label: "BF.CreatureType.Type.Label" }),
 			tags: new SetField(new StringField(), { label: "BF.CreatureType.Tag.Label" }),
@@ -15,7 +15,7 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, { label: "BF.CreatureType.Label", ...options });
+		super(fields, { label: "BF.CreatureType.Label", ...options }, context);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

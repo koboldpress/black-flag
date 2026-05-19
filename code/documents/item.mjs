@@ -101,7 +101,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	get pseudoDocumentHierarchy() {
 		const hierarchy = {};
 		for (const [fieldName, field] of this.system.schema.entries()) {
-			if (field.constructor.hierarchical) hierarchy[fieldName] = field;
+			if (field.constructor.pseudoHierarchical) hierarchy[fieldName] = field;
 		}
 		Object.defineProperty(this, "pseudoDocumentHierarchy", { value: Object.freeze(hierarchy), writable: false });
 		return this.pseudoDocumentHierarchy;

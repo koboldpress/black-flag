@@ -15,7 +15,7 @@ import FormulaField from "./formula-field.mjs";
  * Field that represents a set of actor modifiers.
  */
 export default class ModifierField extends foundry.data.fields.ArrayField {
-	constructor(options) {
+	constructor(options, context) {
 		super(
 			new foundry.data.fields.SchemaField({
 				type: new foundry.data.fields.StringField(),
@@ -29,7 +29,8 @@ export default class ModifierField extends foundry.data.fields.ArrayField {
 					{ required: false, initial: undefined }
 				)
 			}),
-			options
+			options,
+			context
 		);
 	}
 }

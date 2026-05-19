@@ -5,12 +5,12 @@
  * @param {StringFieldOptions} options - Options which configure the behavior of the field.
  */
 export default class LocalDocumentField extends foundry.data.fields.DocumentIdField {
-	constructor(model, options = {}) {
+	constructor(model, options = {}, context = {}) {
 		if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
 			throw new Error("A LocalDocumentField must specify a DataModel subclass as its type");
 		}
 
-		super(options);
+		super(options, context);
 		this.model = model;
 	}
 

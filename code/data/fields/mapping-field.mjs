@@ -25,11 +25,11 @@
  *                                           by `options.initialKeys`?
  */
 export default class MappingField extends foundry.data.fields.TypedObjectField {
-	constructor(model, options) {
+	constructor(model, options, context) {
 		if (!(model instanceof foundry.data.fields.DataField)) {
 			throw new Error("MappingField must have a DataField as its contained element");
 		}
-		super(model, options);
+		super(model, options, context);
 
 		/**
 		 * The embedded DataField definition which is contained in this field.

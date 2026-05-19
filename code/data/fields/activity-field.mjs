@@ -6,37 +6,32 @@ import TypeField from "./type-field.mjs";
  * Field that automatically prepares activities in an {@link ActivityCollection}.
  */
 export class ActivityField extends MappingField {
-	constructor(options) {
+	constructor(options, context) {
 		super(
 			new TypeField({
 				determineType: value => value?.type,
 				modelLookup: type => CONFIG.Activity.types[type]?.documentClass ?? null
 			}),
-			options
+			options,
+			context
 		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	static hierarchical = true;
-	// TODO: Rework this to be more like EmbeddedCollection
+	/**
+	 * Whether this field defines part of a PseudoDocument hierarchy.
+	 * @type {boolean}
+	 */
+	static pseudoHierarchical = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	initialize(value, model, options) {
+		options = { ...options, clean: { copy: false } };
 		return new ActivityCollection(model, super.initialize(value, model, options));
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	// migrateSource(sourceData, fieldData) {
-	// 	for (const value of Object.values(fieldData ?? {})) {
-	// 		this.model.migrateSource(sourceData, value);
-	// 	}
-	// }
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

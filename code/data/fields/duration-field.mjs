@@ -14,7 +14,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @param {object} [options={}] - Additional options in addition to the default label.
  */
 export default class DurationField extends SchemaField {
-	constructor(fields = {}, options = {}) {
+	constructor(fields = {}, options = {}, context = {}) {
 		fields = {
 			value: new FormulaField({ deterministic: true, label: "BF.DURATION.FIELDS.duration.value.label" }),
 			unit: new StringField({
@@ -27,7 +27,7 @@ export default class DurationField extends SchemaField {
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, options);
+		super(fields, options, context);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

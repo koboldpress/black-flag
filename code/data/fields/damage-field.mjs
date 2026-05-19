@@ -7,8 +7,8 @@ const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, Str
  * Field for storing damage data.
  */
 export default class DamageField extends EmbeddedDataField {
-	constructor({ simple = false, ...options } = {}) {
-		super(simple ? SimpleDamageData : ExtendedDamageData, { label: "BF.DAMAGE.Label", ...options });
+	constructor({ simple = false, ...options } = {}, context = {}) {
+		super(simple ? SimpleDamageData : ExtendedDamageData, { label: "BF.DAMAGE.Label", ...options }, context);
 	}
 }
 

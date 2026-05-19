@@ -7,8 +7,8 @@ const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, S
  * Field for storing uses data.
  */
 export default class UsesField extends EmbeddedDataField {
-	constructor(options = {}) {
-		super(UsesData, foundry.utils.mergeObject({ label: "BF.Uses.Label" }, options));
+	constructor(options = {}, context = {}) {
+		super(UsesData, foundry.utils.mergeObject({ label: "BF.Uses.Label" }, options), context);
 	}
 }
 

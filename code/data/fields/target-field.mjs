@@ -24,7 +24,7 @@ const { BooleanField, SchemaField, StringField } = foundry.data.fields;
  * @param {object} [options={}] - Additional options in addition to the default label.
  */
 export default class TargetField extends SchemaField {
-	constructor(fields = {}, options = {}) {
+	constructor(fields = {}, options = {}, context = {}) {
 		fields = {
 			template: new SchemaField({
 				count: new FormulaField({ deterministic: true }),
@@ -44,7 +44,7 @@ export default class TargetField extends SchemaField {
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, { label: "BF.Targeting.Label", ...options });
+		super(fields, { label: "BF.Targeting.Label", ...options }, context);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

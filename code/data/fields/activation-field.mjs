@@ -13,7 +13,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @param {object} [options={}] - Additional options in addition to the default label.
  */
 export default class ActivationField extends SchemaField {
-	constructor(fields = {}, options = {}) {
+	constructor(fields = {}, options = {}, context = {}) {
 		fields = {
 			value: new NumberField({ min: 0, integer: true, label: "BF.ACTIVATION.FIELDS.activation.value.label" }),
 			type: new StringField({
@@ -26,7 +26,7 @@ export default class ActivationField extends SchemaField {
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, options);
+		super(fields, options, context);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
