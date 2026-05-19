@@ -46,6 +46,8 @@ export class PropertyConfigurationData extends AdvancementDataModel {
 
 	/** @inheritDoc */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		if (Array.isArray(source.changes)) {
 			for (const change of source.changes) {
 				if (!Object.hasOwn(change, "type") && typeof change.mode === "number") {
@@ -54,6 +56,7 @@ export class PropertyConfigurationData extends AdvancementDataModel {
 				}
 			}
 		}
+
 		return super.migrateData(source);
 	}
 }

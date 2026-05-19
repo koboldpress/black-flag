@@ -31,11 +31,13 @@ export class ImprovementConfigurationData extends AdvancementDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		if (foundry.utils.getType(source.talentList) === "string") {
 			source.talentList = [source.talentList];
 		}
 
-		return source;
+		return super.migrateData(source);
 	}
 }
 

@@ -58,13 +58,15 @@ export class ChooseFeaturesConfigurationData extends AdvancementDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		// Added in 0.10.051
 		if ("choices" in source)
 			Object.entries(source.choices).forEach(([k, c]) => {
 				if (foundry.utils.getType(c) === "number") source.choices[k] = { count: c };
 			});
 
-		return source;
+		return super.migrateData(source);
 	}
 }
 

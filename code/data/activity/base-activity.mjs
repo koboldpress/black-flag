@@ -207,6 +207,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static migrateData(source) {
 		source = super.migrateData(source);
+		if (!source) return source;
 
 		// Added in 2.0.068
 		BaseDataModel._migrateObjectUnits(source.duration);

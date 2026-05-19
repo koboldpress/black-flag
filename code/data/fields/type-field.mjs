@@ -46,7 +46,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	_cleanType(value, options, _state) {
 		if (!(typeof value === "object")) value = {};
 
-		const cls = this.getModel(value);
+		const cls = this.getModel(value) ?? this.getModel(_state?.source);
 		if (cls) return cls.cleanData(value, options, _state);
 		return value;
 	}
@@ -56,7 +56,11 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	/** @override */
 	initialize(value, model, options = {}) {
 		const cls = this.getModel(value, model);
-		if (cls) return cls.fromSource(value, { parent: model, ...options });
+		if (cls) {
+			const created = cls.fromSource(value, { parent: model, ...options });
+			if (created.schema && this.name !== "element") created.schema.name = this.name;
+			return created;
+		}
 		return foundry.utils.deepClone(value);
 	}
 
@@ -64,7 +68,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/** @override */
 	_migrate(value, options, _state) {
-		const cls = this.getModel(_state?.source);
+		const cls = this.getModel(value) ?? this.getModel(_state?.source);
 		if (cls) cls.migrateDataSafe(value);
 		return value;
 	}

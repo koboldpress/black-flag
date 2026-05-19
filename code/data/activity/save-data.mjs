@@ -83,6 +83,8 @@ export class SaveData extends ActivityDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		// Added in ???
 		if (foundry.utils.getType(source.damage?.parts) === "Array") {
 			source.damage.parts.forEach(p => BaseActivity._migrateCustomDamageFormula(p));
@@ -109,7 +111,7 @@ export class SaveData extends ActivityDataModel {
 			else source.save.ability = [];
 		}
 
-		return source;
+		return super.migrateData(source);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

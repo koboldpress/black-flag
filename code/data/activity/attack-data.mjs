@@ -151,6 +151,9 @@ export class AttackData extends ActivityDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		console.log("AttackActivity#migrateData", source);
+		if (!source) return super.migrateData(source);
+
 		// Added in ???
 		if (foundry.utils.getType(source.damage?.parts) === "Array") {
 			source.damage.parts.forEach(p => BaseActivity._migrateCustomDamageFormula(p));
@@ -169,7 +172,7 @@ export class AttackData extends ActivityDataModel {
 			}
 		}
 
-		return source;
+		return super.migrateData(source);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

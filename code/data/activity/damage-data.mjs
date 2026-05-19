@@ -45,6 +45,8 @@ export class DamageData extends ActivityDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		// Added in 0.10.042
 		if ("damage" in source) {
 			if ("allowCritical" in source.damage) {
@@ -52,6 +54,6 @@ export class DamageData extends ActivityDataModel {
 			}
 		}
 
-		return source;
+		return super.migrateData(source);
 	}
 }

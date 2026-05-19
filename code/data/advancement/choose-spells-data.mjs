@@ -80,6 +80,8 @@ export class ChooseSpellsConfigurationData extends AdvancementDataModel {
 
 	/** @override */
 	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
 		// Added in 0.9.037
 		if (foundry.utils.getType(source.restriciton?.allowRituals) === "boolean") {
 			source.restriction.allowRituals = source.restriction.allowRituals ? "allow" : "";
@@ -91,7 +93,7 @@ export class ChooseSpellsConfigurationData extends AdvancementDataModel {
 				if (foundry.utils.getType(c) === "number") source.choices[k] = { count: c };
 			});
 
-		return source;
+		return super.migrateData(source);
 	}
 }
 
