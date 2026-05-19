@@ -14,10 +14,10 @@
           "healing": {
             "type": "temp",
             "number": null,
-            "denomination": 0,
+            "denomination": null,
             "custom": {
               "enabled": true,
-              "formula": "@prof + @progression.warlock.levels"
+              "formula": "@prof + @progression.classes.warlock.levels"
             },
             "scaling": {
               "number": 1
@@ -42,7 +42,8 @@
           "override": false
         },
         "range": {
-          "units": "self"
+          "units": "self",
+          "special": ""
         },
         "target": {
           "template": {
@@ -65,7 +66,14 @@
           "max": ""
         },
         "name": "",
-        "img": ""
+        "img": "",
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "identifier": ""
+        }
       }
     },
     "uses": {
@@ -107,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.037",
-    "coreVersion": "13.347",
+    "systemVersion": "3.0.075",
+    "coreVersion": "14.361",
     "createdTime": 1719377051403,
-    "modifiedTime": 1720051688304,
+    "modifiedTime": 1779215565962,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null,
     "exportSource": null
