@@ -2,10 +2,10 @@ import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { convertAmount, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import ActivationField from "../fields/activation-field.mjs";
-import DurationField from "../fields/duration-field.mjs";
-import RangeField from "../fields/range-field.mjs";
-import TargetField from "../fields/target-field.mjs";
+import ActivationField from "../fields/shared/activation-field.mjs";
+import DurationField from "../fields/shared/duration-field.mjs";
+import RangeField from "../fields/shared/range-field.mjs";
+import TargetField from "../fields/shared/target-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 

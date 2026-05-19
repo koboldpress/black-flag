@@ -1,4 +1,4 @@
-import { formatNumber, formatTime } from "../../utils/_module.mjs";
+import { formatNumber, formatTime } from "../../../utils/_module.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 

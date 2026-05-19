@@ -1,5 +1,5 @@
-import ScaleTypeUsage from "../advancement/scale-value/scale-type-usage.mjs";
-import FormulaField from "./formula-field.mjs";
+import ScaleTypeUsage from "../../advancement/scale-value/scale-type-usage.mjs";
+import FormulaField from "../formula-field.mjs";
 
 const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, StringField } = foundry.data.fields;
 

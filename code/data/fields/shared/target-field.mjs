@@ -1,5 +1,5 @@
-import { defaultUnit, formatDistance, formatNumber, getPluralLocalizationKey } from "../../utils/_module.mjs";
-import FormulaField from "./formula-field.mjs";
+import { defaultUnit, formatDistance, formatNumber, getPluralLocalizationKey } from "../../../utils/_module.mjs";
+import FormulaField from "../formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 

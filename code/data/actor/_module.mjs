@@ -4,6 +4,7 @@ export { default as PCData } from "./pc-data.mjs";
 export { default as SiegeData } from "./siege-data.mjs";
 export { default as VehicleData } from "./vehicle-data.mjs";
 
+export { default as AdvancementValueField } from "./fields/advancement-value-field.mjs";
 export { default as ResistancesField } from "./fields/resistances-field.mjs";
 
 export { default as ACTemplate } from "./templates/ac-template.mjs";

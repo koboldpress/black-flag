@@ -1,6 +1,6 @@
 import ActivityDataModel from "../abstract/activity-data-model.mjs";
-import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import DamageField from "../fields/shared/damage-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;

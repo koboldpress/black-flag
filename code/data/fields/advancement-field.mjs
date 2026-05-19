@@ -32,15 +32,6 @@ export class AdvancementField extends MappingField {
 		options = { ...options, clean: { copy: false } };
 		return new AdvancementCollection(model, super.initialize(value, model, options));
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	// migrateSource(sourceData, fieldData) {
-	// 	for (const value of Object.values(fieldData ?? {})) {
-	// 		this.model.migrateSource(sourceData, value);
-	// 	}
-	// }
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

@@ -1,5 +1,5 @@
 import IdentifierField from "../../fields/identifier-field.mjs";
-import SourceField from "../../fields/source-field.mjs";
+import SourceField from "../../fields/shared/source-field.mjs";
 
 const { HTMLField, SchemaField } = foundry.data.fields;
 

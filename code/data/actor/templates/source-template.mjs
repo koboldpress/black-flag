@@ -1,4 +1,4 @@
-import SourceField from "../../fields/source-field.mjs";
+import SourceField from "../../fields/shared/source-field.mjs";
 
 const { SchemaField } = foundry.data.fields;
 
@@ -18,7 +18,7 @@ export default class SourceTemplate extends foundry.abstract.DataModel {
 			})
 		};
 	}
-	
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */

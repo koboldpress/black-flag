@@ -1,6 +1,6 @@
 import ActivityDataModel from "../abstract/activity-data-model.mjs";
-import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import DamageField from "../fields/shared/damage-field.mjs";
 import BaseActivity from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
@@ -151,7 +151,6 @@ export class AttackData extends ActivityDataModel {
 
 	/** @override */
 	static migrateData(source) {
-		console.log("AttackActivity#migrateData", source);
 		if (!source) return super.migrateData(source);
 
 		// Added in ???

@@ -1,5 +1,5 @@
-import Scaling from "../../documents/scaling.mjs";
-import FormulaField from "./formula-field.mjs";
+import Scaling from "../../../documents/scaling.mjs";
+import FormulaField from "../formula-field.mjs";
 
 const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 

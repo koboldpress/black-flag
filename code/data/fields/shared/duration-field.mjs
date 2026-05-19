@@ -1,5 +1,5 @@
-import { formatNumber, formatTime } from "../../utils/_module.mjs";
-import FormulaField from "./formula-field.mjs";
+import { formatNumber, formatTime } from "../../../utils/_module.mjs";
+import FormulaField from "../formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 

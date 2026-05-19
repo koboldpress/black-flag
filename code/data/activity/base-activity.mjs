@@ -1,13 +1,13 @@
 import { convertAmount, formatNumber, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
-import ActivationField from "../fields/activation-field.mjs";
-import DurationField from "../fields/duration-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
-import RangeField from "../fields/range-field.mjs";
-import TargetField from "../fields/target-field.mjs";
 import TypeField from "../fields/type-field.mjs";
-import UsesField from "../fields/uses-field.mjs";
+import ActivationField from "../fields/shared/activation-field.mjs";
+import DurationField from "../fields/shared/duration-field.mjs";
+import RangeField from "../fields/shared/range-field.mjs";
+import TargetField from "../fields/shared/target-field.mjs";
+import UsesField from "../fields/shared/uses-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {

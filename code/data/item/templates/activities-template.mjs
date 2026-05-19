@@ -1,7 +1,7 @@
 import CastActivity from "../../../documents/activity/cast-activity.mjs";
 import { formatNumber, replaceFormulaData, simplifyBonus } from "../../../utils/_module.mjs";
 import { ActivityField } from "../../fields/activity-field.mjs";
-import UsesField from "../../fields/uses-field.mjs";
+import UsesField from "../../fields/shared/uses-field.mjs";
 
 /**
  * Data definition template for items with activities.
