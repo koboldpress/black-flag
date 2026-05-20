@@ -177,12 +177,9 @@
       "src": "systems/black-flag/artwork/tokens/sphinx-androsphinx.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -233,13 +230,12 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [
-      {
-        "id": "seeAll",
+    "detectionModes": {
+      "seeAll": {
         "range": 120,
         "enabled": true
       }
-    ],
+    },
     "occludable": {
       "radius": 0
     },
@@ -263,7 +259,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -320,7 +317,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.BbYvzTep6oj55CUk",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -392,7 +389,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -446,31 +443,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Monstrosity Resilience",
           "_id": "jxagd3hzp2UTp7Wl",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "frightened",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -479,7 +459,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -489,8 +469,33 @@
           },
           "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "frightened",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!x0GMYLNpOmSzUC2w.5iY6YaMk29ZTym4E.jxagd3hzp2UTp7Wl"
         }
       ],
@@ -505,7 +510,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.5eDnfMruW8QT67Zf",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -623,7 +628,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -783,7 +788,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.lkBDXbx2O78UA8gz",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -933,7 +938,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.sJz2TidQi9dF5ClQ",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1075,7 +1080,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.J9zLZYHvTHwzB98C",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1243,7 +1248,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.t61I6zrmEDPdOLfw",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1484,7 +1489,7 @@
       "_stats": {
         "compendiumSource": "Item.9vnmIluEGj14FPtd",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1655,7 +1660,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.DC1j3Ur40T2ltktm",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1894,7 +1899,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.6PXublV5eymPa56L",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2049,21 +2054,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.ebGqTLYBFxSDf3g7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Freedom of Movement",
           "img": "icons/magic/movement/pinwheel-turning-blue.webp",
           "_id": "z0vvVF2g25tDE6YA",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": false,
@@ -2073,7 +2076,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2081,6 +2084,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!x0GMYLNpOmSzUC2w.rppAIY8sAjfD2z6t.z0vvVF2g25tDE6YA"
         }
       ],
@@ -2098,7 +2104,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.ebGqTLYBFxSDf3g7",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2343,7 +2349,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.ZTVg00JolCuPkOOX",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2511,7 +2517,7 @@
       "_stats": {
         "compendiumSource": "Item.o0vr8OSXiH6hUnve",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2861,7 +2867,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2991,7 +2997,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3114,7 +3120,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.1mfH5RDUtqGjmM0N",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3412,7 +3418,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3599,7 +3605,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.Jr00Z1fIby1cJtbS",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748936144,
@@ -3774,7 +3780,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yA5Y42t58yyeRG4v",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748936144,
@@ -3792,7 +3798,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

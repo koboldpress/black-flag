@@ -126,24 +126,35 @@
       "transfer": false,
       "_id": "HRFpdMBFVTeYjIS5",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"1d4\" }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "attack",
+                    "ability-save"
+                  ]
+                }
+              ],
+              "formula": "1d4"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -153,7 +164,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": 1729540763170,
@@ -161,6 +172,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!cA0WjduYTgzkXSbn.HRFpdMBFVTeYjIS5"
     }
   ],
@@ -172,7 +186,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1725073676700,

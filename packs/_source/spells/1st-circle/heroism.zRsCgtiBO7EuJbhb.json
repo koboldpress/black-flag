@@ -137,28 +137,26 @@
     {
       "origin": "Compendium.black-flag.spells.Item.zRsCgtiBO7EuJbhb",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Heroism",
       "img": "icons/magic/control/control-influence-crown-gold.webp",
       "_id": "IkCNiI4SHdElgK8n",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.condition.immunities.value",
-          "mode": 2,
-          "value": "frightened",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.condition.immunities.value",
+            "value": "frightened",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You are immune to being frightened and gain temporary hit points equal to the caster’s spellcasting ability modifier at the start of each of your turns.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -168,7 +166,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.041",
         "createdTime": 1722573280232,
@@ -176,6 +174,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!zRsCgtiBO7EuJbhb.IkCNiI4SHdElgK8n"
     }
   ],
@@ -186,7 +187,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.047",
     "createdTime": 1722569604725,

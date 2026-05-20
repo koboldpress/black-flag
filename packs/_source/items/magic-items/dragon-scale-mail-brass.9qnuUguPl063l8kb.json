@@ -131,34 +131,43 @@
       "name": "Fire Protection",
       "origin": "Compendium.black-flag.items.Item.2ECiCbKc64dBvOnv",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
       "_id": "QtKIKFxdXvDSelma",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "fire",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-save"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on saves against the Frightful Presence and breath weapons of dragons."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against the Frightful Presence and breath weapons of dragons.\" } }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -168,7 +177,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1727900843671,
@@ -176,6 +185,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!9qnuUguPl063l8kb.QtKIKFxdXvDSelma"
     }
   ],
@@ -186,7 +198,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "1.2.058",
     "createdTime": 1725589217362,

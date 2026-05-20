@@ -112,38 +112,36 @@
       "name": "Sharpness",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/consumables/potions/potion-tube-corked-labeled-cyan.webp",
       "_id": "5Ogi6nGJYhFLQcXZ",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Sharp {}",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "3",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "Sharp {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 3,
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -153,7 +151,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": 1729533871831,
@@ -161,6 +159,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!gRjXG2ATSF7lmbwe.5Ogi6nGJYhFLQcXZ"
     }
   ],
@@ -172,7 +173,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729533738183,

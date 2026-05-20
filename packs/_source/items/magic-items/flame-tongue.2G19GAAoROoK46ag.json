@@ -46,62 +46,60 @@
       "name": "Flame Tongue",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/sword-jeweled-red.webp",
       "_id": "45i74uJWwyD2mOdM",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Flame Tongue {}",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You can use a bonus action to speak this magic sword’s command word, causing flames to erupt from the blade. The flames are harmless to you and the weapon. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra [[/damage 2d6 fire]] to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword.</p>",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "Flame Tongue {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You can use a bonus action to speak this magic sword’s command word, causing flames to erupt from the blade. The flames are harmless to you and the weapon. These flames shed bright light in a 40-foot radius and dim light for an additional 40 feet. While the sword is ablaze, it deals an extra [[/damage 2d6 fire]] to any target it hits. The flames last until you use a bonus action to speak the command word again or until you drop or sheathe the sword.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -111,7 +109,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728592148967,
@@ -119,6 +117,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!2G19GAAoROoK46ag.45i74uJWwyD2mOdM"
     }
   ],
@@ -130,7 +131,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788160621,

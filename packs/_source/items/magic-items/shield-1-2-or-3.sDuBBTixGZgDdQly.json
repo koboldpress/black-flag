@@ -46,62 +46,60 @@
       "name": "Shield, +1",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/shield/buckler-wooden-boss-glowing-blue.webp",
       "_id": "VetVNuevteox9rCI",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{}, +1",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>While wielding this shield, you have a +1 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "1000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "uncommon",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{}, +1",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>While wielding this shield, you have a +1 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 1,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 1000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "uncommon",
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "<p>While wielding this shield, you have a +1 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -111,7 +109,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728593539936,
@@ -119,6 +117,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!sDuBBTixGZgDdQly.VetVNuevteox9rCI"
     },
     {
@@ -126,61 +127,59 @@
       "name": "Shield, +2",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/shield/buckler-wooden-boss-glowing-blue.webp",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{}, +2",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>While wielding this shield, you have a +2 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "2",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{}, +2",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>While wielding this shield, you have a +2 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 2,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "<p>While wielding this shield, you have a +2 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -190,7 +189,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728593641048,
@@ -199,6 +198,9 @@
         "exportSource": null
       },
       "_id": "25melnFwARHlAKUk",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!sDuBBTixGZgDdQly.25melnFwARHlAKUk"
     },
     {
@@ -206,61 +208,59 @@
       "name": "Shield, +3",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/shield/buckler-wooden-boss-glowing-blue.webp",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{}, +3",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>While wielding this shield, you have a +3 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "3",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "15000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "veryRare",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{}, +3",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>While wielding this shield, you have a +3 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 3,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 15000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "veryRare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "<p>While wielding this shield, you have a +3 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -270,7 +270,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728593642300,
@@ -279,6 +279,9 @@
         "exportSource": null
       },
       "_id": "eyv74QYE6eDmFE4j",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!sDuBBTixGZgDdQly.eyv74QYE6eDmFE4j"
     }
   ],
@@ -290,7 +293,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "1.2.058",
     "createdTime": 1726788619810,

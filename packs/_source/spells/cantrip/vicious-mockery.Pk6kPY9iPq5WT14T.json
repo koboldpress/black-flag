@@ -150,24 +150,34 @@
       "transfer": false,
       "_id": "bzUPm7xsCzBGBzTz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on the next attack roll you make before the end of your next turn.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "attack"
+                }
+              ],
+              "note": {
+                "rollMode": -1,
+                "text": "You have disadvantage on the next attack roll you make before the end of your next turn."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -177,7 +187,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723578531939,
@@ -185,6 +195,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Pk6kPY9iPq5WT14T.bzUPm7xsCzBGBzTz"
     }
   ],
@@ -195,7 +208,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528022203,

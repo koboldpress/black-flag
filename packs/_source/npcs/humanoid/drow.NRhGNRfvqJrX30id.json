@@ -162,12 +162,9 @@
       "src": "systems/black-flag/artwork/tokens/elf-drow-female.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -218,7 +215,7 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -242,7 +239,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -313,7 +311,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.FO53M9vYJXLrYPDs",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -370,28 +368,26 @@
         {
           "origin": "Actor.xzNkh19gS47k8afx.Item.8OnJ2gwmn8VtXulH",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Fey Ancestry",
           "img": "icons/magic/nature/beam-hand-leaves-green.webp",
           "_id": "y6e5zkQcNLQ2ebR5",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "charmed",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "charmed",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -401,7 +397,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -409,6 +405,16 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!NRhGNRfvqJrX30id.pjeDiwwf1WyFgEuD.y6e5zkQcNLQ2ebR5"
         }
       ],
@@ -422,7 +428,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.RbZGBRoq4nHGevGy",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -488,7 +494,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.hzFrJFfPPIv20rWe",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -668,7 +674,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -846,7 +852,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.b126bs62p8TQIYZ8",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -986,7 +992,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -1001,7 +1007,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

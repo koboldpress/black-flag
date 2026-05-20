@@ -130,28 +130,42 @@
     {
       "origin": "Compendium.black-flag.spells.Item.chy78m9Lxue2yLjN",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Irresistible Dance",
       "img": "icons/tools/instruments/bell-brass-brown.webp",
       "_id": "dypUwWNOn1jzXEcp",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-save\", \"attack\"] }], \"note\": { \"rollMode\": -1, \"text\": \"While dancing you have disadvantage on DEX saves and attack rolls.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "ability-save",
+                    "attack"
+                  ]
+                }
+              ],
+              "note": {
+                "rollMode": -1,
+                "text": "While dancing you have disadvantage on DEX saves and attack rolls."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You must use all your movement to dance without leaving your space and have disadvantage on DEX saves and attack rolls. While you are affected by this spell, other creatures have advantage on attack rolls against you.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -161,7 +175,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.041",
         "createdTime": 1722833663468,
@@ -169,6 +183,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!chy78m9Lxue2yLjN.dypUwWNOn1jzXEcp"
     }
   ],
@@ -179,7 +196,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722833511687,

@@ -46,28 +46,25 @@
       "name": "Ioun Stone of Fortitude",
       "origin": "Compendium.black-flag.items.Item.ktKqFpqkAA1omgGh",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/commodities/gems/gem-rough-cushion-purple-pink.webp",
       "_id": "1Dwd6BXhs9RCIw6r",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.abilities.constitution.value",
+            "value": 2,
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.abilities.constitution.value",
-          "mode": 2,
-          "value": "2",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -77,7 +74,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1729031206334,
@@ -85,6 +82,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ktKqFpqkAA1omgGh.1Dwd6BXhs9RCIw6r"
     }
   ],
@@ -96,7 +96,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.047",
     "createdTime": 1724986177040,

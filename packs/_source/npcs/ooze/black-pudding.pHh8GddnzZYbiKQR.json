@@ -166,12 +166,9 @@
       "src": "systems/black-flag/artwork/tokens/black-pudding.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -222,13 +219,12 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 60,
         "enabled": true
       }
-    ],
+    },
     "occludable": {
       "radius": 0
     },
@@ -252,7 +248,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -311,7 +308,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.uS8axwG1NAgmQaLi",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -459,7 +456,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -527,7 +524,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.q6Fcwt1u5j4YntFm",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -583,67 +580,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Ooze Resilience",
           "_id": "TRIJesrj6nA7uktU",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "grappled",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "restrained",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "blinded",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "charmed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "deafened",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "frightened",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "prone",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -652,7 +596,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -662,8 +606,69 @@
           },
           "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "grappled",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "restrained",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "blinded",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "charmed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "deafened",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "frightened",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "prone",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!pHh8GddnzZYbiKQR.zjIGXLAXFZtJ8tKR.TRIJesrj6nA7uktU"
         }
       ],
@@ -682,7 +687,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -748,7 +753,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.OzFKQOuwMXIPVAOv",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -866,7 +871,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -997,7 +1002,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1124,7 +1129,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1313,7 +1318,7 @@
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.BM0wnwrOQkmV3utI",
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748934788,
@@ -1327,7 +1332,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

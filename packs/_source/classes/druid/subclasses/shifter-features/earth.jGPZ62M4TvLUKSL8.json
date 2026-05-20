@@ -41,56 +41,21 @@
     {
       "origin": "Compendium.black-flag.classes.Item.jGPZ62M4TvLUKSL8",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Earth Infusion",
       "_id": "zaKGBBFVY1aXrekO",
-      "changes": [
-        {
-          "key": "system.traits.movement.types.burrow",
-          "mode": 2,
-          "value": "30",
-          "priority": null
-        },
-        {
-          "key": "system.traits.senses.types.tremorsense",
-          "mode": 2,
-          "value": "60",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": null
-        }
-      ],
       "description": "",
       "transfer": true,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -102,8 +67,44 @@
       },
       "img": "icons/magic/earth/construct-stone.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.types.burrow",
+            "value": 30,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.senses.types.tremorsense",
+            "value": 60,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "bludgeoning",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "piercing",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "slashing",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!jGPZ62M4TvLUKSL8.zaKGBBFVY1aXrekO"
     }
   ],
@@ -115,7 +116,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.033",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1717791110108,
     "modifiedTime": 1717793051550,
     "lastModifiedBy": "blackflag0000000",

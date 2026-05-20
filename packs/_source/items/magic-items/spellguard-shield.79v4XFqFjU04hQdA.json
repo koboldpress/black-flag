@@ -58,26 +58,36 @@
       "name": "Spellguard",
       "origin": "Compendium.black-flag.items.Item.79v4XFqFjU04hQdA",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/shield/kite-wooden-sigil-purple.webp",
       "_id": "v6FlUvpdllZUWsoV",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against spells and other magical effects.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-save"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on saves against spells and other magical effects."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -87,7 +97,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1730072626915,
@@ -95,6 +105,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!79v4XFqFjU04hQdA.v6FlUvpdllZUWsoV"
     }
   ],
@@ -105,7 +118,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1725589643277,

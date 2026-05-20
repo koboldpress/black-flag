@@ -169,12 +169,9 @@
       "src": "systems/black-flag/artwork/tokens/hag-ambush.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -225,7 +222,7 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -249,7 +246,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -298,31 +296,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.Pvh1Vv9rYGzhycly",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Fey Resilience",
           "_id": "xsKr4hZ7kVgeQaXM",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "charmed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -331,7 +312,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -341,8 +322,33 @@
           },
           "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "charmed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "unconscious",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!WaqJiuEog6C2Sjgw.hFfdmGXfMISmr9LB.xsKr4hZ7kVgeQaXM"
         }
       ],
@@ -357,7 +363,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.ktWTCgJSzoZompKX",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -495,7 +501,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -559,7 +565,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.9SnGOXer6OWDVFZR",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -677,7 +683,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -827,7 +833,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.O9ZMiRif8A9hL0G9",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -971,7 +977,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.AR6lGdaHEnUy6Em6",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1114,7 +1120,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.TgJgOsNetxkikvZa",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1281,7 +1287,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.ZYLMA2g3OIC3ecTz",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1440,18 +1446,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Charm",
           "_id": "MHWYFHDDXmIygkPs",
-          "changes": [],
           "description": "<p>The target is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
           "transfer": false,
           "statuses": [
@@ -1462,7 +1464,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1472,8 +1474,13 @@
           },
           "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": []
+          },
           "sort": 0,
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!WaqJiuEog6C2Sjgw.qyomFTEKoNwBjr9c.MHWYFHDDXmIygkPs"
         }
       ],
@@ -1496,7 +1503,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1674,7 +1681,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.wpv41TYYICzPZpIg",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1845,7 +1852,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.hDdvHqQgCRbmFltS",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2016,7 +2023,7 @@
       "_stats": {
         "compendiumSource": "Compendium.world.missing-spells.Item.PxAu1PAJ5ecjgAb2",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2198,7 +2205,7 @@
       "_stats": {
         "compendiumSource": "Item.tw5UKzJUaCLrthVG",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2332,7 +2339,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2593,7 +2600,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.Jr00Z1fIby1cJtbS",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748932537,
@@ -2846,7 +2853,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748932537,
@@ -2860,7 +2867,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

@@ -158,9 +158,6 @@
       "src": "systems/black-flag/artwork/tokens/scorpion.webp",
       "scaleX": 0.5,
       "scaleY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -216,13 +213,12 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 10,
         "enabled": true
       }
-    ],
+    },
     "flags": {},
     "randomImg": false,
     "occludable": {
@@ -246,7 +242,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -415,7 +412,7 @@
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.lA42gzSugdKluuYF",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748929347,
@@ -434,7 +431,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1709697835872,
     "modifiedTime": 1756750735861,
     "lastModifiedBy": "blackflag0000000",

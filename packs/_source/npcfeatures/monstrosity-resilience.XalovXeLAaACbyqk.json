@@ -32,38 +32,21 @@
     {
       "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Monstrosity Resilience",
       "_id": "jxagd3hzp2UTp7Wl",
-      "changes": [
-        {
-          "key": "system.traits.condition.resistances.value",
-          "mode": 2,
-          "value": "exhaustion",
-          "priority": null
-        },
-        {
-          "key": "system.traits.condition.resistances.value",
-          "mode": 2,
-          "value": "frightened",
-          "priority": null
-        }
-      ],
       "description": "",
       "transfer": true,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -75,8 +58,26 @@
       },
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.condition.resistances.value",
+            "value": "exhaustion",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.condition.resistances.value",
+            "value": "frightened",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!XalovXeLAaACbyqk.jxagd3hzp2UTp7Wl"
     }
   ],
@@ -89,7 +90,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706473622104,
     "modifiedTime": 1713149287714,
     "lastModifiedBy": "blackflag0000000",

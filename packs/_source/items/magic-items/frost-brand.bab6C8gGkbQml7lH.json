@@ -46,13 +46,10 @@
       "name": "Frost Brand",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
@@ -62,52 +59,52 @@
           "effects": [
             "5pkWUVQWt49xdkTr"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "Frost Brand {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "veryRare",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>When you hit with an attack using this magic sword, the target takes an extra [[/damage 1d6 cold]]. In addition, while you hold the sword, you have resistance to fire damage.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Frost Brand {}",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "veryRare",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>When you hit with an attack using this magic sword, the target takes an extra [[/damage 1d6 cold]]. In addition, while you hold the sword, you have resistance to fire damage.</p>",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -117,7 +114,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728592364718,
@@ -125,6 +122,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!bab6C8gGkbQml7lH.vtfV5OtdWOTOh2VB"
     },
     {
@@ -132,28 +132,25 @@
       "name": "Frost Brand Resistance",
       "origin": "Compendium.black-flag.items.Item.bab6C8gGkbQml7lH",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
       "_id": "5pkWUVQWt49xdkTr",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "fire",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
       "description": "<p>While you hold this sword, you have resistance to fire damage.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -163,7 +160,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728592427545,
@@ -171,6 +168,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!bab6C8gGkbQml7lH.5pkWUVQWt49xdkTr"
     }
   ],
@@ -190,7 +190,7 @@
   },
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1726788222228,

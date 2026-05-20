@@ -110,32 +110,21 @@
     {
       "origin": "Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Bless",
       "_id": "2a767QpT9Rm2qcqm",
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"1d4\" }",
-          "priority": null
-        }
-      ],
       "description": "<p>You makes an attack roll or a save before the spell ends, you can roll a [[/r d4]] and add the number rolled to the attack roll or save.</p>",
       "transfer": false,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -147,8 +136,33 @@
       },
       "img": "icons/magic/light/orb-shadow-blue.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "attack",
+                    "ability-save"
+                  ]
+                }
+              ],
+              "formula": "1d4"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Gnxh5w9pE08ZGF9S.2a767QpT9Rm2qcqm"
     }
   ],
@@ -160,7 +174,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706932347742,
     "modifiedTime": 1723605130322,
     "lastModifiedBy": "blackflag0000000",

@@ -168,12 +168,9 @@
       "src": "systems/black-flag/artwork/tokens/fungi-shrieker.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -224,13 +221,12 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 30,
         "enabled": true
       }
-    ],
+    },
     "occludable": {
       "radius": 0
     },
@@ -254,7 +250,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -311,7 +308,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.P3tFaxFkcBUSL0r9",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -371,43 +368,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Plant Resilience",
           "_id": "4alHXchWfiVtXGAv",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -416,7 +384,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -426,8 +394,45 @@
           },
           "img": "icons/magic/nature/plant-glowing-white-purple.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "paralyzed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "petrified",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "unconscious",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!pyDYHRdZzv3Br8wM.iJTxpczcKEWzd95w.4alHXchWfiVtXGAv"
         }
       ],
@@ -446,7 +451,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -600,7 +605,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -740,7 +745,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -870,7 +875,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -885,7 +890,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

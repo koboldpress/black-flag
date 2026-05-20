@@ -42,13 +42,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.v7RXBnGwuywX39hK",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Striding and Springing",
@@ -56,16 +53,16 @@
       "_id": "rAhnAvKoXhm2X721",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.movement.types.walk",
+            "value": 30,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.movement.types.walk",
-          "mode": 4,
-          "value": "30",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -75,7 +72,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725901799347,
@@ -83,6 +80,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!v7RXBnGwuywX39hK.rAhnAvKoXhm2X721"
     }
   ],
@@ -94,7 +94,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724983485013,

@@ -106,24 +106,31 @@
       "transfer": false,
       "_id": "EuxJSl6nqUf0YiJy",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }], \"formula\": \"5\" }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "armor-class"
+                }
+              ],
+              "formula": "5"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from darts created by the <em>magic missile</em> spell.</p>",
       "tint": "#ffffff",
@@ -133,7 +140,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723437069635,
@@ -141,6 +148,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!MibJGjLMmuyrSzUZ.EuxJSl6nqUf0YiJy"
     }
   ],
@@ -152,7 +162,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1699211483460,
     "modifiedTime": 1723437069664,
     "lastModifiedBy": "blackflag0000000",

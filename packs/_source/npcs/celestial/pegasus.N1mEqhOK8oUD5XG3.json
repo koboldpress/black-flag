@@ -163,9 +163,6 @@
       "src": "systems/black-flag/artwork/tokens/pegasus.webp",
       "scaleX": 1,
       "scaleY": 1,
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -221,7 +218,7 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "flags": {},
     "randomImg": false,
     "occludable": {
@@ -245,7 +242,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -288,32 +286,21 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.CyOvikNLSOB1L2fT",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": 0,
-            "startTurn": 0
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Celestial Resilience",
           "_id": "ggk3wSDvlMxXXpMT",
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "radiant",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
           "flags": {},
           "tint": "#ffffff",
           "_stats": {
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": null,
             "systemVersion": null,
             "createdTime": null,
@@ -325,8 +312,27 @@
           },
           "img": "icons/magic/holy/angel-winged-humanoid-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "radiant",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": 0,
+            "time": 0,
+            "turn": 0,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!N1mEqhOK8oUD5XG3.OhEj2rmBVMASzsbJ.ggk3wSDvlMxXXpMT"
         }
       ],
@@ -345,7 +351,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709672696244,
         "modifiedTime": 1712943207695,
         "lastModifiedBy": "blackflag0000000",
@@ -470,7 +476,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1712943122766,
         "modifiedTime": 1712943189864,
         "lastModifiedBy": "blackflag0000000",
@@ -532,7 +538,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709773734467,
         "modifiedTime": 1712943219170,
         "lastModifiedBy": "blackflag0000000",
@@ -594,7 +600,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709773738433,
         "modifiedTime": 1712943222316,
         "lastModifiedBy": "blackflag0000000",
@@ -706,7 +712,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711420922343,
         "modifiedTime": 1712943376773,
         "lastModifiedBy": "blackflag0000000",
@@ -824,7 +830,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1712943395248,
         "modifiedTime": 1712943486762,
         "lastModifiedBy": "blackflag0000000",
@@ -992,7 +998,7 @@
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.5ndxvSRcubJLDMsW",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748930618,
@@ -1011,7 +1017,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1709672664051,
     "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",

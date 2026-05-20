@@ -46,34 +46,51 @@
       "name": "Eyes",
       "origin": "Compendium.black-flag.items.Item.AnIWL7PHp60CXsml",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/head/hood-red.webp",
       "_id": "KRrVJAU59spU0ABc",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "wisdom"
+                },
+                {
+                  "k": "skill",
+                  "v": "perception"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You can see in all directions, and you have advantage on WIS (Perception) checks that rely on sight."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.senses.types.darkvision",
+            "value": 120,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }, { \"k\": \"skill\", \"v\": \"perception\" }], \"note\": { \"rollMode\": 1, \"text\": \"You can see in all directions, and you have advantage on WIS (Perception) checks that rely on sight.\" } }",
-          "priority": null
-        },
-        {
-          "key": "system.traits.senses.types.darkvision",
-          "mode": 4,
-          "value": "120",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -83,7 +100,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1729892455721,
@@ -91,6 +108,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!AnIWL7PHp60CXsml.KRrVJAU59spU0ABc"
     }
   ],
@@ -102,7 +122,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1725070997860,

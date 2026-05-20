@@ -119,30 +119,48 @@
       "transfer": false,
       "_id": "SDAfSmD84UybC2IZ",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.movement.types.climb",
-          "mode": 4,
-          "value": "@base",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"skill\", \"v\": \"athletics\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR (Athletics) checks you make to climb.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.types.climb",
+            "value": "@base",
+            "priority": null,
+            "type": "upgrade"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "strength"
+                },
+                {
+                  "k": "skill",
+                  "v": "athletics"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on STR (Athletics) checks you make to climb."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "tint": "#ffffff",
@@ -152,7 +170,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": 1729541085556,
@@ -160,6 +178,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!T0Tq5SOXW9Vv6uFp.SDAfSmD84UybC2IZ"
     }
   ],
@@ -171,7 +192,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1725073390099,

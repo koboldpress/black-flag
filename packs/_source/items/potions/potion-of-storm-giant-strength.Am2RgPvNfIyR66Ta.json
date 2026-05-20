@@ -121,24 +121,22 @@
       "transfer": false,
       "_id": "5KtEYJHqfYtGSqkz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.abilities.strength.value",
-          "mode": 4,
-          "value": "29",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.strength.value",
+            "value": 29,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>When you drink this potion, your STR score changes to 29 for 1 hour. The potion has no effect if your STR score equals or exceeds that score.</p>",
       "tint": "#ffffff",
@@ -148,7 +146,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": 1729540138914,
@@ -156,6 +154,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Am2RgPvNfIyR66Ta.5KtEYJHqfYtGSqkz"
     }
   ],
@@ -167,7 +168,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1725073646512,

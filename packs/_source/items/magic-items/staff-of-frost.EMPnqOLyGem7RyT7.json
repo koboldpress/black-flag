@@ -390,28 +390,25 @@
       "name": "Cold Resistance",
       "origin": "Compendium.black-flag.items.Item.EMPnqOLyGem7RyT7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/weapons/staves/staff-ornate-blue.webp",
       "_id": "SRO4xSfKY0VMnASY",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "cold",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -421,7 +418,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1730072856536,
@@ -429,6 +426,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!EMPnqOLyGem7RyT7.SRO4xSfKY0VMnASY"
     }
   ],
@@ -439,7 +439,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1725590474375,

@@ -159,12 +159,9 @@
       "src": "systems/black-flag/artwork/tokens/mage-apprentice.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1.4,
       "scaleY": 1.4,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -215,7 +212,7 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -239,7 +236,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -300,7 +298,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -368,7 +366,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -546,7 +544,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -691,7 +689,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.z0bwd75DutQ7TOcY",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -836,7 +834,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.AR6lGdaHEnUy6Em6",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -991,18 +989,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.SgbFroBbEHc9wkLk",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Color Spray",
           "_id": "8mdFkri0shpjQVq0",
-          "changes": [],
           "description": "<p>A creature affected by this spell is blinded until the spell ends.</p>",
           "transfer": false,
           "statuses": [
@@ -1013,7 +1007,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1023,8 +1017,13 @@
           },
           "img": "icons/magic/light/orbs-smoke-pink.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": []
+          },
           "sort": 0,
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!UHqydMVavWYtY4d3.naCygfyQ7KWWunbB.8mdFkri0shpjQVq0"
         }
       ],
@@ -1042,7 +1041,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.SgbFroBbEHc9wkLk",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1202,28 +1201,29 @@
         {
           "origin": "Compendium.black-flag.spells.Item.3l1YJDLUiCS4EYzx",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Mage Armor",
           "img": "icons/magic/defensive/shield-barrier-flaming-diamond-magenta.webp",
           "_id": "TJbQJmIkUgvc3Ij8",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.attributes.ac.formulas",
-              "mode": 2,
-              "value": "{ \"label\": \"Mage Armor\", \"formula\": \"13 + @abilities.dexterity.mod\" }",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.attributes.ac.formulas",
+                "value": {
+                  "label": "Mage Armor",
+                  "formula": "13 + @abilities.dexterity.mod"
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "<p>Your base AC becomes 13 + your DEX modifier.</p>",
           "tint": "#ffffff",
           "transfer": true,
@@ -1233,7 +1233,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1241,6 +1241,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!UHqydMVavWYtY4d3.fYavPRn936MMtbSI.TJbQJmIkUgvc3Ij8"
         }
       ],
@@ -1263,7 +1266,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.3l1YJDLUiCS4EYzx",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1435,7 +1438,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.pais75ndQesCocfq",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1607,7 +1610,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yA5Y42t58yyeRG4v",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748932036,
@@ -1625,7 +1628,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

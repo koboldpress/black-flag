@@ -129,28 +129,43 @@
     {
       "origin": "Compendium.black-flag.spells.Item.PJhD4Dztf5Vsp1h5",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Pass Without Trace",
       "img": "icons/magic/nature/wolf-paw-glow-orange.webp",
       "_id": "M0ZwTRWpHFQdkYMT",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }, { \"k\": \"skill\", \"v\": \"stealth\" }], \"formula\": \"10\" }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "dexterity"
+                },
+                {
+                  "k": "skill",
+                  "v": "stealth"
+                }
+              ],
+              "formula": "10"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have a +10 bonus to DEX (Stealth) checks and can’t be tracked except by magical means. You leave behind no tracks or other traces of your passage.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -160,7 +175,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723155659319,
@@ -168,6 +183,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!PJhD4Dztf5Vsp1h5.M0ZwTRWpHFQdkYMT"
     }
   ],
@@ -178,7 +196,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723092965520,

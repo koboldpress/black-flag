@@ -70,50 +70,21 @@
     {
       "origin": "Compendium.black-flag.classes.Item.YjSjjMJW0Nvx81KJ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": 60,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": 60,
+        "units": "seconds",
+        "expiry": "turnStart",
+        "expired": false
       },
       "disabled": true,
       "name": "Spell Ward",
       "_id": "dqha31WGdiIZsYOy",
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{\"type\": \"bonus\", \"filter\": [{\"k\": \"type\", \"v\": \"armor-class\"}], \"formula\": \"@prof\" }",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": null
-        }
-      ],
       "description": "",
       "transfer": true,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -125,8 +96,47 @@
       },
       "img": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "armor-class"
+                }
+              ],
+              "formula": "@prof"
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "bludgeoning",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "piercing",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "slashing",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!YjSjjMJW0Nvx81KJ.dqha31WGdiIZsYOy"
     }
   ],
@@ -138,7 +148,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.026",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1700002851822,
     "modifiedTime": 1715742936184,
     "lastModifiedBy": "blackflag0000000",

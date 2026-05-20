@@ -47,28 +47,25 @@
       "name": "Warmth",
       "origin": "Compendium.black-flag.items.Item.fH7su3IILGLJu7jW",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/finger/ring-band-thin-rounded-gold.webp",
       "_id": "Ru20DzIHKhzGvgZQ",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "cold",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -78,7 +75,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1729891664847,
@@ -86,6 +83,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!fH7su3IILGLJu7jW.Ru20DzIHKhzGvgZQ"
     }
   ],
@@ -97,7 +97,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "1.2.058",
     "createdTime": 1724987395928,

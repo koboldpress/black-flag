@@ -120,34 +120,31 @@
       "name": "Cloak of Arachnida",
       "origin": "Compendium.black-flag.items.Item.ugWH1CTAVyK78jq0",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/back/cloak-collared-blue-iron.webp",
       "_id": "GLjIBKrfO1J8ubhI",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "poison",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.movement.types.climb",
+            "value": "@base",
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        },
-        {
-          "key": "system.traits.movement.types.climb",
-          "mode": 4,
-          "value": "@base",
-          "priority": null
-        }
-      ],
       "description": "<p>While wearing this cloak, you have resistance to poison damage, a climbing speed equal to your walking speed, and can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -157,7 +154,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726799144409,
@@ -165,6 +162,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ugWH1CTAVyK78jq0.GLjIBKrfO1J8ubhI"
     }
   ],
@@ -176,7 +176,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "1.2.058",
     "createdTime": 1724983714446,

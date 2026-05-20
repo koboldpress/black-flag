@@ -117,28 +117,26 @@
     {
       "origin": "Compendium.black-flag.spells.Item.wpv41TYYICzPZpIg",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Hypnotic Pattern",
       "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
       "_id": "hNEUP0OTna7JHfvv",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.movement.multiplier",
-          "mode": 5,
-          "value": "0",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.multiplier",
+            "value": 0,
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -151,7 +149,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.041",
         "createdTime": 1722573812458,
@@ -159,6 +157,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "showIcon": 2,
+      "start": null,
+      "folder": null,
       "_key": "!items.effects!wpv41TYYICzPZpIg.hNEUP0OTna7JHfvv"
     }
   ],
@@ -170,7 +171,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706934167852,
     "modifiedTime": 1723698555356,
     "lastModifiedBy": "blackflag0000000",

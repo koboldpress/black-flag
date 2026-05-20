@@ -159,12 +159,9 @@
       "src": "systems/black-flag/artwork/tokens/bard.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1.4,
       "scaleY": 1.4,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -215,7 +212,7 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -239,7 +236,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -289,28 +287,26 @@
         {
           "origin": "Actor.3OJGopFO0cw5Mer6.Item.Px7rxaw2VILoFvN7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Artistic Expression (Song or Oration)",
           "img": "icons/skills/trades/music-notes-sound-blue.webp",
           "_id": "5GRbxcdOL5WJbvuo",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "thunder",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "thunder",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -320,7 +316,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -328,39 +324,40 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.Px7rxaw2VILoFvN7.5GRbxcdOL5WJbvuo"
         },
         {
           "origin": "Actor.3OJGopFO0cw5Mer6.Item.Px7rxaw2VILoFvN7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Artistic Expression (Paint)",
           "img": "icons/skills/trades/music-notes-sound-blue.webp",
           "_id": "lAHgpOIDyvaO9nIb",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "acid",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "poison",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "acid",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "poison",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -370,7 +367,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -378,33 +375,34 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.Px7rxaw2VILoFvN7.lAHgpOIDyvaO9nIb"
         },
         {
           "origin": "Actor.3OJGopFO0cw5Mer6.Item.Px7rxaw2VILoFvN7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Artistic Expression (Witty or Cleaver)",
           "img": "icons/skills/trades/music-notes-sound-blue.webp",
           "_id": "NOQTufQHDC4VoT0h",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "psychic",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "psychic",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -414,7 +412,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -422,6 +420,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.Px7rxaw2VILoFvN7.NOQTufQHDC4VoT0h"
         }
       ],
@@ -439,7 +440,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -507,7 +508,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -621,7 +622,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -805,7 +806,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.pcyyBxMi5naeXbSt",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -990,7 +991,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.b126bs62p8TQIYZ8",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -1169,7 +1170,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1380,7 +1381,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.YEjQ3ADloS9QFghm",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1525,7 +1526,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.z0bwd75DutQ7TOcY",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1674,7 +1675,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.O9ZMiRif8A9hL0G9",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1838,21 +1839,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.6dvUhdyeuOtRySf9",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Faerie Fire",
           "img": "icons/magic/light/explosion-star-small-pink.webp",
           "_id": "MVr5rXFmzbRaD7qp",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "<p>You shed dim light in a 10-foot radius. Any attack roll against you has advantage if the attacker can see you, and you can’t benefit from being invisible.</p>",
           "tint": "#ffffff",
           "transfer": false,
@@ -1862,7 +1861,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1870,6 +1869,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.qUaMubyuShe9TLsr.MVr5rXFmzbRaD7qp"
         }
       ],
@@ -1892,7 +1894,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.6dvUhdyeuOtRySf9",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2059,21 +2061,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Hold",
           "img": "icons/magic/control/debuff-chains-shackle-movement-red.webp",
           "_id": "7jxJgJzn0Cp5EzS8",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "<p>You are paralyzed for the duration. At the end of each of your turns, you can repeat the [[/save WIS]] save, ending the effect on a success.</p>",
           "tint": "#ffffff",
           "transfer": false,
@@ -2085,7 +2085,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2093,6 +2093,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.W6vbjRSjCiKcMBGw.7jxJgJzn0Cp5EzS8"
         }
       ],
@@ -2115,7 +2118,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2356,7 +2359,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2600,7 +2603,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.Bcm0RKcg5os0dDhC",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2761,21 +2764,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.6T8BIGQrvpiLF4CE",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Greater Invisibility",
           "img": "icons/magic/control/silhouette-hold-change-blue.webp",
           "_id": "0ShGxgKcNXknjuzk",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "<p>You become invisible until the spell ends. Anything you are wearing or carrying is invisible as long as it is on your person.</p>",
           "tint": "#ffffff",
           "transfer": false,
@@ -2787,7 +2788,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2795,6 +2796,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!i4NFjO6EY2U2Rc8g.gim44tfjdoUXsXMi.0ShGxgKcNXknjuzk"
         }
       ],
@@ -2817,7 +2821,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.6T8BIGQrvpiLF4CE",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2895,7 +2899,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.wltnYOTuHz96wXq5",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2910,7 +2914,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

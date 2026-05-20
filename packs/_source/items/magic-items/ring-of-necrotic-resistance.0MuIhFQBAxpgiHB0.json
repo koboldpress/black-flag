@@ -47,28 +47,25 @@
       "name": "Necrotic Resistance",
       "origin": "Compendium.black-flag.items.Item.0MuIhFQBAxpgiHB0",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/finger/ring-faceted-grey.webp",
       "_id": "1LipJBzuyp81Q6LD",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "necrotic",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "necrotic",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to necrotic damage while wearing this ring.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -78,7 +75,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1729890390134,
@@ -86,6 +83,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!0MuIhFQBAxpgiHB0.1LipJBzuyp81Q6LD"
     }
   ],
@@ -97,7 +97,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724987187032,

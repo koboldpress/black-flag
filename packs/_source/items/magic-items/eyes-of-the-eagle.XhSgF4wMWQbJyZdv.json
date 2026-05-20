@@ -46,28 +46,45 @@
       "name": "Eyes of the Eagle",
       "origin": "Compendium.black-flag.items.Item.XhSgF4wMWQbJyZdv",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/head/goggles-leather-blue.webp",
       "_id": "HOe8n7j0aALEaXKW",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "wisdom"
+                },
+                {
+                  "k": "skill",
+                  "v": "perception"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on WIS (Perception) checks that rely on sight."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }, { \"k\": \"skill\", \"v\": \"perception\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on WIS (Perception) checks that rely on sight.\" } }",
-          "priority": null
-        }
-      ],
       "description": "<p>You have advantage on WIS (Perception) checks that rely on sight.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -77,7 +94,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728426934326,
@@ -85,6 +102,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!XhSgF4wMWQbJyZdv.HOe8n7j0aALEaXKW"
     }
   ],
@@ -96,7 +116,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724984106092,

@@ -169,12 +169,9 @@
       "src": "systems/black-flag/artwork/tokens/devil-bearded.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -225,7 +222,7 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -249,7 +246,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -308,7 +306,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.qaTYdbDMm8oAcpZT",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -374,7 +372,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -446,7 +444,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -560,7 +558,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -885,7 +883,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.caf9G1uCz7agcoym",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -1025,7 +1023,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1082,70 +1080,68 @@
         {
           "origin": "Actor.jvgfL1KwSHTsigT2.Item.CSwXCoodfS8QUJCq",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Devilish Resilience",
           "img": "icons/creatures/unholy/demon-winged-cyclops-drooling.webp",
           "_id": "uJ6N3XWMfDKvX9cK",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "cold",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "fire",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "poison",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "poisoned",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "bludgeoning",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "piercing",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "slashing",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.resistances.bypasses",
-              "mode": 2,
-              "value": "magical",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "cold",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "fire",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "poison",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "poisoned",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "bludgeoning",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "piercing",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "slashing",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.resistances.bypasses",
+                "value": "magical",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -1155,7 +1151,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1163,6 +1159,16 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!kSCNogXBHBJCc2Lj.qWuHQiDCrhb1t7jJ.uJ6N3XWMfDKvX9cK"
         }
       ],
@@ -1176,7 +1182,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.x1nZb854NRe24wtG",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1426,18 +1432,15 @@
             "magical": false,
             "rider": {
               "statuses": []
-            }
+            },
+            "changes": []
           },
-          "changes": [],
           "disabled": false,
           "duration": {
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "rounds": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "description": "",
           "tint": "#ffffff",
@@ -1448,11 +1451,16 @@
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "2.0.068",
-            "lastModifiedBy": null
+            "lastModifiedBy": null,
+            "createdTime": null,
+            "modifiedTime": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!kSCNogXBHBJCc2Lj.GwzpqTiTquWnVd1P.g9jp6TMAe1XAH3i9"
         }
       ],
@@ -1471,7 +1479,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748934144,
@@ -1485,7 +1493,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

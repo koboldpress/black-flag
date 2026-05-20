@@ -46,68 +46,66 @@
       "name": "Holy Avenger",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/sword-guard-flanged-purple.webp",
       "_id": "e4hJTSu3l0fw8LJp",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Holy Avenger {}",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 5,
-          "value": "200000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "legendary",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "3",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You gain a +3 bonus to attack and damage rolls made with this magic weapon. When you hit a Fiend or an Undead with it, the target takes an extra [[/damage 2d10 radiant]].</p> <p>While you wield this sword, it creates an aura in a 10-foot radius around you. You and all creatures friendly to you in the aura have advantage on saves against spells and other magical effects. If you have 17 or more levels in the paladin class, the radius of the aura increases to 30 feet.</p>",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "Holy Avenger {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 200000,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "legendary",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 3,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You gain a +3 bonus to attack and damage rolls made with this magic weapon. When you hit a Fiend or an Undead with it, the target takes an extra [[/damage 2d10 radiant]].</p> <p>While you wield this sword, it creates an aura in a 10-foot radius around you. You and all creatures friendly to you in the aura have advantage on saves against spells and other magical effects. If you have 17 or more levels in the paladin class, the radius of the aura increases to 30 feet.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -117,7 +115,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728592755099,
@@ -125,6 +123,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!bDWdWpO1mfUYt79o.e4hJTSu3l0fw8LJp"
     }
   ],
@@ -136,7 +137,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788352421,

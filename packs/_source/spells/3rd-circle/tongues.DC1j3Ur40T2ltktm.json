@@ -104,24 +104,22 @@
       "transfer": false,
       "_id": "J5bJOelOTfIZqQcI",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.proficiencies.languages.custom",
-          "mode": 2,
-          "value": "Any spoken language",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.proficiencies.languages.custom",
+            "value": "Any spoken language",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>You have the ability to understand any spoken language you hear. Moreover, when you speak, any creature that knows at least one language and can hear you understands what you say.</p>",
       "tint": "#ffffff",
@@ -131,7 +129,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723577517269,
@@ -139,6 +137,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!DC1j3Ur40T2ltktm.J5bJOelOTfIZqQcI"
     }
   ],
@@ -150,7 +151,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706935900181,
     "modifiedTime": 1723577517298,
     "lastModifiedBy": "blackflag0000000",

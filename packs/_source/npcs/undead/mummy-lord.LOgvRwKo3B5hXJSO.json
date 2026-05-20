@@ -178,12 +178,9 @@
       "src": "systems/black-flag/artwork/tokens/mummy-lord.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -234,7 +231,7 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -258,7 +255,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -382,7 +380,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.AFEvilzbYvJvN62b",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -450,7 +448,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -518,7 +516,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.2uqPJiNnCH98IN43",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -586,7 +584,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.BxpGHptUlgiUehuG",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -651,7 +649,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.nryL8pXwd7SJzonQ",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -711,37 +709,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Undead Resilience",
           "_id": "eTrciZFtsPDaLR2j",
-          "changes": [
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "poison",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "poisoned",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -750,7 +725,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -760,8 +735,39 @@
           },
           "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "poison",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "poisoned",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.2UTbmDg79RSjmltI.eTrciZFtsPDaLR2j"
         }
       ],
@@ -776,7 +782,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.XRipBRedRIWKA8YQ",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -895,7 +901,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1090,7 +1096,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -1208,7 +1214,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1364,7 +1370,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.lkBDXbx2O78UA8gz",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1501,21 +1507,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.LGHPueVAi4bMnmFc",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Guidance",
           "img": "icons/magic/symbols/circled-gem-pink.webp",
           "_id": "QX9n2KU4w9evJUYL",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "<p>Once before the spell ends, you can roll a [[/r d4]] and add the number rolled to one ability check of your. You can roll the die before or after making the ability check. The spell then ends.</p>",
           "tint": "#ffffff",
           "transfer": false,
@@ -1525,7 +1529,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1533,6 +1537,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.BZY44ZhlJPAdmY6s.QX9n2KU4w9evJUYL"
         }
       ],
@@ -1550,7 +1557,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.LGHPueVAi4bMnmFc",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1692,7 +1699,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.J9zLZYHvTHwzB98C",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1860,7 +1867,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.t61I6zrmEDPdOLfw",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2039,7 +2046,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2211,7 +2218,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.WSBhluYBmP1706xn",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2438,25 +2445,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Blinding Sickness",
           "_id": "fAZCKn8wySuUPFiD",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"wisdom\" }], \"note\": { \"rollMode\": -1, \"text\": \"Pain grips your’s mind, and your eyes turn milky white. You have disadvantage on WIS checks and WIS saves and area blinded.\" } }",
-              "priority": null
-            }
-          ],
           "description": "<p>Pain grips the creature’s mind, and its eyes turn milky white. The creature has disadvantage on WIS checks and WIS saves and is blinded.</p>",
           "transfer": false,
           "statuses": [
@@ -2467,7 +2463,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2477,32 +2473,53 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "ability-check",
+                        "ability-save"
+                      ]
+                    },
+                    {
+                      "k": "ability",
+                      "v": "wisdom"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "Pain grips your’s mind, and your eyes turn milky white. You have disadvantage on WIS checks and WIS saves and area blinded."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.fAZCKn8wySuUPFiD"
         },
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Filth Fever",
           "_id": "hRcEBwf7vyc0lt3E",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": -1, \"text\": \"A raging fever sweeps through the your body. You have disadvantage on STR checks, STR saves, and attack rolls that use STR.\" } }",
-              "priority": null
-            }
-          ],
           "description": "<p>A raging fever sweeps through the creature’s body. The creature has disadvantage on STR checks, STR saves, and attack rolls that use STR.</p>",
           "transfer": false,
           "statuses": [],
@@ -2511,7 +2528,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2521,38 +2538,54 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "ability-check",
+                        "ability-save",
+                        "attack"
+                      ]
+                    },
+                    {
+                      "k": "ability",
+                      "v": "strength"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "A raging fever sweeps through the your body. You have disadvantage on STR checks, STR saves, and attack rolls that use STR."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.hRcEBwf7vyc0lt3E"
         },
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Flesh Rot",
           "_id": "J1uOVccRY061PrHb",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }], \"note\": { \"rollMode\": -1, \"text\": \"Your flesh decays. You have disadvantage on CHA checks and become vulnerable to all damage.\" } }",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.vulnerabilities.value",
-              "mode": 2,
-              "value": "all",
-              "priority": null
-            }
-          ],
           "description": "<p>The creature’s flesh decays. The creature has disadvantage on CHA checks and becomes vulnerable to all damage.</p>",
           "transfer": false,
           "statuses": [],
@@ -2561,7 +2594,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2571,32 +2604,55 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "v": "ability-check"
+                    },
+                    {
+                      "k": "ability",
+                      "v": "charisma"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "Your flesh decays. You have disadvantage on CHA checks and become vulnerable to all damage."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.vulnerabilities.value",
+                "value": "all",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.J1uOVccRY061PrHb"
         },
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Mindfire",
           "_id": "jKwfTnFk2VQtkulb",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"intelligence\" }], \"note\": { \"rollMode\": -1, \"text\": \"Your mind becomes feverish. You have disadvantage on INT checks and INT saves, and you behave as if under the effects of the confusion spell during combat.\" } }",
-              "priority": null
-            }
-          ],
           "description": "<p>The creature’s mind becomes feverish. The creature has disadvantage on INT checks and INT saves, and the creature behaves as if under the effects of the @UUID[Compendium.black-flag.spells.Item.Bcm0RKcg5os0dDhC]{confusion} spell during combat.</p>",
           "transfer": false,
           "statuses": [],
@@ -2605,7 +2661,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2615,32 +2671,53 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "ability-check",
+                        "ability-save"
+                      ]
+                    },
+                    {
+                      "k": "ability",
+                      "v": "intelligence"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "Your mind becomes feverish. You have disadvantage on INT checks and INT saves, and you behave as if under the effects of the confusion spell during combat."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.jKwfTnFk2VQtkulb"
         },
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Seizure",
           "_id": "jvLh1Q36VP2rslZL",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }, { \"k\": \"ability\", \"v\": \"dexterity\" }], \"note\": { \"rollMode\": -1, \"text\": \"You are overcome with shaking. You have disadvantage on DEX checks, DEX saves, and attack rolls that use DEX.\" } }",
-              "priority": null
-            }
-          ],
           "description": "<p>The creature is overcome with shaking. The creature has disadvantage on DEX checks, DEX saves, and attack rolls that use DEX.</p>",
           "transfer": false,
           "statuses": [],
@@ -2649,7 +2726,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2659,32 +2736,54 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "ability-check",
+                        "ability-save",
+                        "attack"
+                      ]
+                    },
+                    {
+                      "k": "ability",
+                      "v": "dexterity"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "You are overcome with shaking. You have disadvantage on DEX checks, DEX saves, and attack rolls that use DEX."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.jvLh1Q36VP2rslZL"
         },
         {
           "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Slimy Doom",
           "_id": "gzXgEuAwbX5qRJ1V",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"constitution\" }], \"note\": { \"rollMode\": -1, \"text\": \"You begin to bleed uncontrollably. You have disadvantage on CON checks and CON saves. In addition, when you take damage, you are stunned until the end of your next turn.\" } }",
-              "priority": null
-            }
-          ],
           "description": "<p>The creature begins to bleed uncontrollably. The creature has disadvantage on CON checks and CON saves. In addition, when the creature takes damage, it is stunned until the end of its next turn.</p>",
           "transfer": false,
           "statuses": [],
@@ -2693,7 +2792,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -2703,8 +2802,40 @@
           },
           "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "ability-check",
+                        "ability-save"
+                      ]
+                    },
+                    {
+                      "k": "ability",
+                      "v": "constitution"
+                    }
+                  ],
+                  "note": {
+                    "rollMode": -1,
+                    "text": "You begin to bleed uncontrollably. You have disadvantage on CON checks and CON saves. In addition, when you take damage, you are stunned until the end of your next turn."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!LOgvRwKo3B5hXJSO.xzZzSAZnvWNvMCUX.gzXgEuAwbX5qRJ1V"
         }
       ],
@@ -2727,7 +2858,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2896,7 +3027,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.5XC70iK7GvVRh0xx",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3094,7 +3225,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.lGmxkutPlXsgyzRd",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3235,7 +3366,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3370,7 +3501,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.lcQWavvDlBEs1wge",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3506,7 +3637,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3636,7 +3767,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3763,7 +3894,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -3920,7 +4051,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -4070,7 +4201,7 @@
       "_stats": {
         "compendiumSource": "Item.m28Fbrhs3ryYSTBL",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -4330,7 +4461,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.tR10yTScNFrVtOhj",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748930386,
@@ -4510,7 +4641,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748930386,
@@ -4524,7 +4655,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

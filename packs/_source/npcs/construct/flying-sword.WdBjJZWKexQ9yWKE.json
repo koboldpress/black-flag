@@ -167,9 +167,6 @@
       "src": "systems/black-flag/artwork/tokens/flying-sword.webp",
       "scaleX": 1,
       "scaleY": 1,
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -225,13 +222,12 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 60,
         "enabled": true
       }
-    ],
+    },
     "flags": {},
     "randomImg": false,
     "occludable": {
@@ -255,7 +251,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -313,7 +310,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711421197052,
         "modifiedTime": 1711423373591,
         "lastModifiedBy": "blackflag0000000",
@@ -375,7 +372,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709775093376,
         "modifiedTime": 1711423384137,
         "lastModifiedBy": "blackflag0000000",
@@ -425,74 +422,21 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.mgIy0dlBCDXk6o5C",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": 0,
-            "startTurn": 0
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Construct Resilience",
           "_id": "kaexE9tx9L3fp0QH",
-          "changes": [
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "poison",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "psychic",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "charmed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "frightened",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "poisoned",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
           "flags": {},
           "tint": "#ffffff",
           "_stats": {
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": null,
             "systemVersion": null,
             "createdTime": null,
@@ -504,8 +448,69 @@
           },
           "img": "systems/black-flag/artwork/types/feature.svg",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "poison",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "psychic",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "charmed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "frightened",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "paralyzed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "petrified",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "poisoned",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": 0,
+            "time": 0,
+            "turn": 0,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!WdBjJZWKexQ9yWKE.xvsssnE7I2CwvCM4.kaexE9tx9L3fp0QH"
         }
       ],
@@ -524,7 +529,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709606040616,
         "modifiedTime": 1711423386485,
         "lastModifiedBy": "blackflag0000000",
@@ -586,7 +591,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711421375455,
         "modifiedTime": 1711423397755,
         "lastModifiedBy": "blackflag0000000",
@@ -704,7 +709,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711423526045,
         "modifiedTime": 1711423561958,
         "lastModifiedBy": "blackflag0000000",
@@ -872,7 +877,7 @@
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.ElVb4hPQIAKlDmN4",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748932564,
@@ -891,7 +896,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1709606236479,
     "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",

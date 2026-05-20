@@ -124,34 +124,32 @@
     {
       "origin": "Compendium.black-flag.spells.Item.NYzqOGEhgYfPjkNO",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Mind Blank",
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
       "_id": "Fh8HC9GKUcP44r6G",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.damage.immunities.value",
-          "mode": 2,
-          "value": "psychic",
-          "priority": null
-        },
-        {
-          "key": "system.traits.condition.immunities.value",
-          "mode": 2,
-          "value": "charmed",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.damage.immunities.value",
+            "value": "psychic",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.condition.immunities.value",
+            "value": "charmed",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You are immune to psychic damage, any effect that would sense your emotions or read your thoughts, divination spells, and the charmed condition. The spell even foils <em>wish</em> spells and spells or effects of similar power used to affect the target’s mind or to gain information about the target.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -161,7 +159,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1722986640859,
@@ -169,6 +167,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!NYzqOGEhgYfPjkNO.Fh8HC9GKUcP44r6G"
     }
   ],
@@ -179,7 +180,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919929792,

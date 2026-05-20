@@ -179,21 +179,19 @@
     {
       "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Asleep",
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
       "_id": "8br4SlLX6xayN0sb",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "<p>You fall unconscious. You wake up if you take any damage or if another creature uses its action to shake you awake.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -205,7 +203,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721357847386,
@@ -213,26 +211,27 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "showIcon": 2,
+      "start": null,
+      "folder": null,
       "_key": "!items.effects!yOoinQLdJ9jWvSIh.8br4SlLX6xayN0sb"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Panicked",
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
       "_id": "6x2qmCxg0SxuZOb8",
       "type": "base",
-      "system": {},
-      "changes": [],
+      "system": {
+        "changes": []
+      },
       "description": "<p>You are frightened of the caster. On each of your turns, you must take the Dash action and move away from the caster by the safest and shortest available route, unless there is nowhere to move. If you move to a place at least 60 feet away from the caster where you can no longer see them, this effect ends.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -244,7 +243,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721357847548,
@@ -252,33 +251,50 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "showIcon": 2,
+      "start": null,
+      "folder": null,
       "_key": "!items.effects!yOoinQLdJ9jWvSIh.6x2qmCxg0SxuZOb8"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Sickened",
       "img": "icons/magic/unholy/orb-swirling-teal.webp",
       "_id": "FeIRtL60dUjav3Ta",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"attack\"] }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on attack rolls and ability checks.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "ability-check",
+                    "attack"
+                  ]
+                }
+              ],
+              "note": {
+                "rollMode": -1,
+                "text": "You have disadvantage on attack rolls and ability checks."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have disadvantage on attack rolls and ability checks. At the end of each of your turns, you can make another [[/save wisdom]] save. If you succeed, the effect ends.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -288,7 +304,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721357849709,
@@ -296,6 +312,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!yOoinQLdJ9jWvSIh.FeIRtL60dUjav3Ta"
     }
   ],
@@ -306,7 +325,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1721357677245,

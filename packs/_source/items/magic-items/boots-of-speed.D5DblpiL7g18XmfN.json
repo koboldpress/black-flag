@@ -115,13 +115,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.D5DblpiL7g18XmfN",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "name": "Enhanced Speed",
@@ -129,16 +126,16 @@
       "_id": "0tvUSSUhK8vLkt6X",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.movement.multiplier",
+            "value": 2,
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.movement.multiplier",
-          "mode": 5,
-          "value": "2",
-          "priority": null
-        }
-      ],
       "description": "<p>Your walking speed is doubled and any creature that makes an opportunity attack against you has disadvantage on the attack roll.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -148,7 +145,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725901723828,
@@ -156,6 +153,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!D5DblpiL7g18XmfN.0tvUSSUhK8vLkt6X"
     }
   ],
@@ -167,7 +167,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1724983477912,

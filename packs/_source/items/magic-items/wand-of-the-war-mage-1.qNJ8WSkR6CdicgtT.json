@@ -46,28 +46,38 @@
       "name": "War Mage, +1",
       "origin": "Compendium.black-flag.items.Item.qNJ8WSkR6CdicgtT",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/weapons/wands/wand-gem-blue.webp",
       "_id": "KC1aRtoA0rQzwuVY",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "attack"
+                },
+                {
+                  "k": "activity.attack.type.classification",
+                  "v": "spell"
+                }
+              ],
+              "formula": "1"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }], \"formula\": \"1\" }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -77,7 +87,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1730154862482,
@@ -85,6 +95,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!qNJ8WSkR6CdicgtT.KC1aRtoA0rQzwuVY"
     }
   ],
@@ -96,7 +109,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1725071587313,

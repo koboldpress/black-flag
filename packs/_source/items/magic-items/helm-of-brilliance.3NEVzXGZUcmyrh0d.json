@@ -514,28 +514,25 @@
       "name": "Helm of Brilliance",
       "origin": "Compendium.black-flag.items.Item.3NEVzXGZUcmyrh0d",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/head/helm-norman-engraved.webp",
       "_id": "xWiN3Ec17NwTNhzo",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "fire",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
       "description": "<p>As long as the helm has at least one ruby, you have resistance to fire damage.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -545,7 +542,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728594759674,
@@ -553,6 +550,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!3NEVzXGZUcmyrh0d.xWiN3Ec17NwTNhzo"
     }
   ],
@@ -564,7 +564,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1724985760286,

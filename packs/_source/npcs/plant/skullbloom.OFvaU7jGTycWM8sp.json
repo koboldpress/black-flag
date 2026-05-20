@@ -157,9 +157,6 @@
       "src": "systems/black-flag/artwork/tokens/skullbloom.webp",
       "scaleX": 1,
       "scaleY": 1,
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -215,13 +212,12 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 10,
         "enabled": true
       }
-    ],
+    },
     "flags": {},
     "randomImg": false,
     "occludable": {
@@ -245,7 +241,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -300,7 +297,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709773583652,
         "modifiedTime": 1712944721320,
         "lastModifiedBy": "blackflag0000000",
@@ -350,50 +347,21 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": 0,
-            "startTurn": 0
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Plant Resilience",
           "_id": "4alHXchWfiVtXGAv",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
           "flags": {},
           "tint": "#ffffff",
           "_stats": {
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": null,
             "systemVersion": null,
             "createdTime": null,
@@ -405,8 +373,45 @@
           },
           "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "paralyzed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "petrified",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "unconscious",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": 0,
+            "time": 0,
+            "turn": 0,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!OFvaU7jGTycWM8sp.8WP8EEwbuRwAnVsU.4alHXchWfiVtXGAv"
         }
       ],
@@ -425,7 +430,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709615924250,
         "modifiedTime": 1712944723789,
         "lastModifiedBy": "blackflag0000000",
@@ -543,7 +548,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1712944732596,
         "modifiedTime": 1712944984182,
         "lastModifiedBy": "blackflag0000000",
@@ -605,7 +610,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1712945185187,
         "modifiedTime": 1712945366054,
         "lastModifiedBy": "blackflag0000000",
@@ -736,7 +741,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -923,7 +928,7 @@
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748930935,
@@ -1092,7 +1097,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.RXzBRDACuZetQZur",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748930935,
@@ -1115,7 +1120,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1709673876531,
     "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",

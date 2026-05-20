@@ -739,28 +739,38 @@
       "name": "The Woodlands",
       "origin": "Compendium.black-flag.items.Item.zBuYA4vMWtfzZ70l",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/weapons/staves/staff-nature-spiral.webp",
       "_id": "QlWtn9uQyBr51JcE",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "attack"
+                },
+                {
+                  "k": "activity.attack.type.classification",
+                  "v": "spell"
+                }
+              ],
+              "formula": "2"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }], \"formula\": \"2\" }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -770,7 +780,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1730073274892,
@@ -778,6 +788,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!zBuYA4vMWtfzZ70l.QlWtn9uQyBr51JcE"
     }
   ],
@@ -788,7 +801,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1725590743742,

@@ -46,56 +46,54 @@
       "name": "Howling Arrows",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/ammunition/arrow-simple-grey.webp",
       "_id": "JP01zAazMpBska4f",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Howling {}",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 5,
-          "value": "10",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "common",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>These arrowheads are made from hollowed antler and emit a shrill whistle while airborne. A successful attack made with a howling arrow deals only half damage, but the target must succeed on a [[/save 11 CON]] or be deafened until the end of its next turn.</p>",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "Howling {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 10,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "common",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>These arrowheads are made from hollowed antler and emit a shrill whistle while airborne. A successful attack made with a howling arrow deals only half damage, but the target must succeed on a [[/save 11 CON]] or be deafened until the end of its next turn.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -105,7 +103,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728592876606,
@@ -113,6 +111,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!8qZvhPM8mKWot4ZO.JP01zAazMpBska4f"
     }
   ],
@@ -124,7 +125,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788393240,

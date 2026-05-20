@@ -173,12 +173,9 @@
       "src": "systems/black-flag/artwork/tokens/oni.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": -1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -229,7 +226,7 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -253,7 +250,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -327,7 +325,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.FrdsogSzdIlz9Lmo",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -395,7 +393,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -451,25 +449,14 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.m72mAsPV1hqNYPSi",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Giant Attributes",
           "_id": "1F1KR2nud7oEdy85",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "stunned",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
@@ -478,7 +465,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -488,8 +475,27 @@
           },
           "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "stunned",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!Ae67uuF7mBe8NGDN.HHb1eNLZm7Hf3Hdb.1F1KR2nud7oEdy85"
         }
       ],
@@ -504,7 +510,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.NXzP92LbivNcESTI",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -642,7 +648,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.sq472hZSowexsGWG",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -756,7 +762,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1051,7 +1057,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.caf9G1uCz7agcoym",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -1218,7 +1224,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1369,7 +1375,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.zAdVL033HkTXL6Nq",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1526,7 +1532,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.PKj2TSp0iwaPZulb",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1685,18 +1691,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Charm",
           "_id": "MHWYFHDDXmIygkPs",
-          "changes": [],
           "description": "<p>The target is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
           "transfer": false,
           "statuses": [
@@ -1707,7 +1709,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1717,8 +1719,13 @@
           },
           "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": []
+          },
           "sort": 0,
+          "showIcon": 2,
+          "start": null,
+          "folder": null,
           "_key": "!actors.items.effects!Ae67uuF7mBe8NGDN.8Qoh5pmjZJnYqVjI.MHWYFHDDXmIygkPs"
         }
       ],
@@ -1741,7 +1748,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1898,58 +1905,77 @@
         {
           "origin": "Compendium.black-flag.spells.Item.fUkZjWTGW0wFntSB",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Gaseous Form",
           "img": "icons/magic/air/wind-swirl-gray-blue.webp",
           "_id": "EfBnS0G1W7UMWYhI",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.movement.types.walk",
-              "mode": 5,
-              "value": "0",
-              "priority": null
-            },
-            {
-              "key": "system.traits.movement.types.climb",
-              "mode": 5,
-              "value": "0",
-              "priority": null
-            },
-            {
-              "key": "system.traits.movement.types.fly",
-              "mode": 5,
-              "value": "10",
-              "priority": null
-            },
-            {
-              "key": "system.traits.movement.types.swim",
-              "mode": 5,
-              "value": "0",
-              "priority": null
-            },
-            {
-              "key": "system.traits.movement.types.burrow",
-              "mode": 5,
-              "value": "0",
-              "priority": null
-            },
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }, { \"k\": \"ability\", \"o\": \"in\", \"v\": [\"strength\", \"dexterity\", \"constitution\"] }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR, DEX, and CON saves.\" } }",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.movement.types.walk",
+                "value": 0,
+                "priority": null,
+                "type": "override"
+              },
+              {
+                "key": "system.traits.movement.types.climb",
+                "value": 0,
+                "priority": null,
+                "type": "override"
+              },
+              {
+                "key": "system.traits.movement.types.fly",
+                "value": 10,
+                "priority": null,
+                "type": "override"
+              },
+              {
+                "key": "system.traits.movement.types.swim",
+                "value": 0,
+                "priority": null,
+                "type": "override"
+              },
+              {
+                "key": "system.traits.movement.types.burrow",
+                "value": 0,
+                "priority": null,
+                "type": "override"
+              },
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "note",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "v": "ability-save"
+                    },
+                    {
+                      "k": "ability",
+                      "o": "in",
+                      "v": [
+                        "strength",
+                        "dexterity",
+                        "constitution"
+                      ]
+                    }
+                  ],
+                  "note": {
+                    "rollMode": 1,
+                    "text": "You have advantage on STR, DEX, and CON saves."
+                  }
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": false,
@@ -1959,7 +1985,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1967,6 +1993,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!Ae67uuF7mBe8NGDN.z88C1Omy0xfpIgsY.EfBnS0G1W7UMWYhI"
         }
       ],
@@ -1989,7 +2018,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.fUkZjWTGW0wFntSB",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2161,7 +2190,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.pais75ndQesCocfq",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2284,7 +2313,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.OcvlV6gbt6xUtMed",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2475,7 +2504,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.Jr00Z1fIby1cJtbS",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748928283,
@@ -2650,7 +2679,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yA5Y42t58yyeRG4v",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748928283,
@@ -2668,7 +2697,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

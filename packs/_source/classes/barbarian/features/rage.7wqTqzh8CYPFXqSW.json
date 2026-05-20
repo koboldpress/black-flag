@@ -110,56 +110,21 @@
     {
       "origin": "Compendium.black-flag.classes.Item.7wqTqzh8CYPFXqSW",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Rage",
       "_id": "LkVwlaV9hQ35ooLr",
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{\"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"type\", \"v\": \"ability-save\" }]}, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR ability checks and saves while raging.\" } }",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"kind\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.attack.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "bludgeoning",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "piercing",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "slashing",
-          "priority": null
-        }
-      ],
       "description": "",
       "transfer": false,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -171,8 +136,90 @@
       },
       "img": "icons/skills/wounds/injury-face-impact-orange.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "o": "OR",
+                  "v": [
+                    {
+                      "k": "type",
+                      "v": "ability-check"
+                    },
+                    {
+                      "k": "type",
+                      "v": "ability-save"
+                    }
+                  ]
+                },
+                {
+                  "k": "ability",
+                  "v": "strength"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on STR ability checks and saves while raging."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "damage"
+                },
+                {
+                  "k": "kind",
+                  "v": "attack"
+                },
+                {
+                  "k": "ability",
+                  "v": "strength"
+                },
+                {
+                  "k": "activity.attack.type.value",
+                  "v": "melee"
+                }
+              ],
+              "formula": "@scale.barbarian.damage"
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "bludgeoning",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "piercing",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "slashing",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!7wqTqzh8CYPFXqSW.LkVwlaV9hQ35ooLr"
     }
   ],
@@ -184,7 +231,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "1.2.059",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1717383139458,
     "modifiedTime": 1736380323922,
     "lastModifiedBy": "blackflag0000000",

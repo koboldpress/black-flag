@@ -103,24 +103,22 @@
       "transfer": false,
       "_id": "EhapyrI5PcYhY0WU",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.proficiencies.languages.value",
-          "mode": 2,
-          "value": "ALL",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.proficiencies.languages.value",
+            "value": "ALL",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>You understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.</p>",
       "tint": "#ffffff",
@@ -130,7 +128,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723605360576,
@@ -138,6 +136,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!wyKjdoHh1PVEId7q.EhapyrI5PcYhY0WU"
     }
   ],
@@ -149,7 +150,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706932702351,
     "modifiedTime": 1723605360611,
     "lastModifiedBy": "blackflag0000000",

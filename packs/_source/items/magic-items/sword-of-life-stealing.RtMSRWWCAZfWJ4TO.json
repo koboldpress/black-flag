@@ -46,62 +46,60 @@
       "name": "Sword of Life Stealing",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/scimitar-bone.webp",
       "_id": "y5KAWLnzlTA62zXk",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Life Stealing",
-          "priority": null
-        },
-        {
-          "key": "system.attunemment.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>When you attack a creature with this magic weapon and roll a 20 on the attack roll, that target takes an extra [[/damage 3d6 necrotic]], provided that the target isn’t a Construct or an Undead. You gain temporary HP equal to the extra damage dealt.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 5,
-          "value": "8000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Life Stealing",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunemment.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>When you attack a creature with this magic weapon and roll a 20 on the attack roll, that target takes an extra [[/damage 3d6 necrotic]], provided that the target isn’t a Construct or an Undead. You gain temporary HP equal to the extra damage dealt.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.value",
+            "value": 8000,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -111,7 +109,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1730156668913,
@@ -119,6 +117,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!RtMSRWWCAZfWJ4TO.y5KAWLnzlTA62zXk"
     }
   ],
@@ -130,7 +131,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788725412,

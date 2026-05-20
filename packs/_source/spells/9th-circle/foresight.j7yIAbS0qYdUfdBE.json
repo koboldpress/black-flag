@@ -129,28 +129,43 @@
     {
       "origin": "Compendium.black-flag.spells.Item.j7yIAbS0qYdUfdBE",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Foresight",
       "img": "icons/magic/perception/third-eye-blue-red.webp",
       "_id": "mwz9DqDEGc1XOeG6",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }], \"note\": { \"rollMode\": 1, \"text\": \"You can’t be surprised and have advantage on attack rolls, ability checks, and saves. In addition, other creatures have disadvantage on attack rolls against you.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "ability-check",
+                    "ability-save",
+                    "attack"
+                  ]
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You can’t be surprised and have advantage on attack rolls, ability checks, and saves. In addition, other creatures have disadvantage on attack rolls against you."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": false,
@@ -160,7 +175,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721445335955,
@@ -168,6 +183,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!j7yIAbS0qYdUfdBE.mwz9DqDEGc1XOeG6"
     }
   ],
@@ -178,7 +196,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1721445191061,

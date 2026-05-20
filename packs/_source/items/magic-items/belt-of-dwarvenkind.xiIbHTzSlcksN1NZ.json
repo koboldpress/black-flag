@@ -42,13 +42,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.xiIbHTzSlcksN1NZ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Belt of Dwarvenkind",
@@ -56,22 +53,42 @@
       "_id": "u7KHWBqVW01gP3mg",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.abilities.constitution.value",
+            "value": 2,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "charisma"
+                },
+                {
+                  "k": "skill",
+                  "v": "persuasion"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on CHA (Persuasion) checks made to interact with dwarves."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.abilities.constitution.value",
-          "mode": 2,
-          "value": "2",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }, { \"k\": \"skill\", \"v\": \"persuasion\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CHA (Persuasion) checks made to interact with dwarves.\" } }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -81,7 +98,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725740351036,
@@ -89,18 +106,18 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!xiIbHTzSlcksN1NZ.u7KHWBqVW01gP3mg"
     },
     {
       "origin": "Compendium.black-flag.items.Item.xiIbHTzSlcksN1NZ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "name": "Belt of Dwarvenkind (non-Dwarf)",
@@ -108,34 +125,34 @@
       "_id": "YlwI6ie7vAzVhba9",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.condition.resistances.value",
+            "value": "poisoned",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "poison",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.traits.senses.types.darkvision",
+            "value": 60,
+            "priority": null,
+            "type": "upgrade"
+          },
+          {
+            "key": "system.proficiencies.languages.value",
+            "value": "dwarvish",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.condition.resistances.value",
-          "mode": 2,
-          "value": "poisoned",
-          "priority": null
-        },
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        },
-        {
-          "key": "system.traits.senses.types.darkvision",
-          "mode": 4,
-          "value": "60",
-          "priority": null
-        },
-        {
-          "key": "system.proficiencies.languages.value",
-          "mode": 2,
-          "value": "dwarvish",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -145,7 +162,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725740352069,
@@ -153,6 +170,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!xiIbHTzSlcksN1NZ.YlwI6ie7vAzVhba9"
     }
   ],
@@ -164,7 +184,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724983024363,

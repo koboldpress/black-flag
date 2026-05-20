@@ -46,62 +46,60 @@
       "name": "Sword of Wounding",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/sword-hooked-worn.webp",
       "_id": "LK8SSBYNG9SfarYW",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Wounding",
-          "priority": null
-        },
-        {
-          "key": "system.attunemment.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>Hit points lost to this weapon’s damage can be regained only through a short or long rest, rather than by regeneration, magic, or any other means.</p> <p>Once per turn, when you hit a creature with an attack using this magic weapon, you can choose (no action required) to wound the target. At the start of each of the wounded creature’s turns, it takes [[/damage 1d4 necrotic]] for each time you’ve wounded it. It can then make a [[/save 15 CON]], ending the effect of all such wounds on itself on a success. Alternatively, the wounded creature, or a creature within 5 feet of it, can use an action to make a [[/check 15 WIS (Medicine)]], ending the effect of such wounds on it on a success.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 5,
-          "value": "8000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Wounding",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunemment.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>Hit points lost to this weapon’s damage can be regained only through a short or long rest, rather than by regeneration, magic, or any other means.</p> <p>Once per turn, when you hit a creature with an attack using this magic weapon, you can choose (no action required) to wound the target. At the start of each of the wounded creature’s turns, it takes [[/damage 1d4 necrotic]] for each time you’ve wounded it. It can then make a [[/save 15 CON]], ending the effect of all such wounds on itself on a success. Alternatively, the wounded creature, or a creature within 5 feet of it, can use an action to make a [[/check 15 WIS (Medicine)]], ending the effect of such wounds on it on a success.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.value",
+            "value": 8000,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -111,7 +109,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1730156499424,
@@ -119,6 +117,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!KRGjrcOJfkSviT8R.LK8SSBYNG9SfarYW"
     }
   ],
@@ -130,7 +131,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788832999,

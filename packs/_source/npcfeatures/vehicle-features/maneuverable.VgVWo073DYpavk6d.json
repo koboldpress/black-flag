@@ -43,26 +43,24 @@
       "name": "Maneuverable",
       "origin": "Compendium.black-flag.npcfeatures.Item.VgVWo073DYpavk6d",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/skills/movement/arrow-down-pink.webp",
       "_id": "TBjGqZeJ7sip50SU",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.movement.tags",
-          "mode": 2,
-          "value": "maneuverable",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.tags",
+            "value": "maneuverable",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -72,7 +70,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "1.1.055",
         "createdTime": 1733435826491,
@@ -80,6 +78,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!VgVWo073DYpavk6d.TBjGqZeJ7sip50SU"
     }
   ],
@@ -91,7 +92,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "1.1.055",
     "createdTime": 1733435605694,

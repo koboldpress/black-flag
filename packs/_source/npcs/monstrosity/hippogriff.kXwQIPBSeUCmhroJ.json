@@ -154,9 +154,6 @@
       "src": "systems/black-flag/artwork/tokens/hippogriff.webp",
       "scaleX": 1,
       "scaleY": 1,
-      "offsetX": 0,
-      "offsetY": 0,
-      "rotation": 0,
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -212,7 +209,7 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "flags": {},
     "randomImg": false,
     "occludable": {
@@ -236,7 +233,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -291,7 +289,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1709774609989,
         "modifiedTime": 1711909239542,
         "lastModifiedBy": "blackflag0000000",
@@ -341,38 +339,21 @@
         {
           "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": 0,
-            "startTurn": 0
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Monstrosity Resilience",
           "_id": "jxagd3hzp2UTp7Wl",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "frightened",
-              "priority": null
-            }
-          ],
           "description": "",
           "transfer": true,
           "statuses": [],
           "flags": {},
           "tint": "#ffffff",
           "_stats": {
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": null,
             "systemVersion": null,
             "createdTime": null,
@@ -384,8 +365,33 @@
           },
           "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.resistances.value",
+                "value": "frightened",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": 0,
+            "time": 0,
+            "turn": 0,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!kXwQIPBSeUCmhroJ.4KMEKZ4EPLVcpaot.jxagd3hzp2UTp7Wl"
         }
       ],
@@ -404,7 +410,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1706473622104,
         "modifiedTime": 1711909241964,
         "lastModifiedBy": "blackflag0000000",
@@ -516,7 +522,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711420922343,
         "modifiedTime": 1711909343888,
         "lastModifiedBy": "blackflag0000000",
@@ -673,7 +679,7 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "createdTime": 1711909378785,
         "modifiedTime": 1713147781828,
         "lastModifiedBy": "blackflag0000000",
@@ -841,7 +847,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748934204,
@@ -1008,7 +1014,7 @@
         "compendiumSource": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748934204,
@@ -1027,7 +1033,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1709615530482,
     "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",

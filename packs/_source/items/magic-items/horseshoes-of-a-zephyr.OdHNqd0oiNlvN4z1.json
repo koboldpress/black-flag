@@ -45,31 +45,28 @@
       "name": "Zephyr",
       "origin": "Compendium.black-flag.items.Item.OdHNqd0oiNlvN4z1",
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "seconds": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "system": {
         "magical": true,
         "rider": {
           "statuses": []
-        }
+        },
+        "changes": [
+          {
+            "key": "system.traits.movement.ignoredDifficultTerrain",
+            "value": "ALL",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
       "img": "icons/tools/smithing/horseshoe-steel-blue.webp",
       "_id": "FMwzErcR1Zc5mtTl",
-      "changes": [
-        {
-          "key": "system.traits.movement.ignoredDifficultTerrain",
-          "mode": 2,
-          "value": "ALL",
-          "priority": null
-        }
-      ],
       "description": "<p>The creature leaves no tracks and ignores difficult terrain.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -80,13 +77,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756766599413,
         "modifiedTime": 1756766627250,
         "lastModifiedBy": "blackflag0000000"
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!OdHNqd0oiNlvN4z1.FMwzErcR1Zc5mtTl"
     }
   ],
@@ -98,7 +98,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724985830068,

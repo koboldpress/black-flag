@@ -118,13 +118,10 @@
       "name": "Nine Lives Stealer",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/sword-guard-flanged.webp",
@@ -134,58 +131,58 @@
           "activities": [
             "nfXr4LTo9937R6au"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "Nine Lives Stealer {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 8800,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "veryRare",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 2,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You gain a +2 bonus to attack and damage rolls made with this magic weapon.</p> <p>The sword has [[/r 1d8 + 1]] charges. If you score a critical hit against a creature that has fewer than 100 HP, it must succeed on a [[/save 15 CON]] or be slain instantly as the sword tears its life force from its body (a Construct or an Undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Nine Lives Stealer {}",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 5,
-          "value": "8800",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "veryRare",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "2",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You gain a +2 bonus to attack and damage rolls made with this magic weapon.</p> <p>The sword has [[/r 1d8 + 1]] charges. If you score a critical hit against a creature that has fewer than 100 HP, it must succeed on a [[/save 15 CON]] or be slain instantly as the sword tears its life force from its body (a Construct or an Undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property.</p>",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -195,7 +192,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728593283615,
@@ -203,6 +200,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!N0zoMwOvfIQJ5OSy.1zJqHeYfnrPhz45I"
     }
   ],
@@ -222,7 +222,7 @@
   },
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1726788501344,

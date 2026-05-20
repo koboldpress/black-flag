@@ -132,13 +132,10 @@
       "name": "Giant Slayer",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/sword-ringed-engraved.webp",
@@ -148,52 +145,52 @@
           "activities": [
             "mPAasKgz1LMeT90k"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "Giant Slayer {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 1500,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 1,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p> <p>When you use it to hit a creature with the Giant type, the creature takes an extra [[/r 2d6]] damage of the weapon’s type and must succeed on a [[/save 15 STR]] or fall prone.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Giant Slayer {}",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "1500",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p> <p>When you use it to hit a creature with the Giant type, the creature takes an extra [[/r 2d6]] damage of the weapon’s type and must succeed on a [[/save 15 STR]] or fall prone.</p>",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -203,7 +200,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728592490990,
@@ -211,6 +208,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Ul7HC0gMUySOFScq.bY3MXWiuucLdmCmd"
     }
   ],
@@ -230,7 +230,7 @@
   },
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1726788319699,

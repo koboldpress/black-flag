@@ -41,32 +41,21 @@
     {
       "origin": "Compendium.black-flag.classes.Item.Qco8rSb1pldTRusr",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Fire Infusion",
       "_id": "uHQNoPjP7H6Pujjr",
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"activity.attack.type.value\", \"v\": \"melee\" }], \"formula\": \"1d8[fire]\" }",
-          "priority": null
-        }
-      ],
       "description": "",
       "transfer": true,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -78,8 +67,33 @@
       },
       "img": "icons/creatures/magical/spirit-fire-yellow.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "damage"
+                },
+                {
+                  "k": "activity.attack.type.value",
+                  "v": "melee"
+                }
+              ],
+              "formula": "1d8[fire]"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Qco8rSb1pldTRusr.uHQNoPjP7H6Pujjr"
     }
   ],
@@ -91,7 +105,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.033",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1717791112663,
     "modifiedTime": 1717793053497,
     "lastModifiedBy": "blackflag0000000",

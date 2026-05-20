@@ -123,24 +123,22 @@
       "transfer": false,
       "_id": "NASY94AcE3QzHDGb",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.senses.types.truesight",
-          "mode": 4,
-          "value": "120",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.senses.types.truesight",
+            "value": 120,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
+      },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>You have the ability to see things as they actually are. For the duration, you have truesight to a range of 120 feet.</p>",
       "tint": "#ffffff",
@@ -150,7 +148,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.042",
         "createdTime": 1723578110594,
@@ -158,6 +156,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ucOdaPECcXApN7hF.NASY94AcE3QzHDGb"
     }
   ],
@@ -168,7 +169,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527977259,

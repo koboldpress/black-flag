@@ -143,28 +143,42 @@
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Bear’s Endurance",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "E1EOsUr8FrPOtPhj",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"constitution\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CON checks\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "constitution"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on CON checks"
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on CON checks and gain 2d6 temporary HP, which are lost when the spell ends.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -174,7 +188,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356319554,
@@ -182,33 +196,50 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.E1EOsUr8FrPOtPhj"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Bull’s Strength",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "wvyLeBKyZb2LBMzw",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR checks, and your carrying capacity doubles.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "strength"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on STR checks, and your carrying capacity doubles."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on STR checks, and its carrying capacity doubles.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -218,7 +249,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356332381,
@@ -226,33 +257,50 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.wvyLeBKyZb2LBMzw"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Cat’s Grace",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "ekJrnJV8AvbwjKn5",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on DEX checks. You also don’t take damage from falling 20 feet or less if you aren’t incapacitated.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "dexterity"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on DEX checks. You also don’t take damage from falling 20 feet or less if you aren’t incapacitated."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on DEX checks. You also don’t take damage from falling 20 feet or less if you aren’t incapacitated.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -262,7 +310,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356342411,
@@ -270,33 +318,64 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.ekJrnJV8AvbwjKn5"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Eagle’s Splendor",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "JVC16KBUV2V2VqNz",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }] }, { \"k\": \"type\", \"v\": \"ability-save\" }] }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CHA checks and saves against the charmed condition.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "o": "OR",
+                  "v": [
+                    {
+                      "o": "AND",
+                      "v": [
+                        {
+                          "k": "type",
+                          "v": "ability-check"
+                        },
+                        {
+                          "k": "ability",
+                          "v": "charisma"
+                        }
+                      ]
+                    },
+                    {
+                      "k": "type",
+                      "v": "ability-save"
+                    }
+                  ]
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on CHA checks and saves against the charmed condition."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on CHA checks and saves against the charmed condition.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -306,7 +385,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356349829,
@@ -314,33 +393,46 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.JVC16KBUV2V2VqNz"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Fox’s Cunning",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "foTtbXuAed8nN8VC",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on INT checks and checks made to Hide or otherwise avoid notice.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-check"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on INT checks and checks made to Hide or otherwise avoid notice."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on INT checks and checks made to Hide or otherwise avoid notice.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -350,7 +442,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356351271,
@@ -358,33 +450,50 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.foTtbXuAed8nN8VC"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Owl’s Wisdom",
       "img": "icons/magic/earth/strike-fist-stone-light.webp",
       "_id": "E6Y7zyxPmSnTKB2G",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on WIS checks and can’t be surprised.\" } }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "wisdom"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on WIS checks and can’t be surprised."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>You have advantage on WIS checks and can’t be surprised.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -394,7 +503,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356351505,
@@ -402,6 +511,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!eQSukAkHZgLbOZA7.E6Y7zyxPmSnTKB2G"
     }
   ],
@@ -412,7 +524,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1721356198532,

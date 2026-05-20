@@ -162,12 +162,9 @@
       "src": "systems/black-flag/artwork/tokens/shield-guardian.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -218,13 +215,12 @@
       "saturation": -1,
       "contrast": 0
     },
-    "detectionModes": [
-      {
-        "id": "senseAll",
+    "detectionModes": {
+      "senseAll": {
         "range": 10,
         "enabled": true
       }
-    ],
+    },
     "occludable": {
       "radius": 0
     },
@@ -248,7 +244,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 2
   },
   "items": [
     {
@@ -298,70 +295,68 @@
         {
           "origin": "Actor.Hjt32yTa8tOAHm8K.Item.8u9jB6KBZXi0gFt8",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Construct Resilience",
           "img": "icons/commodities/tech/tube-chamber-lightning.webp",
           "_id": "qFDGY8I24ZDpT5zi",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "poison",
-              "priority": null
-            },
-            {
-              "key": "system.traits.damage.immunities.value",
-              "mode": 2,
-              "value": "psychic",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "charmed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "frightened",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.immunities.value",
-              "mode": 2,
-              "value": "poisoned",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "poison",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.damage.immunities.value",
+                "value": "psychic",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "exhaustion",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "charmed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "frightened",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "paralyzed",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "petrified",
+                "priority": null,
+                "type": "add"
+              },
+              {
+                "key": "system.traits.condition.immunities.value",
+                "value": "poisoned",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -371,7 +366,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -379,6 +374,16 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!th8XoqIxyhbFl55A.lSQmVZBr8i0E2u6A.qFDGY8I24ZDpT5zi"
         }
       ],
@@ -392,7 +397,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.8dvgLrBxaIwGFZxv",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -464,7 +469,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -528,7 +533,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gCywSogmFrzBXUYK",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -665,7 +670,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.7IjJKufAUzxiqE6B",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -737,7 +742,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -851,7 +856,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -971,28 +976,26 @@
         {
           "origin": "Actor.PVVqAIyhI9CvmQ6D.Item.50KsG2d6HTvuCYQP",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Shield AC Bonus",
           "img": "icons/magic/defensive/shield-barrier-blue.webp",
           "_id": "6u0B9alqEs7Lajmi",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.attributes.ac.override",
-              "mode": 5,
-              "value": "19",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.attributes.ac.override",
+                "value": 19,
+                "priority": null,
+                "type": "override"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -1002,7 +1005,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1010,6 +1013,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!th8XoqIxyhbFl55A.50KsG2d6HTvuCYQP.6u0B9alqEs7Lajmi"
         }
       ],
@@ -1023,7 +1029,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.cKhDTegQbrDWDgVv",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1159,7 +1165,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1344,7 +1350,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.tR10yTScNFrVtOhj",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748935562,
@@ -1517,7 +1523,7 @@
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yA5Y42t58yyeRG4v",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748935562,
@@ -1535,7 +1541,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

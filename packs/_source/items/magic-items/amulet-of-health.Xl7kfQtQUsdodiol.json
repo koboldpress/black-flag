@@ -42,13 +42,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.Xl7kfQtQUsdodiol",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Amulet of Health",
@@ -56,16 +53,16 @@
       "_id": "SpxENMek6OzzOp0U",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.abilities.constitution.value",
+            "value": 19,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.abilities.constitution.value",
-          "mode": 4,
-          "value": "19",
-          "priority": null
-        }
-      ],
       "description": "<p>Your CON score is 19 while you carry this amulet. It has no effect on you if your CON is already 19 or higher.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -75,7 +72,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725738171068,
@@ -83,6 +80,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Xl7kfQtQUsdodiol.SpxENMek6OzzOp0U"
     }
   ],
@@ -94,7 +94,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.044",
     "createdTime": 1724977296894,

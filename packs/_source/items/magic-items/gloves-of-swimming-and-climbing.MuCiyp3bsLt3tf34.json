@@ -46,28 +46,45 @@
       "name": "Gloves of Swimming and Climbing",
       "origin": "Compendium.black-flag.items.Item.MuCiyp3bsLt3tf34",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/hand/glove-simple-leather-green.webp",
       "_id": "mmN6U27CkuCteVHv",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "strength"
+                },
+                {
+                  "k": "skill",
+                  "v": "athletics"
+                }
+              ],
+              "note": {
+                "rollMode": 0,
+                "text": "You have a +5 bonus to STR (Athletics) checks made to climb or swim."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"skill\", \"v\": \"athletics\" }], \"note\": { \"rollMode\": 0, \"text\": \"You have a +5 bonus to STR (Athletics) checks made to climb or swim.\" } }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -77,7 +94,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728594416066,
@@ -85,6 +102,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!MuCiyp3bsLt3tf34.mmN6U27CkuCteVHv"
     }
   ],
@@ -96,7 +116,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724985195636,

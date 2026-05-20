@@ -46,62 +46,60 @@
       "name": "Sword of Sharpness",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
       "_id": "h2RiIPVKYFyhkxWT",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Sharpness",
-          "priority": null
-        },
-        {
-          "key": "system.attunemment.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>When you attack an object with this magic sword and hit, maximize your weapon damage dice against the target.</p> <p>When you attack a creature with this weapon and roll a 20 on the attack roll, that target takes an extra [[/damage 4d6 slashing]]. Then roll another d20. If you roll a 20, you lop off one of the target’s limbs, with the effect of such loss determined by the GM. If the creature has no limb to sever, you lop off a portion of its body instead.</p> <p>In addition, you can speak the sword’s command word to cause the blade to shed bright light in a 10-foot radius and dim light for an additional 10 feet. Speaking the command word again or sheathing the sword puts out the light.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "60000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 2,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 2,
-          "value": "veryRare",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Sharpness",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunemment.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>When you attack an object with this magic sword and hit, maximize your weapon damage dice against the target.</p> <p>When you attack a creature with this weapon and roll a 20 on the attack roll, that target takes an extra [[/damage 4d6 slashing]]. Then roll another d20. If you roll a 20, you lop off one of the target’s limbs, with the effect of such loss determined by the GM. If the creature has no limb to sever, you lop off a portion of its body instead.</p> <p>In addition, you can speak the sword’s command word to cause the blade to shed bright light in a 10-foot radius and dim light for an additional 10 feet. Speaking the command word again or sheathing the sword puts out the light.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.value",
+            "value": 60000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.rarity",
+            "value": "veryRare",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -111,7 +109,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1730156589387,
@@ -119,6 +117,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!Zbeq9WnehX8cfT8k.h2RiIPVKYFyhkxWT"
     }
   ],
@@ -130,7 +131,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1726788768173,

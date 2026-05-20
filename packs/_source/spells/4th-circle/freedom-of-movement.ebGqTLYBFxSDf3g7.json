@@ -112,28 +112,26 @@
     {
       "origin": "Compendium.black-flag.spells.Item.ebGqTLYBFxSDf3g7",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Freedom of Movement",
       "img": "icons/magic/movement/pinwheel-turning-blue.webp",
       "_id": "z0vvVF2g25tDE6YA",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.movement.ignoredDifficultTerrain",
-          "mode": 2,
-          "value": "ALL",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.ignoredDifficultTerrain",
+            "value": "ALL",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>Your movement is unaffected by difficult terrain, and spells and other magical effects can neither reduce your speed nor cause you to be paralyzed or restrained.</p><p>You can also spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature that has it grappled. Finally, being underwater imposes no penalties on your movement or attacks.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -143,7 +141,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721444406415,
@@ -151,6 +149,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ebGqTLYBFxSDf3g7.z0vvVF2g25tDE6YA"
     }
   ],
@@ -162,7 +163,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1706997764100,
     "modifiedTime": 1723778802520,
     "lastModifiedBy": "blackflag0000000",

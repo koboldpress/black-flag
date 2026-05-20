@@ -42,13 +42,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.M7nvMwH62c1GFUHG",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Fire Giant Strength",
@@ -56,16 +53,16 @@
       "_id": "S25u6VmiZabtyvG4",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.abilities.strength.value",
+            "value": 25,
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.abilities.strength.value",
-          "mode": 4,
-          "value": "25",
-          "priority": null
-        }
-      ],
       "description": "<p>While wearing this belt, your STR score changes to 25. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -75,7 +72,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725901337694,
@@ -83,6 +80,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!M7nvMwH62c1GFUHG.S25u6VmiZabtyvG4"
     }
   ],
@@ -94,7 +94,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724983148818,

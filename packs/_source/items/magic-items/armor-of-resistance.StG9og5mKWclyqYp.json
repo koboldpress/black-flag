@@ -44,13 +44,10 @@
       "name": "Armor of Acid Resistance",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -60,52 +57,52 @@
           "effects": [
             "j3o04U5NuPHPwfyI"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Acid Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to acid damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Acid Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to acid damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to acid damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -115,7 +112,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726797932525,
@@ -123,6 +120,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.cP13IDYJ17SYDxEH"
     },
     {
@@ -130,28 +130,25 @@
       "name": "Acid Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "_id": "j3o04U5NuPHPwfyI",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "acid",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "acid",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to acid damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -161,7 +158,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798025065,
@@ -169,6 +166,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.j3o04U5NuPHPwfyI"
     },
     {
@@ -176,27 +176,24 @@
       "name": "Cold Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "cold",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "cold",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to cold damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -206,7 +203,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798072978,
@@ -215,6 +212,9 @@
         "exportSource": null
       },
       "_id": "ZQ0Y1u26r9Rhd4wj",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.ZQ0Y1u26r9Rhd4wj"
     },
     {
@@ -222,27 +222,24 @@
       "name": "Fire Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "fire",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "fire",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to fire damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -252,7 +249,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798074589,
@@ -261,6 +258,9 @@
         "exportSource": null
       },
       "_id": "U3CPH8kMbARA8mUJ",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.U3CPH8kMbARA8mUJ"
     },
     {
@@ -268,27 +268,24 @@
       "name": "Force Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "force",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "force",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to force damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -298,7 +295,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798075369,
@@ -307,6 +304,9 @@
         "exportSource": null
       },
       "_id": "Jjz2yxKMGRsCx4Yp",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.Jjz2yxKMGRsCx4Yp"
     },
     {
@@ -314,27 +314,24 @@
       "name": "Lightning Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "lightning",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "lightning",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to lightning damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -344,7 +341,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798076607,
@@ -353,6 +350,9 @@
         "exportSource": null
       },
       "_id": "c29Qi69TJzgFQvw9",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.c29Qi69TJzgFQvw9"
     },
     {
@@ -360,27 +360,24 @@
       "name": "Necrotic Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "necrotic",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "necrotic",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to necrotic damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -390,7 +387,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798077396,
@@ -399,6 +396,9 @@
         "exportSource": null
       },
       "_id": "3RISlCbBdZ5zHbOI",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.3RISlCbBdZ5zHbOI"
     },
     {
@@ -406,27 +406,24 @@
       "name": "Poison Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "poison",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "poison",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to poison damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -436,7 +433,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798078149,
@@ -445,6 +442,9 @@
         "exportSource": null
       },
       "_id": "vVSHg0Hdogk0Cxkz",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.vVSHg0Hdogk0Cxkz"
     },
     {
@@ -452,27 +452,24 @@
       "name": "Psychic Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "psychic",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "psychic",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to psychic damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -482,7 +479,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798078893,
@@ -491,6 +488,9 @@
         "exportSource": null
       },
       "_id": "UhqARksEZICQSE7I",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.UhqARksEZICQSE7I"
     },
     {
@@ -498,27 +498,24 @@
       "name": "Radiant Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "radiant",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "radiant",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to radiant damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -528,7 +525,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798079614,
@@ -537,6 +534,9 @@
         "exportSource": null
       },
       "_id": "TbMerqkUtLNjoBF3",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.TbMerqkUtLNjoBF3"
     },
     {
@@ -544,27 +544,24 @@
       "name": "Thunder Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-purple.webp",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.traits.damage.resistances.value",
+            "value": "thunder",
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.traits.damage.resistances.value",
-          "mode": 2,
-          "value": "thunder",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to thunder damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -574,7 +571,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1726798080507,
@@ -583,6 +580,9 @@
         "exportSource": null
       },
       "_id": "V2mTGIsAXTtZmUvA",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.V2mTGIsAXTtZmUvA"
     },
     {
@@ -590,13 +590,10 @@
       "name": "Armor of Cold Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -611,52 +608,52 @@
           "effects": [
             "ZQ0Y1u26r9Rhd4wj"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Cold Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to cold damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Cold Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to cold damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to cold damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -667,7 +664,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334583554,
@@ -675,6 +672,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "97pKCx6a6tFCKW6k",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.97pKCx6a6tFCKW6k"
     },
     {
@@ -682,13 +682,10 @@
       "name": "Armor of Fire Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -703,52 +700,52 @@
           "effects": [
             "U3CPH8kMbARA8mUJ"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Fire Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to fire damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Fire Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to fire damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to fire damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -759,7 +756,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334585304,
@@ -767,6 +764,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "T5MVPepndvNZ43KO",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.T5MVPepndvNZ43KO"
     },
     {
@@ -774,13 +774,10 @@
       "name": "Armor of Force Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -795,52 +792,52 @@
           "effects": [
             "Jjz2yxKMGRsCx4Yp"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Force Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to force damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Force Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to force damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to force damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -851,7 +848,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334586466,
@@ -859,6 +856,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "ES9ePnlknT47bP4c",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.ES9ePnlknT47bP4c"
     },
     {
@@ -866,13 +866,10 @@
       "name": "Armor of Lightning Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -887,52 +884,52 @@
           "effects": [
             "c29Qi69TJzgFQvw9"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Lightning Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to lightning damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Lightning Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to lightning damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to lightning damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -943,7 +940,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334587815,
@@ -951,6 +948,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "YzcZRlU12m7vFjv3",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.YzcZRlU12m7vFjv3"
     },
     {
@@ -958,13 +958,10 @@
       "name": "Armor of Necrotic Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -979,52 +976,52 @@
           "effects": [
             "3RISlCbBdZ5zHbOI"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Necrotic Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to necrotic damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Necrotic Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to necrotic damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to necrotic damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -1035,7 +1032,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334588681,
@@ -1043,6 +1040,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "O3OX879gfObxPcS2",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.O3OX879gfObxPcS2"
     },
     {
@@ -1050,13 +1050,10 @@
       "name": "Armor of Poison Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -1071,52 +1068,52 @@
           "effects": [
             "vVSHg0Hdogk0Cxkz"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Poison Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to poison damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Poison Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to poison damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to poison damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -1127,7 +1124,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334589541,
@@ -1135,6 +1132,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "lOSQpo1LYEEccnuS",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.lOSQpo1LYEEccnuS"
     },
     {
@@ -1142,13 +1142,10 @@
       "name": "Armor of Psychic Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -1163,52 +1160,52 @@
           "effects": [
             "UhqARksEZICQSE7I"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Psychic Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to psychic damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Psychic Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to psychic damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to psychic damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -1219,7 +1216,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334590416,
@@ -1227,6 +1224,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "LTbpgXmVrxDwgQag",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.LTbpgXmVrxDwgQag"
     },
     {
@@ -1234,13 +1234,10 @@
       "name": "Armor of Radiant Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -1255,52 +1252,52 @@
           "effects": [
             "TbMerqkUtLNjoBF3"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Radiant Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to radiant damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Radiant Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to radiant damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to radiant damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -1311,7 +1308,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334822489,
@@ -1319,6 +1316,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "pNhWm47v3N3cLEbF",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.pNhWm47v3N3cLEbF"
     },
     {
@@ -1326,13 +1326,10 @@
       "name": "Armor of Thunder Resistance",
       "origin": "Compendium.black-flag.items.Item.StG9og5mKWclyqYp",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/equipment/chest/breastplate-purple.webp",
@@ -1347,52 +1344,52 @@
           "effects": [
             "V2mTGIsAXTtZmUvA"
           ]
-        }
+        },
+        "changes": [
+          {
+            "key": "name",
+            "value": "{} of Thunder Resistance",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.price.value",
+            "value": 5000,
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.price.denomination",
+            "value": "gp",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You have resistance to thunder damage while you wear this armor.</p>",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "rare",
+            "priority": null,
+            "type": "override"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "{} of Thunder Resistance",
-          "priority": null
-        },
-        {
-          "key": "system.price.value",
-          "mode": 2,
-          "value": "5000",
-          "priority": null
-        },
-        {
-          "key": "system.price.denomination",
-          "mode": 5,
-          "value": "gp",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You have resistance to thunder damage while you wear this armor.</p>",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "rare",
-          "priority": null
-        }
-      ],
       "description": "<p>You have resistance to thunder damage while you wear this armor.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -1403,7 +1400,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756334827485,
@@ -1411,6 +1408,9 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "DLfqQKCSPXZSCoNO",
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!StG9og5mKWclyqYp.DLfqQKCSPXZSCoNO"
     }
   ],
@@ -1439,7 +1439,7 @@
   },
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1726787840054,

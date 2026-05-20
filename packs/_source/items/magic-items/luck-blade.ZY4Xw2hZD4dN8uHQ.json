@@ -202,56 +202,54 @@
       "name": "Luck Blade",
       "origin": null,
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": true,
       "img": "icons/weapons/swords/greatsword-flamberge.webp",
       "_id": "QCOgBxM1vZ5Af4sU",
-      "system": {},
-      "changes": [
-        {
-          "key": "name",
-          "mode": 5,
-          "value": "Luck Blade {}",
-          "priority": null
-        },
-        {
-          "key": "system.attunement.value",
-          "mode": 5,
-          "value": "required",
-          "priority": null
-        },
-        {
-          "key": "system.rarity",
-          "mode": 5,
-          "value": "legendary",
-          "priority": null
-        },
-        {
-          "key": "system.properties",
-          "mode": 2,
-          "value": "magical",
-          "priority": null
-        },
-        {
-          "key": "system.magicalBonus",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        },
-        {
-          "key": "system.description.value",
-          "mode": 2,
-          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While carried, you also gain a +1 bonus to saves.</p> <p><em><strong>Luck.</strong></em> While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p> <p><em><strong>Wish.</strong></em> The sword has [[/r 1d4 - 1]] charges. While holding it, you can use an action to expend 1 charge and cast the wish spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p>",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "name",
+            "value": "Luck Blade {}",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.attunement.value",
+            "value": "required",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.rarity",
+            "value": "legendary",
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.properties",
+            "value": "magical",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.magicalBonus",
+            "value": 1,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.description.value",
+            "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While carried, you also gain a +1 bonus to saves.</p> <p><em><strong>Luck.</strong></em> While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p> <p><em><strong>Wish.</strong></em> The sword has [[/r 1d4 - 1]] charges. While holding it, you can use an action to expend 1 charge and cast the wish spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p>",
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -261,7 +259,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.048",
         "createdTime": 1728592967479,
@@ -269,6 +267,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ZY4Xw2hZD4dN8uHQ.QCOgBxM1vZ5Af4sU"
     },
     {
@@ -276,28 +277,34 @@
       "name": "Luck Blade",
       "origin": "Compendium.black-flag.items.Item.ZY4Xw2hZD4dN8uHQ",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/weapons/swords/greatsword-flamberge.webp",
       "_id": "FFW4oWL8fWaCKwPf",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-save"
+                }
+              ],
+              "formula": "1"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"formula\": \"1\" }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -307,7 +314,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1728593037230,
@@ -315,6 +322,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!ZY4Xw2hZD4dN8uHQ.FFW4oWL8fWaCKwPf"
     }
   ],
@@ -326,7 +336,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "2.0.068",
     "createdTime": 1726788463904,

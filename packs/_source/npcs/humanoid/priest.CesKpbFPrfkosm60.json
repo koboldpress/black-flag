@@ -158,12 +158,9 @@
       "src": "systems/black-flag/artwork/tokens/priest.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
-      "offsetX": 0,
-      "offsetY": 0,
       "fit": "contain",
       "scaleX": 1,
       "scaleY": 1,
-      "rotation": 0,
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
@@ -214,7 +211,7 @@
       "saturation": 0,
       "contrast": 0
     },
-    "detectionModes": [],
+    "detectionModes": {},
     "occludable": {
       "radius": 0
     },
@@ -238,7 +235,8 @@
       "src": null,
       "disposition": false
     },
-    "movementAction": null
+    "movementAction": null,
+    "depth": 1
   },
   "items": [
     {
@@ -309,7 +307,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.FO53M9vYJXLrYPDs",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -366,28 +364,26 @@
         {
           "origin": "Actor.jmCstjvQ7Q1iRpz6.Item.eFFw1hHZ5AvZtmoB",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Divine Blessing (Necrotic)",
           "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
           "_id": "yOucNUj8r1FOnnHx",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "necrotic",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "necrotic",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -397,7 +393,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -405,33 +401,34 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!CesKpbFPrfkosm60.eFFw1hHZ5AvZtmoB.yOucNUj8r1FOnnHx"
         },
         {
           "origin": "Actor.jmCstjvQ7Q1iRpz6.Item.eFFw1hHZ5AvZtmoB",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Divine Blessing (Radiant)",
           "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
           "_id": "rGdOfGwLQSLQXnfe",
           "type": "base",
-          "system": {},
-          "changes": [
-            {
-              "key": "system.traits.damage.resistances.value",
-              "mode": 2,
-              "value": "radiant",
-              "priority": null
-            }
-          ],
+          "system": {
+            "changes": [
+              {
+                "key": "system.traits.damage.resistances.value",
+                "value": "radiant",
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "description": "",
           "tint": "#ffffff",
           "transfer": true,
@@ -441,7 +438,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -449,6 +446,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!CesKpbFPrfkosm60.eFFw1hHZ5AvZtmoB.rGdOfGwLQSLQXnfe"
         }
       ],
@@ -466,7 +466,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -534,7 +534,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -648,7 +648,7 @@
       "_stats": {
         "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -828,7 +828,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.items.Item.XOrCLbriQXUoLCTL",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": null,
@@ -976,21 +976,19 @@
         {
           "origin": "Compendium.black-flag.spells.Item.LGHPueVAi4bMnmFc",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Guidance",
           "img": "icons/magic/symbols/circled-gem-pink.webp",
           "_id": "QX9n2KU4w9evJUYL",
           "type": "base",
-          "system": {},
-          "changes": [],
+          "system": {
+            "changes": []
+          },
           "description": "<p>Once before the spell ends, you can roll a [[/r d4]] and add the number rolled to one ability check of your. You can roll the die before or after making the ability check. The spell then ends.</p>",
           "tint": "#ffffff",
           "transfer": false,
@@ -1000,7 +998,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1008,6 +1006,9 @@
             "lastModifiedBy": null,
             "exportSource": null
           },
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!CesKpbFPrfkosm60.R9a3pLP2zRaZfX7b.QX9n2KU4w9evJUYL"
         }
       ],
@@ -1025,7 +1026,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.LGHPueVAi4bMnmFc",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1173,7 +1174,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.TWVI2s8oV0TiSEKy",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1317,7 +1318,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.J9zLZYHvTHwzB98C",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1484,25 +1485,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.HorNiol8kDK0QGIo",
           "duration": {
-            "rounds": null,
-            "startTime": null,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": false,
           "name": "Bane",
           "_id": "Haf0C3lt2Dpfgd2x",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"-1d4\" }",
-              "priority": null
-            }
-          ],
           "description": "<p>You make an attack roll or a save before the spell ends, you must roll a [[/r d4]] and subtract the number rolled from the attack roll or save.</p>",
           "transfer": false,
           "statuses": [],
@@ -1511,7 +1501,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1521,8 +1511,33 @@
           },
           "img": "icons/magic/unholy/projectiles-binary-pink.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "bonus",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "attack",
+                        "ability-save"
+                      ]
+                    }
+                  ],
+                  "formula": "-1d4"
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": null,
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!CesKpbFPrfkosm60.h7VynGpRormIetU4.Haf0C3lt2Dpfgd2x"
         }
       ],
@@ -1540,7 +1555,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.HorNiol8kDK0QGIo",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1697,25 +1712,14 @@
         {
           "origin": "Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S",
           "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": null,
-            "startTurn": null
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
           },
           "disabled": true,
           "name": "Bless",
           "_id": "2a767QpT9Rm2qcqm",
-          "changes": [
-            {
-              "key": "system.modifiers",
-              "mode": 2,
-              "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"1d4\" }",
-              "priority": null
-            }
-          ],
           "description": "<p>When a target makes an attack roll or a save before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or save.</p>",
           "transfer": true,
           "statuses": [],
@@ -1724,7 +1728,7 @@
           "_stats": {
             "compendiumSource": null,
             "duplicateSource": null,
-            "coreVersion": "13.347",
+            "coreVersion": "14.361",
             "systemId": "black-flag",
             "systemVersion": "0.10.049",
             "createdTime": null,
@@ -1734,8 +1738,40 @@
           },
           "img": "icons/magic/light/orb-shadow-blue.webp",
           "type": "base",
-          "system": {},
+          "system": {
+            "changes": [
+              {
+                "key": "system.modifiers",
+                "value": {
+                  "type": "bonus",
+                  "filter": [
+                    {
+                      "k": "type",
+                      "o": "in",
+                      "v": [
+                        "attack",
+                        "ability-save"
+                      ]
+                    }
+                  ],
+                  "formula": "1d4"
+                },
+                "priority": null,
+                "type": "add"
+              }
+            ]
+          },
           "sort": 0,
+          "start": {
+            "combat": null,
+            "round": null,
+            "time": 0,
+            "turn": null,
+            "combatant": null,
+            "initiative": null
+          },
+          "showIcon": 1,
+          "folder": null,
           "_key": "!actors.items.effects!CesKpbFPrfkosm60.FGacNHVEkgORRLxA.2a767QpT9Rm2qcqm"
         }
       ],
@@ -1753,7 +1789,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -1997,7 +2033,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2166,7 +2202,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.t61I6zrmEDPdOLfw",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2345,7 +2381,7 @@
       "_stats": {
         "duplicateSource": null,
         "compendiumSource": "Compendium.black-flag.spells.Item.Aqff6XGGmiVXo6A6",
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.049",
         "createdTime": null,
@@ -2543,7 +2579,7 @@
         "compendiumSource": "Actor.BFZstHfi0baxmNx6.Item.hN2trEj79VPyGrqZ",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1756748928727,
@@ -2557,7 +2593,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.049",
     "createdTime": 1729607939811,

@@ -124,28 +124,43 @@
     {
       "origin": "Compendium.black-flag.spells.Item.41ZrbBuwqsxQ2eR2",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Glibness",
       "img": "icons/magic/control/fear-fright-monster-purple-blue.webp",
       "_id": "4KLy854QcvLlmoIq",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"min\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"charisma\" }], \"formula\": \"15\" }",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "min",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "ability-check",
+                    "ability-save"
+                  ]
+                },
+                {
+                  "k": "ability",
+                  "v": "charisma"
+                }
+              ],
+              "formula": "15"
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
+      },
       "description": "<p>Until the spell ends, when you make a CHA ability check or save, you can replace the number you roll with a 15. In addition, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -155,7 +170,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.040",
         "createdTime": 1721967335121,
@@ -163,6 +178,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!41ZrbBuwqsxQ2eR2.4KLy854QcvLlmoIq"
     }
   ],
@@ -173,7 +191,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1721967208310,

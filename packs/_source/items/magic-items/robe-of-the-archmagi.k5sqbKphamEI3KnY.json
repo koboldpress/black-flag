@@ -46,40 +46,80 @@
       "name": "The Archmagi",
       "origin": "Compendium.black-flag.items.Item.k5sqbKphamEI3KnY",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/back/cloak-plain-white.webp",
       "_id": "jBDiSrbQZiVkLOHy",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.attributes.ac.formulas",
+            "value": {
+              "label": "Robe of the Archmagi",
+              "formula": "15 + @abilities.dexterity.mod",
+              "armored": false
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "ability-save"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You have advantage on saves against spells and other magical effects."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "bonus",
+              "filter": [
+                {
+                  "o": "OR",
+                  "v": [
+                    {
+                      "k": "type",
+                      "v": "spellcasting-dc"
+                    },
+                    {
+                      "o": "AND",
+                      "v": [
+                        {
+                          "k": "type",
+                          "v": "attack"
+                        },
+                        {
+                          "k": "activity.attack.type.classification",
+                          "v": "spell"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "formula": 2
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.attributes.ac.formulas",
-          "mode": 2,
-          "value": "{ \"label\": \"Robe of the Archmagi\", \"formula\": \"15 + @abilities.dexterity.mod\", \"armored\": false }",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against spells and other magical effects.\" } }",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"spellcasting-dc\" }, { \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }] }] }], \"formula\": 2 }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -89,7 +129,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1729892808385,
@@ -97,6 +137,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!k5sqbKphamEI3KnY.jBDiSrbQZiVkLOHy"
     }
   ],
@@ -108,7 +151,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.050",
     "createdTime": 1725071115999,

@@ -143,34 +143,32 @@
     {
       "origin": "Compendium.black-flag.spells.Item.nw5Cqw1rX3c3u7Fd",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Feeblemind",
       "img": "icons/magic/control/voodoo-doll-pain-damage-tan.webp",
       "_id": "jTC3GqL6djeOfxWd",
       "type": "base",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.abilities.intelligence.value",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        },
-        {
-          "key": "system.abilities.charisma.value",
-          "mode": 5,
-          "value": "1",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.abilities.intelligence.value",
+            "value": 1,
+            "priority": null,
+            "type": "override"
+          },
+          {
+            "key": "system.abilities.charisma.value",
+            "value": 1,
+            "priority": null,
+            "type": "override"
+          }
+        ]
+      },
       "description": "<p>Your INT and CHA become 1 (−5). You can’t cast spells, activate magic items, understand language, or communicate in any intelligible way. However, you can identify its friends, follow them, and even protect them.</p><p>At the end of every 30 days, you can repeat your save against this spell, ending the spell on a success.</p>",
       "tint": "#ffffff",
       "transfer": false,
@@ -180,7 +178,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721443120048,
@@ -188,6 +186,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!nw5Cqw1rX3c3u7Fd.jTC3GqL6djeOfxWd"
     }
   ],
@@ -198,7 +199,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1721442974221,

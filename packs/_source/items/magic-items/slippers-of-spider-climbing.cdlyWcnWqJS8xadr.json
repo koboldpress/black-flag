@@ -46,26 +46,24 @@
       "name": "Spider Climbing",
       "origin": "Compendium.black-flag.items.Item.cdlyWcnWqJS8xadr",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/feet/shoes-rounded-pink.webp",
       "_id": "HhuPPgGmICKCi1Az",
-      "system": {},
-      "changes": [
-        {
-          "key": "system.traits.movements.types.climb",
-          "mode": 4,
-          "value": "@base",
-          "priority": null
-        }
-      ],
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movements.types.climb",
+            "value": "@base",
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
+      },
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -75,7 +73,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1730072502747,
@@ -83,6 +81,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!cdlyWcnWqJS8xadr.HhuPPgGmICKCi1Az"
     }
   ],
@@ -94,7 +95,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1725071284372,

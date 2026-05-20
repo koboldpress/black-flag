@@ -256,32 +256,21 @@
     {
       "origin": "Compendium.black-flag.spells.Item.P3e0uUb8bp9vnRO2",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Aquatic Adaptation",
       "_id": "loclAaiflDrkcBX3",
-      "changes": [
-        {
-          "key": "system.traits.movement.types.swim",
-          "mode": 4,
-          "value": "@base",
-          "priority": null
-        }
-      ],
       "description": "<p>You adapt your body to an aquatic environment, sprouting gills and growing webbing between your fingers. You can breathe underwater and gain a swimming speed equal to your walking speed.</p>",
       "transfer": false,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -293,32 +282,40 @@
       },
       "img": "icons/creatures/fish/fish-fangtooth-skeletal-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": [
+          {
+            "key": "system.traits.movement.types.swim",
+            "value": "@base",
+            "priority": null,
+            "type": "upgrade"
+          }
+        ]
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!P3e0uUb8bp9vnRO2.loclAaiflDrkcBX3"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.P3e0uUb8bp9vnRO2",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Change Appearance",
       "_id": "WyY1OnwEuyOSAP5v",
-      "changes": [],
       "description": "<p>You transform your appearance. You decide what you look like, including your height, weight, facial features, the sound of your voice, hair length, coloration, and distinguishing characteristics, if any. You can make yourself appear as a member of another lineage, though none of your statistics change. You can’t appear as a creature of a different size than you, and your basic shape stays the same; if you’re bipedal, you can’t use this spell to become quadrupedal, for instance. At any time for the duration of the spell, you can use your action to change your appearance in this way again.</p>",
       "transfer": false,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -330,32 +327,33 @@
       },
       "img": "icons/magic/control/silhouette-hold-change-green.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!P3e0uUb8bp9vnRO2.WyY1OnwEuyOSAP5v"
     },
     {
       "origin": "Compendium.black-flag.spells.Item.P3e0uUb8bp9vnRO2",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Natural Weapons",
       "_id": "BvP5nqj7Rb1fI20m",
-      "changes": [],
       "description": "<p>You grow a natural weapon of your choice, such as claws, fangs, spines, or horns. Your unarmed strikes deal 1d6 bludgeoning, piercing, or slashing damage as appropriate to the natural weapon you chose, and you are proficient with your unarmed strikes. Finally, the natural weapon is magic, and you have a +1 bonus to attack and damage rolls you make using it.</p>",
       "transfer": false,
       "statuses": [],
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -367,8 +365,13 @@
       },
       "img": "icons/creatures/claws/claw-hooked-purple.webp",
       "type": "base",
-      "system": {},
+      "system": {
+        "changes": []
+      },
       "sort": 0,
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!P3e0uUb8bp9vnRO2.BvP5nqj7Rb1fI20m"
     }
   ],
@@ -380,7 +383,7 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "createdTime": 1717965611302,
     "modifiedTime": 1723697211561,
     "lastModifiedBy": "blackflag0000000",

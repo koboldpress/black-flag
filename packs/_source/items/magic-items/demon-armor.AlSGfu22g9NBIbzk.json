@@ -150,34 +150,47 @@
       "name": "Demon Armor",
       "origin": "Compendium.black-flag.items.Item.AlSGfu22g9NBIbzk",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "img": "icons/equipment/chest/breastplate-layered-leather-green.webp",
       "_id": "OZ1NxntpsS5iuZRm",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.proficiencies.languages.value",
+            "value": "abyssal",
+            "priority": null,
+            "type": "add"
+          },
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "o": "in",
+                  "v": [
+                    "attack",
+                    "ability-save"
+                  ]
+                }
+              ],
+              "note": {
+                "rollMode": -1,
+                "text": "You have disadvantage on attack rolls against demons and on saves against their spells and special abilities."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.proficiencies.languages.value",
-          "mode": 2,
-          "value": "abyssal",
-          "priority": null
-        },
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on attack rolls against demons and on saves against their spells and special abilities.\" } }",
-          "priority": null
-        }
-      ],
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
@@ -187,7 +200,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1727900134241,
@@ -195,6 +208,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!AlSGfu22g9NBIbzk.OZ1NxntpsS5iuZRm"
     }
   ],
@@ -205,7 +221,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.047",
     "createdTime": 1725589059018,

@@ -41,13 +41,10 @@
     {
       "origin": "Compendium.black-flag.items.Item.e9LqhTIb4WjmjmUn",
       "duration": {
-        "rounds": null,
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "disabled": false,
       "name": "Boots of Elvenkind",
@@ -55,16 +52,36 @@
       "_id": "EpIuEcDDEYco3Csp",
       "type": "base",
       "system": {
-        "magical": true
+        "magical": true,
+        "changes": [
+          {
+            "key": "system.modifiers",
+            "value": {
+              "type": "note",
+              "filter": [
+                {
+                  "k": "type",
+                  "v": "skill-check"
+                },
+                {
+                  "k": "ability",
+                  "v": "dexterity"
+                },
+                {
+                  "k": "skill",
+                  "v": "stealth"
+                }
+              ],
+              "note": {
+                "rollMode": 1,
+                "text": "You also have advantage on DEX (Stealth) checks that rely on moving silently."
+              }
+            },
+            "priority": null,
+            "type": "add"
+          }
+        ]
       },
-      "changes": [
-        {
-          "key": "system.modifiers",
-          "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }, { \"k\": \"skill\", \"v\": \"stealth\" }], \"note\": { \"rollMode\": 1, \"text\": \"You also have advantage on DEX (Stealth) checks that rely on moving silently.\" } }",
-          "priority": null
-        }
-      ],
       "description": "<p>You also have advantage on DEX (Stealth) checks that rely on moving silently.</p>",
       "tint": "#ffffff",
       "transfer": true,
@@ -74,7 +91,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "black-flag",
         "systemVersion": "2.0.068",
         "createdTime": 1725901431018,
@@ -82,6 +99,9 @@
         "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
       "_key": "!items.effects!e9LqhTIb4WjmjmUn.EpIuEcDDEYco3Csp"
     }
   ],
@@ -93,7 +113,7 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.361",
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1724983184659,
