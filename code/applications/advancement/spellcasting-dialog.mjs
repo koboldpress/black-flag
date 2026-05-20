@@ -364,8 +364,8 @@ export default class SpellcastingDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onRender(context, options) {
-		super._onRender(context, options);
+	async _onRender(context, options) {
+		await super._onRender(context, options);
 		this.element.querySelectorAll("[data-spell-uuid]").forEach(element => {
 			element.dataset.tooltip = `<section class="loading" data-uuid="${element.dataset.spellUuid}"></section>`;
 			element.dataset.tooltipClass = "black-flag black-flag-tooltip item-tooltip";

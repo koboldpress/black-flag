@@ -412,8 +412,8 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onFirstRender(context, options) {
-		super._onFirstRender(context, options);
+	async _onFirstRender(context, options) {
+		await super._onFirstRender(context, options);
 		const form = this.form;
 		if (form) {
 			form.id = this.formID;
@@ -427,7 +427,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/** @inheritDoc */
 	async _onRender(context, options) {
-		super._onRender(context, options);
+		await super._onRender(context, options);
 		this.element.toggleAttribute("data-progression", this.progressionView);
 
 		if (this.progressionView) {
@@ -439,7 +439,10 @@ export default class PCSheet extends BaseActorSheet {
 					await flow._render(true);
 				} else {
 					await flow.render({ force: true });
-					flow._insertElement(flow.element);
+					const doc = this.element.ownerDocument;
+					const existing = doc.getElementById(flow.element.id);
+					if (existing) existing.replaceWith(flow.element);
+					else flow._insertElement(flow.element);
 				}
 			}
 		}

@@ -230,8 +230,8 @@ export default class AdvancementFlow extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onFirstRender(context, options) {
-		super._onFirstRender(context, options);
+	async _onFirstRender(context, options) {
+		await super._onFirstRender(context, options);
 		Object.assign(this.element.dataset, {
 			id: this.advancement.id,
 			level: this.level,

@@ -79,8 +79,8 @@ export default class ConceptSelectionDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onFirstRender(context, options) {
-		super._onFirstRender(context, options);
+	async _onFirstRender(context, options) {
+		await super._onFirstRender(context, options);
 		this.element.classList.add(this.type);
 	}
 

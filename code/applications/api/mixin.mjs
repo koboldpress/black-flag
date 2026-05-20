@@ -137,8 +137,8 @@ export default function ApplicationV2Mixin(Base) {
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/** @inheritDoc */
-		_onFirstRender(context, options) {
-			super._onFirstRender(context, options);
+		async _onFirstRender(context, options) {
+			await super._onFirstRender(context, options);
 			const containers = {};
 			for (const [part, config] of Object.entries(this.constructor.PARTS)) {
 				if (!config.container?.id) continue;
@@ -158,8 +158,8 @@ export default function ApplicationV2Mixin(Base) {
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/** @inheritDoc */
-		_onRender(context, options) {
-			super._onRender(context, options);
+		async _onRender(context, options) {
+			await super._onRender(context, options);
 
 			// Attach draggable
 			if (this.options.dragDrop && this.options.dragSelectors.length) {

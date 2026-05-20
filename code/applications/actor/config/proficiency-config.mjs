@@ -58,8 +58,8 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onRender(context, options) {
-		super._onRender(context, options);
+	async _onRender(context, options) {
+		await super._onRender(context, options);
 		for (const checkbox of this.element.querySelectorAll('input[type="checkbox"]:checked')) {
 			this._onToggleCategory(checkbox);
 		}

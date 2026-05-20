@@ -165,8 +165,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onFirstRender(context, options) {
-		super._onFirstRender(context, options);
+	async _onFirstRender(context, options) {
+		await super._onFirstRender(context, options);
 		this.document.constructor._registerApp(this.document, this);
 		this.item.apps[this.id] = this;
 	}
@@ -174,8 +174,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onRender(context, options) {
-		super._onRender(context, options);
+	async _onRender(context, options) {
+		await super._onRender(context, options);
 
 		for (const element of this.element.querySelectorAll("[data-expand-id]")) {
 			element

@@ -98,8 +98,8 @@ export default class ActivationMessageData extends ChatMessageDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onRender(element) {
-		super._onRender(element);
+	async _onRender(element) {
+		await super._onRender(element);
 		this.activity?.onRenderChatCard(this.parent, element);
 		this._renderButtons(element);
 		this.activity?.activateChatListeners(this.parent, element);

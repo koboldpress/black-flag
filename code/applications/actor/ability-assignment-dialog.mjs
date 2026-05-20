@@ -179,8 +179,8 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_onRender(context, options) {
-		super._onRender(context, options);
+	async _onRender(context, options) {
+		await super._onRender(context, options);
 		for (const element of this.element.querySelectorAll('.scores > fieldset [type="radio"]')) {
 			element.addEventListener("change", this._onAssignmentChoice.bind(this));
 		}

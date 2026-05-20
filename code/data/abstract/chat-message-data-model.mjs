@@ -56,7 +56,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 		const click = this.#onClick.bind(this);
 		element.addEventListener("click", click);
 		element.addEventListener("contextmenu", click);
-		this._onRender(element);
+		await this._onRender(element);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -90,7 +90,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 	 * @param {HTMLElement} element
 	 * @protected
 	 */
-	_onRender(element) {
+	async _onRender(element) {
 		for (const e of element.querySelectorAll(".item-tooltip")) {
 			const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
 			if (!uuid) continue;
