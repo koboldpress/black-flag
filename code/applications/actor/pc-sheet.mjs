@@ -471,7 +471,7 @@ export default class PCSheet extends BaseActorSheet {
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static #assignAbilities(event, target) {
-		new AbilityAssignmentDialog({ document: this.actor }).render({ force: true });
+		this._renderChild(new AbilityAssignmentDialog({ document: this.actor }));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -483,11 +483,14 @@ export default class PCSheet extends BaseActorSheet {
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static #levelDown(event, target) {
-		BlackFlag.applications.api.BFDialog.confirm({
-			content: `<p><strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.localize(
+		this._confirmDialog({
+			content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.localize(
 				"BF.Progression.Action.LevelDown.Message"
 			)}</p>`,
 			yes: { callback: () => this.actor.system.levelDown() },
+			position: {
+				width: 400
+			},
 			window: {
 				title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`
 			}
@@ -506,7 +509,7 @@ export default class PCSheet extends BaseActorSheet {
 		const allowMulticlassing = game.settings.get(game.system.id, "allowMulticlassing");
 		const cls = this.actor.system.progression.levels[1]?.class;
 		if (cls && allowMulticlassing) {
-			new LevelUpDialog({ document: this.actor }).render({ force: true });
+			this._renderChild(new LevelUpDialog({ document: this.actor }));
 		} else if (cls) {
 			try {
 				await this.actor.system.levelUp(cls);
@@ -514,7 +517,7 @@ export default class PCSheet extends BaseActorSheet {
 				ui.notifications.warn(err.message);
 			}
 		} else {
-			new ConceptSelectionDialog({ document: this.actor, details: { type: "class" } }).render({ force: true });
+			this._renderChild(new ConceptSelectionDialog({ document: this.actor, details: { type: "class" } }));
 		}
 	}
 
@@ -552,10 +555,12 @@ export default class PCSheet extends BaseActorSheet {
 	 */
 	static #selectConcept(event, target) {
 		const classIdentifier = target.closest("[data-class]")?.dataset.class;
-		new ConceptSelectionDialog({
-			document: this.actor,
-			details: { classIdentifier, type: target.dataset.type }
-		}).render({ force: true });
+		this._renderChild(
+			new ConceptSelectionDialog({
+				document: this.actor,
+				details: { classIdentifier, type: target.dataset.type }
+			})
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

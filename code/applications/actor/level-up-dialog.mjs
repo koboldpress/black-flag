@@ -88,9 +88,9 @@ export default class LevelUpDialog extends BFApplication {
 				ui.notifications.warn(err.message);
 			}
 		} else {
-			new ConceptSelectionDialog({ document: this.actor, details: { multiclass: true, type: "class" } }).render({
-				force: true
-			});
+			this.actor.sheet._renderChild(
+				new ConceptSelectionDialog({ document: this.actor, details: { multiclass: true, type: "class" } })
+			);
 		}
 	}
 }

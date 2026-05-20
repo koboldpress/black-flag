@@ -206,7 +206,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				label: "BF.SplitStack.Title",
 				icon: '<i class="fa-solid fa-arrows-split-up-and-left" inert></i>',
 				visible: () => this.isEditable && (item.system.quantity ?? 0) > 1,
-				callback: () => new SplitStackDialog({ document: item }).render({ force: true }),
+				callback: () => this.app._renderChild(new SplitStackDialog({ document: item })),
 				group: "action"
 			},
 			{
@@ -284,17 +284,17 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			case "attune":
 				return item.setFlag("black-flag", "relationship.attuned", !item.system.attuned);
 			case "deleteActivity":
-				if (activity) return activity.deleteDialog();
+				if (activity) return activity.deleteDialog({ sheet: this.app });
 			case "delete":
-				return item.deleteDialog();
+				return item.deleteDialog({ sheet: this.app });
 			case "duplicate":
 				return item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name }) }, { save: true });
 			case "editActivity":
 			case "viewActivity":
-				if (activity) return activity.sheet.render({ force: true });
+				if (activity) return this.app._openDocumentSheet(activity);
 			case "edit":
 			case "view":
-				return item.sheet.render(true);
+				return this.app._openDocumentSheet(item);
 			case "enable":
 				return item.setFlag("black-flag", "relationship.enabled", !item.enabled);
 			case "equip":
@@ -302,7 +302,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			case "expand":
 				return this._onExpand(item, target);
 			case "activate":
-				if (activity) return activity.activate({ event });
+				if (activity) return activity.activate({ event }, { options: { sheet: this.app } });
 			case "identify":
 				return item.system.toggleIdentification();
 			case "post":

@@ -315,7 +315,7 @@ export default class BaseItemSheet extends PrimarySheetMixin(BFDocumentSheet) {
 
 		switch (target.dataset.type) {
 			case "prerequisite":
-				return new PrerequisiteConfig(config).render({ force: true });
+				return this._renderChild(new PrerequisiteConfig(config));
 		}
 	}
 
@@ -336,11 +336,13 @@ export default class BaseItemSheet extends PrimarySheetMixin(BFDocumentSheet) {
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static #showIcon(event, target) {
-		new foundry.applications.apps.ImagePopout({
-			src: this.item.img,
-			uuid: this.item.uuid,
-			window: { title: this.item.system.identified === false ? this.item.system.unidentified.name : this.item.name }
-		}).render({ force: true });
+		this._renderChild(
+			new foundry.applications.apps.ImagePopout({
+				src: this.item.img,
+				uuid: this.item.uuid,
+				window: { title: this.item.system.identified === false ? this.item.system.unidentified.name : this.item.name }
+			})
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -353,6 +355,22 @@ export default class BaseItemSheet extends PrimarySheetMixin(BFDocumentSheet) {
 	 */
 	static #toggleIdentification(event, target) {
 		this.item.system.toggleIdentification?.();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Detached Windows           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_renderChild(app, options = {}) {
+		if (this.parent) return this.parent.renderChild(app, options);
+		if (this.window?.windowId)
+			return app.render({
+				force: true,
+				window: { detached: true, windowId: this.window.windowId },
+				...options
+			});
+		return app.render({ force: true, ...options });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

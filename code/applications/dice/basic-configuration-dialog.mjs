@@ -410,7 +410,8 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 		return new Promise((resolve, reject) => {
 			const app = new this(config, message, dialog.options);
 			app.addEventListener("close", () => resolve(app.rolls), { once: true });
-			app.render({ force: true });
+			if (dialog.sheet?._renderChild) dialog.sheet._renderChild(app);
+			else app.render({ force: true });
 		});
 	}
 }

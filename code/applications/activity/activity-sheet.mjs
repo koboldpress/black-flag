@@ -465,7 +465,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	static async #deleteEffect(event, target) {
 		if (!this.activity.system.effects) return;
 		const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
-		const result = await this.item.effects.get(effectId)?.deleteDialog();
+		const result = await this.item.effects.get(effectId)?.deleteDialog({ sheet: this });
 		if (result instanceof ActiveEffect) {
 			const effects = this.activity.toObject().system.effects.filter(e => e._id !== effectId);
 			this.activity.update({ "system.effects": effects });

@@ -28,12 +28,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	/** @override */
 	static DEFAULT_OPTIONS = {
 		actions: {
-			deleteItem: BaseActorSheet.#deleteItem,
 			rest: BaseActorSheet.#rest,
 			roll: BaseActorSheet.#roll,
 			showArtwork: BaseActorSheet.#showArtwork,
-			showConfiguration: BaseActorSheet.#showConfiguration,
-			showItem: BaseActorSheet.#showItem
+			showConfiguration: BaseActorSheet.#showConfiguration
 		},
 		classes: ["actor", "standard-form"],
 		dragDrop: false,
@@ -375,7 +373,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	 * @returns {Promise}
 	 */
 	async _onAction(event, dataset) {
-		if (dataset.action === "rest") this.actor.rest({ type: dataset.type });
+		if (dataset.action === "rest") this.actor.rest({ sheet: this, type: dataset.type });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -401,26 +399,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Handle deleting an item.
-	 * @this {BaseActorSheet}
-	 * @param {Event} event - Triggering click event.
-	 * @param {HTMLElement} target - Button that was clicked.
-	 */
-	static #deleteItem(event, target) {
-		const item = this.actor.items.get(target.closest("[data-item-id]")?.dataset.itemId);
-		item?.deleteDialog();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Handle resting the actor.
 	 * @this {BaseActorSheet}
 	 * @param {Event} event - Triggering click event.
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static #rest(event, target) {
-		this.actor.rest({ type: target.dataset.type });
+		this.actor.rest({ sheet: this, type: target.dataset.type });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -479,33 +464,33 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 		const options = { document: this.actor, selectedId: target.dataset.key };
 		switch (target.dataset.type) {
 			case "ability":
-				return new AbilityConfig(options).render({ force: true });
+				return this._renderChild(new AbilityConfig(options));
 			case "armor-class":
-				return new ArmorClassConfig(options).render({ force: true });
+				return this._renderChild(new ArmorClassConfig(options));
 			case "health":
-				return new HealthConfig(options).render({ force: true });
+				return this._renderChild(new HealthConfig(options));
 			case "initiative":
-				return new InitiativeConfig(options).render({ force: true });
+				return this._renderChild(new InitiativeConfig(options));
 			case "language":
-				return new LanguageConfig(options).render({ force: true });
+				return this._renderChild(new LanguageConfig(options));
 			case "luck":
-				return new LuckConfig(options).render({ force: true });
+				return this._renderChild(new LuckConfig(options));
 			case "movement":
-				return new MovementConfig(options).render({ force: true });
+				return this._renderChild(new MovementConfig(options));
 			case "proficiency":
-				return new ProficiencyConfig(options).render({ force: true });
+				return this._renderChild(new ProficiencyConfig(options));
 			case "resistance":
-				return new ResistanceConfig(options).render({ force: true });
+				return this._renderChild(new ResistanceConfig(options));
 			case "senses":
-				return new SensesConfig(options).render({ force: true });
+				return this._renderChild(new SensesConfig(options));
 			case "skill":
-				return new SkillConfig(options).render({ force: true });
+				return this._renderChild(new SkillConfig(options));
 			case "tool":
-				return new ToolConfig(options).render({ force: true });
+				return this._renderChild(new ToolConfig(options));
 			case "type":
-				return new TypeConfig(options).render({ force: true });
+				return this._renderChild(new TypeConfig(options));
 			case "vehicle":
-				return new ToolConfig({ ...options, trait: "vehicles" }).render({ force: true });
+				return this._renderChild(new ToolConfig({ ...options, trait: "vehicles" }));
 		}
 	}
 
@@ -519,19 +504,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	 * @abstract
 	 */
 	_showConfiguration(event, target) {}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Handle showing an item's sheet.
-	 * @this {BaseActorSheet}
-	 * @param {Event} event - Triggering click event.
-	 * @param {HTMLElement} target - Button that was clicked.
-	 */
-	static #showItem(event, target) {
-		const item = this.actor.items.get(target.closest("[data-item-id]")?.dataset.itemId);
-		item?.sheet.render({ force: true });
-	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Form Submission           */

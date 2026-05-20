@@ -388,7 +388,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(foundry.appv1.she
 				const item = this.actor.items.get(itemId);
 				switch (subAction) {
 					case "delete":
-						return item?.deleteDialog();
+						return item?.deleteDialog({ sheet: this });
 					case "edit":
 					case "view":
 						return item?.sheet.render(true);

@@ -11,6 +11,11 @@
 	flex-direction: column;
 	gap: 1rem;
 
+	body.detached & {
+		max-block-size: unset;
+		max-inline-size: unset;
+	}
+
 	> p {
 		font-size: var(--font-size-16);
 		padding-inline: 1em;

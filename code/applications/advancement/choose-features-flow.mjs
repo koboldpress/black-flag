@@ -100,14 +100,16 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 			let replaces;
 			try {
 				({ choice, replaces } = await new Promise((resolve, reject) => {
-					new ChooseFeaturesDialog(this, {
-						details: {
-							isReplacement,
-							level: this.advancement.relavantLevel(this.levels)
-						},
-						resolve,
-						reject
-					}).render({ force: true });
+					this.actor.sheet._renderChild(
+						new ChooseFeaturesDialog(this, {
+							details: {
+								isReplacement,
+								level: this.advancement.relavantLevel(this.levels)
+							},
+							resolve,
+							reject
+						})
+					);
 				}));
 			} catch (err) {
 				return;

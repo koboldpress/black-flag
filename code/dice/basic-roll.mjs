@@ -40,6 +40,7 @@ import { buildRoll } from "../utils/_module.mjs";
  * @property {boolean} [configure=true] - Should the roll configuration dialog be displayed?
  * @property {typeof BaseConfigurationDialog} - [applicationClass] - Alternate configuration dialog application to use.
  * @property {BaseConfigurationDialogOptions} [options] - Additional options passed through to the configuration dialog.
+ * @property {ApplicationV2} [sheet] - Sheet to render the dialog as a child of.
  */
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -152,6 +153,7 @@ export default class BasicRoll extends Roll {
 		}
 
 		this.applyKeybindings(config, dialog, message);
+		dialog.sheet ??= foundry.applications.instances.get(config.event?.target?.closest(".application")?.id);
 
 		let rolls;
 		if (dialog.configure === false) {

@@ -141,7 +141,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 	/** @inheritDoc */
 	async _onAction(event, dataset) {
 		if (dataset.action === "config" && dataset.type === "spellcasting") {
-			new NPCSpellcastingConfig({ document: this.actor }).render({ force: true });
+			this._renderChild(new NPCSpellcastingConfig({ document: this.actor }));
 			return;
 		}
 		return super._onAction(event, dataset);
@@ -157,7 +157,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 	 */
 	static #longRest(event, target) {
 		// TODO: Figure out why this is not getting the individual context menu entry
-		this.actor.rest({ type: "long" });
+		this.actor.rest({ sheet: this, type: "long" });
 	}
 
 	/**
@@ -168,7 +168,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 	 */
 	static #shortRest(event, target) {
 		// TODO: Figure out why this is not getting the individual context menu entry
-		this.actor.rest({ type: "short" });
+		this.actor.rest({ sheet: this, type: "short" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -176,7 +176,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 	/** @inheritDoc */
 	async _showConfiguration(event, target) {
 		if (target.dataset.type === "spellcasting") {
-			new NPCSpellcastingConfig({ document: this.actor }).render({ force: true });
+			this._renderChild(new NPCSpellcastingConfig({ document: this.actor }));
 			return false;
 		}
 	}

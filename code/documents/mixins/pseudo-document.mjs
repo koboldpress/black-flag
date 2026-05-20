@@ -412,25 +412,26 @@ export default Base =>
 		 * @param {object} [options] - Positioning and sizing options for the resulting dialog.
 		 * @returns {Promise<PseudoDocument>} - A Promise which resolves to the deleted PseudoDocument.
 		 */
-		async deleteDialog(options = {}) {
+		async deleteDialog({ sheet, ...options } = {}) {
 			const type = game.i18n.localize(this.metadata.title);
-			return BlackFlag.applications.api.BFDialog.confirm(
-				foundry.utils.mergeObject(
-					{
-						content: `<p><strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format(
-							"SIDEBAR.DeleteWarning",
-							{
-								type
-							}
-						)}</p>`,
-						yes: { callback: () => this.delete() },
-						window: {
-							title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`
+			const config = foundry.utils.mergeObject(
+				{
+					content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.format(
+						"SIDEBAR.DeleteWarning",
+						{
+							type
 						}
-					},
-					options
-				)
+					)}</p>`,
+					yes: { callback: () => this.delete() },
+					position: { width: 400 },
+					window: {
+						title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`
+					}
+				},
+				options
 			);
+			if (sheet) return sheet._confirmDialog(config);
+			return BlackFlag.applications.api.BFDialog.confirm(config);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */

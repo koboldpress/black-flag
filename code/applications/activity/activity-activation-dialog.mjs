@@ -453,19 +453,21 @@ export default class ActivityActivationDialog extends BFFormDialog {
 	 * @param {Activity} activity - Activity to activate.
 	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
 	 * @param {object} options - Additional options for the application.
+	 * @param {ApplicationV2} [options.sheet] - The sheet to render this dialog a child of.
 	 * @returns {Promise<ActivityActivationConfiguration>} - Final configuration object if activated.
 	 * @throws error if activity couldn't be activated.
 	 */
-	static async create(activity, config, options) {
+	static async create(activity, config, { sheet, ...options } = {}) {
 		if (!activity.item.isOwned) throw new Error("Cannot activate an activity that is not owned.");
 
 		return new Promise((resolve, reject) => {
 			const dialog = new this({ activity, config, ...options });
-			dialog.addEventListener("close", event => {
+			dialog.addEventListener("close", () => {
 				if (dialog.used) resolve(dialog.config);
 				else reject();
 			});
-			dialog.render({ force: true });
+			if (sheet) sheet._renderChild(dialog);
+			else dialog.render({ force: true });
 		});
 	}
 }

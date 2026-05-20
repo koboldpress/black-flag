@@ -74,9 +74,11 @@ export default class ImprovementFlow extends AdvancementFlow {
 		if (event.submitter?.dataset.action === "selectChoice") {
 			let choice;
 			try {
-				const promise = new Promise((resolve, reject) => {
-					new ChooseFeaturesDialog(this, { details: { type: "talent" }, resolve, reject }).render({ force: true });
-				});
+				const promise = new Promise((resolve, reject) =>
+					this.actor.sheet._renderChild(
+						new ChooseFeaturesDialog(this, { details: { type: "talent" }, resolve, reject })
+					)
+				);
 				choice = await promise;
 			} catch (err) {
 				return;

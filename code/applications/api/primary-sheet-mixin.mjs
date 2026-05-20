@@ -12,7 +12,9 @@ export default function PrimarySheetMixin(Base) {
 		static DEFAULT_OPTIONS = {
 			actions: {
 				configureIdentity: PrimarySheet.#configureIdentity,
+				deleteDocument: PrimarySheet.#onDeleteDocument,
 				editImage: PrimarySheet._onEditImage,
+				showDocument: PrimarySheet.#onShowDocument,
 				toggleSheetMode: PrimarySheet.#toggleSheetMode
 			},
 			window: {
@@ -284,6 +286,69 @@ export default function PrimarySheetMixin(Base) {
 					target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
 				} else target.update({ [input.dataset.name]: result });
 			}
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Handle removing an document.
+		 * @this {PrimarySheet}
+		 * @param {Event} event - Triggering click event.
+		 * @param {HTMLElement} target - Button that was clicked.
+		 */
+		static async #onDeleteDocument(event, target) {
+			if ((await this._onDeleteDocument(event, target)) === false) return;
+			const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+			const doc = await fromUuid(uuid);
+			doc?.deleteDialog({ sheet: this });
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Handle removing an document.
+		 * @param {Event} event - Triggering click event.
+		 * @param {HTMLElement} target - Button that was clicked.
+		 * @returns {any} - Return `false` to prevent default behavior.
+		 */
+		async _onDeleteDocument(event, target) {}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Handle opening a document sheet.
+		 * @this {PrimarySheet}
+		 * @param {Event} event - Triggering click event.
+		 * @param {HTMLElement} target - Button that was clicked.
+		 */
+		static async #onShowDocument(event, target) {
+			if ((await this._onShowDocument(event, target)) === false) return;
+			if ([HTMLInputElement, HTMLSelectElement].some(el => event.target instanceof el)) return;
+			const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+			const doc = await fromUuid(uuid);
+			this._openDocumentSheet(doc);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Handle opening a document sheet.
+		 * @param {Event} event - Triggering click event.
+		 * @param {HTMLElement} target - Button that was clicked.
+		 * @returns {any} - Return `false` to prevent default behavior.
+		 */
+		async _onShowDocument(event, target) {}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Open a document's sheet, rendering it as a child of this application if supported.
+		 * @param {Document} doc - The document whose sheet should be opened.
+		 * @param {RenderOptions} [options] - Options passed to render.
+		 * @protected
+		 */
+		_openDocumentSheet(doc, options = {}) {
+			if (doc?.sheet) this._renderChild(doc.sheet, options);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */

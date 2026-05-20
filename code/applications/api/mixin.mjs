@@ -295,6 +295,61 @@ export default function ApplicationV2Mixin(Base) {
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
+		/*          Detached Windows           */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Render a confirm dialog as a child of this application.
+		 * @param {object} config - Configuration passed to DialogV2.confirm.
+		 * @returns {Promise}
+		 */
+		_confirmDialog(config) {
+			const { promise, resolve } = Promise.withResolvers();
+			const { yes = {}, no = {}, ...rest } = config;
+			const app = new BlackFlag.applications.api.BFDialog({
+				...rest,
+				buttons: [
+					foundry.utils.mergeObject(
+						{ action: "yes", icon: "fa-solid fa-check", label: game.i18n.localize("COMMON.Yes"), default: true },
+						yes
+					),
+					foundry.utils.mergeObject(
+						{ action: "no", icon: "fa-solid fa-xmark", label: game.i18n.localize("COMMON.No") },
+						no
+					)
+				],
+				submit: result => resolve(result)
+			});
+			app.addEventListener("close", () => resolve(null), { once: true });
+			this._renderChild(app);
+			return promise;
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Get render options to open an application as its own detached window.
+		 * @returns {object}
+		 */
+		_detachOptions() {
+			const { windowId } = (this.parent ?? this).window ?? {};
+			return windowId ? { window: { detached: true, windowId } } : {};
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Render an application in the same workspace as this one.
+		 * @param {ApplicationV2} app - The application to render.
+		 * @param {RenderOptions} [options] - Options passed to render.
+		 * @returns {Promise<ApplicationV2>}
+		 */
+		_renderChild(app, options = {}) {
+			if (this.parent) return this.parent.renderChild(app, options);
+			return this.renderChild(app, options);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
 		/*             Drag & Drop             */
 		/* <><><><> <><><><> <><><><> <><><><> */
 

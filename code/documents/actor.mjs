@@ -632,6 +632,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Take a short rest, possibly spending hit dice and recovering resources and item uses.
 	 * @param {RestConfiguration} [config={}] - Configuration options for a short rest.
+	 * @param {ApplicationV2} [config.sheet] - The sheet to render this dialog a child of.
 	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
 	 */
 	async shortRest(config = {}) {
@@ -643,6 +644,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Take a long rest, possibly recovering hit points, resources, and item uses.
 	 * @param {RestConfiguration} [config={}] - Configuration options for a long rest.
+	 * @param {ApplicationV2} [config.sheet] - The sheet to render this dialog a child of.
 	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
 	 */
 	async longRest(config = {}) {
@@ -654,10 +656,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Perform all of the changes needed when the actor rests.
 	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {ApplicationV2} [config.sheet] - The sheet to render this dialog a child of.
 	 * @param {object} [deltas={}] - Any changes that have been made earlier in the process.
 	 * @returns {Promise<RestResult>} - Final result of the rest operation.
 	 */
-	async rest(config = {}, deltas = {}) {
+	async rest({ sheet, ...config } = {}, deltas = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
 		if (!restConfig) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
 		config = foundry.utils.mergeObject({ dialog: true, chat: true }, config);
@@ -682,7 +685,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const RestDialog = config.dialog ? restConfig.dialogClass : null;
 		if (RestDialog) {
 			try {
-				foundry.utils.mergeObject(config, await RestDialog.rest(this, config));
+				foundry.utils.mergeObject(config, await RestDialog.rest(this, config, { sheet }));
 			} catch (err) {
 				return;
 			}

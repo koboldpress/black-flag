@@ -120,9 +120,11 @@ export default class BaseRestDialog extends BFFormDialog {
 	 * A helper constructor that displays the appropriate rest dialog and returns user choices when complete.
 	 * @param {BlackFlagActor} actor - Actor that is taking the rest.
 	 * @param {RestConfiguration} config - Configuration information for the rest.
+	 * @param {object} [options={}] - Additional options for the application.
+	 * @param {ApplicationV2} [options.sheet] - The sheet to render this dialog a child of.
 	 * @returns {Promise<RestConfiguration>}
 	 */
-	static async rest(actor, config) {
+	static async rest(actor, config, { sheet } = {}) {
 		return new Promise((resolve, reject) => {
 			const app = new this({
 				config,
@@ -138,7 +140,8 @@ export default class BaseRestDialog extends BFFormDialog {
 				document: actor
 			});
 			app.addEventListener("close", () => (app.rested ? resolve(app.config) : reject()), { once: true });
-			app.render({ force: true });
+			if (sheet) sheet._renderChild(app);
+			else app.render({ force: true });
 		});
 	}
 }

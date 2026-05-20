@@ -40,6 +40,27 @@ export default class BlackFlagJournalEntrySheet extends foundry.applications.she
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Detached Windows           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Render an application in the same workspace as this one.
+	 * @param {ApplicationV2} app - The application to render.
+	 * @param {RenderOptions} [options] - Options passed to render.
+	 * @returns {Promise<ApplicationV2>}
+	 */
+	_renderChild(app, options = {}) {
+		if (this.parent) return this.parent.renderChild(app, options);
+		if (this.window?.windowId)
+			return app.render({
+				force: true,
+				window: { detached: true, windowId: this.window.windowId },
+				...options
+			});
+		return app.render({ force: true, ...options });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

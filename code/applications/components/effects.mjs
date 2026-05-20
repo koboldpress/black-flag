@@ -216,9 +216,9 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				return this._onAddEffect(target);
 			case "edit":
 			case "view":
-				return effect.sheet.render({ force: true });
+				return this.app._openDocumentSheet(effect);
 			case "delete":
-				return effect.deleteDialog();
+				return effect.deleteDialog({ sheet: this.app });
 			case "duplicate":
 				const data = effect.toObject();
 				delete data._id;

@@ -2,6 +2,8 @@
 	max-block-size: 90vh;
 	container: sheet / inline-size;
 
+	body.detached & { max-block-size: unset; }
+
 	&:not(.minimized, .minimizing, .maximizing) {
 		min-block-size: 200px;
 		min-inline-size: 366px;

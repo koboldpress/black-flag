@@ -154,20 +154,20 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 
 		switch (action) {
 			case "activate":
-				if (activity) return activity.activate({ event });
+				if (activity) return activity.activate({ event }, { options: { sheet: this.app } });
 			case "activateItem":
-				return item?.activate({ event });
+				return item?.activate({ event }, { options: { sheet: this.app } });
 			case "delete":
-				if (activity) return activity.deleteDialog();
+				if (activity) return activity.deleteDialog({ sheet: this.app });
 			case "deleteItem":
-				if (item) return item.deleteDialog();
+				if (item) return item.deleteDialog({ sheet: this.app });
 				break;
 			case "edit":
 			case "view":
-				if (activity) return activity.sheet.render({ force: true });
+				if (activity) return this.app._openDocumentSheet(activity);
 			case "editItem":
 			case "viewItem":
-				if (item) return item.sheet.render(true);
+				if (item) return this.app._openDocumentSheet(item);
 				break;
 			case "post":
 				if (item) return item.postToChat();

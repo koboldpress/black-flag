@@ -22,6 +22,8 @@
 	padding: 0;
 	scrollbar-color: var(--bf-scrollbar-color) transparent;
 
+	body.detached & { max-inline-size: 100vw; }
+
 	> div {
 		display: flex;
 		flex-direction: row;
@@ -49,6 +51,11 @@
 	min-inline-size: 500px;
 	overflow-block: scroll;
 	padding: 0;
+
+	body.detached & {
+		max-block-size: unset;
+		max-inline-size: unset;
+	}
 
 	> div {
 		.option {

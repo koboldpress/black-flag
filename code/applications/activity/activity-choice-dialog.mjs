@@ -94,13 +94,15 @@ export default class ActivityChoiceDialog extends BFApplication {
 	 * Display the choice dialog for an item.
 	 * @param {BlackFlagItem} item
 	 * @param {Partial<ApplicationConfiguration>} [options={}]
+	 * @param {ApplicationV2} [options.sheet] - The sheet to render this dialog a child of.
 	 * @returns {Promise<Activity|null>}
 	 */
-	static create(item, options = {}) {
+	static create(item, { sheet, ...options } = {}) {
 		return new Promise(resolve => {
 			const dialog = new this({ ...options, item });
 			dialog.addEventListener("close", () => resolve(dialog.activity), { once: true });
-			dialog.render({ force: true });
+			if (sheet) sheet._renderChild(dialog);
+			else dialog.render({ force: true });
 		});
 	}
 }

@@ -141,9 +141,9 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 				return ActivitySelection.createDialog(this.item);
 			case "edit":
 			case "view":
-				return activity.sheet.render({ force: true });
+				return this.app._openDocumentSheet(activity);
 			case "delete":
-				return activity.deleteDialog();
+				return activity.deleteDialog({ sheet: this.app });
 			case "duplicate":
 				const data = activity.toObject();
 				delete data._id;
@@ -269,7 +269,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 						system: { spell: { uuid: data.uuid } }
 					}
 				]);
-				created[0]?.sheet.render({ force: true });
+				this.app._openDocumentSheet(created[0]);
 			}
 		} finally {
 			CONFIG.ux.DragDrop.finishDragEvent(event);

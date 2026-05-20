@@ -233,6 +233,22 @@ export default class PseudoDocumentSheet extends BFApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Detached Windows           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_renderChild(app, options = {}) {
+		if (this.parent) return this.parent.renderChild(app, options);
+		if (this.window?.windowId)
+			return app.render({
+				force: true,
+				window: { detached: true, windowId: this.window.windowId },
+				...options
+			});
+		return app.render({ force: true, ...options });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Form Submission           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

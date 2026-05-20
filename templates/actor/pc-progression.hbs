@@ -55,13 +55,13 @@
 					<img src="{{ img }}">
 				</figure>
 				<span>
-					<button type="button" class="link-button" data-action="showItem" data-item-id="{{ id }}">
+					<button type="button" class="link-button" data-action="showDocument" data-uuid="{{ uuid }}">
 						{{ name }}
 					</button>
 				</span>
 				{{#if @root.editable}}
 					<span class="controls">
-						<button type="button" class="link-button" data-action="deleteItem" data-item-id="{{ id }}"
+						<button type="button" class="link-button" data-action="deleteDocument" data-uuid="{{ uuid }}"
 						        data-tooltip aria-label="{{ localize 'BF.Item.Action.Delete' }}">
 							<i class="fa-solid fa-trash" inert></i>
 						</button>
@@ -106,19 +106,18 @@
 					<img src="{{ data.document.img }}">
 				</figure>
 				<span>
-					<button type="button" class="link-button" data-action="showItem"
-					        data-item-id="{{data.document.id}}">
+					<button type="button" class="link-button" data-action="showDocument" data-uuid="{{ data.document.uuid }}">
 						{{ data.document.name }}
 					</button>
 					{{#if data.subclass}}
 						<span class="subclass">
-							<button type="button" class="link-button" data-action="showItem"
-							        data-item-id="{{ data.subclass.id }}">
+							<button type="button" class="link-button" data-action="showDocument" data-uuid="{{ data.subclass.uuid }}">
 								{{ data.subclass.name }}
 							</button>
 							{{#if @root.editable}}
-								<button type="button" class="link-button" data-action="deleteItem" data-item-id="{{ data.subclass.id }}"
-								        data-tooltip aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+								<button type="button" class="link-button" data-action="deleteDocument"
+								        data-uuid="{{ data.subclass.uuid }}" data-tooltip
+								        aria-label="{{ localize 'BF.Item.Action.Delete' }}">
 									<i class="fa-solid fa-trash" inert></i>
 								</button>
 							{{/if}}

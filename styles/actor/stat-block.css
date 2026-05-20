@@ -4,6 +4,8 @@
 	--end-border-radius: 18px;
 	--icon-fill: var(--bf-icon-color-blue);
 
+	body.detached & { max-block-size: unset; }
+
 	&:not(.minimized, .minimizing, .maximizing) {
 		min-block-size: 420px;
 		min-inline-size: 420px;

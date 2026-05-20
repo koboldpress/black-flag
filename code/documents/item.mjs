@@ -253,7 +253,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			let activity = activities[0];
 			// TODO: Handle proper skip-dialog keybindings
 			if (activities.length > 1 && !config.event?.shiftKey) {
-				activity = await ActivityChoiceDialog.create(this);
+				activity = await ActivityChoiceDialog.create(this, { sheet: dialog.options?.sheet });
 			}
 			return activity?.activate(config, dialog, message);
 		} else if (this.actor) {
@@ -284,37 +284,57 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async deleteDialog(options = {}) {
+	async deleteDialog({ sheet, ...options } = {}, operation = {}) {
 		// Display custom delete dialog when deleting a container with contents
 		const count = await this.system.contentsCount;
 		if (count) {
-			return BlackFlag.applications.api.BFDialog.confirm(
+			const config = foundry.utils.mergeObject(
+				{
+					content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong>
+				${game.i18n.format("BF.Container.Delete.Message", { count })}</p>
+				<label>
+					<input type="checkbox" name="deleteContents">
+					${game.i18n.localize("BF.Container.Delete.Contents")}
+				</label>`,
+					yes: {
+						callback: (event, button, dialog) => {
+							const deleteContents = dialog.element.querySelector('[name="deleteContents"]').checked;
+							this.delete({ ...operation, deleteContents });
+						}
+					},
+					position: { width: 400 },
+					window: {
+						title: `${game.i18n.format("DOCUMENT.Delete", {
+							type: game.i18n.localize("BF.Item.Type.Container[one]")
+						})}: ${this.name}`
+					}
+				},
+				options
+			);
+			if (sheet) return sheet._confirmDialog(config);
+			return BlackFlag.applications.api.BFDialog.confirm(config);
+		}
+
+		if (sheet) {
+			const type = game.i18n.localize(this.constructor.metadata.label);
+			return sheet._confirmDialog(
 				foundry.utils.mergeObject(
 					{
-						content: `<p><strong>${game.i18n.localize("AreYouSure")}</strong>
-					${game.i18n.format("BF.Container.Delete.Message", { count })}</p>
-					<label>
-						<input type="checkbox" name="deleteContents">
-						${game.i18n.localize("BF.Container.Delete.Contents")}
-					</label>`,
-						yes: {
-							callback: (event, button, dialog) => {
-								const deleteContents = dialog.element.querySelector('[name="deleteContents"]').checked;
-								this.delete({ deleteContents });
-							}
-						},
-						window: {
-							title: `${game.i18n.format("DOCUMENT.Delete", {
-								type: game.i18n.localize("BF.Item.Type.Container[one]")
-							})}: ${this.name}`
-						}
+						window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+						position: { width: 400 },
+						content: `
+					<p>
+						<strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+					</p>
+				`,
+						yes: { callback: () => this.delete(operation) }
 					},
 					options
 				)
 			);
 		}
 
-		return super.deleteDialog(options);
+		return super.deleteDialog(options, operation);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

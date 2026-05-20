@@ -36,7 +36,7 @@ export default class EquipmentFlow extends AdvancementFlow {
 				result = await new Promise((resolve, reject) => {
 					const dialog = new EquipmentDialog({ actor: this.actor });
 					dialog.addEventListener("close", event => resolve(dialog), { once: true });
-					dialog.render({ force: true });
+					this.actor.sheet._renderChild(dialog);
 				});
 			} catch (err) {
 				return;
