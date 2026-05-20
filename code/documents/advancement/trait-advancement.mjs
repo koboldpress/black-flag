@@ -179,6 +179,7 @@ export default class TraitAdvancement extends Advancement {
 
 		for (const trait of traitTypes) {
 			const actorValues = Trait.actorValues(this.actor, trait);
+			if (actorValues === null) continue;
 			const choices = Trait.choices(trait, { prefixed: true });
 			for (const key of choices.set) {
 				const value = actorValues[key] ?? 0;

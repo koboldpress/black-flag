@@ -23,15 +23,15 @@ export function actorKeyPath(trait) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Get the current trait values for the provided actor.
+ * Get the current trait values for the provided actor. Returns `null` if trait type isn't supported by actor.
  * @param {BlackFlagActor} actor
  * @param {string} trait - Trait as defined in `CONFIG.BlackFlag.traits`.
- * @returns {Record<string, number>}
+ * @returns {Record<string, number>|null}
  */
 export function actorValues(actor, trait) {
 	const keyPath = actorKeyPath(trait);
 	const data = foundry.utils.getProperty(actor, keyPath);
-	if ( !data ) return {};
+	if ( !data ) return null;
 	const traitChoices = choices(trait, { prefixed: true });
 	const values = {};
 
