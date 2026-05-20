@@ -75,10 +75,10 @@ export default class BaseConfig extends DocumentSheet {
 		for (let modifier of this.document.system.modifiers) {
 			let valid = true;
 			for (const i of include) {
-				if (!modifier.filter.some(f => foundry.utils.objectsEqual(i, f))) valid = false;
+				if (!modifier.filter.some(f => foundry.utils.equals(i, f))) valid = false;
 			}
 			for (const e of exclude) {
-				if (modifier.filter.some(f => foundry.utils.objectsEqual(e, f))) valid = false;
+				if (modifier.filter.some(f => foundry.utils.equals(e, f))) valid = false;
 			}
 			if (!valid) continue;
 

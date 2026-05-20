@@ -97,7 +97,7 @@ export default class BaseSettingsConfig extends BFApplication {
 		for (const [key, value] of Object.entries(foundry.utils.expandObject(formData.object))) {
 			const current = game.settings.get(game.system.id, key);
 			if (foundry.utils.getType(value) === "Object") {
-				if (foundry.utils.objectsEqual(value, current)) continue;
+				if (foundry.utils.equals(value, current)) continue;
 			} else if (current === value) continue;
 			await game.settings.set(game.system.id, key, value);
 
