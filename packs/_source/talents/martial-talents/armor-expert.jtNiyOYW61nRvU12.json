@@ -13,7 +13,34 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "ZJaUvfeEzeaPU9EY": {
+        "type": "property",
+        "_id": "ZJaUvfeEzeaPU9EY",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "type": "add",
+              "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }, { \"k\": \"armored\", \"v\": true }, { \"k\": \"armor.type.category\", \"o\" : \"in\", \"v\" : [\"heavy\", \"medium\"]},{\"k\": \"armor.proficient\", \"v\": true}], \"formula\": \"1\" }"
+            },
+            {
+              "key": "system.modifiers",
+              "type": "add",
+              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves to avoid being pulled, shoved, or knocked prone.\" } }"
+            }
+          ]
+        },
+        "flags": {},
+        "icon": null,
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "title": "Armor Expert",
+        "hint": ""
+      }
+    },
     "changes": [
       {
         "key": "system.modifiers",
@@ -55,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "13.347",
+    "systemVersion": "3.0.075",
+    "coreVersion": "14.361",
     "createdTime": 1716347655616,
-    "modifiedTime": 1717177343758,
+    "modifiedTime": 1779311600156,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null,
     "exportSource": null
