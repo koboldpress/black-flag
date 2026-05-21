@@ -1,5 +1,5 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
-import AbilityTemplate from "../../canvas/ability-template.mjs";
+import TemplatePlacement from "../../canvas/template-placement.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import ActorDeltasField from "../../data/chat-message/fields/deltas-field.mjs";
@@ -1050,7 +1050,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	shouldHideChatButton(button, message) {
 		switch (button.dataset.action) {
 			case "placeTemplate":
-				return !game.user.can("TEMPLATE_CREATE") || !game.canvas.scene;
+				return !game.user.can("REGION_CREATE") || !game.canvas.scene;
 		}
 		return false;
 	}
@@ -1302,28 +1302,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {PointerEvent} event - Triggering click event.
 	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
 	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
-	 * @returns {Promise<MeasuredTemplateDocument[]>}
+	 * @returns {Promise<RegionDocument[]>}
 	 */
 	static async #placeTemplate(event, target, message) {
-		const templates = [];
-		const minimized = !this.actor?.sheet._minimized;
-		await this.actor?.sheet?.minimize();
-
 		try {
-			for (const template of AbilityTemplate.fromActivity(this)) {
-				const result = await template.drawPreview();
-				if (result) templates.push(result);
-			}
+			return await TemplatePlacement.fromActivity(this);
 		} catch (err) {
 			Hooks.onError("Activity#placeTemplate", err, {
 				msg: game.i18n.localize("BF.TARGET.Warning.PlaceTemplate"),
 				log: "error",
 				notify: "error"
 			});
-		} finally {
-			if (minimized) this.actor?.sheet?.maximize();
+			return [];
 		}
-		return templates;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

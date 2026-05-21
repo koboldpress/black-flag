@@ -47,7 +47,7 @@ export const areaOfEffectTypes = {
 	radius: {
 		localization: "BF.AreaOfEffect.Type.Radius.Label",
 		icon: "systems/black-flag/artwork/interface/area/radius.svg",
-		template: "circle",
+		template: "emanation",
 		sizes: ["radius"]
 	},
 	sphere: {

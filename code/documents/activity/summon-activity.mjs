@@ -149,7 +149,16 @@ export default class SummonActivity extends Activity {
 				game.i18n.format("BF.SUMMONG.Warning.NoProfile", { profileId: options?.profile, item: this.item.name })
 			);
 
-		// TODO: Hook
+		/**
+		 * A hook event that fires before summoning is performed.
+		 * @function blackFlag.preSummon
+		 * @memberof hookEvents
+		 * @param {SummonActivity} activity - The activity that is performing the summoning.
+		 * @param {SummonsProfile} profile - Profile used for summoning.
+		 * @param {SummoningConfiguration} options - Additional summoning options.
+		 * @returns {boolean} - Explicitly return `false` to prevent summoning.
+		 */
+		if (Hooks.call("blackFlag.preSummon", this, profile, options) === false) return;
 
 		// Fetch the actor that will be summoned
 		const summonUuid = this.system.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
@@ -160,8 +169,6 @@ export default class SummonActivity extends Activity {
 		if (!actor.isOwner) throw new Error(game.i18n.format("BF.SUMMON.Warning.NoOwnership", { actor: actor.name }));
 
 		const tokensData = [];
-		const minimized = !this.actor?.sheet._minimized;
-		await this.actor?.sheet.minimize();
 		try {
 			// Figure out where to place the summons
 			const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -174,22 +181,55 @@ export default class SummonActivity extends Activity {
 					...(await this.getChanges(actor, profile, options))
 				};
 
-				// TODO: Hook
+				/**
+				 * A hook event that fires before a specific token is summoned. After placement has been determined but before
+				 * the final token data is constructed.
+				 * @function blackFlag.preSummonToken
+				 * @memberof hookEvents
+				 * @param {SummonActivity} activity - The activity that is performing the summoning.
+				 * @param {SummonsProfile} profile - Profile used for summoning.
+				 * @param {TokenUpdateData} config - Configuration for creating a modified token.
+				 * @param {SummoningConfiguration} options - Additional summoning options.
+				 * @returns {boolean} - Explicitly return `false` to prevent this token from being summoned.
+				 */
+				if (Hooks.call("blackFlag.preSummonToken", this, profile, tokenUpdateData, options) === false) continue;
 
 				// Create a token document and apply updates
 				const tokenData = await this.getTokenData(tokenUpdateData);
 
-				// TODO: Hook
+				/**
+				 * A hook event that fires after token creation data is prepared, but before summoning occurs.
+				 * @function blackFlag.summonToken
+				 * @memberof hookEvents
+				 * @param {SummonActivity} activity - The activity that is performing the summoning.
+				 * @param {SummonsProfile} profile - Profile used for summoning.
+				 * @param {object} tokenData - Data for creating a token.
+				 * @param {SummoningConfiguration} options - Additional summoning options.
+				 */
+				Hooks.callAll("blackFlag.summonToken", this, profile, tokenData, options);
 
 				tokensData.push(tokenData);
 			}
-		} finally {
-			if (minimized) this.actor?.sheet.maximize();
+		} catch (err) {
+			Hooks.onError("SummonActivity#placeSummons", err, {
+				msg: _loc("BlackFlag.SUMMON.Warning.PlaceTokens"),
+				log: "error",
+				notify: "error"
+			});
 		}
 
 		const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData);
 
-		// TODO: Hook
+		/**
+		 * A hook event that fires when summoning is complete.
+		 * @function blackFlag.postSummon
+		 * @memberof hookEvents
+		 * @param {SummonActivity} activity - The activity that is performing the summoning.
+		 * @param {SummonsProfile} profile - Profile used for summoning.
+		 * @param {BFToken[]} tokens - Tokens that have been created.
+		 * @param {SummoningConfiguration} options - Additional summoning options.
+		 */
+		Hooks.callAll("blackFlag.postSummon", this, profile, createdTokens, options);
 
 		return createdTokens;
 	}

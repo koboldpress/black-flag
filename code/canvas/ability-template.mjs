@@ -4,6 +4,16 @@ import { convertDistance } from "../utils/_module.mjs";
  * Custom measured template class with helpers to handle placing templates from activities.
  */
 export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
+	constructor(...args) {
+		foundry.utils.logCompatibilityWarning(
+			"The `AbilityTemplate` class has been deprecated in favor of the `TemplatePlacement` API.",
+			{ since: "Black Flag 3.0 ", until: "Black Flag 4.0" }
+		);
+		super(...args);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Track the timestamp when the last mouse move event was captured.
 	 * @type {number}
@@ -43,6 +53,11 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
 	 * @returns {AbilityTemplate[]|null} - The template objects, or null if the item does not produce a template.
 	 */
 	static fromActivity(activity, options = {}) {
+		foundry.utils.logCompatibilityWarning(
+			"`AbilityTemplate.fromActivity` has been deprecated in favor of `TemplatePlacement.fromActivity`.",
+			{ since: "Black Flag 3.0 ", until: "Black Flag 4.0" }
+		);
+
 		const target = activity.target?.template ?? {};
 		const templateShape = CONFIG.BlackFlag.areaOfEffectTypes[target.type]?.template;
 		if (!templateShape) return null;
