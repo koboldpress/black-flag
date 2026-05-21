@@ -302,8 +302,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			targets: getTargetDescriptors()
 		};
 
-		const scaling = Number(this.item.getFlag(game.system.id, "scaling")) || 0;
-		if (scaling > 0) flags.scaling = scaling;
+		const scaling = Number(this.item.getFlag(game.system.id, "scaling"));
+		if (Number.isNumeric(scaling) && scaling > 0) flags.scaling = scaling;
 
 		return flags;
 	}
