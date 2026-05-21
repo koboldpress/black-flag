@@ -54,7 +54,7 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
 	let { type, config, label } = match.groups;
-	config = parseConfig(config, { multiple: ["damage", "healing"].includes(type) });
+	config = parseConfig(config, { multiple: ["damage", "healing", "heal"].includes(type) });
 	config._input = match[0];
 	switch (type.toLowerCase()) {
 		case "attack":
@@ -1138,6 +1138,7 @@ async function enrichDamage(configs, label, options) {
 		if (c.mode) config.attackMode = c.mode;
 		if (c.format) config.format = c.format;
 		if (c.formula) formulaParts.push(c.formula);
+		if (configs._isHealing && !c.type) c.type = "healing";
 		c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
 		for (const value of c.values) {
 			if (value in CONFIG.BlackFlag.damageTypes) c.type.push(value);
@@ -1149,7 +1150,6 @@ async function enrichDamage(configs, label, options) {
 			else formulaParts.push(value);
 		}
 		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-		c.type = c.type ?? (configs._isHealing ? "healing" : null);
 		if (c.formula) {
 			config.formulas.push(c.formula);
 			config.types.push(c.type.join("|"));

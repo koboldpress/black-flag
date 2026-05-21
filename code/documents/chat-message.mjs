@@ -357,6 +357,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 	/**
 	 * Add one or more menu buttons to the chat message, creating the menu if needed.
+	 * @param {HTMLElement} html - Chat message HTML.
 	 * @param {HTMLButtonElement...} buttons - Buttons to add.
 	 */
 	_renderMenuButton(html, ...buttons) {
