@@ -28,18 +28,23 @@ export default class SpellcastingDialog extends BFApplication {
 			if (type === "replacement" && this.advancement.replacesSpellAt(level)) {
 				const replacedData = this.advancement.value.replaced?.[level];
 				const replaces = this.getReplacesSlot(replacedData?.level, replacedData?.original);
-				this.slots.push({ type, selected: spellsBySlot[type]?.shift(), replaces });
-				// TODO: Pass in proper number for replacements
+				this.slots.push({
+					type,
+					number: replacedData?.slotNumber ?? replaces.slotNumber,
+					selected: spellsBySlot[type]?.shift(),
+					replaces
+				});
 			} else {
 				this.slots.push(
 					...Array.fromRange(total).map((s, i) => ({
 						type,
-						selected: spellsBySlot[type]?.shift(),
-						number: i
+						number: i,
+						selected: spellsBySlot[type]?.shift()
 					}))
 				);
 			}
 		}
+		console.log(this.slots);
 
 		// Begin fetching spells to display
 		this.allSpells = Search.compendiums(Item, {
@@ -254,6 +259,7 @@ export default class SpellcastingDialog extends BFApplication {
 		// All spells selected for this class at lower levels that haven't already been replaced
 		if (this.currentSlot.type === "replacement") {
 			const validSlots = new Set(["replacement", "spells", "special"]);
+			if (this.spellcasting.spells.mode === "spellbook") validSlots.add("spellbook:free");
 			const previousSpells = new Set();
 			const replacedData = this.advancement.value.replaced?.[level];
 			for (const level of Array.fromRange(this.advancement.relavantLevel(this.levels) - 1, 1)) {
@@ -300,7 +306,14 @@ export default class SpellcastingDialog extends BFApplication {
 				(type === "rituals" && !this.advancement.configuration.rituals.restricted)
 			)
 		) {
-			filters.push({ k: "system.source", o: "hasAny", v: this.advancement.slotSources(this.levels, this.currentSlot) });
+			filters.push({
+				k: "system.source",
+				o: "hasAny",
+				v: this.advancement.slotSources(
+					this.currentSlot.replaces?.level ?? this.levels,
+					this.currentSlot.replaces ?? this.currentSlot
+				)
+			});
 		}
 
 		switch (type) {
@@ -488,7 +501,7 @@ export default class SpellcastingDialog extends BFApplication {
 					id,
 					level,
 					type: replacedData.slot ?? addedData.slot,
-					number: replacedData.slotNumber ?? addedData.number,
+					number: replacedData.slotNumber ?? addedData.slotNumber,
 					uuid: addedData.uuid
 				}
 			: null;

@@ -44,6 +44,8 @@
 					{{ formField configuration.fields.spells.fields.spellbook.fields.otherLevels
 					             value=configuration.data.spells.spellbook.otherLevels classes="label-top" rootId=partId }}
 				{{/blackFlag-formGroup}}
+				{{ formField configuration.fields.spells.fields.replacement value=configuration.data.spells.replacement
+				             rootId=partId }}
 			{{/if}}
 		</fieldset>
 	{{/if}}
