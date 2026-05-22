@@ -29,8 +29,15 @@ export default class SpellcastingDialog extends BFApplication {
 				const replacedData = this.advancement.value.replaced?.[level];
 				const replaces = this.getReplacesSlot(replacedData?.level, replacedData?.original);
 				this.slots.push({ type, selected: spellsBySlot[type]?.shift(), replaces });
+				// TODO: Pass in proper number for replacements
 			} else {
-				this.slots.push(...Array.fromRange(total).map((s, i) => ({ type, selected: spellsBySlot[type]?.shift() })));
+				this.slots.push(
+					...Array.fromRange(total).map((s, i) => ({
+						type,
+						selected: spellsBySlot[type]?.shift(),
+						number: i
+					}))
+				);
 			}
 		}
 
@@ -164,6 +171,7 @@ export default class SpellcastingDialog extends BFApplication {
 	 *
 	 * @property {string} type - Type of spell that can be added to the slot.
 	 * @property {string} selected - UUID for selected spell.
+	 * @property {number} number - Slot number within slots of this type.
 	 * @property {string} [name] - Name to display for this slot.
 	 * @property {ReplacedSlotData} [replaces] - Data for the spell being replaced.
 	 */
@@ -292,7 +300,7 @@ export default class SpellcastingDialog extends BFApplication {
 				(type === "rituals" && !this.advancement.configuration.rituals.restricted)
 			)
 		) {
-			filters.push({ k: "system.source", o: "has", v: this.spellcasting.source });
+			filters.push({ k: "system.source", o: "hasAny", v: this.advancement.slotSources(this.levels, this.currentSlot) });
 		}
 
 		switch (type) {
@@ -341,7 +349,12 @@ export default class SpellcastingDialog extends BFApplication {
 		const restrictions = {};
 
 		const source = filters.find(f => f.k === "system.source");
-		if (source) restrictions.source = CONFIG.BlackFlag.spellSources.localized[source.v];
+		if (source)
+			restrictions.source = game.i18n.getListFormatter({ type: "disjunction" }).format(
+				Array.from(source.v)
+					.map(s => CONFIG.BlackFlag.spellSources.localized[s])
+					.filter(_ => _)
+			);
 
 		const schools = filters.find(f => f.k === "system.school");
 		if (schools)
@@ -411,12 +424,12 @@ export default class SpellcastingDialog extends BFApplication {
 			visibleSlots.add(slot.type);
 			if (!slot.selected) continue;
 			if (slot.type === "replacement") replacement = { original: slot.replaces, replacement: slot.selected };
-			else toAdd.set(slot.selected, slot.type);
+			else toAdd.set(slot.selected, { slot: slot.type, slotNumber: slot.number });
 		}
 
 		for (const spell of this.advancement._getAddedSpells(this.levels)) {
 			if (!visibleSlots.has(spell.slot) || spell.slot === "replacement") continue;
-			if (toAdd.get(spell.uuid) === spell.slot) toAdd.delete(spell.uuid);
+			if (toAdd.get(spell.uuid)?.type === spell.slot) toAdd.delete(spell.uuid);
 			else toRemove.add(spell.document);
 		}
 
@@ -426,7 +439,7 @@ export default class SpellcastingDialog extends BFApplication {
 
 		if (toAdd.size || replacement)
 			await this.advancement.apply(this.levels, {
-				added: Array.from(toAdd.entries()).map(([uuid, slot]) => ({ uuid, slot })),
+				added: Array.from(toAdd.entries()).map(([uuid, { slot, slotNumber }]) => ({ uuid, slot, slotNumber })),
 				replacement
 			});
 	}
@@ -468,8 +481,16 @@ export default class SpellcastingDialog extends BFApplication {
 	 * @returns {SpellSlotData|null}
 	 */
 	getReplacesSlot(level, id) {
-		const addedData = this.advancement.value._source.added?.[level]?.find(a => a.document === id);
-		const replacedSlot = this.advancement.value._source.replaced?.[level]?.slot;
-		return addedData ? { id, level, type: replacedSlot ?? addedData.slot, uuid: addedData.uuid } : null;
+		const addedData = this.advancement.value._source.added?.[level]?.find(a => a.document === id) ?? {};
+		const replacedData = this.advancement.value._source.replaced?.[level] ?? {};
+		return addedData
+			? {
+					id,
+					level,
+					type: replacedData.slot ?? addedData.slot,
+					number: replacedData.slotNumber ?? addedData.number,
+					uuid: addedData.uuid
+				}
+			: null;
 	}
 }

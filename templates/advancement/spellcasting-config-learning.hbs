@@ -4,6 +4,9 @@
 			<legend>{{ localize "BF.Advancement.Spellcasting.GainingSpells" }}</legend>
 			{{ formField configuration.fields.spells.fields.mode value=configuration.data.spells.mode
 			             options=learningModes rootId=partId }}
+			{{#if (gt configuration.data.sources.size 1)}}
+				{{ formField configuration.fields.permissiveSources value=configuration.data.permissiveSources rootId=partId }}
+			{{/if}}
 			{{#each known as |data name|}}
 				<hr>
 				<div class="form-group" data-name="{{ name }}">

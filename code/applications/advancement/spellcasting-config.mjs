@@ -141,7 +141,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		);
 		const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
 		const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
-		await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
+		await this.submit({ updateData: { [`configuration.${name}.scale`]: scale.id } });
 		scale.sheet.render({ force: true });
 	}
 

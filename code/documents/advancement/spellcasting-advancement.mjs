@@ -156,6 +156,28 @@ export default class SpellcastingAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Sources from which this spellcasting slot can select.
+	 * @param {AdvancementLevels} level - Level of the slot.
+	 * @param {SpellSlotData} slot - Slot data.
+	 * @returns {Set<string>}
+	 */
+	slotSources(levels, slot) {
+		if (this.configuration.sources.size < 2 || this.configuration.permissiveSources) return this.configuration.sources;
+
+		const stats = this.statsForLevel(levels);
+		const total = stats.get(slot.type)?.total ?? 0;
+		if (total < this.configuration.sources.size) return this.configuration.sources;
+
+		const isFirstLevel = this.relavantLevel(levels) === this.level.value;
+		const sources = Array.from(this.configuration.sources);
+		const divisor = Math.floor(total / (this.configuration.sources.size + (isFirstLevel ? 1 : 0)));
+		const index = Math.floor(slot.number / divisor);
+		return sources[index] ? new Set([sources[index]]) : this.configuration.sources;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Details on how many spells of each type there are to learn for a level.
 	 * @param {AdvancementLevels} levels - Level for which to get the details.
 	 * @returns {Map<string, { learned: number, total: number }>}
@@ -275,12 +297,13 @@ export default class SpellcastingAdvancement extends Advancement {
 
 				if (data.replacement) {
 					replacementKeyPath = `${this.valueKeyPath}.replaced.${level}`;
-					const originalReplacedSlot =
-						this.value._source.replaced?.[data.replacement?.original?.level ?? existingReplacement?.level]?.slot;
+					const originalReplacedData =
+						this.value._source.replaced?.[data.replacement?.original?.level ?? existingReplacement?.level] ?? {};
 					valueData[replacementKeyPath] = {
 						level: data.replacement?.original?.level ?? existingReplacement?.level,
 						original: replacedSlot.document,
-						slot: originalReplacedSlot ?? replacedSlot.slot
+						slot: originalReplacedData.slot ?? replacedSlot.slot,
+						slotNumber: originalReplacedData.slotNumber ?? replaceSlot.slotNumber
 					};
 				} else {
 					valueData[`${this.valueKeyPath}.replaced.${level}`] = _del;
@@ -376,7 +399,7 @@ export default class SpellcastingAdvancement extends Advancement {
 	async createSpells(toAdd, { added = [], data, render = false } = {}) {
 		const spells = [];
 		for (const [index, toAddData] of toAdd.entries()) {
-			const origin = { source: this.configuration.source, identifier: this.item.identifier };
+			const origin = { identifier: this.item.identifier };
 			const spellData = await this.createItemData(toAddData.uuid, {
 				changes: { [`flags.${game.system.id}.relationship`]: { mode: "standard", origin } },
 				data,

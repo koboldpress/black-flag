@@ -3,8 +3,16 @@ import AdvancementDataModel from "../abstract/advancement-data-model.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
-const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField } =
-	foundry.data.fields;
+const {
+	ArrayField,
+	BooleanField,
+	DocumentIdField,
+	DocumentUUIDField,
+	NumberField,
+	SchemaField,
+	SetField,
+	StringField
+} = foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
@@ -12,13 +20,15 @@ const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, Set
  * @property {string} ability - Spellcasting ability if not class's key ability.
  * @property {object} cantrips
  * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
+ * @property {boolean} permissiveSources - When multiple sources are available, should spell selection be allowed from
+ *                                         any source for all slots, or should specific slots be locked to a source?
  * @property {string} progression - Specific progression within selected type (e.g. "full", "half", "third").
  * @property {object} rituals
  * @property {string} rituals.scale - ID of scale value that represents number of rituals known.
  * @property {boolean} rituals.restricted - Should ritual selection be restricted to a single source?
  * @property {object} slots
  * @property {string} slots.scale - ID of the scale value that represents the number of spell slots.
- * @property {string} source - Source of magic used by spellcasting (e.g. "arcane", "divine").
+ * @property {Set<string>} sources - Sources of magic used by spellcasting (e.g. "arcane", "divine").
  * @property {object} spells
  * @property {string} spells.scale - ID of scale value that represents number of spells known.
  * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
@@ -43,6 +53,7 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 			cantrips: new SchemaField({
 				scale: new DocumentIdField()
 			}),
+			permissiveSources: new BooleanField(),
 			progression: new StringField(),
 			rituals: new SchemaField({
 				scale: new DocumentIdField(),
@@ -51,7 +62,7 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 			slots: new SchemaField({
 				scale: new DocumentIdField()
 			}),
-			source: new StringField(),
+			sources: new SetField(new StringField()),
 			spells: new SchemaField({
 				scale: new DocumentIdField(),
 				mode: new StringField(),
@@ -76,13 +87,15 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 	 * @type {string}
 	 */
 	get label() {
-		const source = CONFIG.BlackFlag.spellSources[this.source]?.label;
+		const sources = Array.from(this.sources)
+			.map(s => CONFIG.BlackFlag.spellSources.localized[s])
+			.filter(_ => _);
 		const prepared = this.preparation ? "BF.Spellcasting.Preparation.Trait" : null;
 		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.type];
 		const progression = typeConfig?.progression?.[this.progression]?.trait ?? typeConfig?.trait;
 		return game.i18n
 			.format("BF.Spellcasting.Trait.Display", {
-				source: source ? game.i18n.localize(source) : "",
+				source: sources.length ? game.i18n.getListFormatter({ style: "short" }).format(sources) : "",
 				prepared: prepared ? game.i18n.localize(prepared) : "",
 				progression: progression ? game.i18n.localize(progression) : ""
 			})
@@ -121,13 +134,40 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the first spell source.
+	 * @type {string}
+	 * @deprecated
+	 */
+	get source() {
+		foundry.utils.logCompatibilityWarning(
+			"`SpellcastingAdvancement#source` has been moved to `sources` and is now a Set.",
+			{ since: "Black Flag 3.0", until: "Black Flag 4.0" }
+		);
+		return this.sources.first();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static migrateData(source) {
 		if (!source) return super.migrateData(source);
-		if ("circle" in source) source.source = source.circle;
+
+		// Added in 0.9.023
+		if (source.circle) {
+			source.sources = [source.circle];
+			delete source.circle;
+		}
+
+		// Added in 3.0.075
+		if (source.source) {
+			source.sources = [source.source];
+			delete source.source;
+		}
+
 		return super.migrateData(source);
 	}
 
@@ -179,11 +219,13 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 /**
  * @typedef {GrantedFeatureData} LearnedSpellData
  * @property {string} slot - Type of slot this fills (e.g. "normal", "cantrip", "ritual", "special", "free").
+ * @property {number} slotNumber - Slot number within slots of this type.
  */
 
 /**
  * @typedef {ReplacedFeatureData} ReplacedSpellData
  * @property {string} slot - Type of slot replaced.
+ * @property {number} slotNumber - Slot number within slots of this type.
  */
 
 /**
@@ -201,7 +243,8 @@ export class SpellcastingValueData extends foundry.abstract.DataModel {
 					new SchemaField({
 						document: new LocalDocumentField(foundry.documents.BaseItem),
 						slot: new StringField(),
-						uuid: new StringField() // TODO: Replace with UUIDField when available
+						slotNumber: new NumberField({ min: 0, integer: true }),
+						uuid: new DocumentUUIDField()
 					})
 				),
 				{ required: false, initial: undefined }
@@ -211,7 +254,8 @@ export class SpellcastingValueData extends foundry.abstract.DataModel {
 					level: new NumberField({ integer: true, min: 0 }),
 					original: new DocumentIdField(),
 					replacement: new DocumentIdField(),
-					slot: new StringField()
+					slot: new StringField(),
+					slotNumber: new NumberField({ min: 0, integer: true })
 				}),
 				{ required: false }
 			)
