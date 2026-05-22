@@ -14,18 +14,26 @@
     },
     "advancement": {
       "5H78U1rCBXDmLNPj": {
-        "type": "grantFeatures",
+        "type": "chooseFeatures",
         "_id": "5H78U1rCBXDmLNPj",
         "configuration": {
+					"choices": {
+						"20": 1
+					},
+					"allowDrops": true,
+					"type": "feature",
           "pool": [
             {
               "uuid": "Compendium.black-flag.classes.Item.sssVvUrToRwNhT7T"
             }
           ],
-          "enabled": true
+					"restriction": {
+						"category": "class",
+						"type": "epicBoon",
+						"source": "auto"
+					}
         },
         "level": {
-          "value": 20,
           "classIdentifier": "warlock"
         },
         "flags": {},

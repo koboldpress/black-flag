@@ -14,19 +14,27 @@
     },
     "advancement": {
       "5H78U1rCBXDmLNPj": {
-        "type": "grantFeatures",
+        "type": "chooseFeatures",
         "_id": "5H78U1rCBXDmLNPj",
         "configuration": {
+					"choices": {
+						"20": 1
+					},
+					"allowDrops": true,
+					"type": "feature",
           "pool": [
             {
               "uuid": "Compendium.black-flag.classes.Item.NksyxvutwtlwReVY"
             }
-          ]
+          ],
+					"restriction": {
+						"category": "class",
+						"type": "epicBoon",
+						"source": "auto"
+					}
         },
         "level": {
-          "value": 20,
-          "classIdentifier": "bard",
-          "classRestriction": ""
+          "classIdentifier": "bard"
         },
         "flags": {},
         "title": "Epic Boon",
