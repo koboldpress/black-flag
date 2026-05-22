@@ -48,7 +48,7 @@ export class ChooseFeaturesConfigurationData extends AdvancementDataModel {
 				category: new StringField(),
 				type: new StringField()
 			}),
-			type: new StringField({ blank: false, initial: "feature" })
+			type: new StringField({ required: true, blank: false, initial: "feature" })
 		};
 	}
 
