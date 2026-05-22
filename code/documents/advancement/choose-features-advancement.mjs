@@ -230,9 +230,11 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 				const validSources = CONFIG.BlackFlag.registration.groupedOptions(sourceTypes);
 				let invalidSource;
 				if (sourceTypes.size && restriction.source === "auto") {
-					const originItem =
-						this.actor.items.get(this.item.getFlag("black-flag", "ultimateOrigin")?.split(".")[0]) ?? this.item;
-					if (originItem.identifier !== item.system.identifier.associated) invalidSource = originItem.name;
+					if (this.actor) {
+						const originItem =
+							this.actor.items.get(this.item.getFlag("black-flag", "ultimateOrigin")?.split(".")[0]) ?? this.item;
+						if (originItem.identifier !== item.system.identifier.associated) invalidSource = originItem.name;
+					}
 				} else if (sourceTypes.size && item.system.identifier.associated !== restriction.source) {
 					invalidSource = validSources.get(restriction.source)?.label ?? restriction.source;
 				}
