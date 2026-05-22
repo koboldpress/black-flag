@@ -344,7 +344,10 @@
 				"label": "Features"
 			},
 			"restriction": {
-				"label": "Choice Restrictions"
+				"label": "Choice Restrictions",
+				"source": {
+					"label": "Feature Source"
+				}
 			},
 			"type": {
 				"label": "Item Type"
@@ -358,9 +361,13 @@
 			"Label": "Replace",
 			"Title": "replace"
 		},
+		"Source": {
+			"Automatic": "Determine Automatically"
+		},
 		"Title": "Choose Features",
 		"Warning": {
 			"PreviouslyChosen": "This feature has already been chosen at a previous level.",
+			"Source": "Feature must be associated with {source} to be selected.",
 			"Type": "Only {type} can be selected for this choice."
 		}
 	},

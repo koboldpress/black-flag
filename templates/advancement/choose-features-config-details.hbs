@@ -8,5 +8,9 @@
 			{{ formField configuration.fields.restriction.fields.type value=configuration.data.restriction.type
 			             label=typeRestriction.typeLabel options=typeRestriction.typeOptions blank="" rootId=partId }}
 		{{/if}}
+		{{#if typeRestriction.sourceOptions}}
+			{{ formField configuration.fields.restriction.fields.source value=configuration.data.restriction.source
+			             options=typeRestriction.sourceOptions rootId=partId }}
+		{{/if}}
 	{{/if}}
 </fieldset>

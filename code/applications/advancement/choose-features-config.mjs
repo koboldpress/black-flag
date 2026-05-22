@@ -67,12 +67,22 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 				.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 		if (this.advancement.configuration.type === "feature") {
 			const selectedCategory = CONFIG.BlackFlag.featureCategories[this.advancement.configuration.restriction.category];
+			const selectedType = selectedCategory?.children?.[this.advancement.configuration.restriction.type];
 			context.typeRestriction = {
 				categoryLabel: game.i18n.localize("BF.Feature.Category.Label"),
 				categoryOptions: makeLabels(CONFIG.BlackFlag.featureCategories),
 				typeLabel: game.i18n.localize("BF.Feature.Type.Label"),
 				typeOptions: selectedCategory?.children ? makeLabels(selectedCategory.children) : null
 			};
+			const validSources = CONFIG.BlackFlag.registration.groupedOptions(
+				new Set([...(selectedCategory?.sources ?? []), ...(selectedType?.sources ?? [])])
+			);
+			if (!validSources.isEmpty)
+				context.typeRestriction.sourceOptions = [
+					{ value: "", label: _loc("COMMON.None") },
+					{ value: "auto", label: _loc("BF.Advancement.ChooseFeatures.Source.Automatic"), rule: true },
+					...validSources.formOptions()
+				];
 		} else if (this.advancement.configuration.type === "talent") {
 			context.typeRestriction = {
 				categoryLabel: game.i18n.localize("BF.Feature.Talent.Category.Label"),

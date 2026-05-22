@@ -8,8 +8,8 @@ const { ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberFiel
  * Configuration data for choice levels.
  *
  * @typedef {object} ChoiceLevelConfiguration
- * @property {number} count         Number of items a player can select at this level.
- * @property {boolean} replacement  Can a player replace previous selections at this level?
+ * @property {number} count - Number of items a player can select at this level.
+ * @property {boolean} replacement - Can a player replace previous selections at this level?
  */
 
 /**
@@ -20,6 +20,7 @@ const { ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberFiel
  * @property {FeatureGrantConfiguration[]} pool - Items to present as choices.
  * @property {object} restriction
  * @property {string} restriction.category - Category of allowed items (e.g. class or race).
+ * @property {string} restriction.source - Specific source allowed or "auto" to match ultimate origin if valid.
  * @property {string} restriction.type - Subtype of allowed items (e.g. martialTalent or channelDivinity).
  * @property {string} type - General item type to support (e.g. feature or talent).
  */
@@ -46,6 +47,7 @@ export class ChooseFeaturesConfigurationData extends AdvancementDataModel {
 			pool: new ArrayField(new SchemaField({ uuid: new DocumentUUIDField() })),
 			restriction: new SchemaField({
 				category: new StringField(),
+				source: new StringField(),
 				type: new StringField()
 			}),
 			type: new StringField({ required: true, blank: false, initial: "feature" })
