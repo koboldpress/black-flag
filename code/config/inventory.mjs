@@ -229,7 +229,8 @@ export const sheetSections = {
 										v: filters
 									}
 								],
-								levels: cls.levels
+								levels: cls.levels,
+								sublabel: cls.subclass ? `Level ${cls.levels} - ${cls.subclass.identifier}` : `Level ${cls.levels}`
 							},
 							{ inplace: false }
 						);
@@ -250,7 +251,23 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "lineage" }
-			]
+			],
+			expand: (document, sectionData) => {
+				// This function add the selected name of the lineage as a sublabel that can be displayed
+				if (document.system.progression.lineage.name !== "") {
+					return [
+						foundry.utils.mergeObject(
+							sectionData,
+							{
+								sublabel: document.system.progression.lineage.name
+							}
+						)
+					]
+				}
+				else {
+					return [sectionData];
+				}
+			}
 		},
 		{
 			id: "heritage-features",
@@ -259,7 +276,23 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "heritage" }
-			]
+			],
+			expand: (document, sectionData) => {
+				// This function add the selected name of the heritage as a sublabel that can be displayed
+				if (document.system.progression.heritage.name !== "") {
+					return [
+						foundry.utils.mergeObject(
+							sectionData,
+							{
+								sublabel: document.system.progression.heritage.name
+							}
+						)
+					]
+				}
+				else {
+					return [sectionData];
+				}
+			}
 		},
 		{
 			id: "features",
