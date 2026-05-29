@@ -7,7 +7,7 @@
 			{{#each sections.features as |section sectionId|}}
 				<tbody data-section="{{sectionId}}">
 					<tr class="table-header">
-						<td class="name">{{ localize section.label }}</td>
+						<td class="name">{{ localize section.label }} {{#if section.sublabel}}({{section.sublabel}}){{/if}}</td>
 						<th class="uses">{{ localize "BF.Uses.Short" }}</th>
 						<td class="controls"></td>
 					</tr>
