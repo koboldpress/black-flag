@@ -195,6 +195,14 @@ export const sheetSections = {
 			options: { autoHide: true }
 		},
 		{
+			id: "background",
+			tab: "features",
+			label: "BF.Item.Type.Background[one]",
+			filters: [
+				{ k: "type", v: "background" }
+			]
+		},
+		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Feature.Category.Class[other]",
