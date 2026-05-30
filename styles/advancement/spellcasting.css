@@ -16,8 +16,10 @@
 }
 
 .black-flag.spell-manager {
-	/* min-block-size: 400px;
-	min-inline-size: 600px; */
+	&:not(.minimized, .minimizing, .maximizing) {
+		min-block-size: 400px;
+		min-inline-size: 600px;
+	}
 
 	.window-content {
 		padding: 0;
@@ -127,12 +129,14 @@
 			input {
 				margin: 0;
 				accent-color: var(--bf-border-color-blue);
+				--checkbox-checked-color: var(--bf-border-color-blue);
+				block-size: var(--checkbox-size);
+				inline-size: var(--checkbox-size);
 
-				&[type="radio"] { margin-block-end: 3px; }
+				&[type="radio"] { --checkbox-size: 20px; }
 				&[type="checkbox"] {
+					--checkbox-size: 15px;
 					flex: unset;
-					width: 15px;
-					height: 15px;
 				}
 			}
 		}
@@ -152,6 +156,9 @@
 	section.slots {
 		h3 {
 			border: none;
+			color: inherit;
+			font-family: var(--bf-font-primary);
+			font-size: var(--font-size-18);
 			text-align: center;
 			margin-block: 6px;
 		}
