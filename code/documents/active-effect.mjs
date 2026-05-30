@@ -421,8 +421,10 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 */
 	static _onClickTokenHUD(event) {
 		const { target } = event;
+		if (!target.classList?.contains("effect-control")) return;
+
 		const actor = canvas.hud.token.object?.actor;
-		if (!target.classList?.contains("effect-control") || !actor) return;
+		if (!actor) return;
 
 		const id = target.dataset?.statusId;
 		if (id === "exhaustion") BlackFlagActiveEffect._manageExhaustion(event, actor);
