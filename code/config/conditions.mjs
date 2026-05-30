@@ -189,12 +189,12 @@ export const conditionEffects = {
 export const statusEffects = {
 	burrowing: {
 		name: "EFFECT.BF.Burrowing",
-		icon: "systems/black-flag/artwork/statuses/burrowing.svg",
+		img: "systems/black-flag/artwork/statuses/burrowing.svg",
 		special: "BURROW"
 	},
 	concentrating: {
 		name: "EFFECT.BF.Concentrating",
-		icon: "systems/black-flag/artwork/statuses/concentrating.svg",
+		img: "systems/black-flag/artwork/statuses/concentrating.svg",
 		special: "CONCENTRATING"
 	},
 	coverHalf: {
@@ -218,43 +218,43 @@ export const statusEffects = {
 		exclusiveGroup: "cover"
 	},
 	dead: {
-		icon: "systems/black-flag/artwork/statuses/dead.svg",
+		img: "systems/black-flag/artwork/statuses/dead.svg",
 		order: 1,
 		special: "DEFEATED"
 	},
 	dodging: {
 		name: "EFFECT.BF.Dodging",
-		icon: "systems/black-flag/artwork/statuses/dodging.svg"
+		img: "systems/black-flag/artwork/statuses/dodging.svg"
 	},
 	ethereal: {
 		name: "EFFECT.BF.Ethereal",
-		icon: "systems/black-flag/artwork/statuses/ethereal.svg"
+		img: "systems/black-flag/artwork/statuses/ethereal.svg"
 	},
 	// TODO: Rename to flying to match other conditions
 	fly: {
 		label: "EFFECT.BF.Flying",
-		icon: "systems/black-flag/artwork/statuses/flying.svg",
+		img: "systems/black-flag/artwork/statuses/flying.svg",
 		special: "FLY"
 	},
 	hiding: {
 		name: "EFFECT.BF.Hiding",
-		icon: "systems/black-flag/artwork/statuses/hiding.svg"
+		img: "systems/black-flag/artwork/statuses/hiding.svg"
 	},
 	hovering: {
 		name: "EFFECT.BF.Hovering",
-		icon: "systems/black-flag/artwork/statuses/hovering.svg"
+		img: "systems/black-flag/artwork/statuses/hovering.svg"
 	},
 	marked: {
 		name: "EFFECT.BF.Marked",
-		icon: "systems/black-flag/artwork/statuses/marked.svg"
+		img: "systems/black-flag/artwork/statuses/marked.svg"
 	},
 	sleeping: {
 		name: "EFFECT.BF.Sleeping",
-		icon: "systems/black-flag/artwork/statuses/sleeping.svg"
+		img: "systems/black-flag/artwork/statuses/sleeping.svg"
 	},
 	stable: {
 		name: "EFFECT.BF.Stable",
-		icon: "systems/black-flag/artwork/statuses/stable.svg"
+		img: "systems/black-flag/artwork/statuses/stable.svg"
 	}
 };
 
@@ -265,25 +265,27 @@ export const statusEffects = {
  * @internal
  */
 export function _configureStatusEffects() {
-	const addEffect = (effects, { icon: img, ...data }) => {
+	const addEffect = ({ special, ...data }) => {
 		data = foundry.utils.deepClone(data);
-		effects.push({ _id: staticID(`bf${data.id}`), img, ...data });
-		if ("special" in data) CONFIG.specialStatusEffects[data.special] = data.id;
+		if ("label" in data) {
+			data.name = data.label;
+			delete data.label;
+		}
+		if ("icon" in data) {
+			data.img = data.icon;
+			delete data.icon;
+		}
+		if (special) CONFIG.specialStatusEffects[special] = data.id;
+		return { _id: staticID(`bf${data.id}`), order: Infinity, ...data, name: _loc(data.name) };
 	};
 	CONFIG.statusEffects = Object.entries(statusEffects).reduce((arr, [id, data]) => {
-		const original = CONFIG.statusEffects.find(s => s.id === id);
-		addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
+		const original = CONFIG.statusEffects[id];
+		arr.push(addEffect(foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false })));
 		return arr;
 	}, []);
-	for (const [id, { label: name, ...data }] of Object.entries(conditions)) {
-		addEffect(CONFIG.statusEffects, { id, name, ...data });
+	for (const [id, data] of Object.entries(conditions)) {
+		CONFIG.statusEffects[id] = addEffect({ id, ...data });
 	}
-	CONFIG.statusEffects.forEach(s => (s.name = game.i18n.localize(s.name)));
-	CONFIG.statusEffects.sort((lhs, rhs) =>
-		lhs.order || rhs.order
-			? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
-			: lhs.name.localeCompare(rhs.name, game.i18n.lang)
-	);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
