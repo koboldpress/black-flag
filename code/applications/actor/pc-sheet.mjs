@@ -212,6 +212,10 @@ export default class PCSheet extends BaseActorSheet {
 
 		context.canResetAbilityAssignment =
 			context.editable && (game.settings.get("black-flag", "abilitySelectionManual") || game.user.isGM);
+		context.displayLevelUp =
+			this.actor.system.progression.level < CONFIG.BlackFlag.maxLevel ||
+			(game.settings.get(game.system.id, "rulesConfiguration").epicAdvancement &&
+				this.actor.system.progression.level < CONFIG.BlackFlag.maxLevelEpic);
 		context.displayXPBar = game.settings.get(game.system.id, "levelingMode") === "xp";
 
 		context.progressionLevels = [];
@@ -224,6 +228,7 @@ export default class PCSheet extends BaseActorSheet {
 				number: level,
 				...data,
 				class: data.class,
+				className: level > CONFIG.BlackFlag.maxLevel ? _loc("BF.Progression.Epic.Label") : data.class?.name,
 				flows: [],
 				highestLevel: level !== 0 && level === context.system.progression.level
 			};
@@ -507,10 +512,11 @@ export default class PCSheet extends BaseActorSheet {
 	 */
 	static async #levelUp(event, target) {
 		const allowMulticlassing = game.settings.get(game.system.id, "allowMulticlassing");
+		const isEpicLevel = this.actor.system.progression.level >= CONFIG.BlackFlag.maxLevel;
 		const cls = this.actor.system.progression.levels[1]?.class;
-		if (cls && allowMulticlassing) {
+		if (cls && allowMulticlassing && !isEpicLevel) {
 			this._renderChild(new LevelUpDialog({ document: this.actor }));
-		} else if (cls) {
+		} else if (cls || isEpicLevel) {
 			try {
 				await this.actor.system.levelUp(cls);
 			} catch (err) {

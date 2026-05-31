@@ -105,6 +105,7 @@ export default class BaseSettingsConfig extends BFApplication {
 			requiresClientReload ||= s.scope === "client" && s.requiresReload;
 			requiresWorldReload ||= s.scope === "world" && s.requiresReload;
 		}
-		if (requiresClientReload || requiresWorldReload) SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+		if (requiresClientReload || requiresWorldReload)
+			foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
 	}
 }

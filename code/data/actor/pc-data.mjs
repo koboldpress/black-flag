@@ -415,16 +415,19 @@ export default class PCData extends ActorDataModel.mixin(
 				return obj;
 			}, {});
 		for (const [level, data] of Object.entries(this.progression.levels)) {
-			const document = data.class;
-			if (!document) continue;
-			const classData = (this.progression.classes[data.class.identifier] ??= {
-				document,
-				subclass: subclasses[document.identifier],
-				levels: 0,
-				originalClass: Number(level) === 1
-			});
-			classData.levels += 1;
-			data.levels = { character: Number(level), class: classData.levels, identifier: document.identifier };
+			const doc = data.class;
+			data.levels = { character: Number(level) };
+			if (doc) {
+				const classData = (this.progression.classes[data.class.identifier] ??= {
+					document: doc,
+					subclass: subclasses[document.identifier],
+					levels: 0,
+					originalClass: Number(level) === 1
+				});
+				classData.levels += 1;
+				Object.assign(data.levels, { class: classData.levels, identifier: doc.identifier });
+				data.levels.class = classData.levels;
+			}
 		}
 		for (const data of Object.values(this.progression.classes)) {
 			Object.defineProperty(data, "levelsLabel", {
@@ -444,7 +447,7 @@ export default class PCData extends ActorDataModel.mixin(
 			});
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
-		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
+		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1, "pc");
 
 		// Experience Points
 		const xp = this.progression.xp;
@@ -468,7 +471,7 @@ export default class PCData extends ActorDataModel.mixin(
 		hd.max ??= 0;
 		for (const data of Object.values(this.progression.levels)) {
 			const cls = data.class;
-			const hpAdvancement = cls.system.advancement.byType("hitPoints")[0];
+			const hpAdvancement = cls?.system.advancement.byType("hitPoints")[0];
 			if (!hpAdvancement) continue;
 			const denom = (hd.d[hpAdvancement.configuration.denomination] ??= { spent: 0 });
 			denom.max ??= 0;
@@ -969,10 +972,41 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/**
 	 * Level up using the provided class.
-	 * @param {BlackFlagItem} cls - Class in which to level up.
+	 * @param {BlackFlagItem} [cls] - Class in which to level up.
 	 * @returns {Promise}
 	 */
 	async levelUp(cls) {
+		const levels = { character: (this.progression.level ?? 0) + 1 };
+
+		if (
+			levels.character > CONFIG.BlackFlag.maxLevel &&
+			game.settings.get(game.system.id, "rulesConfiguration").epicAdvancement
+		) {
+			if (levels.character > CONFIG.BlackFlag.maxLevelEpic)
+				throw new Error(_loc("BF.Level.Warning.Max", { max: CONFIG.BlackFlag.maxLevelEpic }));
+
+			// Add new progression data
+			await this.parent.update(
+				{ [`system.progression.levels.${levels.character}`]: {} },
+				{ blackFlag: { levelUp: true } }
+			);
+
+			for (const advancement of this.parent.advancementForLevel(levels.character)) {
+				this.parent.enqueueAdvancementChange(advancement, "apply", [
+					levels,
+					undefined,
+					{ initial: true, render: false }
+				]);
+			}
+
+			return;
+		}
+
+		if (levels.character > CONFIG.BlackFlag.maxLevel)
+			throw new Error(_loc("BF.Level.Warning.Max", { max: CONFIG.BlackFlag.maxLevel }));
+
+		if (!cls) throw new Error(_loc("BF.Progression.Warning.NoClass"));
+
 		if (!game.settings.get(game.system.id, "allowMulticlassing")) {
 			const existingClass = Object.keys(this.progression.classes)[0];
 			if (existingClass && existingClass !== cls.identifier) {
@@ -980,13 +1014,10 @@ export default class PCData extends ActorDataModel.mixin(
 			}
 		}
 
-		const levels = {
-			character: (this.progression.level ?? 0) + 1,
+		Object.assign(levels, {
 			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1,
 			identifier: cls.identifier
-		};
-		if (levels.character > CONFIG.BlackFlag.maxLevel)
-			throw new Error(_loc("BF.Level.Warning.Max", { max: CONFIG.BlackFlag.maxLevel }));
+		});
 
 		// Create class if it doesn't already exist on actor
 		let existingClass = this.progression.classes[cls.identifier]?.document;
@@ -1013,12 +1044,13 @@ export default class PCData extends ActorDataModel.mixin(
 	 * @returns {Promise}
 	 */
 	async levelDown() {
+		const levels = { character: this.progression.level };
 		const cls = this.progression.levels[this.progression.level].class;
-		const levels = {
-			character: this.progression.level,
-			class: this.progression.classes[cls.identifier].levels,
-			identifier: cls.identifier
-		};
+		if (cls)
+			Object.assign(levels, {
+				class: this.progression.classes[cls.identifier].levels,
+				identifier: cls.identifier
+			});
 
 		// Remove advancements for the old level
 		for (const advancement of this.parent.advancementForLevel(levels.character)) {
@@ -1026,7 +1058,7 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 
 		// Remove subclass if less than 3rd level
-		const subclass = this.progression.classes[cls.identifier].subclass;
+		const subclass = this.progression.classes[cls?.identifier]?.subclass;
 		if (levels.class <= CONFIG.BlackFlag.subclassLevel && subclass)
 			this.parent.enqueueAdvancementChange(this.parent, "deleteEmbeddedDocuments", [
 				"Item",
@@ -1041,7 +1073,7 @@ export default class PCData extends ActorDataModel.mixin(
 		]);
 
 		// If class has no more levels, remove it from the actor
-		if (levels.class <= 1)
+		if (cls && levels.class <= 1)
 			this.parent.enqueueAdvancementChange(this.parent, "deleteEmbeddedDocuments", [
 				"Item",
 				[cls.id],

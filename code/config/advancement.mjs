@@ -166,21 +166,33 @@ export const experiencePoints = [
 	900, // Level 3
 	2700, // Level 4
 	6500, // Level 5
-	14000, // Level 6
-	23000, // Level 7
-	34000, // Level 8
-	48000, // Level 9
-	64000, // Level 10
-	85000, // Level 11
-	100000, // Level 12
-	120000, // Level 13
-	140000, // Level 14
-	165000, // Level 15
-	195000, // Level 16
-	225000, // Level 17
-	265000, // Level 18
-	305000, // Level 19
-	355000 // Level 20
+	14_000, // Level 6
+	23_000, // Level 7
+	34_000, // Level 8
+	48_000, // Level 9
+	64_000, // Level 10
+	85_000, // Level 11
+	100_000, // Level 12
+	120_000, // Level 13
+	140_000, // Level 14
+	165_000, // Level 15
+	195_000, // Level 16
+	225_000, // Level 17
+	265_000, // Level 18
+	305_000, // Level 19
+	355_000, // Level 20
+
+	// Epic Level Advancement
+	375_000, // Level 21
+	405_000, // Level 22
+	435_000, // Level 23
+	465_000, // Level 24
+	495_000, // Level 25
+	525_000, // Level 26
+	555_000, // Level 27
+	585_000, // Level 28
+	615_000, // Level 29
+	645_000 // Level 30
 ];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -211,6 +223,13 @@ export function levels() {
  * @type {number}
  */
 export const maxLevel = 20;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Maximum character level when Epic Advancement is enabled.
+ */
+export const maxLevelEpic = 30;
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

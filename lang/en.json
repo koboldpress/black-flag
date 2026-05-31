@@ -1958,6 +1958,8 @@
 		"Class[other]": "Class Features",
 		"ClassSpecific[one]": "{class} Feature",
 		"ClassSpecific[other]": "{class} Features",
+		"EpicLevelBoon[one]": "Epic Level Boon",
+		"EpicLevelBoon[other]": "Epic Level Boons",
 		"Heritage[one]": "Heritage Trait",
 		"Heritage[other]": "Heritage Traits",
 		"Lineage[one]": "Lineage Trait",
@@ -2941,6 +2943,9 @@
 		"Return": "Return"
 	},
 	"Base": "Base",
+	"Epic": {
+		"Label": "Epic"
+	},
 	"Notification": {
 		"ChooseBackground": "Choose a Background",
 		"ChooseClass": "Choose a Class",
@@ -2953,6 +2958,7 @@
 		"InsufficientPrimaryScore": "Your {ability} score must be at least {threshold} in order to take a level in a different class, but it is only {value}.",
 		"InsufficientSecondaryScore[one]": "Your {ability} score must be at least {threshold} to take a level of {class}.",
 		"InsufficientSecondaryScore[other]": "Either your {ability} scores must be at least {threshold} to take a level of {class}.",
+		"NoClass": "A class must be provided when leveling up outside Epic Advancement.",
 		"NoMulticlassing": "Multiclassing is not currently allowed in this game."
 	}
 },
@@ -3419,6 +3425,10 @@
 	},
 	"RULES": {
 		"FIELDS": {
+			"epicAdvancement": {
+				"hint": "Allow advancement beyond 20th level all the way to 30th level.",
+				"label": "Epic Advancement"
+			},
 			"firearms": {
 				"hint": "Enable the firearms rules and weapon types found in the Game Master’s Guide.",
 				"label": "Firearms"

@@ -16,6 +16,7 @@ export default class RulesSetting extends foundry.abstract.DataModel {
 	/** @override */
 	static defineSchema() {
 		return {
+			epicAdvancement: new BooleanField(),
 			firearms: new BooleanField()
 		};
 	}

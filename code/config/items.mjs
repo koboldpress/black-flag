@@ -158,6 +158,9 @@ export const featureCategories = {
 			}
 		}
 	},
+	epicLevelBoon: {
+		localization: "BF.Feature.Category.EpicLevelBoon"
+	},
 	talent: {
 		localization: "BF.Feature.Category.Talent"
 	},

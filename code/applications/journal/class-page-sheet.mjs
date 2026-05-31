@@ -279,7 +279,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 
 			// Level & proficiency bonus
 			const cells = [{ class: "level", content: formatNumber(level, { ordinal: true }) }];
-			if (item.type === "class") cells.push({ class: "prof", content: `+${Proficiency.calculateMod(level)}` });
+			if (item.type === "class") cells.push({ class: "prof", content: `+${Proficiency.calculateMod(level, "pc")}` });
 			if (hasFeatures)
 				cells.push({
 					class: "features",

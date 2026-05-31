@@ -110,9 +110,11 @@ export default class Proficiency {
 	/**
 	 * Calculate an actor's proficiency modifier based on level or CR.
 	 * @param {number} level - Level or CR To use for calculating proficiency modifier.
+	 * @param {string} [type] - Actor type for which the proficiency is being calculated.
 	 * @returns {number} - Proficiency modifier.
 	 */
-	static calculateMod(level) {
+	static calculateMod(level, type) {
+		if (type === "pc" && level > CONFIG.BlackFlag.maxLevel) level -= 2;
 		return Math.floor((level + 7) / 4);
 	}
 

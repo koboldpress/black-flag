@@ -10,12 +10,12 @@
 						{{ localize "BF.Level.None" }}
 					{{/if}}
 				</span>
-				{{#unless (eq system.progression.level CONFIG.maxLevel)}}
+				{{#if displayLevelUp}}
 					<button type="button" class="link-button" data-action="levelUp">
 						<i class="fa-solid fa-arrow-up-wide-short" inert></i>
 						{{ localize "BF.Progression.Action.LevelUp.Label" }}
 					</button>
-				{{/unless}}
+				{{/if}}
 				{{#if displayXPBar}}<blackFlag-xpBar></blackFlag-xpBar>{{/if}}
 			</div>
 		</fieldset>
@@ -158,7 +158,7 @@
 						{{/if}}
 					</span>
 					<span class="class">
-						{{ level.class.name }}
+						{{ level.className }}
 						{{ blackFlag-notificationBadge @root.actor category=(concat "level-" level.number) }}
 					</span>
 					{{#if (and @root.editable level.highestLevel)}}
