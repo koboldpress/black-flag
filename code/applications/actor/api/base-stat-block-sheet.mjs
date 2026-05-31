@@ -272,7 +272,7 @@ export default class BaseStatBlockSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async _prepareTraits(context) {
 		context.traits = {};
-		const none = _loc("None");
+		const none = _loc("COMMON.None");
 
 		// Search through active effects for any that apply to traits
 		const validKeyPaths = new Set([

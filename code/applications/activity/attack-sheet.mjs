@@ -38,7 +38,7 @@ export default class AttackSheet extends ActivitySheet {
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
 		context.abilityOptions = [
-			{ value: "none", label: _loc("None") },
+			{ value: "none", label: _loc("COMMON.None") },
 			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({
 				...o,
 				group: _loc("BF.Ability.Label[other]")

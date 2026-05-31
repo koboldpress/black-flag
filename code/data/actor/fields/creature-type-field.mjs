@@ -26,7 +26,7 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 
 		Object.defineProperty(obj, "label", {
 			get() {
-				if (!this.value) return _loc("None");
+				if (!this.value) return _loc("COMMON.None");
 				const key = CONFIG.BlackFlag.creatureTypes[this.value]?.localization;
 				let type = _loc(`${key}[${this.swarm ? "other" : "one"}]`);
 				if (this.swarm)

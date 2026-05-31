@@ -268,7 +268,7 @@ export default class PCSheet extends BaseActorSheet {
 	async _prepareTraits(context) {
 		context.traits = [];
 		const { traits, proficiencies } = context.system;
-		const none = _loc("None");
+		const none = _loc("COMMON.None");
 
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
@@ -344,7 +344,7 @@ export default class PCSheet extends BaseActorSheet {
 			context.traits.push({
 				key,
 				label,
-				value: value || _loc("None"),
+				value: value || _loc("COMMON.None"),
 				config: "resistance"
 			});
 		};
