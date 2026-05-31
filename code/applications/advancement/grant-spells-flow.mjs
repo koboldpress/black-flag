@@ -18,7 +18,7 @@ export default class GrantSpellsFlow extends AdvancementFlow {
 				field: new StringField(),
 				name: "ability",
 				options: [
-					{ value: "", label: game.i18n.localize("BF.Advancement.GrantSpells.Notification.Ability"), rule: true },
+					{ value: "", label: _loc("BF.Advancement.GrantSpells.Notification.Ability"), rule: true },
 					...Array.from(this.advancement.configuration.spell.ability).map(value => ({
 						value,
 						label: CONFIG.BlackFlag.abilities.localized[value]

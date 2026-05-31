@@ -28,7 +28,7 @@ export default class HealthConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.localize("BF.Health.Label");
+		return _loc("BF.Health.Label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

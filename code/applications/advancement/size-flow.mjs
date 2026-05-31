@@ -18,7 +18,7 @@ export default class SizeFlow extends AdvancementFlow {
 				field: new StringField(),
 				name: "size",
 				options: [
-					{ value: "", label: game.i18n.localize("BF.Advancement.Size.Notification"), rule: true },
+					{ value: "", label: _loc("BF.Advancement.Size.Notification"), rule: true },
 					...this.advancement.configuration.options.map(value => ({
 						value,
 						label: CONFIG.BlackFlag.sizes.localized[value]

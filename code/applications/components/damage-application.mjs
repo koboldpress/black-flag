@@ -72,14 +72,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			div.innerHTML = `
 				<label>
 					<i class="fa-solid fa-heart-crack" inert></i>
-					<span>${game.i18n.localize("BF.DAMAGE.Application.Label")}</span>
+					<span>${_loc("BF.DAMAGE.Application.Label")}</span>
 					<i class="fa-solid fa-caret-down" inert></i>
 				</label>
 				<div class="collapsible-content">
 					<div class="wrapper">
 						<button class="apply-damage light-button" type="button" data-action="applyDamage">
 							<i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
-							${game.i18n.localize("BF.DAMAGE.Application.Action.Apply")}
+							${_loc("BF.DAMAGE.Application.Action.Apply")}
 						</button>
 					</div>
 				</div>
@@ -234,19 +234,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
 		if (change === "threshold") {
 			if (options.ignore?.threshold) mode = "ignore";
-			label = game.i18n.localize("BF.DAMAGE.Threshold");
+			label = _loc("BF.DAMAGE.Threshold");
 		} else {
 			if (options.ignore?.[change]?.has(type)) mode = "ignore";
 			else if (change === "immunity" && options.downgrade?.has(type)) mode = "downgrade";
 			const typeLabel =
 				type === "all"
-					? game.i18n.localize("BF.Resistance.AllDamage")
+					? _loc("BF.Resistance.AllDamage")
 					: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type];
-			label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, { type: typeLabel });
+			label = _loc(`BF.DAMAGE.Application.Change.${change.capitalize()}`, { type: typeLabel });
 		}
 
-		if (mode === "ignore") label = game.i18n.format("BF.DAMAGE.Application.Ignoring", { source: label });
-		if (mode === "downgrade") label = game.i18n.format("BF.DAMAGE.Application.Downgrading", { source: label });
+		if (mode === "ignore") label = _loc("BF.DAMAGE.Application.Ignoring", { source: label });
+		if (mode === "downgrade") label = _loc("BF.DAMAGE.Application.Downgrading", { source: label });
 
 		return { label, pressed: mode === "active" ? "false" : mode === "ignore" ? "true" : "mixed" };
 	}

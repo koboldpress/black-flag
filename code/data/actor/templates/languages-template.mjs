@@ -84,7 +84,7 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 
 		let entries;
 		if ( languages.value.has("ALL") ) {
-			entries = new Map([["ALL", game.i18n.localize("BF.Language.All")]]);
+			entries = new Map([["ALL", _loc("BF.Language.All")]]);
 		} else {
 			entries = new Map(Array.from(languages.value).map(v => [v, Trait.keyLabel(v, { trait: "languages" })]));
 		}
@@ -95,7 +95,7 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 			convertAmount(data, "distance", { keys: ["range"] });
 			const label = CONFIG.BlackFlag.rangedCommunication[key]?.label;
 			if ( label && data.range ) extras.push(
-				`${game.i18n.localize(label)} ${formatDistance(data.range, data.unit)}`
+				`${_loc(label)} ${formatDistance(data.range, data.unit)}`
 			);
 		}
 

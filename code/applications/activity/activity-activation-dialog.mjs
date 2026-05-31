@@ -177,7 +177,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 
 		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot") && !this.config.cause)
 			context.fields.push({
-				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.PromptDecrease") }),
+				field: new BooleanField({ label: _loc("BF.CONSUMPTION.Type.SpellSlots.PromptDecrease") }),
 				name: "consume.spellSlot",
 				value: this.config.consume?.spellSlot
 			});
@@ -185,7 +185,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if (this.activity.activation.type === "legendary" && this._shouldDisplay("consume.action"))
 			context.fields.push({
 				field: new BooleanField({
-					label: game.i18n.format("BF.CONSUMPTION.Type.PromptGeneric", { type: this.activity.activation.label })
+					label: _loc("BF.CONSUMPTION.Type.PromptGeneric", { type: this.activity.activation.label })
 					// TODO: Display legendary action count as hint
 				}),
 				name: "consume.action",
@@ -232,7 +232,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if (this.activity.target?.template?.type && this._shouldDisplay("create.measuredTemplate")) {
 			context.hasCreation = true;
 			context.template = {
-				field: new BooleanField({ label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate") }),
+				field: new BooleanField({ label: _loc("BF.TARGET.Action.PlaceTemplate") }),
 				name: "create.measuredTemplate",
 				value: this.config.create?.measuredTemplate
 			};
@@ -293,7 +293,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 				})
 				.filter(_ => _);
 			context.spellSlots = {
-				field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
+				field: new StringField({ label: _loc("BF.Spell.Circle.Label") }),
 				name: "spell.slot",
 				value: this.config.spell?.slot,
 				options: spellSlotOptions
@@ -315,7 +315,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 						(slot.type === "leveled" && slot.circle > maximumCircle)
 					)
 						return null;
-					const label = game.i18n.format("BF.CONSUMPTION.Type.SpellSlots.Available", {
+					const label = _loc("BF.CONSUMPTION.Type.SpellSlots.Available", {
 						slot: slot.label,
 						available: formatNumber(slot.value)
 					});
@@ -326,7 +326,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 				.filter(_ => _);
 
 			context.spellSlots = {
-				field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
+				field: new StringField({ label: _loc("BF.Spell.Circle.Label") }),
 				name: "spell.slot",
 				value: spellSlotValue,
 				options: spellSlotOptions
@@ -335,7 +335,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			if (!spellSlotOptions.some(o => !o.disabled))
 				context.notes.push({
 					type: "warn",
-					message: game.i18n.format("BF.ACTIVATION.Warning.NoSlotsLeft", {
+					message: _loc("BF.ACTIVATION.Warning.NoSlotsLeft", {
 						name: this.item.name
 					})
 				});
@@ -345,7 +345,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 				field: new NumberField({
 					min: 1,
 					max: Math.max(1, max),
-					label: game.i18n.localize("BF.CONSUMPTION.Scaling.Value")
+					label: _loc("BF.CONSUMPTION.Scaling.Value")
 				}),
 				name: "scalingValue",
 				// Config stores the scaling increase, but scaling value (increase + 1) is easier to understand in the UI

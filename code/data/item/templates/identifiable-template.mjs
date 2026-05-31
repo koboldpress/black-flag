@@ -85,7 +85,7 @@ export default class IdentifiableTemplate extends foundry.abstract.DataModel {
 		// If a base item is set, fetch that and use its name/description
 		if ( baseItem ) {
 			if ( fetchName ) {
-				foundry.utils.setProperty(changes, "system.unidentified.name", game.i18n.format(
+				foundry.utils.setProperty(changes, "system.unidentified.name", _loc(
 					"BF.IDENTIFIABLE.DefaultName", { type: baseItem.name }
 				));
 			}
@@ -96,8 +96,8 @@ export default class IdentifiableTemplate extends foundry.abstract.DataModel {
 		}
 
 		// Otherwise, set the name to match the item type
-		if ( fetchName ) foundry.utils.setProperty(changes, "system.unidentified.name", game.i18n.format(
-			"BF.IDENTIFIABLE.DefaultName", { type: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
+		if ( fetchName ) foundry.utils.setProperty(changes, "system.unidentified.name", _loc(
+			"BF.IDENTIFIABLE.DefaultName", { type: _loc(CONFIG.Item.typeLabels[this.parent.type]) }
 		));
 	}
 

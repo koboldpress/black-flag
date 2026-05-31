@@ -266,10 +266,7 @@ export default class DamageRoll extends BasicRoll {
 		if (bonus > 0) {
 			this.terms.push(new foundry.dice.terms.OperatorTerm({ operator: "+" }));
 			this.terms.push(
-				new foundry.dice.terms.NumericTerm(
-					{ number: bonus },
-					{ flavor: game.i18n.localize("BF.DAMAGE.Critical.Maximize") }
-				)
+				new foundry.dice.terms.NumericTerm({ number: bonus }, { flavor: _loc("BF.DAMAGE.Critical.Maximize") })
 			);
 		}
 

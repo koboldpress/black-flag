@@ -117,7 +117,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 					.map(s => CONFIG.BlackFlag.spellSchools.localized[s])
 					.filter(s => s)
 			);
-		else context.schoolLabel = game.i18n.localize("BF.Spellcasting.Learning.Schools.NoRestriction");
+		else context.schoolLabel = _loc("BF.Spellcasting.Learning.Schools.NoRestriction");
 
 		return context;
 	}
@@ -136,9 +136,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	static async #onAddScale(event, target) {
 		const name = target.closest("[data-name]").dataset.name;
 		if (this.advancement.configuration[name].scaleValue) return;
-		const title = game.i18n.localize(
-			name === "slots" ? "BF.Spellcasting.FIELDS.slots.label" : this.constructor.KNOWN[name].label
-		);
+		const title = _loc(name === "slots" ? "BF.Spellcasting.FIELDS.slots.label" : this.constructor.KNOWN[name].label);
 		const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
 		const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
 		await this.submit({ updateData: { [`configuration.${name}.scale`]: scale.id } });

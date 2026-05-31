@@ -73,7 +73,7 @@ export default class BaseRestDialog extends BFFormDialog {
 
 	/** @override */
 	get title() {
-		return game.i18n.localize(CONFIG.BlackFlag.rest.types[this.config.type]?.label);
+		return _loc(CONFIG.BlackFlag.rest.types[this.config.type]?.label);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -90,7 +90,7 @@ export default class BaseRestDialog extends BFFormDialog {
 			fields: [],
 			hd: this.actor.system.attributes?.hd,
 			hp: this.actor.system.attributes?.hp,
-			note: restConfig?.hint ? game.i18n.localize(restConfig.hint) : ""
+			note: restConfig?.hint ? _loc(restConfig.hint) : ""
 		};
 		return context;
 	}
@@ -132,7 +132,7 @@ export default class BaseRestDialog extends BFFormDialog {
 					{
 						default: true,
 						icon: "fa-solid fa-bed",
-						label: game.i18n.localize("BF.Rest.Action.Rest.Label"),
+						label: _loc("BF.Rest.Action.Rest.Label"),
 						name: "rest",
 						type: "submit"
 					}

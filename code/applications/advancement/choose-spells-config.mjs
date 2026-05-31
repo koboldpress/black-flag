@@ -67,7 +67,7 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 			{ value: "only", label: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Only" }
 		];
 		context.spellCircleOptions = [
-			{ value: -1, label: game.i18n.localize("BF.Advancement.ChooseSpells.FIELDS.restriction.circle.Available") },
+			{ value: -1, label: _loc("BF.Advancement.ChooseSpells.FIELDS.restriction.circle.Available") },
 			{ rule: true },
 			...CONFIG.BlackFlag.spellCircles({ formOptions: true })
 		];

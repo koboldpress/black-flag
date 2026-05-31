@@ -24,14 +24,14 @@ export default class AttackRollConfigurationDialog extends ChallengeRollConfigur
 		context = await super._prepareConfigurationContext(context, options);
 		if (this.options.attackModes?.length)
 			context.fields.unshift({
-				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.ATTACK.Mode.Label") }),
+				field: new foundry.data.fields.StringField({ label: _loc("BF.ATTACK.Mode.Label") }),
 				name: "attackMode",
 				options: this.options.attackModes,
 				value: this.config.attackMode
 			});
 		if (this.options.ammunitionOptions?.length)
 			context.fields.unshift({
-				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.Item.Type.Ammunition[one]") }),
+				field: new foundry.data.fields.StringField({ label: _loc("BF.Item.Type.Ammunition[one]") }),
 				name: "ammunition",
 				options: [{ value: "", label: "" }, ...this.options.ammunitionOptions],
 				value: this.config.ammunition

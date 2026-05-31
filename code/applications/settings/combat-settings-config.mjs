@@ -39,7 +39,7 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
 		switch (partId) {
 			case "initiative":
 				context.fields = [this.createSettingField("initiativeTiebreaker")];
-				context.legend = game.i18n.localize("BF.Initiative.Label");
+				context.legend = _loc("BF.Initiative.Label");
 				break;
 			case "criticals":
 				context.fields = [
@@ -47,14 +47,14 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
 					this.createSettingField("criticalMultiplyDice"),
 					this.createSettingField("criticalMultiplyNumeric")
 				];
-				context.legend = game.i18n.localize("BF.SETTINGS.CRITICAL.Label");
+				context.legend = _loc("BF.SETTINGS.CRITICAL.Label");
 				break;
 			// case "npcs":
 			// 	context.fields = [
 			// 		this.createSettingField("autoRecharge"),
 			// 		this.createSettingField("autoRollNPCHP")
 			// 	];
-			// 	context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name");
+			// 	context.legend = _loc("SETTINGS.DND5E.NPCS.Name");
 			// 	break;
 		}
 		return context;

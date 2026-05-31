@@ -134,8 +134,8 @@ export default class FeatureData extends ItemDataModel.mixin(
 			(featureCategory && ["class", "lineage", "heritage"].includes(context.source.type.category)) ||
 			featureCategory?.children
 		) {
-			const group = game.i18n.format("BF.Feature.Type.LabelSpecific", {
-				type: game.i18n.localize(`${featureCategory.localization}[one]`)
+			const group = _loc("BF.Feature.Type.LabelSpecific", {
+				type: _loc(`${featureCategory.localization}[one]`)
 			});
 			typeOptions = featureCategory?.children?.localizedOptions.map(o => ({ ...o, group }));
 			context.type.value = context.source.type.value || context.source.identifier.associated;

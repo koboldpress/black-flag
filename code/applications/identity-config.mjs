@@ -32,7 +32,7 @@ export default class SourceConfig extends BFDocumentSheet {
 
 	/** @inheritDoc */
 	get title() {
-		return `${game.i18n.localize("BF.SOURCE.Config")}: ${this.document.name}`;
+		return `${_loc("BF.SOURCE.Config")}: ${this.document.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

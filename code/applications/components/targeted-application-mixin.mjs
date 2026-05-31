@@ -74,10 +74,10 @@ export default function TargetedApplicationElement(Base) {
 			this.targetSourceControl.classList.add("target-source-control");
 			this.targetSourceControl.innerHTML = `
 				<button type="button" class="link-button" data-mode="targeted" aria-pressed="false">
-					<i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("BF.Tokens.Targeted")}
+					<i class="fa-solid fa-bullseye" inert></i> ${_loc("BF.Tokens.Targeted")}
 				</button>
 				<button type="button" class="link-button" data-mode="selected" aria-pressed="false">
-					<i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("BF.Tokens.Selected")}
+					<i class="fa-solid fa-expand" inert></i> ${_loc("BF.Tokens.Selected")}
 				</button>
 			`;
 			this.targetSourceControl
@@ -114,7 +114,7 @@ export default function TargetedApplicationElement(Base) {
 			else {
 				const li = document.createElement("li");
 				li.classList.add("none");
-				li.innerText = game.i18n.localize(`BF.Tokens.None${this.targetingMode.capitalize()}`);
+				li.innerText = _loc(`BF.Tokens.None${this.targetingMode.capitalize()}`);
 				this.targetList.replaceChildren(li);
 			}
 		}

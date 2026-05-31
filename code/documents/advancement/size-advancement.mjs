@@ -50,7 +50,7 @@ export default class SizeAdvancement extends Advancement {
 			category: `level-${levels.character}`,
 			section: "progression",
 			level: "warn",
-			message: game.i18n.localize("BF.Advancement.Size.Notification")
+			message: _loc("BF.Advancement.Size.Notification")
 		});
 	}
 
@@ -69,9 +69,9 @@ export default class SizeAdvancement extends Advancement {
 	titleForLevel(levels, { flow = false } = {}) {
 		let sizes;
 		if (flow && this.value.selected) {
-			sizes = [game.i18n.localize(CONFIG.BlackFlag.sizes[this.value.selected].label)];
+			sizes = [_loc(CONFIG.BlackFlag.sizes[this.value.selected].label)];
 		} else if (!flow) {
-			sizes = this.configuration.options.map(s => game.i18n.localize(CONFIG.BlackFlag.sizes[s].label));
+			sizes = this.configuration.options.map(s => _loc(CONFIG.BlackFlag.sizes[s].label));
 		}
 		if (!sizes) return this.title;
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "disjunction" });

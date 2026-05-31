@@ -84,7 +84,7 @@ export default class ActivationField extends SchemaField {
 			const type = CONFIG.BlackFlag.activationOptions({ pluralCount: data.value ?? 1 }).get(data.type);
 			if (!type) return "";
 
-			label = game.i18n.format("BF.ACTIVATION.Formatted.Scalar", {
+			label = _loc("BF.ACTIVATION.Formatted.Scalar", {
 				number: formatNumber(data.value ?? 1),
 				type: type.label,
 				typeLowercase: type.label.toLowerCase()
@@ -94,7 +94,7 @@ export default class ActivationField extends SchemaField {
 		if (style === "combined") {
 			return `<span${data.condition ? ` data-tooltip="${data.condition.capitalize()}"` : ""}>${label}</span>`;
 		} else if (data.condition) {
-			return game.i18n.format("BF.ACTIVATION.Formatted.Condition", {
+			return _loc("BF.ACTIVATION.Formatted.Condition", {
 				activation: label,
 				condition: data.condition
 			});

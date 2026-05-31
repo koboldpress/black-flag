@@ -57,7 +57,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 			ac.formulas.push(foundry.utils.mergeObject(data, {
 				enabled: ac.baseFormulas.has(id),
 				id,
-				label: game.i18n.localize(data.label),
+				label: _loc(data.label),
 				type: "base"
 			}, {inplace: false}))
 		}
@@ -66,7 +66,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 			get() {
 				const label = [];
 				if ( this.currentFormula?.id === "armored" ) label.push(this.equippedArmor.name);
-				else if ( this.currentFormula?.label ) label.push(game.i18n.localize(this.currentFormula.label));
+				else if ( this.currentFormula?.label ) label.push(_loc(this.currentFormula.label));
 				if ( this.equippedShield ) label.push(this.equippedShield.name);
 				return game.i18n.getListFormatter({ style: "short", type: "unit" }).format(label);
 			},
@@ -144,7 +144,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 			} catch(error) {
 				this.parent.notifications.set(`ac-formula-error-${index}`, {
 					level: "error", category: "armor-class", section: "main",
-					message: game.i18n.format(
+					message: _loc(
 						"BF.ARMORCLASS.Warning.InvalidFormula", {formula: config.formula, error: error.message}
 					)
 				});

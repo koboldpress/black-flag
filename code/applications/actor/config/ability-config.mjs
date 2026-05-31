@@ -33,7 +33,7 @@ export default class AbilityConfig extends BaseSelectorConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Ability.Label[other]") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Ability.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

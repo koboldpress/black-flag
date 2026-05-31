@@ -158,7 +158,7 @@ export default class EquipmentDialog extends BFApplication {
 	 */
 	async _prepareSelectionContext(partId, context, options) {
 		context.document = this.documents[partId];
-		context.documentType = game.i18n.localize(CONFIG.Item.typeLabels[partId]).toLowerCase();
+		context.documentType = _loc(CONFIG.Item.typeLabels[partId]).toLowerCase();
 		const advancement = this.advancements[partId];
 		if (!context.document || !advancement) return context;
 
@@ -258,11 +258,11 @@ export default class EquipmentDialog extends BFApplication {
 	 */
 	static async #onSubmitForm(event, form, formData) {
 		if (formData.get("mode") === "wealth") {
-			if (!this.documents.class) throw new Error(game.i18n.localize("BF.Advancement.Equipment.Warning.NoClass"));
+			if (!this.documents.class) throw new Error(_loc("BF.Advancement.Equipment.Warning.NoClass"));
 			const rolls = await CONFIG.Dice.BasicRoll.build(
 				{ rolls: [{ parts: [CONFIG.BlackFlag.startingWealth.formula] }] },
 				{ configure: false },
-				{ data: { flavor: game.i18n.localize("BF.Advancement.Equipment.WealthRoll") } }
+				{ data: { flavor: _loc("BF.Advancement.Equipment.WealthRoll") } }
 			);
 			if (!rolls[0]) throw new Error("Could not roll for wealth.");
 			this.#wealth = rolls[0].total;
@@ -300,7 +300,7 @@ export default class EquipmentDialog extends BFApplication {
 		}
 
 		if (selectionNeeded.length) {
-			throw new Error(game.i18n.localize("BF.Advancement.Equipment.Warning.ChoiceRequired"));
+			throw new Error(_loc("BF.Advancement.Equipment.Warning.ChoiceRequired"));
 		}
 	}
 }

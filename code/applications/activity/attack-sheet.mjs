@@ -38,10 +38,10 @@ export default class AttackSheet extends ActivitySheet {
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
 		context.abilityOptions = [
-			{ value: "none", label: game.i18n.localize("None") },
+			{ value: "none", label: _loc("None") },
 			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.Ability.Label[other]")
+				group: _loc("BF.Ability.Label[other]")
 			}))
 		];
 		const defaultAbility = this.activity.system.defaultAbility;
@@ -49,7 +49,7 @@ export default class AttackSheet extends ActivitySheet {
 			context.abilityOptions.unshift(
 				{
 					value: "",
-					label: game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
+					label: _loc("BF.Default.Specific", { default: _loc(defaultAbility).toLowerCase() })
 				},
 				{ rule: true }
 			);
@@ -63,7 +63,7 @@ export default class AttackSheet extends ActivitySheet {
 		context = await super._prepareIdentityContext(context);
 
 		if (this.item.system.validAttackTypes?.size)
-			context.defaultType = game.i18n.format("BF.Default.Specific", {
+			context.defaultType = _loc("BF.Default.Specific", {
 				default: game.i18n
 					.getListFormatter({ type: "disjunction" })
 					.format(
@@ -75,7 +75,7 @@ export default class AttackSheet extends ActivitySheet {
 
 		const defaultClassification = CONFIG.BlackFlag.attackTypes[this.item.system.type?.classification];
 		context.defaultClassification = defaultClassification
-			? game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultClassification).toLowerCase() })
+			? _loc("BF.Default.Specific", { default: _loc(defaultClassification).toLowerCase() })
 			: null;
 		return context;
 	}

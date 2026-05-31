@@ -56,12 +56,12 @@ export default class CheckActivity extends Activity {
 			if (checkType === "skill") type = SKILLS[associated];
 			else if (checkType === "tool") type = TOOLS[associated];
 			else if (checkType === "vehicle") type = VEHICLES[associated];
-			if (type) label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type });
+			if (type) label = _loc("BF.Enricher.Check.Specific", { ability, type });
 
 			buttons.push({
 				label: dc
 					? `
-					<span class="visible-dc">${game.i18n.format("BF.Enricher.DC.Phrase", { dc, check: wrap(label) })}</span>
+					<span class="visible-dc">${_loc("BF.Enricher.DC.Phrase", { dc, check: wrap(label) })}</span>
 					<span class="hidden-dc">${wrap(label)}</span>
 				`
 					: wrap(label),
@@ -72,7 +72,7 @@ export default class CheckActivity extends Activity {
 				dataset
 			});
 		};
-		const wrap = check => game.i18n.format("BF.Enricher.Check.Short", { check });
+		const wrap = check => _loc("BF.Enricher.Check.Short", { check });
 
 		const associated = Array.from(this.system.check.associated);
 		if (!associated.length && this.item.type === "tool") associated.push(this.item.system.type.base);

@@ -33,7 +33,7 @@ export default class TraitAdvancement extends Advancement {
 	 */
 	prepareData() {
 		const traitConfig = CONFIG.BlackFlag.traits[this.bestGuessTrait()];
-		this.title = this.title || game.i18n.localize(traitConfig?.labels.title || this.metadata.title);
+		this.title = this.title || _loc(traitConfig?.labels.title || this.metadata.title);
 		this.icon = this.icon || traitConfig?.icon || this.metadata.icon;
 		this.identifier = this.identifier || formatIdentifier(this.title);
 		if (!this.metadata.multiLevel) this.level ??= this.minimumLevel;
@@ -230,7 +230,7 @@ export default class TraitAdvancement extends Advancement {
 		if (foundry.utils.isEmpty(choices))
 			return {
 				choices,
-				label: game.i18n.format("BF.Advancement.Trait.Notification", {
+				label: _loc("BF.Advancement.Trait.Notification", {
 					count: formatNumber(available.length, { spelledOut: true }),
 					type: Trait.traitLabel(this.bestGuessTrait(), available.length)
 				})
@@ -248,7 +248,7 @@ export default class TraitAdvancement extends Advancement {
 
 		return {
 			choices,
-			label: game.i18n.format(`BF.Advancement.Trait.Notification${simplifyNotification ? "Simple" : ""}`, {
+			label: _loc(`BF.Advancement.Trait.Notification${simplifyNotification ? "Simple" : ""}`, {
 				count: formatNumber(available.length, { spelledOut: true }),
 				type: Trait.traitLabel(this.bestGuessTrait(available.map(a => a.set)), available.length)
 			})

@@ -64,7 +64,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 			category: `level-${levels.character}`,
 			section: "progression",
 			level: "warn",
-			message: game.i18n.format(
+			message: _loc(
 				getPluralLocalizationKey(choicesNeeded, pr => `BF.Advancement.ChooseFeatures.Notification[${pr}]`),
 				{
 					title: this.title,
@@ -100,8 +100,8 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	titleForLevel(levels, { flow = false } = {}) {
 		const data = this.configuration.choices[this.relavantLevel(levels)] ?? {};
 		let tag;
-		if (data.count) tag = game.i18n.format("BF.Advancement.ChooseFeatures.Choose", { number: data.count });
-		else if (data.replacement) tag = game.i18n.localize("BF.Advancement.ChooseFeatures.Replacement.Title");
+		if (data.count) tag = _loc("BF.Advancement.ChooseFeatures.Choose", { number: data.count });
+		else if (data.replacement) tag = _loc("BF.Advancement.ChooseFeatures.Replacement.Title");
 		else return this.title;
 		return `${this.title} <span class="choice-count">(${tag.toLowerCase()})</span>`;
 		// TODO: Use type & restriction to auto-generate title
@@ -205,8 +205,8 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 		// Type restriction is set and the item type does not match the selected type
 		if (type && type !== item.type) {
-			const typeLabel = game.i18n.localize(CONFIG.Item.typeLabels[type]);
-			if (strict) throw new Error(game.i18n.format("BF.Advancement.ChooseFeatures.Warning.Type", { type: typeLabel }));
+			const typeLabel = _loc(CONFIG.Item.typeLabels[type]);
+			if (strict) throw new Error(_loc("BF.Advancement.ChooseFeatures.Warning.Type", { type: typeLabel }));
 			return false;
 		}
 
@@ -220,8 +220,8 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 			if (errorLabel) {
 				if (strict)
 					throw new Error(
-						game.i18n.format("BF.Advancement.ChooseFeatures.Warning.Type", {
-							type: game.i18n.localize(`${errorLabel}[other]`).toLowerCase()
+						_loc("BF.Advancement.ChooseFeatures.Warning.Type", {
+							type: _loc(`${errorLabel}[other]`).toLowerCase()
 						})
 					);
 				return false;
@@ -239,10 +239,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 					invalidSource = validSources.get(restriction.source)?.label ?? restriction.source;
 				}
 				if (invalidSource) {
-					if (strict)
-						throw new Error(
-							game.i18n.format("BF.Advancement.ChooseFeatures.Warning.Source", { source: invalidSource })
-						);
+					if (strict) throw new Error(_loc("BF.Advancement.ChooseFeatures.Warning.Source", { source: invalidSource }));
 					return false;
 				}
 			}
@@ -255,10 +252,10 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 				if (strict) {
 					const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction", style: "long" });
 					throw new Error(
-						game.i18n.format("BF.Prerequisite.Warning.Failure", {
+						_loc("BF.Prerequisite.Warning.Failure", {
 							name: this.actor.name,
 							requirements: listFormatter.format(messages),
-							type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]).toLowerCase()
+							type: _loc(CONFIG.Item.typeLabels[item.type]).toLowerCase()
 						})
 					);
 				}

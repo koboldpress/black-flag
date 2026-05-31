@@ -27,7 +27,7 @@ export default class LuckConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Luck.Label") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Luck.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

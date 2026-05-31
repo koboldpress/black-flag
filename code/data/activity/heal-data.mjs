@@ -37,7 +37,7 @@ export class HealData extends ActivityDataModel {
 	 * @type {string|null}
 	 */
 	get defaultAbility() {
-		if (this.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
+		if (this.isSpell) return _loc("BF.Spellcasting.Label");
 		return null;
 	}
 

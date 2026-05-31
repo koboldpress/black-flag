@@ -92,13 +92,13 @@ export default class ResistancesTemplate extends foundry.abstract.DataModel {
 
 		const makeDamageLabel = (source, formatter) => formatter.format(
 			Array.from(source).map(t => t === "all" ?
-				game.i18n.localize("BF.Resistance.AllDamage") :
+				_loc("BF.Resistance.AllDamage") :
 				CONFIG.BlackFlag.damageTypes.localized[t]).filter(t => t)
 		);
 		const nonmagical = makeDamageLabel(damage.nonmagical, game.i18n.getListFormatter({ style: "long" }));
 		damage.label = [
 			makeDamageLabel(damage.value, game.i18n.getListFormatter({ type: "unit" })),
-			nonmagical ? game.i18n.format("BF.Resistance.Nonmagical", { type: nonmagical }) : null
+			nonmagical ? _loc("BF.Resistance.Nonmagical", { type: nonmagical }) : null
 		].filter(t => t).join("; ");
 
 		condition.label = game.i18n.getListFormatter({ type: "unit" })

@@ -28,7 +28,7 @@ export default class RulesSettingsConfig extends BaseSettingsConfig {
 				data.disabled = true;
 				data.value = true;
 				const sources = game.i18n.getListFormatter().format(source.requiredSources(name));
-				data.hint = `${game.i18n.localize(field.hint)} ${game.i18n.format("BF.SETTINGS.RULES.Required", { sources })}`;
+				data.hint = `${_loc(field.hint)} ${_loc("BF.SETTINGS.RULES.Required", { sources })}`;
 			}
 			context.fields.push(data);
 		}

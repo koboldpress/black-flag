@@ -281,7 +281,7 @@ export function renderSettingsSidebar(html) {
 	const section = document.createElement("section");
 	section.classList.add("black-flag", "sidebar-info", "flexcol");
 	section.innerHTML = `
-		<h4 class="divider">${game.i18n.localize("BF.GameSystem")}</h4>
+		<h4 class="divider">${_loc("BF.GameSystem")}</h4>
 		<figure class="black-flag sidebar-badge">
 			<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
 			     data-tooltip="${game.system.title}" alt="${game.system.title}">
@@ -292,7 +292,7 @@ export function renderSettingsSidebar(html) {
 
 	const welcomeLink = document.createElement("button");
 	welcomeLink.dataset.action = "welcome";
-	welcomeLink.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> ${game.i18n.localize("BF.WELCOME.Button")}`;
+	welcomeLink.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> ${_loc("BF.WELCOME.Button")}`;
 	welcomeLink.addEventListener("click", () => new WelcomeDialog().render({ force: true }));
 	section.append(welcomeLink);
 
@@ -310,17 +310,17 @@ function _settingsLinks() {
 	links.innerHTML = `
 		<li>
 			<a href="https://koboldpress.github.io/black-flag-docs/" target="_blank">
-				${game.i18n.localize("BF.Link.Notes")}
+				${_loc("BF.Link.Notes")}
 			</a>
 		</li>
 		<li>
 			<a href="https://github.com/koboldpress/black-flag/issues" target="_blank">
-				${game.i18n.localize("BF.Link.Issues")}
+				${_loc("BF.Link.Issues")}
 			</a>
 		</li>
 		<li>
 			<a href="https://discord.com/channels/170995199584108546/1083522450148577290" target="_blank">
-				${game.i18n.localize("BF.Link.Discord")}
+				${_loc("BF.Link.Discord")}
 			</a>
 		</li>
 	`;

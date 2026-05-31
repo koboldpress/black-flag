@@ -207,7 +207,7 @@ export const sheetSections = {
 				return Object.entries(document.system.progression.classes)
 					.map(([identifier, cls]) => {
 						const label = pluralRule =>
-							game.i18n.format(`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name });
+							_loc(`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name });
 						const filters = [
 							{ k: "system.identifier.associated", v: identifier },
 							{ k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith" }

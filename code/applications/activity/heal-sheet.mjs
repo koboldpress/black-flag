@@ -32,10 +32,10 @@ export default class HealSheet extends ActivitySheet {
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
 		context.scalingOptions = [
-			{ value: "", label: game.i18n.localize("BF.DAMAGE.Scaling.Mode.None") },
+			{ value: "", label: _loc("BF.DAMAGE.Scaling.Mode.None") },
 			...Object.entries(CONFIG.BlackFlag.damageScalingModes).map(([value, config]) => ({
 				value,
-				label: game.i18n.localize(config.label)
+				label: _loc(config.label)
 			}))
 		];
 		return context;

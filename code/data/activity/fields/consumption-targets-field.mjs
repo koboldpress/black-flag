@@ -84,7 +84,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	get placeholder() {
 		if (this.type !== "item") return "";
-		return game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem");
+		return _loc("BF.CONSUMPTION.Type.ItemUses.ThisItem");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -96,11 +96,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	get scalingModes() {
 		if (CONFIG.BlackFlag.consumptionTypes[this.type]?.scalingModes === false) return null;
 		return [
-			{ value: "", label: game.i18n.localize("BF.CONSUMPTION.Scaling.Mode.None") },
-			{ value: "amount", label: game.i18n.localize("BF.CONSUMPTION.Scaling.Mode.Amount") },
+			{ value: "", label: _loc("BF.CONSUMPTION.Scaling.Mode.None") },
+			{ value: "amount", label: _loc("BF.CONSUMPTION.Scaling.Mode.Amount") },
 			...Object.entries(CONFIG.BlackFlag.consumptionTypes[this.type].scalingModes ?? {}).map(([value, config]) => ({
 				value,
-				label: game.i18n.localize(config.label)
+				label: _loc(config.label)
 			}))
 		];
 	}
@@ -174,7 +174,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static async consumeActivityUses(config, updates) {
 		const result = await this._usesConsumption(config, {
 			uses: this.activity.uses,
-			type: game.i18n.format("BF.CONSUMPTION.Type.ActivityUses.Warning", {
+			type: _loc("BF.CONSUMPTION.Type.ActivityUses.Warning", {
 				itemName: this.item.name,
 				activityName: this.activity.name
 			}),
@@ -198,7 +198,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 		if (!foundry.utils.hasProperty(this.actor, keyPath))
 			throw new ConsumptionError(
-				game.i18n.format("BF.CONSUMPTION.Warning.MissingAttribute", {
+				_loc("BF.CONSUMPTION.Warning.MissingAttribute", {
 					activity: this.activity.name,
 					attribute,
 					item: this.item.name
@@ -211,10 +211,10 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		else if (current < cost) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 		if (warningMessage)
 			throw new ConsumptionError(
-				game.i18n.format(warningMessage, {
+				_loc(warningMessage, {
 					available: formatNumber(current),
 					cost: formatNumber(cost),
-					type: game.i18n.format("BF.CONSUMPTION.Type.Attribute.Warning", { attribute })
+					type: _loc("BF.CONSUMPTION.Type.Attribute.Warning", { attribute })
 				})
 			);
 
@@ -233,7 +233,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
 
 		if (!this.actor.system.attributes?.hd)
-			throw new ConsumptionError(game.i18n.format("BF.CONSUMPTION.Warning.MissingHitDice", { denomination: "" }));
+			throw new ConsumptionError(_loc("BF.CONSUMPTION.Warning.MissingHitDice", { denomination: "" }));
 
 		const availableDenominations = Object.entries(this.actor.system.attributes.hd.d);
 		if (this.target === "smallest") availableDenominations.sort((lhs, rhs) => lhs[0] - rhs[0]);
@@ -248,8 +248,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			if (warningMessage) {
 				const denomination = `d${this.target}`;
 				throw new ConsumptionError(
-					game.i18n.format(warningMessage, {
-						type: game.i18n.format("BF.CONSUMPTION.Type.HitDice.Warning", { denomination }),
+					_loc(warningMessage, {
+						type: _loc("BF.CONSUMPTION.Type.HitDice.Warning", { denomination }),
 						denomination,
 						cost: formatNumber(cost, { spelledOut: true }),
 						available: formatNumber(denom?.value, { spelledOut: true })
@@ -276,8 +276,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			const available = Object.values(this.actor.system.attributes.hd.d).reduce((sum, d) => sum + d.available, 0);
 			const warningMessage = `BF.CONSUMPTION.Warning.${available > 0 ? "NotEnough" : "None"}`;
 			throw new ConsumptionError(
-				game.i18n.format(warningMessage, {
-					type: game.i18n.localize("BF.HitDie.Label[other]").toLowerCase(),
+				_loc(warningMessage, {
+					type: _loc("BF.HitDie.Label[other]").toLowerCase(),
 					cost: formatNumber(cost, { spelledOut: true }),
 					available: formatNumber(available, { spelledOut: true })
 				})
@@ -297,7 +297,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const item = this.target ? this.actor.items.get(this.target) : this.item;
 		if (!item)
 			throw new ConsumptionError(
-				game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", {
+				_loc("BF.CONSUMPTION.Warning.MissingItem", {
 					activity: this.activity.name,
 					item: this.item.name
 				})
@@ -306,7 +306,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const result = await this._usesConsumption(config, {
 			uses: item.system.uses,
 			quantity: item.system.quantity ?? 1,
-			type: game.i18n.format("BF.CONSUMPTION.Type.ItemUses.Warning", { name: item.name }),
+			type: _loc("BF.CONSUMPTION.Type.ItemUses.Warning", { name: item.name }),
 			rolls: updates.rolls
 		});
 		if (!result) return;
@@ -344,9 +344,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		else if (newSpent > circleData.max) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 		if (warningMessage) {
 			const circle = CONFIG.BlackFlag.spellCircles()[circleNumber].toLowerCase();
-			const type = game.i18n.format("BF.CONSUMPTION.Type.SpellSlots.Warning", { circle });
+			const type = _loc("BF.CONSUMPTION.Type.SpellSlots.Warning", { circle });
 			throw new ConsumptionError(
-				game.i18n.format(warningMessage, {
+				_loc(warningMessage, {
 					type,
 					circle,
 					cost: formatNumber(cost, { spelledOut: true }),
@@ -385,7 +385,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		else if (cost > availableUses) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 		if (warningMessage)
 			throw new ConsumptionError(
-				game.i18n.format(warningMessage, {
+				_loc(warningMessage, {
 					type,
 					cost: formatNumber(cost, { spelledOut: true }),
 					available: formatNumber(availableUses, { spelledOut: true })
@@ -433,12 +433,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
 		const uses = this.activity.uses;
 		return {
-			label: game.i18n.localize(`BF.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
-			hint: game.i18n.format(`BF.CONSUMPTION.Type.ActivityUses.PromptHint${increaseKey}`, {
+			label: _loc(`BF.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
+			hint: _loc(`BF.CONSUMPTION.Type.ActivityUses.PromptHint${increaseKey}`, {
 				cost,
-				use: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
+				use: _loc(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
 				available: formatNumber(uses.value),
-				availableUse: game.i18n.localize(getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Type.Use.${pr}`))
+				availableUse: _loc(getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Type.Use.${pr}`))
 			}),
 			warn: simplifiedCost > uses.value
 		};
@@ -457,8 +457,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
 		const current = foundry.utils.getProperty(this.actor.system, this.target);
 		return {
-			label: game.i18n.localize(`BF.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
-			hint: game.i18n.format(`BF.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`, {
+			label: _loc(`BF.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
+			hint: _loc(`BF.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`, {
 				cost,
 				attribute: getAttributeOption(this.target)?.label ?? this.target,
 				current: formatNumber(current)
@@ -479,19 +479,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static consumptionLabelsHitDice(config, consumed) {
 		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
 		let denomination;
-		if (this.target === "smallest") denomination = game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Smallest");
-		else if (this.target === "largest") denomination = game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Largest");
+		if (this.target === "smallest") denomination = _loc("BF.CONSUMPTION.Type.HitDice.Smallest");
+		else if (this.target === "largest") denomination = _loc("BF.CONSUMPTION.Type.HitDice.Largest");
 		else denomination = `d${this.target}`;
 		const available =
 			(["smallest", "largest"].includes(this.target)
 				? this.actor.system.attributes?.hd?.available
 				: this.actor.system.attributes?.hd?.d[this.target]?.available) ?? 0;
 		return {
-			label: game.i18n.localize(`BF.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
-			hint: game.i18n.format(`BF.CONSUMPTION.Type.HitDice.PromptHint${increaseKey}`, {
+			label: _loc(`BF.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
+			hint: _loc(`BF.CONSUMPTION.Type.HitDice.PromptHint${increaseKey}`, {
 				cost,
 				denomination: denomination.toLowerCase(),
-				die: game.i18n.localize(`BF.CONSUMPTION.Type.HitDie.${pluralRule}`),
+				die: _loc(`BF.CONSUMPTION.Type.HitDie.${pluralRule}`),
 				available: formatNumber(available)
 			}),
 			warn: simplifiedCost > available
@@ -510,7 +510,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static consumptionLabelsItemUses(config, consumed) {
 		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
 		const item = this.actor.items.get(this.target);
-		const itemName = item ? item.name : game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem").toLowerCase();
+		const itemName = item ? item.name : _loc("BF.CONSUMPTION.Type.ItemUses.ThisItem").toLowerCase();
 		const uses = (item ?? this.item).system.uses;
 
 		let totalUses = uses.value;
@@ -521,12 +521,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		}
 
 		return {
-			label: game.i18n.localize(`BF.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
-			hint: game.i18n.format(`BF.CONSUMPTION.Type.ItemUses.PromptHint${increaseKey}`, {
+			label: _loc(`BF.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
+			hint: _loc(`BF.CONSUMPTION.Type.ItemUses.PromptHint${increaseKey}`, {
 				cost,
-				use: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
+				use: _loc(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
 				available: formatNumber(totalUses),
-				availableUse: game.i18n.localize(getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Type.Use.${pr}`)),
+				availableUse: _loc(getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Type.Use.${pr}`)),
 				item: item ? `<em>${itemName}</em>` : itemName
 			}),
 			warn: simplifiedCost > totalUses
@@ -548,10 +548,10 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const level = CONFIG.BlackFlag.spellCircles()[number].toLowerCase();
 		const available = this.actor.system.spellcasting?.slots?.[`circle-${number}`]?.value ?? 0;
 		return {
-			label: game.i18n.localize(`BF.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
-			hint: game.i18n.format(`BF.CONSUMPTION.Type.SpellSlots.PromptHint${increaseKey}`, {
+			label: _loc(`BF.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
+			hint: _loc(`BF.CONSUMPTION.Type.SpellSlots.PromptHint${increaseKey}`, {
 				cost,
-				slot: game.i18n.format(`BF.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }),
+				slot: _loc(`BF.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }),
 				available: formatNumber(available)
 			}),
 			warn: simplifiedCost > available
@@ -613,9 +613,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static validHitDiceTargets() {
 		return [
-			{ value: "smallest", label: game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Smallest") },
+			{ value: "smallest", label: _loc("BF.CONSUMPTION.Type.HitDice.Smallest") },
 			...CONFIG.BlackFlag.hitDieSizes.map(d => ({ value: d, label: `d${d}` })),
-			{ value: "largest", label: game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Largest") }
+			{ value: "largest", label: _loc("BF.CONSUMPTION.Type.HitDice.Largest") }
 		];
 	}
 
@@ -637,18 +637,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 				uses.recovery[0].period !== "recharge"
 			) {
 				const period = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[uses.recovery[0].period];
-				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { value: formatNumber(uses.max), period });
+				label = _loc("BF.CONSUMPTION.Uses.Available.Period", { value: formatNumber(uses.max), period });
 			} else {
-				const type = game.i18n.localize(
-					getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Uses.Available.Charges[${pr}]`)
-				);
-				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Limited", { value: formatNumber(uses.value), type });
+				const type = _loc(getPluralLocalizationKey(uses.value, pr => `BF.CONSUMPTION.Uses.Available.Charges[${pr}]`));
+				label = _loc("BF.CONSUMPTION.Uses.Available.Limited", { value: formatNumber(uses.value), type });
 			}
 			return `${name} (${label})`;
 		};
-		const options = [
-			{ value: "", label: makeLabel(game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem"), this.item) }
-		];
+		const options = [{ value: "", label: makeLabel(_loc("BF.CONSUMPTION.Type.ItemUses.ThisItem"), this.item) }];
 		const items = (this.actor?.items ?? []).filter(i => i.system.uses?.max && i !== this.item);
 		if (items.length) options.push({ rule: true }, ...items.map(i => ({ value: i.id, label: makeLabel(i.name, i) })));
 		return options;

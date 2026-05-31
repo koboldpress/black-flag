@@ -59,19 +59,19 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	async _prepareDetailsContext(context, options) {
 		context.validTypeOptions = Array.from(this.advancement.constructor.VALID_TYPES).map(value => ({
 			value,
-			label: game.i18n.localize(CONFIG.Item.typeLabels[value])
+			label: _loc(CONFIG.Item.typeLabels[value])
 		}));
 		const makeLabels = obj =>
 			Object.entries(obj)
-				.map(([value, d]) => ({ value, label: game.i18n.localize(`${d.localization}[one]`) }))
+				.map(([value, d]) => ({ value, label: _loc(`${d.localization}[one]`) }))
 				.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 		if (this.advancement.configuration.type === "feature") {
 			const selectedCategory = CONFIG.BlackFlag.featureCategories[this.advancement.configuration.restriction.category];
 			const selectedType = selectedCategory?.children?.[this.advancement.configuration.restriction.type];
 			context.typeRestriction = {
-				categoryLabel: game.i18n.localize("BF.Feature.Category.Label"),
+				categoryLabel: _loc("BF.Feature.Category.Label"),
 				categoryOptions: makeLabels(CONFIG.BlackFlag.featureCategories),
-				typeLabel: game.i18n.localize("BF.Feature.Type.Label"),
+				typeLabel: _loc("BF.Feature.Type.Label"),
 				typeOptions: selectedCategory?.children ? makeLabels(selectedCategory.children) : null
 			};
 			const validSources = CONFIG.BlackFlag.registration.groupedOptions(
@@ -85,7 +85,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 				];
 		} else if (this.advancement.configuration.type === "talent") {
 			context.typeRestriction = {
-				categoryLabel: game.i18n.localize("BF.Feature.Talent.Category.Label"),
+				categoryLabel: _loc("BF.Feature.Talent.Category.Label"),
 				categoryOptions: makeLabels(CONFIG.BlackFlag.talentCategories)
 			};
 		}

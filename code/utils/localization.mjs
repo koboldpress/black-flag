@@ -17,7 +17,7 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
 	const inlineTags = [];
 	for ( const tag of tags ) {
 		const config = tagDefinitions[tag];
-		const localized = game.i18n.localize(config?.display ?? tag);
+		const localized = _loc(config?.display ?? tag);
 		switch ( config?.type ) {
 			case "appendedTags":
 				appendedTags.push(localized);
@@ -48,7 +48,7 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
 	let label = game.i18n.getListFormatter({ style: "short", type: listType }).format(entries);
 	if ( appendedTags.length ) label += ` (${game.i18n.getListFormatter({ style: "short" }).format(appendedTags)})`;
 
-	formatters.forEach(f => label = game.i18n.format(f, { entries: label }));
+	formatters.forEach(f => label = _loc(f, { entries: label }));
 	return game.i18n.getListFormatter({ type: "unit" }).format([label, ...extras].filter(l => l));
 }
 
@@ -120,7 +120,7 @@ export function getAttributeOption(attribute, { actor, item }={}) {
 	// Hit Dice
 	else if ( attribute.startsWith("attributes.hd.d.") ) {
 		const denom = attribute.replace("attributes.hd.d.", "").replace(".spent", "");
-		label = game.i18n.format("BF.HitDie.LabelSpecific", { denom });
+		label = _loc("BF.HitDie.LabelSpecific", { denom });
 		group = "BF.HitDie.Label[other]";
 	}
 
@@ -212,8 +212,8 @@ export function getAttributeOption(attribute, { actor, item }={}) {
 
 	if ( !option ) option = {
 		value: attribute,
-		label: label ? game.i18n.localize(label) : attribute,
-		group: group ? game.i18n.localize(group) : undefined
+		label: label ? _loc(label) : attribute,
+		group: group ? _loc(group) : undefined
 	};
 	if ( label ) _attributeOptionCache[type].set(attribute, option);
 	option = foundry.utils.deepClone(option);
@@ -343,7 +343,7 @@ export function makeLabels(object, {
 export function makeLabel(input, {
 	pluralCount=1, pluralRule, labelKeyPath="label", localizationKeyPath="localization"
 }={}) {
-	return game.i18n.localize(
+	return _loc(
 		foundry.utils.getType(input) === "string" ? input
 			: foundry.utils.getProperty(input, labelKeyPath)
       ?? (pluralRule ? `${foundry.utils.getProperty(input, localizationKeyPath)}[${pluralRule}]`
@@ -363,7 +363,7 @@ export function systemVersion() {
 	const version = parts.join(".");
 	const type = `BF.Version.${(game.system.flags.version?.type ?? "stable").capitalize()}`;
 
-	return game.i18n.format("BF.Version.Label", {
-		version, build, type: game.i18n.localize(type)
+	return _loc("BF.Version.Label", {
+		version, build, type: _loc(type)
 	});
 }

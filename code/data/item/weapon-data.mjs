@@ -231,7 +231,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 			...this.properties.map(p => CONFIG.BlackFlag.itemProperties.localized[p])
 		];
 		const listFormatter = game.i18n.getListFormatter({ type: "unit" });
-		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
+		return listFormatter.format(traits.filter(t => t).map(t => _loc(t)));
 		// Ranged
 		// Reach (total)
 	}
@@ -358,8 +358,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 		}
 
 		const type = CONFIG.BlackFlag.weapons.allLocalized[this.type.base ?? this.type.category];
-		if (type) this.type.label = `${game.i18n.localize("BF.WEAPON.Label[one]")} (${type})`;
-		else this.type.label = game.i18n.localize("BF.WEAPON.Label[one]");
+		if (type) this.type.label = `${_loc("BF.WEAPON.Label[one]")} (${type})`;
+		else this.type.label = _loc("BF.WEAPON.Label[one]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -435,7 +435,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 		const has = (data, key) => data.includes?.(key) ?? data.has?.(key);
 		context.detailsParts = ["blackFlag.details-weapon"];
 		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
-			obj[k] = { label: game.i18n.localize(o.label), selected: has(context.source.options, k) };
+			obj[k] = { label: _loc(o.label), selected: has(context.source.options, k) };
 			return obj;
 		}, {});
 		context.reachPlaceholder = convertDistance(5, "foot", { to: this.range.unit }).value;

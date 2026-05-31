@@ -36,7 +36,7 @@ export default class ToolConfig extends BaseSelectorConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: Trait.traitLabel(this.options.trait, 999) });
+		return _loc("BF.Action.Configure.Specific", { type: Trait.traitLabel(this.options.trait, 999) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

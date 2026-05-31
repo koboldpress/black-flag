@@ -96,8 +96,8 @@ export class SpellcastingConfigurationData extends AdvancementDataModel {
 		return game.i18n
 			.format("BF.Spellcasting.Trait.Display", {
 				source: sources.length ? game.i18n.getListFormatter({ style: "short" }).format(sources) : "",
-				prepared: prepared ? game.i18n.localize(prepared) : "",
-				progression: progression ? game.i18n.localize(progression) : ""
+				prepared: prepared ? _loc(prepared) : "",
+				progression: progression ? _loc(progression) : ""
 			})
 			.trim();
 	}

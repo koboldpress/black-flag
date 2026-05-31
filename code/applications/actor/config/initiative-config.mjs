@@ -31,7 +31,7 @@ export default class InitiativeConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Initiative.Label") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Initiative.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -43,7 +43,7 @@ export default class InitiativeConfig extends BaseConfigSheet {
 		const context = await super._prepareContext(options);
 		const defaultAbility = CONFIG.BlackFlag.abilities.localized[CONFIG.BlackFlag.defaultAbilities.initiative];
 		context.abilityOptions = [
-			{ value: "", label: game.i18n.format("BF.Default.Specific", { default: defaultAbility }) },
+			{ value: "", label: _loc("BF.Default.Specific", { default: defaultAbility }) },
 			{ rule: true },
 			...CONFIG.BlackFlag.abilities.localizedOptions
 		];

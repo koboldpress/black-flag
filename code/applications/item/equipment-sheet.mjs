@@ -63,14 +63,14 @@ export default class EquipmentSheet extends BaseItemSheet {
 
 		const has = (data, key) => data.includes?.(key) ?? data.has?.(key);
 		context.attunementOptions = [
-			{ value: "", label: game.i18n.localize("BF.Attunement.Type.None") },
-			{ value: "optional", label: game.i18n.localize("BF.Attunement.Type.Optional") },
-			{ value: "required", label: game.i18n.localize("BF.Attunement.Type.Required") }
+			{ value: "", label: _loc("BF.Attunement.Type.None") },
+			{ value: "optional", label: _loc("BF.Attunement.Type.Optional") },
+			{ value: "required", label: _loc("BF.Attunement.Type.Required") }
 		];
 		context.proficiencyOptions = [
-			{ value: null, label: game.i18n.localize("BF.Proficiency.Override.Auto") },
-			{ value: true, label: game.i18n.localize("BF.Proficiency.Override.Always") },
-			{ value: false, label: game.i18n.localize("BF.Proficiency.Override.Never") }
+			{ value: null, label: _loc("BF.Proficiency.Override.Auto") },
+			{ value: true, label: _loc("BF.Proficiency.Override.Always") },
+			{ value: false, label: _loc("BF.Proficiency.Override.Never") }
 		];
 		context.properties = (context.system.validProperties?.entries() ?? []).reduce((obj, [k, label]) => {
 			obj[k] = { label, selected: has(context.source.properties, k) };

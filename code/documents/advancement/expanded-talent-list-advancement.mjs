@@ -64,7 +64,7 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 			.map(t => CONFIG.BlackFlag.talentCategories.localizedDescription[t])
 			.filter(t => t);
 
-		return `<p>${game.i18n.format("BF.Advancement.ExpandedTalentList.JournalDescription", {
+		return `<p>${_loc("BF.Advancement.ExpandedTalentList.JournalDescription", {
 			class: classDocument.name,
 			classLowercase: classDocument.name.toLowerCase(),
 			talentLists: game.i18n.getListFormatter({ type: "disjunction", style: "short" }).format(lists)

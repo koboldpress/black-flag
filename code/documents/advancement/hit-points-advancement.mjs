@@ -76,7 +76,7 @@ export default class HitPointsAdvancement extends Advancement {
 			category: `level-${levels.character}`,
 			section: "progression",
 			level: "warn",
-			message: game.i18n.localize("BF.Advancement.HitPoints.Notification")
+			message: _loc("BF.Advancement.HitPoints.Notification")
 		});
 	}
 

@@ -57,8 +57,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/** @override */
 	get title() {
-		const type = game.i18n.localize(this.advancement.metadata.title);
-		return `${game.i18n.format("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
+		const type = _loc(this.advancement.metadata.title);
+		return `${_loc("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,7 +68,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/** @inheritDoc */
 	async _prepareContext(options) {
 		const levels = [
-			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
+			[0, _loc("BF.Advancement.Core.Level.Any.Short")],
 			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
 		].slice(this.advancement.minimumLevel);
 		const context = await super._prepareContext(options);
@@ -80,7 +80,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		context.source = this.advancement._source;
 		context.advancement = this.advancement;
 		context.default = {
-			title: game.i18n.localize(this.advancement.metadata.title),
+			title: _loc(this.advancement.metadata.title),
 			icon: this.advancement.metadata.icon,
 			identifier: formatIdentifier(this.advancement.title),
 			identifierHint: this.advancement.metadata.identifier.hint
@@ -94,17 +94,17 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		context.showLevelSelector = !this.advancement.metadata.multiLevel;
 
 		context.classIdentifierOptions = [
-			{ value: "", label: game.i18n.localize("BF.Level.Overall") },
+			{ value: "", label: _loc("BF.Level.Overall") },
 			...Object.entries(CONFIG.BlackFlag.registration.all.class).map(([value, { name }]) => ({
 				value,
 				label: name,
-				group: game.i18n.localize("BF.Level.Class")
+				group: _loc("BF.Level.Class")
 			}))
 		];
 		context.classRestrictionOptions = [
-			{ value: "", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.None") },
-			{ value: "original", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.Original") },
-			{ value: "multiclass", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.Multiclass") }
+			{ value: "", label: _loc("BF.Advancement.Core.ClassRestriction.None") },
+			{ value: "original", label: _loc("BF.Advancement.Core.ClassRestriction.Original") },
+			{ value: "multiclass", label: _loc("BF.Advancement.Core.ClassRestriction.Multiclass") }
 		];
 
 		return context;
@@ -272,7 +272,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	_validateDroppedItem(event, item) {
 		// Abort if this uuid is the parent item
 		if (item.uuid === this.item.uuid) {
-			throw new Error(game.i18n.localize("BF.Advancement.Config.Warning.Recursive"));
+			throw new Error(_loc("BF.Advancement.Config.Warning.Recursive"));
 		}
 	}
 }

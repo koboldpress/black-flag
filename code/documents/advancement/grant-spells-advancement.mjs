@@ -47,7 +47,7 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 			category: `level-${levels.character}`,
 			section: "progression",
 			level: "warn",
-			message: game.i18n.localize("BF.Advancement.GrantSpells.Notification.Ability")
+			message: _loc("BF.Advancement.GrantSpells.Notification.Ability")
 		});
 	}
 

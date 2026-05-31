@@ -124,7 +124,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		let level = this.getFlag("black-flag", "level");
 		if (!Number.isFinite(level)) level = 1;
 		this.img = `systems/black-flag/artwork/statuses/exhaustion-${level}.svg`;
-		this.name = game.i18n.format("BF.Condition.Exhaustion.Numbered", { level: formatNumber(level) });
+		this.name = _loc("BF.Condition.Exhaustion.Numbered", { level: formatNumber(level) });
 		if (level >= 6) this.statuses.add("dead");
 	}
 
@@ -359,7 +359,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		if (this.id === this.constructor.ID.EXHAUSTION && Number.isFinite(newLevel) && Number.isFinite(originalLevel)) {
 			if (newLevel === originalLevel) return;
 			if (newLevel < originalLevel)
-				this.name = game.i18n.format("BF.Condition.Exhaustion.Numbered", {
+				this.name = _loc("BF.Condition.Exhaustion.Numbered", {
 					level: formatNumber(originalLevel)
 				});
 			this._displayScrollingStatus(newLevel > originalLevel);
@@ -463,7 +463,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	// 	const createData = {
 	// 		...foundry.utils.deepClone(effectData),
 	// 		_id: staticID(`bf${effectData.id}`),
-	// 		name: game.i18n.localize(effectData.name),
+	// 		name: _loc(effectData.name),
 	// 		statuses: [effectData.id, ...(effectData.statuses ?? [])]
 	// 	};
 	// 	this.migrateDataSafe(createData);

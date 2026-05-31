@@ -58,7 +58,7 @@ export default class CastSheet extends ActivitySheet {
 		}
 
 		context.abilityOptions = [
-			{ value: "", label: game.i18n.localize("BF.Default.Generic") },
+			{ value: "", label: _loc("BF.Default.Generic") },
 			{ rule: true },
 			...CONFIG.BlackFlag.abilities.localizedOptions
 		];
@@ -66,13 +66,13 @@ export default class CastSheet extends ActivitySheet {
 		context.propertyOptions = [
 			...Object.entries(CONFIG.BlackFlag.spellComponents).map(([value, { label }]) => ({
 				value,
-				label: game.i18n.localize(label),
-				group: game.i18n.localize("BF.Spell.Component.Label")
+				label: _loc(label),
+				group: _loc("BF.Spell.Component.Label")
 			})),
 			...Object.entries(CONFIG.BlackFlag.spellTags).map(([value, { label }]) => ({
 				value,
-				label: game.i18n.localize(label),
-				group: game.i18n.localize("BF.Spell.Tag.Label")
+				label: _loc(label),
+				group: _loc("BF.Spell.Tag.Label")
 			}))
 		];
 

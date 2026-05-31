@@ -44,7 +44,7 @@ export default class RangeField extends SchemaField {
 				else {
 					const type = CONFIG.BlackFlag.rangeTypes[this.unit];
 					if (!type) return "";
-					let label = game.i18n.localize(type.label);
+					let label = _loc(type.label);
 					if (this.unit === "special" && this.special) {
 						label = `<span data-tooltip="${this.special}">${label}*</span>`;
 					}

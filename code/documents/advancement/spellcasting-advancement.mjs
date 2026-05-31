@@ -254,7 +254,7 @@ export default class SpellcastingAdvancement extends Advancement {
 		if (this.gainsSpellsAt(level)) {
 			const circle = this.computeMaxCircle(level);
 			changes.push({
-				link: `<span class="choice-name">${game.i18n.format("BF.Advancement.Spellcasting.CircleSpells", {
+				link: `<span class="choice-name">${_loc("BF.Advancement.Spellcasting.CircleSpells", {
 					circle: CONFIG.BlackFlag.spellCircles()[circle]
 				})}`
 			});

@@ -65,7 +65,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 			div.innerHTML = `
 				<label>
 					<i class="fa-solid fa-bolt" inert></i>
-					<span>${game.i18n.localize("BF.EFFECT.Application.Label")}</span>
+					<span>${_loc("BF.EFFECT.Application.Label")}</span>
 					<i class="fa-solid fa-caret-down" inert></i>
 				</label>
 				<div class="collapsible-content">
@@ -104,7 +104,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 				</div>
 				<button class="apply-effect light-button" type="button" data-action="applyEffect"
 								data-tooltip="BF.EFFECT.Action.ApplyTokens"
-								aria-label="${game.i18n.localize("BF.EFFECT.Action.ApplyTokens")}">
+								aria-label="${_loc("BF.EFFECT.Action.ApplyTokens")}">
 					<i class="fas fa-reply-all fa-flip-horizontal" inert></i>
 				</button>
 			`;
@@ -158,7 +158,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 	async _applyEffectToActor(effect, actor) {
 		const origin = effect;
 		if (!game.user.isGM && !actor.isOwner) {
-			throw new Error(game.i18n.localize("BF.EFFECT.Application.Warning.NotOwner"));
+			throw new Error(_loc("BF.EFFECT.Application.Warning.NotOwner"));
 		}
 
 		const effectFlags = {

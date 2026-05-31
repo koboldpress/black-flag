@@ -74,8 +74,8 @@ export default class ChooseFeaturesDialog extends BFApplication {
 			if (type) type = `${type}[one]`;
 		}
 		if (!type) type = CONFIG.Item.typeLabels[configType];
-		return game.i18n.format(`BF.ConceptSelection.${this.options.details.isReplacement ? "Replace" : ""}Title`, {
-			type: game.i18n.localize(type)
+		return _loc(`BF.ConceptSelection.${this.options.details.isReplacement ? "Replace" : ""}Title`, {
+			type: _loc(type)
 		});
 	}
 
@@ -91,8 +91,8 @@ export default class ChooseFeaturesDialog extends BFApplication {
 		context.allowDrops = this.advancement.configuration.allowDrops;
 		context.choices = await Promise.all((await this.advancement.choices()).map(c => this.getChoiceData(c)));
 		if (context.allowDrops)
-			context.dropLabel = game.i18n.format("BF.Advancement.ChooseFeatures.Drop", {
-				type: game.i18n.localize(`BF.Item.Type.${this.advancement.configuration.type.capitalize()}[one]`).toLowerCase()
+			context.dropLabel = _loc("BF.Advancement.ChooseFeatures.Drop", {
+				type: _loc(`BF.Item.Type.${this.advancement.configuration.type.capitalize()}[one]`).toLowerCase()
 			});
 		if (this.options.details.isReplacement) {
 			context.replacements = [];
@@ -194,7 +194,7 @@ export default class ChooseFeaturesDialog extends BFApplication {
 		}
 
 		if (this.advancement.selectionLimitReached(item)) {
-			return ui.notifications.error(game.i18n.localize("BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen"));
+			return ui.notifications.error(_loc("BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen"));
 		}
 
 		this.handleChoice(item.uuid);

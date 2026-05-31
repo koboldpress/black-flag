@@ -114,7 +114,7 @@ export default class CastActivity extends Activity {
 					{
 						_id: this.constructor.ENCHANTMENT_ID,
 						type: "enchantment",
-						name: game.i18n.localize("BF.CAST.Enchantment.Name"),
+						name: _loc("BF.CAST.Enchantment.Name"),
 						img: "systems/black-flag/artwork/activities/cast.svg",
 						origin: this.uuid,
 						changes: this.getSpellChanges()

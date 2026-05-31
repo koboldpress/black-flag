@@ -66,7 +66,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.localize("BF.Prerequisite.Config.Title");
+		return _loc("BF.Prerequisite.Config.Title");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -152,7 +152,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 				value: context.source.restriction.requireAll
 			}
 		];
-		context.legend = game.i18n.localize("BF.Prerequisite.Config.Details");
+		context.legend = _loc("BF.Prerequisite.Config.Details");
 		return context;
 	}
 
@@ -167,7 +167,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	 */
 	_prepareItemsContext(context, options) {
 		context.field = new SetField(new DocumentUUIDField({ type: "Item" }), {
-			label: game.i18n.localize("BF.Prerequisite.Items.Label")
+			label: _loc("BF.Prerequisite.Items.Label")
 		});
 		return context;
 	}
@@ -183,7 +183,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	 */
 	_prepareProficienciesContext(context, options) {
 		const prepareProficiency = (trait, label) => ({
-			field: new SetField(new StringField(), { label: game.i18n.localize(label) }),
+			field: new SetField(new StringField(), { label: _loc(label) }),
 			name: `proficiencies.${trait}`,
 			options: Trait.choices(trait, { any: true, category: true, priority: "localization" }).formOptions(),
 			value: new Set([
@@ -197,7 +197,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 			prepareProficiency("tools", "BF.Item.Type.Tool[one]"),
 			prepareProficiency("skills", "BF.Skill.Label[one]")
 		];
-		context.legend = game.i18n.localize("BF.Proficiency.Label[other]");
+		context.legend = _loc("BF.Proficiency.Label[other]");
 		return context;
 	}
 
@@ -213,12 +213,12 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 	_prepareSpellcastingContext(context, options) {
 		context.fields = [
 			{
-				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingFeature.ConfigLabel") }),
+				field: new BooleanField({ label: _loc("BF.Prerequisite.SpellcastingFeature.ConfigLabel") }),
 				name: "spellcasting.feature",
 				value: context.filters.spellcastingFeature?.v
 			},
 			{
-				field: new StringField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingCircle.ConfigLabel") }),
+				field: new StringField({ label: _loc("BF.Prerequisite.SpellcastingCircle.ConfigLabel") }),
 				name: "spellcasting.circle",
 				options: [
 					{ value: "", label: "" },
@@ -227,17 +227,17 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 				value: context.filters.spellCircle?.v
 			},
 			{
-				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.ConfigLabel") }),
+				field: new BooleanField({ label: _loc("BF.Prerequisite.SpellcastingCantrip.ConfigLabel") }),
 				name: "spellcasting.cantrip",
 				value: context.filters.hasCantrips?.v
 			},
 			{
-				field: new BooleanField({ label: game.i18n.localize("BF.Prerequisite.SpellcastingDamage.ConfigLabel") }),
+				field: new BooleanField({ label: _loc("BF.Prerequisite.SpellcastingDamage.ConfigLabel") }),
 				name: "spellcasting.damage",
 				value: context.filters.hasDamagingSpells?.v
 			}
 		];
-		context.legend = game.i18n.localize("BF.Spellcasting.Label");
+		context.legend = _loc("BF.Spellcasting.Label");
 		return context;
 	}
 
@@ -261,7 +261,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 		context.fields = [
 			{
 				field: new NumberField({
-					label: game.i18n.localize(`BF.Prerequisite.Level${level.class ? "Class" : "Character"}.ConfigLabel`)
+					label: _loc(`BF.Prerequisite.Level${level.class ? "Class" : "Character"}.ConfigLabel`)
 				}),
 				name: "traits.level.value",
 				options: [
@@ -272,7 +272,7 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 			},
 			level.value
 				? {
-						field: new StringField({ label: game.i18n.localize("BF.Advancement.FIELDS.level.classIdentifier.label") }),
+						field: new StringField({ label: _loc("BF.Advancement.FIELDS.level.classIdentifier.label") }),
 						name: "traits.level.class",
 						options: [
 							{ value: "", label: "" },
@@ -285,13 +285,13 @@ export default class PrerequisiteConfig extends BFDocumentSheet {
 					}
 				: null,
 			{
-				field: new StringField({ label: game.i18n.localize("BF.Size.Label") }),
+				field: new StringField({ label: _loc("BF.Size.Label") }),
 				name: "traits.size",
 				options: [{ value: "", label: "" }, ...CONFIG.BlackFlag.sizes.localizedOptions],
 				value: context.filters.creatureSize?.v
 			}
 		];
-		context.legend = game.i18n.localize("BF.Trait.Label[other]");
+		context.legend = _loc("BF.Trait.Label[other]");
 		return context;
 	}
 

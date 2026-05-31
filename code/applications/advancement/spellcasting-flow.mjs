@@ -21,7 +21,7 @@ export default class SpellcastingFlow extends AdvancementFlow {
 				type: "submit",
 				classes: "light-button",
 				action: "learnSpells",
-				label: game.i18n.localize("BF.Advancement.Spellcasting.Action.LearnSpells")
+				label: _loc("BF.Advancement.Spellcasting.Action.LearnSpells")
 			});
 		else if (this.advancement.replacesSpellAt(level) && stats.get("replacement").toLearn)
 			context.actions.push({
@@ -30,7 +30,7 @@ export default class SpellcastingFlow extends AdvancementFlow {
 				action: "learnSpells",
 				label: `
 				<i class="fa-solid fa-shuffle" inert></i>
-				${game.i18n.localize("BF.Advancement.Spellcasting.Action.ReplaceSpell")}
+				${_loc("BF.Advancement.Spellcasting.Action.ReplaceSpell")}
 			`
 			});
 

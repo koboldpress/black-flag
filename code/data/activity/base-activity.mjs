@@ -244,7 +244,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		BaseDataModel.prototype._shimObjectUnits.call(this, "range");
 		BaseDataModel.prototype._shimObjectUnits.call(this, "target.template");
 
-		this.name = this.name || game.i18n.localize(this.constructor.metadata.title);
+		this.name = this.name || _loc(this.constructor.metadata.title);
 		this.img = this.img || this.constructor.metadata.icon;
 		this.system.prepareData?.();
 	}
@@ -269,7 +269,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 							section: "auto",
 							messageData: {
 								name: `${this.item.name} (${this.name})`,
-								property: game.i18n.localize(label)
+								property: _loc(label)
 							}
 						})
 					)
@@ -343,7 +343,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 					this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
 						level: "error",
 						section: "auto",
-						message: game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
+						message: _loc("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
 					});
 			}
 		}

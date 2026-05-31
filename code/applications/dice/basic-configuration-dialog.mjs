@@ -177,7 +177,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 		context.buttons = {
 			roll: {
 				icon: '<i class="fa-solid fa-dice" inert></i>',
-				label: game.i18n.localize("BF.Roll.Action.RollGeneric")
+				label: _loc("BF.Roll.Action.RollGeneric")
 			}
 		};
 		return context;
@@ -196,14 +196,14 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 		context.fields = [
 			{
 				field: new foundry.data.fields.StringField({
-					label: game.i18n.localize("BF.Roll.Mode.Label"),
+					label: _loc("BF.Roll.Mode.Label"),
 					required: true,
 					blank: false
 				}),
 				name: "rollMode",
 				options: Object.entries(CONFIG.ChatMessage.modes)
 					.filter(([k]) => k !== "ic")
-					.map(([value, { label }]) => ({ value, label: game.i18n.localize(label) })),
+					.map(([value, { label }]) => ({ value, label: _loc(label) })),
 				value: this.message.rollMode ?? this.options.default?.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode()
 			}
 		];

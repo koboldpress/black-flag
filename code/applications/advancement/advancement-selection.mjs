@@ -17,7 +17,7 @@ export default class AdvancementSelection extends PseudoDocumentSelection {
 
 	/** @override */
 	get title() {
-		return `${game.i18n.localize("BF.Advancement.Selection.Title")}: ${this.options.item.name}`;
+		return `${_loc("BF.Advancement.Selection.Title")}: ${this.options.item.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -44,14 +44,14 @@ export default class AdvancementSelection extends PseudoDocumentSelection {
 			)
 				continue;
 			context.types[name] = {
-				label: game.i18n.localize(advancement.metadata.title),
+				label: _loc(advancement.metadata.title),
 				icon: advancement.metadata.icon,
-				hint: game.i18n.localize(advancement.metadata.hint),
+				hint: _loc(advancement.metadata.hint),
 				disabled: !advancement.availableForItem(this.item)
 			};
 		}
 		context.types = BlackFlag.utils.sortObjectEntries(context.types, { sortKey: "label" });
-		context.buttonLabel = game.i18n.localize("BF.Advancement.Core.Action.Create");
+		context.buttonLabel = _loc("BF.Advancement.Core.Action.Create");
 		return context;
 	}
 }

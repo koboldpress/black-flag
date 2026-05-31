@@ -141,7 +141,7 @@ export default class SelectChoices {
 				if (data.selectableCategory)
 					options.push({
 						...option,
-						label: game.i18n.format("BF.Trait.All", { category: label }),
+						label: _loc("BF.Trait.All", { category: label }),
 						group: newParentLabel
 					});
 				if (data.children) options.push(...data.children.formOptions({ parentLabel: newParentLabel, selected }));

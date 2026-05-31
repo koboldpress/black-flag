@@ -208,7 +208,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {string}
 	 */
 	get damageFlavor() {
-		return game.i18n.localize("BF.DAMAGE.Label");
+		return _loc("BF.DAMAGE.Label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -250,7 +250,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			formula = simplifyFormula(formula);
 			if (formula) {
 				const damageType = CONFIG.BlackFlag.damageTypes[roll.options.damageType];
-				layout.innerHTML += `<span class="damage">${formula} ${game.i18n.localize(damageType?.label ?? "")}</span>`;
+				layout.innerHTML += `<span class="damage">${formula} ${_loc(damageType?.label ?? "")}</span>`;
 			}
 		}
 		return layout.outerHTML;
@@ -868,7 +868,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 					updates.actor["system.attributes.legendary.spent"] = legendary.spent + count;
 				} else {
 					const err = new ConsumptionError(
-						game.i18n.format(errMessage, {
+						_loc(errMessage, {
 							type: CONFIG.BlackFlag.actionTypes.localized[this.activation.type],
 							required: formatNumber(count),
 							available: formatNumber(legendary.value)
@@ -941,7 +941,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				updates.actor[`system.spellcasting.slots.${slot}.spent`] = slotData.spent + 1;
 			} else {
 				const err = new ConsumptionError(
-					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
+					_loc("BF.Spellcasting.Warning.NoLeveledSlot", {
 						circle: slotData.label,
 						circleLowercase: slotData.label?.toLowerCase()
 					})
@@ -1029,7 +1029,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		if (this.target?.template?.type)
 			buttons.push({
-				label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate"),
+				label: _loc("BF.TARGET.Action.PlaceTemplate"),
 				icon: '<i class="fa-solid fa-bullseye" inert></i>',
 				dataset: {
 					action: "placeTemplate"
@@ -1172,7 +1172,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
 				rollNotes: this.actor?.system.getModifiers?.(allModifiers, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+				title: _loc("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 			}
 		});
 
@@ -1309,7 +1309,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			return await TemplatePlacement.fromActivity(this);
 		} catch (err) {
 			Hooks.onError("Activity#placeTemplate", err, {
-				msg: game.i18n.localize("BF.TARGET.Warning.PlaceTemplate"),
+				msg: _loc("BF.TARGET.Warning.PlaceTemplate"),
 				log: "error",
 				notify: "error"
 			});

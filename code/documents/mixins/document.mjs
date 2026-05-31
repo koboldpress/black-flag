@@ -114,7 +114,7 @@ export default Base =>
 					if (type === foundry.CONST.BASE_DOCUMENT_TYPE) continue;
 					if (types && !types.includes(type)) continue;
 					let label = CONFIG[this.documentName]?.typeLabels?.[type];
-					label = label && game.i18n.has(label) ? game.i18n.localize(label) : type;
+					label = label && game.i18n.has(label) ? _loc(label) : type;
 					documentTypes.push({ value: type, label });
 					if (type === defaultType) defaultTypeAllowed = true;
 				}
@@ -137,8 +137,8 @@ export default Base =>
 
 			// Collect data
 			folders ??= collection?._formatFolderSelectOptions() ?? [];
-			const label = game.i18n.localize(this.metadata.label);
-			const title = game.i18n.format("DOCUMENT.Create", { type: label });
+			const label = _loc(this.metadata.label);
+			const title = _loc("DOCUMENT.Create", { type: label });
 
 			const lastCreated = game.user.getFlag(game.system.id, "lastCreatedTypes") ?? {};
 			const selectedType = data.type ?? lastCreated[documentName] ?? CONFIG[documentName]?.defaultType ?? types[0];
@@ -147,13 +147,13 @@ export default Base =>
 			if (!foundry.utils.isEmpty(CONFIG[documentName]?.categories)) {
 				categories = {};
 				for (const [key, value] of Object.entries(CONFIG[documentName]?.categories)) {
-					const category = { label: game.i18n.localize(value.label), children: {} };
+					const category = { label: _loc(value.label), children: {} };
 					for (const type of value.types) {
 						if (!types.includes(type.metadata?.type)) continue;
 						extraTypes.delete(type.metadata?.type);
 						const name = type.fullType;
 						category.children[name] = {
-							label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[name] ?? name),
+							label: _loc(CONFIG[documentName]?.typeLabels?.[name] ?? name),
 							chosen: name === selectedType
 						};
 					}
@@ -168,14 +168,14 @@ export default Base =>
 				folders: folders
 					? [{ value: "", label: "" }, ...folders.map(({ id, name }) => ({ value: id, label: name }))]
 					: null,
-				name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
+				name: data.name || _loc("DOCUMENT.New", { type: label }),
 				folder: data.folder,
 				hasFolders: folders.length >= 1,
 				type: selectedType,
 				categories,
 				types: extraTypes.reduce((obj, t) => {
 					const label = CONFIG[documentName]?.typeLabels?.[t] ?? t;
-					obj[t] = game.i18n.localize(label);
+					obj[t] = _loc(label);
 					return obj;
 				}, {})
 			});

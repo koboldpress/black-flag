@@ -44,7 +44,7 @@ function _createEnrichmentLookup() {
 	addTrait("vehicles");
 
 	_enrichmentLookup.abilities.spellcasting = {
-		label: game.i18n.localize("BF.Ability.Spellcasting.Label"),
+		label: _loc("BF.Ability.Spellcasting.Label"),
 		key: "spellcasting"
 	};
 }

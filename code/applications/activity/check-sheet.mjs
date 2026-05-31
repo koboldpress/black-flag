@@ -31,33 +31,33 @@ export default class CheckSheet extends ActivitySheet {
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
 
-		const group = game.i18n.localize("BF.Ability.Label[other]");
+		const group = _loc("BF.Ability.Label[other]");
 		context.abilityOptions = [
 			{ value: "", label: "" },
 			{ rule: true },
-			{ value: "spellcasting", label: game.i18n.localize("BF.Spellcasting.Label") },
+			{ value: "spellcasting", label: _loc("BF.Spellcasting.Label") },
 			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({ ...o, group }))
 		];
 
 		context.associatedOptions = [
 			...CONFIG.BlackFlag.skills.localizedOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.Skill.Label[other]")
+				group: _loc("BF.Skill.Label[other]")
 			})),
 			...CONFIG.BlackFlag.tools.localizedOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.Tool.Label[other]")
+				group: _loc("BF.Tool.Label[other]")
 			})),
 			...CONFIG.BlackFlag.vehicles.localizedPluralOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.VEHICLE.Label[other]")
+				group: _loc("BF.VEHICLE.Label[other]")
 			}))
 		];
 
 		context.calculationOptions = [
-			{ value: "", label: game.i18n.localize("BF.Formula.Custom.Label") },
+			{ value: "", label: _loc("BF.Formula.Custom.Label") },
 			{ rule: true },
-			{ value: "spellcasting", label: game.i18n.localize("BF.Spellcasting.Label") },
+			{ value: "spellcasting", label: _loc("BF.Spellcasting.Label") },
 			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({ ...o, group }))
 		];
 

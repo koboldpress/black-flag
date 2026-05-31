@@ -29,12 +29,12 @@ export default class VehicleSheet extends BaseStatBlockSheet {
 	async _prepareContext(options) {
 		const context = await super._prepareContext(options);
 
-		const dimensions = game.i18n.format("BF.VEHICLE.Dimensions", {
+		const dimensions = _loc("BF.VEHICLE.Dimensions", {
 			length: formatDistance(context.system.traits.dimensions.length, context.system.traits.dimensions.unit),
 			width: formatDistance(context.system.traits.dimensions.width, context.system.traits.dimensions.unit)
 		});
 		context.labels = {
-			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
+			sizeAndType: `${_loc(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
 				CONFIG.BlackFlag.vehicles.localized[context.system.traits.type.value] ?? ""
 			} (${dimensions})`
 		};

@@ -28,7 +28,7 @@ export default class ArmorClassConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.ARMORCLASS.Label") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.ARMORCLASS.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

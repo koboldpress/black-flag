@@ -147,13 +147,13 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		};
 		if (defaultActivation)
 			context.activation.options.unshift(
-				{ value: "", label: game.i18n.format("BF.Default.Specific", { default: defaultActivation.toLowerCase() }) },
+				{ value: "", label: _loc("BF.Default.Specific", { default: defaultActivation.toLowerCase() }) },
 				{ rule: true }
 			);
 
 		context.consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({
 			value,
-			label: game.i18n.localize(CONFIG.BlackFlag.consumptionTypes[value].label)
+			label: _loc(CONFIG.BlackFlag.consumptionTypes[value].label)
 		}));
 
 		context.durationOptions = CONFIG.BlackFlag.durationOptions({
@@ -253,10 +253,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		}));
 		if (context.activity.system.damage?.parts) {
 			const scalingOptions = [
-				{ value: "", label: game.i18n.localize("BF.DAMAGE.Scaling.Mode.None") },
+				{ value: "", label: _loc("BF.DAMAGE.Scaling.Mode.None") },
 				...Object.entries(CONFIG.BlackFlag.damageScalingModes).map(([value, config]) => ({
 					value,
-					label: game.i18n.localize(config.label)
+					label: _loc(config.label)
 				}))
 			];
 			let indexOffset = 0;
@@ -274,8 +274,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 						{ value: "", label: "" },
 						...damageTypes,
 						{ rule: true },
-						{ value: "max", label: game.i18n.localize("BF.DAMAGE.Type.Max") },
-						{ value: "variable", label: game.i18n.localize("BF.DAMAGE.Type.Variable") }
+						{ value: "max", label: _loc("BF.DAMAGE.Type.Max") },
+						{ value: "variable", label: _loc("BF.DAMAGE.Type.Variable") }
 					],
 					variableTypeOptions: damageTypes.map(({ value, label }) => ({
 						value,
@@ -319,7 +319,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			}
 		);
 		context.placeholder = {
-			name: game.i18n.localize(this.activity.metadata.title),
+			name: _loc(this.activity.metadata.title),
 			img: this.activity.metadata.icon
 		};
 

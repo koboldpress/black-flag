@@ -19,7 +19,7 @@ export default class SkillRollConfigurationDialog extends ChallengeRollConfigura
 		if (this.options.chooseAbility)
 			context.fields.unshift({
 				field: new foundry.data.fields.StringField({
-					label: game.i18n.localize("BF.Ability.Label[one]"),
+					label: _loc("BF.Ability.Label[one]"),
 					required: true,
 					blank: false
 				}),

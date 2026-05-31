@@ -195,9 +195,9 @@ export const spellSlotTable = [
  */
 export function spellCircles({ dashed = false, formOptions = false, plural = false, includeCantrip = true } = {}) {
 	const obj = Array.fromRange(maxSpellCircle + Number(includeCantrip), Number(!includeCantrip)).reduce((obj, l) => {
-		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Circle.Cantrip[${plural ? "other" : "one"}]`);
+		if (l === 0) obj[l] = _loc(`BF.Spell.Circle.Cantrip[${plural ? "other" : "one"}]`);
 		else
-			obj[l] = game.i18n.format(`BF.Spell.Circle.Level${dashed ? "Dashed" : ""}`, {
+			obj[l] = _loc(`BF.Spell.Circle.Level${dashed ? "Dashed" : ""}`, {
 				number: formatNumber(l, { ordinal: true })
 			});
 		return obj;

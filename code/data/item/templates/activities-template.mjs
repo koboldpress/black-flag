@@ -65,7 +65,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 
 		this.uses.max = simplifyBonus(replaceFormulaData(this.uses.max ?? "", rollData, {
 			notifications: this.parent.notifications, key: "invalid-max-uses-formula", section: "auto",
-			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
+			messageData: { name: this.parent.name, property: _loc("BF.Uses.Maximum.DebugName") }
 		}));
 		// TODO: Add ability to have uses increase without clamping to max
 		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);

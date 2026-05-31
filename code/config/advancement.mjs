@@ -199,7 +199,7 @@ export const hitDieSizes = [4, 6, 8, 10, 12];
  */
 export function levels() {
 	return Array.fromRange(maxLevel, 1).reduce((obj, l) => {
-		obj[l] = game.i18n.format("BF.Level.Ordinal", { number: formatNumber(l, { ordinal: true }) });
+		obj[l] = _loc("BF.Level.Ordinal", { number: formatNumber(l, { ordinal: true }) });
 		return obj;
 	}, {});
 }

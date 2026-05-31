@@ -65,7 +65,7 @@ export default class EquipmentAdvancement extends Advancement {
 			category: `level-${levels.character}`,
 			section: "progression",
 			level: "warn",
-			message: game.i18n.localize("BF.Advancement.Equipment.Notification")
+			message: _loc("BF.Advancement.Equipment.Notification")
 		});
 	}
 

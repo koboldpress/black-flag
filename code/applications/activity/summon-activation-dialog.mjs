@@ -34,7 +34,7 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 
 			if (!foundry.utils.hasProperty(this.options.display, "create.summons"))
 				context.summonsFields.push({
-					field: new BooleanField({ label: game.i18n.localize("BF.SUMMON.Action.Place") }),
+					field: new BooleanField({ label: _loc("BF.SUMMON.Action.Place") }),
 					name: "create.summons",
 					value: this.config.create?.summons
 				});
@@ -50,7 +50,7 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 						options = options.map(({ value, label }) => ({ value, label: label.replace("1 × ", "") }));
 					}
 					context.summonsFields.push({
-						field: new StringField({ label: game.i18n.localize("BF.SUMMON.Profile.Label") }),
+						field: new StringField({ label: _loc("BF.SUMMON.Profile.Label") }),
 						name: "summons.profile",
 						value: this.config.summons?.profile,
 						options
@@ -59,7 +59,7 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 
 				if (this.activity.system.creatureSizes.size > 1)
 					context.summonsFields.push({
-						field: new StringField({ label: game.i18n.localize("BF.Size.Label") }),
+						field: new StringField({ label: _loc("BF.Size.Label") }),
 						name: "summons.creatureSize",
 						value: this.config.summons?.creatureSize,
 						options: Array.from(this.activity.system.creatureSizes)
@@ -69,7 +69,7 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 
 				if (this.activity.system.creatureTypes.size > 1)
 					context.summonsFields.push({
-						field: new StringField({ label: game.i18n.localize("BF.CreatureType.Label") }),
+						field: new StringField({ label: _loc("BF.CreatureType.Label") }),
 						name: "summons.creatureType",
 						value: this.config.summons?.creatureType,
 						options: Array.from(this.activity.system.creatureTypes)
@@ -97,7 +97,7 @@ export default class SummonActivationDialog extends ActivityActivationDialog {
 			switch (this.activity.system.summon.mode) {
 				case "cr":
 					const cr = simplifyBonus(profile.cr, rollData);
-					label = game.i18n.format("BF.SUMMON.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+					label = _loc("BF.SUMMON.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
 					break;
 				default:
 					const doc = fromUuidSync(profile.uuid);

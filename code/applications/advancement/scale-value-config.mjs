@@ -61,12 +61,12 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareConfigContext(context, options) {
-		let identifierHint = game.i18n.format(this.advancement.metadata.identifier.hint, {
+		let identifierHint = _loc(this.advancement.metadata.identifier.hint, {
 			parentIdentifier: this.advancement.parentIdentifier,
 			identifier: this.advancement.identifier
 		});
 		if (this.advancement.configuration.type === "dice") {
-			identifierHint = `${identifierHint} ${game.i18n.format("BF.Advancement.ScaleValue.Identifier.DiceHint", {
+			identifierHint = `${identifierHint} ${_loc("BF.Advancement.ScaleValue.Identifier.DiceHint", {
 				parentIdentifier: this.advancement.parentIdentifier,
 				identifier: this.advancement.identifier
 			})}`;
@@ -74,7 +74,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		context.default.identifierHint = identifierHint;
 		context.types = Object.entries(CONFIG.Advancement.types.scaleValue.dataTypes).map(([value, d]) => ({
 			value,
-			label: game.i18n.localize(d.metadata.label)
+			label: _loc(d.metadata.label)
 		}));
 		return context;
 	}

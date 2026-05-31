@@ -93,7 +93,7 @@ export default class Proficiency {
 	 * @type {string}
 	 */
 	get label() {
-		return game.i18n.localize(
+		return _loc(
 			{
 				0: "BF.Proficiency.Level.None",
 				0.5: "BF.Proficiency.Level.Half",

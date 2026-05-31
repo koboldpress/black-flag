@@ -81,10 +81,10 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 		};
 
 		context.headingLevelOptions = [
-			{ value: "", label: game.i18n.localize("BF.JournalPage.Class.HeadingLevel.Inherit"), rule: true },
+			{ value: "", label: _loc("BF.JournalPage.Class.HeadingLevel.Inherit"), rule: true },
 			...Array.fromRange(4, 1).map(level => ({
 				value: level,
-				label: game.i18n.format("JOURNALENTRYPAGE.Level", { level })
+				label: _loc("JOURNALENTRYPAGE.Level", { level })
 			}))
 		];
 
@@ -165,7 +165,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 		const makeTrait = type => {
 			const advancement = traits.find(a => a.bestGuessTrait() === type);
 			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "multiclass"`
-			if (!advancement) return game.i18n.localize("BF.Proficiency.None");
+			if (!advancement) return _loc("BF.Proficiency.None");
 			return Trait.localizedList(advancement.configuration.grants, advancement.configuration.choices, {
 				choiceMode: advancement.configuration.choiceMode
 			});
@@ -223,9 +223,9 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 		const scaleValues = this._getScaleValues(item, { features });
 		const spellProgression = await item.system.advancement.byType("spellcasting")[0]?.generateSpellcastingTable();
 
-		const headers = [[{ content: game.i18n.localize("BF.Level.Label[one]") }]];
-		if (item.type === "class") headers[0].push({ content: game.i18n.localize("BF.Proficiency.Bonus.Abbreviation") });
-		if (hasFeatures) headers[0].push({ content: game.i18n.localize("BF.Item.Type.Feature[other]") });
+		const headers = [[{ content: _loc("BF.Level.Label[one]") }]];
+		if (item.type === "class") headers[0].push({ content: _loc("BF.Proficiency.Bonus.Abbreviation") });
+		if (hasFeatures) headers[0].push({ content: _loc("BF.Item.Type.Feature[other]") });
 		headers[0].push(...scaleValues.column.map(a => ({ content: a.title })));
 		if (spellProgression) {
 			if (spellProgression.headers.length > 1) {
@@ -272,9 +272,9 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 			}
 
 			if (item.type === "class" && level === CONFIG.BlackFlag.subclassLevel) {
-				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
+				features.subclass = _loc("BF.Subclass.LabelSpecific", { class: item.name });
 			} else if (item.type === "class" && CONFIG.BlackFlag.subclassFeatureLevels.includes(level)) {
-				features.subclass = game.i18n.localize("BF.Feature.Category.Subclass[one]");
+				features.subclass = _loc("BF.Feature.Category.Subclass[one]");
 			}
 
 			// Level & proficiency bonus
@@ -333,12 +333,12 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 	async _getFeatures(item, { features }) {
 		const makeTag = levels => {
 			if (foundry.utils.getType(levels) !== "Array") levels = [levels];
-			return game.i18n.format("BF.Feature.Tag", {
+			return _loc("BF.Feature.Tag", {
 				level: game.i18n
 					.getListFormatter()
 					.format(levels.sort((lhs, rhs) => lhs - rhs).map(l => formatNumber(l, { ordinal: true }))),
 				owner: item.name,
-				type: game.i18n.localize("BF.Item.Type.Feature[one]")
+				type: _loc("BF.Item.Type.Feature[one]")
 			});
 		};
 
@@ -384,7 +384,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 		if (item.type === "class")
 			prepared.push({
 				level: CONFIG.BlackFlag.subclassLevel,
-				name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
+				name: _loc("BF.Subclass.LabelSpecific", { class: item.name }),
 				description: this.document.system.description.subclassAdvancement
 					? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
 							this.document.system.description.subclassAdvancement,
@@ -394,7 +394,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 								async: true
 							}
 						)
-					: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
+					: _loc("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
 				tag: makeTag(CONFIG.BlackFlag.subclassFeatureLevels)
 			});
 

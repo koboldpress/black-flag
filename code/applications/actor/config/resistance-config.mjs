@@ -31,7 +31,7 @@ export default class ResistanceConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Resistance.Config") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Resistance.Config") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -56,7 +56,7 @@ export default class ResistanceConfig extends BaseConfigSheet {
 				context.name = "BF.DAMAGE.Label";
 				const options = { section: all ? "value" : "nonmagical" };
 				context.entries = [
-					this._prepareEntry("all", "damage", game.i18n.localize("BF.Resistance.AllDamage"), options),
+					this._prepareEntry("all", "damage", _loc("BF.Resistance.AllDamage"), options),
 					...Object.entries(CONFIG.BlackFlag.damageTypes.localized).map(([key, label]) =>
 						this._prepareEntry(key, "damage", label, options)
 					)

@@ -66,15 +66,15 @@ export default class BaseSettingsConfig extends BFApplication {
 			throw new Error("Automatic field generation only available for Boolean, Number, or String types");
 		const data = {
 			field: isDataField ? setting.type : new Field({ required: true, blank: false }),
-			hint: game.i18n.localize(setting.hint),
-			label: game.i18n.localize(setting.name),
+			hint: _loc(setting.hint),
+			label: _loc(setting.name),
 			name,
 			value: game.settings.get(game.system.id, name)
 		};
 		if (setting.choices)
 			data.options = Object.entries(setting.choices).map(([value, label]) => ({
 				value,
-				label: game.i18n.localize(label)
+				label: _loc(label)
 			}));
 		return data;
 	}

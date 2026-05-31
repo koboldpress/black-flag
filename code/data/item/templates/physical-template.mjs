@@ -178,8 +178,8 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 			get() {
 				if ( !data.totalPrice ) return "—";
 				const denominationConfig = CONFIG.BlackFlag.currencies[this.denomination];
-				return game.i18n.format("BF.Currency.Display", {
-					value: formatNumber(data.totalPrice), denomination: game.i18n.localize(denominationConfig.abbreviation)
+				return _loc("BF.Currency.Display", {
+					value: formatNumber(data.totalPrice), denomination: _loc(denominationConfig.abbreviation)
 				});
 				// TODO: Adjust total displayed to use smallest logical unit (so 5 cp x 20 = 100 cp => 1 gp)
 			},
@@ -310,11 +310,11 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	 * @param {Map<string, string>} tags - Tags map to set.
 	 */
 	setPhysicalChatTags(tags) {
-		if ( this.attuned ) tags.set("attuned", game.i18n.localize("BF.Attunement.Attuned"));
+		if ( this.attuned ) tags.set("attuned", _loc("BF.Attunement.Attuned"));
 		else if ( this.attunement.value === "required" ) {
-			tags.set("attuned", game.i18n.localize("BF.Attunement.Type.Required"));
+			tags.set("attuned", _loc("BF.Attunement.Type.Required"));
 		}
-		if ( this.equipped ) tags.set("equipped", game.i18n.localize("BF.Item.Equipped"));
+		if ( this.equipped ) tags.set("equipped", _loc("BF.Item.Equipped"));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -146,7 +146,7 @@ function createRequestLink(label, dataset) {
 		gmLink.classList.add("extra-link");
 		gmLink.dataset.action = "postRequest";
 		gmLink.dataset.tooltip = "BF.Enricher.Request.Action";
-		gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
+		gmLink.setAttribute("aria-label", _loc(gmLink.dataset.tooltip));
 		gmLink.innerHTML = '<i class="fa-solid fa-comment-dots" inert></i>';
 		span.insertAdjacentElement("beforeend", gmLink);
 	}
@@ -284,7 +284,7 @@ async function handlePostRequest(event, target) {
 			"systems/black-flag/templates/chat/request-card.hbs",
 			{ buttons }
 		),
-		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
+		flavor: _loc("BF.Enricher.Request.Title"),
 		speaker: MessageClass.getSpeaker({ user: game.user }),
 		user: game.user.id
 	};
@@ -407,7 +407,7 @@ async function enrichAttack(config, label, options) {
 	if (!displayFormula.startsWith("+") && !displayFormula.startsWith("-")) displayFormula = `+${displayFormula}`;
 
 	const span = document.createElement("span");
-	span.innerHTML = game.i18n.format("BF.Enricher.Attack.Long", {
+	span.innerHTML = _loc("BF.Enricher.Attack.Long", {
 		formula: createRollLink(displayFormula, config).outerHTML
 	});
 
@@ -429,7 +429,7 @@ async function enrichAttack(config, label, options) {
 		];
 		const full = document.createElement("span");
 		full.className = "attack-extended";
-		full.innerHTML = game.i18n.format("BF.Enricher.Attack.Extended", {
+		full.innerHTML = _loc("BF.Enricher.Attack.Extended", {
 			type,
 			parts: game.i18n.getListFormatter({ type: "unit" }).format(parts.filter(_ => _))
 		});
@@ -486,7 +486,7 @@ async function rollAttack(event, target) {
 					targets: getTargetDescriptors()
 				}
 			},
-			flavor: game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.ATTACK.Label") }),
+			flavor: _loc("BF.Roll.Type.Label", { type: _loc("BF.ATTACK.Label") }),
 			speaker: ChatMessage.implementation.getSpeaker()
 		}
 	};
@@ -562,24 +562,24 @@ function createRollLabel(config) {
 		case "tool":
 		case "vehicle":
 			if (ability && (skill || tool || vehicle)) {
-				label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool ?? vehicle });
+				label = _loc("BF.Enricher.Check.Specific", { ability, type: skill ?? tool ?? vehicle });
 			} else {
 				label = ability;
 			}
 			if (config.passive) {
-				label = game.i18n.format(`BF.Enricher.${showDC ? "DC." : ""}Passive.${longSuffix}`, {
+				label = _loc(`BF.Enricher.${showDC ? "DC." : ""}Passive.${longSuffix}`, {
 					dc: config.dc,
 					check: label
 				});
 			} else {
-				if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
-				label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
+				if (showDC) label = _loc("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+				label = _loc(`BF.Enricher.Check.${longSuffix}`, { check: label });
 			}
 			break;
 		case "ability-save":
 			label = ability || config.ability?.toUpperCase() || "";
-			if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
-			label = game.i18n.format(`BF.Enricher.Save.${longSuffix}`, { save: label });
+			if (showDC) label = _loc("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+			label = _loc(`BF.Enricher.Save.${longSuffix}`, { save: label });
 			break;
 		default:
 			return "";
@@ -826,7 +826,7 @@ async function enrichCheck(config, label, options) {
 			// Multiple associated proficiencies, link each individually
 			if (associated.length > 1)
 				parts.push(
-					game.i18n.format("BF.Enricher.Check.Specific", {
+					_loc("BF.Enricher.Check.Specific", {
 						ability: LOOKUP.abilities[ability].label,
 						type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML))
 					})
@@ -840,9 +840,9 @@ async function enrichCheck(config, label, options) {
 
 		label = formatter.format(parts);
 		if (config.dc && !config.hideDC) {
-			label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+			label = _loc("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 		}
-		label = game.i18n.format(`BF.Enricher.Check.${config.format === "long" ? "Long" : "Short"}`, { check: label });
+		label = _loc(`BF.Enricher.Check.${config.format === "long" ? "Long" : "Short"}`, { check: label });
 		const template = document.createElement("template");
 		template.innerHTML = label;
 		return createRequestLink(template, {
@@ -1007,8 +1007,8 @@ async function enrichSave(config, label, options) {
 		});
 		label = game.i18n.getListFormatter({ type: "disjunction" }).format(abilities);
 		const showDC = config.dc && !config.hideDC;
-		if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
-		label = game.i18n.format(`BF.Enricher.Save.${config.format === "long" ? "Long" : "Short"}`, { save: label });
+		if (showDC) label = _loc("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+		label = _loc(`BF.Enricher.Save.${config.format === "long" ? "Long" : "Short"}`, { save: label });
 		const template = document.createElement("template");
 		template.innerHTML = label;
 		label = template;
@@ -1057,7 +1057,7 @@ async function rollCheckSave(event, target) {
 
 	const actors = new Set(getSelectedTokens().map(t => t.actor));
 	if (!actors.size) {
-		ui.notifications.warn(game.i18n.localize("BF.Enricher.Warning.NoActor"));
+		ui.notifications.warn(_loc("BF.Enricher.Warning.NoActor"));
 		return;
 	}
 
@@ -1225,7 +1225,7 @@ async function enrichDamage(configs, label, options) {
 			}
 		}
 
-		parts.push(game.i18n.format(`BF.Enricher.Damage.${localizationType}`, localizationData));
+		parts.push(_loc(`BF.Enricher.Damage.${localizationType}`, localizationData));
 	}
 
 	const link = document.createElement("a");
@@ -1233,7 +1233,7 @@ async function enrichDamage(configs, label, options) {
 	link.dataset.action = "roll";
 	_addDataset(link, config);
 	if (config.average && parts.length === 2) {
-		link.innerHTML = game.i18n.format("BF.Enricher.Damage.Double", { first: parts[0], second: parts[1] });
+		link.innerHTML = _loc("BF.Enricher.Damage.Double", { first: parts[0], second: parts[1] });
 	} else {
 		link.innerHTML = game.i18n.getListFormatter().format(parts);
 	}
@@ -1241,7 +1241,7 @@ async function enrichDamage(configs, label, options) {
 	if (config.format === "extended") {
 		const span = document.createElement("span");
 		span.className = "damage-extended";
-		span.innerHTML = game.i18n.format("BF.Enricher.Damage.Extended", { damage: link.outerHTML });
+		span.innerHTML = _loc("BF.Enricher.Damage.Extended", { damage: link.outerHTML });
 		return span;
 	}
 
@@ -1283,8 +1283,8 @@ async function rollDamage(event, target) {
 
 	const dialogConfig = {};
 
-	const title = game.i18n.format("BF.Roll.Type.Label", {
-		type: game.i18n.localize(rollType === "healing" ? "BF.Healing.Label" : "BF.DAMAGE.Label")
+	const title = _loc("BF.Roll.Type.Label", {
+		type: _loc(rollType === "healing" ? "BF.Healing.Label" : "BF.DAMAGE.Label")
 	});
 	const messageConfig = {
 		data: {
@@ -1419,7 +1419,7 @@ async function enrichReference(config, label, options) {
 		apply.dataset.action = "applyStatus";
 		apply.dataset.status = key;
 		apply.dataset.tooltip = "BF.Enricher.Apply.Label";
-		apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
+		apply.setAttribute("aria-label", _loc(apply.dataset.tooltip));
 		apply.innerHTML = '<i class="fa-solid fa-fw fa-reply-all fa-flip-horizonal" inert></i>';
 		span.append(apply);
 	}

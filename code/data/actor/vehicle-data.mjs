@@ -329,7 +329,7 @@ export default class VehicleData extends ActorDataModel.mixin(
 				if (type === "walk") generatedLabel = formatDistance(speed, movement.unit);
 				else generatedLabel = `${label.toLowerCase()} ${formatDistance(speed, movement.unit)}`;
 				if (pace) {
-					generatedLabel = game.i18n.format("BF.VEHICLE.FormattedPace", {
+					generatedLabel = _loc("BF.VEHICLE.FormattedPace", {
 						speed: generatedLabel,
 						perHour: formatPace(pace, this.traits.pace.unit, { unitDisplay: "short" }),
 						perDay: formatPace(pace * 24, this.traits.pace.unit, { period: "day" })
@@ -347,7 +347,7 @@ export default class VehicleData extends ActorDataModel.mixin(
 			.sort((lhs, rhs) => rhs[1] - lhs[1])
 			.map(([type, speed]) => {
 				const config = CONFIG.BlackFlag.movementTypes[type];
-				const label = config ? game.i18n.localize(config.label) : type;
+				const label = config ? _loc(config.label) : type;
 				return `${label} ${formatDistance(speed, movement.unit)}`;
 			});
 		movement.labels.push(...movement.custom);

@@ -129,8 +129,8 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		const type = CONFIG.BlackFlag.ammunition.localized[this.type.category];
-		if (type) this.type.label = `${game.i18n.localize("BF.WEAPON.Label[one]")} (${type})`;
-		else this.type.label = game.i18n.localize("BF.WEAPON.Label[one]");
+		if (type) this.type.label = `${_loc("BF.WEAPON.Label[one]")} (${type})`;
+		else this.type.label = _loc("BF.WEAPON.Label[one]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

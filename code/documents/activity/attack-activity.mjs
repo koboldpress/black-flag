@@ -97,7 +97,7 @@ export default class AttackActivity extends Activity {
 	_activationChatButtons() {
 		const buttons = [
 			{
-				label: game.i18n.localize("BF.ATTACK.Label"),
+				label: _loc("BF.ATTACK.Label"),
 				icon: '<i class="blackFlag-icon" data-src="systems/black-flag/artwork/traits/weapons.svg" inert></i>',
 				dataset: {
 					action: "rollAttack"
@@ -106,7 +106,7 @@ export default class AttackActivity extends Activity {
 		];
 		if (this.hasDamage)
 			buttons.push({
-				label: game.i18n.localize("BF.DAMAGE.Label"),
+				label: _loc("BF.DAMAGE.Label"),
 				icon: '<i class="fa-solid fa-burst" inert></i>',
 				dataset: {
 					action: "rollDamage"
@@ -232,7 +232,7 @@ export default class AttackActivity extends Activity {
 					attackModes: this.item.system.attackModes,
 					buildConfig: prepareAttackRoll,
 					rollNotes,
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 				}
 			},
 			dialog
@@ -466,7 +466,7 @@ export default class AttackActivity extends Activity {
 		// Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
 		if (this.system.validAttackTypes.has("melee")) {
 			parts.push(
-				game.i18n.format("BF.RANGE.Formatted.Reach", {
+				_loc("BF.RANGE.Formatted.Reach", {
 					reach: formatDistance(this.item.system.range.reach, this.item.system.range.unit, { strict: false })
 				})
 			);
@@ -481,7 +481,7 @@ export default class AttackActivity extends Activity {
 				if (long && short !== long) range = `${short}/${formatDistance(long, unit, { strict: false })}`;
 				else range = formatDistance(short, unit, { strict: false });
 			}
-			parts.push(game.i18n.format("BF.RANGE.Formatted.Range", { range }));
+			parts.push(_loc("BF.RANGE.Formatted.Range", { range }));
 		}
 
 		return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));

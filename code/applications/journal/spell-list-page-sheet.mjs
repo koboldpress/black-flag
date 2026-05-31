@@ -83,10 +83,10 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
 		};
 
 		context.headingLevelOptions = [
-			{ value: "", label: game.i18n.localize("BF.JournalPage.Class.HeadingLevel.Inherit"), rule: true },
+			{ value: "", label: _loc("BF.JournalPage.Class.HeadingLevel.Inherit"), rule: true },
 			...Array.fromRange(6, 1).map(level => ({
 				value: level,
-				label: game.i18n.format("JOURNALENTRYPAGE.Level", { level })
+				label: _loc("JOURNALENTRYPAGE.Level", { level })
 			}))
 		];
 
@@ -101,7 +101,7 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
 
 		context.groupingOptions = Object.entries(this.constructor.GROUPING_MODES).map(([value, label]) => ({
 			value,
-			label: game.i18n.localize(label)
+			label: _loc(label)
 		}));
 		context.grouping = this.grouping || this.options.grouping || context.system.grouping;
 

@@ -111,7 +111,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 */
 	async embedPrerequisite(embed) {
 		if ( this.restriction.label ) embed[0]?.insertAdjacentHTML("beforebegin", `<p><em>${
-			game.i18n.format("BF.Prerequisite.Listing", { prerequisite: this.restriction.label })
+			_loc("BF.Prerequisite.Listing", { prerequisite: this.restriction.label })
 		}</em></p>`);
 		return embed;
 	}
@@ -141,8 +141,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		// Abilities
 		for ( const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities) ) {
 			if ( !filters[`ability-${key}`] ) continue;
-			prerequisites.push(validate(filters[`ability-${key}`], game.i18n.format("BF.Prerequisite.Ability.Label", {
-				abbreviation: game.i18n.localize(ability.labels.abbreviation).toUpperCase(),
+			prerequisites.push(validate(filters[`ability-${key}`], _loc("BF.Prerequisite.Ability.Label", {
+				abbreviation: _loc(ability.labels.abbreviation).toUpperCase(),
 				value: formatNumber(filters[`ability-${key}`].v)
 			})));
 		}
@@ -157,7 +157,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 				)
 			));
 			if ( filters[`${trait}Categories`] ) proficiencies.push(validate(filters[`${trait}Categories`],
-				game.i18n.format("BF.Prerequisite.Proficiency.AtLeastOne", { category: formatter.format(
+				_loc("BF.Prerequisite.Proficiency.AtLeastOne", { category: formatter.format(
 					filters[`${trait}Categories`].v.map(p => Trait.keyLabel(p, { trait, count: 1, priority: "localization" }))
 				) })
 			));
@@ -166,38 +166,38 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		prepareProficiency("weapons");
 		prepareProficiency("tools");
 		prepareProficiency("skills");
-		if ( proficiencies.length ) prerequisites.push(game.i18n.format("BF.Prerequisite.Proficiency.Label", {
+		if ( proficiencies.length ) prerequisites.push(_loc("BF.Prerequisite.Proficiency.Label", {
 			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
 		}));
 
 		// Spellcasting
 		if ( filters.spellcastingFeature ) prerequisites.push(validate(
-			filters.spellcastingFeature, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
+			filters.spellcastingFeature, _loc("BF.Prerequisite.SpellcastingFeature.Label")
 		));
 		if ( filters.spellCircle ) prerequisites.push(validate(
-			filters.spellCircle, game.i18n.format("BF.Prerequisite.SpellcastingCircle.Label", {
+			filters.spellCircle, _loc("BF.Prerequisite.SpellcastingCircle.Label", {
 				circle: CONFIG.BlackFlag.spellCircles()[filters.spellCircle.v]
 			})
 		));
 		if ( filters.hasCantrips ) prerequisites.push(validate(
-			filters.hasCantrips, game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Label")
+			filters.hasCantrips, _loc("BF.Prerequisite.SpellcastingCantrip.Label")
 		));
 		if ( filters.hasDamagingSpells ) prerequisites.push(validate(
-			filters.hasDamagingSpells, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")
+			filters.hasDamagingSpells, _loc("BF.Prerequisite.SpellcastingDamage.Label")
 		));
 
 		// Traits
-		if ( filters.characterLevel ) prerequisites.push(validate(filters.characterLevel, game.i18n.format(
+		if ( filters.characterLevel ) prerequisites.push(validate(filters.characterLevel, _loc(
 			"BF.Prerequisite.LevelCharacter.Label", { level: formatNumber(filters.characterLevel.v, { ordinal: true }) }
 		)));
-		if ( filters.classLevel ) prerequisites.push(validate(filters.classLevel, game.i18n.format(
+		if ( filters.classLevel ) prerequisites.push(validate(filters.classLevel, _loc(
 			"BF.Prerequisite.LevelClass.Label", {
 				level: formatNumber(filters.classLevel.v, { ordinal: true }),
 				class: CONFIG.BlackFlag.registration.get("class", filters.classLevel._class)?.name ?? "—"
 			}
 		)));
-		if ( filters.creatureSize ) prerequisites.push(validate(filters.creatureSize, game.i18n.format(
-			"BF.Prerequisite.Size.Label", { size: game.i18n.localize(CONFIG.BlackFlag.sizes[filters.creatureSize.v]?.label) }
+		if ( filters.creatureSize ) prerequisites.push(validate(filters.creatureSize, _loc(
+			"BF.Prerequisite.Size.Label", { size: _loc(CONFIG.BlackFlag.sizes[filters.creatureSize.v]?.label) }
 		)));
 
 		// Other Items
@@ -248,8 +248,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		for ( const invalidFilter of invalidFilters ) {
 			if ( invalidFilter._id?.startsWith("ability-") ) {
 				const abilityKey = invalidFilter._id.replace("ability-", "");
-				messages.push(game.i18n.format("BF.Prerequisite.Ability.Warning", {
-					ability: game.i18n.localize(CONFIG.BlackFlag.abilities[abilityKey].labels.full).toLowerCase(),
+				messages.push(_loc("BF.Prerequisite.Ability.Warning", {
+					ability: _loc(CONFIG.BlackFlag.abilities[abilityKey].labels.full).toLowerCase(),
 					value: formatNumber(invalidFilter.v)
 				}));
 				continue;
@@ -260,7 +260,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 				case "toolsCategories":
 				case "skillsCategories":
 				case "weaponsCategories":
-					proficiencies.push(game.i18n.format("BF.Prerequisite.Proficiency.AtLeastOne", {
+					proficiencies.push(_loc("BF.Prerequisite.Proficiency.AtLeastOne", {
 						category: formatter.format(invalidFilter.v.map(p => Trait.keyLabel(
 							p?._key ?? p, { trait: invalidFilter._id.replace("Categories", ""), count: 1, priority: "localization" }
 						)))
@@ -275,32 +275,32 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 					))));
 					break;
 				case "characterLevel":
-					messages.push(game.i18n.format("BF.Prerequisite.LevelCharacter.Warning", {
+					messages.push(_loc("BF.Prerequisite.LevelCharacter.Warning", {
 						level: formatNumber(invalidFilter.v, { ordinal: true })
 					}));
 					break;
 				case "classLevel":
-					messages.push(game.i18n.format("BF.Prerequisite.LevelClass.Warning", {
+					messages.push(_loc("BF.Prerequisite.LevelClass.Warning", {
 						level: formatNumber(invalidFilter.v, { ordinal: true }),
 						class: CONFIG.BlackFlag.registration.get("class", invalidFilter._class)?.name ?? "—"
 					}))
 					break;
 				case "creatureSize":
-					messages.push(game.i18n.format("BF.Prerequisite.Size.Warning", {
-						size: game.i18n.localize(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
+					messages.push(_loc("BF.Prerequisite.Size.Warning", {
+						size: _loc(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
 					}));
 					break;
 				case "hasCantrips":
-					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning"));
+					messages.push(_loc("BF.Prerequisite.SpellcastingCantrip.Warning"));
 					break;
 				case "hasDamagingSpells":
-					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning"));
+					messages.push(_loc("BF.Prerequisite.SpellcastingDamage.Warning"));
 					break;
 				case "spellcastingFeature":
-					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning"));
+					messages.push(_loc("BF.Prerequisite.SpellcastingFeature.Warning"));
 					break;
 				case "spellCircle":
-					messages.push(game.i18n.format("BF.Prerequisite.SpellcastingCircle.Warning", {
+					messages.push(_loc("BF.Prerequisite.SpellcastingCircle.Warning", {
 						circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
 					}));
 					break;
@@ -310,11 +310,11 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			}
 		}
 
-		if ( proficiencies.length ) messages.push(game.i18n.format("BF.Prerequisite.Proficiency.Warning", {
+		if ( proficiencies.length ) messages.push(_loc("BF.Prerequisite.Proficiency.Warning", {
 			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
 		}));
 
-		for ( const uuid of missingItems ) messages.push(game.i18n.format("BF.Prerequisite.Items.Warning", {
+		for ( const uuid of missingItems ) messages.push(_loc("BF.Prerequisite.Items.Warning", {
 			name: fromUuidSync(uuid)?.name
 		}));
 

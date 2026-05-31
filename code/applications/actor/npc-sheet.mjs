@@ -63,7 +63,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 		context.cr = formatCR(context.system.attributes.cr);
 
 		context.labels = {
-			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
+			sizeAndType: `${_loc(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
 				context.system.traits.type.label
 			}`
 		};
@@ -77,7 +77,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 
 		context.stealthLabel = formatNumber(context.system.attributes.stealth);
 		if (context.system.attributes.baseStealth)
-			context.stealthLabel = game.i18n.format("BF.Armor.StealthReduction", {
+			context.stealthLabel = _loc("BF.Armor.StealthReduction", {
 				reduced: context.stealthLabel,
 				full: formatNumber(context.system.attributes.baseStealth)
 			});
@@ -113,7 +113,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 				value: leg.value ?? 0,
 				max: context.editable ? leg.max ?? 0 : context.source.attributes.legendary.max
 			};
-			context.actions.legendary.description = game.i18n.format(
+			context.actions.legendary.description = _loc(
 				getPluralLocalizationKey(
 					context.system.attributes.legendary.max,
 					pr => `BF.LegendaryAction.Description[${pr}]`

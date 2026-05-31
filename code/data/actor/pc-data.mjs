@@ -429,7 +429,7 @@ export default class PCData extends ActorDataModel.mixin(
 		for (const data of Object.values(this.progression.classes)) {
 			Object.defineProperty(data, "levelsLabel", {
 				get() {
-					return game.i18n.format(
+					return _loc(
 						getPluralLocalizationKey(this.levels, pr => `BF.Level.Count[${pr}]`),
 						{ number: this.levels }
 					);
@@ -513,7 +513,7 @@ export default class PCData extends ActorDataModel.mixin(
 			this.parent.notifications.set("too-much-attunement", {
 				level: "warn",
 				section: "inventory",
-				message: game.i18n.localize("BF.Attunement.Warning")
+				message: _loc("BF.Attunement.Warning")
 			});
 		}
 
@@ -783,7 +783,7 @@ export default class PCData extends ActorDataModel.mixin(
 				category: "class",
 				section: "progression",
 				order,
-				message: game.i18n.localize("BF.Progression.Notification.ChooseClass")
+				message: _loc("BF.Progression.Notification.ChooseClass")
 			});
 		}
 
@@ -795,7 +795,7 @@ export default class PCData extends ActorDataModel.mixin(
 				category: "abilities",
 				section: "progression",
 				order,
-				message: game.i18n.localize("BF.Progression.Notification.DetermineAbilityScores")
+				message: _loc("BF.Progression.Notification.DetermineAbilityScores")
 			});
 		}
 
@@ -807,7 +807,7 @@ export default class PCData extends ActorDataModel.mixin(
 				category: "lineage",
 				section: "progression",
 				order,
-				message: game.i18n.localize("BF.Progression.Notification.ChooseLineage")
+				message: _loc("BF.Progression.Notification.ChooseLineage")
 			});
 		}
 
@@ -819,7 +819,7 @@ export default class PCData extends ActorDataModel.mixin(
 				category: "heritage",
 				section: "progression",
 				order,
-				message: game.i18n.localize("BF.Progression.Notification.ChooseHeritage")
+				message: _loc("BF.Progression.Notification.ChooseHeritage")
 			});
 		}
 
@@ -831,7 +831,7 @@ export default class PCData extends ActorDataModel.mixin(
 				category: "background",
 				section: "progression",
 				order,
-				message: game.i18n.localize("BF.Progression.Notification.ChooseBackground")
+				message: _loc("BF.Progression.Notification.ChooseBackground")
 			});
 		}
 
@@ -839,7 +839,7 @@ export default class PCData extends ActorDataModel.mixin(
 		for (const [key, data] of Object.entries(this.progression.classes)) {
 			if (!data.requiresSubclass) continue;
 			order++;
-			const message = game.i18n.format("BF.Progression.Notification.ChooseSubclass", { class: data.document.name });
+			const message = _loc("BF.Progression.Notification.ChooseSubclass", { class: data.document.name });
 			this.parent.notifications.set(`no-subclass-${key}`, {
 				level: "warn",
 				section: "progression",
@@ -903,8 +903,8 @@ export default class PCData extends ActorDataModel.mixin(
 		let newValue = luck.value + (context === "failure" ? luck.failureAmount ?? 1 : 1);
 		if (newValue > CONFIG.BlackFlag.luck.max) {
 			const rollConfig = { rolls: [{ parts: [luck.formula || "1d4"] }] };
-			const type = game.i18n.localize("BF.Luck.Label");
-			const flavor = game.i18n.format("BF.Roll.Action.RerollSpecific", { type });
+			const type = _loc("BF.Luck.Label");
+			const flavor = _loc("BF.Roll.Action.RerollSpecific", { type });
 			const dialogConfig = { configure: false };
 			const messageConfig = {
 				data: {
@@ -957,11 +957,9 @@ export default class PCData extends ActorDataModel.mixin(
 	 */
 	async setConcept(document) {
 		if (!["lineage", "heritage", "background"].includes(document.type))
-			throw new Error(game.i18n.format("BF.ConceptSelection.Warning.InvalidType", { type: document.type }));
+			throw new Error(_loc("BF.ConceptSelection.Warning.InvalidType", { type: document.type }));
 		if (this.progression[document.type])
-			throw new Error(
-				game.i18n.format("BF.ConceptSelection.Warning.Duplicate", { type: document.type, name: this.parent.name })
-			);
+			throw new Error(_loc("BF.ConceptSelection.Warning.Duplicate", { type: document.type, name: this.parent.name }));
 
 		const newDocument = await this.parent.createEmbeddedDocuments("Item", [document.toObject()], { render: false });
 		return this.parent.update({ [`system.progression.${document.type}`]: newDocument[0] });
@@ -978,7 +976,7 @@ export default class PCData extends ActorDataModel.mixin(
 		if (!game.settings.get(game.system.id, "allowMulticlassing")) {
 			const existingClass = Object.keys(this.progression.classes)[0];
 			if (existingClass && existingClass !== cls.identifier) {
-				throw new Error(game.i18n.localize("BF.Progression.Warning.NoMulticlassing"));
+				throw new Error(_loc("BF.Progression.Warning.NoMulticlassing"));
 			}
 		}
 
@@ -988,7 +986,7 @@ export default class PCData extends ActorDataModel.mixin(
 			identifier: cls.identifier
 		};
 		if (levels.character > CONFIG.BlackFlag.maxLevel)
-			throw new Error(game.i18n.format("BF.Level.Warning.Max", { max: CONFIG.BlackFlag.maxLevel }));
+			throw new Error(_loc("BF.Level.Warning.Max", { max: CONFIG.BlackFlag.maxLevel }));
 
 		// Create class if it doesn't already exist on actor
 		let existingClass = this.progression.classes[cls.identifier]?.document;

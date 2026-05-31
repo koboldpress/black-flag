@@ -128,7 +128,7 @@ export default class TraitConfig extends AdvancementConfig {
 	async _prepareConfigContext(context, options) {
 		const traitConfig = CONFIG.BlackFlag.traits[this.advancement.bestGuessTrait()];
 		if (traitConfig) {
-			context.default.title = game.i18n.localize(traitConfig.labels.title);
+			context.default.title = _loc(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
 		context.default.hint = Trait.localizedList(this.config.grants, this.config.choices, {
@@ -160,8 +160,8 @@ export default class TraitConfig extends AdvancementConfig {
 	async _prepareChoicesContext(context, options) {
 		context.count = context.choices[this.selected]?.data.count;
 		context.choiceModeOptions = [
-			{ value: "inclusive", label: game.i18n.localize("BF.Advancement.Trait.Choice.Mode.Inclusive.Label") },
-			{ value: "exclusive", label: game.i18n.localize("BF.Advancement.Trait.Choice.Mode.Exclusive.Label") }
+			{ value: "inclusive", label: _loc("BF.Advancement.Trait.Choice.Mode.Inclusive.Label") },
+			{ value: "exclusive", label: _loc("BF.Advancement.Trait.Choice.Mode.Exclusive.Label") }
 		];
 		return context;
 	}
@@ -182,11 +182,11 @@ export default class TraitConfig extends AdvancementConfig {
 			options: Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 })
 		};
 		context.selectedTrait = {
-			field: new StringField({ required: true, blank: false, label: game.i18n.localize("BF.Trait.Type") }),
+			field: new StringField({ required: true, blank: false, label: _loc("BF.Trait.Type") }),
 			header: `${CONFIG.BlackFlag.traits[this.trait].labels.localization}[other]`,
 			options: Object.entries(CONFIG.BlackFlag.traits)
 				.filter(([, config]) => this.config.mode === "default" || (config.type === "proficiency" && config.expertise))
-				.map(([value, config]) => ({ value, label: game.i18n.localize(config.labels.title) })),
+				.map(([value, config]) => ({ value, label: _loc(config.labels.title) })),
 			value: this.trait
 		};
 		return context;

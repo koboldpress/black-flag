@@ -38,7 +38,7 @@ export default class DamageActivity extends Activity {
 		const buttons = [];
 		if (this.hasDamage)
 			buttons.push({
-				label: game.i18n.localize("BF.DAMAGE.Label"),
+				label: _loc("BF.DAMAGE.Label"),
 				icon: '<i class="fa-solid fa-burst" inert></i>',
 				dataset: {
 					action: "rollDamage"

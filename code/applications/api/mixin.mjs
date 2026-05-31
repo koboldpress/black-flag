@@ -310,13 +310,10 @@ export default function ApplicationV2Mixin(Base) {
 				...rest,
 				buttons: [
 					foundry.utils.mergeObject(
-						{ action: "yes", icon: "fa-solid fa-check", label: game.i18n.localize("COMMON.Yes"), default: true },
+						{ action: "yes", icon: "fa-solid fa-check", label: _loc("COMMON.Yes"), default: true },
 						yes
 					),
-					foundry.utils.mergeObject(
-						{ action: "no", icon: "fa-solid fa-xmark", label: game.i18n.localize("COMMON.No") },
-						no
-					)
+					foundry.utils.mergeObject({ action: "no", icon: "fa-solid fa-xmark", label: _loc("COMMON.No") }, no)
 				],
 				submit: result => resolve(result)
 			});

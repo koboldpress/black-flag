@@ -268,7 +268,7 @@ export default class PCSheet extends BaseActorSheet {
 	async _prepareTraits(context) {
 		context.traits = [];
 		const { traits, proficiencies } = context.system;
-		const none = game.i18n.localize("None");
+		const none = _loc("None");
 
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
@@ -277,7 +277,7 @@ export default class PCSheet extends BaseActorSheet {
 				key: "size",
 				classes: "single",
 				label: "BF.Size.Label",
-				value: size ? game.i18n.localize(size.label) : none,
+				value: size ? _loc(size.label) : none,
 				config: "type"
 			});
 
@@ -344,13 +344,13 @@ export default class PCSheet extends BaseActorSheet {
 			context.traits.push({
 				key,
 				label,
-				value: value || game.i18n.localize("None"),
+				value: value || _loc("None"),
 				config: "resistance"
 			});
 		};
-		prepareResistance("resistances", game.i18n.localize("BF.Resistance.Label"));
-		prepareResistance("immunities", game.i18n.localize("BF.Immunity.Label"));
-		prepareResistance("vulnerabilities", game.i18n.localize("BF.Vulnerability.Label"));
+		prepareResistance("resistances", _loc("BF.Resistance.Label"));
+		prepareResistance("immunities", _loc("BF.Immunity.Label"));
+		prepareResistance("vulnerabilities", _loc("BF.Vulnerability.Label"));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -484,7 +484,7 @@ export default class PCSheet extends BaseActorSheet {
 	 */
 	static #levelDown(event, target) {
 		this._confirmDialog({
-			content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.localize(
+			content: `<p><strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc(
 				"BF.Progression.Action.LevelDown.Message"
 			)}</p>`,
 			yes: { callback: () => this.actor.system.levelDown() },
@@ -492,7 +492,7 @@ export default class PCSheet extends BaseActorSheet {
 				width: 400
 			},
 			window: {
-				title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`
+				title: `${_loc("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`
 			}
 		});
 	}

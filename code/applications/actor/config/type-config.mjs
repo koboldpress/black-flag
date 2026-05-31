@@ -31,7 +31,7 @@ export default class TypeConfig extends BaseCustomConfigSheet {
 
 	/** @inheritDoc */
 	get title() {
-		return game.i18n.localize("BF.CreatureType.Label");
+		return _loc("BF.CreatureType.Label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

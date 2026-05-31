@@ -121,7 +121,7 @@ export class AttackData extends ActivityDataModel {
 	 * @type {string|null}
 	 */
 	get defaultAbility() {
-		if (this.attack.type.classification === "spell") return game.i18n.localize("BF.Spellcasting.Label");
+		if (this.attack.type.classification === "spell") return _loc("BF.Spellcasting.Label");
 
 		const labels = CONFIG.BlackFlag.abilities.localized;
 		const available = this.availableAbilities;

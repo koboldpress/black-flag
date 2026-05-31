@@ -144,7 +144,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 	get blankLabel() {
 		const localization = this.constructor.CATEGORIES[this.type]?.localization;
 		if (!localization) return "";
-		return game.i18n.localize(getPluralLocalizationKey(this.count ?? 1, pr => `${localization}[${pr}]`));
+		return _loc(getPluralLocalizationKey(this.count ?? 1, pr => `${localization}[${pr}]`));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -175,7 +175,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		if (this.type === "weapon") {
 			for (const [categoryKey, category] of Object.entries(CONFIG.BlackFlag.weapons.localized)) {
 				for (const [typeKey, type] of Object.entries(CONFIG.BlackFlag.weaponTypes.localized)) {
-					choices[`${categoryKey}.${typeKey}`] = game.i18n.format(
+					choices[`${categoryKey}.${typeKey}`] = _loc(
 						getPluralLocalizationKey(this.count ?? 1, pr => `BF.WEAPON.Type.CombinedLabel[${pr}]`),
 						{
 							category,
@@ -258,10 +258,10 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		if (!label) return;
 		if (this.count > 1) label = `${formatNumber(this.count, { spellOut: true })} ${label}`;
 		else if (this.type !== "linked") {
-			label = game.i18n.format("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
+			label = _loc("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
 		}
 		if (this.type === "linked" && this.requiresProficiency) {
-			label += ` (${game.i18n.localize("BF.Advancement.Equipment.Proficiency.IfProficient").toLowerCase()})`;
+			label += ` (${_loc("BF.Advancement.Equipment.Proficiency.IfProficient").toLowerCase()})`;
 		}
 		return label;
 	}
@@ -306,7 +306,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 	 * @returns {string[]}
 	 */
 	prefixOrEntries(entries, depth) {
-		const letters = game.i18n.localize(`BF.Advancement.Equipment.Prefixes.${depth}`);
+		const letters = _loc(`BF.Advancement.Equipment.Prefixes.${depth}`);
 		if (!letters) return entries;
 		return entries.map((e, idx) => `(${letters[idx]}) ${e}`);
 	}

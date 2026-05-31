@@ -113,7 +113,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 		let label;
 		if (this.type.category === "shield") label = formatNumber(this._source.armor.value || 2, { sign: true });
 		else
-			label = `${game.i18n.localize("BF.ARMORCLASS.Abbreviation")}: ${formatNumber(
+			label = `${_loc("BF.ARMORCLASS.Abbreviation")}: ${formatNumber(
 				this._source.armor.value || 0
 			)} ${this.modifierHint(false)}`;
 		if (this.magicAvailable && this.magicalBonus) label += ` + ${formatNumber(this.magicalBonus)}`;
@@ -146,7 +146,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 		];
 		// TODO: Display required strength with cumbersome property
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
+		return listFormatter.format(traits.filter(t => t).map(t => _loc(t)));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -191,8 +191,8 @@ export default class ArmorData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		const type = CONFIG.BlackFlag.armor.allLocalized[this.type.base ?? this.type.category];
-		if (type) this.type.label = `${game.i18n.localize("BF.Armor.Label[one]")} (${type})`;
-		else this.type.label = game.i18n.localize("BF.Armor.Label[one]");
+		if (type) this.type.label = `${_loc("BF.Armor.Label[one]")} (${type})`;
+		else this.type.label = _loc("BF.Armor.Label[one]");
 
 		if (!this.armor.value && this.type.category === "shield") this.armor.value = 2;
 		if (this.magicAvailable && this.magicalBonus) this.armor.value += this.magicalBonus;
@@ -222,7 +222,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 				category: "armor-class",
 				section: "inventory",
 				document: this.parent.id,
-				message: game.i18n.format("BF.Armor.Notification.TooMany", {
+				message: _loc("BF.Armor.Notification.TooMany", {
 					type: game.i18n
 						.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
 						.toLowerCase()
@@ -249,7 +249,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 		if (!this.equipped) return;
 		if (this.proficient === false) {
-			const message = game.i18n.format("BF.Armor.Notification.NotProficient", {
+			const message = _loc("BF.Armor.Notification.NotProficient", {
 				type: game.i18n
 					.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
 					.toLowerCase()
@@ -273,7 +273,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 				],
 				note: {
 					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
-					text: game.i18n.format("BF.Armor.Notification.NotProficientNote", { name: this.parent.name })
+					text: _loc("BF.Armor.Notification.NotProficientNote", { name: this.parent.name })
 				}
 			});
 		}
@@ -286,7 +286,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 				],
 				note: {
 					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
-					text: game.i18n.localize("BF.Armor.Notification.Noisy")
+					text: _loc("BF.Armor.Notification.Noisy")
 				}
 			});
 		}
@@ -349,11 +349,11 @@ export default class ArmorData extends ItemDataModel.mixin(
 		if (this.modifier.max === 0) return "";
 
 		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
-		const hint = game.i18n.format(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
-			ability: game.i18n.localize(ability.labels.abbreviation).toUpperCase()
+		const hint = _loc(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
+			ability: _loc(ability.labels.abbreviation).toUpperCase()
 		});
 		if (!this.modifier.max) return hint;
 
-		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: formatNumber(this.modifier.max) });
+		return _loc("BF.Armor.Modifier.Description.Max", { hint, max: formatNumber(this.modifier.max) });
 	}
 }

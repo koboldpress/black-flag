@@ -40,7 +40,7 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 
 	/** @inheritDoc */
 	get title() {
-		return game.i18n.localize("BF.AbilityAssignment.Label");
+		return _loc("BF.AbilityAssignment.Label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -148,7 +148,7 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 			score.nextCost = !score.isMax ? config.costs[score.value + 1] - score.existingCost : null;
 			score.costDescription = score.isMax
 				? "—"
-				: game.i18n.format(
+				: _loc(
 						getPluralLocalizationKey(score.nextCost, pr => `BF.AbilityAssignment.Method.PointBuy.Cost.Point[${pr}]`),
 						{ number: score.nextCost }
 					);
@@ -311,7 +311,7 @@ export default class AbilityAssignmentDialog extends BFDocumentSheet {
 
 		// Create chat message with roll results
 		const cls = getDocumentClass("ChatMessage");
-		const flavor = game.i18n.localize("BF.AbilityAssignment.RolledAbilityScore");
+		const flavor = _loc("BF.AbilityAssignment.RolledAbilityScore");
 		const messageData = {
 			flavor,
 			title: `${flavor}: ${this.document.name}`,

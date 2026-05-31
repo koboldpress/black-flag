@@ -30,7 +30,7 @@ export default class NPCSpellcastingConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Spellcasting.Label") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Spellcasting.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

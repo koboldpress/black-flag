@@ -38,7 +38,7 @@ export default class UtilityActivity extends Activity {
 		const buttons = [];
 		if (this.system.roll.formula)
 			buttons.push({
-				label: this.system.roll.name || game.i18n.localize("BF.Roll.Action.RollGeneric"),
+				label: this.system.roll.name || _loc("BF.Roll.Action.RollGeneric"),
 				icon: '<i class="fa-solid fa-dice" inert></i>',
 				dataset: {
 					action: "rollFormula",
@@ -75,7 +75,7 @@ export default class UtilityActivity extends Activity {
 			configure: this.system.roll.prompt,
 			options: {
 				rollNotes: this.actor?.system.getModifiers?.(rollConfig.modifierData, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+				title: _loc("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 			}
 		});
 

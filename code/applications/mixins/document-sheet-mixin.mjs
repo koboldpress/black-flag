@@ -43,7 +43,7 @@ export default function DocumentSheetMixin(Base) {
 			if (game.user.isGM || this.document.isOwner) {
 				// Identity / Source button
 				buttons.unshift({
-					label: game.i18n.localize("BF.Identity.Label"),
+					label: _loc("BF.Identity.Label"),
 					class: "identity-config",
 					icon: "fa-solid fa-id-card",
 					onclick: async ev => new IdentityConfig({ document: this.document }).render({ force: true })
@@ -59,7 +59,7 @@ export default function DocumentSheetMixin(Base) {
 					icon: getIcon(),
 					onclick: async ev => {
 						this.modes.editing = !this.modes.editing;
-						ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> <span>${game.i18n.localize(getLabel())}</span>`;
+						ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> <span>${_loc(getLabel())}</span>`;
 						await this.submit();
 						this.render();
 					}

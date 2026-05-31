@@ -43,10 +43,8 @@ export default class SourceField extends SchemaField {
 
 		if (this.fallback) this.label = this.fallback;
 		else {
-			const page = Number.isNumeric(this.page)
-				? game.i18n.format("BF.SOURCE.Display.Page", { page: this.page })
-				: this.page ?? "";
-			this.label = game.i18n.format("BF.SOURCE.Display.Full", { book: this.book, page }).trim();
+			const page = Number.isNumeric(this.page) ? _loc("BF.SOURCE.Display.Page", { page: this.page }) : this.page ?? "";
+			this.label = _loc("BF.SOURCE.Display.Full", { book: this.book, page }).trim();
 		}
 
 		this.value = this.book || (pkg?.title ?? "");

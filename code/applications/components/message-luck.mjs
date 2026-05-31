@@ -53,13 +53,13 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 						${createLuckPoints(config.max, luckAvailable)}
 					</ol>
 				</div>
-				<button data-action="luck-bonus" data-tooltip="${game.i18n.localize("BF.Luck.Action.Bonus")}">
+				<button data-action="luck-bonus" data-tooltip="${_loc("BF.Luck.Action.Bonus")}">
 					<i class="fa-solid fa-plus"></i>
 					<ol class="luck-points cost">
 						${createLuckPoints(config.costs.bonus)}
 					</ol>
 				</button>
-				<button data-action="luck-reroll" data-tooltip="${game.i18n.localize("BF.Luck.Action.Reroll")}">
+				<button data-action="luck-reroll" data-tooltip="${_loc("BF.Luck.Action.Reroll")}">
 					<i class="fa-solid fa-clock-rotate-left"></i>
 					<ol class="luck-points cost">
 						${createLuckPoints(config.costs.reroll)}
@@ -231,7 +231,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 			result = await BlackFlag.applications.api.BFDialog.tooltipWait(
 				{ element: event.currentTarget },
 				{
-					content: game.i18n.localize("BF.Luck.Reroll.Prompt"),
+					content: _loc("BF.Luck.Reroll.Prompt"),
 					buttons: results.map(r => ({
 						action: `${r.result}`,
 						label: `${r.result}`,

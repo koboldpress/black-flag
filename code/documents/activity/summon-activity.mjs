@@ -97,7 +97,7 @@ export default class SummonActivity extends Activity {
 		if (!this.system.availableProfiles.length) return super._activationChatButtons(message);
 		return [
 			{
-				label: game.i18n.localize("BF.SUMMON.Action.Summon"),
+				label: _loc("BF.SUMMON.Action.Summon"),
 				icon: '<i class="fa-solid fa-spaghetti-monster-flying" inert></i>',
 				dataset: {
 					action: "placeSummons"
@@ -139,15 +139,13 @@ export default class SummonActivity extends Activity {
 	 * @returns {BlackFlagToken[]|void}
 	 */
 	async placeSummons(options) {
-		if (!canvas.scene) throw new Error(game.i18n.localize("BF.SUMMON.Warning.NoScene"));
-		if (!this.canSummon) throw new Error(game.i18n.localize("BF.SUMMON.Warning.CreateToken"));
+		if (!canvas.scene) throw new Error(_loc("BF.SUMMON.Warning.NoScene"));
+		if (!this.canSummon) throw new Error(_loc("BF.SUMMON.Warning.CreateToken"));
 
 		// Retrieve profile information
 		const profile = this.system.profiles.find(p => p._id === options?.profile);
 		if (!profile)
-			throw new Error(
-				game.i18n.format("BF.SUMMONG.Warning.NoProfile", { profileId: options?.profile, item: this.item.name })
-			);
+			throw new Error(_loc("BF.SUMMONG.Warning.NoProfile", { profileId: options?.profile, item: this.item.name }));
 
 		/**
 		 * A hook event that fires before summoning is performed.
@@ -166,7 +164,7 @@ export default class SummonActivity extends Activity {
 		const actor = await this.fetchActor(summonUuid);
 
 		// Verify ownership of actor
-		if (!actor.isOwner) throw new Error(game.i18n.format("BF.SUMMON.Warning.NoOwnership", { actor: actor.name }));
+		if (!actor.isOwner) throw new Error(_loc("BF.SUMMON.Warning.NoOwnership", { actor: actor.name }));
 
 		const tokensData = [];
 		try {
@@ -243,7 +241,7 @@ export default class SummonActivity extends Activity {
 	 */
 	async fetchActor(uuid) {
 		const actor = await fromUuid(uuid);
-		if (!actor) throw new Error(game.i18n.format("BF.SUMMON.Warning.NoActor", { uuid }));
+		if (!actor) throw new Error(_loc("BF.SUMMON.Warning.NoActor", { uuid }));
 
 		const actorLink = actor.prototypeToken.actorLink;
 		if (!actor.pack && (!actorLink || actor.getFlag(game.system.id, "summon.origin") === this.uuid)) return actor;
@@ -264,7 +262,7 @@ export default class SummonActivity extends Activity {
 		if (localActor) return localActor;
 
 		// Check permissions to create actors before importing
-		if (!game.user.can("ACTOR_CREATE")) throw new Error(game.i18n.localize("BF.SUMMON.Warning.CreateActor"));
+		if (!game.user.can("ACTOR_CREATE")) throw new Error(_loc("BF.SUMMON.Warning.CreateActor"));
 
 		// No suitable world actor was found, create a new actor for this summoning instance.
 		if (actor.pack) {
@@ -334,7 +332,7 @@ export default class SummonActivity extends Activity {
 				],
 				disabled: false,
 				icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-				name: game.i18n.localize("BF.SUMMON.FIELDS.match.proficiency.label")
+				name: _loc("BF.SUMMON.FIELDS.match.proficiency.label")
 			});
 			actorUpdates.effects.push(proficiencyEffect.toObject());
 		}
@@ -367,7 +365,7 @@ export default class SummonActivity extends Activity {
 							],
 							disabled: false,
 							icon: "icons/magic/defensive/shield-barrier-blue.webp",
-							name: game.i18n.localize("BF.SUMMON.FIELDS.bonuses.ac.label")
+							name: _loc("BF.SUMMON.FIELDS.bonuses.ac.label")
 						}).toObject()
 					);
 			}
@@ -394,7 +392,7 @@ export default class SummonActivity extends Activity {
 						],
 						disabled: false,
 						icon: "icons/magic/life/heart-glowing-red.webp",
-						name: game.i18n.localize("BF.SUMMON.FIELDS.bonuses.hp.label")
+						name: _loc("BF.SUMMON.FIELDS.bonuses.hp.label")
 					}).toObject();
 				};
 
@@ -461,7 +459,7 @@ export default class SummonActivity extends Activity {
 					],
 					disabled: false,
 					icon: "icons/skills/melee/strike-slashes-orange.webp",
-					name: game.i18n.localize(`BF.SUMMON.FIELDS.bonuses.${field}.label`)
+					name: _loc(`BF.SUMMON.FIELDS.bonuses.${field}.label`)
 				}).toObject()
 			);
 		}
@@ -523,7 +521,7 @@ export default class SummonActivity extends Activity {
 					changes,
 					disabled: false,
 					icon: "icons/skills/melee/strike-slashes-orange.webp",
-					name: game.i18n.localize("BF.SUMMON.ItemChanges.Label"),
+					name: _loc("BF.SUMMON.ItemChanges.Label"),
 					origin: this.uuid,
 					type: "enchantment"
 				}).toObject();

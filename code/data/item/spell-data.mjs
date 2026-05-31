@@ -226,9 +226,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		const preparationMode = this.parent.getFlag("black-flag", "relationship.mode");
 		if (!preparationMode || preparationMode === "standard") {
 			if (this.parent.getFlag("black-flag", "relationship.alwaysPrepared")) {
-				return game.i18n.localize("BF.Spell.Preparation.AlwaysPrepared");
+				return _loc("BF.Spell.Preparation.AlwaysPrepared");
 			} else if (this.alwaysPreparable) {
-				return game.i18n.localize(`BF.Spell.Preparation.${this.prepared ? "" : "Not"}Prepared`);
+				return _loc(`BF.Spell.Preparation.${this.prepared ? "" : "Not"}Prepared`);
 			}
 			return null;
 		}
@@ -287,7 +287,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			...this.tags.map(t => CONFIG.BlackFlag.spellTags.localized[t])
 		];
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-		return listFormatter.format(traits.filter(_ => _).map(t => game.i18n.localize(t)));
+		return listFormatter.format(traits.filter(_ => _).map(t => _loc(t)));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -396,7 +396,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 							notifications: this.parent.notifications,
 							key: `invalid-target-${keyPath.replaceAll(".", "-")}`,
 							section: "auto",
-							messageData: { name: this.parent.name, property: game.i18n.localize(label) }
+							messageData: { name: this.parent.name, property: _loc(label) }
 						})
 					)
 				);
@@ -491,8 +491,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			const config = CONFIG.BlackFlag.spellComponents[key];
 			const data = {
 				type: "component",
-				label: game.i18n.localize(config.abbreviation),
-				tooltip: style === "combined " ? game.i18n.localize(config.label) : game.i18n.localize(config.abbreviation)
+				label: _loc(config.abbreviation),
+				tooltip: style === "combined " ? _loc(config.label) : _loc(config.abbreviation)
 			};
 			if (key === "material" && spell.components.material.description) {
 				data.label += "*";
@@ -552,7 +552,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	async getSheetData(context, options) {
 		if (options.embed) {
 			const localizationKey = this.circle.base === 0 ? "Cantrip" : this.tags.has("ritual") ? "Ritual" : "Standard";
-			context.circleType = game.i18n.format(`BF.Spell.CircleType.${localizationKey}`, {
+			context.circleType = _loc(`BF.Spell.CircleType.${localizationKey}`, {
 				circle: CONFIG.BlackFlag.spellCircles({ dashed: true })[this.circle.base],
 				school: CONFIG.BlackFlag.spellSchools.localized[this.school],
 				types: game.i18n
@@ -567,7 +567,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			}
 
 			context.durationLabel = this.tags.has("concentration")
-				? game.i18n.format("BF.Spell.Tag.Concentration.Formatted", {
+				? _loc("BF.Spell.Tag.Concentration.Formatted", {
 						duration: this.duration.label
 					})
 				: this.duration.label;
@@ -585,11 +585,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		context.detailsParts = ["blackFlag.details-spell"];
 
 		context.components = Object.entries(CONFIG.BlackFlag.spellComponents).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.components.required, k) };
+			obj[k] = { label: _loc(p.label), selected: has(context.source.components.required, k) };
 			return obj;
 		}, {});
 		context.tags = Object.entries(CONFIG.BlackFlag.spellTags).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.tags, k) };
+			obj[k] = { label: _loc(p.label), selected: has(context.source.tags, k) };
 			return obj;
 		}, {});
 
@@ -605,7 +605,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			...CONFIG.BlackFlag.rangeTypes.localizedOptions,
 			...CONFIG.BlackFlag.distanceUnits.localizedOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.Distance.Label")
+				group: _loc("BF.Distance.Label")
 			}))
 		];
 
@@ -614,42 +614,42 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			context.configurationFields = [
 				{
 					field: new StringField({ required: true, blank: false }),
-					label: game.i18n.localize("BF.Spell.Preparation.Label"),
+					label: _loc("BF.Spell.Preparation.Label"),
 					name: "flags.black-flag.relationship.mode",
 					options: CONFIG.BlackFlag.spellPreparationModes.localizedOptions,
 					value: flag.mode
 				},
 				{
 					field: new BooleanField(),
-					label: game.i18n.localize("BF.Spell.Preparation.AlwaysPrepared"),
+					label: _loc("BF.Spell.Preparation.AlwaysPrepared"),
 					name: "flags.black-flag.relationship.alwaysPrepared",
 					value: flag.alwaysPrepared
 				},
 				{
 					field: new StringField(),
-					label: game.i18n.localize("BF.Spellcasting.Ability.Label"),
+					label: _loc("BF.Spellcasting.Ability.Label"),
 					name: "flags.black-flag.relationship.origin.ability",
 					options: [
-						{ value: "", label: game.i18n.format("BF.Default.Specific", { default: this.defaultAbility }), rule: true },
+						{ value: "", label: _loc("BF.Default.Specific", { default: this.defaultAbility }), rule: true },
 						...CONFIG.BlackFlag.abilities.localizedOptions
 					],
 					value: flag.origin?.ability
 				},
 				{
 					field: new StringField({ required: true, blank: false }),
-					label: game.i18n.localize("BF.Spellcasting.Origin"),
+					label: _loc("BF.Spellcasting.Origin"),
 					name: "flags.black-flag.relationship.origin.identifier",
 					options: [
 						{ value: "", label: "" },
 						...Object.entries(CONFIG.BlackFlag.registration.list("class")).map(([value, data]) => ({
 							value,
 							label: data.name,
-							group: game.i18n.localize("BF.Item.Type.Class[other]")
+							group: _loc("BF.Item.Type.Class[other]")
 						})),
 						...Object.entries(CONFIG.BlackFlag.registration.list("subclass")).map(([value, data]) => ({
 							value,
 							label: data.name,
-							group: game.i18n.localize("BF.Item.Type.Subclass[other]")
+							group: _loc("BF.Item.Type.Subclass[other]")
 						}))
 					],
 					value: flag.origin?.identifier

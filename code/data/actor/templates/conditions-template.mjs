@@ -51,7 +51,7 @@ export default class ConditionsTemplate extends foundry.abstract.DataModel {
 			for ( const note of notes ) {
 				if ( (status === "exhaustion") && note.level && (note.level > this.attributes.exhaustion) ) continue;
 				this.modifiers.push({
-					type: "note", filter: note.filter, note: { rollMode: note.rollMode ?? 0, text: game.i18n.localize(note.text) }
+					type: "note", filter: note.filter, note: { rollMode: note.rollMode ?? 0, text: _loc(note.text) }
 				});
 			}
 		}

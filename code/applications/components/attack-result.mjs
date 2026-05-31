@@ -47,7 +47,7 @@ export default class AttackResultElement extends ChatTrayElement {
 			div.innerHTML = `
 				<label>
 					<i class="fa-solid fa-bullseye" inert></i>
-					<span>${game.i18n.localize("BF.TARGET.Label[other]")}</span>
+					<span>${_loc("BF.TARGET.Label[other]")}</span>
 					<i class="fa-solid fa-caret-down" inert></i>
 				</label>
 				<div class="collapsible-content">
@@ -77,7 +77,7 @@ export default class AttackResultElement extends ChatTrayElement {
 		else {
 			const li = document.createElement("li");
 			li.classList.add("none");
-			li.innerText = game.i18n.localize("BF.Tokens.None.Targeted");
+			li.innerText = _loc("BF.Tokens.None.Targeted");
 			this.#targetList.replaceChildren(li);
 		}
 	}

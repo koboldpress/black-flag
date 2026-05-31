@@ -218,7 +218,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		Object.defineProperty(slot, "circle", { value: progression.pact.circle ?? 1, enumerable: false, writable: false });
 		const circle = CONFIG.BlackFlag.spellCircles({ plural: true })[slot.circle];
 		Object.defineProperty(slot, "label", {
-			value: game.i18n.format("BF.Spellcasting.Type.Pact.Section", { circle, circleLowercase: circle.toLowerCase() }),
+			value: _loc("BF.Spellcasting.Type.Pact.Section", { circle, circleLowercase: circle.toLowerCase() }),
 			enumerable: false
 		});
 	}

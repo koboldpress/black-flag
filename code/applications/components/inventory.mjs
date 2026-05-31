@@ -288,7 +288,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			case "delete":
 				return item.deleteDialog({ sheet: this.app });
 			case "duplicate":
-				return item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name }) }, { save: true });
+				return item.clone({ name: _loc("DOCUMENT.CopyOf", { name: item.name }) }, { save: true });
 			case "editActivity":
 			case "viewActivity":
 				if (activity) return this.app._openDocumentSheet(activity);

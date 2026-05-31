@@ -52,14 +52,14 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 				category: `level-${levels.character}`,
 				section: "progression",
 				level: "warn",
-				message: game.i18n.localize("BF.Advancement.Improvement.Notification.Ability")
+				message: _loc("BF.Advancement.Improvement.Notification.Ability")
 			});
 		if (foundry.utils.isEmpty(this.value.talent))
 			notifications.set(`${baseKey}-talent`, {
 				category: `level-${levels.character}`,
 				section: "progression",
 				level: "warn",
-				message: game.i18n.localize("BF.Advancement.Improvement.Notification.Talent")
+				message: _loc("BF.Advancement.Improvement.Notification.Talent")
 			});
 	}
 
@@ -116,7 +116,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 							displayDelete
 								? `
 								<button type="button" class="link-button" data-action="removeChoice" data-key="${key}"
-								        data-tooltip aria-label="${game.i18n.localize("BF.Advancement.Improvement.Action.Revert")}">
+								        data-tooltip aria-label="${_loc("BF.Advancement.Improvement.Action.Revert")}">
 									<i class="fa-solid fa-trash" inert></i>
 								</button>
 								`
@@ -126,7 +126,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 				.join(" ");
 		} else {
 			const choices = [
-				`${game.i18n.localize("BF.Ability.Label[one]")} ${p1}`,
+				`${_loc("BF.Ability.Label[one]")} ${p1}`,
 				...Array.from(this.configuration.talentList).map(e => CONFIG.BlackFlag.talentCategories.localizedPlural[e])
 			];
 			return choices.map(c => `<span class="choice-entry"><span class="choice-name">${c}</span></span>`).join(" ");
@@ -143,8 +143,8 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		let lists = Array.from(this.configuration.talentList).map(
 			t => CONFIG.BlackFlag.talentCategories.localizedDescription[t]
 		);
-		return game.i18n.format("BF.Advancement.Improvement.Journal.Description", {
-			talentList: game.i18n.format(
+		return _loc("BF.Advancement.Improvement.Journal.Description", {
+			talentList: _loc(
 				getPluralLocalizationKey(lists.length, pr => `BF.Advancement.Improvement.Journal.TalentList[${pr}]`),
 				{
 					lists: game.i18n.getListFormatter({ type: "disjunction" }).format(lists)
@@ -261,10 +261,10 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 				if (strict) {
 					const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction", style: "long" });
 					throw new Error(
-						game.i18n.format("BF.Prerequisite.Warning.Failure", {
+						_loc("BF.Prerequisite.Warning.Failure", {
 							name: this.actor.name,
 							requirements: listFormatter.format(messages),
-							type: game.i18n.localize(CONFIG.Item.typeLabels[item.type]).toLowerCase()
+							type: _loc(CONFIG.Item.typeLabels[item.type]).toLowerCase()
 						})
 					);
 				}

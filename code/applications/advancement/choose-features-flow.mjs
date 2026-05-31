@@ -35,7 +35,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 				type: "submit",
 				classes: "light-button",
 				action: "selectChoice",
-				label: game.i18n.localize("BF.Advancement.ChooseFeatures.Action.Choose")
+				label: _loc("BF.Advancement.ChooseFeatures.Action.Choose")
 			});
 
 		const level = this.advancement.relavantLevel(this.levels);
@@ -48,7 +48,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 				action: "replaceChoice",
 				label: `
 				<i class="fa-solid fa-shuffle" inert></i>
-				${game.i18n.localize("BF.Advancement.ChooseFeatures.Action.Replace")}
+				${_loc("BF.Advancement.ChooseFeatures.Action.Replace")}
 			`
 			});
 

@@ -150,7 +150,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
 	/** @override */
 	prepareData() {
-		this.title = this.title || game.i18n.localize(this.metadata.title);
+		this.title = this.title || _loc(this.metadata.title);
 		this.icon = this.icon || this.metadata.icon;
 		this.identifier = this.identifier || formatIdentifier(this.title);
 		if (!this.metadata.multiLevel) this.level.value ??= this.minimumLevel;

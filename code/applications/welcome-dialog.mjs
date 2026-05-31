@@ -135,11 +135,11 @@ export default class WelcomeDialog extends BFApplication {
 	async _prepareMainContext(context, options) {
 		context.tab = context.tabs.main;
 		context.message = `
-			${game.i18n.localize("BF.WELCOME.Message.Introduction")}
+			${_loc("BF.WELCOME.Message.Introduction")}
 			<ul>
-			  <li>${game.i18n.localize("BF.WELCOME.Message.Documentation")}</li>
-				<li>${game.i18n.localize("BF.WELCOME.Message.Content")}</li>
-				<li>${game.i18n.localize("BF.WELCOME.Message.Bugs")}</li>
+			  <li>${_loc("BF.WELCOME.Message.Documentation")}</li>
+				<li>${_loc("BF.WELCOME.Message.Content")}</li>
+				<li>${_loc("BF.WELCOME.Message.Bugs")}</li>
 			</ul>
 		`.replace(
 			/<documentation-link>(?<content>[^<]+)<\/documentation-link>/i,

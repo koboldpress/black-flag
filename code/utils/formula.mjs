@@ -30,7 +30,7 @@ export function replaceFormulaData(formula, data, {
 	});
 
 	if ( (missingReferences.size > 0) && notifications ) notifications.set(key, {
-		level: "error", ...notificationData, message: game.i18n.format(message, {
+		level: "error", ...notificationData, message: _loc(message, {
 			...messageData, references: game.i18n.getListFormatter({ style: "long", type: "conjunction" })
 				.format(missingReferences)
 		})

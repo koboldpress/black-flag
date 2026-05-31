@@ -140,7 +140,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 		if (this.options.tag === "form") frame.autocomplete = "off";
 
 		// Add document ID copy
-		const copyLabel = game.i18n.localize("SHEETS.CopyUuid");
+		const copyLabel = _loc("SHEETS.CopyUuid");
 		const copyId = `<button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
 														data-tooltip="${copyLabel}" aria-label="${copyLabel}"></button>`;
 		this.window.close.insertAdjacentHTML("beforebegin", copyId);
@@ -156,8 +156,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 	_canRender(_options) {
 		if (!this.isVisible)
 			throw new Error(
-				game.i18n.format("SHEETS.DocumentSheetPrivate", {
-					type: game.i18n.localize(this.document.constructor.metadata.label)
+				_loc("SHEETS.DocumentSheetPrivate", {
+					type: _loc(this.document.constructor.metadata.label)
 				})
 			);
 	}
@@ -210,9 +210,9 @@ export default class PseudoDocumentSheet extends BFApplication {
 		if (event.detail > 1) return; // Ignore repeated clicks
 		const id = event.button === 2 ? this.document.id : this.document.uuid;
 		const type = event.button === 2 ? "id" : "uuid";
-		const label = game.i18n.localize(this.document.constructor.metadata.label);
+		const label = _loc(this.document.constructor.metadata.label);
 		game.clipboard.copyPlainText(id);
-		ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+		ui.notifications.info(_loc("DOCUMENT.IdCopiedClipboard", { label, type, id }));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

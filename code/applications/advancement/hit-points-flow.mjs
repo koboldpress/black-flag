@@ -19,19 +19,19 @@ export default class HitPointsFlow extends AdvancementFlow {
 					classes: "light-button",
 					action: "takeAverage",
 					label: `
-					${game.i18n.localize("BF.Advancement.HitPoints.Action.TakeAverage")}
+					${_loc("BF.Advancement.HitPoints.Action.TakeAverage")}
 					<strong>${formatNumber(this.advancement.average, { sign: true })}</strong>
 				`
 				},
 				{
-					html: `<span class="or">${game.i18n.localize("BF.Advancement.HitPoints.Action.or")}</span>`
+					html: `<span class="or">${_loc("BF.Advancement.HitPoints.Action.or")}</span>`
 				},
 				{
 					type: "submit",
 					classes: "light-button",
 					action: "roll",
 					label: `
-					${game.i18n.format("BF.Roll.Action.RollSpecific", { type: game.i18n.localize("BF.HitDie.Label[one]") })}
+					${_loc("BF.Roll.Action.RollSpecific", { type: _loc("BF.HitDie.Label[one]") })}
 					<strong>d${this.advancement.configuration.denomination}</strong>
 				`
 				}
@@ -66,8 +66,8 @@ export default class HitPointsFlow extends AdvancementFlow {
 
 			// Create chat message with roll results
 			const cls = getDocumentClass("ChatMessage");
-			const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", {
-				type: game.i18n.localize("BF.HitPoint.Label[other]")
+			const flavor = _loc("BF.Roll.Action.RollSpecific", {
+				type: _loc("BF.HitPoint.Label[other]")
 			});
 			const messageData = {
 				flavor,

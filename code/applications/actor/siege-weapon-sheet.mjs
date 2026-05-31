@@ -30,9 +30,7 @@ export default class SiegeWeaponSheet extends BaseStatBlockSheet {
 
 		context.enriched = await this._prepareDescriptions(context);
 		context.labels = {
-			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${game.i18n.localize(
-				"BF.Object"
-			)}`
+			sizeAndType: `${_loc(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${_loc("BF.Object")}`
 		};
 
 		return context;

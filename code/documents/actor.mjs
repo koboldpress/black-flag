@@ -882,7 +882,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const localizationData = {
 			name: this.name,
 			hitDice: formatNumber(result.type === "long" ? totalHD : -totalHD),
-			hitDiceLabel: game.i18n.localize(getPluralLocalizationKey(totalHD, pr => `BF.HitDie.Label[${pr}]`)).toLowerCase(),
+			hitDiceLabel: _loc(getPluralLocalizationKey(totalHD, pr => `BF.HitDie.Label[${pr}]`)).toLowerCase(),
 			hitPoints: formatNumber(result.deltas.hitPoints),
 			hitPointsLabel: game.i18n
 				.localize(getPluralLocalizationKey(result.deltas.hitPoints, pr => `BF.HitPoint.Label[${pr}]`))
@@ -890,8 +890,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		};
 
 		const chatData = {
-			content: game.i18n.format(localizationString, localizationData),
-			flavor: game.i18n.localize(restConfig.label),
+			content: _loc(localizationString, localizationData),
+			flavor: _loc(restConfig.label),
 			rolls: result.rolls,
 			speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
 			system: {
@@ -980,20 +980,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			)
 		].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.Ability.Action.CheckSpecific", {
+		const type = _loc("BF.Ability.Action.CheckSpecific", {
 			ability: CONFIG.BlackFlag.abilities.localized[config.ability] ?? ""
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
 					rollNotes: this.system.getModifiers?.(ability?.check.modifiers._data, "note"),
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1067,20 +1067,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			)
 		].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.Ability.Action.SaveSpecificLong", {
+		const type = _loc("BF.Ability.Action.SaveSpecificLong", {
 			ability: CONFIG.BlackFlag.abilities.localized[config.ability] ?? ""
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
 					rollNotes: this.system.getModifiers?.(ability?.save.modifiers._data, "note"),
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1173,18 +1173,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			)
 		].concat(config.rolls ?? []);
 
-		const type = game.i18n.localize("BF.Death.Label[one]");
+		const type = _loc("BF.Death.Label[one]");
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
 					rollNotes: this.system.getModifiers?.(modifierData, "note"),
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1276,12 +1276,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		// Display success/failure chat message
 		if (details.chatString) {
-			const counted = game.i18n.format("BF.Death.Message.Counted", {
+			const counted = _loc("BF.Death.Message.Counted", {
 				count: formatNumber(details.count),
-				label: game.i18n.localize(getPluralLocalizationKey(details.count, pr => `BF.Death.Message.Label[${pr}]`))
+				label: _loc(getPluralLocalizationKey(details.count, pr => `BF.Death.Message.Label[${pr}]`))
 			});
 			let chatData = {
-				content: game.i18n.format(details.chatString, { name: this.name, counted }),
+				content: _loc(details.chatString, { name: this.name, counted }),
 				speaker: messageConfig.data.speaker
 			};
 			ChatMessage.applyMode(chatData, roll.options.rollMode);
@@ -1335,7 +1335,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		// Ensure there is a hit die to spend
 		else if (!this.system.attributes.hd.d[config.denomination]?.available) {
 			return ui.notifications.warn(
-				game.i18n.format("BF.HitDie.Warning.NoneAvailableSpecific", {
+				_loc("BF.HitDie.Warning.NoneAvailableSpecific", {
 					denomination: config.denomination
 				})
 			);
@@ -1365,18 +1365,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			)
 		].concat(config.rolls ?? []);
 
-		const type = game.i18n.localize("BF.HitDie.Label[one]");
+		const type = _loc("BF.HitDie.Label[one]");
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				configure: false,
 				options: {
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
+		const flavor = _loc("BF.Roll.Type.Label", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1499,8 +1499,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			{
 				options: {
 					rollNotes: this.system.getModifiers?.(init.modifiers?._data, "note"),
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", {
-						type: game.i18n.localize("BF.Initiative.Label")
+					title: _loc("BF.Roll.Configuration.LabelSpecific", {
+						type: _loc("BF.Initiative.Label")
 					})
 				}
 			},
@@ -1622,8 +1622,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.subject = this;
 		rollConfig.rolls = [CONFIG.Dice.ChallengeRoll.mergeConfigs(roll, config.rolls?.shift())].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.Skill.Action.CheckSpecific", {
-			skill: game.i18n.localize(CONFIG.BlackFlag.skills[config.skill].label)
+		const type = _loc("BF.Skill.Action.CheckSpecific", {
+			skill: _loc(CONFIG.BlackFlag.skills[config.skill].label)
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
@@ -1632,13 +1632,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					buildConfig: prepareSkillConfig,
 					chooseAbility: true,
 					rollNotes,
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1741,8 +1741,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.subject = this;
 		rollConfig.rolls = [CONFIG.Dice.ChallengeRoll.mergeConfigs(roll, config.rolls?.shift())].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
-			tool: game.i18n.localize(tool.label)
+		const type = _loc("BF.Tool.Action.CheckSpecific", {
+			tool: _loc(tool.label)
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
@@ -1751,13 +1751,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					buildConfig: prepareToolConfig,
 					chooseAbility: true,
 					rollNotes,
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {
@@ -1865,8 +1865,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.subject = this;
 		rollConfig.rolls = [CONFIG.Dice.ChallengeRoll.mergeConfigs(roll, config.rolls?.shift())].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.VEHICLE.Action.CheckSpecific", {
-			vehicle: game.i18n.localize(vehicle.label)
+		const type = _loc("BF.VEHICLE.Action.CheckSpecific", {
+			vehicle: _loc(vehicle.label)
 		});
 		const dialogConfig = foundry.utils.mergeObject(
 			{
@@ -1875,13 +1875,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					buildConfig: prepareVehicleConfig,
 					chooseAbility: true,
 					rollNotes,
-					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+					title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
 			dialog
 		);
 
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const flavor = _loc("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				data: {

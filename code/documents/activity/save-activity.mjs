@@ -97,11 +97,11 @@ export default class SaveActivity extends Activity {
 
 		const makeButton = abilityId => {
 			const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[abilityId] ?? "";
-			const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
+			const dc = _loc("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
 			buttons.push({
 				label: `
-					<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
-					<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
+					<span class="visible-dc">${_loc("BF.Enricher.Save.Long", { save: dc })}</span>
+					<span class="hidden-dc">${_loc("BF.Enricher.Save.Long", { save: ability })}</span>
 				`,
 				icon: '<i class="fa-solid fa-shield-heart" inert></i>',
 				dataset: {
@@ -117,7 +117,7 @@ export default class SaveActivity extends Activity {
 
 		if (this.hasDamage)
 			buttons.push({
-				label: game.i18n.localize("BF.DAMAGE.Label"),
+				label: _loc("BF.DAMAGE.Label"),
 				icon: '<i class="fa-solid fa-burst" inert></i>',
 				dataset: {
 					action: "rollDamage"

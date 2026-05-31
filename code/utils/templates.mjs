@@ -40,7 +40,7 @@ function formGroup(context, options) {
 
 	return `
 	<div class="form-group split-group ${options.hash.classes ?? ""}">${label ? `
-		<label>${game.i18n.localize(label)}</label>` : ""}
+		<label>${_loc(label)}</label>` : ""}
 		<div class="form-fields ${options.hash.interiorClasses ?? ""}">
 			${options.fn(this)}
 		</div>${options.hash.hint ? `

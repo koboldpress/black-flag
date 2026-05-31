@@ -42,7 +42,7 @@ export default class LevelUpDialog extends BFApplication {
 
 	/** @inheritDoc */
 	get title() {
-		return `${game.i18n.localize("BF.Progression.Action.LevelUp.Label")} ${this.actor.name}`;
+		return `${_loc("BF.Progression.Action.LevelUp.Label")} ${this.actor.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -57,7 +57,7 @@ export default class LevelUpDialog extends BFApplication {
 		const primaryClass = this.actor.system.progression.levels[1].class;
 		const abilityValue = this.actor.system.abilities[primaryClass.system.keyAbility]?.value ?? 0;
 		if (abilityValue < CONFIG.BlackFlag.multiclassingAbilityThreshold) {
-			context.multiclassMessage = game.i18n.format("BF.Progression.Warning.InsufficientPrimaryScore", {
+			context.multiclassMessage = _loc("BF.Progression.Warning.InsufficientPrimaryScore", {
 				ability: CONFIG.BlackFlag.abilities.localized[primaryClass.system.keyAbility],
 				threshold: formatNumber(CONFIG.BlackFlag.multiclassingAbilityThreshold),
 				value: formatNumber(abilityValue)

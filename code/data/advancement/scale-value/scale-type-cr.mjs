@@ -42,6 +42,6 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 			case 0.5:
 				value = "&frac12;";
 		}
-		return game.i18n.format("BF.ChallengeRating.Specific", { value });
+		return _loc("BF.ChallengeRating.Specific", { value });
 	}
 }

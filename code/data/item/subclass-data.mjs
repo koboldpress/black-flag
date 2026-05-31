@@ -163,14 +163,14 @@ export default class SubclassData extends ItemDataModel.mixin(
 		const matchingClass = this.parent.actor.system.progression?.classes?.[this.identifier.class];
 		if (!matchingClass) {
 			ui.notifications.error(
-				game.i18n.format("BF.Subclass.Warning.MissingClass", {
+				_loc("BF.Subclass.Warning.MissingClass", {
 					class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class
 				})
 			);
 			return false;
 		} else if (matchingClass.subclass) {
 			ui.notifications.error(
-				game.i18n.format("BF.Subclass.Warning.ExistingSubclass", {
+				_loc("BF.Subclass.Warning.ExistingSubclass", {
 					class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class,
 					subclass: matchingClass.subclass.name
 				})

@@ -27,7 +27,7 @@ export default class ImprovementFlow extends AdvancementFlow {
 				field: new StringField(),
 				name: "ability",
 				options: [
-					{ value: "", label: game.i18n.localize("BF.Advancement.Improvement.Notification.Ability"), rule: true },
+					{ value: "", label: _loc("BF.Advancement.Improvement.Notification.Ability"), rule: true },
 					...CONFIG.BlackFlag.abilities.localizedOptions
 						.filter(({ value }) => this.actor.system.abilities[value].value < this.actor.system.abilities[value].max)
 						.map(({ value, label }) => ({
@@ -43,7 +43,7 @@ export default class ImprovementFlow extends AdvancementFlow {
 					type: "submit",
 					classes: "light-button",
 					action: "selectChoice",
-					label: game.i18n.localize("BF.Advancement.Improvement.Action.Choose")
+					label: _loc("BF.Advancement.Improvement.Action.Choose")
 				});
 		}
 

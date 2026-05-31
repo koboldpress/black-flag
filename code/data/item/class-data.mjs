@@ -126,7 +126,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 		const keyAbilityAdvancement = this.advancement.byType("keyAbility")[0];
 		if (keyAbilityAdvancement) {
 			const keyAbilityOptions = keyAbilityAdvancement.configuration.options.map(
-				o => game.i18n.localize(CONFIG.BlackFlag.abilities.localized[o]) ?? o
+				o => _loc(CONFIG.BlackFlag.abilities.localized[o]) ?? o
 			);
 			const listFormatter = game.i18n.getListFormatter({ style: "short", type: "conjunction" });
 			this.labels.keyAbility = listFormatter.format(keyAbilityOptions);

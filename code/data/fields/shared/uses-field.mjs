@@ -101,8 +101,8 @@ export class UsesData extends foundry.abstract.DataModel {
 				get() {
 					return Object.entries(CONFIG.BlackFlag.recoveryPeriods).map(([value, config]) => ({
 						disabled: existingPeriods.has(value) && this.period !== value,
-						group: game.i18n.localize(config.group),
-						label: game.i18n.localize(config.label),
+						group: _loc(config.group),
+						label: _loc(config.label),
 						value
 					}));
 				},
@@ -130,12 +130,12 @@ export class UsesData extends foundry.abstract.DataModel {
 								{ rule: true },
 								{
 									value: "recharge",
-									label: game.i18n.localize("BF.Recovery.Recharge.Label"),
+									label: _loc("BF.Recovery.Recharge.Label"),
 									disabled: this.recharge.disabled
 								},
 								...(item?.isEmbedded
 									? usesScaleValues
-									: [{ value: "@scale.", label: game.i18n.localize("BF.Advancement.ScaleValue.Title") }])
+									: [{ value: "@scale.", label: _loc("BF.Advancement.ScaleValue.Title") }])
 							];
 				},
 				configurable: true,
@@ -148,9 +148,9 @@ export class UsesData extends foundry.abstract.DataModel {
 						options: [
 							...Array.fromRange(4, 2).map(min => ({
 								value: min,
-								label: game.i18n.format("BF.Recovery.Recharge.Range", { min })
+								label: _loc("BF.Recovery.Recharge.Range", { min })
 							})),
-							{ value: 6, label: game.i18n.localize("BF.Recovery.Recharge.Single") }
+							{ value: 6, label: _loc("BF.Recovery.Recharge.Single") }
 						].reverse()
 					};
 				},
@@ -241,15 +241,15 @@ export class UsesData extends foundry.abstract.DataModel {
 			subject: this.parent
 		};
 
-		const type = game.i18n.localize("BF.Recovery.Recharge.Label");
+		const type = _loc("BF.Recovery.Recharge.Label");
 		const dialogConfig = {
 			configure: false,
 			options: {
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				title: _loc("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		};
 
-		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
+		const flavor = _loc("BF.Roll.Type.Label", { type });
 		const messageConfig = {
 			data: {
 				flavor,

@@ -16,7 +16,7 @@ export default class ActivitySelection extends PseudoDocumentSelection {
 
 	/** @override */
 	get title() {
-		return `${game.i18n.localize("BF.ACTIVITY.Selection.Title")}: ${this.options.item.name}`;
+		return `${_loc("BF.ACTIVITY.Selection.Title")}: ${this.options.item.name}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -38,13 +38,13 @@ export default class ActivitySelection extends PseudoDocumentSelection {
 			if (name === CONST.BASE_DOCUMENT_TYPE) continue;
 			const activity = config.documentClass;
 			context.types[name] = {
-				label: game.i18n.localize(activity.metadata.title),
+				label: _loc(activity.metadata.title),
 				icon: activity.metadata.icon,
-				hint: game.i18n.localize(activity.metadata.hint)
+				hint: _loc(activity.metadata.hint)
 			};
 		}
 		context.types = BlackFlag.utils.sortObjectEntries(context.types, { sortKey: "label" });
-		context.buttonLabel = game.i18n.localize("BF.ACTIVITY.Core.Action.Create");
+		context.buttonLabel = _loc("BF.ACTIVITY.Core.Action.Create");
 		return context;
 	}
 }

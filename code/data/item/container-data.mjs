@@ -273,7 +273,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		this.prepareIdentifiable();
 		this.preparePhysicalLabels();
 		this.type ??= {};
-		this.type.label = game.i18n.localize("BF.Item.Gear.Category.WondrousItem");
+		this.type.label = _loc("BF.Item.Gear.Category.WondrousItem");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

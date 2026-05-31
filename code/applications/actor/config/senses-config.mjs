@@ -35,7 +35,7 @@ export default class SensesConfig extends BaseCustomConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.SENSES.Label[other]") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.SENSES.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -51,7 +51,7 @@ export default class SensesConfig extends BaseCustomConfigSheet {
 			data: senses,
 			fields: context.system.fields.traits.fields.senses.fields,
 			tagOptions: Object.entries(CONFIG.BlackFlag.senseTags).reduce((obj, [key, config]) => {
-				obj[key] = { label: game.i18n.localize(config.label), chosen: senses.tags?.includes(key) };
+				obj[key] = { label: _loc(config.label), chosen: senses.tags?.includes(key) };
 				return obj;
 			}, {}),
 			types: Object.entries(CONFIG.BlackFlag.senses.localized).reduce((obj, [key, label]) => {

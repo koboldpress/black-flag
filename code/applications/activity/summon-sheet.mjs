@@ -49,8 +49,8 @@ export default class SummonSheet extends ActivitySheet {
 		context.creatureTypeOptions = CONFIG.BlackFlag.creatureTypes.localizedOptions;
 
 		context.profileModes = [
-			{ value: "", label: game.i18n.localize("BF.SUMMON.FIELDS.summon.mode.Direct") },
-			{ value: "cr", label: game.i18n.localize("BF.SUMMON.FIELDS.summon.mode.CR") }
+			{ value: "", label: _loc("BF.SUMMON.FIELDS.summon.mode.Direct") },
+			{ value: "cr", label: _loc("BF.SUMMON.FIELDS.summon.mode.CR") }
 		];
 		context.profiles = this.activity.system.profiles
 			.map((data, index) => ({

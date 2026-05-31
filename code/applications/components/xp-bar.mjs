@@ -12,9 +12,9 @@ export default class XPBarElement extends AppAssociatedElement {
 		if (!xp) return;
 		this.innerHTML = `
 			<div role="meter"></div>
-			<label id="${this.app.id}-xp-bar-label">${game.i18n.localize("BF.ExperiencePoints.Label")}</label>
+			<label id="${this.app.id}-xp-bar-label">${_loc("BF.ExperiencePoints.Label")}</label>
 			<div class="input">
-				<input type="number" name="xpChange" placeholder="${game.i18n.localize("BF.ExperiencePoints.Action.Add")}">
+				<input type="number" name="xpChange" placeholder="${_loc("BF.ExperiencePoints.Action.Add")}">
 				<button type="submit" name="addXP"><i class="fa-solid fa-plus"></i></button>
 			</div>
 			<div class="values">
@@ -45,7 +45,7 @@ export default class XPBarElement extends AppAssociatedElement {
 		const bar = this.querySelector('[role="meter"]');
 		bar.style = `--bar-percentage: ${xp.percentage}%;`;
 		bar.setAttribute("aria-valuenow", xp.percentage);
-		bar.setAttribute("aria-valuetext", game.i18n.format("BF.ExperiencePoints.LabelSpecific", { value: xp.value }));
+		bar.setAttribute("aria-valuetext", _loc("BF.ExperiencePoints.LabelSpecific", { value: xp.value }));
 		bar.setAttribute("aria-valuemin", xp.min);
 		bar.setAttribute("aria-valuemax", xp.max);
 		this.querySelector('[name="xpChange"]').value = "";

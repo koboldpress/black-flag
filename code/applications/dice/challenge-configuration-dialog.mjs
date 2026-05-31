@@ -22,15 +22,15 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 		context.buttons = {
 			advantage: {
 				icon: '<i class="fa-solid fa-square-caret-up"></i>',
-				label: game.i18n.localize("BF.Roll.Action.Advantage.Label")
+				label: _loc("BF.Roll.Action.Advantage.Label")
 			},
 			normal: {
 				icon: '<i class="fa-solid fa-dice"></i>',
-				label: game.i18n.localize("BF.Roll.Action.Normal.Label")
+				label: _loc("BF.Roll.Action.Normal.Label")
 			},
 			disadvantage: {
 				icon: '<i class="fa-solid fa-square-caret-down"></i>',
-				label: game.i18n.localize("BF.Roll.Action.Disadvantage.Label")
+				label: _loc("BF.Roll.Action.Disadvantage.Label")
 			}
 		};
 		return context;

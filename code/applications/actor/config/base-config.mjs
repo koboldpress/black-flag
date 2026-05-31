@@ -31,7 +31,7 @@ export default class BaseConfig extends DocumentSheet {
 
 	/** @inheritDoc */
 	get title() {
-		return `${game.i18n.format("BF.Configuration.Title", { type: this.type })}`;
+		return `${_loc("BF.Configuration.Title", { type: this.type })}`;
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */

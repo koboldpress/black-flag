@@ -52,7 +52,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 */
 	get chatTags() {
 		const tags = this.constructor.baseTags;
-		tags.set("type", game.i18n.localize(CONFIG.Item.typeLabels[this.type]));
+		tags.set("type", _loc(CONFIG.Item.typeLabels[this.type]));
 		return tags;
 	}
 
@@ -290,11 +290,11 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (count) {
 			const config = foundry.utils.mergeObject(
 				{
-					content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong>
-				${game.i18n.format("BF.Container.Delete.Message", { count })}</p>
+					content: `<p><strong>${_loc("COMMON.AreYouSure")}</strong>
+				${_loc("BF.Container.Delete.Message", { count })}</p>
 				<label>
 					<input type="checkbox" name="deleteContents">
-					${game.i18n.localize("BF.Container.Delete.Contents")}
+					${_loc("BF.Container.Delete.Contents")}
 				</label>`,
 					yes: {
 						callback: (event, button, dialog) => {
@@ -304,8 +304,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 					},
 					position: { width: 400 },
 					window: {
-						title: `${game.i18n.format("DOCUMENT.Delete", {
-							type: game.i18n.localize("BF.Item.Type.Container[one]")
+						title: `${_loc("DOCUMENT.Delete", {
+							type: _loc("BF.Item.Type.Container[one]")
 						})}: ${this.name}`
 					}
 				},
@@ -316,15 +316,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 
 		if (sheet) {
-			const type = game.i18n.localize(this.constructor.metadata.label);
+			const type = _loc(this.constructor.metadata.label);
 			return sheet._confirmDialog(
 				foundry.utils.mergeObject(
 					{
-						window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+						window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
 						position: { width: 400 },
 						content: `
 					<p>
-						<strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+						<strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
 					</p>
 				`,
 						yes: { callback: () => this.delete(operation) }
@@ -669,7 +669,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (container) {
 			depth = 1 + (await container.system.allContainers()).length;
 			if (depth > PhysicalTemplate.MAX_DEPTH) {
-				ui.notifications.warn(game.i18n.format("BF.Container.Warning.MaxDepth", { depth: PhysicalTemplate.MAX_DEPTH }));
+				ui.notifications.warn(_loc("BF.Container.Warning.MaxDepth", { depth: PhysicalTemplate.MAX_DEPTH }));
 				return;
 			}
 		}

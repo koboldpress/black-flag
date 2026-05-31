@@ -174,7 +174,7 @@ export function choices(trait, { any=false, category=false, chosen=new Set(), pr
 
 	if ( traitConfig.labels?.all && !any ) {
 		const key = prefixed ? `${trait}:ALL` : "ALL";
-		result[key] = { label: game.i18n.localize(traitConfig.labels.all), chosen: chosen.has(key), sorting: false };
+		result[key] = { label: _loc(traitConfig.labels.all), chosen: chosen.has(key), sorting: false };
 	}
 
 	if ( prefixed && any ) {
@@ -192,7 +192,7 @@ export function choices(trait, { any=false, category=false, chosen=new Set(), pr
 		}
 		if ( prefixed ) key = `${prefix}:${key}`;
 		result[key] = {
-			label: game.i18n.localize(label),
+			label: _loc(label),
 			chosen: data.selectable !== false ? chosen.has(key) : false,
 			selectable: data.selectable !== false,
 			sorting: traitConfig.sortCategories !== false
@@ -254,8 +254,8 @@ export function mixedChoices(keys) {
 export function traitLabel(trait, count) {
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	const pluralRule = ( count !== undefined ) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
-	if ( !traitConfig ) return game.i18n.localize(`BF.Trait.Label[${pluralRule}]`);
-	return game.i18n.localize(`${traitConfig.labels.localization}[${pluralRule}]`);
+	if ( !traitConfig ) return _loc(`BF.Trait.Label[${pluralRule}]`);
+	return _loc(`${traitConfig.labels.localization}[${pluralRule}]`);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -279,18 +279,18 @@ export function keyLabel(key, { count, trait, final, priority }={}) {
 	if ( !trait || trait === parts[0] ) trait = parts.shift();
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	if ( !traitConfig ) return key;
-	const type = game.i18n.localize(getPluralLocalizationKey(count ?? 1, pr => `${traitConfig.labels.localization}[${pr}]`)).toLowerCase();
+	const type = _loc(getPluralLocalizationKey(count ?? 1, pr => `${traitConfig.labels.localization}[${pr}]`)).toLowerCase();
 
 	const searchTrait = (parts, traits, type) => {
 		const firstKey = parts.shift();
 
 		if ( firstKey === "ALL" ) {
-			return traitConfig.labels?.all ? game.i18n.localize(traitConfig.labels.all) : key;
+			return traitConfig.labels?.all ? _loc(traitConfig.labels.all) : key;
 		}
 
 		else if ( firstKey === "*" ) {
 			const key = `BF.Advancement.Trait.Choice.${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
-			return game.i18n.format(key, { count: localizedCount, type });
+			return _loc(key, { count: localizedCount, type });
 		}
 
 		let category = traits[firstKey];
@@ -305,12 +305,12 @@ export function keyLabel(key, { count, trait, final, priority }={}) {
 
 		if ( !parts.length ) {
 			if ( !label ) return key;
-			return game.i18n.localize(label);
+			return _loc(label);
 		}
 
 		if ( !category.children ) return key;
 
-		if ( localization ) type = game.i18n.localize(getPluralLocalizationKey(count ?? 1, pr => `${localization}[${pr}]`));
+		if ( localization ) type = _loc(getPluralLocalizationKey(count ?? 1, pr => `${localization}[${pr}]`));
 		else type = label;
 
 		return searchTrait(parts, category.children, type);
@@ -357,7 +357,7 @@ export function choiceLabel(choice, { only=false, final=false, trait }={}) {
 	// Select from a list of options
 	// { count: 2, pool: ["thief", "skills:*"] } -> Choose two from thieves tools or any skill
 	const choices = choice.pool.map(key => keyLabel(key, { trait }));
-	return game.i18n.format("BF.Advancement.Trait.Choice.List", {
+	return _loc("BF.Advancement.Trait.Choice.List", {
 		count: count,
 		list: listFormatter.format(choices)
 	});
@@ -393,7 +393,7 @@ export function localizedList(grants, choices=[], { choiceMode="inclusive", styl
 
 	const listFormatter = new Intl.ListFormat(game.i18n.lang, { style, type: "conjunction" });
 	if ( !sections.length || grants.size ) return listFormatter.format(sections);
-	return game.i18n.format("BF.Advancement.Trait.Choice.Wrapper", {
+	return _loc("BF.Advancement.Trait.Choice.Wrapper", {
 		choices: listFormatter.format(sections)
 	});
 }

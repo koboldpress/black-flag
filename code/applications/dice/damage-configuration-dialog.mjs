@@ -28,11 +28,11 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 		context.buttons = {
 			critical: {
 				icon: '<i class="fa-solid fa-bomb"></i>',
-				label: game.i18n.localize("BF.Roll.Action.Critical.Label")
+				label: _loc("BF.Roll.Action.Critical.Label")
 			},
 			normal: {
 				icon: '<i class="fa-solid fa-dice"></i>',
-				label: game.i18n.localize("BF.Roll.Action.Normal.Label")
+				label: _loc("BF.Roll.Action.Normal.Label")
 			}
 		};
 		if (this.config.critical?.allow === false) delete context.buttons.critical;
@@ -53,7 +53,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 			damageTypes: roll.options.damageTypes
 				? Object.entries(allTypes).reduce((obj, [key, config]) => {
 						if (roll.options.damageTypes.has(key)) {
-							obj[key] = game.i18n.localize(config.label);
+							obj[key] = _loc(config.label);
 						}
 						return obj;
 					}, {})

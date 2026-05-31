@@ -413,19 +413,16 @@ export default Base =>
 		 * @returns {Promise<PseudoDocument>} - A Promise which resolves to the deleted PseudoDocument.
 		 */
 		async deleteDialog({ sheet, ...options } = {}) {
-			const type = game.i18n.localize(this.metadata.title);
+			const type = _loc(this.metadata.title);
 			const config = foundry.utils.mergeObject(
 				{
-					content: `<p><strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${game.i18n.format(
-						"SIDEBAR.DeleteWarning",
-						{
-							type
-						}
-					)}</p>`,
+					content: `<p><strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", {
+						type
+					})}</p>`,
 					yes: { callback: () => this.delete() },
 					position: { width: 400 },
 					window: {
-						title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`
+						title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}`
 					}
 				},
 				options
@@ -510,7 +507,7 @@ export default Base =>
 		toAnchor({ attrs = {}, dataset = {}, classes = [], name, icon } = {}) {
 			// Build dataset
 			const documentConfig = CONFIG[this.documentName];
-			const documentName = game.i18n.localize(`DOCUMENT.BF.${this.documentName}`);
+			const documentName = _loc(`DOCUMENT.BF.${this.documentName}`);
 			let anchorIcon = icon ?? documentConfig.sidebarIcon ?? "fas fa-suitcase";
 			dataset = foundry.utils.mergeObject(
 				{
@@ -526,9 +523,9 @@ export default Base =>
 			// If this is a typed document, add the type to the dataset
 			if (this.type) {
 				const typeLabel = documentConfig.typeLabels?.[this.type];
-				const typeName = game.i18n.has(typeLabel) ? `${game.i18n.localize(typeLabel)}` : "";
+				const typeName = game.i18n.has(typeLabel) ? `${_loc(typeLabel)}` : "";
 				dataset.tooltip = typeName
-					? game.i18n.format("DOCUMENT.TypePageFormat", { type: typeName, page: documentName })
+					? _loc("DOCUMENT.TypePageFormat", { type: typeName, page: documentName })
 					: documentName;
 				anchorIcon = icon ?? documentConfig.typeIcons?.[this.type] ?? documentConfig.sidebarIcon ?? anchorIcon;
 			}

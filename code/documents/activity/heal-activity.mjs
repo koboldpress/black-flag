@@ -43,7 +43,7 @@ export default class HealActivity extends Activity {
 
 	/** @override */
 	get damageFlavor() {
-		return game.i18n.localize("BF.Healing.Label");
+		return _loc("BF.Healing.Label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -73,7 +73,7 @@ export default class HealActivity extends Activity {
 		if (this.system.healing?.formula) {
 			const config = CONFIG.BlackFlag.healingTypes[this.system.healing.type];
 			buttons.push({
-				label: game.i18n.localize("BF.HEAL.Title"),
+				label: _loc("BF.HEAL.Title"),
 				icon: config?.icon ? `<i class="blackFlag-icon" data-src="${config.icon}" inert></i>` : null,
 				dataset: {
 					action: "rollHealing"

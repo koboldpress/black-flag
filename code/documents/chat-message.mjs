@@ -250,7 +250,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (damageOnSave) {
 			const p = document.createElement("p");
 			p.classList.add("supplement");
-			p.innerHTML = `<strong>${game.i18n.format("BF.SAVE.OnSave")}</strong> ${game.i18n.localize(
+			p.innerHTML = `<strong>${_loc("BF.SAVE.OnSave")}</strong> ${_loc(
 				`BF.SAVE.FIELDS.damage.onSave.${damageOnSave}`
 			)}`;
 			html.querySelector(".chat-card, .message-content")?.appendChild(p);
@@ -342,7 +342,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			button.dataset.action = "grantLuck";
 			button.innerHTML = `
 				<i class="fa-solid fa-clover" inert></i>
-				<span>${game.i18n.localize("BF.Luck.Action.Grant")}</span>
+				<span>${_loc("BF.Luck.Action.Grant")}</span>
 			`;
 			button.type = "button";
 			button.addEventListener("click", () => {

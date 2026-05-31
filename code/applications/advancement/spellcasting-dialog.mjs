@@ -209,7 +209,7 @@ export default class SpellcastingDialog extends BFApplication {
 
 	/** @override */
 	get title() {
-		return game.i18n.localize("BF.Spellbook.Title");
+		return _loc("BF.Spellbook.Title");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -271,7 +271,7 @@ export default class SpellcastingDialog extends BFApplication {
 				}
 			}
 			context.replacementOptions = [
-				{ value: "", label: game.i18n.localize("BF.Advancement.Spellcasting.Replacement.None") },
+				{ value: "", label: _loc("BF.Advancement.Spellcasting.Replacement.None") },
 				{ rule: true },
 				...Array.from(previousSpells)
 					.map(({ id, level, name: label }) => ({

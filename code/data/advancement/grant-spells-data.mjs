@@ -141,8 +141,8 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 							}
 						},
 						name: `${
-							activity.name ?? game.i18n.localize(CONFIG.Activity.types[activity.type]?.documentClass.metadata.title)
-						} (${game.i18n.localize("BF.Advancement.SpellConfig.FreeCasting").toLowerCase()})`,
+							activity.name ?? _loc(CONFIG.Activity.types[activity.type]?.documentClass.metadata.title)
+						} (${_loc("BF.Advancement.SpellConfig.FreeCasting").toLowerCase()})`,
 						sort: (activity.sort ?? 0) + 1,
 						system: {
 							linked: {

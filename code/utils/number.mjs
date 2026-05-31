@@ -367,7 +367,7 @@ export function formatNumber(value, options={}) {
 	}
 	if ( options.spelledOut ) {
 		const key = `BF.Number[${value}]`;
-		if ( game.i18n.has(key) ) return game.i18n.localize(key);
+		if ( game.i18n.has(key) ) return _loc(key);
 	}
 
 	let formatted = getNumberFormatter(_prepareFormattingOptions(options)).format(value);
@@ -375,12 +375,12 @@ export function formatNumber(value, options={}) {
 	if ( options.ordinal ) {
 		const rule = getPluralRules({ type: "ordinal" }).select(value);
 		const key = `BF.Number.Ordinal[${rule}]`;
-		if ( game.i18n.has(key) ) formatted = game.i18n.format(key, { number: formatted });
+		if ( game.i18n.has(key) ) formatted = _loc(key, { number: formatted });
 	}
 
 	if ( options.unit?.localization && (options.unitFallback !== false) ) {
 		const key = getPluralLocalizationKey(value, pr => `${options.unit.localization}[${pr}]`);
-		formatted += ` ${game.i18n.localize(key).toLowerCase()}`;
+		formatted += ` ${_loc(key).toLowerCase()}`;
 	}
 
 	return formatted;
@@ -497,7 +497,7 @@ function _formatSystemUnits(value, unit, config, options={}) {
 	options.unitDisplay ??= "short";
 	if ( config?.counted ) {
 		const localizationKey = getPluralLocalizationKey(value, pr => `${config.counted}.${options.unitDisplay}.${pr}`);
-		return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+		return _loc(localizationKey, { number: formatNumber(value, options) });
 	}
 	return formatNumber(value, { unit: config?.formattingUnit ?? unit, ...options });
 }

@@ -44,7 +44,7 @@ export default class DeathSavesElement extends AppAssociatedElement {
 					n,
 					filled: this.death[type] >= n,
 					tooltip: `${key}.Label`,
-					label: game.i18n.format(`${key}.Count`, { count: formatNumber(n, { ordinal: true }) })
+					label: _loc(`${key}.Count`, { count: formatNumber(n, { ordinal: true }) })
 				});
 			}
 		}

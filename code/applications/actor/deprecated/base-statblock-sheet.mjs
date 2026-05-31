@@ -52,7 +52,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 
 		if (activity?.activation.type === "legendary" && activity.activation.value > 1) {
 			parts.push(
-				game.i18n.format(
+				_loc(
 					getPluralLocalizationKey(activityy.activation.value, pr => `BF.LegendaryAction.Cost[${pr}]`),
 					{ count: formatNumber(activity.activation.value) }
 				)
@@ -65,7 +65,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 
 			// If max is set and min is zero, display as "1 of 3"
 			if (uses.min === 0) {
-				label = game.i18n.format("BF.Uses.Display.Of", {
+				label = _loc("BF.Uses.Display.Of", {
 					value: formatNumber(uses.value),
 					max: formatNumber(uses.max)
 				});
@@ -76,19 +76,19 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 
 			// If only a single recovery formula that is Recharge
 			if (uses.recovery.length === 1 && uses.recovery[0].period === "recharge") {
-				if (uses.spent === 0 && uses.max === 1) label = game.i18n.localize("BF.Recovery.Recharge.Charged");
+				if (uses.spent === 0 && uses.max === 1) label = _loc("BF.Recovery.Recharge.Charged");
 				else if (uses.max === 1) label = null;
 				if (uses.spent > 0) {
-					if (uses.recovery[0].formula === "6") recharge = game.i18n.localize("BF.Recovery.Recharge.Single");
-					else recharge = game.i18n.format("BF.Recovery.Recharge.Range", { min: uses.recovery[0].formula });
+					if (uses.recovery[0].formula === "6") recharge = _loc("BF.Recovery.Recharge.Single");
+					else recharge = _loc("BF.Recovery.Recharge.Range", { min: uses.recovery[0].formula });
 				}
 			}
 
 			// If only a single recovery formula that recovers all uses is set, display "/SR" or "/Day"
 			else if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
 				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0].period];
-				const abbreviation = game.i18n.localize(config?.npcLabel ?? config?.abbreviation);
-				if (abbreviation) label = game.i18n.format("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
+				const abbreviation = _loc(config?.npcLabel ?? config?.abbreviation);
+				if (abbreviation) label = _loc("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
 			}
 
 			parts.push(label, recharge);
@@ -105,7 +105,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 			obj[key] = { label, items: [] };
 			return obj;
 		}, {});
-		context.actions.other = { label: game.i18n.localize("BF.ACTIVATION.Type.Other"), items: [] };
+		context.actions.other = { label: _loc("BF.ACTIVATION.Type.Other"), items: [] };
 		context.passive = [];
 		context.spellcasting = { uses: {} };
 		for (const item of this.actor.items) {
@@ -176,7 +176,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 			ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[spellcasting.ability];
 			dc = spellcasting.dc;
 		}
-		context.spellcasting.label = game.i18n.format("BF.Spellcasting.NPC.Description", {
+		context.spellcasting.label = _loc("BF.Spellcasting.NPC.Description", {
 			ability,
 			dc,
 			name: this.actor.name.toLowerCase()
@@ -187,15 +187,15 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 			const uses = value.spells[0].system.uses;
 			if (uses.max) {
 				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0]?.period];
-				const abbreviation = game.i18n.localize(config?.npcLabel ?? config?.abbreviation);
+				const abbreviation = _loc(config?.npcLabel ?? config?.abbreviation);
 				if (abbreviation)
-					value.label = game.i18n.format("BF.Uses.Display.Recovery", {
+					value.label = _loc("BF.Uses.Display.Recovery", {
 						value: formatNumber(uses.max),
 						period: abbreviation.toLowerCase()
 					});
 				else value.label = formatNumber(uses.max);
 			} else {
-				value.label = game.i18n.localize("BF.Spell.Preparation.Mode.AtWill");
+				value.label = _loc("BF.Spell.Preparation.Mode.AtWill");
 			}
 			const spells = [];
 			for (const spell of value.spells.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang))) {
@@ -217,7 +217,7 @@ export default class BaseStatblockSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async prepareTraits(context) {
 		context.traits = {};
-		const none = game.i18n.localize("None");
+		const none = _loc("None");
 
 		// Search through active effects for any that apply to traits
 		const validKeyPaths = new Set([

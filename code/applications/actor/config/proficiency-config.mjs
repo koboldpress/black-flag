@@ -33,10 +33,8 @@ export default class ProficiencyConfig extends BaseConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", {
-			type: game.i18n
-				.getListFormatter()
-				.format([game.i18n.localize("BF.Armor.Label[one]"), game.i18n.localize("BF.WEAPON.Label[one]")])
+		return _loc("BF.Action.Configure.Specific", {
+			type: game.i18n.getListFormatter().format([_loc("BF.Armor.Label[one]"), _loc("BF.WEAPON.Label[one]")])
 		});
 	}
 

@@ -18,7 +18,7 @@ export default class IdentifierField extends foundry.data.fields.StringField {
 	/** @override */
 	_validateType(value) {
 		if (!isValidIdentifier(value, { allowType: this.allowType })) {
-			throw new Error(game.i18n.format("BF.Identifier.Error.Invalid", { value }));
+			throw new Error(_loc("BF.Identifier.Error.Invalid", { value }));
 		}
 	}
 }

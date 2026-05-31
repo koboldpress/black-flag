@@ -42,7 +42,7 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.Language.Label[other]") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.Language.Label[other]") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -58,7 +58,7 @@ export default class LanguageConfig extends BaseCustomConfigSheet {
 			communication: Object.entries(CONFIG.BlackFlag.rangedCommunication).reduce((obj, [key, config]) => {
 				obj[key] = {
 					fields: context.system.fields.proficiencies.fields.languages.fields.communication.model.fields,
-					label: game.i18n.localize(config.label),
+					label: _loc(config.label),
 					prefix: `system.proficiencies.languages.communication.${key}.`,
 					value: languages.communication[key] ?? {}
 				};

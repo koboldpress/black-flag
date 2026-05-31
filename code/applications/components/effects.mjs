@@ -90,11 +90,9 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				parentId: effect.target === effect.parent ? null : effect.parent.id
 			};
 			if (effect.isSuppressed) {
-				data.suppressionReason = game.i18n.format("BF.EFFECT.SuppressionReason.Description", {
+				data.suppressionReason = _loc("BF.EFFECT.SuppressionReason.Description", {
 					item: effect.parent.name,
-					reasons: game.i18n
-						.getListFormatter({ style: "short" })
-						.format(effect.suppressionReasons.map(r => game.i18n.localize(r)))
+					reasons: game.i18n.getListFormatter({ style: "short" }).format(effect.suppressionReasons.map(r => _loc(r)))
 				});
 				context.suppressed.effects.push(data);
 			} else if (effect.disabled) context.inactive.effects.push(data);
@@ -246,7 +244,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		this.document.createEmbeddedDocuments("ActiveEffect", [
 			{
 				type: isEnchantment ? "enchantment" : "standard",
-				name: isItem ? this.document.name : game.i18n.localize("BF.EFFECT.New"),
+				name: isItem ? this.document.name : _loc("BF.EFFECT.New"),
 				icon: isItem ? this.document.img : "icons/svg/aura.svg",
 				origin: isEnchantment ? undefined : this.document.uuid,
 				duration: {

@@ -30,7 +30,7 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 
 	/** @override */
 	get title() {
-		return game.i18n.format("BF.Action.Configure.Specific", { type: game.i18n.localize("BF.MOVEMENT.Label") });
+		return _loc("BF.Action.Configure.Specific", { type: _loc("BF.MOVEMENT.Label") });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -42,9 +42,9 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 		context = await super._preparePartContext(partId, context, options);
 
 		context.difficultTerrainTypes = [
-			{ value: "ALL", label: game.i18n.localize("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.All") },
-			{ value: "magical", label: game.i18n.localize("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Magical") },
-			{ value: "nonmagical", label: game.i18n.localize("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Nonmagical") },
+			{ value: "ALL", label: _loc("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.All") },
+			{ value: "magical", label: _loc("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Magical") },
+			{ value: "nonmagical", label: _loc("BF.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Nonmagical") },
 			{ rule: true },
 			...CONFIG.BlackFlag.difficultTerrainTypes.localizedOptions
 		];
@@ -58,7 +58,7 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 			const keyPath = `system.traits.movement.types.${key}`;
 			obj[key] = {
 				field: context.movement.fields.types.model,
-				label: game.i18n.localize(config.label),
+				label: _loc(config.label),
 				name: keyPath,
 				placeholder:
 					foundry.utils.getProperty(this.document.overrides, keyPath) ??
@@ -70,7 +70,7 @@ export default class MovementConfig extends BaseCustomConfigSheet {
 		}, {});
 		context.tagOptions = Object.entries(CONFIG.BlackFlag.movementTags).reduce((obj, [key, config]) => {
 			if (!config.validTypes || config.validTypes.has(this.document.type)) {
-				obj[key] = { label: game.i18n.localize(config.label), chosen: context.movement.data.tags?.includes(key) };
+				obj[key] = { label: _loc(config.label), chosen: context.movement.data.tags?.includes(key) };
 			}
 			return obj;
 		}, {});

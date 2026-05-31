@@ -102,9 +102,7 @@ export default class TargetField extends SchemaField {
 
 		Object.defineProperty(obj.affects, "placeholder", {
 			get() {
-				return obj.template.type
-					? game.i18n.localize("BF.TARGET.Count.EveryGeneric")
-					: game.i18n.localize("BF.TARGET.Count.AnyGeneric");
+				return obj.template.type ? _loc("BF.TARGET.Count.EveryGeneric") : _loc("BF.TARGET.Count.AnyGeneric");
 			},
 			enumerable: false
 		});
@@ -127,7 +125,7 @@ export default class TargetField extends SchemaField {
 		const affectsConfig = CONFIG.BlackFlag.targetTypes[this.target.affects.type];
 		this.target.affects.labels ??= {};
 		this.target.affects.labels.sheet = TargetField.affectsLabel(this.target);
-		this.target.affects.labels.statBlock = game.i18n.format(
+		this.target.affects.labels.statBlock = _loc(
 			getPluralLocalizationKey(
 				this.target.affects.count || 1,
 				pr => `${affectsConfig?.counted ?? "BF.TARGET.Type.Target.Counted"}[${pr}]`
@@ -135,7 +133,7 @@ export default class TargetField extends SchemaField {
 			{ number: formatNumber(this.target.affects.count || 1, { spelledOut: true }) }
 		);
 		if (actor?.system.isSwarm && item.type === "weapon" && item.system.range.reach === 0) {
-			this.target.affects.labels.statBlock = game.i18n.format("BF.TARGET.InSwarmsSpace", {
+			this.target.affects.labels.statBlock = _loc("BF.TARGET.InSwarmsSpace", {
 				target: this.target.affects.labels.statBlock
 			});
 		}
@@ -171,13 +169,13 @@ export default class TargetField extends SchemaField {
 		let long;
 
 		if (affects.type === "special") {
-			short = game.i18n.localize(type.label);
+			short = _loc(type.label);
 		} else if (!affects.count) {
 			const key = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "Every" : "Any";
 			const pluralRule = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "one" : "other";
-			short = long = game.i18n.format(`BF.TARGET.Count.${key}Specific`, {
-				type: game.i18n.localize(`${type.localization}[${pluralRule}]`),
-				typeLowercase: game.i18n.localize(`${type.localization}[${pluralRule}]`).toLowerCase()
+			short = long = _loc(`BF.TARGET.Count.${key}Specific`, {
+				type: _loc(`${type.localization}[${pluralRule}]`),
+				typeLowercase: _loc(`${type.localization}[${pluralRule}]`).toLowerCase()
 			});
 		} else {
 			const number = formatNumber(affects.count ?? 1);
@@ -190,7 +188,7 @@ export default class TargetField extends SchemaField {
 		}
 
 		if (affects.choice) {
-			long = game.i18n.format("BF.TARGET.Choice", { number: long ?? short });
+			long = _loc("BF.TARGET.Choice", { number: long ?? short });
 		}
 
 		const tooltip = long ? (affects.special ? `${long} (${affects.special})` : long) : affects.special?.capitalize();
@@ -220,13 +218,13 @@ export default class TargetField extends SchemaField {
 		let long;
 
 		const shape = type.localization
-			? game.i18n.localize(getPluralLocalizationKey(template.count, pr => `${type.localization}[${pr}]`))
-			: game.i18n.localize(type.label) ?? "";
+			? _loc(getPluralLocalizationKey(template.count, pr => `${type.localization}[${pr}]`))
+			: _loc(type.label) ?? "";
 
 		if (type.icon) {
 			let size = formatDistance(template.size, template.unit, { unitDisplay: "narrow" });
 			const image = `<img class="area-icon" src="${type.icon}" alt="${shape}"></img>`;
-			short = game.i18n.format("BF.AreaOfEffect.Described", {
+			short = _loc("BF.AreaOfEffect.Described", {
 				size: style === "combined" ? `<span class="number">${size}</span>` : size,
 				shape: image,
 				shapeLowercase: image
@@ -237,13 +235,13 @@ export default class TargetField extends SchemaField {
 		}
 
 		if (style !== "short" && short) {
-			long = game.i18n.format("BF.AreaOfEffect.Described", {
+			long = _loc("BF.AreaOfEffect.Described", {
 				size: formatDistance(template.size, template.unit),
 				shape,
 				shapeLowercase: shape.toLowerCase()
 			});
 			if (template.count > 1) {
-				long = game.i18n.format("BF.AreaOfEffect.Counted", {
+				long = _loc("BF.AreaOfEffect.Counted", {
 					count: formatNumber(template.count, { spelledOut: true }).capitalize(),
 					sizedShape: long
 				});

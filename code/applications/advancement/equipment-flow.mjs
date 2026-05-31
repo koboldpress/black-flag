@@ -18,7 +18,7 @@ export default class EquipmentFlow extends AdvancementFlow {
 					type: "submit",
 					classes: "light-button",
 					action: "selectEquipment",
-					label: game.i18n.localize("BF.Advancement.Equipment.Action.Select")
+					label: _loc("BF.Advancement.Equipment.Action.Select")
 				}
 			];
 		return context;

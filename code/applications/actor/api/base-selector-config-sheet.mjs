@@ -52,7 +52,7 @@ export default class BaseSelectorConfigSheet extends BaseConfigSheet {
 	 * @protected
 	 */
 	async _prepareSelectorContext(context, options) {
-		context.options = [{ value: "", label: game.i18n.localize("BF.Global") }, { rule: true }];
+		context.options = [{ value: "", label: _loc("BF.Global") }, { rule: true }];
 		context.selected = this.selectedId;
 		return context;
 	}

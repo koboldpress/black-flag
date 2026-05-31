@@ -43,10 +43,10 @@ export default class SaveSheet extends ActivitySheet {
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
 
-		const group = game.i18n.localize("BF.Formula.Default.DC");
+		const group = _loc("BF.Formula.Default.DC");
 		context.abilityOptions = [
-			{ value: "custom", label: game.i18n.localize("BF.Formula.Custom.Label") },
-			{ value: "spellcasting", label: game.i18n.localize("BF.Spellcasting.Label") },
+			{ value: "custom", label: _loc("BF.Formula.Custom.Label") },
+			{ value: "spellcasting", label: _loc("BF.Spellcasting.Label") },
 			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({ ...o, group }))
 		];
 		const defaultAbility = this.activity.system.defaultAbility;
@@ -54,16 +54,16 @@ export default class SaveSheet extends ActivitySheet {
 			context.abilityOptions.unshift(
 				{
 					value: "",
-					label: game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
+					label: _loc("BF.Default.Specific", { default: _loc(defaultAbility).toLowerCase() })
 				},
 				{ rule: true }
 			);
 		}
 
 		context.onSaveOptions = [
-			{ value: "none", label: game.i18n.localize("BF.SAVE.FIELDS.damage.onSave.none") },
-			{ value: "half", label: game.i18n.localize("BF.SAVE.FIELDS.damage.onSave.half") },
-			{ value: "full", label: game.i18n.localize("BF.SAVE.FIELDS.damage.onSave.full") }
+			{ value: "none", label: _loc("BF.SAVE.FIELDS.damage.onSave.none") },
+			{ value: "half", label: _loc("BF.SAVE.FIELDS.damage.onSave.half") },
+			{ value: "full", label: _loc("BF.SAVE.FIELDS.damage.onSave.full") }
 		];
 
 		return context;

@@ -26,12 +26,12 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 
 		Object.defineProperty(obj, "label", {
 			get() {
-				if (!this.value) return game.i18n.localize("None");
+				if (!this.value) return _loc("None");
 				const key = CONFIG.BlackFlag.creatureTypes[this.value]?.localization;
-				let type = game.i18n.localize(`${key}[${this.swarm ? "other" : "one"}]`);
+				let type = _loc(`${key}[${this.swarm ? "other" : "one"}]`);
 				if (this.swarm)
-					type = game.i18n.format("BF.CreatureType.Swarm.Phrase", {
-						size: game.i18n.localize(CONFIG.BlackFlag.sizes[this.swarm].label),
+					type = _loc("BF.CreatureType.Swarm.Phrase", {
+						size: _loc(CONFIG.BlackFlag.sizes[this.swarm].label),
 						type
 					});
 				const tags = [...Array.from(this.tags).map(t => CONFIG.BlackFlag.creatureTags.localized[t]), ...this.custom]

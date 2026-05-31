@@ -50,8 +50,8 @@ export default class ConceptSelectionDialog extends BFApplication {
 
 	/** @inheritDoc */
 	get title() {
-		return game.i18n.format("BF.ConceptSelection.Title", {
-			type: game.i18n.localize(CONFIG.Item.typeLabels[this.type])
+		return _loc("BF.ConceptSelection.Title", {
+			type: _loc(CONFIG.Item.typeLabels[this.type])
 		});
 	}
 
@@ -101,8 +101,8 @@ export default class ConceptSelectionDialog extends BFApplication {
 				choice => choice.document.system.identifier.class === this.options.details.classIdentifier
 			);
 		context.type = this.type;
-		context.typeName = game.i18n.localize(CONFIG.Item.typeLabels[this.type]).toLowerCase();
-		context.typeNamePlural = game.i18n.localize(CONFIG.Item.typeLabelsPlural[this.type]).toLowerCase();
+		context.typeName = _loc(CONFIG.Item.typeLabels[this.type]).toLowerCase();
+		context.typeNamePlural = _loc(CONFIG.Item.typeLabelsPlural[this.type]).toLowerCase();
 
 		return context;
 	}
@@ -134,7 +134,7 @@ export default class ConceptSelectionDialog extends BFApplication {
 				a => (abilities[a]?.value ?? 0) >= CONFIG.BlackFlag.multiclassingAbilityThreshold
 			);
 			if (!validAbilities) {
-				optionContext.multiclassMessage = game.i18n.format(
+				optionContext.multiclassMessage = _loc(
 					getPluralLocalizationKey(
 						keyAbilityOptions.size,
 						pr => `BF.Progression.Warning.InsufficientSecondaryScore[${pr}]`

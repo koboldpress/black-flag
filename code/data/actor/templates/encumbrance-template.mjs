@@ -100,7 +100,7 @@ export default class EncumbranceTemplate extends foundry.abstract.DataModel {
 		if ( !statuses.length ) return effect?.delete();
 
 		const effectData = { ...CONFIG.BlackFlag.encumbrance.effects[statuses[0]], statuses };
-		effectData.name = game.i18n.localize(effectData.name);
+		effectData.name = _loc(effectData.name);
 		if ( effect ) {
 			const originalEncumbrance = effect.statuses.first();
 			return effect.update(effectData, { [game.system.id]: { originalEncumbrance } });
