@@ -488,7 +488,7 @@ export default class PCData extends ActorDataModel.mixin(
 			if (doc) {
 				const classData = (this.progression.classes[data.class.identifier] ??= {
 					document: doc,
-					subclass: subclasses[document.identifier],
+					subclass: subclasses[doc.identifier],
 					levels: 0,
 					originalClass: Number(level) === 1
 				});
