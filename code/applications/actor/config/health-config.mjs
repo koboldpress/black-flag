@@ -70,10 +70,16 @@ export default class HealthConfig extends BaseConfigSheet {
 		);
 
 		// Create level multiplier HTML
-		context.levels = this.document.system.progression?.level ?? 0;
-		context.levelMultiplier = `
-			<span class="multiplier"><span class="times">&times;</span> ${formatNumber(context.levels)}</span>
+		const levels = this.document.system.progression?.level ?? 0;
+		context.levelMultiplierAll = `
+			<span class="multiplier"><span class="times">&times;</span> ${formatNumber(levels)}</span>
 		`;
+		context.levelMultiplierMod =
+			levels > CONFIG.BlackFlag.maxLevel
+				? `
+			<span class="multiplier"><span class="times">&times;</span> ${formatNumber(CONFIG.BlackFlag.maxLevel)}</span>
+		`
+				: context.levelMultiplierAll;
 
 		context.hd = {
 			data: context.system.data.attributes.hd,

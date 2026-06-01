@@ -233,7 +233,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	async choices() {
 		let filters;
 		if (!this.actor.getFlag(game.system.id, "unrestrictedTalents")) {
-			const subclass = this.actor.system.progression.classes[this.item.identifier].subclass;
+			const subclass = this.actor.system.progression.classes[this.item.identifier]?.subclass;
 			const expandedTalentList = subclass?.system.advancement.byType("expandedTalentList")[0];
 			filters = [
 				{

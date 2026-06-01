@@ -195,6 +195,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	*advancementForLevel(level = 0) {
 		const levels = level > 0 ? this.system.progression.levels[level]?.levels : { character: 0, class: 0 };
 		if (!levels) return;
+		if (level > CONFIG.BlackFlag.maxLevel && this.system.epicAdvancementItem) {
+			for (const advancement of this.system.epicAdvancementItem.advancementForLevel(level)) {
+				yield advancement;
+			}
+		}
 		for (const item of this.items) {
 			for (const advancement of item.advancementForLevel(levels)) {
 				yield advancement;

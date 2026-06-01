@@ -29,7 +29,13 @@ export default class ImprovementFlow extends AdvancementFlow {
 				options: [
 					{ value: "", label: _loc("BF.Advancement.Improvement.Notification.Ability"), rule: true },
 					...CONFIG.BlackFlag.abilities.localizedOptions
-						.filter(({ value }) => this.actor.system.abilities[value].value < this.actor.system.abilities[value].max)
+						.filter(
+							({ value }) =>
+								this.actor.system.abilities[value].value <
+								(this.levels.character > CONFIG.BlackFlag.maxLevel
+									? CONFIG.BlackFlag.maxAbilityScore.epic
+									: this.actor.system.abilities[value].max)
+						)
 						.map(({ value, label }) => ({
 							value,
 							label: `${label}: ${formatNumber(this.actor.system.abilities[value].value)} → ${formatNumber(

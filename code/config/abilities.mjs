@@ -145,3 +145,14 @@ export const defaultAbilities = {
 	meleeAttack: "strength",
 	rangedAttack: "dexterity"
 };
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Maximum ability scores for normal and epic advancement.
+ * @enum {number}
+ */
+export const maxAbilityScore = {
+	base: 20,
+	epic: 30
+};

@@ -25,7 +25,7 @@
 				<label>{{ ability.label }}</label>
 				<div class="form-fields">
 					{{ blackFlag-signedNumber ability.mod }}
-					{{{ @root.levelMultiplier }}}
+					{{{ @root.levelMultiplierMod }}}
 				</div>
 			</div>
 		{{/if}}
@@ -37,7 +37,7 @@
 				<div class="form-fields">
 					<span class="plusSign">+</span>
 					{{ formInput field value=../hp.source.bonuses.level }}
-					{{{ @root.levelMultiplier }}}
+					{{{ @root.levelMultiplierAll }}}
 				</div>
 			</div>
 			{{> ".effects" effects=../effects.level multiplier=@root.levelMultiplier }}

@@ -24,6 +24,8 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
+const EPIC_ITEM_ID = staticID("epicAdvancement");
+
 /**
  * @typedef {object} PCAbilityData
  * @property {number} base - Base ability score set during character creation.
@@ -168,7 +170,7 @@ export default class PCData extends ActorDataModel.mixin(
 			abilities: new MappingField(
 				new SchemaField({
 					base: new NumberField({ min: 0, integer: true, label: "BF.Ability.Score.Base" }),
-					max: new NumberField({ min: 0, initial: 20, integer: true }),
+					max: new NumberField({ min: 0, initial: () => CONFIG.BlackFlag.maxAbilityScore.base, integer: true }),
 					save: new SchemaField({
 						proficiency: new ProficiencyField({ rounding: false })
 					})
@@ -347,6 +349,72 @@ export default class PCData extends ActorDataModel.mixin(
 	/** @override */
 	get embeddedDescriptionKeyPath() {
 		return "biography.backstory";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Synthetic item used to handle epic advancement.
+	 * @type {BFItem|null}
+	 */
+	#epicAdvancementItem = null;
+
+	get epicAdvancementItem() {
+		if (this.#epicAdvancementItem) return this.#epicAdvancementItem;
+		const { maxLevel, maxLevelEpic } = CONFIG.BlackFlag;
+
+		if (!game.settings.get(game.system.id, "rulesConfiguration").epicAdvancement || this.progression.level < maxLevel)
+			return null;
+
+		const advancement = [
+			{
+				_id: staticID(`epicLevelBoons`),
+				configuration: {
+					choices: Object.fromEntries(
+						Array.fromRange(maxLevelEpic - maxLevel, maxLevel + 1)
+							.filter(level => (level - maxLevel) % 2 === 0)
+							.map(level => [level, { count: 1 }])
+					),
+					restriction: {
+						category: "epicLevelBoon"
+					},
+					type: "feature"
+				},
+				title: _loc("BF.Progression.Epic.Advancement.Boon"),
+				type: "chooseFeatures"
+			}
+		];
+
+		const talentList = Object.values(this.progression.classes).reduce((set, data) => {
+			const classTalentList = data.document?.system.advancement
+				.byType("improvement")[0]
+				?.configuration.talentList.forEach(t => set.add(t));
+			const expandedTalentList = data.subclass?.system.advancement
+				.byType("expandedTalentList")[0]
+				?.configuration.talentList.forEach(t => set.add(t));
+			return set;
+		}, new Set());
+		for (let level = maxLevel + 1; level <= maxLevelEpic; level += 2) {
+			advancement.push({
+				_id: staticID(`epicLevel${level}Improvement`),
+				configuration: { talentList },
+				level: { value: level },
+				title: _loc("BF.Progression.Epic.Advancement.Improvement"),
+				type: "improvement"
+			});
+		}
+
+		return (this.#epicAdvancementItem = new Item.implementation(
+			{
+				_id: EPIC_ITEM_ID,
+				name: _loc("BF.Progression.Epic.Advancement.Item"),
+				type: "feature",
+				system: {
+					advancement: Object.fromEntries(advancement.map(a => [a._id, a]))
+				}
+			},
+			{ parent: this.parent }
+		));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
