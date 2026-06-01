@@ -141,7 +141,10 @@ export default class EquipmentDialog extends BFApplication {
 			disabled,
 			entry,
 			entries: await Promise.all(entry.children.map(e => this._prepareEquipmentEntry(e))),
-			label: entry.label,
+			label:
+				entry.type === "currency"
+					? CONFIG.BlackFlag.currencies.localizedAbbreviation[entry.key]?.toUpperCase()
+					: entry.label,
 			options: entry.optionsWithProficiency(this.actor)
 		};
 	}
@@ -185,7 +188,7 @@ export default class EquipmentDialog extends BFApplication {
 		}`;
 		context.locked =
 			this.advancements.class?.configuredForLevel() || this.advancements.background?.configuredForLevel();
-		context.mode = this.advancements.class?.value.wealth ? "wealth" : "equipment";
+		context.mode = this.advancements.class?.value.mode || "equipment";
 		return context;
 	}
 
@@ -286,6 +289,9 @@ export default class EquipmentDialog extends BFApplication {
 							type
 						);
 					else selectionNeeded.push(part._id);
+					break;
+				case "currency":
+					this.#assignments[type].push({ part: part._id, count: part.count ?? 1, currency: part.key });
 					break;
 				default:
 					const uuid = part.findSelection(selection);

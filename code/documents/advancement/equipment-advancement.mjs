@@ -76,7 +76,7 @@ export default class EquipmentAdvancement extends Advancement {
 	/** @override */
 	configuredForLevel(levels) {
 		return (
-			!foundry.utils.isEmpty(this.value.added) ||
+			this.value.mode ||
 			this.actor.system.progression.levels[1]?.class?.system.advancement.byType("equipment")[0]?.value.wealth
 		);
 	}
@@ -115,11 +115,17 @@ export default class EquipmentAdvancement extends Advancement {
 		// Starting equipment
 		if (data?.assignments?.length) {
 			value = {
-				added: (await Promise.all(data.assignments.map(a => fromUuid(a.uuid).then(item => ({ ...a, item }))))).filter(
-					i => i
-				),
-				contained: []
+				added: (
+					await Promise.all(data.assignments.map(a => fromUuid(a.uuid)?.then(item => (item ? { ...a, item } : null))))
+				).filter(_ => _),
+				contained: [],
+				currency: {},
+				mode: "equipment"
 			};
+			for (const { count, currency } of data.assignments) {
+				if (!count || !currency) continue;
+				value.currency[currency] = (value.currency[currency] ?? 0) + count;
+			}
 			for (const addData of value.added) {
 				const itemData = await BlackFlagItem.createWithContents([addData.item]);
 				delete addData.item;
@@ -137,26 +143,29 @@ export default class EquipmentAdvancement extends Advancement {
 		// Starting wealth
 		else if (data?.wealth) {
 			const currency = CONFIG.BlackFlag.startingWealth.currency;
-			value = { wealth: data.wealth };
-
-			// Check to see if existing currency exists to update
-			const existingItem = this.actor.items.find(i => i.type === "currency" && i.identifier === currency);
-			if (existingItem) {
-				toUpdate.push({ _id: existingItem.id, "system.quantity": existingItem.system.quantity + data.wealth });
-			}
-
-			// Otherwise add a new item
-			else {
-				const uuid = CONFIG.BlackFlag.currencies[currency]?.uuid;
-				const itemData = (await fromUuid(uuid)).toObject();
-				itemData.system.quantity = data.wealth;
-				toCreate.push(itemData);
-			}
+			value = { currency: { [currency]: data.wealth }, mode: "wealth" };
 		}
 
 		if (value) {
+			for (const [currency, amount] of Object.entries(value.currency ?? {})) {
+				// Check to see if existing currency exists to update
+				const existingItem = this.actor.items.find(i => i.type === "currency" && i.identifier === currency);
+				if (existingItem) {
+					toUpdate.push({ _id: existingItem.id, "system.quantity": existingItem.system.quantity + amount });
+				}
+
+				// Otherwise add a new item
+				else {
+					const uuid = CONFIG.BlackFlag.currencies[currency]?.uuid;
+					const itemData = (await fromUuid(uuid)).toObject();
+					itemData.system.quantity = data.wealth;
+					toCreate.push(itemData);
+				}
+			}
+
 			if (toCreate.length) await this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, render });
 			if (toUpdate.length) await this.actor.updateEmbeddedDocuments("Item", toUpdate, { render });
+
 			return await this.actor.update({ [this.valueKeyPath]: value });
 		}
 	}
@@ -170,18 +179,19 @@ export default class EquipmentAdvancement extends Advancement {
 		);
 		const toUpdate = [];
 
-		if (this.item.type === "class" && this.value.wealth) {
-			const currency = CONFIG.BlackFlag.startingWealth.currency;
+		for (const [currency, amount] of Object.entries(this.value.currency)) {
 			const existingItem = this.actor.items.find(i => i.type === "currency" && i.identifier === currency);
 			if (existingItem) {
-				const updatedQuantity = existingItem.system.quantity - this.value.wealth;
-				if (updatedQuantity <= 0) toDelete.push(existingItem.id);
+				const updatedQuantity = Math.max(existingItem.system.quantity - amount, 0);
+				if (updatedQuantity === 0 && !CONFIG.BlackFlag.currencies[currency]?.default) toDelete.push(existingItem.id);
 				else toUpdate.push({ _id: existingItem.id, "system.quantity": updatedQuantity });
 			}
 		}
 
 		if (toDelete.length) await this.actor.deleteEmbeddedDocuments("Item", toDelete, { render: false });
 		if (toUpdate.length) await this.actor.updateEmbeddedDocuments("Item", toUpdate, { render });
-		return await this.actor.update({ [this.valueKeyPath]: { added: [], contained: [], wealth: null } });
+		return await this.actor.update({
+			[this.valueKeyPath]: { added: [], contained: [], currency: _replace({}), mode: "equipment" }
+		});
 	}
 }

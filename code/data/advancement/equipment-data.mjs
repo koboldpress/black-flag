@@ -13,7 +13,8 @@ const {
 	NumberField,
 	SchemaField,
 	SetField,
-	StringField
+	StringField,
+	TypedObjectField
 } = foundry.data.fields;
 
 /**
@@ -64,6 +65,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		tool: "BF.Advancement.Equipment.Choice.Tool",
 		weapon: "BF.Advancement.Equipment.Choice.Weapon",
 
+		// Currency
+		currency: "BF.Advancement.Equipment.Currency",
+
 		// Generic item type
 		linked: "BF.Advancement.Equipment.SpecificItem"
 	};
@@ -86,6 +90,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		armor: {
 			localization: "BF.Item.Type.Armor",
 			config: "armor"
+		},
+		currency: {
+			config: "currencies"
 		},
 		tool: {
 			localization: "BF.Item.Type.Tool",
@@ -166,10 +173,13 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 	 */
 	get keyOptions() {
 		const config = foundry.utils.deepClone(CONFIG.BlackFlag[this.constructor.CATEGORIES[this.type]?.config]);
-		const choices = Object.entries(config ?? {}).reduce((obj, [key, value]) => {
-			if (value.children) obj[key] = makeLabel(value, { pluralCount: this.count ?? 1, labelKeyPath: null });
-			return obj;
-		}, {});
+		const choices =
+			this.type === "currency"
+				? config
+				: Object.entries(config ?? {}).reduce((obj, [key, value]) => {
+						if (value.children) obj[key] = makeLabel(value, { pluralCount: this.count ?? 1, labelKeyPath: null });
+						return obj;
+					}, {});
 
 		// Special handling for weapons
 		if (this.type === "weapon") {
@@ -243,6 +253,12 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 					.getListFormatter({ type: this.type === "AND" ? "conjunction" : "disjunction", style: "long" })
 					.format(entries);
 
+			// For currencies, just display amount and abbreviation
+			case "currency":
+				const abbr = CONFIG.BlackFlag.currencies.localizedAbbreviation[this.key];
+				if (this.count && abbr) label = `${formatNumber(this.count)} ${abbr}`;
+				break;
+
 			// For linked type, fetch the name using the index
 			case "linked":
 				const index = fromUuidSync(this.key);
@@ -256,6 +272,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		}
 
 		if (!label) return;
+		if (this.type === "currency") return label;
 		if (this.count > 1) label = `${formatNumber(this.count, { spellOut: true })} ${label}`;
 		else if (this.type !== "linked") {
 			label = _loc("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
@@ -325,7 +342,8 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
  *
  * @property {GrantedEquipmentData[]} added - Equipment item added for each entry.
  * @property {Set<string>} contained - Items added within containers.
- * @property {number} wealth - Amount of wealth added if chosen over equipment.
+ * @property {Record<string, number>} currency - Amount of different currencies added.
+ * @property {""|"equipment"|"wealth"} mode - Was wealth rolled or equipment selected?
  */
 export class EquipmentValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
@@ -340,7 +358,31 @@ export class EquipmentValueData extends foundry.abstract.DataModel {
 				})
 			),
 			contained: new SetField(new StringField()),
-			wealth: new NumberField({ integer: true })
+			currency: new TypedObjectField(new NumberField({ integer: true, positive: true })),
+			mode: new StringField()
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		if (!source) return super.migrateData(source);
+
+		// Added in 3.0.075
+		if (source.mode === undefined && source.added?.length) source.mode = "equipment";
+
+		// Added in 3.0.075
+		if (source.wealth) {
+			source.currency ??= {};
+			source.currency[CONFIG.BlackFlag.startingWealth.currency] ??= 0;
+			source.currency[CONFIG.BlackFlag.startingWealth.currency] += source.weatlh;
+			source.mode = "wealth";
+			delete source.wealth;
+		}
+
+		return super.migrateData(source);
 	}
 }

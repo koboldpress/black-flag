@@ -27,6 +27,8 @@
 						<select name="selection.{{ entry._id }}">
 							{{ blackFlag-groupedSelectOptions options blank=label rule=true }}
 						</select>
+					{{else if (eq entry.type "currency")}}
+						{{ label }}
 					{{else if (eq entry.type "linked")}}
 						{{ blackFlag-linkForUUID entry.key }}
 					{{else}}
