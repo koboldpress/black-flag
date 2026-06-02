@@ -536,7 +536,7 @@ export default class SummonActivity extends Activity {
 		}
 
 		// Add applied effects
-		actorUpdates.effects.push(...this.system.effects.map(e => e.effect?.toObject()).filter(e => e));
+		actorUpdates.effects.push(...this.system.applicableEffects.map(e => e.toObject()));
 
 		return { actorUpdates, tokenUpdates };
 	}

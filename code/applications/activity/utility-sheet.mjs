@@ -16,7 +16,7 @@ export default class UtilitySheet extends ActivitySheet {
 		...super.PARTS,
 		effect: {
 			template: "systems/black-flag/templates/activity/utility-effect.hbs",
-			templates: ["systems/black-flag/templates/activity/parts/activity-effects.hbs"]
+			templates: super.PARTS.effect.templates
 		}
 	};
 

@@ -21,7 +21,7 @@ export default class SummonSheet extends ActivitySheet {
 		effect: {
 			template: "systems/black-flag/templates/activity/summon-effect.hbs",
 			templates: [
-				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
+				...super.PARTS.effect.templates,
 				"systems/black-flag/templates/activity/parts/summon-changes.hbs",
 				"systems/black-flag/templates/activity/parts/summon-profiles.hbs"
 			]

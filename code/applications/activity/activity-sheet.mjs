@@ -47,7 +47,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			]
 		},
 		effect: {
-			template: "systems/black-flag/templates/activity/activity-effect.hbs"
+			template: "systems/black-flag/templates/activity/activity-effect.hbs",
+			templates: [
+				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
+				"systems/black-flag/templates/activity/parts/activity-effect-level-limit.hbs",
+				"systems/black-flag/templates/activity/parts/activity-effect-settings.hbs"
+			]
 		}
 	};
 
@@ -236,7 +241,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 						link: data.effect.toAnchor().outerHTML,
 						prefix: `system.effects.${index}.`,
 						source: context.source.system.effects[index] ?? data,
-						additionalSettings: null
+						additionalSettings: "systems/black-flag/templates/activity/parts/activity-effect-settings.hbs"
 					};
 					return this._prepareAppliedEffectContext(context, effect);
 				})
@@ -450,7 +455,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			name: this.item.name,
 			img: this.item.img,
 			origin: this.item.uuid,
-			transfer: false
+			transfer: false,
+			type: "standard"
 		};
 	}
 

@@ -16,10 +16,7 @@ export default class CheckSheet extends ActivitySheet {
 		...super.PARTS,
 		effect: {
 			template: "systems/black-flag/templates/activity/check-effect.hbs",
-			templates: [
-				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
-				"systems/black-flag/templates/activity/parts/check-details.hbs"
-			]
+			templates: [...super.PARTS.effect.templates, "systems/black-flag/templates/activity/parts/check-details.hbs"]
 		}
 	};
 

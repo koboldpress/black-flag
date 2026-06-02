@@ -52,7 +52,12 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	 * @type {BlackFlagActiveEffect[]|null}
 	 */
 	get applicableEffects() {
-		return this.effects?.map(e => e.effect).filter(e => e) ?? null;
+		const level = this.activity.relevantLevel;
+		return (
+			this.effects
+				?.filter(e => e.effect && (e.level?.min ?? -Infinity) <= level && level <= (e.level?.max ?? Infinity))
+				.map(e => e.effect) ?? null
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -532,9 +532,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				data: {
 					flags: {
 						[game.system.id]: this.messageFlags
-					},
-					system: {
-						effects: this.system.applicableEffects?.map(e => e.id)
 					}
 				},
 				hasConsumption: activationConfig.hasConsumption,
@@ -579,10 +576,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// TODO: Create activated effect/track concentration
 
 		// Display the card in chat
-		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-		if (config.targets?.length) {
-			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
-		}
+		activity._finalizeMessageConfig(activationConfig, messageConfig, results);
 		results.message = await activity.createActivationMessage(messageConfig);
 
 		// Finalize the activation
@@ -1007,6 +1001,24 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				}
 			)
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Apply any final modifications to message config immediately before message is created.
+	 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+	 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the chat message.
+	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @protected
+	 */
+	_finalizeMessageConfig(activationConfig, messageConfig, results) {
+		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
+		if (activationConfig.targets?.length) {
+			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
+		}
+		const effects = this.system.applicableEffects?.map(e => e.id);
+		if (effects) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

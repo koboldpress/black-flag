@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label>{{ localize "BF.ACTIVITY.FIELDS.effects.element.level.label" }}</label>
+	<div class="form-fields range-fields">
+			{{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
+									 placeholder="0" ariaLabel=(localize "BF.ACTIVITY.FIELDS.effects.element.level.min.label") }}
+			<blackFlag-icon src="systems/black-flag/artwork/interface/range-connector.svg" class="separator"></blackFlag-icon>
+			{{ formInput fields.level.fields.max name=(concat prefix "level.max") value=data.level.max
+									 placeholder="∞" ariaLabel=(localize "BF.ACTIVITY.FIELDS.effects.element.level.max.label") }}
+	</div>
+	<p class="hint">{{ localize "BF.ACTIVITY.FIELDS.effects.element.level.hint" }}</p>
+</div>
