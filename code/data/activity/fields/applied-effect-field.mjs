@@ -36,8 +36,20 @@ export default class AppliedEffectField extends SchemaField {
 
 		Object.defineProperty(obj, "effect", {
 			get() {
-				return item?.effects.get(this._id);
+				foundry.utils.logCompatibilityWarning(
+					"Activity effets should now be accessed using the `getEffect()` method, which may be asynchronous.",
+					{ since: "Black Flag 3.0", until: "Black Flag 4.0" }
+				);
+				return this.getEffect();
 			},
+			configurable: true
+		});
+		Object.defineProperty(obj, "getEffect", {
+			value: () => item?.effects.get(obj._id),
+			configurable: true
+		});
+		Object.defineProperty(obj, "relativeUUID", {
+			value: `.ActiveEffect.${obj._id}`,
 			configurable: true
 		});
 

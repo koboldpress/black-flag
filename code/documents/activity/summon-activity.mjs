@@ -92,6 +92,14 @@ export default class SummonActivity extends Activity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	_finalizeMessageConfig(activationConfig, messageConfig, results) {
+		super._finalizeMessageConfig(activationConfig, messageConfig, results);
+		delete messageConfig.data.system?.effects;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	_activationChatButtons(message) {
 		if (!this.system.availableProfiles.length) return super._activationChatButtons(message);
@@ -536,7 +544,7 @@ export default class SummonActivity extends Activity {
 		}
 
 		// Add applied effects
-		actorUpdates.effects.push(...this.system.applicableEffects.map(e => e.toObject()));
+		actorUpdates.effects.push(...(await this.system.getApplicableEffects()).map(e => e.toObject()));
 
 		return { actorUpdates, tokenUpdates };
 	}

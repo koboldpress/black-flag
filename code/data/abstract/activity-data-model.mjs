@@ -48,15 +48,13 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Effects that can be applied from this activity.
-	 * @type {BlackFlagActiveEffect[]|null}
+	 * Effect profiles that can be applied from this activity.
+	 * @type {EffectApplicationData[]|null}
 	 */
 	get applicableEffects() {
 		const level = this.activity.relevantLevel;
 		return (
-			this.effects
-				?.filter(e => e.effect && (e.level?.min ?? -Infinity) <= level && level <= (e.level?.max ?? Infinity))
-				.map(e => e.effect) ?? null
+			this.effects?.filter(e => (e.level?.min ?? -Infinity) <= level && level <= (e.level?.max ?? Infinity)) ?? null
 		);
 	}
 
@@ -127,6 +125,17 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Effects that can be applied from this activity.
+	 * @returns {Promise<BFActiveEffect[]>|null}
+	 */
+	getApplicableEffects() {
+		const applicableEffects = this.applicableEffects;
+		return applicableEffects ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filte(_ => _)) : null;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

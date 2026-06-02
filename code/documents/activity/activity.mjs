@@ -532,6 +532,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				data: {
 					flags: {
 						[game.system.id]: this.messageFlags
+					},
+					system: {
+						effects: this.applicableEffects?.map(e => e.relativeUUID)
 					}
 				},
 				hasConsumption: activationConfig.hasConsumption,
@@ -1017,7 +1020,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (activationConfig.targets?.length) {
 			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
 		}
-		const effects = this.system.applicableEffects?.map(e => e.id);
+		const effects = this.system.applicableEffects?.map(e => e.relativeUUID);
 		if (effects) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
 	}
 

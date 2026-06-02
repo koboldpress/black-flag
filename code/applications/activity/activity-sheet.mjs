@@ -230,22 +230,25 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 				label: effect.name,
 				selected: appliedEffects.has(effect.id)
 			}));
-			context.appliedEffects = context.activity.system.effects
-				.map((data, index) => {
-					if (!data.effect) return null;
-					const effect = {
-						data,
-						collapsed: this.expandedSections.get(`effect.${data._id}`) ? "" : "collapsed",
-						effect: data.effect,
-						fields: this.activity.system.schema.fields.effects.element.fields,
-						link: data.effect.toAnchor().outerHTML,
-						prefix: `system.effects.${index}.`,
-						source: context.source.system.effects[index] ?? data,
-						additionalSettings: "systems/black-flag/templates/activity/parts/activity-effect-settings.hbs"
-					};
-					return this._prepareAppliedEffectContext(context, effect);
-				})
-				.filter(_ => _);
+			context.appliedEffects = (
+				await Promise.all(
+					context.activity.system.effects.map(async (data, index) => {
+						const effectDocument = await data.getEffect();
+						if (!effectDocument) return null;
+						const effect = {
+							data,
+							collapsed: this.expandedSections.get(`effect.${data._id}`) ? "" : "collapsed",
+							effect: effectDocument,
+							fields: this.activity.system.schema.fields.effects.element.fields,
+							link: effectDocument.toAnchor().outerHTML,
+							prefix: `system.effects.${index}.`,
+							source: context.source.system.effects[index] ?? data,
+							additionalSettings: "systems/black-flag/templates/activity/parts/activity-effect-settings.hbs"
+						};
+						return this._prepareAppliedEffectContext(context, effect);
+					})
+				)
+			).filter(_ => _);
 		}
 
 		context.denominationOptions = [

@@ -12,7 +12,7 @@ const { ArrayField, DocumentIdField, ObjectField, StringField } = foundry.data.f
  *
  * @property {string} [cause] - Relative ID of the activity that caused this one on the same actor.
  * @property {ActivityDeltasData} deltas - Actor/item consumption from this turn change.
- * @property {string[]} effects - Effects that can be applied.
+ * @property {string[]} effects - Relative UUIDs of effects that can be applied.
  */
 export default class ActivationMessageData extends ChatMessageDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -30,7 +30,7 @@ export default class ActivationMessageData extends ChatMessageDataModel {
 				},
 				{ initial: null, nullable: true }
 			),
-			effects: new ArrayField(new DocumentIdField())
+			effects: new ArrayField(new StringField({ blank: false }))
 		};
 	}
 
@@ -89,9 +89,13 @@ export default class ActivationMessageData extends ChatMessageDataModel {
 			content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.parent.content, {
 				rollData: this.parent.getRollData()
 			}),
-			effects: this.effects
-				.map(id => this.item?.effects.get(id))
-				.filter(e => e && (game.user.isGM || (e.transfer && this.parent.author?.id === game.user.id)))
+			effects: (
+				await Promise.all(
+					this.effects.map(uuid =>
+						uuid.length === 16 ? this.item?.effects.get(uuid) : fromUuid(uuid, { relative: this.item })
+					)
+				)
+			).filter(e => e && (game.user.isGM || (e.transfer && this.parent.author?.id === game.user.id)))
 		};
 	}
 

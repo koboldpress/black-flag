@@ -113,13 +113,6 @@ export class SummonData extends ActivityDataModel {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	get applicableEffects() {
-		return null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Summons that can be performed based on character or class level or spell circle.
 	 * @type {SummonsProfile[]}
