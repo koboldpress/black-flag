@@ -43,6 +43,7 @@ const {
  * @property {EffectApplicationData[]} effects - Effects to be applied to summoned creature.
  * @property {object} match
  * @property {boolean} match.attacks - Match the to hit values on summoned actor's attack to the summoner.
+ * @property {boolean} match.disposition - Match summoned token's disposition to that of the summoner.
  * @property {boolean} match.proficiency - Match proficiency on summoned actor to the summoner.
  * @property {boolean} match.saves - Match the save DC on summoned actor's abilities to the summoner.
  * @property {SummonsProfile[]} profiles - Information on creatures that can be summoned.
@@ -75,6 +76,7 @@ export class SummonData extends ActivityDataModel {
 			effects: new ArrayField(new AppliedEffectField()),
 			match: new SchemaField({
 				attacks: new BooleanField(),
+				disposition: new BooleanField(),
 				proficiency: new BooleanField(),
 				saves: new BooleanField()
 			}),

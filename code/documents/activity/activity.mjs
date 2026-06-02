@@ -1318,6 +1318,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_preCreate(data) {
+		if (super._preCreate(data) === false) return false;
+		if (foundry.utils.getType(this.system._preCreate) === "function") return this.system._preCreate(data);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

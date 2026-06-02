@@ -177,7 +177,7 @@ export default Base =>
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/**
-		 * Perform preliminary operations before an Advancement is created.
+		 * Perform preliminary operations before an PseudoDocument is created.
 		 * @param {object} data - The initial data object provided to the document creation request.
 		 * @returns {boolean|void} - A return value of false indicates the creation operation should be cancelled.
 		 * @protected

@@ -109,6 +109,18 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	prepareFinalData() {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform preliminary operations before an Activity is created.
+	 * @param {object} data - The initial data object provided to the document creation request.
+	 * @returns {boolean|void} - A return value of false indicates the creation operation should be cancelled.
+	 * @protected
+	 */
+	_preCreate(data) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

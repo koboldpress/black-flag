@@ -210,7 +210,7 @@ export default class SummonActivity extends Activity {
 			}
 		} catch (err) {
 			Hooks.onError("SummonActivity#placeSummons", err, {
-				msg: _loc("BlackFlag.SUMMON.Warning.PlaceTokens"),
+				msg: _loc("BF.SUMMON.Warning.PlaceTokens"),
 				log: "error",
 				notify: "error"
 			});
@@ -335,6 +335,12 @@ export default class SummonActivity extends Activity {
 				name: _loc("BF.SUMMON.FIELDS.match.proficiency.label")
 			});
 			actorUpdates.effects.push(proficiencyEffect.toObject());
+		}
+
+		// Match disposition
+		if (this.system.match.disposition && this.actor) {
+			const { disposition } = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+			tokenUpdates.disposition = disposition;
 		}
 
 		// Add bonus to AC
