@@ -50,6 +50,12 @@ export const areaOfEffectTypes = {
 		template: "emanation",
 		sizes: ["radius"]
 	},
+	ring: {
+		localization: "BF.AreaOfEffect.Type.Ring.Label",
+		icon: "systems/black-flag/artwork/interface/area/circle.svg",
+		template: "ring",
+		sizes: ["radius", "thickness", "height"]
+	},
 	sphere: {
 		localization: "BF.AreaOfEffect.Type.Sphere.Label",
 		icon: "systems/black-flag/artwork/interface/area/sphere.svg",
@@ -68,7 +74,6 @@ export const areaOfEffectTypes = {
 		template: "ray",
 		sizes: ["length", "thickness", "height"]
 	}
-	// TODO: Consider adding ring w/ thickness
 	// TODO: Consider adding dome w/ height & thickness
 };
 localizeConfig(areaOfEffectTypes);

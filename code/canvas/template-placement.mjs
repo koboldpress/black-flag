@@ -85,7 +85,7 @@ export default class TemplatePlacement extends BasePlacement {
 			case "rectangle":
 				return { ...data, width: size, height: size, type: "rectangle" };
 			case "ring":
-				return { ...data, radius: size, outerWidth: width };
+				return { ...data, radius: size, outerWidth: width, innerWidth: 0 };
 		}
 	}
 
