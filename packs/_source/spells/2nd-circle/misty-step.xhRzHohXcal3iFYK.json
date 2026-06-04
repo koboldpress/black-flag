@@ -6,23 +6,67 @@
   "img": "icons/magic/control/energy-stream-link-teal.webp",
   "system": {
     "activities": {
-      "xoY60I3XUdcMgmIm": {
-        "type": "utility",
-        "_id": "xoY60I3XUdcMgmIm",
+      "TPmpXZfTPrlBTFZR": {
+        "type": "teleport",
+        "_id": "TPmpXZfTPrlBTFZR",
         "description": "",
-        "system": {},
-        "activation": {},
+        "flags": {},
+        "sort": 0,
+        "system": {
+          "distance": {
+            "unit": "foot",
+            "value": "30"
+          },
+          "unlimited": false
+        },
+        "activation": {
+          "type": "action",
+          "override": false,
+          "primary": true
+        },
         "consumption": {
-          "targets": [],
           "scale": {
             "allowed": false
-          }
+          },
+          "targets": []
+        },
+        "duration": {
+          "unit": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "contiguous": false,
+            "unit": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
         },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "max": ""
+        },
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "requireAttunement": false,
+          "requireIdentification": false,
+          "requireMagic": false
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -93,10 +137,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
-    "coreVersion": "13.347",
+    "systemVersion": "3.0.075",
+    "coreVersion": "14.363",
     "createdTime": 1706934750637,
-    "modifiedTime": 1722987224059,
+    "modifiedTime": 1780610464281,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null,
     "exportSource": null

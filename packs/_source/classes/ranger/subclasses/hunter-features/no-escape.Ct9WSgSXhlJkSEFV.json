@@ -6,50 +6,72 @@
   "img": "icons/creatures/magical/spirit-fear-energy-pink.webp",
   "system": {
     "activities": {
-      "skGSYou6c2Ong7Om": {
-        "type": "utility",
-        "_id": "skGSYou6c2Ong7Om",
+      "ZP73SwWVPLYem114": {
+        "type": "teleport",
+        "_id": "ZP73SwWVPLYem114",
         "description": "",
-        "system": {},
+        "flags": {},
+        "sort": 0,
+        "system": {
+          "distance": {
+            "unit": "foot",
+            "value": "30"
+          },
+          "unlimited": false
+        },
         "activation": {
-          "value": null,
           "type": "reaction",
+          "override": false,
+          "primary": true,
           "condition": "When a creature marked by your mystic mark attempts to move"
         },
         "consumption": {
-          "targets": [],
           "scale": {
             "allowed": false
-          }
+          },
+          "targets": []
         },
         "duration": {
-          "units": "instantaneous",
+          "unit": "instantaneous",
+          "concentration": false,
           "override": false
         },
         "range": {
-          "units": "foot",
-          "value": "30"
+          "override": false,
+          "unit": "self",
+          "special": ""
         },
+        "magical": false,
         "target": {
           "template": {
-            "count": 1,
-            "units": "foot",
+            "contiguous": false,
+            "unit": "foot",
             "type": ""
           },
           "affects": {
             "choice": false,
             "type": ""
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
           "recovery": [],
-          "min": "",
           "max": ""
         },
-        "name": "Teleport",
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "requireAttunement": false,
+          "requireIdentification": false,
+          "requireMagic": false,
+          "identifier": ""
+        },
+        "name": "",
         "img": ""
       }
     },
@@ -92,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "13.347",
+    "systemVersion": "3.0.075",
+    "coreVersion": "14.363",
     "createdTime": 1718422367723,
-    "modifiedTime": 1718423207125,
+    "modifiedTime": 1780610257233,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null,
     "exportSource": null

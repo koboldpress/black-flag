@@ -499,73 +499,80 @@
       "folder": "7N2QVgDGXDKvzSzS",
       "system": {
         "activities": {
-          "qwCiDiiQATWmwp7a": {
-            "type": "utility",
-            "_id": "qwCiDiiQATWmwp7a",
+          "mlfUzt1komPCxByz": {
+            "type": "teleport",
+            "_id": "mlfUzt1komPCxByz",
             "description": "",
+            "flags": {},
+            "sort": 0,
             "system": {
-              "roll": {
-                "name": "",
-                "formula": "",
-                "prompt": false,
-                "visible": false
+              "distance": {
+                "unit": "foot",
+                "value": "40"
               },
-              "effects": []
+              "unlimited": false
             },
             "activation": {
-              "value": null,
               "type": "action",
-              "condition": "",
-              "override": false
+              "override": false,
+              "primary": true,
+              "condition": ""
             },
             "consumption": {
+              "scale": {
+                "allowed": false
+              },
               "targets": [
                 {
                   "type": "item",
+                  "target": "",
                   "value": "1",
                   "scaling": {}
                 }
-              ],
-              "scale": {
-                "allowed": false
-              }
+              ]
             },
             "duration": {
-              "units": "instantaneous",
-              "override": false,
-              "concentration": false
-            },
-            "range": {
-              "units": "foot",
-              "value": "40",
-              "special": "",
+              "unit": "instantaneous",
+              "concentration": false,
               "override": false
             },
+            "range": {
+              "override": false,
+              "unit": "self",
+              "special": ""
+            },
+            "magical": false,
             "target": {
               "template": {
-                "count": 1,
                 "contiguous": false,
-                "units": "foot",
+                "unit": "foot",
                 "type": ""
               },
               "affects": {
                 "choice": false,
                 "type": ""
               },
-              "override": false,
-              "prompt": true
+              "prompt": true,
+              "override": false
             },
             "uses": {
               "spent": 0,
               "consumeQuantity": false,
               "recovery": [],
-              "min": "",
               "max": ""
             },
+            "visibility": {
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "requireAttunement": false,
+              "requireIdentification": false,
+              "requireMagic": false,
+              "identifier": ""
+            },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/utility.svg",
-            "sort": 0,
-            "magical": false
+            "img": ""
           }
         },
         "uses": {
@@ -628,12 +635,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "black-flag",
-        "systemVersion": "0.10.049",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "systemVersion": "3.0.075",
+        "createdTime": 1780610768083,
+        "modifiedTime": 1780610794241,
+        "lastModifiedBy": "blackflag0000000",
         "exportSource": null
       },
       "_key": "!actors.items!E91VqMOUotcixlqp.x81JBvy9GGOAJEhR"

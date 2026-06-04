@@ -6,45 +6,67 @@
   "img": "icons/magic/control/silhouette-grow-shrink-blue.webp",
   "system": {
     "activities": {
-      "kieHYZNfh9tUTZbY": {
-        "type": "utility",
-        "_id": "kieHYZNfh9tUTZbY",
+      "yywajWDrc3ABaZJs": {
+        "type": "teleport",
+        "_id": "yywajWDrc3ABaZJs",
         "description": "",
+        "flags": {},
+        "sort": 0,
         "system": {
-          "effects": []
+          "distance": {
+            "unit": "foot",
+            "value": ""
+          },
+          "unlimited": true
         },
         "activation": {
-          "value": null
+          "type": "action",
+          "override": false,
+          "primary": true
         },
         "consumption": {
-          "targets": [],
           "scale": {
             "allowed": false
-          }
+          },
+          "targets": []
         },
         "duration": {
-          "units": "instantaneous",
+          "unit": "instantaneous",
+          "concentration": false,
           "override": false
         },
         "range": {
           "override": false
         },
+        "magical": false,
         "target": {
           "template": {
-            "count": 1,
             "contiguous": false,
-            "units": "foot"
+            "unit": "foot"
           },
           "affects": {
             "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "max": ""
+        },
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "requireAttunement": false,
+          "requireIdentification": false,
+          "requireMagic": false
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -114,11 +136,11 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.363",
     "systemId": "black-flag",
-    "systemVersion": "1.2.060",
+    "systemVersion": "3.0.075",
     "createdTime": 1723527680745,
-    "modifiedTime": 1737399416867,
+    "modifiedTime": 1780610511883,
     "lastModifiedBy": "blackflag0000000",
     "exportSource": null
   },

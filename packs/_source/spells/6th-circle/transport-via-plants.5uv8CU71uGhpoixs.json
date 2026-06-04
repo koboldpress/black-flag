@@ -6,45 +6,67 @@
   "img": "icons/commodities/flowers/dandelion-pod-blue.webp",
   "system": {
     "activities": {
-      "9MitzaKG7nOQ99xE": {
-        "type": "utility",
-        "_id": "9MitzaKG7nOQ99xE",
+      "aOz031ppnbRHAJGN": {
+        "type": "teleport",
+        "_id": "aOz031ppnbRHAJGN",
         "description": "",
+        "flags": {},
+        "sort": 0,
         "system": {
-          "effects": []
+          "distance": {
+            "unit": "foot",
+            "value": ""
+          },
+          "unlimited": true
         },
         "activation": {
-          "value": null
+          "type": "action",
+          "override": false,
+          "primary": true
         },
         "consumption": {
-          "targets": [],
           "scale": {
             "allowed": false
-          }
+          },
+          "targets": []
         },
         "duration": {
-          "units": "instantaneous",
+          "unit": "instantaneous",
+          "concentration": false,
           "override": false
         },
         "range": {
           "override": false
         },
+        "magical": false,
         "target": {
           "template": {
-            "count": 1,
             "contiguous": false,
-            "units": "foot"
+            "unit": "foot"
           },
           "affects": {
             "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "max": ""
+        },
+        "visibility": {
+          "level": {
+            "min": null,
+            "max": null
+          },
+          "requireAttunement": false,
+          "requireIdentification": false,
+          "requireMagic": false
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -115,11 +137,11 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "13.347",
+    "coreVersion": "14.363",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "3.0.075",
     "createdTime": 1723527808239,
-    "modifiedTime": 1723577848412,
+    "modifiedTime": 1780610593587,
     "lastModifiedBy": "blackflag0000000",
     "exportSource": null
   },
