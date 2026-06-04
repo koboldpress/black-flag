@@ -8,6 +8,7 @@ export * from "./forward-data.mjs";
 export * from "./heal-data.mjs";
 export * from "./save-data.mjs";
 export * from "./summon-data.mjs";
+export * from "./teleport-data.mjs";
 export * from "./utility-data.mjs";
 
 export { default as AppliedEffectField } from "./fields/applied-effect-field.mjs";

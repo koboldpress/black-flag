@@ -31,7 +31,7 @@ export default class CheckActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [];
 		const dc = this.system.check.dc.value;
 
@@ -84,7 +84,7 @@ export default class CheckActivity extends Activity {
 			});
 		else if (this.system.check.ability) createButton(this.system.check.ability);
 
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

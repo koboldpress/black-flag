@@ -976,11 +976,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/**
 	 * Prepare the context for item activation.
+	 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
 	 * @returns {object}
 	 * @protected
 	 */
-	async _activationChatContext() {
-		const buttons = this._activationChatButtons();
+	async _activationChatContext(message) {
+		const buttons = this._activationChatButtons(message);
 		return {
 			activity: this,
 			item: this.item,
@@ -1036,6 +1037,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/**
 	 * Create the buttons that will be displayed in chat.
+	 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
 	 * @returns {ActivityActivationChatButton[]}
 	 * @protected
 	 */
@@ -1078,7 +1080,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {Promise<BlackFlagChatMessage|ActivityMessageConfiguration>}
 	 */
 	async createActivationMessage(message = {}) {
-		const context = await this._activationChatContext();
+		const context = await this._activationChatContext(message);
 		await this.item.system.prepareActivationChatContext?.(context);
 
 		/**

@@ -71,6 +71,12 @@ export const _activityTypes = {
 			config: applications.SummonSheet
 		}
 	},
+	teleport: {
+		documentClass: documents.TeleportActivity,
+		sheetClasses: {
+			config: applications.TeleportSheet
+		}
+	},
 	utility: {
 		documentClass: documents.UtilityActivity,
 		sheetClasses: {

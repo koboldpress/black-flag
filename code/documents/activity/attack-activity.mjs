@@ -94,7 +94,7 @@ export default class AttackActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [
 			{
 				label: _loc("BF.ATTACK.Label"),
@@ -112,7 +112,7 @@ export default class AttackActivity extends Activity {
 					action: "rollDamage"
 				}
 			});
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

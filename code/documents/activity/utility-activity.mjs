@@ -34,7 +34,7 @@ export default class UtilityActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [];
 		if (this.system.roll.formula)
 			buttons.push({
@@ -45,7 +45,7 @@ export default class UtilityActivity extends Activity {
 					visibility: this.system.roll.visible ? "all" : undefined
 				}
 			});
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

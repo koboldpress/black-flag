@@ -3,6 +3,33 @@ const {
 } = foundry.dice.terms;
 
 /**
+ * Prepare the final formula value for a model field.
+ * @param {DataModel} model - Model for which the value is being prepared.
+ * @param {string} keyPath - Path to the field within the model.
+ * @param {string} label - Label to use in preparation warnings.
+ * @param {RollData} rollData - Roll data to use when replacing formula values.
+ */
+export function prepareFormulaValue(model, keyPath, label, rollData) {
+	const value = foundry.utils.getProperty(model, keyPath);
+	if ( !value ) return;
+	const item = model.item ?? model.parent;
+	const formula = replaceFormulaData(value, rollData, {
+		notifications: item.notifications,
+		key: `${model.parent instanceof Item
+			? ""
+			: `activity-${model.id ?? model.parent.id}-`}invalid-target-${keyPath.replaceAll(".", "-")}`,
+		section: "auto",
+		messageData: {
+			name: model.parent instanceof Item ? item.name : `${item.name} (${model.name ?? model.parent.name})`,
+			property: _loc(label)
+		}
+	});
+	foundry.utils.setProperty(model, keyPath, simplifyBonus(formula));
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Replace referenced data attributes in the roll formula with values from the provided data.
  * If the attribute is not found in the provided data, adds a warning to the provided messages array.
  * @param {string} formula - The original formula within which to replace.
@@ -125,7 +152,7 @@ function _stripDeterministic(terms) {
 	let temp = [];
 	let multiplicative = false;
 	let determ;
-	
+
 	for ( let i = terms.length - 1; i >= 0; ) {
 		let paren;
 		let term = terms[i];

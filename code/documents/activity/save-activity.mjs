@@ -92,7 +92,7 @@ export default class SaveActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [];
 
 		const makeButton = abilityId => {
@@ -124,7 +124,7 @@ export default class SaveActivity extends Activity {
 				}
 			});
 
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

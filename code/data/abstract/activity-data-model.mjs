@@ -108,8 +108,9 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 
 	/**
 	 * Final data preparation steps performed on Activity after parent actor has been fully prepared.
+	 * @param {object} [rollData] - Deterministic roll data from the activity.
 	 */
-	prepareFinalData() {}
+	prepareFinalData(rollData) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

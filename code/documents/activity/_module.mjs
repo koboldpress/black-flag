@@ -7,4 +7,5 @@ export { default as ForwardActivity } from "./forward-activity.mjs";
 export { default as HealActivity } from "./heal-activity.mjs";
 export { default as SaveActivity } from "./save-activity.mjs";
 export { default as SummonActivity } from "./summon-activity.mjs";
+export { default as TeleportActivity } from "./teleport-activity.mjs";
 export { default as UtilityActivity } from "./utility-activity.mjs";

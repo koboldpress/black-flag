@@ -1,4 +1,10 @@
-import { convertAmount, formatNumber, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
+import {
+	convertAmount,
+	formatNumber,
+	prepareFormulaValue,
+	replaceFormulaData,
+	simplifyBonus
+} from "../../utils/_module.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -252,29 +258,9 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	prepareFinalData() {
-		const rollData = this.item.getRollData();
+	prepareFinalData(rollData) {
+		rollData ??= this.getRollData({ deterministic: true });
 		this.uses.prepareData(rollData);
-
-		const prepareFinalValue = (keyPath, label) => {
-			const value = foundry.utils.getProperty(this, keyPath);
-			if (value)
-				foundry.utils.setProperty(
-					this,
-					keyPath,
-					simplifyBonus(
-						replaceFormulaData(value, rollData, {
-							notifications: this.item.notifications,
-							key: `activity-${this.id}-invalid-target-${keyPath.replaceAll(".", "-")}`,
-							section: "auto",
-							messageData: {
-								name: `${this.item.name} (${this.name})`,
-								property: _loc(label)
-							}
-						})
-					)
-				);
-		};
 
 		this.setProperty("activation.value", "system.casting.value");
 		this.setProperty("activation.type", "system.casting.type");
@@ -304,13 +290,13 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			if (!this.item.system.identifiable) this.visibility.requireIdentification = false;
 		}
 
-		prepareFinalValue("duration.value", "BF.DURATION.Label");
-		prepareFinalValue("target.affects.count", "BF.TARGET.Label[other]");
-		prepareFinalValue("target.template.count", "BF.TARGET.FIELDS.template.count.label");
-		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
-		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
-		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");
-		prepareFinalValue("uses.max", "BF.Uses.Maximum.DebugName");
+		prepareFormulaValue(this, "duration.value", "BF.DURATION.Label", rollData);
+		prepareFormulaValue(this, "target.affects.count", "BF.TARGET.Label[other]", rollData);
+		prepareFormulaValue(this, "target.template.count", "BF.TARGET.FIELDS.template.count.label", rollData);
+		prepareFormulaValue(this, "target.template.size", "BF.AreaOfEffect.Size.Label", rollData);
+		prepareFormulaValue(this, "target.template.width", "BF.AreaOfEffect.Size.Width", rollData);
+		prepareFormulaValue(this, "target.template.height", "BF.AreaOfEffect.Size.Height", rollData);
+		prepareFormulaValue(this, "uses.max", "BF.Uses.Maximum.DebugName", rollData);
 
 		convertAmount(this.range, "distance");
 		convertAmount(this.target.template, "distance", { keys: ["size", "width", "height"] });
@@ -350,7 +336,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 
 		if (this.inheritMagical) this.magical = this.isSpell || this.item.system.properties.has("magical");
 
-		this.system.prepareFinalData?.();
+		this.system.prepareFinalData?.(rollData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -34,7 +34,7 @@ export default class DamageActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [];
 		if (this.hasDamage)
 			buttons.push({
@@ -44,7 +44,7 @@ export default class DamageActivity extends Activity {
 					action: "rollDamage"
 				}
 			});
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

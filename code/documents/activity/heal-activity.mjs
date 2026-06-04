@@ -68,7 +68,7 @@ export default class HealActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_activationChatButtons() {
+	_activationChatButtons(message) {
 		const buttons = [];
 		if (this.system.healing?.formula) {
 			const config = CONFIG.BlackFlag.healingTypes[this.system.healing.type];
@@ -80,7 +80,7 @@ export default class HealActivity extends Activity {
 				}
 			});
 		}
-		return buttons.concat(super._activationChatButtons());
+		return buttons.concat(super._activationChatButtons(message));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
