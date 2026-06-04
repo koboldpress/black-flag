@@ -3,7 +3,9 @@
 		{{#each types}}
 			<li>
 				<label>
-					<figure><img src="{{#if icon}}{{ icon }}{{else}}{{ img }}{{/if}}"></figure>
+					<figure>
+						<blackFlag-icon class="icon" src="{{#if icon}}{{ icon }}{{else}}{{ img }}{{/if}}"></blackFlag-icon>
+					</figure>
 					<span class="name">{{ label }}</span>
 					<input name="type" type="radio" value="{{ @key }}" {{ disabled disabled }}>
 					<p class="hint">{{ hint }}</p>
