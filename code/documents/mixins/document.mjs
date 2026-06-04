@@ -1,13 +1,16 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
+import DependentDocumentMixin from "./dependent-document.mjs";
 import EmbedMixin from "./embed.mjs";
 
 /**
  * Mixin used to share some logic between Actor & Item documents.
- * @type {function(Class): Class}
+ * @template {foundry.abstract.Document} T
+ * @param {typeof T} Base - The base document class to wrap.
+ * @returns {typeof SystemDocument}
  * @mixin
  */
-export default Base =>
-	class extends EmbedMixin(Base) {
+export default function SystemDocumentMixin(Base) {
+	class SystemDocument extends DependentDocumentMixin(EmbedMixin(Base)) {
 		/* <><><><> <><><><> <><><><> <><><><> */
 		/*               Helpers               */
 		/* <><><><> <><><><> <><><><> <><><><> */
@@ -212,4 +215,6 @@ export default Base =>
 				)
 			);
 		}
-	};
+	}
+	return SystemDocument;
+}

@@ -12,6 +12,7 @@ import {
 	formatNumber,
 	simplifyFormula
 } from "../../utils/_module.mjs";
+import DependentDocumentMixin from "../mixins/dependent-document.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -25,7 +26,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @param {object} [options={}] - Options which affect DataModel construction.
  * @abstract
  */
-export default class Activity extends PseudoDocumentMixin(BaseActivity) {
+export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin(BaseActivity)) {
 	/**
 	 * Information on how an advancement type is configured.
 	 *
@@ -126,7 +127,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	get canConfigure() {
 		if (CONFIG.Activity.types[this.type]?.configurable === false) return false;
-		if (this.riderOrigin?.disabled) return false;
+		if (this.dependentOrigin?.disabled) return false;
 		if (this.visibility?.requireIdentification && !this.item.system.identified && !game.user.isGM) return false;
 		return true;
 	}
@@ -165,7 +166,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	get canUse() {
 		if (this.isRider) return false;
-		if (this.riderOrigin?.disabled) return false;
+		if (this.dependentOrigin?.disabled) return false;
 		if (this.visibility?.requireAttunement && !this.item.system.attuned) return false;
 		if (this.visibility?.requireMagic && !this.item.system.magicAvailable) return false;
 		if (this.visibility?.requireIdentification && !this.item.system.identified) return false;
@@ -221,6 +222,18 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const ability = this.actor?.system.abilities?.[this.ability];
 		if (!ability) return 0;
 		return ability?.adjustedMod ?? ability?.mod;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Active effect that granted this activity as a rider.
+	 * @type {BlackFlagActiveEffect|null}
+	 */
+	get dependentOrigin() {
+		return (
+			this.item.effects.get(this.flags[game.system.id]?.dependentOn ?? this.flags[game.system.id]?.riderOrigin) ?? null
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -340,7 +353,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {BlackFlagActiveEffect|null}
 	 */
 	get riderOrigin() {
-		return this.item.effects.get(this.flags[game.system.id]?.riderOrigin) ?? null;
+		foundry.utils.logCompatibilityWarning("Activity's rider origin can now be accessed using `dependentOrigin`.", {
+			since: "Black Flag 3.0",
+			until: "Black Flag 4.0"
+		});
+		return this.dependentOrigin;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -2,12 +2,13 @@ import EmbedMixin from "./embed.mjs";
 
 /**
  * A mixin which extends a DataModel to provide a CRUD-layer similar to normal Documents.
+ * @template {DataModel} T
  * @param {typeof DataModel} Base - The base DataModel to be mixed.
  * @returns {typeof PseudoDocument}
  * @mixin
  */
-export default Base =>
-	class extends EmbedMixin(Base) {
+export default function PseudoDocumentMixin(Base) {
+	class PseudoDocument extends EmbedMixin(Base) {
 		constructor(data, { parent = null, ...options } = {}) {
 			if (parent instanceof Item) parent = parent.system;
 			super(data, { parent, ...options });
@@ -553,4 +554,6 @@ export default Base =>
 		_onClickDocumentLink(event) {
 			return this.sheet.render(true);
 		}
-	};
+	}
+	return PseudoDocument;
+}

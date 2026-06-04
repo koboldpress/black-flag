@@ -164,6 +164,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		const effectFlags = {
 			flags: {
 				[game.system.id]: {
+					dependentOn: origin.uuid,
 					scaling: this.message.getFlag(game.system.id, "scaling"),
 					spellSlot: this.message.getFlag(game.system.id, "spellSlot")
 				}
@@ -198,8 +199,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 			},
 			effectFlags
 		);
-		const applied = await ActiveEffect.implementation.create(effectData, { parent: actor });
-		return applied;
+
+		return await ActiveEffect.implementation.create(effectData, { parent: actor });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -2,11 +2,11 @@ import ActivityChoiceDialog from "../applications/activity/activity-choice-dialo
 import ActivitiesTemplate from "../data/item/templates/activities-template.mjs";
 import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { formatIdentifier } from "../utils/text.mjs";
-import DocumentMixin from "./mixins/document.mjs";
+import SystemDocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Scaling from "./scaling.mjs";
 
-export default class BlackFlagItem extends DocumentMixin(Item) {
+export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,6 +68,16 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (this.isEmbedded) return this.actor.items.get(this.system.container);
 		if (this.pack) return game.packs.get(this.pack).getDocument(this.system.container);
 		return game.items.get(this.system.container);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Active effect that granted this item as a rider.
+	 * @type {BlackFlagActiveEffect|null}
+	 */
+	get dependentOrigin() {
+		return fromUuidSync(this.flags[game.system.id]?.dependentOn, { relative: this, strict: false }) ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

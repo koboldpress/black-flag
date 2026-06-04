@@ -26,17 +26,11 @@ export default class ActiveEffectDataModel extends BaseDataMixin(foundry.data.Ac
 	 * @param {...Document} dependent - One or more dependent documents.
 	 */
 	async addDependent(...dependent) {
-		if (!this.dependent) return;
-		const dependents = this.toObject().dependent;
-		const categories = Object.entries(this.schema.fields.dependent.fields).reduce((obj, [key, field]) => {
-			obj[field.options.type] = key;
-			return obj;
-		}, {});
-		for (const doc of dependent) {
-			const key = categories[doc.constructor.metadata.name];
-			if (key) dependents[key].push({ uuid: doc.uuid });
-		}
-		await this.parent.update({ "system.dependent": dependents });
+		foundry.utils.logCompatibilityWarning(
+			"Dependent documents are now tracked using the `dependentOn` flag on the document itself.",
+			{ since: "Black Flag 3.0", until: "Black Flag 4.0" }
+		);
+		await Promise.all(dependent.map(d => d.setFlag(game.system.id, "dependentOn", this.parent.uuid)));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -66,10 +60,17 @@ export default class ActiveEffectDataModel extends BaseDataMixin(foundry.data.Ac
 					const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
 					doc = this.parent.getEmbeddedDocument(embeddedName, id);
 				} else doc = fromUuidSync(uuid, { strict: false });
-				if (doc) dependents.push(doc);
+				if (doc) {
+					if (
+						(doc instanceof ActiveEffect && doc.origin === this.parent.uuid) ||
+						(this.parent.actor && this.parent.actor === doc.actor) ||
+						(this.parent.item && this.parent.item === doc.item)
+					)
+						dependents.push(doc);
+				}
 			}
 		}
-		return dependents;
+		return dependents.concat(BlackFlag.registry.dependents.get(this.parent));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -92,8 +93,7 @@ export default class ActiveEffectDataModel extends BaseDataMixin(foundry.data.Ac
 	async _onCreate(data, options, userId) {
 		await super._onCreate(data, options, userId);
 		if (userId !== game.userId) return;
-		const riders = await this.createRiders(options);
-		if (riders?.length) await this.addDependent(...riders);
+		await this.createRiders(options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

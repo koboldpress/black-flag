@@ -1,13 +1,14 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { formatNumber, parseOrString, staticID } from "../utils/_module.mjs";
+import DependentDocumentMixin from "./mixins/dependent-document.mjs";
 
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
-export default class BlackFlagActiveEffect extends ActiveEffect {
+export default class BlackFlagActiveEffect extends DependentDocumentMixin(ActiveEffect) {
 	/**
 	 * Status effect for the various conditions.
 	 * @type {Record<string, string>}
@@ -57,6 +58,19 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Another effect that granted this effect as a rider.
+	 * @type {BlackFlagActiveEffect|null}
+	 */
+	get dependentOrigin() {
+		if (!this.item) return null;
+		return (
+			this.item.effects.get(this.flags[game.system.id]?.dependentOn ?? this.flags[game.system.id]?.riderOrigin) ?? null
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	get isSuppressed() {
 		if (super.isSuppressed) return true;
@@ -71,8 +85,11 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 * @type {BlackFlagActiveEffect|null}
 	 */
 	get riderOrigin() {
-		if (!this.item) return null;
-		return this.item.effects.get(this.flags[game.system.id]?.riderOrigin) ?? null;
+		foundry.utils.logCompatibilityWarning("Active Effect's rider origin can now be accessed using `dependentOrigin`.", {
+			since: "Black Flag 3.0",
+			until: "Black Flag 4.0"
+		});
+		return this.dependentOrigin;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

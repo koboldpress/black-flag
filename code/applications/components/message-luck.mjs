@@ -83,7 +83,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 	/**
 	 * The actor that performed the roll.
-	 * @type {BFActor}
+	 * @type {BlackFlagActor}
 	 */
 	get actor() {
 		return this.message.getAssociatedActor();

@@ -3,11 +3,11 @@ import ActivationsField from "../data/chat-message/fields/activations-field.mjs"
 import ActorDeltasField from "../data/chat-message/fields/deltas-field.mjs";
 import { buildRoll, formatNumber, getPluralLocalizationKey, log, Trait } from "../utils/_module.mjs";
 import BlackFlagActiveEffect from "./active-effect.mjs";
-import DocumentMixin from "./mixins/document.mjs";
+import SystemDocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
 
-export default class BlackFlagActor extends DocumentMixin(Actor) {
+export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */

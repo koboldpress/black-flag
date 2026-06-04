@@ -130,7 +130,7 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 
 	/**
 	 * Effects that can be applied from this activity.
-	 * @returns {Promise<BFActiveEffect[]>|null}
+	 * @returns {Promise<BlackFlagActiveEffect[]>|null}
 	 */
 	getApplicableEffects() {
 		const applicableEffects = this.applicableEffects;

@@ -355,7 +355,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/**
 	 * Synthetic item used to handle epic advancement.
-	 * @type {BFItem|null}
+	 * @type {BlackFlagItem|null}
 	 */
 	#epicAdvancementItem = null;
 
