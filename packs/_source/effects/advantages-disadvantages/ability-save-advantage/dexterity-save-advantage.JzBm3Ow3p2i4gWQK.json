@@ -1,0 +1,64 @@
+{
+  "name": "Dexterity Save Advantage",
+  "type": "standard",
+  "img": "systems/black-flag/artwork/abilities/dexterity.svg",
+  "system": {
+    "changes": [
+      {
+        "key": "system.modifiers",
+        "type": "add",
+        "value": {
+          "type": "note",
+          "filter": [
+            {
+              "k": "type",
+              "v": "ability-save"
+            },
+            {
+              "k": "ability",
+              "v": "dexterity"
+            }
+          ],
+          "note": {
+            "rollMode": 1,
+            "text": "You have Advantage on DEX saves."
+          }
+        },
+        "phase": "initial"
+      }
+    ],
+    "magical": false,
+    "rider": {
+      "statuses": []
+    }
+  },
+  "disabled": false,
+  "start": null,
+  "duration": {
+    "value": null,
+    "units": "seconds",
+    "expiry": null,
+    "expired": false
+  },
+  "description": "<p>You have Advantage on DEX saves.</p>",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "showIcon": 1,
+  "folder": "2L1x5NBX053W4hq6",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.363",
+    "systemId": "black-flag",
+    "systemVersion": "3.0.075",
+    "createdTime": 1780602567463,
+    "modifiedTime": 1780602567463,
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "JzBm3Ow3p2i4gWQK",
+  "_key": "!effects!JzBm3Ow3p2i4gWQK"
+}

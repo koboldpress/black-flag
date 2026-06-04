@@ -1,0 +1,64 @@
+{
+  "name": "Perception Advantage",
+  "type": "standard",
+  "img": "icons/magic/perception/eye-ringed-green.webp",
+  "system": {
+    "changes": [
+      {
+        "key": "system.modifiers",
+        "type": "add",
+        "value": {
+          "type": "note",
+          "filter": [
+            {
+              "k": "type",
+              "v": "skill-check"
+            },
+            {
+              "k": "skill",
+              "v": "perception"
+            }
+          ],
+          "note": {
+            "rollMode": 1,
+            "text": "You have Advantage on Perception Checks."
+          }
+        },
+        "phase": "initial"
+      }
+    ],
+    "magical": false,
+    "rider": {
+      "statuses": []
+    }
+  },
+  "disabled": false,
+  "start": null,
+  "duration": {
+    "value": null,
+    "units": "seconds",
+    "expiry": null,
+    "expired": false
+  },
+  "description": "<p>You have Advantage on Perception Checks.</p>",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "showIcon": 1,
+  "folder": "rtYnzHA4cGyT1uX5",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.363",
+    "systemId": "black-flag",
+    "systemVersion": "3.0.075",
+    "createdTime": 1780602435402,
+    "modifiedTime": 1780602435402,
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "yQKv9IPJMmdM3wrf",
+  "_key": "!effects!yQKv9IPJMmdM3wrf"
+}

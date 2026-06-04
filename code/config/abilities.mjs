@@ -3,8 +3,9 @@ import { localizeConfig } from "../utils/_module.mjs";
 /**
  * Configuration data for abilities.
  *
- * @typedef {object} AbilityConfiguration
+ * @typedef AbilityConfiguration
  * @property {string} abbreviation - Shortened version of the ability used for conversion from dnd5e & other features.
+ * @property {string} icon - Icon representing the ability.
  * @property {object} labels
  * @property {string} labels.full - Localization key for the ability's full name.
  * @property {string} labels.abbreviation - Localization key for the ability's abbreviation.
@@ -19,6 +20,7 @@ import { localizeConfig } from "../utils/_module.mjs";
 export const abilities = {
 	strength: {
 		abbreviation: "str",
+		icon: "systems/black-flag/artwork/abilities/strength.svg",
 		labels: {
 			full: "BF.Ability.Strength.Label",
 			abbreviation: "BF.Ability.Strength.Abbreviation"
@@ -27,6 +29,7 @@ export const abilities = {
 	},
 	dexterity: {
 		abbreviation: "dex",
+		icon: "systems/black-flag/artwork/abilities/dexterity.svg",
 		labels: {
 			full: "BF.Ability.Dexterity.Label",
 			abbreviation: "BF.Ability.Dexterity.Abbreviation"
@@ -35,6 +38,7 @@ export const abilities = {
 	},
 	constitution: {
 		abbreviation: "con",
+		icon: "systems/black-flag/artwork/abilities/constitution.svg",
 		labels: {
 			full: "BF.Ability.Constitution.Label",
 			abbreviation: "BF.Ability.Constitution.Abbreviation"
@@ -43,6 +47,7 @@ export const abilities = {
 	},
 	intelligence: {
 		abbreviation: "int",
+		icon: "systems/black-flag/artwork/abilities/intelligence.svg",
 		labels: {
 			full: "BF.Ability.Intelligence.Label",
 			abbreviation: "BF.Ability.Intelligence.Abbreviation"
@@ -51,6 +56,7 @@ export const abilities = {
 	},
 	wisdom: {
 		abbreviation: "wis",
+		icon: "systems/black-flag/artwork/abilities/wisdom.svg",
 		labels: {
 			full: "BF.Ability.Wisdom.Label",
 			abbreviation: "BF.Ability.Wisdom.Abbreviation"
@@ -59,6 +65,7 @@ export const abilities = {
 	},
 	charisma: {
 		abbreviation: "cha",
+		icon: "systems/black-flag/artwork/abilities/charisma.svg",
 		labels: {
 			full: "BF.Ability.Charisma.Label",
 			abbreviation: "BF.Ability.Charisma.Abbreviation"
