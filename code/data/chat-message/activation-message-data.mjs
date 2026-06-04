@@ -12,7 +12,7 @@ const { ArrayField, DocumentIdField, ObjectField, StringField } = foundry.data.f
  *
  * @property {string} [cause] - Relative ID of the activity that caused this one on the same actor.
  * @property {ActivityDeltasData} deltas - Actor/item consumption from this turn change.
- * @property {string[]} effects - Relative UUIDs of effects that can be applied.
+ * @property {string[]} effects - Relative or absolute UUIDs of effects that can be applied.
  */
 export default class ActivationMessageData extends ChatMessageDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */

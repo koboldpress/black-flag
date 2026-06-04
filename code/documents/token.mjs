@@ -52,7 +52,7 @@ export default class BlackFlagTokenDocument extends TokenDocument {
 		};
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Return the movement action cost function for a specific movement type.

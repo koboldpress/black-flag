@@ -11,8 +11,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			icon: "fa-solid fa-gauge"
 		},
 		actions: {
-			addEffect: ActivitySheet.#addEffect,
-			deleteEffect: ActivitySheet.#deleteEffect
+			addEffect: ActivitySheet.#onAddEffect,
+			deleteEffect: ActivitySheet.#onDeleteEffect,
+			dissociateEffect: ActivitySheet.#onDissociateEffect
 		},
 		position: {
 			width: 600
@@ -436,10 +437,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/**
 	 * Handle creating a new active effect and adding it to the applied effects list.
 	 * @this {ActivitySheet}
-	 * @param {Event} event - Triggering click event.
+	 * @param {PointerEvent} event - Triggering click event.
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	static async #addEffect(event, target) {
+	static async #onAddEffect(event, target) {
 		if (!this.activity.system.effects) return;
 		const effectData = this._addEffectData();
 		const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
@@ -468,17 +469,32 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/**
 	 * Handle deleting an active effect and removing it from the applied effects list.
 	 * @this {ActivitySheet}
-	 * @param {Event} event - Triggering click event.
+	 * @param {PointerEvent} event - Triggering click event.
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
-	static async #deleteEffect(event, target) {
+	static async #onDeleteEffect(event, target) {
 		if (!this.activity.system.effects) return;
-		const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+		const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
 		const result = await this.item.effects.get(effectId)?.deleteDialog({ sheet: this });
 		if (result instanceof ActiveEffect) {
 			const effects = this.activity.toObject().system.effects.filter(e => e._id !== effectId);
 			this.activity.update({ "system.effects": effects });
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle dissociating an Active Effect from this Activity.
+	 * @this {ActivitySheet}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static #onDissociateEffect(event, target) {
+		const { profileId } = target.closest("[data-profile-id]")?.dataset ?? {};
+		if (!this.activity.system.effects || !profileId) return;
+		const effects = this.activity.system.toObject().effects.filter(e => e._id !== profileId);
+		this.activity.update({ "system.effects": effects });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -492,14 +508,22 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			const data = foundry.utils.getProperty(submitData, keyPath);
 			if (data) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
 		}
-		if (foundry.utils.hasProperty(submitData, "appliedEffects")) {
-			const effects = submitData.system?.effects ?? this.activity.toObject().system.effects;
+		if (
+			foundry.utils.hasProperty(submitData, "appliedLocalEffects") ||
+			foundry.utils.hasProperty(submitData, "appliedRemoteEffects")
+		) {
 			submitData.system ??= {};
-			submitData.system.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
-			for (const _id of submitData.appliedEffects) {
-				if (submitData.system.effects.find(e => e._id === _id)) continue;
-				submitData.system.effects.push({ _id });
+			const effects = (submitData.system.effects ??= this.activity.toObject().system.effects);
+			for (const _id of submitData.appliedLocalEffects ?? []) {
+				if (effects.find(e => e._id === _id)) continue;
+				effects.push({ _id });
 			}
+			for (const uuid of submitData.appliedRemoteEffects ?? []) {
+				if (effects.find(e => e.uuid === uuid)) continue;
+				effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
+			}
+			delete submitData.appliedLocalEffects;
+			delete submitData.appliedRemoteEffects;
 		}
 		return submitData;
 	}

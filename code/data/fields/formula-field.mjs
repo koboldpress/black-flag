@@ -30,7 +30,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Form Field Integration             */
+	/*       Form Field Integration        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -40,7 +40,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 		return super.toFormGroup(groupConfig, inputConfig);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_toInput(config) {

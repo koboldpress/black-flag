@@ -1,10 +1,11 @@
-const { DocumentIdField, NumberField, SchemaField } = foundry.data.fields;
+const { DocumentIdField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * Data for effects that can be applied.
  *
  * @typedef {object} EffectApplicationData
  * @property {string} _id - ID of the effect to apply.
+ * @property {string} uuid - UUID of remove effect to apply.
  * @property {object} level
  * @property {number} level.min - Minimum level at which this effect can be applied.
  * @property {number} level.max - Maximum level at which this effect can be applied.
@@ -17,6 +18,7 @@ export default class AppliedEffectField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
 			_id: new DocumentIdField(),
+			uuid: new DocumentUUIDField(),
 			level: new SchemaField({
 				min: new NumberField({ min: 0, integer: true }),
 				max: new NumberField({ min: 0, integer: true })
@@ -45,11 +47,11 @@ export default class AppliedEffectField extends SchemaField {
 			configurable: true
 		});
 		Object.defineProperty(obj, "getEffect", {
-			value: () => item?.effects.get(obj._id),
+			value: () => (obj.uuid ? fromUuid(obj.uuid) : item?.effects.get(obj._id)),
 			configurable: true
 		});
 		Object.defineProperty(obj, "relativeUUID", {
-			value: `.ActiveEffect.${obj._id}`,
+			value: obj.uuid ?? `.ActiveEffect.${obj._id}`,
 			configurable: true
 		});
 

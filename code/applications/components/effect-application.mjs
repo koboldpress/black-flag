@@ -46,17 +46,16 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	connectedCallback() {
+	async connectedCallback() {
 		super.connectedCallback();
 		if (!this.message) return;
 
 		// Build the frame HTML only once
 		if (!this.effectsList || !this.targetList) {
 			if (!this.effects.length) {
-				const item = this.message.getAssociatedItem();
-				this.effects = Array.from(this.querySelectorAll("option"))
-					.map(o => item?.effects.get(o.value))
-					.filter(_ => _);
+				this.effects = (
+					await Promise.all(Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value)))
+				).filter(_ => _);
 			}
 
 			const div = document.createElement("div");
@@ -95,7 +94,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		for (const effect of this.effects) {
 			const li = document.createElement("li");
 			li.classList.add("effect");
-			li.dataset.id = effect.id;
+			li.dataset.uuid = effect.uuid;
 			li.innerHTML = `
 				<img class="icon">
 				<div class="name-stacked">
@@ -156,7 +155,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 	 * @protected
 	 */
 	async _applyEffectToActor(effect, actor) {
-		const origin = effect;
+		const item = this.message.getAssociatedItem() ?? {};
+		const origin = effect.inCompendium ? item : effect;
 		if (!game.user.isGM && !actor.isOwner) {
 			throw new Error(_loc("BF.EFFECT.Application.Warning.NotOwner"));
 		}
@@ -176,7 +176,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 			return existingEffect.update(
 				foundry.utils.mergeObject(
 					{
-						...effect.constructor.getInitialDuration(),
+						...effect.constructor.getEffectStart(),
 						disabled: false
 					},
 					effectFlags
@@ -190,7 +190,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 				...effect.toObject(),
 				disabled: false,
 				transfer: false,
-				origin: origin.uuid
+				origin: origin.uuid,
+				_stats: {
+					[effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+					[effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
+				}
 			},
 			effectFlags
 		);
@@ -206,7 +210,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 	 */
 	async _onApplyEffect(event) {
 		event.preventDefault();
-		const effect = this.message.getAssociatedItem()?.effects.get(event.target.closest("[data-id]")?.dataset.id);
+		const effect = await fromUuid(event.target.closest("[data-uuid]")?.dataset.uuid);
 		if (!effect) return;
 		for (const target of this.targetList.querySelectorAll("[data-target-uuid]")) {
 			const actor = fromUuidSync(target.dataset.targetUuid);

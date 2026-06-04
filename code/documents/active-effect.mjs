@@ -60,7 +60,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/** @override */
 	get isSuppressed() {
 		if (super.isSuppressed) return true;
-		if (!this.parent?.isEmbedded || this.type === "enchantment") return false;
+		if (!this.item?.isEmbedded || this.type === "enchantment") return false;
 		return this.suppressionReasons.length > 0;
 	}
 
@@ -71,8 +71,8 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 * @type {BlackFlagActiveEffect|null}
 	 */
 	get riderOrigin() {
-		if (!(this.parent instanceof Item)) return null;
-		return this.parent.effects.get(this.flags[game.system.id]?.riderOrigin) ?? null;
+		if (!this.item) return null;
+		return this.item.effects.get(this.flags[game.system.id]?.riderOrigin) ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,14 +83,14 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 */
 	get suppressionReasons() {
 		const reasons = [];
-		if (this.parent.parent?.type !== "pc") return reasons;
-		if (this.parent.getFlag(game.system.id, "relationship.enabled") === false) {
+		if (this.actor?.type !== "pc" || !this.item) return reasons;
+		if (this.item.getFlag(game.system.id, "relationship.enabled") === false) {
 			reasons.push("BF.EFFECT.SuppressionReason.Disabled");
 		}
-		if (this.parent.system.equippable && !this.parent.system.equipped) {
+		if (this.item.system.equippable && !this.item.system.equipped) {
 			reasons.push("BF.EFFECT.SuppressionReason.NotEquipped");
 		}
-		if (this.parent.system.attunement?.value === "required" && !this.parent.system.attuned) {
+		if (this.item.system.attunement?.value === "required" && !this.item.system.attuned) {
 			reasons.push("BF.EFFECT.SuppressionReason.NotAttuned");
 		}
 		return reasons;
@@ -329,7 +329,8 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/** @inheritDoc */
 	async _preCreate(data, options, user) {
-		if (!options[game.system.id]?.keepOrigin?.includes(data._id)) this.updateSource({ origin: this.parent.uuid });
+		if (this.item && !options[game.system.id]?.keepOrigin?.includes(data._id))
+			this.updateSource({ origin: this.parent.uuid });
 		if ((await super._preCreate(data, options, user)) === false) return false;
 	}
 

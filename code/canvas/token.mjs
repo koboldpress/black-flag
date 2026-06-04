@@ -12,7 +12,7 @@ export default class BlackFlagToken extends foundry.canvas.placeables.Token {
 		return super._drawBar(number, bar, data);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Draw system-specific HP bar styling.
