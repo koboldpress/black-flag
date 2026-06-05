@@ -243,7 +243,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		const isItem = this.document instanceof Item;
 		this.document.createEmbeddedDocuments("ActiveEffect", [
 			{
-				type: isEnchantment ? "enchantment" : "standard",
+				type: isEnchantment ? "enchantment" : "base",
 				name: isItem ? this.document.name : _loc("BF.EFFECT.New"),
 				icon: isItem ? this.document.img : "icons/svg/aura.svg",
 				origin: isEnchantment ? undefined : this.document.uuid,

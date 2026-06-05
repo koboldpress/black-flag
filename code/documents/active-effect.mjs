@@ -118,14 +118,9 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_initializeSource(data, options = {}) {
-		if (data instanceof foundry.abstract.DataModel) data = data.toObject();
-
-		if (data.type === "base") {
-			data.type = "standard";
-		}
-
-		return super._initializeSource(data, options);
+	static migrateData(source) {
+		if (source.type === "standard") source.type = "base";
+		return super.migrateData(source);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -58,8 +58,8 @@ Hooks.once("init", function () {
 	config._configureRedirects();
 	config.registration.setupHooks();
 	data.registerDataModels(ActiveEffect, {
-		enchantment: data.activeEffect.EnchantmentData,
-		standard: data.activeEffect.StandardEffectData
+		base: data.activeEffect.StandardEffectData,
+		enchantment: data.activeEffect.EnchantmentData
 	});
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);

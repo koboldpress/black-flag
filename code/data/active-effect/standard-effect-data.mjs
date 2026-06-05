@@ -20,7 +20,7 @@ export default class StandardEffectData extends ActiveEffectDataModel {
 		foundry.utils.mergeObject(
 			super.metadata,
 			{
-				type: "standard",
+				type: "base",
 				localization: "BF.EFFECT.Type.Standard"
 			},
 			{ inplace: false }

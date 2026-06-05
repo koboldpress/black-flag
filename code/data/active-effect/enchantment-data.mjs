@@ -180,7 +180,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 				fields.effects.toFormGroup(
 					{},
 					{
-						options: this.item.effects.filter(e => e.type === "standard").map(e => ({ value: e.id, label: e.name })),
+						options: this.item.effects.filter(e => e.type === "base").map(e => ({ value: e.id, label: e.name })),
 						value: this._source.rider.effects
 					}
 				)
