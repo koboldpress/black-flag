@@ -102,8 +102,17 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 
 	/**
 	 * Collection of notifications that should be displayed on the actor sheet.
+	 * @type {NotificationsCollection}
 	 */
 	notifications = this.notifications;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An object that tracks which tracks the changes to the data model which were applied by active effects
+	 * @type {object}
+	 */
+	overrides = this.overrides ?? {};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -176,9 +185,27 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Clear or replace properties not automatically reset by upstream initialization.
+	 * @protected
+	 */
+	_clearData() {
+		this.notifications = new NotificationsCollection();
+		this.overrides = {};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+		this._clearData();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	prepareData() {
-		this.notifications = new NotificationsCollection();
 		super.prepareData();
 		if (this.system.shouldPrepareFinalData) this.system.prepareFinalData();
 	}
@@ -215,32 +242,30 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 	 * Apply any transformation to the Item data which are caused by enchantment Effects.
 	 */
 	applyActiveEffects() {
-		const overrides = {};
-
 		// Organize non-disabled effects by their application priority
 		const changes = [];
 		for (const effect of this.allApplicableEffects()) {
 			if (!effect.active) continue;
-			changes.push(
-				...effect.changes.map(change => {
-					const c = foundry.utils.deepClone(change);
-					c.effect = effect;
-					c.priority ??= c.mode * 10;
-					return c;
-				})
-			);
+			for (const change of effect.system.changes) {
+				if (change.key === "") continue;
+				const copy = foundry.utils.deepClone(change);
+				copy.effect = effect;
+				changes.push(copy);
+			}
 		}
 		changes.sort((a, b) => a.priority - b.priority);
+		ActiveEffect.implementation._shimChanges?.(changes);
 
 		// Apply all changes
+		const overrides = {};
+		const replacementData = this.getRollData({ deterministic: true });
 		for (const change of changes) {
-			if (!change.key) continue;
-			const changes = change.effect.apply(this, change);
-			Object.assign(overrides, changes);
+			const result = ActiveEffect.implementation.applyChange(this, change, { replacementData });
+			if (foundry.utils.isPlainObject(result)) Object.assign(overrides, result);
 		}
 
 		// Expand the set of final overrides
-		this.overrides = foundry.utils.expandObject(overrides);
+		foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
