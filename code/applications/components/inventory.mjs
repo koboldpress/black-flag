@@ -744,13 +744,16 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	 * @param {object} [options={}]
 	 * @param {async Function} [options.callback] - Method called for each item after it is added to a section.
 	 * @param {boolean} [options.hide=true] - Should sections marked autoHide by hidden if empty?
+	 * @param {Function} [options.isVisible] - Callback used to determine if each item should be visible.
 	 * @returns {object} - Object with sections grouped by tabs and all their items.
 	 */
-	static async organizeItems(document, items, { callback, hide = true } = {}) {
-		const sections = this.buildSections(document);
+	static async organizeItems(doc, items, { callback, hide = true, isVisible } = {}) {
+		const sections = this.buildSections(doc);
 		const uncategorized = [];
 
-		if (document instanceof Actor) items = items.filter(i => !document.items.has(i.system.container));
+		items = items.filter(
+			i => (doc instanceof Actor ? !doc.items.has(i.system.container) : true) && (isVisible ? isVisible(i) : true)
+		);
 
 		for (const item of items) {
 			const section = InventoryElement.organizeItem(item, sections);
@@ -758,8 +761,8 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			if (callback) await callback(item, section);
 		}
 
-		const filters = document.flags["black-flag"]?.sheet?.filters ?? {};
-		const sorting = document.flags["black-flag"]?.sheet?.sorting ?? {};
+		const filters = doc.flags[game.system.id]?.sheet?.filters ?? {};
+		const sorting = doc.flags[game.system.id]?.sheet?.sorting ?? {};
 		for (const [tab, data] of Object.entries(sections)) {
 			for (const [key, section] of Object.entries(data)) {
 				section.items = FiltersElement.filter(section.items, {

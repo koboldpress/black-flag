@@ -229,7 +229,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 				const itemContext = (context.itemContext[item.id] ??= {});
 				await this._prepareItem(item, itemContext, section);
 			},
-			hide: !context.editable
+			hide: !context.editable,
+			isVisible: this._isItemVisible.bind(this)
 		});
 	}
 
@@ -264,6 +265,19 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*       Item Preparation Helpers      */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether an item should be displayed on the sheet.
+	 * @param {BlackFlagItem} item - Item being prepared.
+	 * @returns {boolean}
+	 */
+	_isItemVisible(item) {
+		const origin = item.dependentOrigin;
+		if (origin?.active === false && origin.parent !== item) return false;
+		return true;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
