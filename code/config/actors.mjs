@@ -236,24 +236,29 @@ export const luck = {
  */
 export const movementTypes = {
 	walk: {
-		label: "BF.MOVEMENT.Type.Walk"
+		label: "BF.MOVEMENT.Type.Walk",
+		icon: "systems/black-flag/artwork/movement/walk.svg"
 	},
 	climb: {
 		label: "BF.MOVEMENT.Type.Climb",
+		icon: "systems/black-flag/artwork/movement/climb.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CdBLKsrlKHR5HvDr",
 		walkFallback: true
 	},
 	fly: {
 		label: "BF.MOVEMENT.Type.Fly",
+		icon: "systems/black-flag/artwork/movement/fly.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CHNmwHjrIZtXEsf4"
 	},
 	swim: {
 		label: "BF.MOVEMENT.Type.Swim",
+		icon: "systems/black-flag/artwork/movement/swim.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.nzj83NdxpPZQoW6Z",
 		walkFallback: true
 	},
 	burrow: {
 		label: "BF.MOVEMENT.Type.Burrow",
+		icon: "systems/black-flag/artwork/movement/burrow.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.jzO6qMcEroDupZDD"
 	}
 };
