@@ -52,7 +52,7 @@ export default class ActiveEffectDataModel extends BaseDataMixin(foundry.data.Ac
 	 */
 	getDependents() {
 		const dependents = [];
-		for (const category of Object.values(this.dependent ?? [])) {
+		for (const category of Object.values(this.dependent ?? {})) {
 			for (const { uuid } of category) {
 				let doc;
 				// TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved

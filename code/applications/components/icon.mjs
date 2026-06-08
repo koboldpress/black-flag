@@ -42,6 +42,14 @@ export default class IconElement extends AdoptedStyleSheetMixin(foundry.applicat
 	static #svgCache = new Map();
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-icon";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

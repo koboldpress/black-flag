@@ -5,6 +5,12 @@ import FormAssociatedElement from "./form-associated-element.mjs";
  * Custom element for allowing multiple selections.
  */
 export default class MultiSelectElement extends FormAssociatedElement {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-multiselect";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Methods                 */
 	/* <><><><> <><><><> <><><><> <><><><> */

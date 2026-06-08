@@ -34,6 +34,19 @@ export default class EnchantActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * List of item types that are enchantable.
+	 * @type {Set<string>}
+	 */
+	get enchantableTypes() {
+		return Object.entries(CONFIG.Item.dataModels).reduce((set, [k, v]) => {
+			if (v.metadata?.hasEffects) set.add(k);
+			return set;
+		}, new Set());
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Existing enchantment applied by this activity on this activity's item.
 	 * @type {BlackFlagActiveEffect}
 	 */
@@ -53,7 +66,7 @@ export default class EnchantActivity extends Activity {
 		const existingProfile = this.existingEnchantment?.flags[game.system.id]?.enchantmentProfile;
 		config.enchantmentProfile ??= this.item.effects.has(existingProfile)
 			? existingProfile
-			: this.availableEnchantments[0]?._id;
+			: this.system.applicableEffects[0]?._id;
 		return config;
 	}
 
@@ -61,7 +74,7 @@ export default class EnchantActivity extends Activity {
 
 	/** @inheritDoc */
 	_requiresConfigurationDialog(config) {
-		return super._requiresConfigurationDialog(config) || this.applicableEffects.length > 1;
+		return super._requiresConfigurationDialog(config) || this.system.applicableEffects.length > 1;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -69,6 +82,7 @@ export default class EnchantActivity extends Activity {
 	/** @inheritDoc */
 	_finalizeMessageConfig(activationConfig, messageConfig, results) {
 		super._finalizeMessageConfig(activationConfig, messageConfig, results);
+		delete messageConfig.data.system?.effects;
 
 		// Store selected enchantment profile in message flag
 		if (activationConfig.enchantmentProfile)
@@ -92,7 +106,7 @@ export default class EnchantActivity extends Activity {
 		if (!enchantmentProfile || !message.isContentVisible) return;
 
 		// Create the enchantment tray
-		const enchantmentApplication = document.createElement("enchantment-application");
+		const enchantmentApplication = document.createElement("blackFlag-enchantmentApplication");
 		const afterElement = element.querySelector(".card-footer");
 		if (afterElement) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
 		else element.querySelector(".chat-card")?.append(enchantmentApplication);
@@ -144,7 +158,13 @@ export default class EnchantActivity extends Activity {
 		}
 
 		const flags = { enchantmentProfile: profile };
-		const enchantmentData = effect.clone({ origin: this.uuid, flags: { [game.system.id]: flags } }).toObject();
+		const enchantmentData = effect
+			.clone({
+				flags: { [game.system.id]: flags },
+				origin: this.uuid,
+				system: { appliedOrigin: this.uuid }
+			})
+			.toObject();
 
 		/**
 		 * Hook that fires before an enchantment is applied to an item.
@@ -178,8 +198,10 @@ export default class EnchantActivity extends Activity {
 		const enchantment = await ActiveEffect.create(enchantmentData, {
 			parent: item,
 			keepId: true,
-			keepOrigin: true,
-			chatMessageOrigin: chatMessage?.id
+			[game.system.id]: {
+				chatMessageOrigin: chatMessage?.id,
+				keepOrigin: true
+			}
 		});
 
 		/**
@@ -208,50 +230,73 @@ export default class EnchantActivity extends Activity {
 	 */
 	canEnchant(item, { chatMessage } = {}) {
 		const errors = [];
+		const restrictions = this.system.restrictions;
 
-		if (!this.restrictions.allowMagical && item.system.properties?.has("mgc") && item.system.isPhysical) {
+		if (!this.enchantableTypes.has(item.type)) {
+			errors.push(
+				new EnchantmentError(
+					_loc("BF.ENCHANT.Warning.NotEnchantable", { type: _loc(CONFIG.Item.typeLabels[item.type]) })
+				)
+			);
+		}
+
+		if (!restrictions.allowMagical && item.system.properties?.has("magical") && item.system.isPhysical) {
 			errors.push(new EnchantmentError(_loc("BF.ENCHANT.Warning.NoMagicalItems")));
 		}
 
-		if (this.restrictions.itemType && item.type !== this.restrictions.itemType) {
+		if (restrictions.type && item.type !== restrictions.type) {
 			errors.push(
 				new EnchantmentError(
 					_loc("BF.ENCHANT.Warning.WrongType", {
 						incorrectType: _loc(CONFIG.Item.typeLabels[item.type]),
-						allowedType: _loc(CONFIG.Item.typeLabels[this.restrictions.itemType])
+						allowedType: _loc(CONFIG.Item.typeLabels[restrictions.type])
 					})
 				)
 			);
 		}
 
-		if (this.restrictions.categories.size && !this.restrictions.categories.has(item.system.type?.category)) {
-			const getLabel = key => CONFIG.Item.dataModels[this.restrictions.type]?.validCategories?.localized?.[key];
+		if (restrictions.categories.size && !restrictions.categories.has(item.system.type?.category)) {
+			const getLabel = key => CONFIG.Item.dataModels[restrictions.type]?.validCategories?.localized?.[key];
 			errors.push(
 				new EnchantmentError(
 					_loc(`BF.ENCHANT.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`, {
-						allowedType: game.i18n
-							.getListFormatter({ type: "disjunction" })
-							.format(Array.from(this.restrictions.categories).map(c => getLabel(c).toLowerCase())),
+						allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
+							Array.from(restrictions.categories)
+								.map(c => getLabel(c)?.toLowerCase())
+								.filter(_ => _)
+						),
 						incorrectType: getLabel(item.system.type?.category)
 					})
 				)
 			);
 		}
 
-		// TODO: Add restrictions.type handling
+		if (restrictions.types.size && !restrictions.types.has(item.system.type?.value)) {
+			const getLabel = key => CONFIG.Item.dataModels[restrictions.type]?.validTypes?.localized?.[key];
+			errors.push(
+				new EnchantmentError(
+					_loc(`BF.ENCHANT.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`, {
+						allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
+							Array.from(restrictions.types)
+								.map(c => getLabel(c)?.toLowerCase())
+								.filter(_ => _)
+						),
+						incorrectType: getLabel(item.system.type?.value)
+					})
+				)
+			);
+		}
 
 		if (
-			this.restrictions.properties.size &&
-			!this.restrictions.properties.intersection(item.system.properties ?? new Set()).size
+			restrictions.properties.size &&
+			!restrictions.properties.intersection(item.system.properties ?? new Set()).size
 		) {
 			errors.push(
 				new EnchantmentError(
 					_loc("BF.ENCHANT.Warning.MissingProperty", {
 						validProperties: game.i18n
 							.getListFormatter({ type: "disjunction" })
-							.format(
-								Array.from(this.restrictions.properties).map(p => CONFIG.BlackFlag.itemProperties.localized[p] ?? p)
-							)
+							.format(Array.from(restrictions.properties).map(p => CONFIG.BlackFlag.itemProperties.localized[p] ?? p))
 					})
 				)
 			);
@@ -272,5 +317,15 @@ export default class EnchantActivity extends Activity {
 		Hooks.callAll("blackFlag.canEnchant", this, item, errors, { chatMessage });
 
 		return errors.length ? errors : true;
+	}
+}
+
+/**
+ * Error to throw when an item cannot be enchanted.
+ */
+export class EnchantmentError extends Error {
+	constructor(...args) {
+		super(...args);
+		this.name = "EnchantmentError";
 	}
 }

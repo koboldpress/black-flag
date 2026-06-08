@@ -3,6 +3,14 @@ import InventoryElement from "./inventory.mjs";
 
 export default class CurrencyElement extends InventoryElement {
 	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-currency";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Bring up the currency adding dialog.
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 */

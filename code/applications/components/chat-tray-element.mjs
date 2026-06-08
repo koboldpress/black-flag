@@ -7,6 +7,14 @@ export default class ChatTrayElement extends MessageAssociatedElement {
 	static observedAttributes = ["open"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-tray";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

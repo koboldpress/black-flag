@@ -2,6 +2,14 @@
  * Bit of text with a button after it for copying it.
  */
 export default class CopyableElement extends foundry.applications.elements.AdoptableHTMLElement {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-copyable";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	connectedCallback() {
 		const button = document.createElement("button");

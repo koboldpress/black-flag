@@ -4,6 +4,14 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying a single inventory filter.
  */
 export default class FilterElement extends AppAssociatedElement {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-filter";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static formAssociated = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */

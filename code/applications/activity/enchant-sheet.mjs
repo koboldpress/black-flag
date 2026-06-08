@@ -56,10 +56,10 @@ export default class EnchantSheet extends ActivitySheet {
 			legend: "BF.ENCHANT.Enchantment.Config"
 		};
 
-		const type = context.source.system.restrictions.itemType;
+		const type = context.source.system.restrictions.type;
 		const typeDataModel = CONFIG.Item.dataModels[type];
 		context.typeOptions = [
-			{ value: "", label: _loc("BF.ENCHANT.FIELDS.restrictions.itemType.Any"), rule: true },
+			{ value: "", label: _loc("BF.ENCHANT.FIELDS.restrictions.type.Any"), rule: true },
 			...Object.entries(CONFIG.Item.dataModels)
 				.filter(([, d]) => d.metadata?.hasEffects)
 				.map(([value]) => ({ value, label: _loc(CONFIG.Item.typeLabels[value]) }))

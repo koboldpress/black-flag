@@ -58,4 +58,21 @@ export default class StandardEffectData extends ActiveEffectDataModel {
 	get isRider() {
 		return this.parent.parent?.flags[game.system.id]?.rider?.effects?.includes(this.parent.id);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+
+		if (this.parent.id === this.parent.constructor.ID.EXHAUSTION) {
+			let level = this.parent.getFlag("black-flag", "level");
+			if (!Number.isFinite(level)) level = 1;
+			this.parent.img = `systems/black-flag/artwork/statuses/exhaustion-${level}.svg`;
+			this.parent.name = _loc("BF.Condition.Exhaustion.Numbered", { level: formatNumber(level) });
+			if (level >= 6) this.parent.statuses.add("dead");
+		}
+	}
 }
