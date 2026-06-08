@@ -56,6 +56,14 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-effects";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -346,7 +354,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		const effectData = effects.map(effect => {
 			const data = effect.toObject();
 			if (effect.type === "enchantment") {
-				data.origin ??= effect.parent.uuid;
+				data.origin ??= effect.item.uuid;
+				foundry.utils.setProperty(data, "system.appliedOrigin", effect.item.uuid);
 				options[game.system.id] ??= {};
 				options[game.system.id].keepOrigin ??= [];
 				options[game.system.id].keepOrigin.push(data._id);

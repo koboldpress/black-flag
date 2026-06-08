@@ -24,6 +24,16 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Enchantments that have been applied by this item.
+	 * @type {BlackFlagActiveEffect[]}
+	 */
+	get appliedEnchantments() {
+		return BlackFlag.registry.enchantments.applied(this.parent.uuid);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should this item's actions be displayed on the actor sheet?
 	 * @type {boolean}
 	 */

@@ -5,6 +5,12 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying and rolling death saves.
  */
 export default class DeathSavesElement extends AppAssociatedElement {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-deathsaves";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */

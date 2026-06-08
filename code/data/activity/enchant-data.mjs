@@ -30,9 +30,9 @@ export class EnchantData extends ActivityDataModel {
 			restrictions: new SchemaField({
 				allowMagical: new BooleanField(),
 				categories: new SetField(new StringField()),
-				itemType: new StringField(),
 				properties: new SetField(new StringField()),
-				type: new SetField(new StringField())
+				type: new StringField(),
+				types: new SetField(new StringField())
 				// TODO: Add freeform filtering
 			})
 		};

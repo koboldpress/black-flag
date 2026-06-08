@@ -128,16 +128,9 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	prepareDerivedData() {
-		super.prepareDerivedData();
-		if (this.id !== this.constructor.ID.EXHAUSTION) return;
-
-		// Change name and icon to match exhaustion level
-		let level = this.getFlag("black-flag", "level");
-		if (!Number.isFinite(level)) level = 1;
-		this.img = `systems/black-flag/artwork/statuses/exhaustion-${level}.svg`;
-		this.name = _loc("BF.Condition.Exhaustion.Numbered", { level: formatNumber(level) });
-		if (level >= 6) this.statuses.add("dead");
+	prepareBaseData() {
+		this.origin = this.getFlag("core", "originText") ?? this.origin;
+		super.prepareBaseData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -341,7 +334,11 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 
 	/** @inheritDoc */
 	async _preCreate(data, options, user) {
-		if (this.item && !options[game.system.id]?.keepOrigin?.includes(data._id))
+		if (
+			this.item &&
+			options[game.system.id]?.keepOrigin !== true &&
+			!options[game.system.id]?.keepOrigin?.includes(data._id)
+		)
 			this.updateSource({ origin: this.parent.uuid });
 		if ((await super._preCreate(data, options, user)) === false) return false;
 	}
@@ -352,7 +349,6 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	async _onCreate(data, options, userId) {
 		await super._onCreate(data, options, userId);
 		if (userId === game.userId) {
-			// TODO: See if this can be moved into preCreateOperation
 			if (this.active && this.parent instanceof Actor) await this.createRiderConditions();
 		}
 	}

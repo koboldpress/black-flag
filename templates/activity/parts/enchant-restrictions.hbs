@@ -1,14 +1,14 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 	<fieldset>
 		<legend>{{ localize "BF.ENCHANT.FIELDS.restrictions.label" }}</legend>
-		{{ formField systemFields.restrictions.fields.itemType value=source.system.restrictions.itemType options=typeOptions
+		{{ formField systemFields.restrictions.fields.type value=source.system.restrictions.type options=typeOptions
 		             rootId=partId }}
 		{{#if categoryOptions}}
 			{{ formField systemFields.restrictions.fields.categories value=source.system.restrictions.categories
 			             options=categoryOptions rootId=partId }}
 		{{/if}}
 		{{#if subtypeOptions}}
-			{{ formField systemFields.restrictions.fields.type value=source.system.restrictions.type
+			{{ formField systemFields.restrictions.fields.types value=source.system.restrictions.types
 									 options=subtypeOptions rootId=partId }}
 		{{/if}}
 		{{#if propertyOptions}}

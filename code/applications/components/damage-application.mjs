@@ -19,6 +19,12 @@ const MULTIPLIERS = [
  * Element that handles applying damage to actors from a chat card.
  */
 export default class DamageApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-damageapplication";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */

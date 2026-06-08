@@ -1,14 +1,15 @@
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import DependentsField from "./fields/dependents-field.mjs";
 
-const { BooleanField, DocumentIdField, SchemaField, SetField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * Data definition for Enchantment active effects.
  *
+ * @property {string} appliedOrigin - Activity or item that applied this enchantment.
  * @property {object} dependent
- * @property {DependentData[]} dependent.activities - Rider activities added by this enchantment.
- * @property {DependentData[]} dependent.effects - Rider effects added by this enchantment.
+ * @property {DependentData[]} dependent.activities - Rider activities added by this enchantment (deprecated).
+ * @property {DependentData[]} dependent.effects - Rider effects added by this enchantment (deprecated).
  * @property {boolean} magical - This enchantment is considered magical and should be disabled if magic isn't available.
  * @property {object} rider
  * @property {Set<string>} rider.activities - Additional activities that should be added to item when enchanted.
@@ -42,6 +43,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
+			appliedOrigin: new DocumentUUIDField(),
 			dependent: new SchemaField({
 				activities: new DependentsField({ type: "Activity" }),
 				effects: new DependentsField({ type: "ActiveEffect" })
@@ -71,6 +73,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	 */
 	get isApplied() {
 		return !!this.parent.origin && this.parent.origin !== this.item?.uuid;
+		// return !!this.appliedOrigin;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -90,8 +93,8 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
-		if (this.isApplied) {
-			// TODO: Add to enchanted items registry
+		if (this.isApplied && this.parent.uuid) {
+			BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
 		}
 	}
 
@@ -103,8 +106,11 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	async createRiders(options) {
 		const riders = await super.createRiders(options);
 
-		const item = await fromUuid(this.parent.origin);
-		// TODO: Support Enchant Activity as origin when added
+		let item;
+		const { chatMessageOrigin } = options[game.system.id] ?? {};
+		if (chatMessageOrigin) item = game.messages.get(chatMessageOrigin)?.getAssociatedItem();
+		else item = await fromUuid(this.parent.origin);
+
 		if (!(item instanceof Item)) return riders;
 
 		// Create Activities
@@ -212,10 +218,27 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	_onCreate(data, options, userId) {
+		super._onCreate(data, options, userId);
+		if (this.isApplied) BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+		const chatMessageOrigin = options[game.system.id]?.chatMessageOrigin;
+		if (chatMessageOrigin) {
+			// TODO: Make this work with detached windows
+			document.body
+				.querySelectorAll(`[data-message-id="${chatMessageOrigin}"] blackFlag-enchantmentApplication`)
+				.forEach(element => element.buildItemList());
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	_onDelete(options, userId) {
 		super._onDelete(options, userId);
-		if (this.isApplied) {
-			// TODO: Remove from enchanted items registry
-		}
+		if (this.isApplied) BlackFlag.registry.enchantments.untrack(this.parent.origin, this.parent.uuid);
+		// TODO: Make this work with detached windows
+		document.body
+			.querySelectorAll(`blackFlag-enchantmentApplication:has([data-enchantment-uuid="${this.parent.uuid}"]`)
+			.forEach(element => element.buildItemList());
 	}
 }

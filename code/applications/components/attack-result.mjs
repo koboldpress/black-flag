@@ -4,6 +4,12 @@ import ChatTrayElement from "./chat-tray-element.mjs";
  * Element that handles displaying attack results.
  */
 export default class AttackResultElement extends ChatTrayElement {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-attackresult";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -55,28 +55,30 @@ export function registerSheets(documentType, categories) {
  */
 export function registerCustomElements() {
 	log("Registering custom elements");
-	window.customElements.define("blackflag-actions", components.ActionsElement);
-	window.customElements.define("blackflag-activities", components.ActivitiesElement);
-	window.customElements.define("blackflag-advancement", components.AdvancementElement);
-	window.customElements.define("blackflag-attackresult", components.AttackResultElement);
-	window.customElements.define("blackflag-consumption", components.ConsumptionElement);
-	window.customElements.define("blackflag-copyable", components.CopyableElement);
-	window.customElements.define("blackflag-currency", components.CurrencyElement);
-	window.customElements.define("blackflag-damageapplication", components.DamageApplicationElement);
-	window.customElements.define("blackflag-damagelist", components.DamageListElement);
-	window.customElements.define("blackflag-deathsaves", components.DeathSavesElement);
-	window.customElements.define("blackflag-effectapplication", components.EffectApplicationElement);
-	window.customElements.define("blackflag-effects", components.EffectsElement);
-	window.customElements.define("blackflag-filter", components.FilterElement);
-	window.customElements.define("blackflag-filters", components.FiltersElement);
-	window.customElements.define("blackflag-icon", components.IconElement);
-	window.customElements.define("blackflag-inventory", components.InventoryElement);
-	window.customElements.define("blackflag-messageluck", components.MessageLuckElement);
-	window.customElements.define("blackflag-multiselect", components.MultiSelectElement);
-	window.customElements.define("blackflag-sorting", components.SortingElement);
-	window.customElements.define("blackflag-tray", components.ChatTrayElement);
-	window.customElements.define("blackflag-uses", components.UsesElement);
-	window.customElements.define("blackflag-xpbar", components.XPBarElement);
+	const registerElement = element => window.customElements.define(element.tagName, element);
+	registerElement(components.ActionsElement);
+	registerElement(components.ActivitiesElement);
+	registerElement(components.AdvancementElement);
+	registerElement(components.AttackResultElement);
+	registerElement(components.ChatTrayElement);
+	registerElement(components.ConsumptionElement);
+	registerElement(components.CopyableElement);
+	registerElement(components.CurrencyElement);
+	registerElement(components.DamageApplicationElement);
+	registerElement(components.DamageListElement);
+	registerElement(components.DeathSavesElement);
+	registerElement(components.EnchantmentApplicationElement);
+	registerElement(components.EffectApplicationElement);
+	registerElement(components.EffectsElement);
+	registerElement(components.FilterElement);
+	registerElement(components.FiltersElement);
+	registerElement(components.IconElement);
+	registerElement(components.InventoryElement);
+	registerElement(components.MessageLuckElement);
+	registerElement(components.MultiSelectElement);
+	registerElement(components.SortingElement);
+	registerElement(components.UsesElement);
+	registerElement(components.XPBarElement);
 }
 
 export { actor, components };

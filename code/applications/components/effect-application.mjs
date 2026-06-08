@@ -5,6 +5,12 @@ import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
  * Application to handle applying active effects from a chat card.
  */
 export default class EffectApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
+	/**
+	 * The HTML tag named used by this element.
+	 * @type {string}
+	 */
+	static tagName = "blackflag-effectapplication";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */

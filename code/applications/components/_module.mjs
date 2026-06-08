@@ -12,6 +12,7 @@ export { default as DamageListElement } from "./damage-list.mjs";
 export { default as DeathSavesElement } from "./death-saves.mjs";
 export { default as DocumentSheetAssociatedElement } from "./document-sheet-associated-element.mjs";
 export { default as DoubleRangeElement } from "./double-range.mjs";
+export { default as EnchantmentApplicationElement } from "./enchantment-application.mjs";
 export { default as EffectApplicationElement } from "./effect-application.mjs";
 export { default as EffectsElement } from "./effects.mjs";
 export { default as FilterElement } from "./filter.mjs";
