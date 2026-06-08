@@ -1,0 +1,8 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	{{> "templates/generic/tab-navigation.hbs" tabs=tabs.effect.tabs }}
+	<section class="tab activity-{{ tabs.effect.tabs.enchantments.id }} {{ tabs.effect.tabs.enchantments.cssClass }}"
+	         data-tab="{{ tabs.effect.tabs.enchantments.id }}" data-group="{{ tabs.effect.tabs.enchantments.group }}">
+		{{> "systems/black-flag/templates/activity/parts/activity-effects.hbs" labels=enchantmentLabels }}
+	</section>
+	{{> "systems/black-flag/templates/activity/parts/enchant-restrictions.hbs" tab=tabs.effect.tabs.restrictions }}
+</section>

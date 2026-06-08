@@ -6,6 +6,7 @@ import IdentifiableTemplate from "./templates/identifiable-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
+import TypeTemplate from "./templates/type-template.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -17,6 +18,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {ProficiencyTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ * @mixes {TypeTemplate}
  *
  * @property {object} armor
  * @property {number} armor.value - Base armor class offered by this item.
@@ -35,7 +37,8 @@ export default class ArmorData extends ItemDataModel.mixin(
 	IdentifiableTemplate,
 	ProficiencyTemplate,
 	PhysicalTemplate,
-	PropertiesTemplate
+	PropertiesTemplate,
+	TypeTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
@@ -151,8 +154,8 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get validCategories() {
+	/** @override */
+	static get validCategories() {
 		return CONFIG.BlackFlag.armor;
 	}
 

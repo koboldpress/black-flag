@@ -10,20 +10,20 @@
 			--}}
 		{{/with}}
 		<ul class="configuration-list profiles-list">
-				{{#each profiles}}
+			{{#each profiles}}
 				<li data-index="{{ index }}" data-profile-id="{{ data._id }}" data-expand-id="profile-{{ data._id }}">
-						{{> ".profile" }}
+					{{> ".profile" }}
 				</li>
-				{{else if (not editable)}}
-					<li class="add-control">{{ localize "BF.None" }}</li>
-				{{/each}}
-				{{#if editable}}
-					<li class="add-control">
-						<button type="button" class="link-button" data-action="addProfile">
-							<i class="fas fa-plus" inert></i> {{ localize 'BF.SUMMON.Profile.Action.Create' }}
-						</button>
-					</li>
-				{{/if}}
+			{{else if (not editable)}}
+				<li class="add-control">{{ localize "BF.None" }}</li>
+			{{/each}}
+			{{#if editable}}
+				<li class="add-control">
+					<button type="button" class="link-button" data-action="addProfile">
+						<i class="fa-solid fa-plus" inert></i> {{ localize 'BF.SUMMON.Profile.Action.Create' }}
+					</button>
+				</li>
+			{{/if}}
 		</ul>
 	</fieldset>
 </section>

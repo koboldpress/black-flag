@@ -1,5 +1,5 @@
 <fieldset>
-	<legend>{{ localize "BF.ACTIVITY.FIELDS.effects.label" }}</legend>
+	<legend>{{ localize (ifThen labels.legend labels.legend "BF.ACTIVITY.FIELDS.effects.label") }}</legend>
 	<multi-select name="appliedLocalEffects" class="hidden-tags">{{ selectOptions allEffects }}</multi-select>
 	<document-tags name="appliedRemoteEffects" class="hidden-tags" type="ActiveEffect"></document-tags>
 	{{#if appliedEffects.length}}<hr>{{/if}}
@@ -7,13 +7,13 @@
 		{{#each appliedEffects}}
 			<li data-index="{{ @index }}" data-profile-id="{{ data._id }}" data-effect-id="{{ effect.id }}"
 			    data-expand-id="effects.{{ data._id }}">
-				{{> ".effect" }}
+				{{> ".effect" labels=../labels }}
 			</li>
 		{{/each}}
 		{{#if editable}}
 			<li class="add-control">
 				<button type="button" class="link-button" data-action="addEffect">
-					 <i class="fa-solid fa-plus" inert></i> {{ localize "BF.EFFECT.Action.Add" }}
+					 <i class="fa-solid fa-plus" inert></i> {{ localize (ifThen labels.add labels.add "BF.EFFECT.Action.Add") }}
 				</button>
 			</li>
 		{{/if}}
@@ -26,13 +26,13 @@
 
 	<div class="controls">
 		{{#if @root.editable}}
-			<button type="button" class="link-button" data-action="dissociateEffect"
-			        data-tooltip aria-label="{{ localize 'BF.EFFECT.Action.Dissociate' }}">
+			<button type="button" class="link-button" data-action="dissociateEffect" data-tooltip
+			        aria-label="{{ localize (ifThen labels.dissociate labels.dissociate 'BF.EFFECT.Action.Dissociate') }}">
 				<i class="fa-solid fa-minus" inert></i>
 			</button>
 			{{#unless data.uuid}}
-				<button type="button" class="link-button" data-action="deleteEffect"
-				        data-tooltip aria-label="{{ localize 'BF.EFFECT.Action.Delete' }}">
+				<button type="button" class="link-button" data-action="deleteEffect" data-tooltip
+				        aria-label="{{ localize (ifThen labels.delete labels.delete 'BF.EFFECT.Action.Delete') }}">
 					<i class="fa-solid fa-trash" inert></i>
 				</button>
 			{{/unless}}

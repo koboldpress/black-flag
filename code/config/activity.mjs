@@ -47,6 +47,12 @@ export const _activityTypes = {
 			config: applications.DamageSheet
 		}
 	},
+	enchant: {
+		documentClass: documents.EnchantActivity,
+		sheetClasses: {
+			config: applications.EnchantSheet
+		}
+	},
 	forward: {
 		documentClass: documents.ForwardActivity,
 		sheetClasses: {

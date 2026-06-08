@@ -1,0 +1,21 @@
+{{#if hasCreation}}
+	<section>
+		<fieldset>
+				<legend>{{ localize "BF.ACTIVATION.SECTION.Creation" }}</legend>
+				{{#if enchantment.field}}
+					{{ formField enchantment.field name=enchantment.name value=enchantment.value options=enchantment.options }}
+				{{else if enchantment}}
+					<input type="hidden" name="enchantmentProfile" value="{{ enchantment }}">
+				{{/if}}
+				{{#if (and enchantment.field template)}}<hr>{{/if}}
+				{{#if template}}
+					{{ formField template.field name=template.name value=template.value }}
+				{{/if}}
+		</fieldset>
+		{{> "blackFlag.activity-activation-notes" }}
+	</section>
+{{else if enchantment}}
+<input type="hidden" name="enchantmentProfile" value="{{ enchantment }}">
+{{else}}
+<section></section>
+{{/if}}

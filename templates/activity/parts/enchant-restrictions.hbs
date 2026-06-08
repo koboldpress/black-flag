@@ -1,0 +1,23 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	<fieldset>
+		<legend>{{ localize "BF.ENCHANT.FIELDS.restrictions.label" }}</legend>
+		{{ formField systemFields.restrictions.fields.itemType value=source.system.restrictions.itemType options=typeOptions
+		             rootId=partId }}
+		{{#if categoryOptions}}
+			{{ formField systemFields.restrictions.fields.categories value=source.system.restrictions.categories
+			             options=categoryOptions rootId=partId }}
+		{{/if}}
+		{{#if subtypeOptions}}
+			{{ formField systemFields.restrictions.fields.type value=source.system.restrictions.type
+									 options=subtypeOptions rootId=partId }}
+		{{/if}}
+		{{#if propertyOptions}}
+			{{ formField systemFields.restrictions.fields.properties value=source.system.restrictions.properties
+			             options=propertyOptions rootId=partId }}
+		{{/if}}
+		{{#if isTypePhysical}}
+			{{ formField systemFields.restrictions.fields.allowMagical value=source.system.restrictions.allowMagical
+			             rootId=partId }}
+		{{/if}}
+	</fieldset>
+</section>
