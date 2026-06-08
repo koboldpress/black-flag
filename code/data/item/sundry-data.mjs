@@ -1,6 +1,7 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
+import TypeTemplate from "./templates/type-template.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 
@@ -8,12 +9,13 @@ const { SchemaField, StringField } = foundry.data.fields;
  * Data definition for Sundry items.
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
+ * @mixes {TypeTemplate}
  *
  * @property {object} type
  * @property {string} type.category - Sundry category as defined in `CONFIG.BlackFlag.sundryCategories`.
  * @property {string} type.base - Specific sundry type defined as a child of its category.
  */
-export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
+export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate, TypeTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -66,8 +68,8 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get validCategories() {
+	/** @override */
+	static get validCategories() {
 		return CONFIG.BlackFlag.sundryCategories;
 	}
 

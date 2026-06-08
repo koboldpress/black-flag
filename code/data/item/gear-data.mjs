@@ -4,6 +4,7 @@ import DescriptionTemplate from "./templates/description-template.mjs";
 import IdentifiableTemplate from "./templates/identifiable-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
+import TypeTemplate from "./templates/type-template.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 
@@ -14,6 +15,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {IdentifiableTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ * @mixes {TypeTemplate}
  *
  * @property {object} type
  * @property {string} type.category - Gear category as defined in `CONFIG.BlackFlag.gearCategories`.
@@ -24,7 +26,8 @@ export default class GearData extends ItemDataModel.mixin(
 	DescriptionTemplate,
 	IdentifiableTemplate,
 	PhysicalTemplate,
-	PropertiesTemplate
+	PropertiesTemplate,
+	TypeTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
@@ -76,8 +79,8 @@ export default class GearData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get validCategories() {
+	/** @override */
+	static get validCategories() {
 		return CONFIG.BlackFlag.gearCategories;
 	}
 

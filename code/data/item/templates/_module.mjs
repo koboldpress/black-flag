@@ -7,3 +7,4 @@ export {default as IdentifiableTemplate} from "./identifiable-template.mjs";
 export {default as PhysicalTemplate} from "./physical-template.mjs";
 export {default as ProficiencyTemplate} from "./proficiency-template.mjs";
 export {default as PropertiesTemplate} from "./properties-template.mjs";
+export {default as TypeTemplate} from "./type-template.mjs";

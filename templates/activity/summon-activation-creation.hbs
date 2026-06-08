@@ -1,5 +1,5 @@
-<section>
-	{{~#if hasCreation}}
+{{#if hasCreation}}
+	<section>
 		<fieldset>
 				<legend>{{ localize "BF.ACTIVATION.SECTION.Creation" }}</legend>
 				{{#each summonsFields}}
@@ -14,5 +14,9 @@
 				{{/if}}
 		</fieldset>
 		{{> "blackFlag.activity-activation-notes" }}
-	{{/if~}}
-</section>
+	</section>
+{{else if summonsProfile}}
+<input type="hidden" name="summons.profile" value="{{ summonsProfile }}">
+{{else}}
+<section></section>
+{{/if}}

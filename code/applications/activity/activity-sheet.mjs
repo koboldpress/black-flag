@@ -455,9 +455,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	 * @protected
 	 */
 	_addEffectData() {
+		const { name, img } = this.activity._source;
 		return {
-			name: this.item.name,
-			img: this.item.img,
+			name: name || this.item.name,
+			img: img || this.item.img,
 			origin: this.item.uuid,
 			transfer: false
 		};
@@ -518,12 +519,24 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 				effects.push({ _id });
 			}
 			for (const uuid of submitData.appliedRemoteEffects ?? []) {
-				if (effects.find(e => e.uuid === uuid)) continue;
+				const effect = fromUuidSync(uuid, { strict: false });
+				if (!effect || effects.find(e => e.uuid === uuid) || !this._validRemoteEffect(effect)) continue;
 				effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
 			}
 			delete submitData.appliedLocalEffects;
 			delete submitData.appliedRemoteEffects;
 		}
 		return submitData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Ensure that an added effect is allowed for this activity.
+	 * @param {object} effect - Index of the remote effect.
+	 * @returns {boolean}
+	 */
+	_validRemoteEffect(effect) {
+		return effect.type === "base" || effect.type === "standard";
 	}
 }

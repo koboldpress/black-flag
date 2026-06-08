@@ -5,6 +5,7 @@ import DescriptionTemplate from "./templates/description-template.mjs";
 import IdentifiableTemplate from "./templates/identifiable-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
+import TypeTemplate from "./templates/type-template.mjs";
 
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -15,6 +16,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @mixes {IdentifiableTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ * @mixes {TypeTemplate}
  *
  * @property {object} damage
  * @property {DamageField} damage.base - Base ammunition damage.
@@ -29,7 +31,8 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	DescriptionTemplate,
 	IdentifiableTemplate,
 	PhysicalTemplate,
-	PropertiesTemplate
+	PropertiesTemplate,
+	TypeTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
@@ -92,8 +95,8 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get validCategories() {
+	/** @override */
+	static get validCategories() {
 		return CONFIG.BlackFlag.ammunition;
 	}
 

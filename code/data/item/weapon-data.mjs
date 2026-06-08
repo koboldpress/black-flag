@@ -14,6 +14,7 @@ import IdentifiableTemplate from "./templates/identifiable-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
+import TypeTemplate from "./templates/type-template.mjs";
 
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -25,6 +26,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  * @mixes {ProficiencyTemplate}
  * @mixes {PropertiesTemplate}
+ * @mixes {TypeTemplate}
  *
  * @property {object} ammunition
  * @property {number} ammunition.capacity - Number of shots that can be held in a weapon with the magazine property.
@@ -49,7 +51,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 	IdentifiableTemplate,
 	PhysicalTemplate,
 	ProficiencyTemplate,
-	PropertiesTemplate
+	PropertiesTemplate,
+	TypeTemplate
 ) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
@@ -273,7 +276,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	get validCategories() {
+	static get validCategories() {
 		return CONFIG.BlackFlag.weapons;
 	}
 
@@ -282,6 +285,13 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @override */
 	get validOptions() {
 		return CONFIG.BlackFlag.weaponOptions;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static get validTypes() {
+		return CONFIG.BlackFlag.weaponTypes;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
