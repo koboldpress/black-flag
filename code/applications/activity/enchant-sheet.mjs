@@ -126,7 +126,8 @@ export default class EnchantSheet extends ActivitySheet {
 			type: "enchantment",
 			name: name || this.item.name,
 			img: img || this.item.img,
-			disabled: true
+			disabled: false,
+			transfer: false
 		};
 	}
 
