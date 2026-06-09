@@ -391,6 +391,7 @@ export default function PseudoDocumentMixin(Base) {
 		 */
 		updateSource(updates) {
 			super.updateSource(updates);
+			this.prepareData?.();
 			return this;
 		}
 
@@ -411,6 +412,7 @@ export default function PseudoDocumentMixin(Base) {
 		/**
 		 * Present a Dialog form to confirm deletion of this PseudoDocument.
 		 * @param {object} [options] - Positioning and sizing options for the resulting dialog.
+		 * @param {DocumentSheet} [options.sheet] - Sheet to display the dialog relative to for detached window handling.
 		 * @returns {Promise<PseudoDocument>} - A Promise which resolves to the deleted PseudoDocument.
 		 */
 		async deleteDialog({ sheet, ...options } = {}) {
