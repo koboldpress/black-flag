@@ -912,7 +912,7 @@
 	}
 },
 
-"BF.Armor": {
+"BF.ARMOR": {
 	"Label[one]": "Armor",
 	"Label[other]": "Armor",
 	"Category": {
@@ -927,22 +927,34 @@
 	},
 	"Details": "Armor Details",
 	"Equipped": "Equipped Armor",
-	"MagicalBonus": {
-		"Label": "Magical Bonus",
-		"Hint": "Magical bonus added to armor class."
+	"FIELDS": {
+		"armor": {
+			"requiredStrength": {
+				"label": "Required Strength"
+			},
+			"value": {
+				"label": "Armor Value"
+			}
+		},
+		"magicalBonus": {
+			"label": "Magical Bonus",
+			"hint": "Magical bonus added to armor class."
+		},
+		"modifier": {
+			"label": "Modifier",
+			"max": {
+				"label": "Maximum Modifier"
+			},
+			"min": {
+				"label": "Minimum Modifier"
+			}
+		}
 	},
 	"Modifier": {
-		"Label": "Modifier",
 		"Description": {
 			"Long": "+ {ability} modifier",
 			"Max": "{hint} (max {max})",
 			"Short": "+ {ability}"
-		},
-		"Maximum": {
-			"Label": "Maximum Modifier"
-		},
-		"Minimum": {
-			"Label": "Minimum Modifier"
 		}
 	},
 	"Notification": {
@@ -955,9 +967,6 @@
 		"Cumbersome": "Cumbersome",
 		"NaturalMaterials": "Natural Materials",
 		"Noisy": "Noisy"
-	},
-	"RequiredStrength": {
-		"Label": "Required Strength"
 	},
 	"StealthReduction": "{reduced} ({full} without heavy armor)",
 	"Type": {
@@ -974,9 +983,6 @@
 		"ScaleMail": "Scale Mail",
 		"Splint": "Splint",
 		"StuddedLeather": "Studded Leather"
-	},
-	"Value": {
-		"Label": "Armor Value"
 	}
 },
 

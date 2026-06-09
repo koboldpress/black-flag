@@ -62,11 +62,11 @@ export default class ArmorClassConfig extends BaseConfigSheet {
 				context.equipped[key] = {
 					anchor: item.toAnchor().outerHTML,
 					img: item.img,
-					magicalBonus: formatNumber(item.system.properties.has("magical") ? item.system.magicalBonus : 0, {
-						signDisplay: "always"
-					}),
+					magicalBonus: formatNumber(item.system.magicalBonus, { signDisplay: "always" }),
 					name: item.name,
-					value: formatNumber(item.system.armor.value, { signDisplay: key === "shield" ? "always" : "auto" })
+					value: formatNumber(item.system.armor.value - item.system.magicalBonus, {
+						signDisplay: key === "shield" ? "always" : "auto"
+					})
 				};
 		}
 		if (foundry.utils.isEmpty(context.equipped)) delete context.equipped;

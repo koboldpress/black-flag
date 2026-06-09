@@ -329,7 +329,7 @@ export default class PCSheet extends BaseActorSheet {
 		// Armor
 		context.traits.push({
 			key: "armor",
-			label: "BF.Armor.Label[other]",
+			label: "BF.ARMOR.Label[other]",
 			value: Trait.localizedList(proficiencies.armor.value, [], { style: "short", trait: "armor" }) || none,
 			config: "proficiency"
 		});

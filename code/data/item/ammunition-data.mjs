@@ -1,5 +1,7 @@
+import { simplifyBonus } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import { DamageField } from "../fields/_module.mjs";
+import FormulaField from "../fields/formula-field.mjs";
+import DamageField from "../fields/shared/damage-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import IdentifiableTemplate from "./templates/identifiable-template.mjs";
@@ -22,7 +24,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {DamageField} damage.base - Base ammunition damage.
  * @property {boolean} damage.replace - Does this ammunition's base damage replace the weapon's base damage
  *                                      rather than supplement it?
- * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
+ * @property {string} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {object} type
  * @property {string} type.category - Ammunition category as defined in `CONFIG.BlackFlag.ammunition`.
  */
@@ -68,7 +70,7 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 				base: new DamageField(),
 				replace: new BooleanField()
 			}),
-			magicalBonus: new NumberField({ integer: true }),
+			magicalBonus: new FormulaField({ deterministic: true }),
 			type: new SchemaField({
 				category: new StringField({ label: "BF.Equipment.Category.Label" })
 			})
@@ -130,6 +132,10 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 		this.prepareDescription();
 		this.prepareIdentifiable();
 		this.preparePhysicalLabels();
+
+		this.magicalBonus = this.magicAvailable
+			? simplifyBonus(this.magicalBonus, this.parent.getRollData({ deterministic: true }))
+			: 0;
 
 		const type = CONFIG.BlackFlag.ammunition.localized[this.type.category];
 		if (type) this.type.label = `${_loc("BF.WEAPON.Label[one]")} (${type})`;

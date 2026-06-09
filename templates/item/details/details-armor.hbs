@@ -10,14 +10,14 @@
 </fieldset>
 
 <fieldset>
-	<legend>{{ localize "BF.Armor.Details" }}</legend>
+	<legend>{{ localize "BF.ARMOR.Details" }}</legend>
 	{{#if (eq system.type.category "shield")}}
 		{{#blackFlag-formGroup "BF.Shield.Bonus.Label" classes="armor-value"}}
 			<span class="separator">+</span>
 			{{ formInput fields.armor.fields.value value=source.armor.value placeholder="2" rootId=partId }}
 		{{/blackFlag-formGroup}}
 	{{else}}
-		{{#blackFlag-formGroup "BF.Armor.Value.Label" classes="armor-value"}}
+		{{#blackFlag-formGroup "BF.ARMOR.FIELDS.armor.value.label" classes="armor-value"}}
 			{{ formInput fields.armor.fields.value value=source.armor.value rootId=partId }}
 			<span>{{ modifierHint }}</span>
 		{{/blackFlag-formGroup}}
@@ -34,7 +34,7 @@
 
 <fieldset>
 	<legend>{{ localize "BF.Override.Label[other]" }}</legend>
-	{{#blackFlag-formGroup "BF.Armor.Modifier.Label" interiorClasses="range-fields"}}
+	{{#blackFlag-formGroup "BF.ARMOR.FIELDS.modifier.label" interiorClasses="range-fields"}}
 		{{ formField fields.modifier.fields.min value=source.modifier.min placeholder=system.modifier.minPlaceholder
 		             classes="label-top" label="BF.Number.Minimum" localize=true rootId=partId }}
 		<blackFlag-icon src="systems/black-flag/artwork/interface/range-connector.svg" class="separator"></blackFlag-icon>

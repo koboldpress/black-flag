@@ -26,8 +26,8 @@ import { localizeConfig } from "../utils/_module.mjs";
 export const traits = {
 	armor: {
 		labels: {
-			title: "BF.Armor.Label[other]",
-			localization: "BF.Armor.Label"
+			title: "BF.ARMOR.Label[other]",
+			localization: "BF.ARMOR.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/armor.svg",
 		type: "proficiency",

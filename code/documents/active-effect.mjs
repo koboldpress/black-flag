@@ -207,7 +207,7 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 		const { field } = options;
 
 		// Replace value when using string interpolation syntax
-		if (field instanceof StringField && change.type === "override" && change.value.includes("{}")) {
+		if (field instanceof StringField && change.type === "override" && change.value?.includes?.("{}")) {
 			change.value = change.value.replace("{}", current ?? "");
 		}
 

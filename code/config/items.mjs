@@ -262,15 +262,15 @@ export const itemProperties = {
 
 	// Armor
 	cumbersome: {
-		label: "BF.Armor.Property.Cumbersome",
+		label: "BF.ARMOR.Property.Cumbersome",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.520mFFl9c7MsE3X5"
 	},
 	naturalMaterials: {
-		label: "BF.Armor.Property.NaturalMaterials",
+		label: "BF.ARMOR.Property.NaturalMaterials",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.DgadUc3PINhgxqT7"
 	},
 	noisy: {
-		label: "BF.Armor.Property.Noisy",
+		label: "BF.ARMOR.Property.Noisy",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.fbvoFGjhh0fwqVxI"
 	},
 

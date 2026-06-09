@@ -77,7 +77,7 @@ export default class NPCSheet extends BaseStatBlockSheet {
 
 		context.stealthLabel = formatNumber(context.system.attributes.stealth);
 		if (context.system.attributes.baseStealth)
-			context.stealthLabel = _loc("BF.Armor.StealthReduction", {
+			context.stealthLabel = _loc("BF.ARMOR.StealthReduction", {
 				reduced: context.stealthLabel,
 				full: formatNumber(context.system.attributes.baseStealth)
 			});

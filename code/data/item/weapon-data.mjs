@@ -4,10 +4,12 @@ import {
 	defaultUnit,
 	formatDistance,
 	formatNumber,
+	simplifyBonus,
 	stepDenomination
 } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import { DamageField } from "../fields/_module.mjs";
+import FormulaField from "../fields/formula-field.mjs";
+import DamageField from "../fields/shared/damage-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import IdentifiableTemplate from "./templates/identifiable-template.mjs";
@@ -33,7 +35,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
  * @property {object} damage
  * @property {DamageField} damage.base - Base weapon damage.
- * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
+ * @property {string} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {Set<string>} options - Weapon options that can be used with this weapon.
  * @property {object} range
  * @property {number} range.short - Short range of the weapon.
@@ -91,7 +93,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 			damage: new SchemaField({
 				base: new DamageField({ simple: true })
 			}),
-			magicalBonus: new NumberField({ integer: true }),
+			magicalBonus: new FormulaField({ deterministic: true }),
 			options: new SetField(new StringField()),
 			range: new SchemaField({
 				short: new NumberField({ min: 0, step: 0.1 }),
@@ -359,6 +361,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		convertAmount(this.range, "distance", { keys: ["short", "long", "reach"] });
+
+		this.magicalBonus = this.magicAvailable
+			? simplifyBonus(this.magicalBonus, this.parent.getRollData({ deterministic: true }))
+			: 0;
 
 		if (this.type.value === "melee") {
 			const unit = this.range.unit;

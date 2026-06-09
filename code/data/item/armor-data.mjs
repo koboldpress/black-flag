@@ -1,5 +1,6 @@
-import { formatNumber } from "../../utils/_module.mjs";
+import { formatNumber, simplifyBonus } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import IdentifiableTemplate from "./templates/identifiable-template.mjs";
@@ -23,7 +24,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @property {object} armor
  * @property {number} armor.value - Base armor class offered by this item.
  * @property {number} armor.requiredStrength - Strength score required to wear this armor.
- * @property {number} magicalBonus - Magical bonus added to armor class.
+ * @property {string} magicalBonus - Magical bonus added to armor class.
  * @property {object} modifier
  * @property {number} modifier.min - Minimum amount of modifier ability (usually DEX) that is contributed to AC.
  * @property {number} modifier.max - Maximum amount of modifier ability (usually DEX) that is contributed to AC.
@@ -45,7 +46,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	static LOCALIZATION_PREFIXES = ["BF.IDENTIFIABLE", "BF.SOURCE"];
+	static LOCALIZATION_PREFIXES = ["BF.ARMOR", "BF.IDENTIFIABLE", "BF.SOURCE"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -71,30 +72,20 @@ export default class ArmorData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			armor: new SchemaField({
-				value: new NumberField({ min: 0, integer: true, label: "BF.Armor.Value.Label" }),
-				requiredStrength: new NumberField({
-					min: 0,
-					integer: true,
-					label: "BF.Armor.RequiredStrength.Label"
-				})
+				value: new NumberField({ min: 0, integer: true }),
+				requiredStrength: new NumberField({ min: 0, integer: true })
 			}),
-			magicalBonus: new NumberField({
-				integer: true,
-				label: "BF.Armor.MagicalBonus.Label",
-				hint: "BF.Armor.MagicalBonus.Hint"
-			}),
+			magicalBonus: new FormulaField({ deterministic: true }),
 			modifier: new SchemaField({
 				min: new NumberField({
 					required: false,
 					initial: undefined,
-					integer: true,
-					label: "BF.Armor.Modifier.Minimum.Label"
+					integer: true
 				}),
 				max: new NumberField({
 					required: false,
 					initial: undefined,
-					integer: true,
-					label: "BF.Armor.Modifier.Maximum.Label"
+					integer: true
 				})
 			}),
 			type: new SchemaField({
@@ -194,11 +185,14 @@ export default class ArmorData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		const type = CONFIG.BlackFlag.armor.allLocalized[this.type.base ?? this.type.category];
-		if (type) this.type.label = `${_loc("BF.Armor.Label[one]")} (${type})`;
-		else this.type.label = _loc("BF.Armor.Label[one]");
+		if (type) this.type.label = `${_loc("BF.ARMOR.Label[one]")} (${type})`;
+		else this.type.label = _loc("BF.ARMOR.Label[one]");
 
 		if (!this.armor.value && this.type.category === "shield") this.armor.value = 2;
-		if (this.magicAvailable && this.magicalBonus) this.armor.value += this.magicalBonus;
+		this.magicalBonus = this.magicAvailable
+			? simplifyBonus(this.magicalBonus, this.parent.getRollData({ deterministic: true }))
+			: 0;
+		this.armor.value += this.magicalBonus;
 
 		const armorConfig = CONFIG.BlackFlag.armor[this.type.category]?.modifier;
 		this.modifier.minPlaceholder = this.modifier.maxPlaceholder = "";
@@ -225,9 +219,9 @@ export default class ArmorData extends ItemDataModel.mixin(
 				category: "armor-class",
 				section: "inventory",
 				document: this.parent.id,
-				message: _loc("BF.Armor.Notification.TooMany", {
+				message: _loc("BF.ARMOR.Notification.TooMany", {
 					type: game.i18n
-						.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
+						.localize(`BF.ARMOR.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
 						.toLowerCase()
 				})
 			});
@@ -252,9 +246,9 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 		if (!this.equipped) return;
 		if (this.proficient === false) {
-			const message = _loc("BF.Armor.Notification.NotProficient", {
+			const message = _loc("BF.ARMOR.Notification.NotProficient", {
 				type: game.i18n
-					.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
+					.localize(`BF.ARMOR.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
 					.toLowerCase()
 			});
 			this.parent.actor.notifications.set(`armor-${this.parent.id}-proficiency`, {
@@ -276,7 +270,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 				],
 				note: {
 					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
-					text: _loc("BF.Armor.Notification.NotProficientNote", { name: this.parent.name })
+					text: _loc("BF.ARMOR.Notification.NotProficientNote", { name: this.parent.name })
 				}
 			});
 		}
@@ -289,7 +283,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 				],
 				note: {
 					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
-					text: _loc("BF.Armor.Notification.Noisy")
+					text: _loc("BF.ARMOR.Notification.Noisy")
 				}
 			});
 		}
@@ -352,11 +346,11 @@ export default class ArmorData extends ItemDataModel.mixin(
 		if (this.modifier.max === 0) return "";
 
 		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
-		const hint = _loc(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
+		const hint = _loc(`BF.ARMOR.Modifier.Description.${long ? "Long" : "Short"}`, {
 			ability: _loc(ability.labels.abbreviation).toUpperCase()
 		});
 		if (!this.modifier.max) return hint;
 
-		return _loc("BF.Armor.Modifier.Description.Max", { hint, max: formatNumber(this.modifier.max) });
+		return _loc("BF.ARMOR.Modifier.Description.Max", { hint, max: formatNumber(this.modifier.max) });
 	}
 }
