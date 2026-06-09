@@ -676,11 +676,10 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 		if (!rider.activities.size && !rider.effects.size) this.unsetFlag(game.system.id, "rider");
 		else
 			this.update(
-				Object.entries(rider).reduce(
-					(updates, [key, value]) =>
-						(updates[`flags.${game.system.id}.rider.${key}`] = value.size ? Array.from(value) : _del),
-					{}
-				)
+				Object.entries(rider).reduce((updates, [key, value]) => {
+					updates[`flags.${game.system.id}.rider.${key}`] = value.size ? Array.from(value) : _del;
+					return updates;
+				}, {})
 			);
 	}
 

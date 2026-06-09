@@ -141,6 +141,43 @@ blackFlag-damageApplication {
 	}
 }
 
+blackFlag-enchantmentApplication {
+	margin: 4px;
+	margin-block-end: 0;
+
+	.drop-area {
+		display: grid;
+		gap: 4px;
+		min-block-size: 40px;
+	}
+
+	.preview {
+		--icon-fill: var(--bf-icon-color-black);
+		--icon-size: 32px;
+		align-items: center;
+		display: flex;
+		gap: 6px;
+
+		&:not(:last-child) {
+			border-block-end: 1px dotted var(--bf-border-color-blue);
+			padding-block-end: 4px;
+		}
+		.name {
+			flex: 1;
+			text-align: start;
+		}
+		button { flex: 0 0 20px; }
+	}
+
+	.count-area {
+		margin-block-start: 2px;
+		margin-inline-end: 4px;
+		font-size: var(--font-size-10);
+		text-align: end;
+		text-transform: uppercase;
+	}
+}
+
 blackFlag-effectApplication {
 	.effects .effect {
 		> button {

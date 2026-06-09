@@ -145,7 +145,7 @@ export default class EnchantActivity extends Activity {
 	 * @returns {Promise<BlackFlagActiveEffect|null>} - Created enchantment effect if the process was successful.
 	 */
 	async applyEnchantment(profileId, item, { chatMessage, strict = true } = {}) {
-		const profile = this.effects.find(p => p._id === profileId);
+		const profile = this.system.effects.find(p => p._id === profileId);
 		const effect = profile?.uuid ? await fromUuid(profile.uuid) : this.item.effects.get(profile._id);
 		if (!effect) return null;
 
@@ -158,7 +158,7 @@ export default class EnchantActivity extends Activity {
 			}
 		}
 
-		const flags = { enchantmentProfile: profile };
+		const flags = { enchantmentProfile: profileId };
 		const enchantmentData = effect
 			.clone({
 				flags: { [game.system.id]: flags },

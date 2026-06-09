@@ -460,6 +460,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			name: name || this.item.name,
 			img: img || this.item.img,
 			origin: this.item.uuid,
+			disabled: false,
 			transfer: false
 		};
 	}

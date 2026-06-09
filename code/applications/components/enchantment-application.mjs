@@ -63,7 +63,7 @@ export default class EnchantmentApplicationElement extends MessageAssociatedElem
 		if (!this.dropArea) {
 			const div = document.createElement("div");
 			div.classList.add("enchantment-control");
-			div.innerHTML = '<div class="drop-area"></div>';
+			div.innerHTML = '<div class="drop-area hint"></div>';
 			this.replaceChildren(div);
 			this.dropArea = div.querySelector(".drop-area");
 			this.addEventListener("drop", this._onDrop.bind(this));
@@ -113,11 +113,14 @@ export default class EnchantmentApplicationElement extends MessageAssociatedElem
 			Object.assign(div.querySelector("img"), { alt: item.name, src: item.img });
 			div.querySelector(".name").append(item.name);
 			if (item.isOwner) {
-				const control = document.createElement("a");
-				control.ariaLabel = _loc("BF.ENCHANTMENT.Action.Remove");
-				control.dataset.action = "removeEnchantment";
-				control.dataset.tooltip = "BF.ENCHANTMENT.Action.Remove";
-				control.innerHTML = '<i class="fa-solid fa-rotate-left" inert></i>';
+				const control = document.createElement("button");
+				control.classList.add("link-button");
+				Object.assign(control, {
+					ariaLabel: _loc("BF.ENCHANTMENT.Action.Remove"),
+					innerHTML: '<i class="fa-solid fa-rotate-left" inert></i>',
+					type: "button"
+				});
+				Object.assign(control.dataset, { action: "removeEnchantment", tooltip: "" });
 				div.append(control);
 			}
 			return div;
