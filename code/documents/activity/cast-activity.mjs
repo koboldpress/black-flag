@@ -57,6 +57,22 @@ export default class CastActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		if (this.cachedSpell) {
+			this._setOverride("activation", "casting", this.cachedSpell);
+			this._setOverride("duration", null, this.cachedSpell);
+			this._setOverride("range", null, this.cachedSpell);
+			this._setOverride("target", null, this.cachedSpell);
+		}
+
+		super.prepareFinalData();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

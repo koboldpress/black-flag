@@ -375,17 +375,18 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	 * activity with data from the item.
 	 * @param {string} activityKeyPath - Path of the property to set on the activity.
 	 * @param {string} [itemKeyPath] - Optional item key path, if different than actor key path.
+	 * @param {BlackFlagItem} [item] - Item to act as the source of the override.
 	 * @internal
 	 */
-	_setOverride(activityKeyPath, itemKeyPath) {
+	_setOverride(activityKeyPath, itemKeyPath, item = this.item) {
 		const obj = foundry.utils.getProperty(this, activityKeyPath);
 		Object.defineProperty(obj, "canOverride", {
-			value: foundry.utils.hasProperty(this.item.system, itemKeyPath ?? activityKeyPath),
+			value: foundry.utils.hasProperty(item.system, itemKeyPath ?? activityKeyPath),
 			configurable: true,
 			enumerable: false
 		});
 		if (obj.canOverride && !obj.override) {
-			foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, itemKeyPath ?? activityKeyPath));
+			foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, itemKeyPath ?? activityKeyPath));
 		}
 	}
 

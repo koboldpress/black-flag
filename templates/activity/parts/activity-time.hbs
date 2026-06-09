@@ -1,38 +1,38 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 	{{#if activity.activation.canOverride}}
-		{{ formField fields.activation.fields.override value=activity.activation.override rootId=partId }}
+		{{ formField fields.activation.fields.override value=source.activation.override rootId=partId }}
 	{{/if}}
 
 	<fieldset class="activation" {{ disabled disabled.activation }}>
 		<legend>{{ localize "BF.ACTIVATION.Label" }}</legend>
 		{{#blackFlag-formGroup "BF.ACTIVATION.Time"}}
 			{{#if activation.scalar}}
-				{{ formField fields.activation.fields.value value=source.activation.value classes="label-top" localize=true
+				{{ formField fields.activation.fields.value value=data.activation.value classes="label-top" localize=true
 				             rootId=partId }}
 			{{/if}}
-			{{ formField fields.activation.fields.type value=source.activation.type options=activation.options
+			{{ formField fields.activation.fields.type value=data.activation.type options=activation.options
 			             classes="label-top" localize=true rootId=partId }}
 		{{/blackFlag-formGroup}}
-		{{ formField fields.activation.fields.condition value=source.activation.condition
+		{{ formField fields.activation.fields.condition value=data.activation.condition
 								 localize=true rootId=partId }}
 	</fieldset>
 
 	{{#if activity.duration.canOverride}}
-		{{ formField fields.duration.fields.override value=activity.duration.override rootId=partId }}
+		{{ formField fields.duration.fields.override value=source.duration.override rootId=partId }}
 	{{/if}}
 
 	<fieldset class="duration" {{ disabled disabled.duration }}>
 		<legend>{{ localize "BF.DURATION.Label" }}</legend>
 		{{#blackFlag-formGroup "BF.DURATION.Label"}}
 			{{#if activity.duration.scalar}}
-				{{ formField fields.duration.fields.value value=source.duration.value classes="label-top" localize=true
+				{{ formField fields.duration.fields.value value=data.duration.value classes="label-top" localize=true
 				             rootId=partId }}
 			{{/if}}
-			{{ formField fields.duration.fields.unit value=source.duration.unit options=durationOptions
+			{{ formField fields.duration.fields.unit value=data.duration.unit options=durationOptions
 			             classes="label-top" localize=true rootId=partId }}
 		{{/blackFlag-formGroup}}
 		{{#if (eq activity.duration.unit "special")}}
-			{{ formField fields.duration.fields.special value=source.duration.special
+			{{ formField fields.duration.fields.special value=data.duration.special
 									localize=true rootId=partId }}
 		{{/if}}
 		{{ formField fields.duration.fields.concentration value=data.duration.concentration rootId=partId }}

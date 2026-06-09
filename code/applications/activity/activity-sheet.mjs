@@ -141,8 +141,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		context.data = {};
 		context.disabled = {};
 		for (const field of ["activation", "duration", "range", "target"]) {
-			context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
-			context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
+			context.data[field] = this.activity._source[field].override ? context.source[field] : context.inferred[field];
+			context.disabled[field] = this.activity[field].canOverride && !this.activity._source[field].override;
 		}
 
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.data.activation.type });

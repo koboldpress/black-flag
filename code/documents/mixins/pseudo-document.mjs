@@ -318,16 +318,18 @@ export default function PseudoDocumentMixin(Base) {
 			if (!context.parent) throw new Error("Cannot update pseudo documents without a parent.");
 			updates = updates.reduce((updates, data) => {
 				if (!data._id) throw new Error("ID must be provided when updating an pseudo document");
-				const c =
-					CONFIG[this.documentName].types[
-						data.type ?? context.parent.getEmbeddedDocument(this.documentName, data._id)?.type
-					];
+				const doc = context.parent.getEmbeddedDocument(this.documentName, data._id);
+				const c = CONFIG[this.documentName].types[data.type ?? doc?.type];
 				const removals = Object.entries(foundry.utils.flattenObject(data)).reduce((obj, [k, v]) => {
 					if (v instanceof foundry.data.operators.ForcedDeletion) obj[k] = _del;
 					return obj;
 				}, {});
 				updates[data._id] = foundry.utils.mergeObject(
-					c?.documentClass.cleanData(foundry.utils.expandObject(data), { partial: true }) ?? data,
+					c?.documentClass.cleanData(
+						foundry.utils.expandObject(data),
+						{ partial: true },
+						{ creation: false, model: doc, source: doc?._source }
+					) ?? data,
 					removals
 				);
 				return updates;

@@ -25,4 +25,22 @@ export class ForwardData extends ActivityDataModel {
 			})
 		};
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareData() {
+		const activity = this.item.system.activities.get(this.linked.id);
+		if (activity && activity.activation?.override) this.parent.activation = activity.toObject().activation;
+
+		super.prepareData();
+
+		Object.defineProperty(this.parent.activation, "canOverride", {
+			value: true,
+			configurable: true,
+			enumerable: false
+		});
+	}
 }

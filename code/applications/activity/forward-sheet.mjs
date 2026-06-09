@@ -79,8 +79,8 @@ export default class ForwardSheet extends ActivitySheet {
 			activation: {
 				id: "activation",
 				group: "sheet",
-				icon: "fa-solid fa-boxes-stacked",
-				label: "BF.ACTIVITY.SECTION.Consumption"
+				icon: "fa-solid fa-clapperboard",
+				label: "BF.ACTIVITY.SECTION.Activation"
 			},
 			effect: {
 				id: "effect",

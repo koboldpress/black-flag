@@ -1,3 +1,21 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	{{#if activity.activation.canOverride}}
+		{{ formField fields.activation.fields.override value=source.activation.override rootId=partId }}
+	{{/if}}
+
+	<fieldset class="activation" {{ disabled disabled.activation }}>
+		<legend>{{ localize "BF.ACTIVATION.Label" }}</legend>
+		{{#blackFlag-formGroup "BF.ACTIVATION.Time"}}
+			{{#if activation.scalar}}
+				{{ formField fields.activation.fields.value value=data.activation.value classes="label-top" localize=true
+										 rootId=partId }}
+			{{/if}}
+			{{ formField fields.activation.fields.type value=data.activation.type options=activation.options
+									 classes="label-top" localize=true rootId=partId }}
+		{{/blackFlag-formGroup}}
+		{{ formField fields.activation.fields.condition value=data.activation.condition
+								 localize=true rootId=partId }}
+	</fieldset>
+
 	{{> "systems/black-flag/templates/activity/parts/activity-consumption.hbs" }}
 </section>

@@ -68,6 +68,7 @@ export class CastData extends ActivityDataModel {
 			if (!this.parent._source.img) this.parent.img = spell.img;
 		}
 		this.parent.visibility.requireMagic = true;
+
 		super.prepareData();
 	}
 
