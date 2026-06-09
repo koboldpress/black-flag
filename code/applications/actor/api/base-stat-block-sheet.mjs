@@ -164,6 +164,7 @@ export default class BaseStatBlockSheet extends BaseActorSheet {
 		context.passive = [];
 		context.spellcasting = { uses: {} };
 		for (const item of this.actor.items) {
+			if (!this._isItemVisible(item)) continue;
 			if (item.type === "spell") {
 				const uses = item.system.uses;
 				const key = !uses.max ? "atwill" : `${uses.max}-${uses.recovery[0]?.period ?? ""}`;

@@ -127,7 +127,7 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	 */
 	get canConfigure() {
 		if (CONFIG.Activity.types[this.type]?.configurable === false) return false;
-		if (this.dependentOrigin?.disabled) return false;
+		if (this.dependentOrigin?.active === false) return false;
 		if (this.visibility?.requireIdentification && !this.item.system.identified && !game.user.isGM) return false;
 		return true;
 	}
@@ -166,7 +166,8 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	 */
 	get canUse() {
 		if (this.isRider) return false;
-		if (this.dependentOrigin?.disabled) return false;
+		if (this.dependentOrigin?.active === false) return false;
+		if (this.item.canUse === false) return false;
 		if (this.visibility?.requireAttunement && !this.item.system.attuned) return false;
 		if (this.visibility?.requireMagic && !this.item.system.magicAvailable) return false;
 		if (this.visibility?.requireIdentification && !this.item.system.identified) return false;

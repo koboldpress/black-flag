@@ -91,6 +91,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		};
 
 		for (const effect of effects) {
+			if (effect.isHidden) continue;
 			const data = {
 				...effect,
 				id: effect.id,
@@ -142,7 +143,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		};
 
 		for (const effect of effects) {
-			if (effect.dependentOrigin?.disabled) continue;
+			if (effect.dependentOrigin?.active === false) continue;
 			const data = {
 				...effect,
 				id: effect.id
@@ -263,8 +264,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 * @protected
 	 */
 	_onAddEffect(target) {
-		const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
-		const isEnchantment = section.startsWith("enchantment");
+		const { section } = event.target.closest("[data-section]")?.dataset ?? {};
+		const isEnchantment = section?.startsWith("enchantment");
 		const isItem = this.document instanceof Item;
 		this.document.createEmbeddedDocuments("ActiveEffect", [
 			{

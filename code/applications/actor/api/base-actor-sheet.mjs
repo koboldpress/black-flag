@@ -274,6 +274,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	 */
 	_isItemVisible(item) {
 		const origin = item.dependentOrigin;
+		if (this.actor.hiddenItems.has(item.id)) return false;
 		if (origin?.active === false && origin.parent !== item) return false;
 		return true;
 	}

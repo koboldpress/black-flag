@@ -47,6 +47,28 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Should this item's uses be able to be recovered?
+	 * @type {boolean}
+	 */
+	get canRecover() {
+		if (this.actor?.hiddenItems.has(this.id)) return false;
+		if (this.dependentOrigin?.active === false) return false;
+		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Should this item be able to be used?
+	 * @type {boolean}
+	 */
+	get canUse() {
+		return this.canRecover;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Tags that should be displayed in chat.
 	 * @type {Map<string, string>}
 	 */

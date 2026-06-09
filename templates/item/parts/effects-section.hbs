@@ -1,4 +1,4 @@
-<fieldset data-section-id="{{ section.id }}">
+<fieldset data-section="{{ section.id }}">
 	<legend>
 		{{ localize section.label }}
 		{{#if @root.editable}}
@@ -9,7 +9,7 @@
 		{{/if}}
 	</legend>
 
-	<table class="fieldset-table" data-section-id="{{ section.id }}">
+	<table class="fieldset-table" data-section="{{ section.id }}">
 		<thead>
 			<tr>
 				<th scope="col" class="effect-name">{{ localize "Name" }}</th>

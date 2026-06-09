@@ -45,6 +45,14 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * List of IDs of items that should be hidden on the sheet.
+	 * @type {Set<string>}
+	 */
+	hiddenItems = this.hiddenItems;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Mapping of item identifiers to the items.
 	 * @type {IdentifiedItemsMap<string, Set<BlackFlagItem>>}
 	 */
@@ -80,8 +88,19 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	prepareData() {
+	_clearData() {
+		super._clearData();
+
+		this.hiddenItems = new Set();
+		this.identifiedItems = new IdentifiedItemsMap();
 		this.notifications = new NotificationsCollection();
+		this.sourcedItems = new SourcedItemsMap();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareData() {
 		super.prepareData();
 		this.items.forEach(i => i.system.prepareFinalData?.());
 		this.system.prepareNotifications?.();
@@ -91,8 +110,6 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 
 	/** @inheritDoc */
 	prepareEmbeddedDocuments() {
-		this.identifiedItems = new IdentifiedItemsMap();
-		this.sourcedItems = new SourcedItemsMap();
 		this._embeddedPreparation = true;
 		super.prepareEmbeddedDocuments();
 		this._embeddedPreparation = false;
@@ -133,7 +150,6 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 	 * Apply any transformations to the Actor which are caused by dynamic Advancement.
 	 */
 	applyAdvancementEffects() {
-		const cls = getDocumentClass("ActiveEffect");
 		const overrides = {};
 
 		const levels = [
@@ -853,8 +869,7 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 		result.itemUpdates = [];
 		result.rolls ??= [];
 		for (const item of this.items) {
-			if (item.dependentOrigin?.active === false || foundry.utils.getType(item.system.recoverUses) !== "function")
-				continue;
+			if (!item.canRecover || foundry.utils.getType(item.system.recoverUses) !== "function") continue;
 			const { updates, rolls } = await item.system.recoverUses(restConfig.recoverPeriods, rollData);
 			if (foundry.utils.isEmpty(updates)) continue;
 			const updateTarget = result.itemUpdates.find(i => i._id === item.id);

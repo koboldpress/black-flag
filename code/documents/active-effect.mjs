@@ -53,7 +53,7 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	 * @type {string}
 	 */
 	get applicableType() {
-		return this.system.applicableType ?? "Actor";
+		return this.isHidden ? "" : this.system.applicableType ?? "Actor";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -77,6 +77,20 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	 */
 	get isAppliedEnchantment() {
 		return this.type === "enchantment" && this.system.applied;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Should this active effect be hidden and disabled?
+	 * @type {boolean}
+	 */
+	get isHidden() {
+		// TODO: Currently whether an active effect is applied if its item is hidden is dependent on
+		// the other in which effects are applied. The hiding items step should be moved to a separate
+		// active effect application pass before the `initial` phase to ensure items are hidden before
+		// any other effect changes can be applied.
+		return this.dependentOrigin?.active === false || (this.item && this.actor?.hiddenItems.has(this.item.id));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -152,9 +166,7 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 		// Handle special actor flags
 		if (change.key.startsWith(`flags.${game.system.id}.`)) {
 			const config = CONFIG.BlackFlag.actorFlags[change.key.replace(`flags.${game.system.id}.`, "")];
-			// TODO: Make sure this actually works
 			if (config?.actorTypes.has(model.type)) options.field = config.field;
-			// if (config?.actorTypes.has(doc.type)) return this.constructor.applyField(doc, change, config.field);
 		}
 
 		// Properly handle formulas that don't exist as part of the data model
@@ -169,6 +181,18 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 			model instanceof Item
 		) {
 			return change.effect.applyActivity(model, change);
+		}
+
+		// Handle hiding items
+		if (change.key === "items.hidden" && model instanceof Actor) {
+			if (change.type === "add") {
+				if (model.items.has(change.value)) model.hiddenItems.add(change.value);
+				else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.add(i.id));
+			} else if (change.type === "subtract") {
+				if (model.items.has(change.value)) model.hiddenItems.delete(change.value);
+				else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.delete(i.id));
+			}
+			return;
 		}
 
 		return super.applyChange(model, change, options);
