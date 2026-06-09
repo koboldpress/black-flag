@@ -1,11 +1,11 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
-	{{#if activity.range.canOverride}}
+	{{#if (or activity.range.canOverride activity.isRider)}}
 		{{ formField fields.range.fields.override value=source.range.override rootId=partId }}
 	{{/if}}
 
 	{{> "systems/black-flag/templates/shared/parts/activity-range.hbs" range=activity.range }}
 
-	{{#if activity.target.canOverride}}
+	{{#if (or activity.target.canOverride activity.isRider)}}
 		{{ formField fields.target.fields.override value=source.target.override rootId=partId }}
 	{{/if}}
 

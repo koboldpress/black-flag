@@ -1,5 +1,5 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
-	{{#if activity.activation.canOverride}}
+	{{#if (or activity.activation.canOverride activity.isRider)}}
 		{{ formField fields.activation.fields.override value=source.activation.override rootId=partId }}
 	{{/if}}
 

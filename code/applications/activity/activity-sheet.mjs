@@ -142,7 +142,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		context.disabled = {};
 		for (const field of ["activation", "duration", "range", "target"]) {
 			context.data[field] = this.activity._source[field].override ? context.source[field] : context.inferred[field];
-			context.disabled[field] = this.activity[field].canOverride && !this.activity._source[field].override;
+			context.disabled[field] =
+				this.activity[field].canOverride && !this.activity._source[field].override && !this.activity.isRider;
 		}
 
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.data.activation.type });
@@ -174,7 +175,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			...CONFIG.BlackFlag.distanceUnits.localizedOptions
 		];
 
-		context.showPrimaryActivation = this.activity.isSpell;
+		context.showPrimaryActivation = this.activity.isSpell || this.activity.isRider;
 
 		context.usesRecovery = (context.activity.uses?.recovery ?? []).map((data, index) => ({
 			data,

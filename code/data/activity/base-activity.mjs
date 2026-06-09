@@ -186,7 +186,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	 * @type {boolean}
 	 */
 	get isRider() {
-		return this.item.flags[game.system.id]?.rider?.activities?.includes(this.id);
+		return this.item.flags[game.system.id]?.rider?.activities?.includes(this.id) ?? false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -385,7 +385,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			configurable: true,
 			enumerable: false
 		});
-		if (obj.canOverride && !obj.override) {
+		if (obj.canOverride && !obj.override && !this.isRider) {
 			foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, itemKeyPath ?? activityKeyPath));
 		}
 	}

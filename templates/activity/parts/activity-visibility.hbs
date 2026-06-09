@@ -7,7 +7,7 @@
 		<blackFlag-icon src="systems/black-flag/artwork/interface/range-connector.svg" class="separator"></blackFlag-icon>
 		{{ formInput fields.visibility.fields.level.fields.max value=source.visibility.level.max placeholder="∞" }}
 	{{/blackFlag-formGroup}}
-	{{#unless activity.isSpell}}
+	{{#if (or (not activity.isSpell) activity.isRider)}}
 	{{ formField fields.visibility.fields.identifier value=source.visibility.identifier rootId=partId }}
-	{{/unless}}
+	{{/if}}
 </fieldset>
