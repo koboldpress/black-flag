@@ -137,15 +137,16 @@ export default class EnchantActivity extends Activity {
 
 	/**
 	 * Apply an enchantment to the provided item.
-	 * @param {string} profile - ID of the enchantment profile to apply.
+	 * @param {string} profileId - ID of the enchantment profile to apply.
 	 * @param {BlackFlagItem} item - Item to which to apply the enchantment.
 	 * @param {object} [options={}]
 	 * @param {BlackFlagChatMessage} [options.chatMessage] - Chat message used to make the enchantment, if applicable.
 	 * @param {boolean} [options.strict] - Display UI errors and prevent creation if enchantment isn't allowed.
 	 * @returns {Promise<BlackFlagActiveEffect|null>} - Created enchantment effect if the process was successful.
 	 */
-	async applyEnchantment(profile, item, { chatMessage, strict = true } = {}) {
-		const effect = this.item.effects.get(profile); // TODO: Support remote effects
+	async applyEnchantment(profileId, item, { chatMessage, strict = true } = {}) {
+		const profile = this.effects.find(p => p._id === profileId);
+		const effect = profile?.uuid ? await fromUuid(profile.uuid) : this.item.effects.get(profile._id);
 		if (!effect) return null;
 
 		// Validate against the enchantment's restraints on the origin item
@@ -162,7 +163,7 @@ export default class EnchantActivity extends Activity {
 			.clone({
 				flags: { [game.system.id]: flags },
 				origin: this.uuid,
-				system: { appliedOrigin: this.uuid }
+				system: { applied: true }
 			})
 			.toObject();
 

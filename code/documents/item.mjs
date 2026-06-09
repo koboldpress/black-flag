@@ -666,7 +666,7 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 	#updateRiderFlags() {
 		const rider = this.effects.reduce(
 			(rider, effect) => {
-				if (effect.type !== "enchantment" || effect.system.isApplied) return rider;
+				if (effect.type !== "enchantment" || effect.system.applied) return rider;
 				effect.system.rider.activities.forEach(a => rider.activities.add(a));
 				effect.system.rider.effects.forEach(a => rider.effects.add(a));
 				return rider;

@@ -41,9 +41,10 @@ export function _migrate() {
  * @param {object} [options={}]
  * @param {boolean} [options.bypassVersionCheck=false] - Bypass certain migration restrictions gated behind system
  *                                                       version stored in item stats.
+ * @param {boolean} [options.debug] - Log raw update operations to the console.
  * @returns {Promise}
  */
-export async function migrateWorld({ bypassVersionCheck = false } = {}) {
+export async function migrateWorld({ bypassVersionCheck = false, debug = false } = {}) {
 	const version = game.system.version;
 	const progress = ui.notifications.info("BF.Migration.World.Begin", {
 		console: false,
@@ -83,33 +84,49 @@ export async function migrateWorld({ bypassVersionCheck = false } = {}) {
 			.map(d => [d, true])
 			.concat(Array.from(collection.invalidDocumentIds).map(id => [collection.getInvalid(id), false]));
 		const operations = [];
-		const mergeOptions = { inplace: false, applyOperators: true };
-		log(`Migrating ${documents.length} ${documentName} documents in World`);
-		for (const [doc, valid] of documents) {
-			try {
-				const options = { bypassVersionCheck, logError, incrementProgress, operations, persistSourceMigration: false };
-				const source = valid ? doc.toObject() : game.data[documentClass.collection].find(d => d._id === doc.id);
-				let updateData = migrate(doc, source, options);
-				if (foundry.utils.isEmpty(updateData)) continue;
+		let count = 0;
+		log(`Checking ${documents.length} ${documentName} documents in World for migration`, { level: "groupCollapsed" });
 
-				log(`Migrating ${documentName} document ${doc.name} [${doc.uuid}]`);
-				if (options.persistSourceMigration) updateData = _persistUpdates(documentClass, source, updateData);
-				operations.push({
-					action: "update",
-					documentName,
-					updates: [{ _id: doc.id, ...updateData }],
-					diff: valid && !options.persistSourceMigration,
-					recursive: !options.persistSourceMigration
-				});
-			} catch (err) {
-				logError(err, documentName, doc.name);
-			} finally {
-				incrementProgress();
+		try {
+			for (const [doc, valid] of documents) {
+				try {
+					const options = {
+						bypassVersionCheck,
+						logError,
+						incrementProgress,
+						operations,
+						persistSourceMigration: false
+					};
+					const source = valid ? doc.toObject() : game.data[documentClass.collection].find(d => d._id === doc.id);
+					let updateData = migrate(doc, source, options);
+					if (foundry.utils.isEmpty(updateData)) continue;
+
+					log(`Migrating ${documentName} document ${doc.name} [${doc.uuid}]`);
+					updateData._stats = { systemVersion: game.system.version };
+					if (options.persistSourceMigration) updateData = _persistUpdates(documentClass, source, updateData);
+					operations.push({
+						action: "update",
+						documentName,
+						updates: [{ _id: doc.id, ...updateData }],
+						diff: valid && !options.persistSourceMigration,
+						recursive: !options.persistSourceMigration
+					});
+					count++;
+				} catch (err) {
+					logError(err, documentName, doc.name);
+				} finally {
+					incrementProgress();
+				}
 			}
+		} finally {
+			console.groupEnd();
 		}
 
-		await foundry.documents.modifyBatch(operations);
-		log(`Migrated all ${documentName} documents in World`);
+		if (operations.length) {
+			if (debug) console.log(operations);
+			await foundry.documents.modifyBatch(operations);
+			if (count > 0) log(`Migrated ${count} ${documentName} documents in World`);
+		}
 	}
 
 	// Migrate Compendium Packs
@@ -131,11 +148,15 @@ export async function migrateWorld({ bypassVersionCheck = false } = {}) {
  * @param {object} [options={}]
  * @param {boolean} [options.bypassVersionCheck=false] - Bypass certain migration restrictions gated behind system
  *                                                       version stored in document stats.
+ * @param {boolean} [options.debug] - Log raw update operations to the console.
  * @param {Function} [options.incrementProgress] - Function that can be called to increment the global progress bar.
  * @param {boolean} [options.strict=false] - Migrate errors should stop the whole process.
  * @returns {Promise}
  */
-export async function migrateCompendium(pack, { bypassVersionCheck = false, incrementProgress, strict = false } = {}) {
+export async function migrateCompendium(
+	pack,
+	{ bypassVersionCheck = false, debug = false, incrementProgress, strict = false } = {}
+) {
 	const migrate = migrationMethods.get(pack.documentName);
 	if (!migrate) return;
 
@@ -150,53 +171,60 @@ export async function migrateCompendium(pack, { bypassVersionCheck = false, incr
 		hasErrors = true;
 	};
 
-	// Unlock the pack for editing
 	const wasLocked = pack.locked;
 	try {
 		await pack.configure({ locked: false });
 		game.compendiumArt.enabled = false;
 
-		// Begin by requesting server-side data model migration and get the migrated content
 		const documents = await pack.getDocuments();
-		const mergeOptions = { inplace: false, applyOperators: true };
 		const operations = [];
-		log(`Migrating ${documents.length} ${pack.documentName} documents in Compendium ${pack.collection}`);
+		let count = 0;
+		log(`Checking ${documents.length} ${pack.documentName} documents in Compendium ${pack.collection}`, {
+			level: "groupCollapsed"
+		});
 
-		// Iterate over compendium entries - applying fine-tuned migration functions
-		for (let doc of documents) {
-			try {
-				const options = { bypassVersionCheck, logError, operations, persistSourceMigration: false };
-				const source = doc.toObject();
-				let updateData = migrate(doc, source, options);
-				if (foundry.utils.isEmpty(updateData)) continue;
+		try {
+			for (let doc of documents) {
+				try {
+					const options = { bypassVersionCheck, logError, operations, persistSourceMigration: false };
+					const source = doc.toObject();
+					let updateData = migrate(doc, source, options);
+					if (foundry.utils.isEmpty(updateData)) continue;
 
-				log(`Migrating ${pack.documentName} document ${doc.name} in Compendium ${pack.collection}`);
-				if (options.persistSourceMigration) updateData = _persistUpdates(pack.documentClass, source, updateData);
-				operations.push({
-					action: "update",
-					documentName: pack.documentName,
-					updates: [{ _id: doc.id, ...updateData }],
-					pack: pack.metadata.id,
-					diff: !options.persistSourceMigration,
-					recursive: !options.persistSourceMigration
-				});
-			} catch (err) {
-				logError(err, pack.documentName, doc.name);
-				if (strict) {
-					progress.element?.classList.add("error");
-					progress.update({ format, message: "BF.Migration.Compendium.Failed" });
-					throw err;
+					log(`Migrating ${pack.documentName} document ${doc.name} in Compendium ${pack.collection}`);
+					updateData._stats = { systemVersion: game.system.version };
+					if (options.persistSourceMigration) updateData = _persistUpdates(pack.documentClass, source, updateData);
+					operations.push({
+						action: "update",
+						documentName: pack.documentName,
+						updates: [{ _id: doc.id, ...updateData }],
+						pack: pack.metadata.id,
+						diff: !options.persistSourceMigration,
+						recursive: !options.persistSourceMigration
+					});
+					count++;
+				} catch (err) {
+					logError(err, pack.documentName, doc.name);
+					if (strict) {
+						progress.element?.classList.add("error");
+						progress.update({ format, message: "BF.Migration.Compendium.Failed" });
+						throw err;
+					}
+				} finally {
+					incrementProgress?.();
+					progress.update({ pct: ++migrated / pack.index.size });
 				}
-			} finally {
-				incrementProgress?.();
-				progress.update({ pct: ++migrated / pack.index.size });
 			}
+		} finally {
+			console.groupEnd();
 		}
 
-		await foundry.documents.modifyBatch(operations);
-		log(`Migrated all ${pack.documentName} documents in Compendium ${pack.collection}`);
+		if (operations.length) {
+			if (debug) console.log(operations);
+			await foundry.documents.modifyBatch(operations);
+			if (count > 0) log(`Migrated ${count} ${pack.documentName} documents in Compendium ${pack.collection}`);
+		}
 	} finally {
-		// Apply the original locked status for the pack
 		await pack.configure({ locked: wasLocked });
 		game.compendiumArt.enabled = true;
 	}
@@ -243,6 +271,20 @@ function migrateActor(actor, source, options = {}) {
  */
 function migrateActiveEffect(effect, source, options = {}) {
 	const updateData = {};
+	const systemVersion = effect._stats.systemVersion ?? effect.parent?._stats.systemVersion;
+
+	// Migrate enchantment active
+	// Added in 3.0.075
+	if (
+		_checkVersion("3.0.075", systemVersion, options.bypassVersionCheck) &&
+		effect.type === "enchantment" &&
+		effect.origin &&
+		effect.origin !== effect.item?.uuid &&
+		!effect.system.applied
+	) {
+		foundry.utils.setProperty(updateData, "system.applied", true);
+	}
+	updateData.__something__ = "else";
 
 	return updateData;
 }
@@ -330,6 +372,24 @@ function migrateScene(scene, source, options = {}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Check to see if a document was updated before a specific version, respecting the version check flag.
+ * @param {string} highestVersion - Version at which the migration won't occur.
+ * @param {string} documentVersion - Version of the document.
+ * @param {boolean|string} [bypassVersionCheck=false] - Bypass the version check. Can be `true` to bypass all
+ *                                                      version checks or a string matching a specific version.
+ * @returns {boolean} - Should the migration be performed.
+ */
+function _checkVersion(highestVersion, documentVersion, bypassVersionCheck = false) {
+	return (
+		bypassVersionCheck === true ||
+		bypassVersionCheck === highestVersion ||
+		foundry.utils.isNewerVersion(highestVersion, documentVersion)
+	);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Count the number of documents that are in the world needing migration.
  * @returns {number}
  */
@@ -382,6 +442,7 @@ function _migrateEmbeddedDocuments(documentName, parent, source, options = {}) {
  * @param {object} source - Document's raw source data.
  * @param {object} updateData - The update data to apply.
  * @param {object} [mergeOptions={}] - Options used for the merging.
+ * @returns {object}
  */
 function _persistUpdates(documentClass, source, updateData, mergeOptions = { inplace: false, applyOperators: true }) {
 	for (const collectionName of Object.values(documentClass.metadata.embedded)) {

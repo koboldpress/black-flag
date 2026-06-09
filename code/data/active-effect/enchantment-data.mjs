@@ -1,12 +1,12 @@
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import DependentsField from "./fields/dependents-field.mjs";
 
-const { BooleanField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * Data definition for Enchantment active effects.
  *
- * @property {string} appliedOrigin - Activity or item that applied this enchantment.
+ * @property {boolean} applied - Should this enchantment be applied.
  * @property {object} dependent
  * @property {DependentData[]} dependent.activities - Rider activities added by this enchantment (deprecated).
  * @property {DependentData[]} dependent.effects - Rider effects added by this enchantment (deprecated).
@@ -43,7 +43,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
-			appliedOrigin: new DocumentUUIDField(),
+			applied: new BooleanField(),
 			dependent: new SchemaField({
 				activities: new DependentsField({ type: "Activity" }),
 				effects: new DependentsField({ type: "ActiveEffect" })
@@ -62,7 +62,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 
 	/** @override */
 	get applicableType() {
-		return this.isApplied ? "Item" : "";
+		return this.applied ? "Item" : "";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -72,8 +72,11 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	 * @type {boolean}
 	 */
 	get isApplied() {
-		return !!this.parent.origin && this.parent.origin !== this.item?.uuid;
-		// return !!this.appliedOrigin;
+		foundry.utils.logCompatibilityWarning(
+			"The `isApplied` getter has been deprecated and replaced with the `applied` property.",
+			{ since: "Black Flag 3.0", until: "Black Flag 4.0" }
+		);
+		return this.applied;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -93,9 +96,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
-		if (this.isApplied && this.parent.uuid) {
-			BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
-		}
+		if (this.applied && this.parent.uuid) BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -166,7 +167,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	onRenderActiveEffectConfig(app, html, context) {
 		const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
 		toRemove.forEach(f => f.remove());
-		if (this.isApplied) return;
+		if (this.applied) return;
 
 		// Add rider inputs
 		const toAdd = [];
@@ -209,10 +210,6 @@ export default class EchantmentData extends ActiveEffectDataModel {
 			ui.notifications.error("BF.ENCHANTMENT.Warning.NotOnActor", { localize: true });
 			return false;
 		}
-		if (this.isApplied) {
-			this.parent.updateSource({ disabled: false });
-			// TODO: Validate enchantment restrictions
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -220,7 +217,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	/** @inheritDoc */
 	_onCreate(data, options, userId) {
 		super._onCreate(data, options, userId);
-		if (this.isApplied) BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+		if (this.applied) BlackFlag.registry.enchantments.track(this.parent.origin, this.parent.uuid);
 		const chatMessageOrigin = options[game.system.id]?.chatMessageOrigin;
 		if (chatMessageOrigin) {
 			// TODO: Make this work with detached windows
@@ -235,7 +232,7 @@ export default class EchantmentData extends ActiveEffectDataModel {
 	/** @inheritDoc */
 	_onDelete(options, userId) {
 		super._onDelete(options, userId);
-		if (this.isApplied) BlackFlag.registry.enchantments.untrack(this.parent.origin, this.parent.uuid);
+		if (this.applied) BlackFlag.registry.enchantments.untrack(this.parent.origin, this.parent.uuid);
 		// TODO: Make this work with detached windows
 		document.body
 			.querySelectorAll(`blackFlag-enchantmentApplication:has([data-enchantment-uuid="${this.parent.uuid}"]`)
