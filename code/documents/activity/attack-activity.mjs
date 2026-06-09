@@ -420,12 +420,15 @@ export default class AttackActivity extends Activity {
 		// Handle ammunition
 		const ammo = config.ammunition?.system;
 		if (ammo) {
-			// TODO: Set magical property on damage parts once supported
+			// Add magical property from ammunition to damage properties
+			if (ammo.properties.has("magical") && !this.item.system.properties?.has("magical")) {
+				rollConfig.rolls.forEach(r => (r.options.magical = true));
+			}
 
 			// Add the ammunition's damage
 			if (ammo.damage.base.formula) {
 				const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-				const damage = ammo.damage.base.clone(ammo.damage.base);
+				const damage = ammo.damage.base.clone(ammo.damage.base.toObject(false));
 				const rollData = this.getRollData();
 
 				// If mode is "replace" and base part is present, replace the base part

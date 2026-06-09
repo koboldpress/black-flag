@@ -40,10 +40,11 @@ blackFlag-damageApplication {
 	.targets {
 		.target {
 			.change-source {
-				width: 13px;
-				height: 13px;
 				--icon-fill: var(--bf-icon-color-black);
 				--icon-size: 13px;
+				inline-size: var(--icon-size);
+				block-size: var(--icon-size);
+				min-block-size: unset;
 				padding: 0;
 				border-radius: 4px;
 				display: grid;
@@ -51,10 +52,7 @@ blackFlag-damageApplication {
 				justify-content: center;
 				font-size: inherit;
 				> * { grid-area: overlay; }
-				> blackFlag-icon {
-					display: block;
-					margin-block-start: -6px;
-				}
+				> blackFlag-icon { display: block; }
 				> i { color: red; }
 				&:not([aria-pressed="true"]) .fa-slash { display: none; }
 				&:not([aria-pressed="mixed"]) .fa-arrow-turn-down { display: none; }

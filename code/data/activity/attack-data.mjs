@@ -191,7 +191,7 @@ export class AttackData extends ActivityDataModel {
 	/** @inheritDoc */
 	prepareFinalData() {
 		if (this.damage.includeBase && this.item.system.damage?.base?.formula) {
-			const basePart = this.item.system.damage.base.clone();
+			const basePart = this.item.system.damage.base.clone(this.item.system.damage.base.toObject(false));
 			basePart.base = true;
 			basePart.locked = true;
 			this.damage.parts.unshift(basePart);
