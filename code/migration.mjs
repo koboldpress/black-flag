@@ -284,7 +284,6 @@ function migrateActiveEffect(effect, source, options = {}) {
 	) {
 		foundry.utils.setProperty(updateData, "system.applied", true);
 	}
-	updateData.__something__ = "else";
 
 	return updateData;
 }

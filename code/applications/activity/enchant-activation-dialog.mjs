@@ -36,9 +36,7 @@ export default class EnchantActivationDialog extends ActivityActivationDialog {
 						return {
 							value: e._id,
 							label:
-								e._id === existingProfile
-									? _loc("DND5E.ENCHANT.Enchantment.Active", { name: effect.name })
-									: effect.name
+								e._id === existingProfile ? _loc("BF.ENCHANT.Enchantment.Active", { name: effect.name }) : effect.name
 						};
 					})
 				)
