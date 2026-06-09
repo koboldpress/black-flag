@@ -264,6 +264,13 @@ export function registerSettings() {
 		default: true,
 		type: Boolean
 	});
+	game.settings.register(game.system.id, "_lastMigratedVersion", {
+		name: "Last System Version Migrated",
+		scope: "world",
+		config: false,
+		type: String,
+		default: ""
+	});
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

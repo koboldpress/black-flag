@@ -14,6 +14,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as enrichers from "./enrichers.mjs";
+import * as migration from "./migration.mjs";
 import { registerModuleData, setupModulePacks } from "./module-registration.mjs";
 import { default as registry } from "./registry.mjs";
 import * as settings from "./settings.mjs";
@@ -28,6 +29,7 @@ globalThis.BlackFlag = {
 	dice,
 	documents,
 	enrichers,
+	migration,
 	modules: {},
 	registry,
 	settings,
@@ -149,12 +151,14 @@ Hooks.once("i18nInit", function () {
 	foundry.helpers.Localization.localizeDataModel(data.settings.RulesSetting);
 });
 
-Hooks.once("ready", function () {
+Hooks.once("ready", async function () {
 	// Adjust sourced items on actors now that compendium UUID redirects have been initialized
 	game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
 	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();
+
+	await migration._migrate();
 
 	if (game.user.isGM && game.settings.get(game.system.id, "_firstRun")) {
 		const welcome = new applications.WelcomeDialog();
@@ -176,4 +180,4 @@ Hooks.on("renderActiveEffectConfig", documents.BlackFlagActiveEffect.onRenderAct
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery));
 Hooks.on("renderJournalEntryPageSheet", applications.journal.BlackFlagJournalEntrySheet.onRenderJournalPageSheet);
 
-export { applications, config, data, dice, documents, enrichers, registry, settings, utils };
+export { applications, canvas, config, data, dice, documents, enrichers, migration, registry, settings, utils };
