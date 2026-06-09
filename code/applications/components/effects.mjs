@@ -127,11 +127,17 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				effects: [],
 				show: { duration: true, source: false, transfer: true }
 			},
-			enchantment: {
-				id: "enchantment",
-				label: "BF.EFFECT.Type.Enchantment[other]",
+			activeEnchantment: {
+				id: "enchantment-active",
+				label: "BF.EFFECT.Category.ActiveEnchantment",
 				effects: [],
-				show: { duration: false, source: true, transfer: false }
+				show: { duration: true, source: true, applied: true }
+			},
+			templateEnchantment: {
+				id: "enchantment-template",
+				label: "BF.EFFECT.Category.TemplateEnchantment",
+				effects: [],
+				show: { duration: false, applied: true }
 			}
 		};
 
@@ -141,8 +147,10 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				...effect,
 				id: effect.id
 			};
-			if (effect.type === "enchantment") context.enchantment.effects.push(data);
-			else context.base.effects.push(data);
+			if (effect.type === "enchantment") {
+				if (effect.system.applied) context.activeEnchantment.effects.push(data);
+				else context.templateEnchantment.effects.push(data);
+			} else context.base.effects.push(data);
 		}
 
 		return context;
@@ -220,6 +228,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		switch (action) {
 			case "add":
 				return this._onAddEffect(target);
+			case "apply":
+				return effect.update({ "system.applied": !effect.system.applied });
 			case "edit":
 			case "view":
 				return this.app._openDocumentSheet(effect);
@@ -247,19 +257,24 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 */
 	_onAddEffect(target) {
 		const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
-		const isEnchantment = section === "enchantment";
+		const isEnchantment = section.startsWith("enchantment");
 		const isItem = this.document instanceof Item;
 		this.document.createEmbeddedDocuments("ActiveEffect", [
 			{
 				type: isEnchantment ? "enchantment" : "base",
 				name: isItem ? this.document.name : _loc("BF.EFFECT.New"),
 				icon: isItem ? this.document.img : "icons/svg/aura.svg",
-				origin: isEnchantment ? undefined : this.document.uuid,
-				duration: {
-					rounds: section === "temporary" ? 1 : undefined
-				},
+				origin: section === "enchantment-template" ? undefined : this.document.uuid,
+				duration:
+					section === "temporary"
+						? {
+								units: "rounds",
+								value: 1
+							}
+						: undefined,
 				disabled: section === "inactive",
 				system: {
+					applied: section === "enchantment-active" ? true : undefined,
 					magical: isItem && this.document.system.properties?.has("magical")
 				}
 			}

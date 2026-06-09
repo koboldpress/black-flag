@@ -62,6 +62,14 @@
 										   inert></i>
 									</button>
 								{{/if}}
+								{{#if ../section.show.applied}}
+									<button class="link-button always-interactive" type="button" {{ disabled (not @root.editable) }}
+									        data-tooltip="BF.ENCHANTMENT.Action.{{ifThen system.applied 'Unapply' 'Apply'}}"
+													aria-label="{{ localize 'BF.ENCHANTMENT.Applied' }}" data-action="apply"
+													aria-pressed="{{ ifThen system.applied 'false' 'true' }}">
+										<i class="{{ ifThen system.applied 'fa-solid fa-square-rss' 'fa-regular fa-square' }}" inert></i>
+									</button>
+								{{/if}}
 								<button class="link-button" type="button" data-action="edit" data-tooltip
 												aria-label="{{ localize 'BF.EFFECT.Action.Edit' }}">
 									<i class="fa-solid fa-edit" inert></i>

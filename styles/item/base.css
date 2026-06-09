@@ -170,20 +170,20 @@
 	blackFlag-effects {
 		display: contents;
 
-		.effect-name { width: 200px; }
+		.effect-name { min-inline-size: 200px; }
 		.effect-controls {
-			width: 40px;
-			> .layout { justify-content: center; }
+			inline-size: 40px;
+			> .layout { justify-content: end; }
 		}
 	}
 }
 
 .black-flag blackFlag-advancement {
 	.advancement-title {
-		width: min(30%, 200px);
+		inline-size: min(30%, 200px);
 	}
 	.advancement-controls {
-		width: 40px;
+		inline-size: 40px;
 	}
 	tr:nth-child(even) { background: var(--bf-background-color-half-white); }
 }
