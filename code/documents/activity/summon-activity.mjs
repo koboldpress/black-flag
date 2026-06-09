@@ -425,6 +425,13 @@ export default class SummonActivity extends Activity {
 			}
 		}
 
+		// Add temp HP
+		if (this.system.tempHP) {
+			const tempHP = new Roll(this.system.tempHP, rollData);
+			await tempHP.evaluate();
+			actorUpdates["system.attributes.hp.temp"] = tempHP.total;
+		}
+
 		// Change creature size
 		if (this.system.creatureSizes.size) {
 			const size = this.system.creatureSizes.has(options.creatureSize)

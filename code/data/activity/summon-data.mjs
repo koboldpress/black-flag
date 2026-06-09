@@ -50,6 +50,7 @@ const {
  * @property {object} summon
  * @property {""|"cr"} summon.mode - Method of determining what type of creature is summoned.
  * @property {boolean} summon.prompt - Should the player be prompted to place the summons?
+ * @property {string} tempHP - Temporary HP granted to the summoned creature.
  */
 export class SummonData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -97,7 +98,8 @@ export class SummonData extends ActivityDataModel {
 			summon: new SchemaField({
 				mode: new StringField(),
 				prompt: new BooleanField({ initial: true })
-			})
+			}),
+			tempHP: new FormulaField()
 		};
 	}
 
