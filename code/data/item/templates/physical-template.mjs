@@ -331,8 +331,8 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	totalWeightIn(unit) {
 		const weight = this.totalWeight;
 		if ( weight instanceof Promise ) {
-			return weight.then(w => convertWeight(w, this.weight.unit, { legacy: false, to: unit }).value);
+			return weight.then(w => convertWeight(w, this.weight.unit, { to: unit }).value);
 		}
-		return convertWeight(weight, this.weight.unit, { legacy: false, to: unit }).value;
+		return convertWeight(weight, this.weight.unit, { to: unit }).value;
 	}
 }

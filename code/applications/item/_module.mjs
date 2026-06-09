@@ -8,8 +8,7 @@ export { default as FeatureSheet } from "./feature-sheet.mjs";
 export { default as SpellSheet } from "./spell-sheet.mjs";
 export { default as SplitStackDialog } from "./split-stack-dialog.mjs";
 
+export { default as BaseItemSheet } from "./api/base-item-sheet.mjs";
 export { default as BaseItemSheetV2 } from "./api/base-item-sheet.mjs";
 
 export { default as PrerequisiteConfig } from "./config/prerequisite-config.mjs";
-
-export { default as BaseItemSheet } from "./deprecated/base-item-sheet.mjs";

@@ -1,4 +1,9 @@
 import BaseActorSheet from "../actor/api/base-actor-sheet.mjs";
+import BFApplication from "../api/application.mjs";
+
+/**
+ * @import { AdvancementLevels } from "../../documents/advancement/advancement.mjs";
+ */
 
 /**
  * Base class for the advancement interface displayed in the progression tab that should be subclassed by
@@ -6,31 +11,62 @@ import BaseActorSheet from "../actor/api/base-actor-sheet.mjs";
  *
  * @param {BlackFlagActor} actor - Actor to which the advancement is being applied.
  * @param {Advancement} advancement - Advancement being represented.
- * @param {{character: number, class: number}} levels - Level for which to configure this flow.
+ * @param {AdvancementLevels} levels - Level for which to configure this flow.
  * @param {object} [options={}] - Application rendering options.
  */
-export default class AdvancementFlow extends FormApplication {
-	constructor(actor, advancement, levels, options = {}) {
-		foundry.utils.logCompatibilityWarning(
-			"The `AdvancementFlow` application has been deprecated and replaced with `AdvancementFlowV2`.",
-			{ since: "Black Flag 2.0", until: "Black Flag 3.0", once: true }
-		);
-		super({}, options);
-		this.#advancementId = advancement.id;
-		this.actor = actor;
-		this.item = advancement.item;
-		this.levels = levels;
+export default class AdvancementFlow extends BFApplication {
+	constructor(options, advancement, levels, _options = {}) {
+		super(options);
+		this.#advancementId = options.advancement.id;
+		this.#item = options.advancement.item;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			template: "systems/black-flag/templates/advancement/advancement-flow.hbs",
-			popOut: false,
-			closeOnSubmit: false
-		});
-	}
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			reverse: AdvancementFlow.#reverse,
+			viewItem: AdvancementFlow.#viewItem
+		},
+		advancement: null,
+		classes: ["advancement-entry"],
+		form: {
+			handler: AdvancementFlow.#handleForm,
+			submitOnChange: true
+		},
+		levels: null,
+		tag: "form",
+		window: {
+			frame: false,
+			positioned: false
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		name: {
+			classes: ["advancement-name"],
+			container: { id: "advancement-header", tag: "header" },
+			template: "systems/black-flag/templates/advancement/advancement-flow-name.hbs"
+		},
+		actions: {
+			classes: ["advancement-actions"],
+			container: { id: "advancement-header", tag: "header" },
+			template: "systems/black-flag/templates/advancement/advancement-flow-actions.hbs"
+		},
+		controls: {
+			classes: ["advancement-controls"],
+			container: { id: "advancement-header", tag: "header" },
+			template: "systems/black-flag/templates/advancement/advancement-flow-controls.hbs"
+		},
+		content: {
+			classes: ["advancement-summary"],
+			template: "systems/black-flag/templates/advancement/advancement-flow-content.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -45,55 +81,8 @@ export default class AdvancementFlow extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Actor to which the advancement is being applied.
-	 * @type {BlackFlagActor}
-	 */
-	actor;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * The item that houses the Advancement.
-	 * @type {BlackFlagItem}
-	 */
-	item;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Levels for which to configure this flow.
-	 * @type {{character: number, class: number}}
-	 */
-	levels;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Data retained by the advancement manager during a reverse step. If restoring data using
-	 * {@link Advancement#restore}, this data should be used when displaying the flow's form.
-	 * @type {object|null}
-	 */
-	retainedData = null;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get element() {
-		// Fix an issue with jQuery not being able to fetch element properly
-		if (this._element) return this._element;
-		return $(document.getElementById(this.id));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get id() {
-		return `${this.advancement.uuid}-${this.levels.character}`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get title() {
-		return this.advancement.title;
+	get actor() {
+		return this.#item.actor;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -107,44 +96,193 @@ export default class AdvancementFlow extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The item that houses the Advancement.
+	 * @type {BlackFlagItem}
+	 */
+	#item;
+
+	get item() {
+		return this.#item;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Levels for which to configure this flow.
+	 * @type {AdvancementLevels}
+	 */
+	get levels() {
+		return this.options.levels;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Initialization            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_initializeApplicationOptions(options) {
+		options = super._initializeApplicationOptions(options);
+		options.uniqueId = `${options.advancement.uuid.replace(".", "-")}#${options.levels.character}`;
+		return options;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData() {
-		const editable =
-			this.advancement.actor.sheet.isEditable && this.advancement.actor.sheet._mode === BaseActorSheet.MODES.EDIT;
+	/** @inheritDoc */
+	async _prepareContext(options) {
 		return {
-			appId: this.id,
-			accentColor: this.advancement.item.accentColor,
+			...(await super._prepareContext(options)),
 			advancement: this.advancement,
-			editable,
-			modes: { editing: editable },
-			type: this.advancement.constructor.typeName,
-			title: this.advancement.titleForLevel(this.levels, { flow: true }),
-			icon: this.advancement.icon,
-			summary: this.advancement.summaryForLevel(this.levels, { flow: true }),
-			levels: this.levels,
-			needsConfiguration: !this.advancement.configuredForLevel(this.levels),
-			warningKey: this.advancement.warningKey(this.levels)
+			editable: this.actor.sheet.isEditable && this.actor.sheet._mode === BaseActorSheet.MODES.EDIT,
+			needsConfiguration: !this.advancement.configuredForLevel(this.levels)
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "actions":
+				return this._prepareActionsContext(context, options);
+			case "content":
+				return this._prepareContentContext(context, options);
+			case "controls":
+				return this._prepareControlsContext(context, options);
+			case "name":
+				return this._prepareNameContext(context, options);
+		}
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the flow actions.
+	 * @param {Partial<ApplicationRenderContext>} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareActionsContext(context, options) {
+		context.actions = [];
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the flow contents.
+	 * @param {Partial<ApplicationRenderContext>} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareContentContext(context, options) {
+		context.summary = this.advancement.summaryForLevel(this.levels, { flow: true });
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the flow controls.
+	 * @param {Partial<ApplicationRenderContext>} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareControlsContext(context, options) {
+		context.showReverse = false;
+		context.reverseLabel = "BF.Advancement.Core.Action.Revert";
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare rendering context for the flow name.
+	 * @param {Partial<ApplicationRenderContext>} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareNameContext(context, options) {
+		context.title = this.advancement.titleForLevel(this.levels, { flow: true });
+		context.warningKey = this.advancement.warningKey(this.levels);
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Life-Cycle Handlers         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onFirstRender(context, options) {
+		await super._onFirstRender(context, options);
+		Object.assign(this.element.dataset, {
+			id: this.advancement.id,
+			level: this.level,
+			type: this.advancement.constructor.typeName
+		});
+		if (this.item.accentColor) this.element.style.setProperty("--bf-item-color", this.item.accentColor);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		html.querySelector('[data-action="reverse"]')?.addEventListener("click", event => {
-			this.advancement.reverse(this.levels);
-		});
+	/**
+	 * Handle reversing the advancement's changes.
+	 * @this {AdvancementFlow}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #reverse(event, target) {
+		this.advancement.reverse(this.levels);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _updateObject(event, formData) {
-		await this.advancement.apply(this.levels, formData);
+	/**
+	 * Handle clicking on an item to open its sheet.
+	 * @this {AdvancementFlow}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #viewItem(event, target) {
+		const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+		const item = await fromUuid(uuid);
+		item?.sheet.render(true);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Form Submission           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle submission of the form.
+	 * @this {AdvancementFlow}
+	 * @param {Event} event - Triggering event.
+	 * @param {HTMLFormElement} form - Form being handled.
+	 * @param {FormDataExtended} formData - Data for the form.
+	 */
+	static async #handleForm(event, form, formData) {
+		this._handleForm(event, formData);
+	}
+
+	/**
+	 * Handle submission of the form.
+	 * @param {Event} event - Triggering event.
+	 * @param {FormDataExtended} formData - Data for the form.
+	 * @protected
+	 */
+	async _handleForm(event, formData) {
+		await this.advancement.apply(this.levels, formData.object);
 	}
 }

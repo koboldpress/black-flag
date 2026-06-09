@@ -1,5 +1,5 @@
 import { formatNumber } from "../../utils/_module.mjs";
-import AdvancementFlow from "./advancement-flow-v2.mjs";
+import AdvancementFlow from "./advancement-flow.mjs";
 
 /**
  * Inline application that presents hit points selection upon level up.

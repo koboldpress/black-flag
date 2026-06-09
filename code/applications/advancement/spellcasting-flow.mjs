@@ -1,4 +1,4 @@
-import AdvancementFlow from "./advancement-flow-v2.mjs";
+import AdvancementFlow from "./advancement-flow.mjs";
 import SpellcastingDialog from "./spellcasting-dialog.mjs";
 
 /**

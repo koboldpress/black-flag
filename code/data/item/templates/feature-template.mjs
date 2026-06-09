@@ -46,14 +46,6 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static migrateFilterIds(source) {
-		foundry.utils.logCompatibilityWarning(
-			"`FeatureTemplate#_migrateFilterIds` has been renamed `_migrateFilterIds`.",
-			{ since: "Black Flag 2.0", until: "Black Flag 3.0", once: true }
-		);
-		this._migrateFilterIds(source);
-	}
-
 	/**
 	 * Migrate source data to an object.
 	 * Added in 0.9.031

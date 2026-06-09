@@ -137,16 +137,6 @@ export default class TargetField extends SchemaField {
 				target: this.target.affects.labels.statBlock
 			});
 		}
-		Object.defineProperty(this.target.affects, "label", {
-			get() {
-				foundry.utils.logCompatibilityWarning(
-					"`target.affects.label` has been moved to `target.affects.labels.sheet`.",
-					{ since: "Black Flag 2.0", until: "Black Flag 3.0", once: true }
-				);
-				return this.labels.sheet;
-			},
-			enumerable: false
-		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

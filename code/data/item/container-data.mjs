@@ -200,8 +200,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		if (this.parent?.pack && !this.parent?.isEmbedded) return this.#contentsWeight();
 		return this.contents.reduce(
 			(weight, item) =>
-				weight +
-				convertWeight(item.system.totalWeight, item.system.weight.unit, { legacy: false, to: this.weight.unit }).value,
+				weight + convertWeight(item.system.totalWeight, item.system.weight.unit, { to: this.weight.unit }).value,
 			0
 		);
 	}
@@ -215,8 +214,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		return contents.reduce(
 			async (weight, item) =>
 				(await weight) +
-				convertWeight(await item.system.totalWeight, item.system.weight.unit, { legacy: false, to: this.weight.unit })
-					.value,
+				convertWeight(await item.system.totalWeight, item.system.weight.unit, { to: this.weight.unit }).value,
 			0
 		);
 	}

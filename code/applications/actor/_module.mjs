@@ -13,7 +13,6 @@ export { default as BaseSelectorConfigSheet } from "./api/base-selector-config-s
 
 export { default as AbilityConfig } from "./config/ability-config.mjs";
 export { default as ArmorClassConfig } from "./config/armor-class-config.mjs";
-export { default as BaseConfig } from "./config/base-config.mjs";
 export { default as HealthConfig } from "./config/health-config.mjs";
 export { default as InitiativeConfig } from "./config/initiative-config.mjs";
 export { default as LanguageConfig } from "./config/language-config.mjs";
@@ -26,9 +25,6 @@ export { default as SensesConfig } from "./config/senses-config.mjs";
 export { default as SkillConfig } from "./config/skill-config.mjs";
 export { default as ToolConfig } from "./config/tool-config.mjs";
 export { default as TypeConfig } from "./config/type-config.mjs";
-
-export { default as BaseActorSheet } from "./deprecated/base-actor-sheet.mjs";
-export { default as BaseStatblockSheet } from "./deprecated/base-statblock-sheet.mjs";
 
 export { default as BaseRestDialog } from "./rest/base-rest-dialog.mjs";
 export { default as LongRestDialog } from "./rest/long-rest-dialog.mjs";

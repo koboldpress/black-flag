@@ -173,7 +173,7 @@ export default class BaseDataModel extends BaseDataMixin(foundry.abstract.TypeDa
 		if (keys.length) {
 			foundry.utils.logCompatibilityWarning(
 				`Automatic application of \`${startingWith}…()\` methods in BaseDataModel will no longer be supported. Switch to calling template methods directly and set \`legacyMixin\` in the template's metadata to \`false\` to hide this warning. The following methods were found: ${keys.map(k => `${this.name}${prototype ? ".prototype" : ""}.${k}()`).join(", ")}`,
-				{ since: "Black Flag 2.0", until: "Black Flag 3.0", once: true }
+				{ since: "Black Flag 2.0", until: "Black Flag 4.0", once: true }
 			);
 		}
 

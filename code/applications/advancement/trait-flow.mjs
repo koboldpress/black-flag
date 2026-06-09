@@ -1,5 +1,5 @@
 import * as Trait from "../../utils/trait.mjs";
-import AdvancementFlow from "./advancement-flow-v2.mjs";
+import AdvancementFlow from "./advancement-flow.mjs";
 
 /**
  * Inline application that presents a trait choice.

@@ -1,4 +1,3 @@
-import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 import { formatIdentifier } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
@@ -298,12 +297,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 		const FlowClass =
 			CONFIG.Advancement.types[this.type]?.sheetClasses?.flow ??
 			CONFIG.Advancement.types[CONST.BASE_DOCUMENT_TYPE].sheetClasses.flow;
-		// TODO: Remove when AdvancementFlow is removed in Black Flag 3.0
-		if (FlowClass instanceof AdvancementFlow) {
-			return new FlowClass(actor, this, levels, options);
-		} else {
-			return new FlowClass({ ...options, advancement: this, levels });
-		}
+		return new FlowClass({ ...options, advancement: this, levels });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

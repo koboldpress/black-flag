@@ -10,14 +10,6 @@ export function formatIdentifier(text, options) {
 	return text.slugify({ ...options, strict: true });
 }
 
-export function slugify(text, options) {
-	foundry.utils.logCompatibilityWarning(
-		"The `slugify` utility method has been renamed `createIdentifier`.",
-		{ since: "Black Flag 2.0", until: "Black Flag 2.2" }
-	);
-	return formatIdentifier(text, options);
-}
-
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**

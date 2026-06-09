@@ -31,14 +31,6 @@ export default class DescriptionTemplate extends foundry.abstract.DataModel {
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static migrateSource(source) {
-		foundry.utils.logCompatibilityWarning(
-			"`DescriptionTemplate#migrateSource` has been renamed `_migrateSource`.",
-			{ since: "Black Flag 2.0", until: "Black Flag 3.0", once: true }
-		);
-		this._migrateSource(source);
-	}
-
 	/**
 	 * Migrate source data to an object.
 	 * @param {object} source - The candidate source data from which the model will be constructed.

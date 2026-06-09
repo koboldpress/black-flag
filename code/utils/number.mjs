@@ -122,29 +122,11 @@ export function convertVolume(value, from, options={}) {
  * @param {number} value - The weight value being converted.
  * @param {string} from - The initial unit as defined in `CONFIG.BlackFlag.weightUnits`.
  * @param {UnitConversionOptions} [options={}]
- * @param {boolean} [options.legacy=true] - Only return converted value rather than value and unit.
  * @returns {{ value: number, unit: string }|number}
  */
 export function convertWeight(value, from, options={}) {
-	if ( foundry.utils.getType(options) !== "Object" ) {
-		foundry.utils.logCompatibilityWarning(
-			"The `to` parameter for `convertWeight` is now passed in to the options object.",
-			{ since: "Black Flag 2.0.068", until: "Black Flag 2.2", once: true }
-		);
-		options = { to: options };
-	}
-
 	const message = unit => `Weight unit ${unit} not defined in CONFIG.BlackFlag.weightUnits`;
-	const result = _convertSystemUnits(value, from, CONFIG.BlackFlag.weightUnits, { ...options, message });
-
-	if ( options.legacy !== false ) {
-		foundry.utils.logCompatibilityWarning(
-			"The `convertWeight` function has been altered to return value and units. Pass a `legacy` of `false` to the options to return the new value.",
-			{ since: "Black Flag 2.0.068", until: "Black Flag 2.2", once: true }
-		);
-		return result.value;
-	}
-	return result;
+	return _convertSystemUnits(value, from, CONFIG.BlackFlag.weightUnits, { ...options, message });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -386,20 +368,6 @@ export function formatNumber(value, options={}) {
 	return formatted;
 }
 
-/**
- * Format a number based on the current locale.
- * @param {number} value - A number for format.
- * @param {NumberFormattingOptions} [options={}] - Additional formatting options.
- * @returns {string}
- */
-export function numberFormat(value, options={}) {
-	foundry.utils.logCompatibilityWarning(
-		"The `BlackFlag.utils.numberFormat` has been renamed `BlackFlag.utils.formatNumber`.",
-		{ since: "Black Flag 2.0", until: "Black Flag 2.2" }
-	);
-	return formatNumber(value, options);
-}
-
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
@@ -411,20 +379,6 @@ export function numberFormat(value, options={}) {
 export function formatNumberParts(value, options={}) {
 	const parts = getNumberFormatter(_prepareFormattingOptions(options)).formatToParts(value);
 	return parts.reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
-}
-
-/**
- * Produce a number with the parts wrapped in their own spans.
- * @param {number} value - A number for format.
- * @param {NumberFormattingOptions} [options={}] - Additional formatting options.
- * @returns {string}
- */
-export function numberParts(value, options={}) {
-	foundry.utils.logCompatibilityWarning(
-		"The `BlackFlag.utils.numberParts` has been renamed `BlackFlag.utils.formatNumberParts`.",
-		{ since: "Black Flag 2.0", until: "Black Flag 2.2" }
-	);
-	return formatNumberParts(value, options);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
