@@ -416,7 +416,8 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	onTargetHoverIn(event) {
 		const uuid = event.currentTarget.dataset.uuid;
 		const doc = fromUuidSync(uuid);
-		const token = doc instanceof Token ? doc : doc?.token?.object ?? doc?.getActiveTokens()[0];
+		const token =
+			doc instanceof foundry.canvas.placeables.Token ? doc : doc?.token?.object ?? doc?.getActiveTokens()[0];
 		if (token && token.isVisible) {
 			if (!token.controlled) token._onHoverIn(event, { hoverOutOthers: true });
 			this._highlighted = token;
