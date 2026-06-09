@@ -170,34 +170,41 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		return [
 			{
 				label: "BF.EFFECT.Action.View",
-				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				icon: "<i class='fa-solid fa-eye'></i>",
 				visible: () => !this.isEditable,
 				onClick: (event, target) => this._onAction(target, "view", { event })
 			},
 			{
 				label: "BF.EFFECT.Action.Edit",
-				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
+				icon: "<i class='fa-solid fa-edit'></i>",
 				visible: () => this.isEditable,
 				onClick: (event, target) => this._onAction(target, "edit", { event })
 			},
 			{
 				label: "BF.EFFECT.Action.Duplicate",
-				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
+				icon: "<i class='fa-solid fa-copy'></i>",
 				visible: () => this.isEditable,
 				onClick: (event, target) => this._onAction(target, "duplicate", { event })
 			},
 			{
 				label: "BF.EFFECT.Action.Delete",
-				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
+				icon: "<i class='fa-solid fa-trash'></i>",
 				visible: () => this.isEditable,
 				onClick: (event, target) => this._onAction(target, "delete", { event }),
 				group: "destructive"
 			},
 			{
 				label: `BF.EFFECT.Action.${effect.disabled ? "Enable" : "Disable"}`,
-				icon: `<i class='fa-solid fa-${effect.disabled ? "check" : "times"} fa-fw'></i>`,
+				icon: `<i class='fa-solid fa-${effect.disabled ? "check" : "times"}'></i>`,
 				visible: () => this.isEditable,
 				onClick: (event, target) => this._onAction(target, "toggle", { event }),
+				group: "state"
+			},
+			{
+				label: `BF.ENCHANTMENT.Action.${effect.system.applied ? "Unapply" : "Apply"}`,
+				icon: "<i class='fa-solid fa-rss'></i>",
+				visible: () => effect.type === "enchantment",
+				onClick: (event, target) => this._onAction(target, "apply", { event }),
 				group: "state"
 			}
 		];
@@ -369,8 +376,9 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		const effectData = effects.map(effect => {
 			const data = effect.toObject();
 			if (effect.type === "enchantment") {
+				data.disabled = false;
 				data.origin ??= effect.item.uuid;
-				foundry.utils.setProperty(data, "system.appliedOrigin", effect.item.uuid);
+				foundry.utils.setProperty(data, "system.applied", true);
 				options[game.system.id] ??= {};
 				options[game.system.id].keepOrigin ??= [];
 				options[game.system.id].keepOrigin.push(data._id);
