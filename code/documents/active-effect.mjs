@@ -71,6 +71,16 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Is this effect an enchantment on an item that accepts enchantment?
+	 * @type {boolean}
+	 */
+	get isAppliedEnchantment() {
+		return this.type === "enchantment" && this.system.applied;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	get isSuppressed() {
 		if (super.isSuppressed) return true;

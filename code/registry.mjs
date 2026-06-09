@@ -109,7 +109,7 @@ class EnchantmentRegisty {
 		}
 		return Array.from(EnchantmentRegisty.#appliedEnchantments.get(uuid) ?? [])
 			.map(uuid => fromUuidSync(uuid))
-			.filter(effect => effect?.system.isApplied);
+			.filter(effect => effect?.isAppliedEnchantment);
 	}
 
 	/* -------------------------------------------- */
