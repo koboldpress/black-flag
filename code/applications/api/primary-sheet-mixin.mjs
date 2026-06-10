@@ -226,6 +226,32 @@ export default function PrimarySheetMixin(Base) {
 		/*         Life-Cycle Handlers         */
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/**
+		 * Add tooltips to inventory items.
+		 * @param {HTMLElement} element - The element to get a tooltip.
+		 * @protected
+		 */
+		_applyItemTooltip(element) {
+			if ("tooltip" in element.dataset) return;
+
+			const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
+			let { uuid, effectId, itemId, parentId } = target?.dataset ?? {};
+			let targetClass = "item-tooltip";
+			if (!uuid && itemId) uuid = this.actor.items.get(itemId)?.uuid;
+			else if (!uuid && effectId) {
+				const collection = parentId ? this.actor.items.get(parentId)?.effects : this.actor.effects;
+				uuid = collection.get(effectId)?.uuid;
+				targetClass = "effect-tooltip";
+			}
+			if (!uuid) return;
+
+			element.dataset.tooltip = `<section class="loading" data-uuid="${uuid}"></section>`;
+			element.dataset.tooltipClass = `black-flag black-flag-tooltip ${targetClass}`;
+			element.dataset.tooltipDirection ??= "LEFT";
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
 		/** @inheritDoc */
 		async _onRender(context, options) {
 			await super._onRender(context, options);
@@ -235,6 +261,8 @@ export default function PrimarySheetMixin(Base) {
 			this.element.classList.toggle("editable", this.isEditable && this._mode === this.constructor.MODES.EDIT);
 			this.element.classList.toggle("interactable", this.isEditable && this._mode === this.constructor.MODES.PLAY);
 			this.element.classList.toggle("locked", !this.isEditable);
+
+			for (const element of this.element.querySelectorAll(".item-tooltip")) this._applyItemTooltip(element);
 
 			if (this.document.system.color) {
 				this.element.style.setProperty("--bf-item-color", this.document.system.color);

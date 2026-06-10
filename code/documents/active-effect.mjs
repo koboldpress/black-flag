@@ -293,6 +293,45 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Embeds & Tooltips          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async richTooltip(enrichmentOptions = {}) {
+		const tags = Array.from(this.statuses)
+			.filter(s => CONFIG.statusEffects[s])
+			.map(s => ({ key: "status", label: CONFIG.statusEffects[s]?.name }));
+		if (this.duration.expired) tags.push({ label: _loc("BF.EFFECT.Status.Expired") });
+		else if (this.isSuppressed) tags.push({ label: _loc("BF.EFFECT.Status.Unavailable") });
+		else if (this.disabled) tags.push({ label: _loc("BF.EFFECT.Status.Disabled") });
+		else if (this.isTemporary) tags.push({ label: _loc("BF.EFFECT.Status.Active") });
+		else tags.push({ label: _loc("BF.EFFECT.Status.Passive") });
+		if (this.type !== "base") tags.push({ label: _loc(CONFIG.ActiveEffect.typeLabels[this.type]) });
+
+		// TODO: Add roll data to effects
+		// const rollData = this.parent.getRollData();
+		const { name, img, description, duration } = this;
+		return {
+			content: await foundry.applications.handlebars.renderTemplate(
+				"systems/black-flag/templates/active-effect/active-effect-tooltip.hbs",
+				{
+					description: await foundry.applications.ux.TextEditor.implementation.enrichHTML(description, {
+						// rollData,
+						relativeTo: this,
+						...enrichmentOptions
+					}),
+					doc: this,
+					duration: Number.isFinite(duration.value) ? duration.label : null,
+					name,
+					img,
+					tags
+				}
+			),
+			classes: ["black-flag", "black-flag-tooltip", "effect-tooltip"]
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

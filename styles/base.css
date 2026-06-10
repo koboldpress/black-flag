@@ -312,13 +312,16 @@ hr, .application hr {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 4px;
+
 	.tag {
 		border: 1px solid var(--bf-border-color-gray);
 		border-radius: 3px;
 		padding-inline: 4px;
 		background: var(--bf-background-color-half-white);
 		box-shadow: 0 1px 1px rgb(0 0 0 / 15%);
+		margin-block-end: 0;
 	}
+
 	.tag:has(.component) {
 		display: flex;
 		gap: 2px;

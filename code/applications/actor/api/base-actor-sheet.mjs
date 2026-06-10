@@ -334,35 +334,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 	/*         Life-Cycle Handlers         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Add tooltips to inventory items.
-	 * @param {HTMLElement} element - The element to get a tooltip.
-	 * @protected
-	 */
-	_applyItemTooltip(element) {
-		if ("tooltip" in element.dataset) return;
-
-		const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
-		let { uuid, effectId, itemId, parentId } = target?.dataset ?? {};
-		if (!uuid && itemId) uuid = this.actor.items.get(itemId)?.uuid;
-		else if (!uuid && effectId) {
-			const collection = parentId ? this.actor.items.get(parentId)?.effects : this.actor.effects;
-			uuid = collection.get(effectId)?.uuid;
-		}
-		if (!uuid) return;
-
-		element.dataset.tooltip = `<section class="loading" data-uuid="${uuid}"></section>`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @inheritDoc */
 	async _onRender(context, options) {
 		await super._onRender(context, options);
 
 		NotificationTooltip.activateListeners(this.actor, this.element);
-
-		for (const element of this.element.querySelectorAll(".item-tooltip")) this._applyItemTooltip(element);
 
 		// Hit Points
 		for (const element of this.element.querySelectorAll('[name$=".hp.value"]')) {

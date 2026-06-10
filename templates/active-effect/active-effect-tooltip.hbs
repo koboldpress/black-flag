@@ -1,8 +1,14 @@
 <section class="content">
 	<section class="header">
 		{{ blackFlag-icon img alt=name classes="circular icon" }}
-		<div class="name">
-			<span class="name">{{ name }}</span>
+		<div class="name name-stacked">
+			<span class="title">{{ name }}</span>
+			{{#if duration}}
+				<span class="subtitle duration">
+					<i class="fa-solid fa-clock" aria-label="{{ localize 'BF.DURATION.Label' }}"></i>
+					<span>{{ duration }}</span>
+				</span>
+			{{/if}}
 		</div>
 	</section>
 	<section class="description">{{{ description }}}</section>

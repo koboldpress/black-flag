@@ -25,7 +25,9 @@
 		z-index: calc(var(--z-index-tooltip) - 1);
 	}
 
-	&.item-tooltip {
+	&.effect-tooltip, &.item-tooltip {
+		min-inline-size: 300px;
+
 		.content {
 			display: flex;
 			flex-direction: column;
@@ -38,7 +40,8 @@
 			align-items: center;
 			gap: 8px;
 
-			.icon { inline-size: 64px; }
+			.icon { --icon-size: 64px; }
+			.name { text-align: center; }
 		}
 		.description {
 			max-block-size: 450px;

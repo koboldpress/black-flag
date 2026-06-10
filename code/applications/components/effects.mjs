@@ -96,7 +96,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				...effect,
 				id: effect.id,
 				sourceName: effect.sourceName,
-				parentId: effect.target === effect.parent ? null : effect.parent.id
+				parentId: effect.target === effect.parent ? null : effect.parent.id,
+				uuid: effect.uuid
 			};
 			if (effect.isSuppressed) {
 				data.suppressionReason = _loc("BF.EFFECT.SuppressionReason.Description", {
@@ -146,7 +147,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			if (effect.dependentOrigin?.active === false) continue;
 			const data = {
 				...effect,
-				id: effect.id
+				id: effect.id,
+				uuid: effect.uuid
 			};
 			if (effect.type === "enchantment") {
 				if (effect.system.applied) context.activeEnchantment.effects.push(data);

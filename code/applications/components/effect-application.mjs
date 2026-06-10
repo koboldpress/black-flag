@@ -100,7 +100,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		for (const effect of this.effects) {
 			const li = document.createElement("li");
 			li.classList.add("effect");
-			li.dataset.uuid = effect.uuid;
+			Object.assign(li.dataset, {
+				tooltip: `<section class="loading" data-uuid="${effect.uuid}"><i class="fa-solid fa-spinner fa-spin-pulse"></i></section>`,
+				tooltipClass: "black-flag black-flag-tooltip effect-tooltip",
+				tooltipDirection: "LEFT",
+				uuid: effect.uuid
+			});
 			li.innerHTML = `
 				<img class="icon">
 				<div class="name-stacked">

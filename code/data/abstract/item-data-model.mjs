@@ -14,7 +14,7 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @property {boolean} [hasDetails=true] - Does this item's sheet have a details tab?
 	 * @property {boolean} [hasEffects=true] - Does this item accept active effects?
 	 * @property {boolean|ItemRegistrationConfig} [register] - Register all items of this type within the central list.
-	 * @property {string} [tooltipTemplate]
+	 * @property {string} [tooltipTemplate] - Template used to render rich tooltips.
 	 */
 
 	/**
@@ -172,13 +172,16 @@ export default class ItemDataModel extends BaseDataModel {
 	async getTooltipData(enrichmentOptions = {}) {
 		const description = foundry.utils.getProperty(this, this.embeddedDescriptionKeyPath) ?? "";
 		const rollData = this.parent.getRollData();
+		const { name, img } = this.parent;
 		const context = {
-			item: this.parent,
 			description: await foundry.applications.ux.TextEditor.implementation.enrichHTML(description, {
 				rollData,
 				relativeTo: this.parent,
 				...enrichmentOptions
 			}),
+			doc: this.parent,
+			img,
+			name,
 			tags: Array.from(this.chatTags.entries())
 				.map(([key, label]) => ({ key, label }))
 				.filter(t => t.label)
