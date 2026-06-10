@@ -950,7 +950,7 @@ async function enrichSave(config, label, options) {
 	config.ability = blankAbility ? [] : config.ability?.replace("/", "|").split("|") ?? [];
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
-		const slug = slugify(value);
+		const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
 		if (slug in LOOKUP.abilities) config.ability.push(LOOKUP.abilities[slug].key);
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
@@ -1141,12 +1141,13 @@ async function enrichDamage(configs, label, options) {
 		if (configs._isHealing && !c.type) c.type = "healing";
 		c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
 		for (const value of c.values) {
-			if (value in CONFIG.BlackFlag.damageTypes) c.type.push(value);
-			else if (value in CONFIG.BlackFlag.healingTypes) c.type.push(value);
-			else if (value === "average") config.average = true;
-			else if (value === "extended") config.format = "extended";
-			else if (value === "magical") config.magical = true;
-			else if (value === "versatile") config.attackMode ??= "twoHanded";
+			const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+			if (slug in CONFIG.BlackFlag.damageTypes) c.type.push(slug);
+			else if (slug in CONFIG.BlackFlag.healingTypes) c.type.push(slug);
+			else if (slug === "average") config.average = true;
+			else if (slug === "extended") config.format = "extended";
+			else if (slug === "magical") config.magical = true;
+			else if (slug === "versatile") config.attackMode ??= "twoHanded";
 			else formulaParts.push(value);
 		}
 		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
