@@ -99,10 +99,12 @@ export default class SaveActivity extends Activity {
 			const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[abilityId] ?? "";
 			const dc = _loc("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
 			buttons.push({
-				label: `
+				label: this.system.save.dc.final
+					? `
 					<span class="visible-dc">${_loc("BF.Enricher.Save.Long", { save: dc })}</span>
 					<span class="hidden-dc">${_loc("BF.Enricher.Save.Long", { save: ability })}</span>
-				`,
+				`
+					: _loc("BF.Enricher.Save.Long", { save: ability }),
 				icon: '<i class="fa-solid fa-shield-heart" inert></i>',
 				dataset: {
 					dc: this.system.save.dc.final,

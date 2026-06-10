@@ -3,7 +3,7 @@
 		{{ formField systemFields.save.fields.ability value=source.system.save.ability
 		             options=CONFIG.abilities.localizedOptions rootId=partId }}
 		{{ formField systemFields.save.fields.dc.fields.ability value=source.system.save.dc.ability options=abilityOptions
-		             rootId=partId }}
+		             blank=false rootId=partId }}
 		{{#if (eq source.system.save.dc.ability "custom")}}
 			{{ formField systemFields.save.fields.dc.fields.formula value=source.system.save.dc.formula
 			             rootId=partId }}
