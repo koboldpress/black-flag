@@ -134,7 +134,9 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	 */
 	getApplicableEffects() {
 		const applicableEffects = this.applicableEffects;
-		return applicableEffects ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filte(_ => _)) : null;
+		return applicableEffects
+			? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
+			: null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

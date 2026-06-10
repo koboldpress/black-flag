@@ -275,9 +275,15 @@ export default class SummonActivity extends Activity {
 		// No suitable world actor was found, create a new actor for this summoning instance.
 		if (actor.pack) {
 			// Template actor resides only in compendium, import the actor into the world and set the flag.
-			return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
-				[`flags.${game.system.id}.summonedCopy`]: true
-			});
+			return game.actors.importFromCompendium(
+				game.packs.get(actor.pack),
+				actor.id,
+				{
+					[`flags.${game.system.id}.summonedCopy`]: true,
+					folder: game.folders.get(this.actor?.folder?.id) ?? null
+				},
+				{ keepId: false }
+			);
 		} else {
 			// Template actor (linked) found in world, create a copy for this user's item.
 			return actor.clone(
