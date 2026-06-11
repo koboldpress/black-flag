@@ -52,7 +52,7 @@
 				</tr>
 			</thead>
 			{{#each sections.spellcasting as |section|}}
-				<tbody data-section="{{ @key }}">
+				<tbody data-section="{{ @key }}" {{ blackFlag-dataset dataset }}>
 					<tr class="table-header">
 						<td class="name">{{ localize section.label }}</td>
 						<td class="slots">

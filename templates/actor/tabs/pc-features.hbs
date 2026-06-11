@@ -5,9 +5,9 @@
 				{{!-- TODO: Filters by action type --}}
 			</thead>
 			{{#each sections.features as |section sectionId|}}
-				<tbody data-section="{{sectionId}}">
+				<tbody data-section="{{ sectionId }}" {{ blackFlag-dataset dataset }}>
 					<tr class="table-header">
-						<td class="name">{{ localize section.label }} {{#if section.sublabel}}({{section.sublabel}}){{/if}}</td>
+						<td class="name item-tooltip">{{ localize section.label }}</td>
 						<th class="uses">{{ localize "BF.Uses.Short" }}</th>
 						<td class="controls"></td>
 					</tr>

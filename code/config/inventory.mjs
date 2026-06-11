@@ -1,3 +1,5 @@
+import { formatNumber } from "../utils/_module.mjs";
+
 /**
  * Configuration data for sheet sections.
  *
@@ -11,6 +13,7 @@
  *                                                 in the document instance.
  * @property {CheckVisibilityCallback} [checkVisibility] - Callback used to determine whether an item should be visible.
  * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
+ * @property {object} [dataset] - Additional data attached to the section when created on the sheet.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
  * @property {boolean} [options.canDelete=true] - Should the delete control be exposed to the user?
@@ -195,14 +198,6 @@ export const sheetSections = {
 			options: { autoHide: true }
 		},
 		{
-			id: "background",
-			tab: "features",
-			label: "BF.Item.Type.Background[one]",
-			filters: [
-				{ k: "type", v: "background" }
-			]
-		},
-		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Feature.Category.Class[other]",
@@ -210,26 +205,29 @@ export const sheetSections = {
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "class" }
 			],
-			expand: (document, sectionData) => {
-				if (document.system.progression.level === 0) return [];
-				return Object.entries(document.system.progression.classes)
+			expand: (doc, sectionData) => {
+				if (doc.system.progression.level === 0) return [];
+				return Object.entries(doc.system.progression.classes)
 					.map(([identifier, cls]) => {
-						const label = pluralRule =>
-							_loc(`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name });
+						const labelParts = [_loc(`BF.Level.Specific`, { level: formatNumber(cls.levels) })];
 						const filters = [
 							{ k: "system.identifier.associated", v: identifier },
 							{ k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith" }
 						];
-						if (cls.subclass)
+						if (cls.subclass) {
 							filters.push(
 								{ k: "system.identifier.associated", v: cls.subclass.identifier },
 								{ k: "flags.black-flag.ultimateOrigin", v: `${cls.subclass.id}.`, o: "startswith" }
 							);
+							labelParts.unshift(cls.subclass.name);
+						}
 						return foundry.utils.mergeObject(
 							sectionData,
 							{
 								id: `class-${identifier}`,
-								label: label("other"),
+								label: `${_loc("BF.Feature.Category.ClassSpecific[other]", { class: cls.document.name })} (${game.i18n
+									.getListFormatter({ type: "unit" })
+									.format(labelParts)})`,
 								filters: [
 									...sectionData.filters,
 									{
@@ -237,8 +235,7 @@ export const sheetSections = {
 										v: filters
 									}
 								],
-								levels: cls.levels,
-								sublabel: cls.subclass ? `Level ${cls.levels} - ${cls.subclass.identifier}` : `Level ${cls.levels}`
+								levels: cls.levels
 							},
 							{ inplace: false }
 						);
@@ -260,21 +257,14 @@ export const sheetSections = {
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "lineage" }
 			],
-			expand: (document, sectionData) => {
-				// This function add the selected name of the lineage as a sublabel that can be displayed
-				if (document.system.progression.lineage.name !== "") {
-					return [
-						foundry.utils.mergeObject(
-							sectionData,
-							{
-								sublabel: document.system.progression.lineage.name
-							}
-						)
-					]
+			expand: (doc, sectionData) => {
+				const lineage = doc.system.progression.lineage;
+				if (lineage) {
+					sectionData.dataset ??= {};
+					sectionData.dataset.uuid = lineage.uuid;
+					sectionData.label = _loc("BF.Feature.Category.LineageSpecific[other]", { lineage: lineage.name });
 				}
-				else {
-					return [sectionData];
-				}
+				return [sectionData];
 			}
 		},
 		{
@@ -285,21 +275,32 @@ export const sheetSections = {
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "heritage" }
 			],
-			expand: (document, sectionData) => {
-				// This function add the selected name of the heritage as a sublabel that can be displayed
-				if (document.system.progression.heritage.name !== "") {
-					return [
-						foundry.utils.mergeObject(
-							sectionData,
-							{
-								sublabel: document.system.progression.heritage.name
-							}
-						)
-					]
+			expand: (doc, sectionData) => {
+				const heritage = doc.system.progression.heritage;
+				if (heritage) {
+					sectionData.dataset ??= {};
+					sectionData.dataset.uuid = heritage.uuid;
+					sectionData.label = _loc("BF.Feature.Category.HeritageSpecific[other]", { heritage: heritage.name });
 				}
-				else {
-					return [sectionData];
+				return [sectionData];
+			}
+		},
+		{
+			id: "background",
+			tab: "features",
+			label: "BF.Feature.Category.Background[other]",
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.category", v: "background" }
+			],
+			expand: (doc, sectionData) => {
+				const background = doc.system.progression.background;
+				if (background) {
+					sectionData.dataset ??= {};
+					sectionData.dataset.uuid = background.uuid;
+					sectionData.label = _loc("BF.Feature.Category.BackgroundSpecific[other]", { background: background.name });
 				}
+				return [sectionData];
 			}
 		},
 		{

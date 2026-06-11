@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		{{#each sections.inventory as |section sectionId|}}
-			<tbody data-section="{{ sectionId }}">
+			<tbody data-section="{{ sectionId }}" {{ blackFlag-dataset dataset }}>
 				<tr class="table-header">
 					<td class="name">{{ localize section.label }}</td>
 					<th class="uses" scope="col">{{ localize "BF.Uses.Short" }}</th>
