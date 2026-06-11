@@ -44,7 +44,6 @@ export default class SpellcastingDialog extends BFApplication {
 				);
 			}
 		}
-		console.log(this.slots);
 
 		// Begin fetching spells to display
 		this.allSpells = Search.compendiums(Item, {

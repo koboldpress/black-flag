@@ -1,10 +1,4 @@
-import {
-	convertAmount,
-	formatNumber,
-	prepareFormulaValue,
-	replaceFormulaData,
-	simplifyBonus
-} from "../../utils/_module.mjs";
+import { convertAmount, formatNumber, prepareFormulaValue } from "../../utils/_module.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";

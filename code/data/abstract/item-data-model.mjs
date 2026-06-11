@@ -58,6 +58,36 @@ export default class ItemDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Whether this item's activities can have scaling configured for their consumption.
+	 * @type {boolean}
+	 */
+	get canConfigureScaling() {
+		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Whether this item's activities should prompt for scaling when used.
+	 * @type {boolean}
+	 */
+	get canScale() {
+		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Whether this item's activities can have scaling configured for their damage.
+	 * @type {boolean}
+	 */
+	get canScaleDamage() {
+		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Tags that should be displayed in chat.
 	 * @type {Map<string, string>}
 	 */

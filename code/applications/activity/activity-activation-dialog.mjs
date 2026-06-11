@@ -293,7 +293,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 				})
 				.filter(_ => _);
 			context.spellSlots = {
-				field: new StringField({ label: _loc("BF.Spell.Circle.Label") }),
+				field: new StringField({ blank: false, required: true, label: _loc("BF.Spell.Circle.Label") }),
 				name: "spell.slot",
 				value: this.config.spell?.slot,
 				options: spellSlotOptions
@@ -326,7 +326,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 				.filter(_ => _);
 
 			context.spellSlots = {
-				field: new StringField({ label: _loc("BF.Spell.Circle.Label") }),
+				field: new StringField({ blank: false, required: true, label: _loc("BF.Spell.Circle.Label") }),
 				name: "spell.slot",
 				value: spellSlotValue,
 				options: spellSlotOptions

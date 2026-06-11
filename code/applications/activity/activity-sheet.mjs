@@ -176,6 +176,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		];
 
 		context.showPrimaryActivation = this.activity.isSpell || this.activity.isRider;
+		context.showScaling = !this.activity.isSpell || this.activity.isRider;
 
 		context.usesRecovery = (context.activity.uses?.recovery ?? []).map((data, index) => ({
 			data,

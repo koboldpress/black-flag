@@ -8,7 +8,7 @@
 						{{> "systems/black-flag/templates/activity/parts/activity-consumption-part.hbs" consumption=this
 						    fields=@root.fields.consumption.fields.targets.element.fields
 								prefix=(concat "consumption.targets." @index ".")
-						    scalingAllowed=@root.source.consumption.scale.allowed }}
+						    scalingAllowed=@root.activity.canConfigureScaling }}
 					</li>
 				{{else}}
 					{{#unless editable}}
@@ -23,11 +23,13 @@
 					</li>
 				{{/if}}
 			</ul>
-			{{ formField fields.consumption.fields.scale.fields.allowed value=source.consumption.scale.allowed
-			             rootId=partId }}
-			{{#if source.consumption.scale.allowed}}
-				{{ formField fields.consumption.fields.scale.fields.max value=source.consumption.scale.max
-				             placeholder="∞" rootId=partId }}
+			{{#if showScaling}}
+				{{ formField fields.consumption.fields.scale.fields.allowed value=source.consumption.scale.allowed
+				             rootId=partId }}
+				{{#if source.consumption.scale.allowed}}
+					{{ formField fields.consumption.fields.scale.fields.max value=source.consumption.scale.max
+					             placeholder="∞" rootId=partId }}
+				{{/if}}
 			{{/if}}
 			{{#if showPrimaryActivation}}
 				{{ formField fields.activation.fields.primary value=source.activation.primary rootId=partId }}

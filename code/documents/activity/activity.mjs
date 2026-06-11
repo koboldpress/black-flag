@@ -135,17 +135,21 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Can consumption scaling be configured?
+	 * @type {boolean}
+	 */
+	get canConfigureScaling() {
+		return this.consumption.scale.allowed || this.item.system.canConfigureScaling;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Is scaling possible with this activity?
 	 * @type {boolean}
 	 */
 	get canScale() {
-		return (
-			this.consumption.scale.allowed ||
-			(this.isSpell &&
-				this.item.system.circle.base > 0 &&
-				(CONFIG.BlackFlag.spellPreparationModes[this.item.getFlag(game.system.id, "relationship.mode")]?.scalable ??
-					true))
-		);
+		return this.consumption.scale.allowed || this.item.system.canScale;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -155,7 +159,7 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	 * @type {boolean}
 	 */
 	get canScaleDamage() {
-		return this.consumption.scale.allowed || this.isSpell;
+		return this.consumption.scale.allowed || this.item.system.canScaleDamage;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -378,7 +382,7 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	 * @type {boolean}
 	 */
 	get spellSlotScaling() {
-		if (!this.isSpell || !this.actor?.system.spellcasting?.slots) return false;
+		if (!this.isSpell || !this.actor?.system.spellcasting?.slots || this.item.system.tags.has("ritual")) return false;
 		return this.canScale;
 	}
 
@@ -789,6 +793,8 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 				(this.actor.system.spellcasting.slots[config.spell.slot]?.circle ?? 0) -
 				(this.item.system.circle?.base ?? -Infinity);
 			if (scaling > 0) config.scaling ??= scaling;
+		} else if (this.isSpell && this.item.system.tags.has("ritual")) {
+			config.scaling = false;
 		}
 
 		config.scaling ??= 0;

@@ -127,10 +127,32 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	get associatedClass() {
 		const doc =
 			this.parent.actor?.system.spellcasting?.origins?.[
-				this.parent.getFlag("black-flag", "relationship.origin.identifier")
+				this.parent.getFlag(game.system.id, "relationship.origin.identifier")
 			]?.document;
 		if (!doc) return null;
 		return (doc.type === "class" ? doc : doc.system.class) ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get canConfigureScaling() {
+		return this.circle.base > 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get canScale() {
+		const modeConfig = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag(game.system.id, "relationship.mode")];
+		return this.circle.base > 0 && (!modeConfig || modeConfig.scalable);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get canScaleDamage() {
+		return true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -194,7 +216,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 */
 	get alwaysPreparable() {
 		const config =
-			CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode") ?? "standard"];
+			CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag(game.system.id, "relationship.mode") ?? "standard"];
 		return config?.preparable && this.circle.base !== 0 && !this.tags.has("ritual");
 	}
 
@@ -203,7 +225,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 * @type {boolean}
 	 */
 	get preparable() {
-		const alwaysPrepared = this.parent.getFlag("black-flag", "relationship.alwaysPrepared");
+		const alwaysPrepared = this.parent.getFlag(game.system.id, "relationship.alwaysPrepared");
 		return this.alwaysPreparable && !alwaysPrepared;
 	}
 
@@ -256,7 +278,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		if (this.circle.base === 0 || this.tags.has("ritual")) return false;
 
 		// At Will & Innate preparation modes never consume slots
-		const prep = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode")];
+		const prep = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag(game.system.id, "relationship.mode")];
 		if (!prep?.scalable) return false;
 
 		return true;
