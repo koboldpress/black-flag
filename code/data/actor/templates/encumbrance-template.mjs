@@ -1,11 +1,35 @@
 import BlackFlagActiveEffect from "../../../documents/active-effect.mjs";
-
+import FormulaField from "../../fields/formula-field.mjs";
 import { simplifyBonus } from "../../../utils/_module.mjs";
+
+const { SchemaField } = foundry.data.fields;
 
 /**
  * Data definition template for actors that need to calculate carrying capacity.
  */
 export default class EncumbranceTemplate extends foundry.abstract.DataModel {
+
+	/** @override */
+	static defineSchema() {
+		return {
+			attributes: new SchemaField({
+				encumbrance: new SchemaField({
+					bonuses: new SchemaField({
+						encumbered: new FormulaField({ deterministic: true }),
+						heavilyEncumbered: new FormulaField({ deterministic: true }),
+						maximum: new FormulaField({ deterministic: true }),
+						overall: new FormulaField({ deterministic: true })
+					}),
+					multipliers: new SchemaField({
+						encumbered: new FormulaField({ deterministic: true, initial: "1" }),
+						heavilyEncumbered: new FormulaField({ deterministic: true, initial: "1" }),
+						maximum: new FormulaField({ deterministic: true, initial: "1" }),
+						overall: new FormulaField({ deterministic: true, initial: "1" })
+					})
+				}, { persisted: false })
+			})
+		};
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
@@ -14,15 +38,7 @@ export default class EncumbranceTemplate extends foundry.abstract.DataModel {
 	/**
 	 * Initialize base encumbrance fields so they can be targeted by active effects.
 	 */
-	prepareBaseEncumbrance() {
-		const encumbrance = this.attributes.encumbrance ??= {};
-		encumbrance.multipliers = {
-			encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1"
-		};
-		encumbrance.bonuses = {
-			encumbered: "", heavilyEncumbered: "", maximum: "", overall: ""
-		};
-	}
+	prepareBaseEncumbrance() {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

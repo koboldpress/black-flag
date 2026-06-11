@@ -11,10 +11,28 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			spellcasting: new SchemaField({
+				dc: new NumberField({ min: 0, integer: true, initial: 0, persisted: false }),
+				maxCircle: new NumberField({ min: 0, integer: true, initial: 0, persisted: false }),
 				slots: new MappingField(new SchemaField({
-					spent: new NumberField({nullable: false, min: 0, initial: 0, integer: true}),
-					override: new NumberField({integer: true, min: 0})
-				}))
+					spent: new NumberField({ nullable: false, min: 0, initial: 0, integer: true }),
+					override: new NumberField({ min: 0, integer: true })
+				})),
+				spells: new SchemaField({
+					cantrips: new NumberField({ min: 0, integer: true, initial: 0 }),
+					damaging: new NumberField({ min: 0, integer: true, initial: 0 }),
+					knowable: new SchemaField({
+						cantrips: new NumberField({ min: 0, integer: true, initial: 0 }),
+						rituals: new NumberField({ min: 0, integer: true, initial: 0 }),
+						spells: new NumberField({ min: 0, integer: true, initial: 0 })
+					}),
+					rituals: new NumberField({ min: 0, integer: true, initial: 0 }),
+					total: new NumberField({ min: 0, integer: true, initial: 0 })
+				}, { persisted: false }),
+				totals: new SchemaField({
+					max: new NumberField({ min: 0, integer: true, initial: 0 }),
+					spent: new NumberField({ min: 0, integer: true, initial: 0 }),
+					value: new NumberField({ min: 0, integer: true, initial: 0 })
+				}, { persisted: false })
 			})
 		};
 	}

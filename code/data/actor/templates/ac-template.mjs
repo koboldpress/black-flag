@@ -15,6 +15,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored"]
 					}, { label: "BF.ARMORCLASS.FIELDS.attributes.ac.baseFormulas.label" }),
+					cover: new NumberField({ min: 0, integer: true, initial: 0, persisted: false, label: "BF.ARMORCLASS.FIELDS.attributes.ac.cover.label" }),
 					customLabel: new StringField({ label: "BF.ARMORCLASS.FIELDS.attributes.ac.customLabel.label" }),
 					formulas: new ArrayField(new SchemaField({
 						armored: new BooleanField({
@@ -52,7 +53,6 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 	 */
 	prepareBaseArmorFormulas() {
 		const ac = this.attributes.ac;
-		ac.cover = 0;
 		for ( const [id, data] of Object.entries(CONFIG.BlackFlag.armorFormulas) ) {
 			ac.formulas.push(foundry.utils.mergeObject(data, {
 				enabled: ac.baseFormulas.has(id),

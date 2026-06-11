@@ -179,7 +179,8 @@ export default class PCData extends ActorDataModel.mixin(
 			),
 			attributes: new SchemaField({
 				attunement: new SchemaField({
-					max: new NumberField({ required: true, initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" })
+					max: new NumberField({ required: true, initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" }),
+					value: new NumberField({ min: 0, integer: true, initial: 0, persisted: false })
 				}),
 				death: new SchemaField({
 					status: new StringField({ initial: "alive", blank: false }),
@@ -455,17 +456,8 @@ export default class PCData extends ActorDataModel.mixin(
 			if (!ability.base) this.progression.abilities.assignmentComplete = false;
 		}
 
-		this.spellcasting.dc ??= 0;
-		this.spellcasting.maxCircle ??= 0;
-		this.spellcasting.totals ??= { value: 0, spent: 0, max: 0 };
-		this.spellcasting.origins ??= {};
-		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
-		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
-
 		this.prepareBaseArmorFormulas();
-		this.prepareBaseEncumbrance();
 		this.prepareBaseModifiers();
-		this.prepareBaseTraits();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

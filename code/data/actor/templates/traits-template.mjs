@@ -36,6 +36,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					ignoredDifficultTerrain: new SetField(new StringField(), {
 						label: "BF.MOVEMENT.FIELDS.traits.movement.ignoredDifficultTerrain.label"
 					}),
+					multiplier: new FormulaField({ deterministic: true, persisted: false }),
 					tags: new SetField(new StringField()),
 					types: new MappingField(new FormulaField({ deterministic: true }), {
 						initial: { walk: "@base" }
@@ -90,9 +91,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	/**
 	 * Prepare initial movement values.
 	 */
-	prepareBaseTraits() {
-		this.traits.movement.multiplier ??= "1";
-	}
+	prepareBaseTraits() {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

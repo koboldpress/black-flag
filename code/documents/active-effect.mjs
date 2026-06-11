@@ -24,17 +24,15 @@ export default class BlackFlagActiveEffect extends DependentDocumentMixin(Active
 	 * Additional key paths to properties added during base data preparation that should be treated as formula fields.
 	 * @type {Set<string>}
 	 */
-	static FORMULA_FIELDS = new Set([
-		"system.attributes.encumbrance.bonuses.encumbered",
-		"system.attributes.encumbrance.bonuses.heavilyEncumbered",
-		"system.attributes.encumbrance.bonuses.maximum",
-		"system.attributes.encumbrance.bonuses.overall",
-		"system.attributes.encumbrance.multipliers.encumbered",
-		"system.attributes.encumbrance.multipliers.heavilyEncumbered",
-		"system.attributes.encumbrance.multipliers.maximum",
-		"system.attributes.encumbrance.multipliers.overall",
-		"system.traits.movement.multiplier"
-	]);
+	static FORMULA_FIELDS = new (class extends Set {
+		add(value) {
+			foundry.utils.logCompatibilityWarning(
+				"`ActiveEFfect#FORMULA_FIELDS` as been deprecated in favor of non-persisted fields.",
+				{ since: "Black Flag 3.0 ", until: "Black Flag 4.0" }
+			);
+			super.add(value);
+		}
+	})();
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
