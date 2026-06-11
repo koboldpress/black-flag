@@ -85,6 +85,25 @@ export class UsesData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		source = super.migrateData(source);
+		if (!source) return source;
+
+		// Added in 3.0.075
+		if (Array.isArray(source.recovery)) {
+			for (const profile of source.recovery) {
+				if (profile.period === "round") profile.period = "roundStart";
+			}
+		}
+
+		return source;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

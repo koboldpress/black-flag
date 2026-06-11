@@ -14,7 +14,7 @@ export default class BlackFlagCombat extends Combat {
 	/** @inheritDoc */
 	async endCombat() {
 		await super.endCombat();
-		this._recoverUses({ turn: true, roundEnd: true, roundStart: true });
+		if (this !== game.combat) this._recoverUses({ turn: true, roundEnd: true, roundStart: true });
 		return this;
 	}
 

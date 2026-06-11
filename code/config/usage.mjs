@@ -127,9 +127,15 @@ export const recoveryPeriods = {
 		combatOnly: true,
 		group: "BF.Recovery.Group.Combat"
 	},
-	round: {
-		label: "BF.Recovery.Period.Round",
-		abbreviation: "BF.Recovery.Period.Round",
+	roundStart: {
+		label: "BF.Recovery.Period.RoundStart",
+		abbreviation: "BF.Recovery.Period.RoundStart",
+		combatOnly: true,
+		group: "BF.Recovery.Group.Combat"
+	},
+	roundEnd: {
+		label: "BF.Recovery.Period.RoundEnd",
+		abbreviation: "BF.Recovery.Period.RoundEnd",
 		combatOnly: true,
 		group: "BF.Recovery.Group.Combat"
 	},
