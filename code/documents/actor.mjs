@@ -179,7 +179,7 @@ export default class BlackFlagActor extends SystemDocumentMixin(Actor) {
 							c.type = MODES_TO_TYPE[c.mode];
 						}
 						c.advancement = advancement;
-						c.priority ??= c.mode * 10;
+						c.priority ??= CONST.ACTIVE_EFFECT_CHANGE_TYPES[c.type] ?? 0;
 						return c;
 					})
 					.sort((lhs, rhs) => lhs.priority - rhs.priority)

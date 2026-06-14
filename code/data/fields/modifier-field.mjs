@@ -1,6 +1,8 @@
 import FilterField from "./filter-field.mjs";
 import FormulaField from "./formula-field.mjs";
 
+const { AnyField, ArrayField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * @typedef {object} Modifier
  * @property {string} type - Type of modifier (e.g. "bonus", "min", "critical-dice", "critical-threshold", "note").
@@ -14,20 +16,21 @@ import FormulaField from "./formula-field.mjs";
 /**
  * Field that represents a set of actor modifiers.
  */
-export default class ModifierField extends foundry.data.fields.ArrayField {
+export default class ModifierField extends ArrayField {
 	constructor(options, context) {
 		super(
-			new foundry.data.fields.SchemaField({
-				type: new foundry.data.fields.StringField(),
+			new SchemaField({
 				filter: new FilterField(),
 				formula: new FormulaField({ required: false, initial: undefined }),
-				note: new foundry.data.fields.SchemaField(
+				note: new SchemaField(
 					{
-						rollMode: new foundry.data.fields.NumberField(),
-						text: new foundry.data.fields.HTMLField()
+						rollMode: new NumberField(),
+						text: new HTMLField()
 					},
 					{ required: false, initial: undefined }
-				)
+				),
+				source: new AnyField({ persisted: false }),
+				type: new StringField()
 			}),
 			options,
 			context
