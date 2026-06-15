@@ -378,7 +378,7 @@ export class EquipmentValueData extends foundry.abstract.DataModel {
 		if (source.wealth) {
 			source.currency ??= {};
 			source.currency[CONFIG.BlackFlag.startingWealth.currency] ??= 0;
-			source.currency[CONFIG.BlackFlag.startingWealth.currency] += source.weatlh;
+			source.currency[CONFIG.BlackFlag.startingWealth.currency] += source.wealth;
 			source.mode = "wealth";
 			delete source.wealth;
 		}
