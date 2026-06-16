@@ -127,7 +127,9 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 
 		// Track changes to cached spells on cast activities
 		const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
-			if ( data instanceof foundry.data.operators.ForcedDeletion || foundry.utils.hasProperty(data, "system.spell.uuid") ) {
+			if ( (data instanceof foundry.data.operators.ForcedDeletion)
+				|| (foundry.utils.hasProperty(data, "system.spell.uuid")
+					&& (foundry.utils.getProperty(data, "system.spell.uuid") !== this.activities.get(key)?.system.spell?.uuid)) ) {
 				return this.activities.get(key)?.cachedSpell?.id;
 			}
 			return null;
@@ -161,7 +163,10 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			if ( existingSpell ) {
 				const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
 				await enchantment.update({ changes: activity.getSpellChanges() });
-			} else cachedInserts.push(await activity.getCachedSpellData());
+			} else {
+				const cached = await activity.getCachedSpellData();
+				if ( cached ) cachedInserts.push(cached);
+			}
 		}
 		if ( cachedInserts.length ) await this.parent.actor.createEmbeddedDocuments("Item", cachedInserts);
 	}

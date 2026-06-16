@@ -188,7 +188,7 @@ export default class BlackFlagItem extends SystemDocumentMixin(Item) {
 				if (data.type === "healing") data.type = "heal";
 				else if (data.type === "savingThrow") data.type = "save";
 			});
-		if (!data.system?.identifier?.value) {
+		if (!data.system?.identifier?.value && data.name) {
 			foundry.utils.setProperty(data, "system.identifier.value", formatIdentifier(data.name));
 		}
 		return super._initializeSource(data, options);
