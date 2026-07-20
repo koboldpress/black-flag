@@ -1043,7 +1043,7 @@ export default class Activity extends DependentDocumentMixin(PseudoDocumentMixin
 	_finalizeMessageConfig(activationConfig, messageConfig, results) {
 		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
 		if (activationConfig.targets?.length) {
-			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
+			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, activationConfig.targets);
 		}
 		const effects = this.system.applicableEffects?.map(e => e.relativeUUID);
 		if (effects) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
