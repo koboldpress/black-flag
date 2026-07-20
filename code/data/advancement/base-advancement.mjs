@@ -64,7 +64,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 			level: new SchemaField({
 				value: new NumberField({ integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0 }),
 				classIdentifier: new IdentifierField(),
-				classRestriction: new StringField({ choices: ["original", "multiclass"] })
+				classRestriction: new StringField()
 			}),
 			title: new StringField(),
 			type: new StringField({
