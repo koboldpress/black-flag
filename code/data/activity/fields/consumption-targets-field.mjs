@@ -218,7 +218,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 				})
 			);
 
-		updates.actor[keyPath] = current - cost;
+		if (keyPath.endsWith(".spent")) updates.actor[keyPath] = current + cost;
+		else updates.actor[keyPath] = current - cost;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

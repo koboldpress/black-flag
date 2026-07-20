@@ -20,15 +20,10 @@ export function _configureConsumableAttributes() {
 			"attributes.death.failure",
 			"attributes.luck.value",
 			"progression.xp.value",
-			// TODO: Allow targeting slot values instead
 			...Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).map(c => `spellcasting.slots.circle-${c}.spent`),
 			"spellcasting.slots.pact.spent"
 		].sort(),
-		npc: [
-			...shared,
-			// TODO: Allow targeting `attributes.legendary.value` instead
-			"attributes.legendary.spent"
-		].sort(),
+		npc: [...shared, "attributes.legendary.spent"].sort(),
 		lair: []
 	};
 }
