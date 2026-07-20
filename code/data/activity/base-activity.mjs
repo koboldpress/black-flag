@@ -285,6 +285,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		}
 
 		prepareFormulaValue(this, "duration.value", "BF.DURATION.Label", rollData);
+		prepareFormulaValue(this, "range.value", "BF.RANGE.Label", rollData);
 		prepareFormulaValue(this, "target.affects.count", "BF.TARGET.Label[other]", rollData);
 		prepareFormulaValue(this, "target.template.count", "BF.TARGET.FIELDS.template.count.label", rollData);
 		prepareFormulaValue(this, "target.template.size", "BF.AreaOfEffect.Size.Label", rollData);
