@@ -155,7 +155,7 @@ export default class ChooseFeaturesDialog extends BFApplication {
 	 */
 	async handleChoice(uuid) {
 		let replaces;
-		if (this.options.details.isReplacement) replaces = this.element[0].querySelector('[name="replaces"]').value;
+		if (this.options.details.isReplacement) replaces = this.element.querySelector('[name="replaces"]').value;
 		this.close({ response: { choice: uuid, replaces } });
 	}
 
