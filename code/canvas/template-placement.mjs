@@ -46,8 +46,8 @@ export default class TemplatePlacement extends BasePlacement {
 			{
 				attachToToken,
 				create: false,
-				preConfirm: ({ document, index }) => {
-					const obj = document.toObject();
+				preConfirm: ({ document: doc, index }) => {
+					const obj = doc.toObject();
 					results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
 				}
 			}

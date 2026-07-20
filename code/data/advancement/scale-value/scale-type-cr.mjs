@@ -37,10 +37,13 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 		switch (this.value) {
 			case 0.125:
 				value = "&frac18;";
+				break;
 			case 0.25:
 				value = "&frac14;";
+				break;
 			case 0.5:
 				value = "&frac12;";
+				break;
 		}
 		return _loc("BF.ChallengeRating.Specific", { value });
 	}
