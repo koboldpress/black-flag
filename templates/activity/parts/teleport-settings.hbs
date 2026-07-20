@@ -1,10 +1,10 @@
 	<fieldset>
 		<legend>{{ localize "BF.TELEPORT.Details" }}</legend>
-		{{ formField systemFields.unlimited value=source.system.unlimited rootId=partId }}
+		{{ formField systemFields.distance.fields.override value=source.system.distance.override rootId=partId }}
 		{{#blackFlag-formGroup "BF.TELEPORT.FIELDS.distance.value.label"}}
-			{{ formField systemFields.distance.fields.value value=source.system.distance.value classes="label-top"
-									 rootId=@root.partId }}
-			{{ formField systemFields.distance.fields.unit value=source.system.distance.unit classes="label-top"
-									 options=CONFIG.distanceUnits.localizedOptions rootId=@root.partId }}
+			{{ formField systemFields.distance.fields.value value=distance.data.value classes="label-top"
+									 placeholder="∞" disabled=distance.disabled rootId=@root.partId }}
+			{{ formField systemFields.distance.fields.unit value=distance.data.unit classes="label-top"
+									 options=CONFIG.distanceUnits.localizedOptions disabled=distance.disabled rootId=@root.partId }}
 		{{/blackFlag-formGroup}}
 	</fieldset>

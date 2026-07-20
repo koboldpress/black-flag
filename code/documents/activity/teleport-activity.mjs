@@ -40,10 +40,8 @@ export default class TeleportActivity extends Activity {
 	 */
 	get canPlanTeleport() {
 		return (
-			this.system.unlimited ||
-			(this.system.distance.unit in CONFIG.BlackFlag.distanceUnits &&
-				Number.isFinite(this.system.distance.value) &&
-				this.system.distance.value > 0)
+			!Number.isFinite(this.system.distance.value) ||
+			(this.system.distance.unit in CONFIG.BlackFlag.distanceUnits && this.system.distance.value > 0)
 		);
 	}
 
@@ -103,21 +101,54 @@ export default class TeleportActivity extends Activity {
 			return null;
 		}
 
-		const movements = [];
-		for (const token of tokens) {
+		const config = { maxDistance, tokens };
+
+		/**
+		 * A hook event that fires before teleport movement has been planned.
+		 * @function blackFlag.preTeleport
+		 * @memberof hookEvents
+		 * @param {TeleportActivity} activity                          The activity that is performing the teleportation.
+		 * @param {{ maxDistance: number, tokens: BlackFlagToken[] }} config  Information on the teleport to plan.
+		 * @returns {boolean}  Explicitly return `false` to prevent teleporting.
+		 */
+		if (Hooks.call("blackFlag.preTeleport", this, config) === false) return;
+
+		const plans = [];
+		for (const token of config.tokens) {
 			const plan = await token.planMovement({
 				allowedActions: ["blink"],
 				direct: true,
-				maxDistance,
+				maxDistance: config.maxDistance,
 				preventDrop: true
 			});
 			if (!plan) continue;
-			movements.push([token, plan]);
+			plans.push({ token, plan });
 		}
 
-		return Promise.all(
-			movements.map(([token, plan]) => token.document.startMovement(plan.id).then(moved => ({ token, plan, moved })))
+		/**
+		 * A hook event that fires after teleport movement has been planned, but before tokens have been moved.
+		 * @function blackFlag.teleport
+		 * @memberof hookEvents
+		 * @param {TeleportActivity} activity                       The activity that is performing the teleportation.
+		 * @param {Omit<TeleportMovementResult, "result">[]} plans  Plans for tokens that are to be moved.
+		 * @returns {boolean}  Explicitly return `false` to prevent teleporting.
+		 */
+		if (Hooks.call("blackFlag.teleport", this, plans) === false) return;
+
+		const results = await Promise.all(
+			plans.map(({ token, plan }) => token.document.startMovement(plan.id).then(moved => ({ token, plan, moved })))
 		);
+
+		/**
+		 * A hook event that fires after teleport movement has occurred.
+		 * @function blackFlag.postTeleport
+		 * @memberof hookEvents
+		 * @param {TeleportActivity} activity         The activity that is performing the teleportation.
+		 * @param {TeleportMovementResult[]} results  Plans for tokens that are to be moved.
+		 */
+		Hooks.callAll("blackFlag.postTeleport", this, results);
+
+		return results;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -127,8 +158,13 @@ export default class TeleportActivity extends Activity {
 	 * @returns {number|null}
 	 */
 	#getSceneMaxDistance() {
-		if (this.teleport?.unlimited) return Infinity;
-		if (!(canvas.grid?.units in CONFIG.BlackFlag.distanceUnits)) return null;
+		if (!Number.isFinite(this.system.distance.value)) return Infinity;
+		if (
+			!(this.system.distance.unit in CONFIG.BlackFlag.distanceUnits) ||
+			!(this.system.distance.value > 0) ||
+			!(canvas.grid?.units in CONFIG.BlackFlag.distanceUnits)
+		)
+			return null;
 		return convertDistance(this.system.distance.value, this.system.distance.unit, canvas.grid.units).value;
 	}
 

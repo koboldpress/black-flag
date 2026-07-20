@@ -25,6 +25,23 @@ export default class TeleportSheet extends ActivitySheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	async _prepareEffectContext(context, options) {
+		context = await super._prepareEffectContext(context, options);
+		context.distance = {
+			data: context.source.system.distance.override
+				? context.source.system.distance
+				: {
+						value: Number.isFinite(this.activity.system.distance.value) ? this.activity.system.distance.value : "∞",
+						units: this.activity.system.distance.units
+					},
+			disabled: !context.source.system.distance.override
+		};
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	_getTabs() {
 		const tabs = super._getTabs();
 		tabs.effect.label = "BF.TELEPORT.SECTIONS.Teleport";
