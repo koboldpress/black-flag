@@ -148,6 +148,12 @@ export default class AttackActivity extends Activity {
 	 */
 
 	/**
+	 * @typedef {object} WeaponUpdate
+	 * @property {string} id        ID of the weapon item to update.
+	 * @property {number} quantity  New quantity after the weapon is thrown.
+	 */
+
+	/**
 	 * Roll an attack.
 	 * @param {AttackRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {AttackRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
@@ -295,6 +301,15 @@ export default class AttackActivity extends Activity {
 			ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
 			flags.ammunition = ammo.id;
 		}
+
+		const weapon = this.item;
+		const isThrown =
+			weapon.system.properties?.has("thrown") && ["thrown", "thrownOffhand"].includes(rollConfig.attackMode);
+		let weaponUpdate = null;
+		if (isThrown && (weapon.system.quantity ?? 0) > 0) {
+			weaponUpdate = { id: weapon.id, quantity: Math.max(0, (weapon.system.quantity ?? 0) - 1) };
+		}
+
 		if (rollConfig.attackMode) flags.attackMode = rollConfig.attackMode;
 		if (!foundry.utils.isEmpty(flags) && this.actor.items.has(this.item.id)) {
 			await this.item.setFlag(game.system.id, flagKey, flags);
@@ -307,14 +322,19 @@ export default class AttackActivity extends Activity {
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {object} [data]
 		 * @param {AmmunitionUpdate|null} [data.ammoUpdate] - Any updates related to ammo consumption for the attack.
+		 * @param {object} [data.weaponUpdate] - Any updates related to weapon quantity for thrown weapons.
 		 * @param {Activity} [data.subject] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.rollAttack", rolls, { ammoUpdate, subject: this });
+		Hooks.callAll("blackFlag.rollAttack", rolls, { ammoUpdate, weaponUpdate, subject: this });
 
 		if (ammoUpdate)
 			await this.actor?.updateEmbeddedDocuments("Item", [
 				{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }
-			]);
+		]);
+		if (weaponUpdate)
+			await this.actor?.updateEmbeddedDocuments("Item", [
+				{ _id: weaponUpdate.id, "system.quantity": weaponUpdate.quantity }
+		]);
 
 		/**
 		 * A hook event that fires after an attack has been rolled.
@@ -500,6 +520,20 @@ export default class AttackActivity extends Activity {
 		if (this.item.system.properties?.has("versatile") && rollConfig.attackMode === "twoHanded") {
 			damage = this.item.system.versatileDamage ?? damage;
 		}
+
+		// Compute the correct attack type based on attackMode for thrown weapons
+		const attackMode = rollConfig.attackMode ?? this.item.system.attackModes[0]?.value;
+		const attackType =
+			attackMode === "thrown" || attackMode === "thrownOffhand" ? "ranged" : this.item.system.type.value;
+
+		modifierData = foundry.utils.mergeObject(modifierData, {
+			activity: {
+				...this.system,
+				attack: {
+					type: { value: attackType }
+				}
+			}
+		});
 
 		const roll = super._processDamagePart(damage, rollConfig, rollData, {
 			...config,
