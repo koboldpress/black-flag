@@ -39,12 +39,6 @@ export function registerSheets(documentType, categories) {
 		});
 		log(`Registered ${type} sheet`);
 	}
-	foundry.applications.apps.DocumentSheetConfig.unregisterSheet(
-		documentType,
-		"core",
-		{ name: `${documentType.name}Sheet` },
-		{ types: Array.from(registered) }
-	);
 	console.groupEnd();
 }
 
